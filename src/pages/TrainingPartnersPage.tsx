@@ -1,0 +1,215 @@
+import { useState } from 'react';
+import { CheckCircle, Handshake, Users, FileText, Award, ShieldCheck } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+import { useSEO } from '@/hooks/useSEO';
+import PageHero from '@/components/PageHero';
+import SectionHeader from '@/components/SectionHeader';
+import Reveal from '@/components/Reveal';
+
+const benefits = [
+  { icon: FileText, title: 'Structured Programmes', desc: 'Access organised, structured educational content for your team.' },
+  { icon: Users, title: 'Learner Support', desc: 'Comprehensive support for learners throughout their journey.' },
+  { icon: Award, title: 'Digital Certification', desc: 'Digital certificates for programme completions.' },
+  { icon: FileText, title: 'Professional Resources', desc: 'A library of professional educational resources.' },
+  { icon: ShieldCheck, title: 'Quality Assurance', desc: 'Evidence-informed content with clear learning outcomes.' },
+  { icon: Handshake, title: 'Partnership Support', desc: 'Dedicated support from our partnership team.' },
+];
+
+const howItWorks = [
+  { step: '01', title: 'Submit Enquiry', desc: 'Complete the partnership enquiry form below.' },
+  { step: '02', title: 'Initial Discussion', desc: 'We will discuss your organisation needs and objectives.' },
+  { step: '03', title: 'Partnership Agreement', desc: 'We formalise the partnership and agree on delivery.' },
+  { step: '04', title: 'Programme Delivery', desc: 'Your team begins learning through our platform.' },
+];
+
+const whoCanApply = [
+  'Healthcare organisations and clinics',
+  'Professional associations and societies',
+  'Educational institutions',
+  'Corporate healthcare providers',
+  'NGOs and non-profit health organisations',
+  'Government health departments',
+];
+
+export default function TrainingPartnersPage() {
+  useSEO({
+    title: 'Training Partners',
+    description:
+      'Become a Clinova Training Partner. Deliver structured professional healthcare education within your organisation.',
+  });
+
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setError('');
+
+    const formData = new FormData(e.currentTarget);
+    const { error: submissionError } = await supabase.from('partnership_inquiries').insert({
+      full_name: String(formData.get('fullName') ?? '').trim(),
+      organisation: String(formData.get('organisation') ?? '').trim(),
+      role: String(formData.get('role') ?? '').trim(),
+      email: String(formData.get('email') ?? '').trim(),
+      phone: String(formData.get('phone') ?? '').trim() || null,
+      country: String(formData.get('country') ?? '').trim(),
+      website: String(formData.get('website') ?? '').trim() || null,
+      message: String(formData.get('message') ?? '').trim(),
+    });
+
+    setSubmitting(false);
+    if (submissionError) {
+      setError('We could not submit your enquiry. Please try again or contact us directly.');
+      return;
+    }
+
+    e.currentTarget.reset();
+    setSubmitted(true);
+  };
+
+  const inputClass = 'w-full px-4 py-3 text-sm bg-white border border-navy-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-transparent text-navy-800 placeholder:text-navy-400';
+  const labelClass = 'block text-sm font-medium text-navy-700 mb-1.5';
+
+  return (
+    <>
+      <PageHero
+        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Training Partners' }]}
+        eyebrow="Training Partners"
+        title="Become a Clinova Training Partner"
+        description="Work with Clinova to deliver structured professional education within your organisation or professional network."
+        image="https://images.pexels.com/photos/6129499/pexels-photo-6129499.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+      />
+
+      {/* Benefits */}
+      <section className="py-16 lg:py-24 bg-white">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            eyebrow="Benefits"
+            title="Why Partner With Clinova?"
+            description="Our partnership programme provides organisations with structured educational resources and support."
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {benefits.map((item, i) => (
+              <Reveal key={item.title} delay={(i % 3) * 80} className="flex items-start gap-4 p-6 rounded-xl border border-navy-100">
+                <div className="w-11 h-11 rounded-lg bg-teal-50 flex items-center justify-center shrink-0">
+                  <item.icon className="w-5 h-5 text-teal-600" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <h3 className="font-heading font-semibold text-navy-900 text-sm mb-1">{item.title}</h3>
+                  <p className="text-xs text-navy-500 leading-relaxed">{item.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Who Can Apply */}
+      <section className="py-16 lg:py-24 bg-navy-50">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-900 mb-4">Who Can Apply?</h2>
+              <p className="text-sm text-navy-500 leading-relaxed mb-6">
+                We welcome partnerships with a range of organisations involved in healthcare education and service delivery.
+              </p>
+              <div className="space-y-3">
+                {whoCanApply.map((item) => (
+                  <div key={item} className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-teal-600 shrink-0" />
+                    <span className="text-sm text-navy-700">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-900 mb-4">How It Works</h2>
+              <div className="space-y-4">
+                {howItWorks.map((step, i) => (
+                  <Reveal key={step.step} delay={i * 100} className="flex items-start gap-4 p-4 bg-white rounded-xl border border-navy-100">
+                    <div className="w-10 h-10 rounded-lg bg-navy-900 text-white flex items-center justify-center font-heading font-bold text-sm shrink-0">
+                      {step.step}
+                    </div>
+                    <div>
+                      <h3 className="font-heading font-semibold text-navy-900 text-sm">{step.title}</h3>
+                      <p className="text-xs text-navy-500 mt-1">{step.desc}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Application Form */}
+      <section className="py-16 lg:py-24 bg-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            eyebrow="Apply Now"
+            title="Partnership Enquiry Form"
+            description="Complete the form below and our team will be in touch to discuss your partnership."
+          />
+          {submitted ? (
+            <div className="text-center py-12 bg-teal-50 rounded-xl border border-teal-100">
+              <CheckCircle className="w-12 h-12 text-teal-600 mx-auto mb-4" />
+              <h3 className="font-heading text-xl font-bold text-navy-900 mb-2">Enquiry Submitted</h3>
+              <p className="text-sm text-navy-600">Thank you for your interest in partnering with Clinova. Our team will be in touch with you soon.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-5 bg-navy-50 p-6 md:p-8 rounded-xl border border-navy-100">
+              {error && <p role="alert" className="text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className={labelClass} htmlFor="fullName">Full Name *</label>
+                  <input id="fullName" type="text" required className={inputClass} placeholder="Your full name" />
+                </div>
+                <div>
+                  <label className={labelClass} htmlFor="organisation">Organisation *</label>
+                  <input id="organisation" type="text" required className={inputClass} placeholder="Organisation name" />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className={labelClass} htmlFor="role">Professional Role *</label>
+                  <input id="role" type="text" required className={inputClass} placeholder="Your role" />
+                </div>
+                <div>
+                  <label className={labelClass} htmlFor="email">Email *</label>
+                  <input id="email" type="email" required className={inputClass} placeholder="you@organisation.com" />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className={labelClass} htmlFor="phone">Phone</label>
+                  <input id="phone" type="tel" className={inputClass} placeholder="Phone number" />
+                </div>
+                <div>
+                  <label className={labelClass} htmlFor="country">Country *</label>
+                  <input id="country" type="text" required className={inputClass} placeholder="Country" />
+                </div>
+              </div>
+              <div>
+                <label className={labelClass} htmlFor="website">Organisation Website</label>
+                <input id="website" type="url" className={inputClass} placeholder="https://..." />
+              </div>
+              <div>
+                <label className={labelClass} htmlFor="message">Message *</label>
+                <textarea id="message" required rows={4} className={inputClass} placeholder="Tell us about your partnership interests..." />
+              </div>
+              <button
+                type="submit"
+                disabled={submitting}
+                className="w-full px-6 py-3.5 bg-clinical-600 text-white font-semibold rounded-lg hover:bg-clinical-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors shadow-sm"
+              >
+                {submitting ? 'Submitting…' : 'Submit Partnership Enquiry'}
+              </button>
+            </form>
+          )}
+        </div>
+      </section>
+    </>
+  );
+}
