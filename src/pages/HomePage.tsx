@@ -15,7 +15,7 @@ import NewsletterForm from '@/components/NewsletterForm';
 import { departments } from '@/data/departments';
 import { getFeaturedProgrammes } from '@/data/programmes';
 import { publishedCPDCourses, cpdFilters } from '@/data/cpdCourses';
-import { newsItems, generalFAQs } from '@/data/content';
+import { publishedNewsItems as newsItems, generalFAQs } from '@/data/content';
 import { useState } from 'react';
 
 const learningSteps = [
@@ -73,11 +73,10 @@ export default function HomePage() {
               </span>
             </div>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white leading-[1.08] text-balance">
-              Advance your healthcare career through professional education
+              Professional learning for healthcare professionals
             </h1>
             <p className="mt-7 text-lg text-navy-100/65 leading-[1.6] max-w-xl">
-              Flexible online learning designed for healthcare professionals seeking practical knowledge, professional
-              development and CPD-focused education.
+              Clinova is preparing educational information for healthcare professionals. Course availability, delivery, recognition and enrolment are not yet confirmed.
             </p>
             <div className="mt-9 flex flex-col sm:flex-row gap-3">
               <Link
@@ -361,15 +360,15 @@ export default function HomePage() {
                 Become a Clinova training partner
               </h2>
               <p className="mt-5 text-base text-navy-600/80 leading-[1.65]">
-                Work with Clinova to deliver structured professional education within your organisation or professional network.
+                Clinova is reviewing potential partnership pathways. No delivery arrangements or partner agreements are currently confirmed.
               </p>
               <div className="mt-8 space-y-3">
                 {[
-                  'Structured programmes tailored to your organisation',
-                  'Comprehensive learner support',
-                  'Digital certification for your team',
-                  'Professional educational resources',
-                  'Dedicated partnership support',
+                  'Partnership criteria and arrangements are being prepared',
+                  'No partnership agreement is implied by this page',
+                  'Delivery and learner support require written confirmation',
+                  'Certification arrangements are not confirmed',
+                  'Enquiries remain unavailable until the submission service is verified',
                 ].map((benefit) => (
                   <div key={benefit} className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 text-teal-500 shrink-0 mt-0.5" />
@@ -413,8 +412,8 @@ export default function HomePage() {
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              ['Clear outcomes', 'Each programme describes who it is for, what it covers and what a learner should be able to do after completing the learning.'],
-              ['Evidence-informed content', 'Resources explain clinical concepts in an educational context and encourage appropriate professional judgement rather than one-size-fits-all advice.'],
+              ['Clear outcomes', 'Approved learning objectives will be displayed after a programme has been reviewed and made available.'],
+              ['Evidence-informed content', 'Educational resources will be published after clinical and editorial review.'],
               ['Respect for scope', 'Accreditation, partnerships, learner outcomes and certificates are described only when the relevant facts and workflows are confirmed.'],
             ].map(([title, description]) => (
               <div key={title} className="border-t border-white/15 pt-5">
@@ -446,11 +445,13 @@ export default function HomePage() {
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
-            {newsItems.slice(0, 3).map((item, i) => (
-              <NewsCard key={item.id} item={item} index={i} />
-            ))}
-          </div>
+          {newsItems.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
+              {newsItems.slice(0, 3).map((item, i) => <NewsCard key={item.id} item={item} index={i} />)}
+            </div>
+          ) : (
+            <p className="border border-navy-100 bg-surface-50 p-6 text-sm leading-relaxed text-navy-700">Articles will appear here after editorial and clinical approval. No review snapshots are presented as published academy news.</p>
+          )}
         </div>
       </section>
 
