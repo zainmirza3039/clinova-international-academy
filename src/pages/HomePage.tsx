@@ -330,7 +330,7 @@ export default function HomePage() {
                 to="/programmes"
                 className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-navy-800 text-white font-semibold hover:bg-navy-700 transition-colors"
               >
-                Explore Proposed Outlines
+                Explore Learning Guides
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </Reveal>
