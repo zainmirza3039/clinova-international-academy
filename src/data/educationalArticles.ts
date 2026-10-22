@@ -17,7 +17,7 @@ export const draftDateLabel = 'Educational overview';
 
 export const educationalArticles: EducationalArticle[] = [
   ...assessmentAndPain, ...rehabilitation, ...clinicalPractice,
-].map(article => ({ ...article, status: 'published' }));
+].map(article => ({ ...article, status: 'draft' }));
 
 const legacyArticleSlugs: Record<string, string> = {
   'draft-cpd-in-healthcare-practice': 'evidence-based-practice-physiotherapy',
