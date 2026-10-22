@@ -45,25 +45,19 @@ describe('substantive original draft library structure', () => {
   it('preserves the three earlier draft article addresses as aliases', () => {
     for (const slug of ['draft-cpd-in-healthcare-practice', 'draft-evidence-informed-pain-management', 'draft-clinical-communication']) expect(getEducationalArticle(slug)).toBeTruthy();
   });
-  it('renders full sections, safety status and reference links instead of placeholder paragraphs', () => {
+  it('blocks draft article detail routes until publication approval', () => {
     const article = educationalArticles[0];
     render(<MemoryRouter initialEntries={[`/resources/${article.slug}`]}><Routes><Route path="/resources/:slug" element={<ResourceDetailPage />} /></Routes></MemoryRouter>);
-    expect(screen.getByRole('heading', { level: 1, name: article.title })).toBeTruthy();
-    expect(screen.getByRole('navigation', { name: 'Article contents' })).toBeTruthy();
-    expect(screen.getByText('Not clinically approved or published.')).toBeTruthy();
-    expect(screen.getByRole('heading', { name: 'References and further reading' })).toBeTruthy();
-    expect(screen.getByText(article.sections[0].paragraphs[0])).toBeTruthy();
-    expect(screen.queryByText(/This is a sample article/)).toBeNull();
+    expect(screen.getByRole('heading', { level: 1, name: 'Article Not Found' })).toBeTruthy();
+    expect(screen.queryByRole('navigation', { name: 'Article contents' })).toBeNull();
+    expect(screen.queryByText(article.sections[0].paragraphs[0])).toBeNull();
   });
-  it('searches the article body and can clear an empty search', () => {
+  it('does not list draft articles in the public resource library', () => {
     render(<MemoryRouter><ResourcesPage /></MemoryRouter>);
-    fireEvent.change(screen.getByLabelText('Search resources'), { target: { value: 'unfindable-phrase-123' } });
     expect(screen.getByRole('status').textContent).toContain('0 articles');
-    fireEvent.click(screen.getByRole('button', { name: 'Clear filters' }));
-    expect(screen.getByRole('status').textContent).toContain('15 articles');
-    const phrase = educationalArticles[0].sections[0].paragraphs[0].split(/\s+/).slice(4, 12).join(' ');
-    fireEvent.change(screen.getByLabelText('Search resources'), { target: { value: phrase } });
-    expect(screen.getByRole('link', { name: new RegExp(educationalArticles[0].title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) })).toBeTruthy();
+    expect(screen.getByText('Articles are being prepared for publication.')).toBeTruthy();
+    expect(screen.queryByRole('link', { name: educationalArticles[0].title })).toBeNull();
+    expect(screen.queryByLabelText('Search resources')).toBeNull();
   });
 });
 
@@ -71,14 +65,15 @@ describe('reading-based resources and confirmed contact fact', () => {
   it('uses actual draft catalogue counts rather than fabricated department totals', () => {
     for (const department of departments) expect(department.programmeCount).toBe(programmes.filter(programme => programme.departmentSlug === department.slug).length);
   });
-  it('does not allow filtering on unconfirmed CPD hours or course delivery estimates', () => {
+  it('hides empty catalogue filters while no programmes or CPD courses are approved', () => {
     const cpd = render(<MemoryRouter><CPDCoursesPage /></MemoryRouter>);
-    expect((cpd.getByLabelText('CPD Hours') as HTMLSelectElement).disabled).toBe(true);
-    expect(cpd.container.querySelector('option[value="10"]')).toBeNull();
+    expect(cpd.queryByLabelText('CPD Hours')).toBeNull();
+    expect(screen.getByText(/No CPD courses are currently approved for publication/)).toBeTruthy();
     cleanup();
     render(<MemoryRouter><ProgrammesPage /></MemoryRouter>);
-    expect((screen.getByLabelText('Duration') as HTMLSelectElement).disabled).toBe(true);
-    expect((screen.getByLabelText('Delivery') as HTMLSelectElement).disabled).toBe(true);
+    expect(screen.queryByLabelText('Duration')).toBeNull();
+    expect(screen.queryByLabelText('Delivery')).toBeNull();
+    expect(screen.getByText(/No programmes are currently approved for publication/)).toBeTruthy();
   });
   it('provides six substantive study resources with prompts, sources and valid reading links', () => {
     expect(learningResources).toHaveLength(6);
@@ -89,18 +84,19 @@ describe('reading-based resources and confirmed contact fact', () => {
       for (const slug of resource.relatedArticleSlugs) expect(getEducationalArticle(slug)).toBeTruthy();
     }
   });
-  it('filters study tools and gives a meaningful empty state', () => {
+  it('keeps unapproved study resources out of the public library', () => {
     render(<MemoryRouter><LearningResourcesPage /></MemoryRouter>);
-    fireEvent.change(screen.getByLabelText('Search study tools'), { target: { value: 'glossary' } });
-    expect(screen.getByRole('status').textContent).toContain('1 resource');
-    expect(screen.getByRole('heading', { name: 'Clinical Reasoning Glossary and Revision Notes' })).toBeTruthy();
+    expect(screen.getByRole('status').textContent).toContain('0 resources');
+    expect(screen.getByText(/Study resources are being prepared for publication/)).toBeTruthy();
+    expect(screen.queryByLabelText('Search study tools')).toBeNull();
+    expect(screen.queryByRole('heading', { name: 'Clinical Reasoning Glossary and Revision Notes' })).toBeNull();
   });
-  it('does not provide fake downloads, forms or completion tracking on a resource page', () => {
+  it('blocks unapproved study-resource detail routes', () => {
     const resource = learningResources[0];
     const { container } = render(<MemoryRouter initialEntries={[`/learning-resources/${resource.slug}`]}><Routes><Route path="/learning-resources/:slug" element={<LearningResourceDetailPage />} /></Routes></MemoryRouter>);
-    expect(screen.getByRole('heading', { name: 'Reflection prompts' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Study Resource Not Found' })).toBeTruthy();
+    expect(screen.queryByRole('heading', { name: 'Reflection prompts' })).toBeNull();
     expect(container.querySelector('form,input,textarea,[download]')).toBeNull();
-    expect(screen.getByText(/No patient-data collection/)).toBeTruthy();
   });
   it('shows only the owner-confirmed address while contact submission remains disabled', () => {
     render(<MemoryRouter><ContactPage /><Footer /></MemoryRouter>);
