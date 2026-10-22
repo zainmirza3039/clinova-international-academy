@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { CheckCircle, Handshake, Users, FileText, Award, ShieldCheck } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import SectionHeader from '@/components/SectionHeader';
 import Reveal from '@/components/Reveal';
+import { validateFormFields } from '@/lib/formValidation';
 
 const benefits = [
   { icon: FileText, title: 'Structured Programmes', desc: 'Access organised, structured educational content for your team.' },
@@ -41,32 +42,57 @@ export default function TrainingPartnersPage() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const submittingRef = useRef(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (submittingRef.current) return;
+    submittingRef.current = true;
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     setSubmitting(true);
     setError('');
 
-    const formData = new FormData(e.currentTarget);
-    const { error: submissionError } = await supabase.from('partnership_inquiries').insert({
-      full_name: String(formData.get('fullName') ?? '').trim(),
-      organisation: String(formData.get('organisation') ?? '').trim(),
-      role: String(formData.get('role') ?? '').trim(),
-      email: String(formData.get('email') ?? '').trim(),
-      phone: String(formData.get('phone') ?? '').trim() || null,
-      country: String(formData.get('country') ?? '').trim(),
-      website: String(formData.get('website') ?? '').trim() || null,
-      message: String(formData.get('message') ?? '').trim(),
-    });
-
-    setSubmitting(false);
-    if (submissionError) {
-      setError('We could not submit your enquiry. Please try again or contact us directly.');
+    const { values, error: validationError } = validateFormFields(
+      Object.fromEntries(formData.entries()),
+      {
+        fullName: { required: true, maxLength: 160 },
+        organisation: { required: true, maxLength: 200 },
+        role: { required: true, maxLength: 160 },
+        email: { required: true, maxLength: 320, kind: 'email' },
+        phone: { maxLength: 80 },
+        country: { required: true, maxLength: 120 },
+        website: { maxLength: 500, kind: 'url' },
+        message: { required: true, maxLength: 5000 },
+      },
+    );
+    if (validationError) {
+      setError(validationError);
+      submittingRef.current = false;
+      setSubmitting(false);
       return;
     }
 
-    e.currentTarget.reset();
-    setSubmitted(true);
+    try {
+      const { error: submissionError } = await supabase.from('partnership_inquiries').insert({
+        full_name: values.fullName,
+        organisation: values.organisation,
+        role: values.role,
+        email: values.email,
+        phone: values.phone,
+        country: values.country,
+        website: values.website,
+        message: values.message,
+      });
+      if (submissionError) throw submissionError;
+      form.reset();
+      setSubmitted(true);
+    } catch {
+      setError('We could not submit your enquiry. Please try again or contact us directly.');
+    } finally {
+      submittingRef.current = false;
+      setSubmitting(false);
+    }
   };
 
   const inputClass = 'w-full px-4 py-3 text-sm bg-white border border-navy-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-transparent text-navy-800 placeholder:text-navy-400';
@@ -153,51 +179,51 @@ export default function TrainingPartnersPage() {
             description="Complete the form below and our team will be in touch to discuss your partnership."
           />
           {submitted ? (
-            <div className="text-center py-12 bg-teal-50 rounded-xl border border-teal-100">
+            <div role="status" aria-live="polite" className="text-center py-12 bg-teal-50 rounded-xl border border-teal-100">
               <CheckCircle className="w-12 h-12 text-teal-600 mx-auto mb-4" />
               <h3 className="font-heading text-xl font-bold text-navy-900 mb-2">Enquiry Submitted</h3>
               <p className="text-sm text-navy-600">Thank you for your interest in partnering with Clinova. Our team will be in touch with you soon.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5 bg-navy-50 p-6 md:p-8 rounded-xl border border-navy-100">
-              {error && <p role="alert" className="text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
+              {error && <p role="alert" aria-live="assertive" className="text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className={labelClass} htmlFor="fullName">Full Name *</label>
-                  <input id="fullName" type="text" required className={inputClass} placeholder="Your full name" />
+                  <input id="fullName" name="fullName" type="text" required maxLength={160} className={inputClass} placeholder="Your full name" />
                 </div>
                 <div>
                   <label className={labelClass} htmlFor="organisation">Organisation *</label>
-                  <input id="organisation" type="text" required className={inputClass} placeholder="Organisation name" />
+                  <input id="organisation" name="organisation" type="text" required maxLength={200} className={inputClass} placeholder="Organisation name" />
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className={labelClass} htmlFor="role">Professional Role *</label>
-                  <input id="role" type="text" required className={inputClass} placeholder="Your role" />
+                  <input id="role" name="role" type="text" required maxLength={160} className={inputClass} placeholder="Your role" />
                 </div>
                 <div>
                   <label className={labelClass} htmlFor="email">Email *</label>
-                  <input id="email" type="email" required className={inputClass} placeholder="you@organisation.com" />
+                  <input id="email" name="email" type="email" required maxLength={320} className={inputClass} placeholder="you@organisation.com" />
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className={labelClass} htmlFor="phone">Phone</label>
-                  <input id="phone" type="tel" className={inputClass} placeholder="Phone number" />
+                  <input id="phone" name="phone" type="tel" maxLength={80} className={inputClass} placeholder="Phone number" />
                 </div>
                 <div>
                   <label className={labelClass} htmlFor="country">Country *</label>
-                  <input id="country" type="text" required className={inputClass} placeholder="Country" />
+                  <input id="country" name="country" type="text" required maxLength={120} className={inputClass} placeholder="Country" />
                 </div>
               </div>
               <div>
                 <label className={labelClass} htmlFor="website">Organisation Website</label>
-                <input id="website" type="url" className={inputClass} placeholder="https://..." />
+                <input id="website" name="website" type="url" maxLength={500} className={inputClass} placeholder="https://..." />
               </div>
               <div>
                 <label className={labelClass} htmlFor="message">Message *</label>
-                <textarea id="message" required rows={4} className={inputClass} placeholder="Tell us about your partnership interests..." />
+                <textarea id="message" name="message" required maxLength={5000} rows={4} className={inputClass} placeholder="Tell us about your partnership interests..." />
               </div>
               <button
                 type="submit"

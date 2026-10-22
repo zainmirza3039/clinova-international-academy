@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Mail, CheckCircle, MessageSquare, GraduationCap, Handshake } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
+import { validateFormFields } from '@/lib/formValidation';
 
 const enquiryTypes = ['General Enquiry', 'Academic Enquiry', 'Partnership Enquiry', 'Technical Support'];
 
@@ -21,30 +22,53 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const submittingRef = useRef(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (submittingRef.current) return;
+    submittingRef.current = true;
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     setSubmitting(true);
     setError('');
 
-    const formData = new FormData(e.currentTarget);
-    const { error: submissionError } = await supabase.from('contact_submissions').insert({
-      name: String(formData.get('name') ?? '').trim(),
-      email: String(formData.get('email') ?? '').trim(),
-      phone: String(formData.get('phone') ?? '').trim() || null,
-      subject: String(formData.get('subject') ?? '').trim(),
-      enquiry_type: String(formData.get('enquiryType') ?? '').trim(),
-      message: String(formData.get('message') ?? '').trim(),
-    });
-
-    setSubmitting(false);
-    if (submissionError) {
-      setError('We could not send your message. Please try again or email us directly.');
+    const { values, error: validationError } = validateFormFields(
+      Object.fromEntries(formData.entries()),
+      {
+        name: { required: true, maxLength: 160 },
+        email: { required: true, maxLength: 320, kind: 'email' },
+        phone: { maxLength: 80 },
+        subject: { required: true, maxLength: 200 },
+        enquiryType: { required: true, maxLength: 80 },
+        message: { required: true, maxLength: 5000 },
+      },
+    );
+    if (validationError) {
+      setError(validationError);
+      submittingRef.current = false;
+      setSubmitting(false);
       return;
     }
 
-    e.currentTarget.reset();
-    setSubmitted(true);
+    try {
+      const { error: submissionError } = await supabase.from('contact_submissions').insert({
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        subject: values.subject,
+        enquiry_type: values.enquiryType,
+        message: values.message,
+      });
+      if (submissionError) throw submissionError;
+      form.reset();
+      setSubmitted(true);
+    } catch {
+      setError('We could not send your message. Please try again or email us directly.');
+    } finally {
+      submittingRef.current = false;
+      setSubmitting(false);
+    }
   };
 
   const inputClass = 'w-full px-4 py-3 text-sm bg-white border border-navy-200 focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-transparent text-navy-800 placeholder:text-navy-400';
@@ -83,37 +107,37 @@ export default function ContactPage() {
                 Send us a message
               </h2>
               {submitted ? (
-                <div className="text-center py-16 bg-teal-50 border border-teal-100">
+                <div role="status" aria-live="polite" className="text-center py-16 bg-teal-50 border border-teal-100">
                   <CheckCircle className="w-12 h-12 text-teal-500 mx-auto mb-4" />
                   <h3 className="font-heading text-xl font-bold text-navy-800 mb-2">Message Sent</h3>
                   <p className="text-sm text-navy-600">Thank you for contacting Clinova. Our team will respond to your enquiry shortly.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5 bg-surface-50 p-6 md:p-8 border border-navy-100">
-                  {error && <p role="alert" className="text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
+                  {error && <p role="alert" aria-live="assertive" className="text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className={labelClass} htmlFor="name">Name *</label>
-                      <input id="name" type="text" required className={inputClass} placeholder="Your name" />
+                      <input id="name" name="name" type="text" required maxLength={160} className={inputClass} placeholder="Your name" />
                     </div>
                     <div>
                       <label className={labelClass} htmlFor="email">Email *</label>
-                      <input id="email" type="email" required className={inputClass} placeholder="you@example.com" />
+                      <input id="email" name="email" type="email" required maxLength={320} className={inputClass} placeholder="you@example.com" />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className={labelClass} htmlFor="phone">Phone</label>
-                      <input id="phone" type="tel" className={inputClass} placeholder="Phone number" />
+                      <input id="phone" name="phone" type="tel" maxLength={80} className={inputClass} placeholder="Phone number" />
                     </div>
                     <div>
                       <label className={labelClass} htmlFor="subject">Subject *</label>
-                      <input id="subject" type="text" required className={inputClass} placeholder="Subject" />
+                      <input id="subject" name="subject" type="text" required maxLength={200} className={inputClass} placeholder="Subject" />
                     </div>
                   </div>
                   <div>
                     <label className={labelClass} htmlFor="enquiryType">Enquiry Type *</label>
-                    <select id="enquiryType" required className={inputClass} defaultValue="">
+                    <select id="enquiryType" name="enquiryType" required className={inputClass} defaultValue="">
                       <option value="" disabled>Select enquiry type</option>
                       {enquiryTypes.map((t) => (
                         <option key={t} value={t}>{t}</option>
@@ -122,7 +146,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <label className={labelClass} htmlFor="message">Message *</label>
-                    <textarea id="message" required rows={5} className={inputClass} placeholder="Your message..." />
+                    <textarea id="message" name="message" required maxLength={5000} rows={5} className={inputClass} placeholder="Your message..." />
                   </div>
                   <button
                     type="submit"
