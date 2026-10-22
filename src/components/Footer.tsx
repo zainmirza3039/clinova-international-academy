@@ -41,12 +41,11 @@ export default function Footer() {
               <img src="/clinova-logo-white.svg" alt="Clinova International Academy" className="w-[200px] h-auto" />
             </Link>
             <p className="text-sm text-navy-100/60 leading-[1.65] mb-6 max-w-md">
-              Explore proposed healthcare learning pathways and original educational drafts.
-              Courses and learning services await confirmation; no enrolment is available here.
+              Explore healthcare subject guides, educational articles and structured resources for independent professional learning.
             </p>
             <div className="space-y-2.5">
               <address className="not-italic text-sm text-navy-100/80">{academyPublicAddress}</address>
-              <p className="text-xs text-navy-100/80">Phone, email and visiting arrangements await confirmation.</p>
+              <p className="text-xs text-navy-100/80">For written correspondence, use the postal address above. Visiting arrangements are not provided.</p>
             </div>
           </div>
 
