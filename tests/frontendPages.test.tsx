@@ -45,9 +45,10 @@ describe('completion frontend pages', () => {
     expect(screen.queryByText(/£|accredited by/i)).toBeNull();
   });
 
-  it('renders admissions guidance and the application preview link', () => {
+  it('states that admissions are not open while linking to the local-only planner', () => {
     renderPage(<AdmissionsPage />);
-    expect(screen.getByRole('heading', { name: /clear next step/i })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: /admissions are not yet open/i })).toBeTruthy();
+    expect(screen.getByText(/No programme is currently approved for enrolment/)).toBeTruthy();
     expect(screen.getByRole('link', { name: /open application planner/i }).getAttribute('href')).toBe('/application');
   });
 
