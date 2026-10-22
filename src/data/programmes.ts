@@ -336,13 +336,13 @@ export const publishedProgrammes = programmes.filter((programme) => programme.pu
 // Explicit review catalogue; publishedProgrammes remains a truthful publication-only export.
 export const reviewProgrammes = programmes.filter((programme) => programme.publicationStatus === 'draft' || programme.publicationStatus === 'published');
 export function getProgrammeBySlug(slug: string): Programme | undefined {
-  return reviewProgrammes.find((p) => p.slug === slug);
+  return publishedProgrammes.find((p) => p.slug === slug);
 }
 
 export function getProgrammesByDepartment(departmentSlug: string): Programme[] {
-  return reviewProgrammes.filter((p) => p.departmentSlug === departmentSlug);
+  return publishedProgrammes.filter((p) => p.departmentSlug === departmentSlug);
 }
 
 export function getFeaturedProgrammes(): Programme[] {
-  return reviewProgrammes.filter((p) => p.featured);
+  return publishedProgrammes.filter((p) => p.featured);
 }
