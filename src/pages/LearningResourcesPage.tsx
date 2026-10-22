@@ -7,16 +7,16 @@ import { learningResources } from '@/data/learningResources';
 import { educationalDisclaimer, getEducationalArticle } from '@/data/educationalArticles';
 
 export default function LearningResourcesPage() {
-  useSEO({ title: 'Draft Study Guides and Learning Resources', description: 'Explore educational checklists, reasoning worksheets, documentation prompts and revision notes. Draft professional learning resources, not clinical protocols.' });
+  useSEO({ title: 'Study Guides and Learning Resources', description: 'Explore educational checklists, reasoning worksheets, documentation prompts and revision notes for professional reflection.' });
   const [search, setSearch] = useState('');
   const filtered = useMemo(() => learningResources.filter(resource => `${resource.title} ${resource.kind} ${resource.summary}`.toLowerCase().includes(search.trim().toLowerCase())), [search]);
   return <>
-    <PageHero breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Resources', to: '/resources' }, { label: 'Study tools' }]} eyebrow="Draft learning resources" title="Study, Reflect and Discuss" description="Use these original reading-based tools to structure professional learning. No downloads, submissions, saved notes or learner records are available here." />
+    <PageHero breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Resources', to: '/resources' }, { label: 'Study tools' }]} eyebrow="Study tools" title="Study, Reflect and Discuss" description="Use these reading-based tools to structure professional learning. Downloads, submissions, saved notes and learner records are not available in this section." />
     <section className="max-w-editorial mx-auto px-6 lg:px-10 py-12">
-      <aside className="p-5 mb-8 bg-amber-50 border border-amber-200 text-sm leading-relaxed text-navy-700"><strong>Draft / qualified review required.</strong> {educationalDisclaimer} Do not enter or share personal or patient information.</aside>
+      <aside className="p-5 mb-8 bg-amber-50 border border-amber-200 text-sm leading-relaxed text-navy-700"><strong>Educational information notice.</strong> {educationalDisclaimer} Do not enter or share personal or patient information.</aside>
       <label htmlFor="study-resource-search" className="block mb-2 font-semibold text-navy-900">Search study tools</label><input id="study-resource-search" type="search" value={search} onChange={event => setSearch(event.target.value)} className="w-full p-3 border border-navy-200 mb-5 focus:ring-2 focus:ring-clinical-500" placeholder="Search guides, checklists or worksheets" />
-      <p role="status" aria-live="polite" className="text-sm text-navy-600 mb-6">Showing {filtered.length} draft resource{filtered.length === 1 ? '' : 's'}</p>
-      {filtered.length ? <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">{filtered.map(resource => <article key={resource.slug} className="p-6 bg-white border border-navy-100"><p className="text-xs font-semibold text-clinical-600">Draft / {resource.kind}</p><h2 className="mt-3 text-lg font-bold text-navy-900"><Link to={`/learning-resources/${resource.slug}`} className="hover:underline">{resource.title}</Link></h2><p className="mt-3 text-sm leading-relaxed text-navy-700">{resource.summary}</p><p className="mt-4 text-xs text-navy-500">Read online — no downloadable file or submission</p></article>)}</div> : <p className="p-6 bg-surface-50 text-navy-700">No study tools match your search. Try a broader term.</p>}
+      <p role="status" aria-live="polite" className="text-sm text-navy-600 mb-6">Showing {filtered.length} learning resource{filtered.length === 1 ? '' : 's'}</p>
+      {filtered.length ? <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">{filtered.map(resource => <article key={resource.slug} className="p-6 bg-white border border-navy-100"><p className="text-xs font-semibold text-clinical-600">{resource.kind}</p><h2 className="mt-3 text-lg font-bold text-navy-900"><Link to={`/learning-resources/${resource.slug}`} className="hover:underline">{resource.title}</Link></h2><p className="mt-3 text-sm leading-relaxed text-navy-700">{resource.summary}</p><p className="mt-4 text-xs text-navy-500">Read online — no downloadable file or submission</p></article>)}</div> : <p className="p-6 bg-surface-50 text-navy-700">No study tools match your search. Try a broader term.</p>}
       <Link to="/resources" className="inline-block mt-8 text-clinical-600 underline">Browse the educational article drafts</Link>
     </section>
   </>;
@@ -25,7 +25,7 @@ export default function LearningResourcesPage() {
 export function LearningResourceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const resource = learningResources.find(item => item.slug === slug);
-  useSEO({ title: resource ? `Draft: ${resource.title}` : 'Study Resource Not Found', description: resource?.summary ?? 'The requested study resource could not be found.' });
+  useSEO({ title: resource ? resource.title : 'Study Resource Not Found', description: resource?.summary ?? 'The requested study resource could not be found.' });
   if (!resource) return <section className="max-w-3xl mx-auto px-6 py-24 text-center"><h1 className="text-3xl font-bold text-navy-900">Study Resource Not Found</h1><Link to="/learning-resources" className="inline-block mt-6 text-clinical-600 underline">Browse study tools</Link></section>;
   const related = resource.relatedArticleSlugs.map(getEducationalArticle).filter((article): article is NonNullable<typeof article> => Boolean(article));
   return <>
