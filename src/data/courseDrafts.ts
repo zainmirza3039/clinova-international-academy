@@ -51,7 +51,7 @@ const initialCourseDrafts: Record<string, CourseDraft> = {
       ], reflectiveActivity: 'Write a shared-decision conversation for a fictional patient choosing between two reasonable next steps. Include the person’s goal, benefits, burdens, uncertainty, safety-net and review plan.' }
     ],
     faqs: [
-      { question: 'Is this course open for enrolment?', answer: 'No. This is an independent study outline, not an enrolment offer. Course availability and enrolment are not provided through this website.' },
+      { question: 'Is this course open for enrolment?', answer: 'No. This is an independent study outline, not an enrolment offer. Course enrolment is not available through this website.' },
       { question: 'Does it provide CPD hours or a certificate?', answer: 'No hours, certification, accreditation or digital certificate are confirmed. Any recognition would require academy and relevant professional review.' },
       { question: 'Can I use this to assess a patient?', answer: 'No. It is educational reading, not a clinical instruction or competence assessment. Follow your scope, supervision, local policy and referral pathways.' },
       { question: 'Who reviewed the clinical content?', answer: 'Qualified clinical review is required and is not claimed here. The outline identifies NICE, WHO and HCPC sources for later review.' }
@@ -85,7 +85,7 @@ const initialCourseDrafts: Record<string, CourseDraft> = {
     ],
     faqs: [
       { question: 'Is this course available now?', answer: 'No. This is an independent study outline. Dates, delivery, fees and enrolment are not provided through this website.' },
-      { question: 'Are CPD hours or a certificate included?', answer: 'No. CPD hours, assessment, accreditation and certificates are awaiting confirmation and must not be inferred from this guide.' },
+      { question: 'Are CPD hours or a certificate included?', answer: 'No. This website does not provide CPD hours, assessment, accreditation or certificates for this guide.' },
       { question: 'Does it teach pain treatment or prescribing?', answer: 'No. It is a cautious professional-learning outline. Treatment, prescribing and referral decisions remain within individual scope, supervision and local guidance.' },
       { question: 'Has a clinician approved the modules?', answer: 'Qualified clinical review is required and is not claimed. NICE, WHO and HCPC sources are listed for transparent future review.' }
     ],
