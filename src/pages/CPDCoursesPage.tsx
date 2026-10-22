@@ -3,15 +3,15 @@ import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import CPDCard from '@/components/CPDCard';
 import SearchBar from '@/components/SearchBar';
-import { reviewCPDCourses } from '@/data/cpdCourses';
+import { publishedCPDCourses } from '@/data/cpdCourses';
 import { departments } from '@/data/departments';
 import { ChevronDown } from 'lucide-react';
 
 export default function CPDCoursesPage() {
   useSEO({
-    title: 'CPD Courses',
+    title: 'Confirmed CPD Courses',
     description:
-      'Browse proposed professional-development topics. CPD accreditation, recognised hours, delivery and enrolment are not confirmed.',
+      'Browse academy-approved CPD courses. Unconfirmed topic outlines are not listed as available courses.',
   });
 
   const [search, setSearch] = useState('');
@@ -21,7 +21,7 @@ export default function CPDCoursesPage() {
   const [visibleCount, setVisibleCount] = useState(8);
 
   const filtered = useMemo(() => {
-    return reviewCPDCourses.filter((c) => {
+    return publishedCPDCourses.filter((c) => {
       if (deptFilter !== 'All' && c.department !== deptFilter) return false;
       if (cpdFilter !== 'All' && c.cpdHours !== parseInt(cpdFilter)) return false;
       if (levelFilter !== 'All' && c.level !== levelFilter) return false;
@@ -39,8 +39,8 @@ export default function CPDCoursesPage() {
       <PageHero
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'CPD Courses' }]}
         eyebrow="CPD Courses"
-        title="Proposed Professional Development Topics"
-        description="Explore proposed professional-development topics. No recognised CPD hours, course availability, accreditation, assessment or certificate is confirmed."
+        title="Continuing Professional Development"
+        description="Only academy-approved CPD offerings appear here. Recognised hours, accreditation, delivery and enrolment will be stated only when confirmed."
         image="https://images.pexels.com/photos/5452222/pexels-photo-5452222.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
@@ -108,8 +108,8 @@ export default function CPDCoursesPage() {
             </>
           ) : (
             <div className="text-center py-16 bg-surface-50 border border-navy-100">
-              <p className="text-navy-500 mb-2">No CPD courses match your current filters.</p>
-              <p className="text-sm text-navy-400">Try adjusting your search or filter criteria.</p>
+              <p className="text-navy-800 mb-2 font-semibold">No CPD courses are currently approved for publication.</p>
+              <p className="text-sm text-navy-600">The academy will list courses here after confirming availability, recognised CPD hours, delivery and any accreditation. No enrolment is currently offered through this page.</p>
             </div>
           )}
         </div>
