@@ -5,7 +5,7 @@ const academyLinks = [
   { label: 'About', to: '/about' },
   { label: 'Departments', to: '/departments' },
   { label: 'Programmes', to: '/programmes' },
-  { label: 'CPD Courses', to: '/cpd-courses' },
+  { label: 'Professional Development', to: '/cpd-courses' },
   { label: 'Online Learning', to: '/online-learning' },
 ];
 
