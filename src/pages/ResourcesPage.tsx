@@ -29,11 +29,11 @@ export function ResourcesPage() {
     <section className="py-12 lg:py-16 bg-white"><div className="max-w-editorial mx-auto px-6 lg:px-10">
       <aside className="bg-amber-50 border border-amber-200 p-5 mb-8 text-sm text-navy-700 leading-relaxed">{educationalDisclaimer}</aside>
       <div className="flex flex-wrap gap-4 mb-8 text-sm font-semibold"><Link to="/learning-resources" className="text-clinical-600 underline underline-offset-4">Study guides, checklists and reflection tools</Link><Link to="/programmes" className="text-clinical-600 underline underline-offset-4">Proposed programme outlines</Link></div>
-      <div className="bg-navy-50 border border-navy-100 p-5 mb-8">
+      {publishedArticleItems.length > 0 && <div className="bg-navy-50 border border-navy-100 p-5 mb-8">
         <label htmlFor="resource-search" className="block text-sm font-semibold text-navy-800 mb-2">Search resources</label>
         <input id="resource-search" type="search" value={search} onChange={event => setSearch(event.target.value)} placeholder="Search titles, topics or article text" className="w-full px-4 py-3 mb-4 text-sm bg-white border border-navy-200 focus:outline-none focus:ring-2 focus:ring-clinical-500 text-navy-800" />
         <div className="flex flex-wrap gap-2" role="group" aria-label="Filter articles by topic">{['All', ...publishedArticleCategories].map(cat => <button type="button" key={cat} onClick={() => setCategory(cat)} aria-pressed={category === cat} className={`px-4 py-2 text-sm font-medium border ${category === cat ? 'bg-navy-900 text-white border-navy-900' : 'bg-white text-navy-700 border-navy-200'}`}>{cat}</button>)}</div>
-      </div>
+      </div>}
       <p className="mb-6 text-sm text-navy-600" role="status" aria-live="polite" aria-atomic="true">Showing {filtered.length} article{filtered.length !== 1 ? 's' : ''}</p>
       {publishedArticleItems.length === 0 ? <div className="text-center py-12 bg-navy-50 border border-navy-100"><p className="font-semibold text-navy-800">Articles are being prepared for publication.</p><p className="mt-2 text-sm text-navy-600">Clinical and editorial review must be completed before materials appear in this public library.</p></div> : filtered.length ? <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">{filtered.map((item, index) => <NewsCard key={item.id} item={item} index={index} />)}</div> : <div className="text-center py-12 bg-navy-50"><p className="font-semibold text-navy-800">No articles match your search.</p><p className="mt-2 text-sm text-navy-600">Try a broader term or another topic.</p><button type="button" onClick={() => { setSearch(''); setCategory('All'); }} className="mt-5 px-5 py-2 bg-navy-900 text-white">Clear filters</button></div>}
 
