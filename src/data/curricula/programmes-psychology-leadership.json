@@ -2,7 +2,7 @@
   {
     "programmeSlug": "certificate-in-cognitive-behavioural-therapy-fundamentals",
     "status": "draft",
-    "reviewNotice": "Proposed introductory professional-learning educational material only. It requires qualified clinical, safeguarding, accessibility and editorial review, plus jurisdiction-specific review before any publication. Reading does not qualify a CBT therapist, diagnose, authorise treatment or provide clinical competence. Future hours, duration, fees, instructors, availability, assessment, accreditation and certificates are unknown; no pass rules are set.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Describe the links among situations, interpretations, emotions, bodily responses and behaviour in introductory CBT theory.",
       "Use a fictional case to distinguish a tentative, collaborative formulation from a diagnosis or treatment plan.",
@@ -76,7 +76,7 @@
     "faqs": [
       {
         "question": "Does this make me a CBT therapist or allow me to diagnose?",
-        "answer": "No. It is an introductory proposed curriculum and does not qualify a CBT therapist, diagnose, authorise treatment, or establish clinical competence. Specialist training, supervised practice, registration or accreditation requirements vary by role and jurisdiction."
+        "answer": "No. It is an introductory suggested curriculum and does not qualify a CBT therapist, diagnose, authorise treatment, or establish clinical competence. Specialist training, supervised practice, registration or accreditation requirements vary by role and jurisdiction."
       },
       {
         "question": "Can I use the lessons as a therapy script or practise exposure?",
@@ -133,7 +133,7 @@
   {
     "programmeSlug": "professional-development-in-healthcare-leadership",
     "status": "draft",
-    "reviewNotice": "Proposed professional-development educational material only. It requires qualified leadership, patient-safety, equality, accessibility and editorial review, with jurisdiction-specific governance review before publication. It creates no credential, authority, appointment or decision rights. Future hours, duration, fees, instructors, availability, assessment, accreditation and certificates are unknown; no pass rules are set.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Describe how leadership behaviours, structures and culture influence safety, care quality and staff experience.",
       "Use systems and human-factors thinking to explore why work varies without reducing incidents to individual blame.",
@@ -176,7 +176,7 @@
           {
             "title": "Human factors and resilient work",
             "description": "Examine how design, workload and interruptions interact with human performance.",
-            "text": "People work within systems that shape attention, memory, decision-making and recovery. Interruptions, confusing interfaces, ambiguous labels, fatigue, workload, handover gaps and competing priorities can combine in predictable ways. Human-factors thinking asks what happened, what made sense at the time, and how design can support safer action. It does not excuse reckless conduct or remove professional accountability; it prevents a simplistic ‘who failed?’ investigation from stopping learning. In a fictional medication handover, examine task demands, information flow, equipment, staffing and local adaptations before proposing a fix. Separate facts from assumptions and avoid using confidential incident records in learning activities. Test whether a proposed barrier creates new work or shifts risk elsewhere. NHS England frames patient safety around culture, systems, insight, involvement and improvement, while local organisations determine their incident processes and governance. This educational material is not a safety investigation method, legal advice or authority to alter a clinical process. Escalate actual hazards through local reporting and safety channels, preserving evidence and confidentiality."
+            "text": "People work within systems that shape attention, memory, decision-making and recovery. Interruptions, confusing interfaces, ambiguous labels, fatigue, workload, handover gaps and competing priorities can combine in predictable ways. Human-factors thinking asks what happened, what made sense at the time, and how design can support safer action. It does not excuse reckless conduct or remove professional accountability; it prevents a simplistic ‘who failed?’ investigation from stopping learning. In a fictional medication handover, examine task demands, information flow, equipment, staffing and local adaptations before proposing a fix. Separate facts from assumptions and avoid using confidential incident records in learning activities. Test whether a suggested barrier creates new work or shifts risk elsewhere. NHS England frames patient safety around culture, systems, insight, involvement and improvement, while local organisations determine their incident processes and governance. This educational material is not a safety investigation method, legal advice or authority to alter a clinical process. Escalate actual hazards through local reporting and safety channels, preserving evidence and confidentiality."
           },
           {
             "title": "Equity, voice and psychological safety",
@@ -201,13 +201,13 @@
             "text": "Trust grows when leaders explain what is known, what is uncertain, what is being done and when people will hear more. In a fictional service change, tailor communication to patients, families, staff, community partners and regulators rather than sending one generic message. Use plain language, accessible formats and interpreters or communication support where needed. Do not promise outcomes before evidence exists, conceal adverse effects, or imply that listening guarantees agreement. Accountability includes naming the decision process and owner, documenting dissent, responding to concerns and reviewing whether the intervention helped or harmed. Team learning requires a loop: gather insight, agree an action, test it, share findings, adapt and check whether benefits are sustained and equitably distributed. Serious incidents, safeguarding matters and professional concerns require local reporting, duty-of-candour or other jurisdiction-specific processes as applicable; this educational material is not legal or governance advice. It creates no authority, credential or appointment. Leaders should seek specialist advice when communications involve confidentiality, litigation, media, employment or significant patient harm."
           }
         ],
-        "reflectiveActivity": "Create a fictional one-page improvement brief with problem, affected groups, proposed small test, three measures, decision owner, equity check, review date and a plain-language uncertainty statement."
+        "reflectiveActivity": "Create a fictional one-page improvement brief with problem, affected groups, suggested small test, three measures, decision owner, equity check, review date and a plain-language uncertainty statement."
       }
     ],
     "faqs": [
       {
         "question": "Does this curriculum make me a healthcare leader or give me authority?",
-        "answer": "No. It is a proposed professional-development outline, not a credential, appointment or delegation of authority. Leadership responsibilities, decision rights, professional accountability and governance remain defined by the employing organisation and applicable law."
+        "answer": "No. It is a suggested professional-development outline, not a credential, appointment or delegation of authority. Leadership responsibilities, decision rights, professional accountability and governance remain defined by the employing organisation and applicable law."
       },
       {
         "question": "Can I use it to investigate an incident or change a clinical process?",
