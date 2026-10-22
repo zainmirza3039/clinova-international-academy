@@ -31,11 +31,19 @@ export default function StudentDashboardPage() {
   useEffect(() => {
     const userId = session?.user.id;
     if (!learnerDataEnabled || !userId) {
+      setProfileName(null);
+      setEnrollments([]);
+      setProgress([]);
+      setCertificates([]);
       setRecordsLoading(false);
       return;
     }
 
     let active = true;
+    setProfileName(null);
+    setEnrollments([]);
+    setProgress([]);
+    setCertificates([]);
     setRecordsLoading(true);
     setError(null);
     void (async () => {
