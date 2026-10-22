@@ -18,7 +18,7 @@ const contactCards = [
 export default function ContactPage() {
   useSEO({
     title: 'Contact Clinova International Academy',
-    description: 'Get in touch with Clinova International Academy. General, academic and partnership enquiries welcome.',
+    description: 'Confirmed public contact information for Clinova International Academy. Online enquiry submission is not currently available.',
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -85,7 +85,7 @@ export default function ContactPage() {
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Contact' }]}
         eyebrow="Contact"
         title="Contact Clinova International Academy"
-        description="We're here to help. Whether you have a general question, an academic enquiry or are interested in partnering with us, we'd love to hear from you."
+        description="The confirmed public address is listed below. Email channels and online form submission are not currently available; do not assume a message has been sent through this website."
         image="https://images.pexels.com/photos/4269271/pexels-photo-4269271.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
@@ -107,7 +107,7 @@ export default function ContactPage() {
             {/* Contact Form */}
             <div className="lg:col-span-7">
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-800 mb-8 leading-[1.15] text-balance">
-                Send us a message
+                Online enquiry submission is unavailable
               </h2>
               {submitted ? (
                 <div role="status" aria-live="polite" className="text-center py-16 bg-teal-50 border border-teal-100">
