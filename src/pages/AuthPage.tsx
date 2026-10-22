@@ -29,7 +29,7 @@ export default function AuthPage({ mode: initialMode = 'sign-in' }: Props) {
   useEffect(() => { setEmail(''); setPassword(''); setConfirmation(''); setMessage(null); setLocalError(null); }, [mode]);
   useEffect(() => {
     if (mode === 'reset-password') setLocalError(auth.status === 'ready' && (!auth.recovery || !auth.session) ? 'This password recovery link is no longer valid. Request a new one to continue.' : null);
-    else if (auth.session && !auth.recovery) navigate('/student', { replace: true });
+    else if (auth.session && !auth.recovery) navigate(returnTo, { replace: true });
   }, [auth.recovery, auth.session, auth.status, mode, navigate]);
 
   if (!auth.enabled || auth.status === 'error') return <UnavailableAuth message={auth.error ?? 'Authentication is not enabled for this site.'} />;
