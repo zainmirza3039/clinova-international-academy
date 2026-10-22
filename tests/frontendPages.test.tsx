@@ -43,6 +43,10 @@ describe('completion frontend pages', () => {
     fireEvent.click(question);
     expect(question.getAttribute('aria-expanded')).toBe('false');
     expect(screen.queryByText(/£|accredited by/i)).toBeNull();
+    const contactQuestion = screen.getByRole('button', { name: /how do i contact clinova/i });
+    fireEvent.click(contactQuestion);
+    expect(screen.getByText(/enquiry submission is disabled in this preview/i)).toBeTruthy();
+    expect(screen.queryByText(/currently supported contact route and expected response guidance/i)).toBeNull();
   });
 
   it('renders admissions guidance and the application preview link', () => {
