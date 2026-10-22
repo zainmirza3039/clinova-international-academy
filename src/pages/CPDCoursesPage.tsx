@@ -9,7 +9,7 @@ import { ChevronDown } from 'lucide-react';
 
 export default function CPDCoursesPage() {
   useSEO({
-    title: 'CPD Courses',
+    title: 'Professional Development',
     description:
       'Explore professional-development topics. Recognised CPD hours, accreditation, delivery and enrolment are confirmed only for specific published offerings.',
   });
@@ -37,8 +37,8 @@ export default function CPDCoursesPage() {
   return (
     <>
       <PageHero
-        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'CPD Courses' }]}
-        eyebrow="CPD Courses"
+        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Professional Development' }]}
+        eyebrow="Professional Development"
         title="Professional Development Topics"
         description="Explore professional-development topics and review the details published for each offering. CPD hours, accreditation, availability, assessment and certification must be confirmed before booking."
         image="https://images.pexels.com/photos/5452222/pexels-photo-5452222.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
@@ -62,7 +62,7 @@ export default function CPDCoursesPage() {
                 </select>
               </div>
               <div>
-                <label htmlFor="cpd-hours" className="block text-xs font-medium text-navy-500 mb-1.5">CPD Hours</label>
+                <label htmlFor="cpd-hours" className="block text-xs font-medium text-navy-500 mb-1.5">CPD credit</label>
                 <select id="cpd-hours" disabled aria-describedby="cpd-hours-note" className={selectClass} value={cpdFilter} onChange={(e) => setCpdFilter(e.target.value)}>
                   <option value="All">CPD credit not awarded</option>
                 </select>
