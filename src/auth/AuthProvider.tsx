@@ -46,7 +46,8 @@ export function safeReturnTarget(target: string | null | undefined) {
   try {
     const parsed = new URL(target, 'https://safe.invalid');
     const decodedPath = decodeURIComponent(parsed.pathname);
-    if (parsed.origin !== 'https://safe.invalid' || !/^\/student(?:\/|$)/.test(parsed.pathname) || decodedPath.includes('\\') || decodedPath.split('/').includes('..')) return '/student';
+    const allowedRoute = /^\/student(?:\/|$)/.test(parsed.pathname) || /^\/admin(?:\/|$)/.test(parsed.pathname);
+    if (parsed.origin !== 'https://safe.invalid' || !allowedRoute || decodedPath.includes('\\') || decodedPath.split('/').includes('..')) return '/student';
     return target;
   } catch { return '/student'; }
 }
