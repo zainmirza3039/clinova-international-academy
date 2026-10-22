@@ -19,17 +19,17 @@ import { publishedNewsItems as newsItems, generalFAQs } from '@/data/content';
 import { useState } from 'react';
 
 const learningSteps = [
-  { number: '01', title: 'Review a Proposed Programme', desc: 'Browse illustrative catalogue outlines and consider which topics may fit your professional goals.' },
-  { number: '02', title: 'Explore Illustrative Materials', desc: 'Read proposed learning themes, resources and activities for professional reflection.' },
-  { number: '03', title: 'Reflect on Relevance', desc: 'Consider how a topic relates to your role, scope of practice and further learning needs.' },
-  { number: '04', title: 'Confirm Before Enrolment', desc: 'Ask the academy to confirm availability, terms and any assessment or recognition before making plans.' },
+  { number: '01', title: 'Confirm the content', desc: 'Verify the course outline, audience and intended learning outcomes.' },
+  { number: '02', title: 'Review the material', desc: 'Complete appropriate clinical and editorial review before publication.' },
+  { number: '03', title: 'Confirm the terms', desc: 'Verify availability, fees, delivery, assessment and any recognition.' },
+  { number: '04', title: 'Publish verified details', desc: 'Make an offering visible only after the academy approves its public information.' }
 ];
 
 const pathwaySteps = [
-  { label: 'Proposed Short Courses', desc: 'Review focused illustrative topic outlines' },
-  { label: 'Professional Development Topics', desc: 'Explore proposed skill-building themes' },
-  { label: 'Proposed Diploma Outlines', desc: 'Consider illustrative study structures' },
-  { label: 'Further Learning Ideas', desc: 'Use the catalogue for planning, not enrolment' },
+  { label: 'Content review', desc: 'Check accuracy and suitability' },
+  { label: 'Academy confirmation', desc: 'Verify offering details and terms' },
+  { label: 'Publication approval', desc: 'Approve public-facing information' },
+  { label: 'Availability notice', desc: 'Publish only confirmed offerings' }
 ];
 
 export default function HomePage() {
@@ -69,7 +69,7 @@ export default function HomePage() {
             <div className="flex items-center gap-3 mb-8">
               <div className="h-px w-8 bg-teal-400" />
               <span className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-400">
-                Online Healthcare Education
+                Healthcare Education
               </span>
             </div>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white leading-[1.08] text-balance">
@@ -130,7 +130,7 @@ export default function HomePage() {
                   <div className="border-t border-navy-100 pt-4">
                     <div className="flex items-center gap-2 text-navy-600">
                       <Globe className="w-4 h-4 text-teal-500" />
-                      <span>Worldwide online learning</span>
+                      <span>Professional education</span>
                     </div>
                   </div>
                 </div>
@@ -254,9 +254,9 @@ export default function HomePage() {
               How It Works
             </div>
             <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
-              An illustrative learning journey
+              How information reaches publication
             </h2>
-            <p className="mt-4 text-sm text-navy-600/70 leading-relaxed">This proposed pathway is illustrative only. It does not represent an active enrolment, confirmed assessment, successful completion or certificate.</p>
+            <p className="mt-4 text-sm text-navy-600/70 leading-relaxed">Course information is published only after availability, terms and any recognition have been confirmed.</p>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {learningSteps.map((step, i) => (
@@ -287,7 +287,7 @@ export default function HomePage() {
                 Global Learning
               </div>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-800 leading-[1.15] text-balance">
-                Healthcare education without borders
+                Education details will follow review
               </h2>
               <p className="mt-5 text-base text-navy-600/80 leading-[1.65]">
                 Clinova is preparing a proposed approach to professional learning. The academy has not confirmed an active online learning platform, enrolment service or learner dashboard.
@@ -320,10 +320,10 @@ export default function HomePage() {
               Learning Pathways
             </div>
             <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
-              Professional pathways
+              Publication process
             </h2>
             <p className="mt-5 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-              A proposed, illustrative learning pathway for professional development planning — not an active enrolment or a promise of certificates or outcomes.
+              This process describes publication controls, not a course, enrolment pathway or promise of outcomes.
             </p>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-8">
@@ -407,7 +407,7 @@ export default function HomePage() {
               Learning designed for professional practice
             </h2>
             <p className="mt-5 text-sm leading-relaxed text-navy-100/70">
-              We do not publish unverified learner testimonials or invented outcomes. Instead, our programmes are structured around clear objectives, practical application and honest communication about what is and is not currently available.
+              We do not publish unverified learner testimonials, course claims or outcomes. Availability, recognition and learner-service details are shown only after the relevant facts and workflows are confirmed.
             </p>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
