@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
-import { Link, MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { useSEO } from '@/hooks/useSEO';
 import ProgrammesPage from '@/pages/ProgrammesPage';
 import CPDCoursesPage from '@/pages/CPDCoursesPage';
@@ -46,16 +46,14 @@ describe('catalogue filter accessibility and URL navigation', () => {
     expect(screen.getAllByRole('button').every(button => button.getAttribute('type') === 'button')).toBe(true);
   });
 
-  it('labels all programme filters and follows same-page type query navigation', () => {
-    render(<MemoryRouter initialEntries={['/programmes?type=Certificate']}><Link to="/programmes?type=Diploma">Navigate diploma</Link><ProgrammesPage /></MemoryRouter>);
-    expect((screen.getByLabelText('Programme Type') as HTMLSelectElement).value).toBe('Certificate');
-    for (const label of ['Department', 'Duration', 'Delivery']) expect(screen.getByLabelText(label).tagName).toBe('SELECT');
-    fireEvent.click(screen.getByText('Navigate diploma'));
-    expect((screen.getByLabelText('Programme Type') as HTMLSelectElement).value).toBe('Diploma');
-  });
-  it('labels every CPD filter', () => {
+  it('hides catalogue filters until there are approved public records', () => {
+    render(<MemoryRouter><ProgrammesPage /></MemoryRouter>);
+    expect(screen.queryByLabelText('Programme Type')).toBeNull();
+    expect(screen.getByText(/No programmes are currently approved for publication/)).toBeTruthy();
+    cleanup();
     render(<MemoryRouter><CPDCoursesPage /></MemoryRouter>);
-    for (const label of ['Department', 'CPD Hours', 'Level']) expect(screen.getByLabelText(label).tagName).toBe('SELECT');
+    expect(screen.queryByLabelText('CPD Hours')).toBeNull();
+    expect(screen.getByText(/No CPD courses are currently approved for publication/)).toBeTruthy();
   });
 });
 
