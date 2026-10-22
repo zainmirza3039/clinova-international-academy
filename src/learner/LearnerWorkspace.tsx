@@ -64,6 +64,7 @@ function CourseReading({ api, course, enrolment }: { api: LearnerApi; course: Le
   const progress = useLearnerRead(progressLoad);
   const [message, setMessage] = useState<string | null>(null);
   const [uncertain, setUncertain] = useState(false);
+  const [accepted, setAccepted] = useState(false);
   const [busy, setBusy] = useState(false);
   const busyRef = useRef(false);
   const [verificationPending, setVerificationPending] = useState(false);
@@ -72,15 +73,16 @@ function CourseReading({ api, course, enrolment }: { api: LearnerApi; course: Le
     setVerificationPending(true);
     progress.reload();
   };
-  // An uncertain mutation stays locked until an explicit successful reread.
+  // Both ambiguous writes and accepted writes require a successful marker reread.
   const mayRetry = verificationPending && progress.state.status === 'ready';
-  const writeLocked = busy || (uncertain && !mayRetry);
+  const writeLocked = busy || ((uncertain || accepted) && !mayRetry);
   const complete = async (lessonId: string, completed: boolean) => {
     if (busyRef.current || enrolment.status !== 'active' || writeLocked) return;
-    busyRef.current = true; setBusy(true); setMessage(null); setUncertain(false); setVerificationPending(false);
+    busyRef.current = true; setBusy(true); setMessage(null); setUncertain(false); setAccepted(false); setVerificationPending(false);
     try {
       await api.setLessonCompletion(lessonId, completed);
-      setMessage('Completion change accepted. Saved markers are being reloaded; this is not assessment or award evidence.');
+      setAccepted(true);
+      setVerificationPending(true);
       progress.reload();
     } catch {
       setMessage('We could not confirm the completion change. It may have reached the server. Reload saved markers before trying again; no automatic retry was sent.');
@@ -92,6 +94,11 @@ function CourseReading({ api, course, enrolment }: { api: LearnerApi; course: Le
     {enrolment.status !== 'active' && <p className="mt-3">Read-only access: completed enrolments cannot change completion markers.</p>}
     {busy && <p className="mt-4" role="status">Saving completion change…</p>}
     {message && <p className="mt-4 rounded-lg bg-amber-50 p-3" role={uncertain ? 'alert' : 'status'}>{message}</p>}
+    {accepted && <p className="mt-4 rounded-lg bg-amber-50 p-3" role={progress.state.status === 'error' ? 'alert' : 'status'}>{progress.state.status === 'ready'
+      ? 'Completion change accepted. Saved markers reloaded; this is not assessment or award evidence.'
+      : progress.state.status === 'error'
+        ? 'Completion change accepted, but saved markers could not be verified. Completion controls remain locked. Reload saved markers before making another change; no automatic write retry was sent.'
+        : 'Completion change accepted. Verifying saved markers; completion controls remain locked until they reload successfully.'}</p>}
     <section className={panelClass} aria-labelledby="saved-markers"><h3 id="saved-markers" className="text-lg font-semibold">Saved completion markers</h3><p className="mt-2 text-sm">Paginated records, not a total or percentage. Absence on this page does not mean a lesson is incomplete. Assessment and certificate records are not queried.</p>
       <button type="button" className={`${buttonClass} mt-3`} disabled={busy || progress.state.status === 'loading'} onClick={reloadProgress}>Reload saved markers</button>
       {progress.state.status !== 'ready' ? <ReadNotice name="saved completion markers" status={progress.state.status} retry={reloadProgress} /> : <>

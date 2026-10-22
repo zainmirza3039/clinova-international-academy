@@ -93,6 +93,45 @@ describe('LearnerWorkspace reads', () => {
 });
 
 describe('LearnerWorkspace completion writes', () => {
+  it('keeps both completion controls locked while an accepted write is being verified', async () => {
+    let resolveMarkers!: (rows: never[]) => void;
+    const markers = new Promise<never[]>(resolve => { resolveMarkers = resolve; });
+    const api = makeApi({ listProgress: vi.fn().mockResolvedValueOnce([]).mockReturnValueOnce(markers) });
+    await readyToLesson(api);
+    const mark = screen.getByRole('button', { name: /Mark reading complete/i }) as HTMLButtonElement;
+    const remove = screen.getByRole('button', { name: /Remove completion marker/i }) as HTMLButtonElement;
+    fireEvent.click(mark);
+    await screen.findByText(/Verifying saved markers/i);
+    expect(mark.disabled).toBe(true);
+    expect(remove.disabled).toBe(true);
+    fireEvent.click(remove);
+    expect(api.setLessonCompletion).toHaveBeenCalledTimes(1);
+    resolveMarkers([]);
+    await screen.findByText(/Saved markers reloaded/i);
+    expect(mark.disabled).toBe(false);
+    expect(remove.disabled).toBe(false);
+  });
+  it('keeps an accepted write locked after failed verification until an explicit successful reread', async () => {
+    const api = makeApi({ listProgress: vi.fn().mockResolvedValueOnce([]).mockRejectedValueOnce(new Error('verification failed')).mockRejectedValueOnce(new Error('retry failed')).mockResolvedValue([]) });
+    await readyToLesson(api);
+    const mark = screen.getByRole('button', { name: /Mark reading complete/i }) as HTMLButtonElement;
+    const remove = screen.getByRole('button', { name: /Remove completion marker/i }) as HTMLButtonElement;
+    fireEvent.click(mark);
+    await screen.findByText(/Completion change accepted, but saved markers could not be verified/i);
+    expect(mark.disabled).toBe(true);
+    expect(remove.disabled).toBe(true);
+    fireEvent.click(mark);
+    expect(api.setLessonCompletion).toHaveBeenCalledTimes(1);
+    fireEvent.click(screen.getByRole('button', { name: /Reload saved markers/i }));
+    await screen.findByRole('button', { name: /Retry saved completion markers/i });
+    expect(mark.disabled).toBe(true);
+    expect(api.listProgress).toHaveBeenCalledTimes(3);
+    fireEvent.click(screen.getByRole('button', { name: /Retry saved completion markers/i }));
+    await screen.findByText(/Saved markers reloaded/i);
+    expect(mark.disabled).toBe(false);
+    expect(remove.disabled).toBe(false);
+    expect(api.setLessonCompletion).toHaveBeenCalledTimes(1);
+  });
   it('delegates one RPC intent per click, suppresses double clicks, and disables while pending', async () => { let resolve!: () => void; const pending = new Promise<void>(r => { resolve = r; }); const api = makeApi({ setLessonCompletion: vi.fn().mockReturnValue(pending) }); await readyToLesson(api); const button = screen.getByRole('button', { name: /Mark reading complete/i }) as HTMLButtonElement; fireEvent.click(button); fireEvent.click(button); expect(api.setLessonCompletion).toHaveBeenCalledTimes(1); expect(api.setLessonCompletion).toHaveBeenCalledWith(LESSON, true); expect(button.disabled).toBe(true); resolve(); await waitFor(() => expect(button.disabled).toBe(false));
   });
   it('keeps completed and withdrawn enrolments read-only', async () => { for (const status of ['completed', 'withdrawn'] as const) { const api = makeApi({ listEnrolments: vi.fn().mockResolvedValue([{ id: 'e', course_id: COURSE, status, enrolled_at: 'now' }]) }); renderWorkspace(api); await screen.findByText(new RegExp(`Enrolment status: ${status}`)); const read = screen.queryByRole('button', { name: /Read Safe Course/i }); if (read) { fireEvent.click(read); expect(await screen.findByText(/Read-only access/i)).toBeTruthy(); } else { expect(screen.getByText(/Lesson access is unavailable/i)).toBeTruthy(); } expect(screen.queryByRole('button', { name: /Mark reading complete/i })).toBeNull(); cleanup(); } });
