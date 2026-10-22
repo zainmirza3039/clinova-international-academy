@@ -1,4 +1,3 @@
-import { newsItems as mainArticleSnapshots } from '@/data/content';
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSEO } from '@/hooks/useSEO';
@@ -6,11 +5,11 @@ import PageHero from '@/components/PageHero';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import NewsCard from '@/components/NewsCard';
 import { newsItems } from '@/data/resourceDrafts';
+import { educationalArticleCards, educationalDisclaimer, draftDateLabel, getEducationalArticle } from '@/data/educationalArticles';
+import { publishedProgrammes } from '@/data/programmes';
 
 const publishedArticleItems = newsItems.filter(item => getEducationalArticle(item.slug)?.status === 'published');
 const publishedArticleCategories = [...new Set(publishedArticleItems.map(item => item.category))];
-import { educationalArticleCards, educationalDisclaimer, draftDateLabel, getEducationalArticle } from '@/data/educationalArticles';
-import { publishedProgrammes } from '@/data/programmes';
 
 export function ResourcesPage() {
   useSEO({ title: 'Educational Article Library', description: 'The public learning library is being prepared. Articles will appear here only after clinical and editorial approval.' });
@@ -47,9 +46,9 @@ export function ResourceDetailPage() {
   const article = getEducationalArticle(slug);
   useSEO({ title: article?.status === 'published' ? article.seoTitle : 'Article Not Found', description: article?.status === 'published' ? article.seoDescription : 'This educational article is not available for public reading.', noindex: !article || article.status !== 'published' });
   if (!article || article.status !== 'published') return <section className="max-w-3xl mx-auto px-6 py-24 text-center"><h1 className="text-3xl font-bold text-navy-900">Article Not Found</h1><p className="mt-4 text-navy-600">This address does not match an article in the library.</p><Link className="inline-block mt-6 text-clinical-600 underline" to="/resources">View All Resources</Link></section>;
-  const explicitRelated = article.relatedArticleSlugs.map(relatedSlug => educationalArticleCards.find(item => item.slug === relatedSlug)).filter((item): item is typeof newsItems[number] => Boolean(item));
+  const explicitRelated = article.relatedArticleSlugs.map(relatedSlug => educationalArticleCards.find(item => item.slug === relatedSlug)).filter((item): item is typeof newsItems[number] => Boolean(item && getEducationalArticle(item.slug)?.status === 'published'));
   const related = (explicitRelated.length ? explicitRelated : educationalArticleCards.filter(item => item.slug !== article.slug && item.category === article.category && getEducationalArticle(item.slug)?.status === 'published')).slice(0, 3);
-  const relatedProgrammes = article.relatedProgrammeSlugs.map(programmeSlug => publishedProgrammes.find(item => item.slug === programmeSlug)).filter((item): item is typeof programmes[number] => Boolean(item));
+  const relatedProgrammes = article.relatedProgrammeSlugs.map(programmeSlug => publishedProgrammes.find(item => item.slug === programmeSlug)).filter((item): item is typeof publishedProgrammes[number] => Boolean(item));
   return <>
     <header className="bg-navy-900 pt-28 pb-12 lg:pt-36"><div className="max-w-4xl mx-auto px-6"><Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Resources', to: '/resources' }, { label: article.category }]} /><p className="mt-6 text-sm font-semibold text-teal-300">{article.category}</p><h1 className="mt-3 text-3xl md:text-4xl font-heading font-bold text-white leading-tight">{article.title}</h1><p className="mt-5 text-navy-200 leading-relaxed">{article.excerpt}</p><p className="mt-4 text-sm text-navy-300">{draftDateLabel}</p></div></header>
     <article className="max-w-4xl mx-auto px-6 py-12">
