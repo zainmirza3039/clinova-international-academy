@@ -1,6 +1,6 @@
 import type { EducationalReference, EducationalSection } from './educationalArticles';
 export interface LearningResource {
-  slug: string; title: string; kind: string; summary: string;
+  slug: string; publicationStatus: 'draft' | 'review' | 'published'; title: string; kind: string; summary: string;
   sections: EducationalSection[]; prompts: string[];
   relatedArticleSlugs: string[]; references: EducationalReference[];
 }
@@ -9,7 +9,7 @@ const sharedDecisions = { title: 'NICE NG197: Shared decision making — recomme
 
 export const learningResources: LearningResource[] = [
   {
-    slug: 'assessment-reflection-checklist', title: 'Assessment Reflection Checklist', kind: 'Study checklist',
+    publicationStatus: 'draft', slug: 'assessment-reflection-checklist', title: 'Assessment Reflection Checklist', kind: 'Study checklist',
     summary: 'A discussion aid for reviewing the reasoning behind an assessment, not a diagnostic screen or permission to practise.',
     sections: [
       { heading: 'Before reviewing a case', paragraphs: ['Use a fictional vignette or an appropriately de-identified case in an approved teaching setting. Do not put real names, dates of birth, contact details or identifiable clinical narratives into this website. The checklist is not exhaustive and must not replace local emergency or safeguarding procedures.', 'Establish the learner’s role, competence and supervision. Ask what the person wants help with, what decisions are being considered and whether consent, communication support or capacity considerations change the assessment approach. A checklist cannot demonstrate that valid consent has been obtained.'] },
@@ -19,7 +19,7 @@ export const learningResources: LearningResource[] = [
     relatedArticleSlugs: ['physiotherapy-assessment-structured-approach', 'patient-safety-red-flags-referral'], references: [professionalStandards],
   },
   {
-    slug: 'rehabilitation-planning-reflection', title: 'Rehabilitation Planning and Case Reflection', kind: 'Planning template',
+    publicationStatus: 'draft', slug: 'rehabilitation-planning-reflection', title: 'Rehabilitation Planning and Case Reflection', kind: 'Planning template',
     summary: 'A blank reasoning structure and fictional discussion task; not an exercise prescription or patient-management record.',
     sections: [
       { heading: 'Build a person-centred planning outline', paragraphs: ['Start with a meaningful activity rather than a list of impairments: what would the person like to do more comfortably, confidently or independently? Identify the context, baseline description and an appropriate outcome measure. Agree how a change will be recognised rather than assuming a test score captures everything that matters.', 'List options to discuss, expected burdens, uncertainty, access barriers and the possibility of no change in treatment. Progression, frequency and intensity require individual assessment and appropriate supervision; this resource intentionally gives no universal dosage or return-to-sport threshold.'] },
@@ -29,7 +29,7 @@ export const learningResources: LearningResource[] = [
     relatedArticleSlugs: ['therapeutic-exercise-safe-progression', 'knee-osteoarthritis-rehabilitation'], references: [professionalStandards, sharedDecisions],
   },
   {
-    slug: 'clinical-documentation-study-template', title: 'Clinical Documentation Study Template', kind: 'Documentation worksheet',
+    publicationStatus: 'draft', slug: 'clinical-documentation-study-template', title: 'Clinical Documentation Study Template', kind: 'Documentation worksheet',
     summary: 'Practise separating reports, observations, reasoning and an agreed plan without entering personal information.',
     sections: [
       { heading: 'Use structure without confusing it with completeness', paragraphs: ['SOAP is one possible teaching structure: Subjective information, Objective findings, Assessment or interpretation, and Plan. It is not a mandatory universal record format, nor does completing four headings ensure that professional or legal requirements are met. Follow the organisation’s approved system and the rules that apply to the jurisdiction and setting.', 'For a fictional vignette, record the source of information, consent considerations, what was actually assessed, the limits of the examination, reasoning behind a decision and communication of the next step. Distinguish an observation from an inference. Do not document that something was normal, discussed or performed unless that is supported by the scenario.'] },
@@ -39,7 +39,7 @@ export const learningResources: LearningResource[] = [
     relatedArticleSlugs: ['clinical-documentation-communication', 'physiotherapy-assessment-structured-approach'], references: [professionalStandards],
   },
   {
-    slug: 'evidence-appraisal-study-guide', title: 'Evidence Appraisal Study Guide', kind: 'Evidence-based practice worksheet',
+    publicationStatus: 'draft', slug: 'evidence-appraisal-study-guide', title: 'Evidence Appraisal Study Guide', kind: 'Evidence-based practice worksheet',
     summary: 'A reusable way to turn a question into a source search, critical appraisal and a cautious application discussion.',
     sections: [
       { heading: 'Ask a focused question', paragraphs: ['Describe the population or problem, the option under consideration, a relevant comparator and an outcome that matters. A focused question helps narrow a search, but not every experience or qualitative question fits an intervention framework. Choose the question structure that serves the learning need.', 'Start with relevant current guidelines and systematic reviews when appropriate, then inspect how recommendations were developed and which populations were studied. A recent publication date or prestigious journal does not by itself establish applicability. Record the source, version and important uncertainties so another learner can follow your reasoning.'] },
@@ -49,7 +49,7 @@ export const learningResources: LearningResource[] = [
     relatedArticleSlugs: ['evidence-based-practice-physiotherapy', 'clinical-documentation-communication'], references: [professionalStandards, sharedDecisions],
   },
   {
-    slug: 'shared-decision-conversation-guide', title: 'Shared Decision-Making Conversation Guide', kind: 'Patient-education planning aid',
+    publicationStatus: 'draft', slug: 'shared-decision-conversation-guide', title: 'Shared Decision-Making Conversation Guide', kind: 'Patient-education planning aid',
     summary: 'Prepare a supervised conversation that makes options, understanding and personal priorities visible.',
     sections: [
       { heading: 'Prepare an accessible discussion', paragraphs: ['Ask what the person wants to understand and how they prefer information to be shared. Consider language support, sensory needs, health literacy, capacity and whether the person wants someone involved. Do not assume that difficulty with professional terminology means lack of decision-making capacity.', 'Explain the decision and the aims of available options, including no treatment or no change where relevant. Discuss benefits, risks, burdens and uncertainty in the context of the person’s life. Use approved, quality-assured decision aids when appropriate; this educational draft is not a validated patient decision aid.'] },
@@ -59,7 +59,7 @@ export const learningResources: LearningResource[] = [
     relatedArticleSlugs: ['clinical-documentation-communication', 'evidence-based-practice-physiotherapy'], references: [sharedDecisions],
   },
   {
-    slug: 'clinical-reasoning-glossary', title: 'Clinical Reasoning Glossary and Revision Notes', kind: 'Glossary',
+    publicationStatus: 'draft', slug: 'clinical-reasoning-glossary', title: 'Clinical Reasoning Glossary and Revision Notes', kind: 'Glossary',
     summary: 'Short working definitions for discussion, with reminders about measurement, uncertainty and scope.',
     sections: [
       { heading: 'Assessment and measurement', paragraphs: ['Impairment: a problem in body function or structure; it is not the same as the person’s difficulty doing an activity. Activity limitation: difficulty carrying out a task. Participation restriction: difficulty engaging in a life situation. These related perspectives encourage a broader discussion than a single joint measurement.', 'Reliability concerns consistency of measurement under specified conditions. Validity concerns whether evidence supports the interpretation and intended use of a measurement. Responsiveness concerns detecting change in the construct of interest. A reliable measurement may still be unsuitable for the question or population.'] },
