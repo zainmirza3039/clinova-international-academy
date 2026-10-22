@@ -17,7 +17,6 @@ import ContactPage from '@/pages/ContactPage';
 import LegalPage from '@/pages/LegalPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import ErrorBoundary from '@/components/ErrorBoundary';
-import { siteSettings } from '@/lib/siteConfig';
 import AdmissionsPage from '@/pages/AdmissionsPage';
 import ApplicationPage from '@/pages/ApplicationPage';
 import AdminPage from '@/pages/AdminPage';
@@ -45,7 +44,6 @@ export default function App() {
         <a href="#main-content" className="skip-link">Skip to content</a>
         <Header />
         <main id="main-content" tabIndex={-1} className="flex-1">
-          <div className="preview-notice">{siteSettings.contentStatus}</div>
           <ErrorBoundary>
           <Suspense fallback={<p role="status" aria-live="polite" className="px-6 py-20 text-center text-navy-700">Loading page…</p>}>
           <Routes>
