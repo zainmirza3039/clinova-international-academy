@@ -15,6 +15,12 @@ export default function NewsletterForm() {
     setSubmitting(true);
     setError('');
 
+    if (!supabase) {
+      setSubmitting(false);
+      setError('Subscriptions are temporarily unavailable while the academy connection is being configured.');
+      return;
+    }
+
     const { error: submissionError } = await supabase.from('newsletter_subscriptions').insert({ email: email.trim() });
     setSubmitting(false);
     if (submissionError && submissionError.code !== '23505') {

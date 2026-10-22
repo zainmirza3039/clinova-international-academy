@@ -3,7 +3,7 @@ import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import CPDCard from '@/components/CPDCard';
 import SearchBar from '@/components/SearchBar';
-import { cpdCourses } from '@/data/cpdCourses';
+import { publishedCPDCourses } from '@/data/cpdCourses';
 import { departments } from '@/data/departments';
 import { ChevronDown } from 'lucide-react';
 
@@ -21,7 +21,7 @@ export default function CPDCoursesPage() {
   const [visibleCount, setVisibleCount] = useState(8);
 
   const filtered = useMemo(() => {
-    return cpdCourses.filter((c) => {
+    return publishedCPDCourses.filter((c) => {
       if (deptFilter !== 'All' && c.department !== deptFilter) return false;
       if (cpdFilter !== 'All' && c.cpdHours !== parseInt(cpdFilter)) return false;
       if (levelFilter !== 'All' && c.level !== levelFilter) return false;

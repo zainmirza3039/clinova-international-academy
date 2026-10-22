@@ -7,9 +7,9 @@ import PageHero from '@/components/PageHero';
 const enquiryTypes = ['General Enquiry', 'Academic Enquiry', 'Partnership Enquiry', 'Technical Support'];
 
 const contactCards = [
-  { icon: MessageSquare, title: 'General Enquiries', email: 'info@clinovaacademy.co.uk', desc: 'Questions about our academy, programmes or services.' },
-  { icon: GraduationCap, title: 'Academic Enquiries', email: 'academic@clinovaacademy.co.uk', desc: 'Questions about specific programmes or enrolment.' },
-  { icon: Handshake, title: 'Partnership Enquiries', email: 'partnerships@clinovaacademy.co.uk', desc: 'Interested in becoming a training partner.' },
+  { icon: MessageSquare, title: 'General Enquiries', email: 'info@clinovainternationalacademy.co.uk', desc: 'Questions about our academy, programmes or services.' },
+  { icon: GraduationCap, title: 'Academic Enquiries', email: 'academic@clinovainternationalacademy.co.uk', desc: 'Questions about specific programmes or enrolment.' },
+  { icon: Handshake, title: 'Partnership Enquiries', email: 'partnerships@clinovainternationalacademy.co.uk', desc: 'Interested in becoming a training partner.' },
 ];
 
 export default function ContactPage() {
@@ -26,6 +26,12 @@ export default function ContactPage() {
     e.preventDefault();
     setSubmitting(true);
     setError('');
+
+    if (!supabase) {
+      setSubmitting(false);
+      setError('Contact submission is temporarily unavailable while the academy connection is being configured.');
+      return;
+    }
 
     const formData = new FormData(e.currentTarget);
     const { error: submissionError } = await supabase.from('contact_submissions').insert({
@@ -94,26 +100,26 @@ export default function ContactPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className={labelClass} htmlFor="name">Name *</label>
-                      <input id="name" type="text" required className={inputClass} placeholder="Your name" />
+                      <input id="name" name="name" type="text" required className={inputClass} placeholder="Your name" />
                     </div>
                     <div>
                       <label className={labelClass} htmlFor="email">Email *</label>
-                      <input id="email" type="email" required className={inputClass} placeholder="you@example.com" />
+                      <input id="email" name="email" type="email" required className={inputClass} placeholder="you@example.com" />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className={labelClass} htmlFor="phone">Phone</label>
-                      <input id="phone" type="tel" className={inputClass} placeholder="Phone number" />
+                      <input id="phone" name="phone" type="tel" className={inputClass} placeholder="Phone number" />
                     </div>
                     <div>
                       <label className={labelClass} htmlFor="subject">Subject *</label>
-                      <input id="subject" type="text" required className={inputClass} placeholder="Subject" />
+                      <input id="subject" name="subject" type="text" required className={inputClass} placeholder="Subject" />
                     </div>
                   </div>
                   <div>
                     <label className={labelClass} htmlFor="enquiryType">Enquiry Type *</label>
-                    <select id="enquiryType" required className={inputClass} defaultValue="">
+                    <select id="enquiryType" name="enquiryType" required className={inputClass} defaultValue="">
                       <option value="" disabled>Select enquiry type</option>
                       {enquiryTypes.map((t) => (
                         <option key={t} value={t}>{t}</option>
@@ -122,7 +128,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <label className={labelClass} htmlFor="message">Message *</label>
-                    <textarea id="message" required rows={5} className={inputClass} placeholder="Your message..." />
+                    <textarea id="message" name="message" required rows={5} className={inputClass} placeholder="Your message..." />
                   </div>
                   <button
                     type="submit"
@@ -144,8 +150,8 @@ export default function ContactPage() {
                     <Mail className="w-5 h-5 text-teal-400 shrink-0 mt-0.5" />
                     <div>
                       <div className="text-xs text-navy-100/50 mb-1">Email</div>
-                      <a href="mailto:info@clinovaacademy.co.uk" className="text-sm font-medium hover:text-teal-400 transition-colors">
-                        info@clinovaacademy.co.uk
+                      <a href="mailto:info@clinovainternationalacademy.co.uk" className="text-sm font-medium hover:text-teal-400 transition-colors">
+                        info@clinovainternationalacademy.co.uk
                       </a>
                     </div>
                   </div>

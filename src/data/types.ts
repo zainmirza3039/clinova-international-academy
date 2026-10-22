@@ -17,9 +17,12 @@ export interface Module {
   topics: string[];
 }
 
+export type PublicationStatus = 'draft' | 'review' | 'published' | 'archived';
+
 export interface Programme {
   id: string;
   slug: string;
+  publicationStatus: PublicationStatus;
   title: string;
   department: string;
   departmentSlug: string;
@@ -46,6 +49,7 @@ export type ProgrammeStatus = 'Open' | 'Coming Soon';
 
 export interface CPDCourse {
   id: string;
+  publicationStatus: PublicationStatus;
   slug: string;
   title: string;
   department: string;
@@ -53,39 +57,33 @@ export interface CPDCourse {
   duration: string;
   level: ProgrammeLevel;
   description: string;
+  learningOutcomes: string[];
+  modules: string[];
+  prerequisites: string;
+  assessment: string;
   image: string;
-}
-
-export interface Testimonial {
-  id: string;
-  role: string;
-  country: string;
-  quote: string;
-  isDemo: boolean;
 }
 
 export interface NewsItem {
   id: string;
+  publicationStatus: PublicationStatus;
   slug: string;
   category: string;
   date: string;
   title: string;
   excerpt: string;
   image: string;
+  sections: ArticleSection[];
+  takeaways: string[];
+}
+
+export interface ArticleSection {
+  heading: string;
+  paragraphs: string[];
 }
 
 export interface FAQ {
   id: string;
   question: string;
   answer: string;
-}
-
-export interface Certificate {
-  id: string;
-  certificateId: string;
-  holder: string;
-  course: string;
-  issueDate: string;
-  cpdHours: number;
-  status: 'verified' | 'not-found';
 }

@@ -4,7 +4,7 @@ import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import FAQAccordion from '@/components/FAQAccordion';
 import CTASection from '@/components/CTASection';
-import { generalFAQs } from '@/data/testimonials';
+import { generalFAQs } from '@/data/content';
 
 const sections = [
   {

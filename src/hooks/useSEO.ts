@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+const PRODUCTION_ORIGIN = 'https://clinovainternationalacademy.co.uk';
+
 interface SEOProps {
   title: string;
   description: string;
@@ -31,7 +33,7 @@ export function useSEO({ title, description, canonical, ogImage, structuredData 
     ensureMeta('meta[property="og:description"]', 'property', 'og:description').content = description;
     ensureMeta('meta[property="og:type"]', 'property', 'og:type').content = 'website';
     ensureMeta('meta[property="og:url"]', 'property', 'og:url').content =
-      `https://clinovaacademy.co.uk${canonical ?? location.pathname}`;
+      `${PRODUCTION_ORIGIN}${canonical ?? location.pathname}`;
     if (ogImage) {
       ensureMeta('meta[property="og:image"]', 'property', 'og:image').content = ogImage;
     }
@@ -44,7 +46,7 @@ export function useSEO({ title, description, canonical, ogImage, structuredData 
       link.setAttribute('rel', 'canonical');
       document.head.appendChild(link);
     }
-    link.href = `https://clinovaacademy.co.uk${canonical ?? location.pathname}`;
+    link.href = `${PRODUCTION_ORIGIN}${canonical ?? location.pathname}`;
 
     const existingScript = document.head.querySelector('#structured-data');
     if (existingScript) existingScript.remove();

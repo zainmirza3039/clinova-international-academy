@@ -5,7 +5,7 @@ import PageHero from '@/components/PageHero';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import SearchBar from '@/components/SearchBar';
 import CTASection from '@/components/CTASection';
-import { programmes } from '@/data/programmes';
+import { publishedProgrammes } from '@/data/programmes';
 import { departments } from '@/data/departments';
 import type { ProgrammeCategory } from '@/data/types';
 
@@ -31,7 +31,7 @@ export default function ProgrammesPage() {
   const [deliveryFilter, setDeliveryFilter] = useState('All');
 
   const filtered = useMemo(() => {
-    return programmes.filter((p) => {
+    return publishedProgrammes.filter((p) => {
       if (initialFeatured && !p.featured) return false;
       if (typeFilter !== 'All' && p.category !== typeFilter) return false;
       if (deptFilter !== 'All' && p.departmentSlug !== deptFilter) return false;

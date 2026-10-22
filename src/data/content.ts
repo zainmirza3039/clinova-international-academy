@@ -1,0 +1,212 @@
+import type { FAQ, NewsItem } from './types';
+
+export const newsItems: NewsItem[] = [
+  {
+    id: 'n1', slug: 'principles-of-physiotherapy-assessment', category: 'Clinical Education', date: '2026-10-01',
+    publicationStatus: 'published',
+    title: 'Principles of Physiotherapy Assessment',
+    excerpt: 'A practical framework for gathering a focused history, selecting examination measures and connecting findings to a defensible clinical hypothesis.',
+    image: 'https://images.pexels.com/photos/20860610/pexels-photo-20860610.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    sections: [
+      { heading: 'Start with a purposeful history', paragraphs: ['A useful assessment begins before a physical test is selected. Clarify the person’s main concern, the behaviour of symptoms, relevant medical history, current activity demands and the outcome that matters to them. Open questions followed by focused clarification help prevent the examination from becoming a checklist detached from the person’s goals.', 'Ask about features that may change urgency or referral. Severe or progressive neurological symptoms, systemic illness indicators, significant trauma and unexplained deterioration require appropriate escalation rather than routine rehabilitation alone.'] },
+      { heading: 'Choose measures that answer a question', paragraphs: ['Observation, movement testing, strength assessment, palpation and functional tasks should each have a reason. Select measures that help distinguish between plausible explanations, establish a baseline or guide a management decision. Record the method and the person’s response so that the result can be compared over time.', 'No single test should be treated as a diagnosis in isolation. Interpret findings alongside the history, functional limitations, irritability and the reliability of the measure.'] },
+      { heading: 'Close the loop', paragraphs: ['Explain the working hypothesis in clear language, check the person’s understanding and agree what will be monitored. A concise record should link subjective information, objective findings, clinical reasoning, advice and the follow-up plan.'] },
+    ],
+    takeaways: ['Use the history to shape the examination.', 'Select tests that answer a clinical question.', 'Document reasoning, uncertainty and the agreed plan.'],
+  },
+  {
+    id: 'n2', slug: 'clinical-reasoning-and-evidence-based-practice', category: 'Clinical Education', date: '2026-09-27',
+    publicationStatus: 'published',
+    title: 'Clinical Reasoning and Evidence-Informed Practice',
+    excerpt: 'How clinicians can combine research evidence, professional judgement and the individual person’s goals when making rehabilitation decisions.',
+    image: 'https://images.pexels.com/photos/5407204/pexels-photo-5407204.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    sections: [
+      { heading: 'Three sources of information', paragraphs: ['Evidence-informed practice brings together the best available research, the practitioner’s knowledge and the person’s preferences, circumstances and goals. These sources may not point to one perfect answer. The task is to make the reasoning visible, proportionate and open to revision.', 'A research finding describes a population and a context; it does not automatically predict one person’s response. Consider applicability, benefits, risks, feasibility and the quality of the evidence before translating it into advice.'] },
+      { heading: 'Make uncertainty explicit', paragraphs: ['A working hypothesis is not a final label. State what is known, what remains uncertain and what observation would change the plan. This supports shared decisions and reduces the temptation to overstate the certainty of a test, a prognosis or a treatment effect.', 'Use follow-up measures that are meaningful to the person. Reassessing function, symptoms and participation can show whether the plan is helping even when a single impairment measure changes little.'] },
+      { heading: 'Build a learning loop', paragraphs: ['After an intervention, compare the observed response with the expected response. Record what was tried, how it was tolerated and what the person learned. This turns routine care into a structured cycle of assessment, action, review and adaptation.'] },
+    ],
+    takeaways: ['Evidence is interpreted in context.', 'Communicate uncertainty instead of hiding it.', 'Review outcomes and adapt the plan.'],
+  },
+  {
+    id: 'n3', slug: 'low-back-pain-assessment-and-management', category: 'Clinical Education', date: '2026-09-23',
+    publicationStatus: 'published',
+    title: 'Low Back Pain: Assessment and Management Principles',
+    excerpt: 'A person-centred approach to classifying low back pain, screening for concerns and supporting safe activity without overpromising certainty.',
+    image: 'https://images.pexels.com/photos/4506169/pexels-photo-4506169.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    sections: [
+      { heading: 'Screen before you reassure', paragraphs: ['Begin by considering whether the presentation is consistent with a common mechanical pattern or whether features suggest a need for medical assessment. Ask about trauma, systemic symptoms, neurological change, bladder or bowel disturbance and other features that alter the risk profile.', 'Screening is not a one-off statement. Revisit relevant concerns when symptoms change, the person deteriorates or the expected course is not observed.'] },
+      { heading: 'Understand the person’s pattern', paragraphs: ['Record aggravating and easing factors, sleep, work and activity demands, beliefs about the back and the person’s priorities. A functional description often guides management more effectively than a search for one painful structure.', 'Explain that pain intensity can be influenced by sensitivity, stress, sleep and context as well as local loading. Avoid dismissing symptoms or presenting a single explanation as fact without adequate assessment.'] },
+      { heading: 'Support gradual participation', paragraphs: ['Agree a manageable activity plan that can be progressed according to response. Education, pacing, exercise and practical changes at home or work may all contribute. The plan should include what to do if symptoms flare and when to seek further assessment.'] },
+    ],
+    takeaways: ['Screen for features requiring escalation.', 'Include function, context and goals in the assessment.', 'Progress activity with review rather than rigid promises.'],
+  },
+  {
+    id: 'n4', slug: 'knee-osteoarthritis-and-therapeutic-exercise', category: 'Clinical Education', date: '2026-09-19',
+    publicationStatus: 'published',
+    title: 'Knee Osteoarthritis and Therapeutic Exercise',
+    excerpt: 'Key considerations for explaining knee osteoarthritis and building an adaptable exercise plan around strength, confidence and daily function.',
+    image: 'https://images.pexels.com/photos/6111589/pexels-photo-6111589.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    sections: [
+      { heading: 'Frame the problem around function', paragraphs: ['Knee osteoarthritis can affect pain, confidence, strength, walking tolerance and participation. Ask what the person wants to do more easily, such as using stairs, walking outdoors or returning to a valued activity. These goals make exercise selection and progression more meaningful.', 'Explain that imaging findings and symptoms do not always match closely. Avoid using a scan as a prediction of an individual’s future or as a reason to stop activity without considering the wider presentation.'] },
+      { heading: 'Select a flexible exercise menu', paragraphs: ['Strength work for the lower limb, aerobic activity and task-specific practice can be combined. Choose a starting level that the person can repeat consistently, then adjust range, resistance, speed, volume or recovery time according to response.', 'A temporary increase in symptoms may occur with new loading, but a sustained deterioration suggests that the dose or context needs review. Use agreed response rules rather than an inflexible pain threshold.'] },
+      { heading: 'Support confidence and self-management', paragraphs: ['Short explanations, demonstrations and written reminders can help people continue between sessions. Discuss pacing, sleep, weight-related goals where relevant and other healthcare support without implying that one change is a cure.'] },
+    ],
+    takeaways: ['Anchor the plan to meaningful activity.', 'Progress exercise dose gradually.', 'Review symptoms and function together.'],
+  },
+  {
+    id: 'n5', slug: 'shoulder-pain-assessment', category: 'Clinical Education', date: '2026-09-15',
+    publicationStatus: 'published',
+    title: 'Shoulder Pain Assessment: From History to Plan',
+    excerpt: 'A structured approach to shoulder assessment that prioritises function, irritability, neurological screening and shared decisions.',
+    image: 'https://images.pexels.com/photos/20860596/pexels-photo-20860596.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    sections: [
+      { heading: 'Clarify the movement problem', paragraphs: ['Ask what activities are limited, when symptoms began and whether the onset followed a specific event. Work, sport, sleep position and overhead demands can reveal the practical impact and help determine which movements to examine first.', 'Include cervical and neurological screening when symptoms, distribution or behaviour suggest that the shoulder may not be the only relevant region.'] },
+      { heading: 'Examine irritability before intensity', paragraphs: ['Observe active movement, compare relevant tasks and use passive or resisted tests when they will add information. A highly irritable shoulder may require a smaller examination dose, while a low-irritability presentation may allow more detailed strength and function testing.', 'Special tests rarely provide a complete answer alone. Interpret them alongside the history, movement pattern and response to loading.'] },
+      { heading: 'Build a staged plan', paragraphs: ['Early management may focus on education, comfortable movement, sleep or work modifications and a small amount of tolerable loading. Progress toward strength, endurance and task-specific capacity as the person’s response allows.'] },
+    ],
+    takeaways: ['Assess function and irritability first.', 'Consider the neck and neurological system when indicated.', 'Progress loading in stages.'],
+  },
+  {
+    id: 'n6', slug: 'stroke-rehabilitation-fundamentals', category: 'Rehabilitation', date: '2026-09-11',
+    publicationStatus: 'published',
+    title: 'Stroke Rehabilitation Fundamentals',
+    excerpt: 'An introduction to goal-led stroke rehabilitation, task practice, communication and safe progression within a multidisciplinary team.',
+    image: 'https://images.pexels.com/photos/6129151/pexels-photo-6129151.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    sections: [
+      { heading: 'Begin with the person’s priorities', paragraphs: ['Stroke rehabilitation should connect assessment to activities and participation. Goals may include transfers, walking, upper-limb use, communication, self-care or returning to a valued role. Include the person and, where appropriate, family or carers in defining what success looks like.', 'Consider cognition, fatigue, mood, vision, sensation, swallowing and communication alongside movement. These factors can change how a task is taught and how safety is managed.'] },
+      { heading: 'Use meaningful, repeated practice', paragraphs: ['Task-specific practice gives the person an opportunity to solve real movement problems. Break a task into manageable steps, provide feedback that supports learning and vary practice as capacity improves. Assistance should be adjusted so that safety is maintained without removing every opportunity for active problem-solving.', 'Monitor fatigue and quality of movement. More repetitions are not automatically better if they lead to unsafe compensations or loss of attention.'] },
+      { heading: 'Coordinate the plan', paragraphs: ['Agree roles, precautions and progression criteria with the wider team. Document changes in function and the support required, not only isolated impairment scores.'] },
+    ],
+    takeaways: ['Set goals around activities and participation.', 'Practise meaningful tasks with appropriate support.', 'Coordinate precautions and progression across the team.'],
+  },
+  {
+    id: 'n7', slug: 'balance-training-and-falls-prevention', category: 'Rehabilitation', date: '2026-09-07',
+    publicationStatus: 'published',
+    title: 'Balance Training and Falls Prevention',
+    excerpt: 'How to assess falls risk factors and design a progressive balance plan that includes strength, environment and confidence.',
+    image: 'https://images.pexels.com/photos/6111616/pexels-photo-6111616.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    sections: [
+      { heading: 'Assess more than standing balance', paragraphs: ['Falls risk is influenced by strength, gait, vision, medication, dizziness, footwear, environment and confidence as well as balance performance. Ask about previous falls, near misses and situations that feel unsafe.', 'Check for features that require medical review, including new neurological symptoms, unexplained fainting or concerning dizziness.'] },
+      { heading: 'Progress the challenge safely', paragraphs: ['Balance practice can vary base of support, sensory conditions, direction, speed, dual-task demand and environmental context. Use a stable support nearby, appropriate supervision and clear instructions. Progress one meaningful challenge at a time.', 'Add lower-limb strengthening and functional tasks such as turning, stepping and rising from a chair. The programme should reflect the situations the person wants to manage.'] },
+      { heading: 'Make the environment part of care', paragraphs: ['Discuss lighting, trip hazards, stairs, bathroom equipment and footwear when relevant. A written plan for what to do after a fall and when to seek help can reduce uncertainty for the person and their support network.'] },
+    ],
+    takeaways: ['Use a multifactorial falls conversation.', 'Progress balance tasks with safety controls.', 'Include the home and community environment.'],
+  },
+  {
+    id: 'n8', slug: 'ankle-sprain-rehabilitation', category: 'Rehabilitation', date: '2026-09-03',
+    publicationStatus: 'published',
+    title: 'Ankle Sprain Rehabilitation',
+    excerpt: 'A staged overview of ankle sprain rehabilitation, from early protection and movement to strength, balance and return to activity.',
+    image: 'https://images.pexels.com/photos/7187811/pexels-photo-7187811.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    sections: [
+      { heading: 'Check the injury and the context', paragraphs: ['Clarify the mechanism, immediate symptoms, ability to bear weight and any history of previous sprains. Consider whether the presentation warrants further assessment for fracture or another injury rather than assuming every lateral ankle injury is uncomplicated.', 'Record swelling, movement, tenderness and functional tolerance in a way that can be repeated.'] },
+      { heading: 'Restore movement and capacity', paragraphs: ['Early management may include relative protection, comfortable range of motion and gradual weight-bearing according to symptoms and clinical findings. As tolerance improves, add calf and lower-limb strength, proprioceptive tasks and changes of direction.', 'Use the person’s sport, work or walking demands to guide progression. A calendar date alone should not determine readiness.'] },
+      { heading: 'Reduce recurrence risk', paragraphs: ['Review balance, strength, footwear, training load and confidence. A short maintenance programme may be useful after symptoms settle, particularly for people returning to cutting, jumping or uneven-ground activities.'] },
+    ],
+    takeaways: ['Screen the mechanism and need for further assessment.', 'Progress from movement to strength and task demand.', 'Address recurrence risk before full return.'],
+  },
+  {
+    id: 'n9', slug: 'acl-rehabilitation-principles', category: 'Rehabilitation', date: '2026-08-30',
+    publicationStatus: 'published',
+    title: 'ACL Rehabilitation Principles',
+    excerpt: 'Planning ACL rehabilitation around milestones, strength, movement quality, psychological readiness and shared return-to-sport decisions.',
+    image: 'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    sections: [
+      { heading: 'Use milestones rather than dates alone', paragraphs: ['ACL rehabilitation varies according to injury management, surgery, associated injuries, the person’s goals and the response to loading. Establish milestones for swelling, range of motion, strength, movement control and functional tasks, with the treating team’s precautions clearly recorded.', 'Early goals may focus on restoring comfortable movement, reducing swelling and rebuilding confidence. Later stages can address running, deceleration, jumping and sport-specific demands.'] },
+      { heading: 'Measure capacity progressively', paragraphs: ['Strength testing, single-leg control, hop or landing tasks and training tolerance can provide useful information when selected and interpreted appropriately. Compare results with the person’s baseline and the demands of their activity rather than relying on one pass-or-fail test.', 'Pain, fear of reinjury and confidence are important parts of readiness. Discuss them openly and include strategies for graded exposure and support.'] },
+      { heading: 'Make return decisions collaboratively', paragraphs: ['Return to sport is a process, not one appointment. Agree responsibilities among the person, rehabilitation professional, surgeon or medical team and coaching staff where applicable. Continue monitoring workload after return rather than treating clearance as the end of rehabilitation.'] },
+    ],
+    takeaways: ['Use individual milestones and clinical precautions.', 'Combine physical and psychological readiness.', 'Continue monitoring after return to activity.'],
+  },
+  {
+    id: 'n10', slug: 'range-of-motion-and-strength-assessment', category: 'Clinical Education', date: '2026-08-26',
+    publicationStatus: 'published',
+    title: 'Range of Motion and Strength Assessment',
+    excerpt: 'Practical considerations for collecting repeatable range-of-motion and strength measures without losing sight of function or context.',
+    image: 'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    sections: [
+      { heading: 'Standardise the method', paragraphs: ['Document the position, equipment, instructions, assistance, repetitions and symptoms associated with a measure. Small changes in method can make apparent change difficult to interpret, so consistency matters when monitoring progress.', 'Explain the test in plain language and check that the person can perform it safely.'] },
+      { heading: 'Interpret measurement error', paragraphs: ['A difference between two measurements may reflect normal variation, fatigue, learning or equipment limitations rather than a meaningful physiological change. Look for patterns across repeated measures and relate them to activity and the person’s report.', 'Strength results can be influenced by pain, effort, leverage and familiarisation. Avoid presenting a single number as a complete description of capacity.'] },
+      { heading: 'Connect impairment to action', paragraphs: ['A measure is most useful when it changes a decision: selecting an exercise, adjusting assistance, setting a functional goal or identifying a need for further assessment. Explain the result and its limits to the person.'] },
+    ],
+    takeaways: ['Record how each measure was collected.', 'Consider variation before calling change meaningful.', 'Use measures to inform decisions, not replace reasoning.'],
+  },
+  {
+    id: 'n11', slug: 'gait-assessment-fundamentals', category: 'Clinical Education', date: '2026-08-22',
+    publicationStatus: 'published',
+    title: 'Gait Assessment Fundamentals',
+    excerpt: 'A structured way to observe walking, identify meaningful limitations and choose interventions that transfer to everyday mobility.',
+    image: 'https://images.pexels.com/photos/7659564/pexels-photo-7659564.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    sections: [
+      { heading: 'Start with the walking goal', paragraphs: ['Ask where and how the person wants to walk: indoors, outdoors, at work, on stairs or in a busy environment. Observe the task in a context that is safe and relevant, using the person’s usual footwear and aid when appropriate.', 'Record speed, endurance, balance, confidence and the assistance required, not only the appearance of individual joint movements.'] },
+      { heading: 'Observe systematically', paragraphs: ['Use a consistent sequence such as initial contact, loading, mid-stance, terminal stance, pre-swing and swing, while also considering trunk, arm movement and step-to-step symmetry. Video may support feedback where consent, privacy and local policy allow.', 'Look for changes with speed, direction, surface and dual-task demand. A strategy that is safe in a quiet clinic may not transfer to the community.'] },
+      { heading: 'Choose interventions that transfer', paragraphs: ['Practise the limiting task, build relevant strength and endurance, and trial equipment or environmental strategies when needed. Reassess the person’s walking goal after changes rather than assuming that a visually different gait is automatically better.'] },
+    ],
+    takeaways: ['Assess walking in a meaningful context.', 'Use a repeatable observation sequence.', 'Reassess transfer to real-world mobility.'],
+  },
+  {
+    id: 'n12', slug: 'exercise-progression-and-load-management', category: 'Professional Development', date: '2026-08-18',
+    publicationStatus: 'published',
+    title: 'Exercise Progression and Load Management',
+    excerpt: 'A practical model for adjusting exercise difficulty, volume and recovery while keeping progression aligned with goals and response.',
+    image: 'https://images.pexels.com/photos/4162451/pexels-photo-4162451.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    sections: [
+      { heading: 'Define the target capacity', paragraphs: ['Progression should be linked to a task or capacity such as lifting, climbing stairs, running or sustained work. Identify what currently limits performance and which exercise variable is most likely to help.', 'Consider the person’s total load, including work, caring responsibilities, sleep and other training. A programme can be reasonable in isolation but excessive when combined with the rest of life.'] },
+      { heading: 'Change one variable at a time', paragraphs: ['Resistance, repetitions, sets, range, speed, complexity, frequency and recovery can all be adjusted. Changing several at once makes it difficult to understand the response. Begin with a repeatable baseline and progress gradually when the person is meeting the agreed criteria.', 'Use a simple response log to record symptoms, fatigue, confidence and task performance.'] },
+      { heading: 'Plan for variation', paragraphs: ['Flare-ups, illness, travel and busy work periods are normal. A flexible plan may include a lighter option, a usual option and a progression option. This keeps the person engaged without framing every variation as failure.'] },
+    ],
+    takeaways: ['Link loading to a meaningful capacity.', 'Progress one main variable at a time.', 'Build flexible options for real life.'],
+  },
+  {
+    id: 'n13', slug: 'clinical-documentation-and-outcome-measures', category: 'Professional Development', date: '2026-08-14',
+    publicationStatus: 'published',
+    title: 'Clinical Documentation and Outcome Measures',
+    excerpt: 'How clear records and appropriate outcome measures support continuity, safety, reflection and shared understanding of progress.',
+    image: 'https://images.pexels.com/photos/5214958/pexels-photo-5214958.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    sections: [
+      { heading: 'Record what matters', paragraphs: ['A useful record makes the encounter understandable to another professional and to the person reading it later. Include the relevant history, examination findings, clinical reasoning, advice, consent, agreed goals, plan and review arrangements.', 'Avoid copying forward statements that are no longer accurate. Update precautions, medication information and functional status when they change.'] },
+      { heading: 'Choose outcomes with purpose', paragraphs: ['An outcome measure should be appropriate to the population, feasible in the setting and connected to the decision being made. Explain what it measures and what a change means. Use the same method when monitoring progress.', 'Combine a standardised measure with a person-defined goal where possible. A numerical change is not a substitute for asking whether daily life has improved.'] },
+      { heading: 'Protect privacy and usefulness', paragraphs: ['Share records only through authorised systems and follow local information-governance requirements. Write respectfully, distinguish observation from interpretation and make uncertainty clear.'] },
+    ],
+    takeaways: ['Make the plan and reasoning visible.', 'Select measures that inform decisions.', 'Keep records accurate, respectful and secure.'],
+  },
+  {
+    id: 'n14', slug: 'red-flags-and-referral-considerations', category: 'Clinical Education', date: '2026-08-10',
+    publicationStatus: 'published',
+    title: 'Red Flags and Referral Considerations',
+    excerpt: 'Why safety screening is a continuing clinical responsibility and how to communicate escalation decisions clearly.',
+    image: 'https://images.pexels.com/photos/7659570/pexels-photo-7659570.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    sections: [
+      { heading: 'Treat screening as a process', paragraphs: ['A red flag is a feature that may increase concern; it is not automatically a diagnosis. Consider the whole presentation, the timing, severity, progression and relevant history. Repeat screening if symptoms change or the course is unexpected.', 'Use local pathways and scope-of-practice requirements when deciding whether to contact a primary-care clinician, urgent service or emergency service.'] },
+      { heading: 'Communicate urgency plainly', paragraphs: ['Explain what has prompted concern, what the person should do next and what symptoms require more urgent action. Avoid alarming language while being specific about the reason for referral and the timeframe.', 'Document the advice, the person’s understanding, consent where relevant and any communication with another professional.'] },
+      { heading: 'Know the limits of remote education', paragraphs: ['An educational article cannot assess an individual’s symptoms. People with severe, rapidly worsening or unexplained symptoms should seek appropriate professional assessment rather than relying on general guidance.'] },
+    ],
+    takeaways: ['Interpret red flags in context.', 'Use appropriate local referral pathways.', 'Give specific safety-net advice and document it.'],
+  },
+  {
+    id: 'n15', slug: 'patient-communication-and-shared-decision-making', category: 'Professional Development', date: '2026-08-06',
+    publicationStatus: 'published',
+    title: 'Patient Communication and Shared Decision-Making',
+    excerpt: 'Practical communication habits that help people understand options, express priorities and take part in decisions about care.',
+    image: 'https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    sections: [
+      { heading: 'Create space for the person’s agenda', paragraphs: ['Begin by asking what the person most wants help with. Listen without interrupting, reflect key concerns and check whether your summary is accurate. This often reveals priorities that a purely impairment-focused assessment would miss.', 'Use plain language and interpreters or communication support when needed. Do not assume that agreement means understanding.'] },
+      { heading: 'Explain options and trade-offs', paragraphs: ['Shared decisions require a balanced discussion of reasonable options, likely benefits, possible burdens and uncertainty. Explain what may happen if the person chooses to wait or monitor, when that is clinically appropriate.', 'Use teach-back: ask the person to describe the plan in their own words and invite questions.'] },
+      { heading: 'Agree a review point', paragraphs: ['A decision is stronger when it includes what will be tried, how the response will be judged and when the plan will be revisited. Goals may change as confidence, symptoms or circumstances change, so review is part of shared decision-making rather than a sign that the original plan failed.'] },
+    ],
+    takeaways: ['Start with the person’s priorities.', 'Discuss options, trade-offs and uncertainty.', 'Use teach-back and agree a review point.'],
+  },
+];
+
+export const generalFAQs: FAQ[] = [
+  { id: 'f1', question: 'Are Clinova programmes accredited?', answer: 'Clinova programmes are CPD-focused educational courses. We do not currently claim formal accreditation from any regulatory body. Programme status and any future approvals will be communicated on the relevant course page.' },
+  { id: 'f2', question: 'How are programmes delivered?', answer: 'Programme pages describe the intended delivery format and learning structure. Contact the academy before enrolling if you need confirmation that a specific programme is currently available.' },
+  { id: 'f3', question: 'Can I study while working full-time?', answer: 'Many programmes are designed around flexible professional learning. Check the individual programme duration and contact the academy to discuss whether the expected workload fits your circumstances.' },
+  { id: 'f4', question: 'Will I receive a certificate?', answer: 'Where stated on a programme page, eligible learners may receive a Certificate of Completion after meeting the published completion requirements. A Certificate of Completion is not a professional licence or formal accreditation.' },
+  { id: 'f5', question: 'What are the entry requirements?', answer: 'Entry requirements vary by programme. Review the intended audience and prerequisites on the relevant detail page, and contact the academy if your background is not covered.' },
+  { id: 'f6', question: 'How long do I have access to course materials?', answer: 'Access arrangements depend on the programme and enrolment workflow. Confirm the applicable period with the academy before enrolment.' },
+];
+
+export const newsCategories = ['Clinical Education', 'Professional Development', 'Rehabilitation'];
+
+export const publishedNewsItems = newsItems.filter((item) => item.publicationStatus === 'published');

@@ -47,6 +47,12 @@ export default function TrainingPartnersPage() {
     setSubmitting(true);
     setError('');
 
+    if (!supabase) {
+      setSubmitting(false);
+      setError('Partnership enquiries are temporarily unavailable while the academy connection is being configured.');
+      return;
+    }
+
     const formData = new FormData(e.currentTarget);
     const { error: submissionError } = await supabase.from('partnership_inquiries').insert({
       full_name: String(formData.get('fullName') ?? '').trim(),
@@ -164,40 +170,40 @@ export default function TrainingPartnersPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className={labelClass} htmlFor="fullName">Full Name *</label>
-                  <input id="fullName" type="text" required className={inputClass} placeholder="Your full name" />
+                  <input id="fullName" name="fullName" type="text" required className={inputClass} placeholder="Your full name" />
                 </div>
                 <div>
                   <label className={labelClass} htmlFor="organisation">Organisation *</label>
-                  <input id="organisation" type="text" required className={inputClass} placeholder="Organisation name" />
+                  <input id="organisation" name="organisation" type="text" required className={inputClass} placeholder="Organisation name" />
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className={labelClass} htmlFor="role">Professional Role *</label>
-                  <input id="role" type="text" required className={inputClass} placeholder="Your role" />
+                  <input id="role" name="role" type="text" required className={inputClass} placeholder="Your role" />
                 </div>
                 <div>
                   <label className={labelClass} htmlFor="email">Email *</label>
-                  <input id="email" type="email" required className={inputClass} placeholder="you@organisation.com" />
+                  <input id="email" name="email" type="email" required className={inputClass} placeholder="you@organisation.com" />
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className={labelClass} htmlFor="phone">Phone</label>
-                  <input id="phone" type="tel" className={inputClass} placeholder="Phone number" />
+                  <input id="phone" name="phone" type="tel" className={inputClass} placeholder="Phone number" />
                 </div>
                 <div>
                   <label className={labelClass} htmlFor="country">Country *</label>
-                  <input id="country" type="text" required className={inputClass} placeholder="Country" />
+                  <input id="country" name="country" type="text" required className={inputClass} placeholder="Country" />
                 </div>
               </div>
               <div>
                 <label className={labelClass} htmlFor="website">Organisation Website</label>
-                <input id="website" type="url" className={inputClass} placeholder="https://..." />
+                <input id="website" name="website" type="url" className={inputClass} placeholder="https://..." />
               </div>
               <div>
                 <label className={labelClass} htmlFor="message">Message *</label>
-                <textarea id="message" required rows={4} className={inputClass} placeholder="Tell us about your partnership interests..." />
+                <textarea id="message" name="message" required rows={4} className={inputClass} placeholder="Tell us about your partnership interests..." />
               </div>
               <button
                 type="submit"
