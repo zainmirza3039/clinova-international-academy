@@ -19,29 +19,29 @@ import { newsItems, generalFAQs } from '@/data/testimonials';
 import { useState } from 'react';
 
 const learningSteps = [
-  { number: '01', title: 'Read a draft', desc: 'Start with an educational article or subject-area outline and note what you want to explore.' },
-  { number: '02', title: 'Reflect on practice', desc: 'Use the learning resources to connect ideas with your role, scope of practice and local guidance.' },
-  { number: '03', title: 'Ask the owner', desc: 'Contact the academy to request confirmation of any course, delivery, dates or assessment arrangements.' },
-  { number: '04', title: 'Choose carefully', desc: 'Only proceed when the academy has confirmed the offering and its terms directly.' },
+  { number: '01', title: 'Explore a topic', desc: 'Start with an educational article or subject-area guide and identify what you want to learn.' },
+  { number: '02', title: 'Reflect on practice', desc: 'Connect learning with your role, professional scope and current local guidance.' },
+  { number: '03', title: 'Confirm programme details', desc: 'Check current availability, delivery, dates and assessment arrangements before enrolling.' },
+  { number: '04', title: 'Choose your next step', desc: 'Review the confirmed requirements and terms for the specific learning opportunity.' },
 ];
 
 const pathwaySteps = [
-  { label: 'Subject areas', desc: 'Start with a draft topic map' },
+  { label: 'Subject areas', desc: 'Explore healthcare disciplines' },
   { label: 'Learning library', desc: 'Read articles and use reflection tools' },
-  { label: 'Proposed outlines', desc: 'Compare educational ideas, not commitments' },
-  { label: 'Owner confirmation', desc: 'Ask what is actually available' },
+  { label: 'Programme information', desc: 'Review published programme details' },
+  { label: 'Next steps', desc: 'Confirm current availability and requirements' },
 ];
 
 export default function HomePage() {
   useSEO({
     title: 'Clinova International Academy | Advancing Healthcare Through Professional Education',
     description:
-      'Proposed healthcare subject areas, educational article drafts and study tools. Course availability, delivery, assessment and recognition require academy confirmation.',
+      'Healthcare learning resources, professional subject areas and study tools. Course availability, delivery, assessment and recognition are stated only when confirmed.',
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'EducationalOrganization',
       name: 'Clinova International Academy',
-      description: 'Proposed healthcare learning content and subject-area resources for professional discussion.',
+      description: 'Healthcare learning resources and subject-area information for professional development.',
     },
   });
 
@@ -82,21 +82,21 @@ export default function HomePage() {
               Explore a thoughtful approach to healthcare learning
             </h1>
             <p className="mt-7 text-lg text-navy-100/65 leading-[1.6] max-w-xl">
-              A proposed collection of healthcare subject areas, educational reading and study tools. Use the material to explore questions; confirm any academy offering before relying on it.
+              Explore healthcare subject areas, educational reading and study tools. Check published programme information for current availability and requirements.
             </p>
             <div className="mt-9 flex flex-col sm:flex-row gap-3">
               <Link
                 to="/programmes"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-clinical-500 text-white font-semibold hover:bg-clinical-600 transition-colors"
               >
-                Explore Proposed Outlines
+                Explore Programmes
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/cpd-courses"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-transparent text-white font-semibold border border-white/25 hover:bg-white/10 transition-colors"
               >
-                Browse Draft Reading
+                Explore Learning Resources
               </Link>
             </div>
           </div>
@@ -109,7 +109,7 @@ export default function HomePage() {
               {[
                 { label: 'Flexible Study' },
                 { label: 'CPD-focused learning' },
-                { label: 'Offering details pending' },
+                { label: 'Clear programme information' },
                 { label: 'Global Access' },
                 { label: 'Self-Paced' },
               ].map((item) => (
@@ -136,7 +136,7 @@ export default function HomePage() {
                   <div className="border-t border-navy-100 pt-4">
                     <div className="flex items-center gap-2 text-navy-600">
                       <Globe className="w-4 h-4 text-teal-500" />
-                      <span>Draft learning resources</span>
+                      <span>Learning resources</span>
                     </div>
                   </div>
                 </div>
@@ -148,13 +148,13 @@ export default function HomePage() {
                   Professional education for the modern healthcare workforce
                 </h2>
                 <p className="mt-6 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-                  This draft catalogue organises proposed subject areas, educational article drafts and study tools for healthcare professionals. Use it to frame questions and reflect on practice; availability, delivery, admissions and outcomes require academy confirmation.
+                  Clinova brings together healthcare subject areas, educational reading and study tools to support professional learning and reflection. Programme availability, delivery, admissions and outcomes depend on the published details for each offering.
                 </p>
                 <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-10 border-t border-navy-100 pt-10">
                   {[
-                    { stat: 'Explore', label: 'Draft study areas' },
-                    { stat: String(newsItems.length), label: 'Draft articles to read' },
-                    { stat: 'Compare', label: 'Proposed programme outlines' },
+                    { stat: 'Explore', label: 'Healthcare study areas' },
+                    { stat: String(newsItems.length), label: 'Learning articles' },
+                    { stat: 'Compare', label: 'Programme information' },
                     { stat: 'Plan', label: 'Your next learning step' },
                   ].map((item) => (
                     <div key={item.label}>
@@ -178,7 +178,7 @@ export default function HomePage() {
                 Departments
               </div>
               <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
-                Proposed subject areas for healthcare learning
+                Healthcare learning subject areas
               </h2>
             </Reveal>
             <Link
@@ -206,7 +206,7 @@ export default function HomePage() {
                 Programmes
               </div>
               <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
-                Featured programmes
+                Featured learning pathways
               </h2>
             </Reveal>
             <Link
@@ -316,10 +316,10 @@ export default function HomePage() {
                 Healthcare education without borders
               </h2>
               <p className="mt-5 text-base text-navy-600/80 leading-[1.65]">
-                This draft platform groups reading and proposed study themes so healthcare professionals can explore ideas from wherever they are. It does not establish a live teaching service, clinical supervision or a guaranteed course pathway.
+                Explore healthcare reading and subject themes from wherever you are. Published programme pages describe the specific services and arrangements available.
               </p>
               <div className="mt-8 space-y-3">
-                {['Read draft material at a time that suits you', 'Use reflection prompts alongside local guidance', 'Compare topics before asking about an offering', 'Treat every outline as subject to owner confirmation'].map((point) => (
+                {['Explore educational material at your own pace', 'Use reflection prompts alongside local guidance', 'Review published programme information', 'Check requirements before making a learning commitment'].map((point) => (
                   <div key={point} className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 text-teal-500 shrink-0 mt-0.5" />
                     <span className="text-sm text-navy-700 leading-relaxed">{point}</span>
@@ -349,7 +349,7 @@ export default function HomePage() {
               Professional pathways
             </h2>
             <p className="mt-5 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-              A conceptual learning pathway to guide your professional development — from foundational certificates to advanced study.
+              A structured way to explore subject areas, learning resources and published programme information.
             </p>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-8">
@@ -386,7 +386,7 @@ export default function HomePage() {
                 Explore a possible training partnership
               </h2>
               <p className="mt-5 text-base text-navy-600/80 leading-[1.65]">
-                Organisations can use this page to outline a possible education enquiry. Partnership terms, resources, support and delivery arrangements are not yet confirmed.
+                Organisations can use this page to describe their learning needs and enquire about potential collaboration. Any partnership is subject to written agreement and confirmation of scope, resources and delivery.
               </p>
               <div className="mt-8 space-y-3">
                 {[
@@ -434,7 +434,7 @@ export default function HomePage() {
                 News &amp; Resources
               </div>
               <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
-                Draft learning library
+                Learning library
               </h2>
             </Reveal>
             <Link
@@ -488,7 +488,7 @@ export default function HomePage() {
                 Ready to explore a learning question?
               </h2>
               <p className="mt-4 text-base text-white/70 leading-[1.65] max-w-lg">
-                Begin with draft reading and study tools. Course availability, assessment, recognition and outcomes require direct confirmation from the academy.
+                Explore educational reading and study tools. Review each programme's published details for availability, assessment, recognition and outcomes.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 <Link
