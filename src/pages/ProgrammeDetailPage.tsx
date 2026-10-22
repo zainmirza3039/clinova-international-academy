@@ -29,7 +29,7 @@ export default function ProgrammeDetailPage() {
       </div>
     </section>
     <div className="max-w-4xl mx-auto px-4 mt-6">
-      <p className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950"><strong>Catalogue information.</strong> Availability, dates, fees, delivery, duration, CPD hours, instructor, assessment and certificate arrangements are not confirmed. No enrolment or checkout is available. A certificate or diploma in a proposed title does not establish an available or recognised award.</p>
+      <p className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950"><strong>Catalogue information.</strong> Availability, dates, fees, delivery, duration, CPD hours, instructor, assessment and certificate arrangements are not confirmed. No enrolment or checkout is available. A title on this page does not establish an available or recognised award.</p>
     </div>
     <section className="py-12 lg:py-16 bg-white">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,7 +38,7 @@ export default function ProgrammeDetailPage() {
             <div>
               <h2 className="font-heading text-2xl font-bold text-navy-900 mb-4">Overview</h2>
               <p className="text-sm text-navy-600 leading-relaxed">{programme.overview}</p>
-              <p className="mt-3 text-sm text-navy-600 leading-relaxed">This is a proposed educational curriculum, not an available course, credential or authority to practise. Suggested outcomes are study aims, not verified learner achievements.</p>
+              <p className="mt-3 text-sm text-navy-600 leading-relaxed">This learning guide organises topics for independent study. Learning aims are prompts for reflection, not evidence of competence or authority to practise.</p>
             </div>
             {draft ? <CurriculumDraftContent draft={draft} /> : <p className="text-sm text-navy-700">Detailed learning content is not available for this topic.</p>}
           </div>
