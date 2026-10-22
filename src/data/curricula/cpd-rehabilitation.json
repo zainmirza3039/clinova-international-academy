@@ -2,7 +2,7 @@
   {
     "courseSlug": "clinical-assessment-of-low-back-pain",
     "status": "draft",
-    "reviewNotice": "educational material professional-learning outline only. Qualified clinical and editorial review is required before publication; local licensure, scope, supervision, referral pathways and accessibility requirements always apply. No CPD duration, assessment, certificate, accreditation, fees, instructor, dates or availability are confirmed.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Structure a person-centred low-back-pain history and examination while keeping alternative diagnoses in view.",
       "Use function, neurological findings, context and risk information to form a revisable working hypothesis.",
@@ -126,7 +126,7 @@
   {
     "courseSlug": "pain-management-fundamentals",
     "status": "draft",
-    "reviewNotice": "educational material professional-learning outline only. Qualified clinical and editorial review is required before publication; local licensure, scope, supervision, referral pathways and accessibility requirements always apply. No CPD duration, assessment, certificate, accreditation, fees, instructor, dates or availability are confirmed.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Describe pain as a multidimensional lived experience without equating intensity with tissue damage.",
       "Conduct a respectful, person-centred pain history that includes function, context, strengths and safety.",
@@ -183,7 +183,7 @@
           {
             "title": "Communicating uncertainty and avoiding harm",
             "description": "Offer credible explanations without overclaiming certainty.",
-            "text": "People living with pain may have received conflicting labels, normal test results or advice that felt dismissive. Explain that a normal or negative result can be reassuring about one concern while not invalidating pain. NICE NG193 specifically recommends sensitivity when communicating normal results and encourages collaborative supportive relationships. Use a working formulation, state what is known and unknown, and describe why a proposed next step fits the person’s priorities. Avoid saying pain is “just psychological,” that tissue damage is impossible, or that improvement proves a mechanism. Ask the person to explain the plan back in their own words and offer accessible written information. A fictional case of a person frightened by an MRI report can be used to practise translating findings without interpreting images beyond competence. Persistent distress, safeguarding concerns, suicidal thoughts, substance-related risk, new systemic symptoms or neurological change require appropriate referral and immediate local action as indicated. This educational material does not provide crisis advice, medication instructions or a substitute for clinical assessment."
+            "text": "People living with pain may have received conflicting labels, normal test results or advice that felt dismissive. Explain that a normal or negative result can be reassuring about one concern while not invalidating pain. NICE NG193 specifically recommends sensitivity when communicating normal results and encourages collaborative supportive relationships. Use a working formulation, state what is known and unknown, and describe why a suggested next step fits the person’s priorities. Avoid saying pain is “just psychological,” that tissue damage is impossible, or that improvement proves a mechanism. Ask the person to explain the plan back in their own words and offer accessible written information. A fictional case of a person frightened by an MRI report can be used to practise translating findings without interpreting images beyond competence. Persistent distress, safeguarding concerns, suicidal thoughts, substance-related risk, new systemic symptoms or neurological change require appropriate referral and immediate local action as indicated. This educational material does not provide crisis advice, medication instructions or a substitute for clinical assessment."
           },
           {
             "title": "Review, medicines questions and multidisciplinary care",
@@ -250,7 +250,7 @@
   {
     "courseSlug": "introduction-to-sports-rehabilitation",
     "status": "draft",
-    "reviewNotice": "educational material professional-learning outline only. Qualified clinical and editorial review is required before publication; local licensure, scope, supervision, referral pathways and accessibility requirements always apply. No CPD duration, assessment, certificate, accreditation, fees, instructor, dates or availability are confirmed.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Describe staged sports rehabilitation as a criteria-informed, person-centred process rather than a calendar.",
       "Relate assessment and loading decisions to sport demands, symptoms, confidence, environment and reinjury risk.",
@@ -368,7 +368,7 @@
   {
     "courseSlug": "motor-control-relearning-in-neurorehabilitation",
     "status": "draft",
-    "reviewNotice": "educational material professional-learning outline only. Qualified clinical and editorial review is required before publication; local licensure, scope, supervision, referral pathways and accessibility requirements always apply. No CPD duration, assessment, certificate, accreditation, fees, instructor, dates or availability are confirmed.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Explain motor-control relearning as goal-linked practice shaped by task, person and environment.",
       "Use stroke-specific examples to connect assessment, cognition, communication, sensation, balance and participation.",
