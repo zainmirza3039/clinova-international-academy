@@ -6,6 +6,8 @@ import ApplicationPage from '@/pages/ApplicationPage';
 import AdminPage from '@/pages/AdminPage';
 import CommunityPage, { EventsPage, FacultyPage } from '@/pages/CommunityPage';
 import FAQsPage from '@/pages/FAQsPage';
+import ContactPage from '@/pages/ContactPage';
+import TrainingPartnersPage from '@/pages/TrainingPartnersPage';
 
 function renderPage(page: React.ReactNode) { return render(<MemoryRouter>{page}</MemoryRouter>); }
 
@@ -56,5 +58,21 @@ describe('completion frontend pages', () => {
     renderPage(<CommunityPage />);
     expect(screen.getByRole('heading', { name: /thoughtful learning community/i })).toBeTruthy();
     expect(screen.getByRole('link', { name: /events/i }).getAttribute('href')).toBe('/events');
+  });
+
+  it('does not collect contact details while online submissions are disabled', () => {
+    renderPage(<ContactPage />);
+    expect(screen.getByRole('heading', { name: /enquiry service unavailable/i })).toBeTruthy();
+    expect(screen.queryByLabelText(/your name/i)).toBeNull();
+    expect(screen.queryByLabelText(/your message/i)).toBeNull();
+    expect(screen.queryByRole('button', { name: /send message/i })).toBeNull();
+  });
+
+  it('does not collect partnership details while online submissions are disabled', () => {
+    renderPage(<TrainingPartnersPage />);
+    expect(screen.getByRole('heading', { name: /enquiry service unavailable/i })).toBeTruthy();
+    expect(screen.queryByLabelText(/full name/i)).toBeNull();
+    expect(screen.queryByLabelText(/organisation/i)).toBeNull();
+    expect(screen.queryByRole('button', { name: /submit partnership enquiry/i })).toBeNull();
   });
 });
