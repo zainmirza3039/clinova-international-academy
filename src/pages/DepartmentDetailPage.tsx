@@ -45,9 +45,9 @@ export default function DepartmentDetailPage() {
   const relatedCPD = cpdCourses.filter((c) => c.department === department.name).slice(0, 4);
 
   const deptFAQs: FAQ[] = [
-    { id: 'df1', question: `What is this ${department.shortName} page?`, answer: `It is a proposed subject-area organisation for educational reading and study planning. It is not evidence of an established academic department or a live service.` },
+    { id: 'df1', question: `What is this ${department.shortName} page?`, answer: `It organises educational reading and study topics for this healthcare discipline. It does not itself represent a clinical service or a live programme.` },
     { id: 'df2', question: 'Who might use these materials?', answer: 'Healthcare professionals, learners and organisations may use the drafts to frame questions. Readers should consider their training, role, local guidance and scope of practice.' },
-    { id: 'df3', question: 'Are the listed programmes available?', answer: 'Programme records are proposed outlines shown for exploration only. Ask the academy to confirm availability, dates, fees, delivery, assessment and any entry requirements.' },
+    { id: 'df3', question: 'Are the listed programmes available?', answer: 'Catalogue entries are informational. Confirm availability, dates, fees, delivery, assessment and entry requirements for each offering before enrolling.' },
     { id: 'df4', question: 'Do these pages provide a qualification or clinical authority?', answer: 'No. These pages do not promise a certificate, accreditation, competence, employment, professional recognition or permission to practise.' },
   ];
 
@@ -59,7 +59,7 @@ export default function DepartmentDetailPage() {
           { label: 'Departments', to: '/departments' },
           { label: department.shortName },
         ]}
-        eyebrow="Proposed subject area"
+        eyebrow="Healthcare learning"
         title={department.name}
         description={department.description}
         image={department.image}
@@ -70,14 +70,14 @@ export default function DepartmentDetailPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-900 mb-4">Subject-area overview</h2>
           <p className="text-base text-navy-600 leading-relaxed">{department.overview}</p>
-          <p className="mt-4 text-sm text-navy-500 leading-relaxed">Use this as a starting point: read a draft, reflect on how it relates to your role, and ask the owner to confirm any offering before relying on it.</p>
+          <p className="mt-4 text-sm text-navy-500 leading-relaxed">Use this subject area to guide further reading and reflection. Review published programme information before making a learning commitment.</p>
         </div>
       </section>
 
       {/* Learning Areas */}
       <section className="py-12 lg:py-16 bg-navy-50">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-bold text-navy-900 mb-3 text-center">Proposed topic coverage</h2>
+          <h2 className="font-heading text-2xl font-bold text-navy-900 mb-3 text-center">Topic coverage</h2>
           <p className="text-center text-sm text-navy-600 mb-8">Subject categories for educational exploration, not an established department curriculum.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {department.learningAreas.map((area, i) => (
@@ -94,7 +94,7 @@ export default function DepartmentDetailPage() {
       {programmes.length > 0 && (
         <section className="py-16 lg:py-24 bg-white">
           <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-            <SectionHeader eyebrow="Proposed outlines" title="Related programme records" description={`Draft catalogue records related to ${department.name}; availability and terms require academy confirmation.`} />
+            <SectionHeader eyebrow="Programme information" title="Related learning pathways" description={`Explore learning topics related to ${department.name}. Availability and terms are stated in each published offering.`} />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {programmes.map((prog, i) => (
                 <ProgrammeCard key={prog.id} programme={prog} index={i} />
@@ -158,7 +158,7 @@ export default function DepartmentDetailPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {relatedArticles.map((article) => article && <Link key={article.slug} to={`/resources/${article.slug}`} className="group p-4 border border-navy-100 hover:border-clinical-300 transition-colors">
               <h3 className="font-heading font-semibold text-navy-800 text-sm leading-snug group-hover:text-clinical-600">{article.title}</h3>
-              <span className="mt-3 inline-flex items-center gap-1 text-xs text-clinical-600">Read draft <ExternalLink className="w-3 h-3" /></span>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs text-clinical-600">Read overview <ExternalLink className="w-3 h-3" /></span>
             </Link>)}
           </div>
           <Link to="/learning-resources" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-clinical-600">Open study tools <ArrowRight className="w-4 h-4" /></Link>
@@ -172,9 +172,9 @@ export default function DepartmentDetailPage() {
       {programmes.length === 0 && relatedCPD.length === 0 && (
         <section className="py-16 bg-navy-50">
           <div className="max-w-3xl mx-auto px-4 text-center">
-            <p className="text-navy-500 mb-4">No related programme records are currently shown for this proposed subject area. Explore the draft library or ask the academy what, if anything, is confirmed.</p>
+            <p className="text-navy-500 mb-4">No related programme records are currently listed for this subject area. Explore the learning library for related educational reading.</p>
             <Link to="/programmes" className="inline-flex items-center gap-2 px-6 py-3 bg-navy-900 text-white font-semibold rounded-lg hover:bg-navy-800 transition-colors">
-              View Proposed Outlines <ArrowRight className="w-4 h-4" />
+              View Programme Information <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </section>
@@ -190,8 +190,8 @@ export default function DepartmentDetailPage() {
 
       <CTASection
         title={`Continue exploring ${department.shortName}`}
-        description="Read the draft library, use study tools and contact the owner to verify any programme details. No outcome or recognition is guaranteed."
-        primaryCTA={{ label: 'View Proposed Outlines', to: '/programmes' }}
+        description="Explore the learning library and study tools. Confirm programme requirements and recognition before enrolling."
+        primaryCTA={{ label: 'View Programme Information', to: '/programmes' }}
         secondaryCTA={{ label: 'Contact Academy', to: '/contact' }}
       />
     </>
