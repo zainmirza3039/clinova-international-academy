@@ -13,7 +13,7 @@ export default function LearningResourcesPage() {
   const [search, setSearch] = useState('');
   const filtered = useMemo(() => publishedLearningResources.filter(resource => `${resource.title} ${resource.kind} ${resource.summary}`.toLowerCase().includes(search.trim().toLowerCase())), [search]);
   return <>
-    <PageHero breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Resources', to: '/resources' }, { label: 'Study tools' }]} eyebrow="Learning resources" title="Study, Reflect and Discuss" description="Use these original reading-based tools to structure professional learning. No downloads, submissions, saved notes or learner records are available here." />
+    <PageHero breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Resources', to: '/resources' }, { label: 'Study tools' }]} eyebrow="Learning resources" title="Study Resources" description="The study library is being prepared. Resources will appear here after qualified review and publication approval." />
     <section className="max-w-editorial mx-auto px-6 lg:px-10 py-12">
       <aside className="p-5 mb-8 bg-amber-50 border border-amber-200 text-sm leading-relaxed text-navy-700">{educationalDisclaimer} Do not enter or share personal or patient information.</aside>
       {publishedLearningResources.length > 0 && <><label htmlFor="study-resource-search" className="block mb-2 font-semibold text-navy-900">Search study tools</label><input id="study-resource-search" type="search" value={search} onChange={event => setSearch(event.target.value)} className="w-full p-3 border border-navy-200 mb-5 focus:ring-2 focus:ring-clinical-500" placeholder="Search guides, checklists or worksheets" /></>}
