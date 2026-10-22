@@ -9,7 +9,7 @@ import { educationalDisclaimer, getEducationalArticle } from '@/data/educational
 const publishedLearningResources = learningResources.filter(resource => resource.publicationStatus === 'published');
 
 export default function LearningResourcesPage() {
-  useSEO({ title: 'Study Guides and Learning Resources', description: 'Explore educational checklists, reasoning worksheets, documentation prompts and revision notes. Professional learning resources awaiting qualified review, not clinical protocols.' });
+  useSEO({ title: 'Study Guides and Learning Resources', description: 'Study resources will appear here after qualified review. No draft worksheets or unapproved materials are publicly available.' });
   const [search, setSearch] = useState('');
   const filtered = useMemo(() => publishedLearningResources.filter(resource => `${resource.title} ${resource.kind} ${resource.summary}`.toLowerCase().includes(search.trim().toLowerCase())), [search]);
   return <>
