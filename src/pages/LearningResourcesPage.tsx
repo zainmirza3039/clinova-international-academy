@@ -4,9 +4,9 @@ import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { learningResources } from '@/data/learningResources';
+import { educationalDisclaimer, getEducationalArticle } from '@/data/educationalArticles';
 
 const publishedLearningResources = learningResources.filter(resource => resource.publicationStatus === 'published');
-import { educationalDisclaimer, getEducationalArticle } from '@/data/educationalArticles';
 
 export default function LearningResourcesPage() {
   useSEO({ title: 'Study Guides and Learning Resources', description: 'Explore educational checklists, reasoning worksheets, documentation prompts and revision notes. Professional learning resources awaiting qualified review, not clinical protocols.' });
