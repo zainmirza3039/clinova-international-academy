@@ -14,7 +14,11 @@ describe('public route rendering without live infrastructure', () => {
   it.each(routes)('%s renders an accessible heading and preview metadata', async (route) => {
     window.history.replaceState({}, '', route);
     const { container } = render(<App />);
-    await waitFor(() => expect(container.querySelector('h1')?.textContent?.trim().length).toBeGreaterThan(0));
+    await waitFor(() => {
+      expect(container.querySelector('h1')?.textContent?.trim().length).toBeGreaterThan(0);
+      expect(document.title).toContain('Clinova');
+      expect(document.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex, nofollow');
+    });
     expect(container.querySelector('#main-content')).not.toBeNull();
     expect(container.querySelectorAll('main')).toHaveLength(1);
     expect(document.title).toContain('Clinova');

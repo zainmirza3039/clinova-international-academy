@@ -1,0 +1,186 @@
+[
+  {
+    "programmeSlug": "certificate-in-patient-centred-healthcare-practice",
+    "status": "draft",
+    "reviewNotice": "Proposed professional-learning draft only. Content, scope, accessibility, clinical accuracy and any future delivery or recognition arrangements require qualified clinical and academy review. It is not legal or medical advice, does not promise a certified skill, and has no confirmed completion, tracking, backend or delivery arrangements.",
+    "outcomes": [
+      "Describe how person-centred practice joins the person’s goals, evidence, professional judgement and context.",
+      "Structure collaborative conversations that make choices, uncertainty and safety-netting understandable.",
+      "Recognise how capacity, safeguarding, confidentiality, interpreters and accessibility affect participation.",
+      "Distinguish professional scope, supervision and referral responsibilities across UK jurisdictions without treating this draft as legal advice.",
+      "Use de-identified reflective cases to identify assumptions, power differences and respectful documentation needs."
+    ],
+    "intendedAudience": [
+      "Regulated health and care professionals developing person-centred consultation habits.",
+      "Students and support staff learning under appropriate supervision and local policy.",
+      "Teams reviewing how communication, inclusion and shared decisions are represented in everyday care."
+    ],
+    "prerequisites": [
+      "A relevant health, care or social-support foundation and familiarity with the limits of one’s role.",
+      "Access to local safeguarding, consent, confidentiality, interpreter and escalation policies; this draft does not replace them.",
+      "Qualified supervision is required for any application to practice; no competence, certification or registration is conferred."
+    ],
+    "modules": [
+      {
+        "title": "Seeing the person in context",
+        "description": "Build a whole-person frame that respects goals, identity, access and power.",
+        "lessons": [
+          {
+            "title": "From presenting problem to person’s priorities",
+            "description": "Turn an initial request into a collaborative account of what matters.",
+            "text": "Person-centred practice starts by making space for the person’s account before selecting a professional agenda. Ask what prompted contact, what they hope will be different, and which activities, relationships or responsibilities are affected. Clarify their understanding, concerns and preferred level of detail; do not assume that a symptom label captures the real decision. Summarise the story and invite correction, especially where language, trauma, disability or previous services may shape trust. Professional knowledge still matters: explain what you can and cannot clarify, identify information that needs checking, and keep a working formulation open to revision. A goal is not an instruction to deliver a particular intervention, and preference does not remove safety responsibilities. Consider practical access, culture, housing, work, caring roles and digital exclusion without stereotyping. In a fictional case, compare a consultation that rushes to advice with one that first establishes priorities. Note how the second might alter questions, options, referrals and follow-up while remaining within the practitioner’s scope and local pathway."
+          },
+          {
+            "title": "Equity, power and reasonable communication",
+            "description": "Recognise barriers and adapt communication without making the person responsible for system design.",
+            "text": "A respectful encounter treats communication access as a service responsibility, not a test of how well someone can fit a standard appointment. Check preferred name, language, format, hearing or vision needs, cognitive load, privacy and whether a supporter should be involved. Offer information in usable chunks, pause for questions and avoid equating quiet agreement with understanding. HCPC standards expect appropriate communication methods, attention to language needs, privacy and dignity for registrants, while exact duties and employer processes differ by role and UK jurisdiction. Do not improvise an untrained child or family member as an interpreter where this could distort meaning, compromise privacy or create pressure; use the approved interpreting route and document limitations. Notice power: professional status, time pressure and institutional language can make refusal feel unsafe. A fictional person may choose not to disclose a concern today; respond without coercion, record what is necessary and explain how they can return. Adaptation is not a promise that every barrier can be removed, but it is a reason to seek advice and improve the pathway."
+          }
+        ],
+        "reflectiveActivity": "Using a fictional, de-identified scenario, map the person’s priorities, access barriers, power concerns and one communication adaptation. Explain what requires supervision or a local policy check."
+      },
+      {
+        "title": "Choices, consent and capacity",
+        "description": "Practise explaining options while keeping consent voluntary, informed and revisable.",
+        "lessons": [
+          {
+            "title": "Shared decisions without false certainty",
+            "description": "Use evidence, expertise and values to make options understandable.",
+            "text": "NICE NG197 describes shared decision making as a routine partnership in which people and professionals work together on treatment and care decisions. Start by naming the decision, then discuss reasonable options, including doing nothing or waiting where relevant. Explain likely benefits, burdens, uncertainties and consequences in plain language; avoid relative numbers without context and avoid presenting a guideline as an automatic answer. Ask what matters most, invite questions and use teach-back to discover misunderstanding rather than to catch the person out. A decision aid can support, not replace, a conversation. NG197 does not cover unexpected emergencies requiring immediate life-saving care or situations where an adult lacks capacity at the time, so those boundaries must be recognised rather than stretched. Document the person’s goals, information offered, preferences, dissent, agreed next step and review point, using local records rules. In a fictional case, one option may be clinically reasonable but unacceptable to the person’s circumstances. The professional responsibility is to explain, listen, manage risk and seek appropriate advice—not to engineer agreement or promise an outcome."
+          },
+          {
+            "title": "Consent, capacity and jurisdictional caution",
+            "description": "Separate permission for care from assumptions about capacity or legal authority.",
+            "text": "Valid consent is voluntary and informed, and it must relate to the decision being made. Check that the person can receive information in an accessible form, consider options, communicate a choice and revisit it when circumstances change. Do not infer incapacity from age, diagnosis, communication style, an unwise choice or the need for support. HCPC guidance says capacity and best-interest frameworks vary among UK countries, and its examples distinguish England, Wales, Northern Ireland and Scotland; local law, policy and professional guidance therefore require checking. This educational draft is not legal advice. In a fictional case, maximise the person’s involvement, postpone when a fluctuating condition may improve, seek senior or specialist input and record the reasoning rather than simply naming a substitute decision-maker. Consent to treatment, consent to sharing information and permission for a supporter to attend are related but not identical questions. Emergencies, safeguarding and statutory duties may alter the route, but do not create a general licence to disclose or proceed. Escalate uncertainty through supervision and the organisation’s policy."
+          }
+        ],
+        "reflectiveActivity": "For a fictional decision, list the decision, information needed, accessibility support, evidence of voluntary understanding, capacity uncertainties and the local policy or supervisor you would consult."
+      },
+      {
+        "title": "Safe relationships and accountable practice",
+        "description": "Connect compassion with boundaries, confidentiality, safeguarding and supervision.",
+        "lessons": [
+          {
+            "title": "Confidentiality, information sharing and safeguarding",
+            "description": "Handle private information proportionately when care, risk or protection concerns arise.",
+            "text": "Confidentiality supports trust, but it is not an absolute promise that information can never be shared. HCPC standards say confidential information should be disclosed only with permission, where law allows, in the service user’s best interests or in the public interest such as preventing harm. GMC guidance gives doctors a more detailed framework, while other professions have their own standards and organisational routes; do not transfer one regulator’s wording uncritically. Explain ordinary information sharing, seek appropriate consent, use the minimum relevant information and record what was shared, with whom, why and under which authority. If a person raises possible abuse, neglect, coercion or immediate danger, listen without promising secrecy, prioritise safety and follow local safeguarding escalation. Do not investigate beyond your role or confront an alleged perpetrator. A fictional disclosure can be explored without identifying a real person: distinguish concern, evidence, urgency and next action. Where consent is refused, capacity is uncertain or jurisdictions differ, obtain senior advice promptly. This is an educational framework, not legal advice; local policy and statutory guidance govern action."
+          },
+          {
+            "title": "Boundaries, delegation and reflective supervision",
+            "description": "Keep relationships safe by recognising role limits, conflicts and escalation needs.",
+            "text": "Warmth and continuity do not require a professional to become a friend, advocate beyond their mandate or informal therapist. HCPC standards require appropriate boundaries, practice within knowledge and skills, referral beyond scope, and supervision for delegated work. Comparable responsibilities are expressed differently by regulators and employers, so identify the governing standard for your profession and setting. Be alert to gifts, private messaging, social media contact, dual relationships, financial pressure and requests for special access. Boundaries should be explained respectfully rather than enforced as punishment. Supervision is not a sign of failure: bring uncertainty, bias, a near miss or a difficult emotional response early, while sharing only the information necessary for safe consultation. In a fictional team, a support worker is asked to perform a task outside training; a safe response pauses, checks delegation and arranges qualified oversight instead of relying on confidence. Document facts and actions without judgemental labels. If immediate risk exists, use the urgent pathway first. This draft does not define a certified skill or authorise independent practice."
+          }
+        ],
+        "reflectiveActivity": "Write a de-identified supervision note about a fictional boundary or safeguarding dilemma. Separate observed facts, your emotional response, risk, policy question and proposed escalation."
+      }
+    ],
+    "faqs": [
+      {"question":"Is this programme available for enrolment?","answer":"No. It is a proposed draft outline; availability, delivery, instructors and enrolment arrangements are unknown and unconfirmed."},
+      {"question":"Does it award a certificate, CPD hours or professional recognition?","answer":"No. No certificate, CPD hours, assessment, pass mark, accreditation or recognition is promised. Any future arrangements require qualified review and explicit confirmation."},
+      {"question":"Can this draft be used as legal or clinical advice?","answer":"No. It is educational material only. Follow your profession’s scope, local policy, supervision, safeguarding route and applicable jurisdictional guidance."},
+      {"question":"Does reading it prove competence in person-centred care?","answer":"No. There is no completion or tracking system and no skill certification. Competence requires appropriate education, supervised practice and the relevant professional requirements."}
+    ],
+    "relatedArticles": [
+      {"title":"Clinical Documentation and Patient Communication: Making Care Understandable and Traceable","slug":"clinical-documentation-communication"},
+      {"title":"Evidence-Based Physiotherapy: Integrating Research, Expertise and What Matters to the Person","slug":"evidence-based-practice-physiotherapy"},
+      {"title":"Patient Safety, Red Flags and Referral: Managing Uncertainty Responsibly","slug":"patient-safety-red-flags-referral"}
+    ],
+    "evidence": [
+      {"organisation":"NICE","title":"Shared decision making (NG197)","url":"https://www.nice.org.uk/guidance/ng197","note":"Scope and recommendations cover partnership, communicating risks, benefits and consequences, decision aids and organisational implementation; it excludes immediate life-saving emergencies and adult decisions where capacity is absent at the time."},
+      {"organisation":"HCPC","title":"Standards of conduct, performance and ethics","url":"https://www.hcpc-uk.org/standards/standards-of-conduct-performance-and-ethics/","note":"Opened source for partnership, valid consent, communication and language needs, boundaries, scope, supervision, confidentiality, risk and safeguarding responsibilities."},
+      {"organisation":"HCPC","title":"Consent and confidentiality","url":"https://www.hcpc-uk.org/standards/meeting-our-standards/confidentiality/guidance-on-confidentiality/consent-and-confidentiality/","note":"Opened source for voluntary and informed consent, capacity, disclosure exceptions and differences among UK jurisdictions."},
+      {"organisation":"GMC","title":"Confidentiality: good practice in handling patient information","url":"https://www.gmc-uk.org/professional-standards/the-professional-standards/confidentiality","note":"Opened professional framework for doctors covering consent, disclosure, protection of patients and information management; it is not a universal regulator standard."}
+    ]
+  },
+  {
+    "programmeSlug": "certificate-in-healthcare-communication",
+    "status": "draft",
+    "reviewNotice": "Proposed professional-learning draft only. Content, scope, accessibility, clinical accuracy and any future delivery or recognition arrangements require qualified clinical and academy review. It is not legal or medical advice, does not promise a certified skill, and has no confirmed completion, tracking, backend or delivery arrangements.",
+    "outcomes": [
+      "Use listening, structuring and plain-language techniques to support safer healthcare conversations.",
+      "Check understanding and communicate uncertainty, risk and next steps without coercion or overclaiming.",
+      "Plan accessible communication with interpreters, supporters and communication aids while protecting privacy.",
+      "Recognise consent, capacity, confidentiality, safeguarding and professional-boundary implications in communication encounters.",
+      "Produce clear, proportionate handovers and reflective notes within scope and supervision."
+    ],
+    "intendedAudience": [
+      "Regulated healthcare professionals and supervised learners who communicate with service users, carers or teams.",
+      "Multidisciplinary staff developing safer consultations, handovers and written communication.",
+      "Educators or service teams using fictional cases to review communication practices before qualified approval."
+    ],
+    "prerequisites": [
+      "A foundation in a healthcare, care or support role and awareness of local escalation routes.",
+      "Access to organisational policies for consent, confidentiality, safeguarding, interpreter booking, records and complaints.",
+      "This draft is not a communication assessment, clinical authorisation or substitute for profession-specific training and supervision."
+    ],
+    "modules": [
+      {
+        "title": "Listening and structuring the encounter",
+        "description": "Make conversations understandable while preserving the person’s voice and agency.",
+        "lessons": [
+          {
+            "title": "Listening before explaining",
+            "description": "Use open questions, summaries and curiosity to discover what the person needs.",
+            "text": "Healthcare communication is not simply the accurate delivery of information. Begin with an open invitation, then listen for the person’s priorities, understanding, worries and preferred way of receiving information. Use brief encouragers, silence and reflective summaries instead of filling every pause. Ask permission before moving from story to explanation: this preserves agency and may reveal a different question than the professional expected. Clarify words that could carry different meanings, such as ‘better’, ‘safe’ or ‘normal’, and avoid jargon disguised as reassurance. A summary should distinguish what the person said from what you infer; invite correction. In a fictional appointment, a person repeatedly returns to work and childcare while the professional focuses on a test result. Identify how acknowledging those practical concerns could improve relevance without dismissing clinical risk. Communication is also observation: fatigue, distress, hearing difficulty or a change in behaviour may require a pause, adjustment or escalation, not a faster script. Remain within role, document material information appropriately and seek supervision when the conversation exceeds your expertise."
+          },
+          {
+            "title": "Plain language, teach-back and uncertainty",
+            "description": "Explain information in usable chunks and check what was understood.",
+            "text": "Plain language is precise language designed for the listener, not a simplified substitute for truth. Offer one idea at a time, explain unavoidable terms, use concrete examples and distinguish what is known, possible and not yet clear. Discuss risks and benefits with context rather than unsupported reassurance or alarming lists. Teach-back asks the person to explain the plan in their own words; it tests the explanation and the system, not intelligence. If understanding is incomplete, change the explanation, use a diagram or arrange another conversation. NICE NG197 highlights communicating risks, benefits and consequences as part of shared decision making, while its recommendations still require professional judgement and individual context. In a fictional case, the person agrees quickly after a complex explanation. Do not treat agreement as proof of informed consent: check voluntariness, questions, alternatives and the person’s priorities. Record key information, decisions and safety-netting according to local records policy. A communication draft cannot validate a procedure, diagnose a condition, guarantee adherence or replace an interpreter, specialist or supervisor when those are needed."
+          }
+        ],
+        "reflectiveActivity": "Rewrite a fictional technical explanation in plain language, then add three teach-back prompts and one sentence that honestly communicates uncertainty."
+      },
+      {
+        "title": "Inclusive and difficult conversations",
+        "description": "Adapt communication for language, distress, capacity and safeguarding without overstepping.",
+        "lessons": [
+          {
+            "title": "Interpreters, supporters and communication aids",
+            "description": "Plan access support while keeping the service user’s voice, consent and privacy central.",
+            "text": "When language or communication access differs from the practitioner’s default, plan rather than improvise. Use the approved interpreter or communication support route, brief the interpreter on purpose and confidentiality, speak directly to the person, use short segments and allow extra time. Avoid idioms, side conversations and asking a child to carry clinical meaning. A supporter may be helpful, but their presence, role and information sharing should be agreed with the person wherever possible; support is not automatic authority to decide or receive everything. Check whether written, visual, tactile, remote or augmentative formats are accessible and reliable for this individual. HCPC standards require practicable steps to meet language and communication needs, but the exact process depends on employer, profession and jurisdiction. Document who assisted, limitations and any follow-up needed without labelling the person as difficult. If privacy, coercion or accuracy is compromised, pause and seek an alternative. In a fictional safeguarding concern, do not let an accompanying person answer every question or promise secrecy; follow local safeguarding procedures and supervision. Communication support improves access, but it does not itself establish capacity, consent or clinical competence."
+          },
+          {
+            "title": "Distress, disagreement and safety-netting",
+            "description": "Respond to emotion and disagreement while keeping risk and next steps visible.",
+            "text": "Strong emotion is information about the encounter, not evidence that a person is irrational or non-compliant. Name what you observe tentatively, allow time, and ask what would make the conversation safer. Validate the experience without agreeing to an unsupported conclusion. When people disagree, clarify the decision, acknowledge legitimate uncertainty, explain alternatives and consider a second opinion or review route. Safety-netting should be specific: what change matters, who to contact, how urgently and what to do if access fails. Do not bury urgent advice in a long script or imply that seeking help is a nuisance. If a disclosure suggests abuse, neglect, coercion or immediate danger, listen, avoid leading investigation, explain limits of confidentiality and use the local safeguarding route. HCPC standards place safety and wellbeing before professional loyalties and require concerns to be reported appropriately, while local procedures determine how. In a fictional case, a person declines a recommended next step. Explore reasons, assess immediate risk, respect a capable refusal and document information given; do not punish or pressure. Seek supervision when clinical, ethical or jurisdictional questions exceed your role."
+          }
+        ],
+        "reflectiveActivity": "Create a fictional safety-netting script for a person who is anxious and disagrees with a recommendation. Include empathy, options, urgent warning signs, access barriers and the escalation route you would check."
+      },
+      {
+        "title": "Communication as professional practice",
+        "description": "Make written, team and digital communication safe, bounded and reviewable.",
+        "lessons": [
+          {
+            "title": "Confidential records and team handovers",
+            "description": "Write what colleagues need while protecting privacy and distinguishing fact from interpretation.",
+            "text": "A useful record supports continuity without turning a person into a collection of labels. Record the person’s stated concern or goal, relevant findings, information offered, consent or refusal, agreed plan, safety-net and follow-up responsibility. Separate direct observation, reported history, professional interpretation and uncertainty. Share only information relevant to the care task, using the approved record and handover route; do not copy identifiable details into informal notes or teaching examples. HCPC standards state that confidential information may be disclosed with permission, where law allows, in the person’s best interests or in the public interest to prevent harm. GMC guidance gives doctors a detailed framework, but other professionals must follow their own standards and local information-governance rules. In a fictional handover, identify what the receiving colleague must know now, what can wait, and what authority supports sharing. Confirm closed-loop responsibility: who will act, by when and how the person will be updated. Clear writing cannot compensate for missing clinical assessment or poor escalation. When uncertain, ask a supervisor or information-governance lead rather than inventing a legal conclusion."
+          },
+          {
+            "title": "Boundaries, digital messages and escalation",
+            "description": "Use communication channels responsibly and know when a conversation must move to formal care.",
+            "text": "Digital convenience can blur professional boundaries. Use only approved channels, verify identity, consider privacy and record clinically relevant communication in the formal system. Do not provide personal contact details, respond to emergencies through an unmonitored inbox or give advice beyond scope because a message feels urgent. Explain response times and the route for immediate help, but never imply that a disclaimer removes professional responsibility. HCPC standards require responsible communication, appropriate boundaries, practice within knowledge and skills, referral beyond scope and support for delegated work. A doctor, nurse, allied health professional or support worker may have different regulator wording and employer processes; identify the applicable framework rather than presenting one standard as universal. In a fictional case, a person sends a distressing message late at night. The learner should preserve relevant information, follow the service’s urgent pathway, alert the appropriate supervisor and protect confidentiality—not diagnose by text or promise an outcome. If a colleague’s communication creates risk, raise the concern through the local procedure. This draft does not authorise independent messaging, certify digital practice or replace training in the system used."
+          }
+        ],
+        "reflectiveActivity": "Draft a fictional team handover and a short digital-channel boundary statement. Mark facts, uncertainty, privacy considerations, urgency, owner and supervisor or policy check."
+      }
+    ],
+    "faqs": [
+      {"question":"Is this a live communication course with an assessment?","answer":"No. It is a proposed draft curriculum only. No assessment, pass mark, completion tracking, instructor, duration or delivery arrangement has been confirmed."},
+      {"question":"Will it certify communication skill or provide CPD recognition?","answer":"No. Certification, CPD hours, accreditation and recognition are not promised. Qualified clinical, educational and accessibility review would be required for any future offer."},
+      {"question":"Can I use these scripts instead of local policies?","answer":"No. They are reflective educational examples, not protocols. Follow your profession’s scope, local consent, confidentiality, interpreter, safeguarding, records and escalation requirements."},
+      {"question":"Does communication support settle capacity or consent?","answer":"No. Interpreters, supporters and aids improve access but do not by themselves establish capacity, valid consent or authority to disclose information. Seek appropriate supervision and policy guidance."}
+    ],
+    "relatedArticles": [
+      {"title":"Clinical Documentation and Patient Communication: Making Care Understandable and Traceable","slug":"clinical-documentation-communication"},
+      {"title":"A Structured Approach to Physiotherapy Assessment","slug":"physiotherapy-assessment-structured-approach"},
+      {"title":"Patient Safety, Red Flags and Referral: Managing Uncertainty Responsibly","slug":"patient-safety-red-flags-referral"}
+    ],
+    "evidence": [
+      {"organisation":"NICE","title":"Shared decision making (NG197)","url":"https://www.nice.org.uk/guidance/ng197","note":"Opened source for communicating risks, benefits and consequences, partnership, decision aids, training and the limits of the guideline in emergencies or adult decisions where capacity is absent at the time."},
+      {"organisation":"HCPC","title":"Standards of conduct, performance and ethics","url":"https://www.hcpc-uk.org/standards/standards-of-conduct-performance-and-ethics/","note":"Opened source for effective communication, language needs, valid consent, boundaries, scope, supervision, confidentiality, risk and safeguarding."},
+      {"organisation":"HCPC","title":"Consent and confidentiality","url":"https://www.hcpc-uk.org/standards/meeting-our-standards/confidentiality/guidance-on-confidentiality/consent-and-confidentiality/","note":"Opened source for informed and voluntary consent, capacity, interpretable information-sharing conditions and UK jurisdiction differences."},
+      {"organisation":"GMC","title":"Confidentiality: good practice in handling patient information","url":"https://www.gmc-uk.org/professional-standards/the-professional-standards/confidentiality","note":"Opened source for doctors’ confidentiality framework, consent, disclosure for protection and information-management boundaries; other professions must use their own standards."}
+    ]
+  }
+]

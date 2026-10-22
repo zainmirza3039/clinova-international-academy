@@ -8,9 +8,7 @@ import AboutPage from '@/pages/AboutPage';
 import DepartmentsPage from '@/pages/DepartmentsPage';
 import DepartmentDetailPage from '@/pages/DepartmentDetailPage';
 import ProgrammesPage from '@/pages/ProgrammesPage';
-import ProgrammeDetailPage from '@/pages/ProgrammeDetailPage';
 import CPDCoursesPage from '@/pages/CPDCoursesPage';
-import CPDCourseDetailPage from '@/pages/CPDCourseDetailPage';
 import OnlineLearningPage from '@/pages/OnlineLearningPage';
 import TrainingPartnersPage from '@/pages/TrainingPartnersPage';
 import CertificateVerificationPage from '@/pages/CertificateVerificationPage';
@@ -31,6 +29,8 @@ import { AuthProvider, ProtectedStudentRoute } from '@/auth/AuthProvider';
 import AuthPage from '@/pages/AuthPage';
 import StudentDashboardPage from '@/pages/StudentDashboardPage';
 
+const ProgrammeDetailPage = lazy(() => import('@/pages/ProgrammeDetailPage'));
+const CPDCourseDetailPage = lazy(() => import('@/pages/CPDCourseDetailPage'));
 const ResourcesPage = lazy(() => import('@/pages/ResourcesPage').then(module => ({ default: module.ResourcesPage })));
 const ResourceDetailPage = lazy(() => import('@/pages/ResourcesPage').then(module => ({ default: module.ResourceDetailPage })));
 const LearningResourcesPage = lazy(() => import('@/pages/LearningResourcesPage'));
@@ -47,7 +47,7 @@ export default function App() {
         <main id="main-content" tabIndex={-1} className="flex-1">
           <div className="preview-notice">{siteSettings.contentStatus}</div>
           <ErrorBoundary>
-          <Suspense fallback={<p role="status" aria-live="polite" className="px-6 py-20 text-center text-navy-700">Loading educational resources…</p>}>
+          <Suspense fallback={<p role="status" aria-live="polite" className="px-6 py-20 text-center text-navy-700">Loading draft content…</p>}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/sign-in" element={<AuthPage mode="sign-in" />} />

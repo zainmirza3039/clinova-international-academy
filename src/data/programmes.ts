@@ -174,7 +174,7 @@ export const programmes: Programme[] = [
     category: 'Diploma',
     description: 'A comprehensive programme covering advanced rehabilitation principles across multiple clinical areas.',
     overview:
-      'This diploma programme provides in-depth education in rehabilitation practice, covering neurological, musculoskeletal and cardiopulmonary rehabilitation. It is designed for healthcare professionals seeking a comprehensive understanding of modern rehabilitation approaches.',
+      'This proposed curriculum connects rehabilitation reasoning, participation goals, team coordination and specialist boundaries across neurological, musculoskeletal and cardiopulmonary examples. The draft title does not establish a diploma award or specialist clinical competence; individual care remains subject to qualified assessment, professional scope and local pathways.',
     duration: 'Awaiting confirmation',
     cpdHours: null,
     delivery: 'Awaiting confirmation',
@@ -213,7 +213,7 @@ export const programmes: Programme[] = [
     department: 'Healthcare Management',
     departmentSlug: 'healthcare-management',
     category: 'Certificate',
-    description: 'Master essential communication skills for effective healthcare practice and team collaboration.',
+    description: 'Explore communication skills, professional boundaries and reflective approaches to healthcare team collaboration.',
     overview:
       'This programme develops practical communication skills for healthcare professionals. You will learn about verbal and non-verbal communication, team communication, breaking bad news, managing conflict and communicating effectively with diverse patient populations.',
     duration: 'Awaiting confirmation',
@@ -254,9 +254,9 @@ export const programmes: Programme[] = [
     department: 'Psychology & Mental Health',
     departmentSlug: 'psychology-mental-health',
     category: 'Certificate',
-    description: 'Learn the foundations of CBT and its application in clinical mental health practice.',
+    description: 'Explore CBT theory, formulation concepts and professional training limits through proposed educational reading; not therapist qualification.',
     overview:
-      'This programme introduces the principles and practice of Cognitive Behavioural Therapy. You will learn about the CBT model, assessment formulation, core therapeutic techniques and the application of CBT for common mental health conditions.',
+      'This proposed reading curriculum introduces CBT theory, formulation concepts, evidence limits and the requirements for specialist training and supervision. It does not qualify a therapist, authorise diagnosis or treatment, or provide instructions for delivering psychotherapy.',
     duration: 'Awaiting confirmation',
     cpdHours: null,
     delivery: 'Awaiting confirmation',

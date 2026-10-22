@@ -1,3 +1,7 @@
+import rehabilitationDrafts from './curricula/programmes-rehabilitation.json';
+import personCentredDrafts from './curricula/programmes-person-centred.json';
+import psychologyLeadershipDrafts from './curricula/programmes-psychology-leadership.json';
+
 export interface CourseDraftLesson {
   title: string;
   description: string;
@@ -26,7 +30,7 @@ export interface CourseDraft {
 
 const reviewNotice = 'Proposed professional-learning draft only. Content, scope, accessibility, clinical accuracy and any future delivery or recognition arrangements require qualified clinical and academy review. It is not medical advice and does not enable enrolment.';
 
-export const courseDrafts: Record<string, CourseDraft> = {
+const initialCourseDrafts: Record<string, CourseDraft> = {
   'certificate-in-musculoskeletal-assessment': {
     programmeSlug: 'certificate-in-musculoskeletal-assessment', status: 'draft', reviewNotice,
     outcomes: ['Use a structured history and examination sequence while adapting to the person and context.', 'Recognise findings that warrant escalation, referral or a different diagnostic pathway.', 'Communicate uncertainty, shared decisions and safety-netting without overclaiming what an assessment can establish.', 'Document relevant findings and reasoning in a way that supports continuity and review.'],
@@ -96,4 +100,13 @@ export const courseDrafts: Record<string, CourseDraft> = {
   }
 };
 
-export function getCourseDraft(slug: string): CourseDraft | undefined { return courseDrafts[slug]; }
+export const courseDrafts: Record<string, CourseDraft> = { ...initialCourseDrafts };
+for (const draft of [...rehabilitationDrafts, ...personCentredDrafts, ...psychologyLeadershipDrafts]) {
+  if (draft.status !== 'draft') throw new Error('Only draft programme content is permitted.');
+  if (Object.prototype.hasOwnProperty.call(courseDrafts, draft.programmeSlug)) throw new Error('Duplicate programme curriculum slug.');
+  courseDrafts[draft.programmeSlug] = { ...draft, status: 'draft' };
+}
+
+export function getCourseDraft(slug: string): CourseDraft | undefined {
+  return Object.prototype.hasOwnProperty.call(courseDrafts, slug) ? courseDrafts[slug] : undefined;
+}
