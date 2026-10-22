@@ -3,7 +3,7 @@ import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/re
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import CertificateVerificationPage from '@/pages/CertificateVerificationPage';
 import { ResourceDetailPage } from '@/pages/ResourcesPage';
-import { publishedNewsItems } from '@/data/content';
+import { newsItems as editorialReviewItems, publishedNewsItems } from '@/data/content';
 import { programmes, reviewProgrammes, publishedProgrammes, getProgrammeBySlug } from '@/data/programmes';
 
 const mocks = vi.hoisted(() => ({ enabled: false, from: vi.fn(), maybeSingle: vi.fn() }));
@@ -39,10 +39,12 @@ describe('reconciled current-main functionality', () => {
     expect(publishedProgrammes).toHaveLength(0);
     for (const programme of reviewProgrammes) expect(getProgrammeBySlug(programme.slug)).toBeUndefined();
   });
-  it.each(publishedNewsItems)('keeps the main article route $slug available as an editorial review snapshot', article => {
-    const { container } = render(<MemoryRouter initialEntries={[`/resources/${article.slug}`]}><Routes><Route path="/resources/:slug" element={<ResourceDetailPage />} /></Routes></MemoryRouter>);
-    expect(screen.getByRole('heading', { name: article.title })).toBeTruthy();
-    expect(container.textContent).toContain(article.sections[0].paragraphs[0]);
-    expect(container.textContent).toContain('Not clinically approved or published.');
+  it('keeps editorial review snapshots unpublished until approval', () => {
+    expect(publishedNewsItems).toHaveLength(0);
+    for (const article of editorialReviewItems) {
+      render(<MemoryRouter initialEntries={[`/resources/${article.slug}`]}><Routes><Route path="/resources/:slug" element={<ResourceDetailPage />} /></Routes></MemoryRouter>);
+      expect(screen.getByRole('heading', { name: 'Article Not Found' })).toBeTruthy();
+      cleanup();
+    }
   });
 });
