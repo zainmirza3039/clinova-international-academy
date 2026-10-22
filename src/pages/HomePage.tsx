@@ -284,7 +284,7 @@ export default function HomePage() {
           <div className="lg:col-span-5 flex items-center">
             <Reveal className="px-6 lg:px-12 py-16 lg:py-24 max-w-lg">
               <div className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-500 mb-4">
-                Global Learning
+                Service status
               </div>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-800 leading-[1.15] text-balance">
                 Education details will follow review
@@ -317,7 +317,7 @@ export default function HomePage() {
         <div className="max-w-editorial mx-auto px-6 lg:px-10">
           <Reveal className="max-w-2xl mb-12 lg:mb-16">
             <div className="text-xs font-semibold uppercase tracking-[0.18em] text-clinical-500 mb-4">
-              Learning Pathways
+              Publication process
             </div>
             <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
               Publication process
@@ -357,7 +357,7 @@ export default function HomePage() {
                 Training Partners
               </div>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-800 leading-[1.15] text-balance">
-                Become a Clinova training partner
+                Explore future partnership possibilities
               </h2>
               <p className="mt-5 text-base text-navy-600/80 leading-[1.65]">
                 Clinova is reviewing potential partnership pathways. No delivery arrangements or partner agreements are currently confirmed.
@@ -380,7 +380,7 @@ export default function HomePage() {
                 to="/training-partners"
                 className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-clinical-500 text-white font-semibold hover:bg-clinical-600 transition-colors"
               >
-                Partner With Clinova
+                Partnership information
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </Reveal>
