@@ -35,14 +35,14 @@ describe('admin role and data gates', () => {
 
   it('keeps database access disabled even for an admin claim until explicitly enabled', () => {
     state.auth.session.user.app_metadata.role = 'admin';
-    render(<AdminPage />);
+    render(<MemoryRouter><AdminPage /></MemoryRouter>);
     expect(screen.getByRole('heading', { name: 'Admin data access is disabled' })).toBeTruthy();
     expect(state.from).not.toHaveBeenCalled();
   });
 
   it('does not offer auth or records while authentication is disabled', () => {
     state.auth.enabled = false;
-    render(<AdminPage />);
+    render(<MemoryRouter><AdminPage /></MemoryRouter>);
     expect(screen.getByRole('heading', { name: 'Administration is not enabled' })).toBeTruthy();
     expect(state.from).not.toHaveBeenCalled();
   });
