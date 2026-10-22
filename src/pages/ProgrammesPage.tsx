@@ -17,7 +17,7 @@ export default function ProgrammesPage() {
   useSEO({
     title: 'Programmes',
     description:
-      'Browse all healthcare education programmes at Clinova International Academy. Explore draft educational topics by subject category and proposed programme type.',
+      'Browse all healthcare education programmes at Clinova International Academy. Explore proposed educational topics by subject category and proposed programme type.',
   });
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -51,7 +51,7 @@ export default function ProgrammesPage() {
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Programmes' }]}
         eyebrow="Programmes"
         title="Proposed Programme Catalogue"
-        description="Explore draft educational outlines, not confirmed course offers. Availability, duration, delivery, fees, CPD hours and certificates await academy confirmation."
+        description="Explore educational outlines, not confirmed course offers. Availability, duration, delivery, fees, CPD hours and certificates await academy confirmation."
         image="https://images.pexels.com/photos/8376296/pexels-photo-8376296.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 

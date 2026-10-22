@@ -47,7 +47,7 @@ export default function App() {
         <main id="main-content" tabIndex={-1} className="flex-1">
           <div className="preview-notice">{siteSettings.contentStatus}</div>
           <ErrorBoundary>
-          <Suspense fallback={<p role="status" aria-live="polite" className="px-6 py-20 text-center text-navy-700">Loading draft content…</p>}>
+          <Suspense fallback={<p role="status" aria-live="polite" className="px-6 py-20 text-center text-navy-700">Loading content…</p>}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/sign-in" element={<AuthPage mode="sign-in" />} />

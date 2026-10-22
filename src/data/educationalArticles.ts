@@ -13,8 +13,8 @@ export interface EducationalArticle {
   relatedArticleSlugs: string[]; relatedProgrammeSlugs: string[];
 }
 
-export const educationalDisclaimer = 'Educational draft for professional discussion, not patient-specific medical advice, a clinical protocol or evidence of competency. Qualified clinical and editorial review is required before publication or clinical use. Follow local guidance, scope of practice and individual assessment; seek urgent local medical help for new severe or rapidly worsening symptoms.';
-export const draftDateLabel = 'Draft — publication date awaiting academy confirmation';
+export const educationalDisclaimer = 'Educational material awaiting qualified review. Not patient-specific medical advice, a clinical protocol or evidence of competency. Qualified clinical and editorial review is required before publication or clinical use. Follow local guidance, scope of practice and individual assessment; seek urgent local medical help for new severe or rapidly worsening symptoms.';
+export const draftDateLabel = 'Publication pending review';
 
 export const educationalArticles: EducationalArticle[] = [
   ...assessmentAndPain, ...rehabilitation, ...clinicalPractice,

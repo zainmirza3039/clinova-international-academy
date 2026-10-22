@@ -22,7 +22,7 @@ describe('substantive original draft library structure', () => {
   it('contains fifteen unique substantial referenced drafts, without fabricated publication fields', () => {
     expect(educationalArticles).toHaveLength(15);
     expect(newsItems.map(item => item.slug)).toEqual(educationalArticles.map(article => article.slug));
-    for (const article of educationalArticles) { const card = newsItems.find(item => item.slug === article.slug); expect(card?.title).toBe(`DRAFT: ${article.title}`); expect(card?.excerpt).toBe(article.excerpt); expect(card?.category).toBe(article.category); }
+    for (const article of educationalArticles) { const card = newsItems.find(item => item.slug === article.slug); expect(card?.title).toBe(article.title); expect(card?.excerpt).toBe(article.excerpt); expect(card?.category).toBe(article.category); }
     expect(new Set(educationalArticles.map(article => article.slug)).size).toBe(15);
     expect(new Set(educationalArticles.map(article => article.title)).size).toBe(15);
     for (const article of educationalArticles) {
@@ -92,7 +92,7 @@ describe('reading-based resources and confirmed contact fact', () => {
   it('filters study tools and gives a meaningful empty state', () => {
     render(<MemoryRouter><LearningResourcesPage /></MemoryRouter>);
     fireEvent.change(screen.getByLabelText('Search study tools'), { target: { value: 'glossary' } });
-    expect(screen.getByRole('status').textContent).toContain('1 draft resource');
+    expect(screen.getByRole('status').textContent).toContain('1 resource');
     expect(screen.getByRole('heading', { name: 'Clinical Reasoning Glossary and Revision Notes' })).toBeTruthy();
   });
   it('does not provide fake downloads, forms or completion tracking on a resource page', () => {

@@ -6,7 +6,7 @@ import { useSEO } from '@/hooks/useSEO';
 const faqs = [
   ['How do I choose a programme?', 'Start with the programme and department pages, then contact the academy if you need help understanding which route fits your goals. Requirements and suitability can vary by programme.'],
   ['How can I ask about admissions?', 'Use the Contact page for an admissions enquiry. Please do not send sensitive documents until the academy confirms what is needed and how it should be shared.'],
-  ['Can I submit an application online?', 'The application preview is not a live submission service. It does not save or transmit information. A confirmed application process will be published here when the secure workflow is available.'],
+  ['Can I submit an application online?', 'The application planner is not a live submission service. It does not save or transmit information. A confirmed application process will be published here when the secure workflow is available.'],
   ['Where can I find course details?', 'Browse the Programmes and CPD Courses sections for the information currently published on this site. If something is unclear, ask the team directly.'],
   ['What fees or funding are available?', 'Fees and funding are programme-specific and are not stated here without confirmed information. Please contact the academy for current details rather than relying on estimates.'],
   ['How do I contact Clinova?', 'Use the Contact page for general, academic and partnership enquiries. It provides the currently supported contact route and expected response guidance.'],

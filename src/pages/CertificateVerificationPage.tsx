@@ -19,11 +19,11 @@ export default function CertificateVerificationPage() {
   if (!verificationEnabled) {
     return (
       <>
-        <PageHero breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Certificate Verification' }]} eyebrow="Verification" title="Certificate verification unavailable" description="Public certificate verification is not enabled for this preview." image="https://images.pexels.com/photos/8177922/pexels-photo-8177922.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" />
+        <PageHero breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Certificate Verification' }]} eyebrow="Verification" title="Certificate verification unavailable" description="Public certificate verification is not enabled." image="https://images.pexels.com/photos/8177922/pexels-photo-8177922.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" />
         <section className="py-16 lg:py-24 bg-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div role="status" className="bg-amber-50 border border-amber-200 rounded-xl p-6 md:p-8 text-sm text-navy-700 leading-relaxed">
-              Public certificate verification is currently unavailable. No certificate lookup is performed in this preview. Please contact the academy through its confirmed channels if you need assistance.
+              Public certificate verification is currently unavailable. No certificate lookup is performed. Please contact the academy through its confirmed channels if you need assistance.
             </div>
           </div>
         </section>

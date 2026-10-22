@@ -42,7 +42,7 @@ export default function Footer() {
               <BrandLogo variant="white" className="w-[240px] max-w-full" />
             </Link>
             <p className="text-sm text-navy-100/60 leading-[1.65] mb-6 max-w-md">
-              Explore proposed healthcare learning pathways and original educational drafts.
+              Explore proposed healthcare learning pathways and educational reading awaiting qualified review.
               Courses and learning services await confirmation; no enrolment is available here.
             </p>
             <div className="space-y-2.5">

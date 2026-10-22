@@ -33,17 +33,17 @@ describe('proposed course drafts', () => {
     expect(programmes.every((item) => item.publicationStatus === 'draft' && item.status === 'Draft')).toBe(true);
     expect(cpdCourses.every((item) => item.publicationStatus === 'draft')).toBe(true);
     const programmeCard = render(<MemoryRouter><ProgrammeCard programme={programmes[0]} /></MemoryRouter>);
-    expect(programmeCard.getByText('Proposed draft')).toBeTruthy();
+    expect(programmeCard.getByText('Proposed')).toBeTruthy();
     expect(programmeCard.container.textContent).not.toMatch(/\d+ CPD|weeks|Certificate of Completion|Enrol/i);
     cleanup();
     const cpdCard = render(<MemoryRouter><CPDCard course={cpdCourses[0]} /></MemoryRouter>);
-    expect(cpdCard.getByText('Proposed draft')).toBeTruthy();
+    expect(cpdCard.getByText('Proposed')).toBeTruthy();
     expect(cpdCard.container.textContent).not.toMatch(/\d+ CPD|weeks|Certificate|Enrol/i);
   });
 
   it('renders lesson content inside collapsed details with no learner completion controls', () => {
     render(<MemoryRouter initialEntries={['/programmes/certificate-in-musculoskeletal-assessment']}><Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes></MemoryRouter>);
-    expect(screen.getByText('Proposed draft catalogue entry.')).toBeTruthy();
+    expect(screen.getByText('Proposed catalogue entry.')).toBeTruthy();
     expect(screen.getAllByText(/Reflective activity:/i)).toHaveLength(3);
     expect(document.querySelectorAll('details[open]')).toHaveLength(0);
     expect(screen.queryByRole('button', { name: /complete|save/i })).toBeNull();

@@ -26,8 +26,8 @@ export default function CurriculumDraftContent({ draft }: { draft: CurriculumCon
         <ul className="mt-3 list-disc space-y-3 pl-5 text-sm leading-relaxed text-navy-700">{draft.prerequisites.map(item => <li key={item}>{item}</li>)}</ul>
       </section>
       <section aria-labelledby={sectionId('Modules')}>
-        <h2 id={sectionId('Modules')} className="scroll-mt-28 font-heading text-2xl font-bold text-navy-900">Draft modules and lessons</h2>
-        <p className="mt-3 text-sm leading-relaxed text-navy-600">Current format: draft reading and unsubmitted reflective activities only. There are no teaching sessions, learner-data capture, graded assessments or completion services here. Future delivery, assessment and recognition arrangements are unconfirmed. Use fictional cases; do not enter patient or learner information.</p>
+        <h2 id={sectionId('Modules')} className="scroll-mt-28 font-heading text-2xl font-bold text-navy-900">Modules and lessons</h2>
+        <p className="mt-3 text-sm leading-relaxed text-navy-600">Current format: reading and unsubmitted reflective activities only. There are no teaching sessions, learner-data capture, graded assessments or completion services here. Future delivery, assessment and recognition arrangements are unconfirmed. Use fictional cases; do not enter patient or learner information.</p>
         <div className="mt-5 space-y-4">{draft.modules.map((module, index) => (
           <details key={module.title} className="rounded-xl border border-navy-200 bg-navy-50 p-4 sm:p-5">
             <summary className="cursor-pointer font-heading font-bold text-navy-900">Module {index + 1}: {module.title}</summary>
@@ -44,7 +44,7 @@ export default function CurriculumDraftContent({ draft }: { draft: CurriculumCon
         ))}</div>
       </section>
       <section>
-        <h2 className="font-heading text-2xl font-bold text-navy-900">Related draft reading</h2>
+        <h2 className="font-heading text-2xl font-bold text-navy-900">Related reading</h2>
         <ul className="mt-4 space-y-3">{draft.relatedArticles.map(article => <li key={article.slug}><Link to={`/resources/${article.slug}`} className="text-sm font-semibold text-clinical-700 underline underline-offset-4">{article.title}</Link></li>)}</ul>
       </section>
       <section aria-labelledby={sectionId('Sources')}>

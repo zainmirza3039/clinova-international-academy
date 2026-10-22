@@ -48,7 +48,7 @@ describe('completion frontend pages', () => {
   it('renders admissions guidance and the application preview link', () => {
     renderPage(<AdmissionsPage />);
     expect(screen.getByRole('heading', { name: /clear next step/i })).toBeTruthy();
-    expect(screen.getByRole('link', { name: /open application preview/i }).getAttribute('href')).toBe('/application');
+    expect(screen.getByRole('link', { name: /open application planner/i }).getAttribute('href')).toBe('/application');
   });
 
   it('renders the community index without implying unverified details', () => {

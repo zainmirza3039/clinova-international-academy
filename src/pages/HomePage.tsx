@@ -21,14 +21,14 @@ import { useState } from 'react';
 const learningSteps = [
   { number: '01', title: 'Review a Proposed Programme', desc: 'Browse illustrative catalogue outlines and consider which topics may fit your professional goals.' },
   { number: '02', title: 'Explore Illustrative Materials', desc: 'Read proposed learning themes, resources and activities for professional reflection.' },
-  { number: '03', title: 'Reflect on Relevance', desc: 'Consider how a draft topic relates to your role, scope of practice and further learning needs.' },
+  { number: '03', title: 'Reflect on Relevance', desc: 'Consider how a topic relates to your role, scope of practice and further learning needs.' },
   { number: '04', title: 'Confirm Before Enrolment', desc: 'Ask the academy to confirm availability, terms and any assessment or recognition before making plans.' },
 ];
 
 const pathwaySteps = [
   { label: 'Proposed Short Courses', desc: 'Review focused illustrative topic outlines' },
   { label: 'Professional Development Topics', desc: 'Explore proposed skill-building themes' },
-  { label: 'Proposed Diploma Outlines', desc: 'Consider comprehensive draft study structures' },
+  { label: 'Proposed Diploma Outlines', desc: 'Consider illustrative study structures' },
   { label: 'Further Learning Ideas', desc: 'Use the catalogue for planning, not enrolment' },
 ];
 
@@ -111,7 +111,7 @@ export default function HomePage() {
               {[
                 { label: 'Flexible Study' },
                 { label: 'CPD-focused learning' },
-                { label: 'Draft learning outlines' },
+                { label: 'Proposed learning outlines' },
                 { label: 'Global Access' },
                 { label: 'Self-Paced' },
               ].map((item) => (

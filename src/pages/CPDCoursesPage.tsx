@@ -40,7 +40,7 @@ export default function CPDCoursesPage() {
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'CPD Courses' }]}
         eyebrow="CPD Courses"
         title="Proposed Professional Development Topics"
-        description="Explore draft professional-development topics. No recognised CPD hours, course availability, accreditation, assessment or certificate is confirmed."
+        description="Explore proposed professional-development topics. No recognised CPD hours, course availability, accreditation, assessment or certificate is confirmed."
         image="https://images.pexels.com/photos/5452222/pexels-photo-5452222.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 

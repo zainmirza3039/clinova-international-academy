@@ -27,7 +27,7 @@ export default function DepartmentCard({ department, index = 0 }: { department: 
             {department.name}
           </h3>
           <span className="text-xs font-medium text-clinical-500 shrink-0 tabular-nums">
-            Draft study area
+            Study area
           </span>
         </div>
         <p className="mt-2 text-sm text-navy-600/70 line-clamp-2 leading-relaxed">{department.description}</p>
