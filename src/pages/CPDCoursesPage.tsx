@@ -49,7 +49,7 @@ export default function CPDCoursesPage() {
           {/* Search + Filters */}
           <div className="bg-surface-50 p-6 mb-12 border border-navy-100">
             <div className="mb-4">
-              <SearchBar value={search} onChange={setSearch} placeholder="Search CPD courses..." />
+              <SearchBar value={search} onChange={setSearch} placeholder="Search learning topics..." />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
@@ -64,9 +64,9 @@ export default function CPDCoursesPage() {
               <div>
                 <label htmlFor="cpd-hours" className="block text-xs font-medium text-navy-500 mb-1.5">CPD Hours</label>
                 <select id="cpd-hours" disabled aria-describedby="cpd-hours-note" className={selectClass} value={cpdFilter} onChange={(e) => setCpdFilter(e.target.value)}>
-                  <option value="All">Hours awaiting confirmation</option>
+                  <option value="All">CPD credit not awarded</option>
                 </select>
-                <p id="cpd-hours-note" className="mt-2 text-xs text-navy-600">No verified CPD hours are available to filter.</p>
+                <p id="cpd-hours-note" className="mt-2 text-xs text-navy-600">This library does not award or record CPD hours.</p>
               </div>
               <div>
                 <label htmlFor="cpd-level" className="block text-xs font-medium text-navy-500 mb-1.5">Level</label>
@@ -108,7 +108,7 @@ export default function CPDCoursesPage() {
             </>
           ) : (
             <div className="text-center py-16 bg-surface-50 border border-navy-100">
-              <p className="text-navy-500 mb-2">No CPD courses match your current filters.</p>
+              <p className="text-navy-500 mb-2">No learning topics match your current filters.</p>
               <p className="text-sm text-navy-400">Try adjusting your search or filter criteria.</p>
             </div>
           )}
