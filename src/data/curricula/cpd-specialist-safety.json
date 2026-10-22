@@ -2,7 +2,7 @@
   {
     "courseSlug": "wound-care-essentials",
     "status": "draft",
-    "reviewNotice": "Proposed professional-learning educational material only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Describe a person-centred wound history without treating a checklist as a diagnosis.",
       "Recognise colonisation, infection and systemic or vascular risk signals that require escalation.",
@@ -122,7 +122,7 @@
   {
     "courseSlug": "pharmacotherapy-updates-in-chronic-disease",
     "status": "draft",
-    "reviewNotice": "Proposed professional-learning educational material only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Explain medicines reconciliation, review and shared decision-making as distinct activities.",
       "Recognise polypharmacy, monitoring concerns and suspected adverse reactions requiring qualified review.",
@@ -242,7 +242,7 @@
   {
     "courseSlug": "cbt-for-anxiety-disorders",
     "status": "draft",
-    "reviewNotice": "Proposed professional-learning educational material only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Describe anxiety experiences and a provisional formulation without premature diagnosis.",
       "Recognise impairment, risk and complexity requiring qualified assessment, supervision or urgent referral.",
@@ -287,7 +287,7 @@
           {
             "title": "Consent, collaboration and accessibility",
             "description": "Make participation voluntary, understandable and responsive to communication, culture and power.",
-            "text": "Consent in psychological care is more than agreement at the first appointment. Explain the purpose of assessment or discussion, likely benefits and burdens, alternatives, confidentiality limits and what will happen if risk emerges. Ask how the person describes their distress and what language, interpreter, supporter or accessibility adjustment would help. Check understanding without turning teach-back into a test. Collaboration means the person can question a formulation, reject a proposed focus and revisit choices as circumstances change. Be alert to power differences, stigma, coercion and the possibility that a standard anxiety narrative does not fit the person’s cultural context. Record preferences and unresolved concerns, then consult the qualified supervisor when the boundary is unclear. Do not encourage unsupervised exposure or ask a person to reproduce therapy techniques from this course. If consent is uncertain or capacity, safeguarding or risk issues arise, follow applicable law and local policy. The educational output is a safer conversation and referral, not treatment delivery."
+            "text": "Consent in psychological care is more than agreement at the first appointment. Explain the purpose of assessment or discussion, likely benefits and burdens, alternatives, confidentiality limits and what will happen if risk emerges. Ask how the person describes their distress and what language, interpreter, supporter or accessibility adjustment would help. Check understanding without turning teach-back into a test. Collaboration means the person can question a formulation, reject a suggested focus and revisit choices as circumstances change. Be alert to power differences, stigma, coercion and the possibility that a standard anxiety narrative does not fit the person’s cultural context. Record preferences and unresolved concerns, then consult the qualified supervisor when the boundary is unclear. Do not encourage unsupervised exposure or ask a person to reproduce therapy techniques from this course. If consent is uncertain or capacity, safeguarding or risk issues arise, follow applicable law and local policy. The educational output is a safer conversation and referral, not treatment delivery."
           }
         ],
         "reflectiveActivity": "Write a role-boundary conversation explaining what a learner can offer, what requires a trained therapist and how the person can pause or decline."
@@ -362,7 +362,7 @@
   {
     "courseSlug": "clinical-nutrition-for-chronic-disease",
     "status": "draft",
-    "reviewNotice": "Proposed professional-learning educational material only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Explain what nutrition screening can and cannot establish in chronic disease.",
       "Recognise malnutrition, refeeding and comorbidity signals requiring specialist assessment.",
@@ -424,7 +424,7 @@
           {
             "title": "Equity, communication and review",
             "description": "Adapt nutrition conversations to culture, resources, disability and changing clinical priorities.",
-            "text": "Nutrition care is equitable only when recommendations can be understood, afforded, prepared and safely consumed. Ask about language, religion, culture, allergies, sensory needs, disability, food insecurity, housing, cooking equipment and who controls food decisions. Do not assume that a familiar food is available or that refusal reflects poor motivation. Use interpreters and accessible materials through approved services, and invite the person to correct assumptions. Review whether the proposed pathway remains acceptable as symptoms, finances, function or disease status change. Pay attention to weight stigma and eating-disorder risk; a target weight or food rule may cause harm when introduced without specialist assessment. WHO’s broad principles are population-level context, not a personal prescription. Record what the person wants, what is uncertain, what support is needed and who will revisit it. Escalate acute deterioration or safeguarding concerns through local services. This learning educational material has no assessment, certification or authority to prescribe diets; qualified teams retain accountability."
+            "text": "Nutrition care is equitable only when recommendations can be understood, afforded, prepared and safely consumed. Ask about language, religion, culture, allergies, sensory needs, disability, food insecurity, housing, cooking equipment and who controls food decisions. Do not assume that a familiar food is available or that refusal reflects poor motivation. Use interpreters and accessible materials through approved services, and invite the person to correct assumptions. Review whether the suggested pathway remains acceptable as symptoms, finances, function or disease status change. Pay attention to weight stigma and eating-disorder risk; a target weight or food rule may cause harm when introduced without specialist assessment. WHO’s broad principles are population-level context, not a personal prescription. Record what the person wants, what is uncertain, what support is needed and who will revisit it. Escalate acute deterioration or safeguarding concerns through local services. This learning educational material has no assessment, certification or authority to prescribe diets; qualified teams retain accountability."
           }
         ],
         "reflectiveActivity": "Write an equitable dietitian referral including culture, communication, food access, consent, urgency and the accountable follow-up owner."
