@@ -33,6 +33,14 @@ jobs:
       - name: Install dependencies and reconcile the stale lockfile
         run: npm install --no-audit --no-fund
 
+      - name: Export reconciled lockfile for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: reconciled-package-lock
+          path: package-lock.json
+          if-no-files-found: error
+          retention-days: 1
+
       - name: Typecheck
         run: npm run typecheck
 
