@@ -34,7 +34,7 @@ export default function CPDCourseDetailPage() {
           <div className="lg:col-span-8 space-y-10">
             <div>
               <h2 className="font-heading text-2xl font-bold text-navy-900 mb-4">Overview</h2>
-              <p className="text-sm text-navy-600 leading-relaxed">These proposed reading materials support critical reflection and recognition of professional limits. They do not establish clinical competence, eligibility to practise, prescribing authority or a qualification. Qualified review is required before any future course offering.</p>
+              <p className="text-sm text-navy-600 leading-relaxed">These educational materials support critical reflection and recognition of professional limits. They do not establish clinical competence, eligibility to practise, prescribing authority or a qualification. Confirm programme availability and terms before booking.</p>
             </div>
             {draft ? <CurriculumDraftContent draft={draft} /> : <p className="text-sm text-navy-700">Detailed learning content is not available for this topic.</p>}
           </div>
