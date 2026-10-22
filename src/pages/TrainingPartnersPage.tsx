@@ -187,9 +187,9 @@ export default function TrainingPartnersPage() {
               <h3 className="font-heading text-xl font-bold text-navy-900 mb-2">Enquiry Submitted</h3>
               <p className="text-sm text-navy-600">Your message was received by the configured enquiry service. This does not confirm a partnership, course, certificate or support arrangement.</p>
             </div>
-          ) : (
+          ) : enquiriesEnabled ? (
             <form aria-label="Partnership enquiry" onSubmit={handleSubmit} className="space-y-5 bg-navy-50 p-6 md:p-8 rounded-xl border border-navy-100">
-              {!enquiriesEnabled && <p className="text-sm text-navy-700 border-l-2 border-teal-500 pl-3 mb-4">{enquiryUnavailable}</p>}
+              
                   {error && <p role="alert" aria-live="assertive" className="text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -237,6 +237,11 @@ export default function TrainingPartnersPage() {
                 {submitting ? 'Submitting…' : 'Submit Partnership Enquiry'}
               </button>
             </form>
+          ) : (
+            <div role="status" aria-live="polite" className="border border-navy-100 bg-navy-50 p-6 md:p-8 rounded-xl">
+              <h3 className="font-heading text-lg font-bold text-navy-900">Enquiry service unavailable</h3>
+              <p className="mt-3 text-sm leading-relaxed text-navy-700">{enquiryUnavailable} The form is hidden so you cannot enter details that this website cannot submit. No partnership enquiry has been sent.</p>
+            </div>
           )}
         </div>
       </section>
