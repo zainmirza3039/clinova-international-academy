@@ -18,5 +18,5 @@ export const enquiryUnavailable = 'Submissions are not available in this preview
 export const siteSettings = {
   academyName: 'Clinova International Academy',
   contactEmail: '', // Awaiting academy confirmation; do not invent an address.
-  contentStatus: 'Preview: programme details and academy policies await confirmation. Applications and administration are not live.',
+  contentStatus: 'Explore healthcare learning resources and subject areas. Course availability, recognition and learner services are stated only where confirmed.',
 };
