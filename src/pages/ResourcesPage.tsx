@@ -28,7 +28,7 @@ export function ResourcesPage() {
     <PageHero breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Resources' }]} eyebrow="Learning resources" title="Learning Library" description="Educational articles will be listed after clinical and editorial approval. No draft materials are presented as published academy content." />
     <section className="py-12 lg:py-16 bg-white"><div className="max-w-editorial mx-auto px-6 lg:px-10">
       <aside className="bg-amber-50 border border-amber-200 p-5 mb-8 text-sm text-navy-700 leading-relaxed">{educationalDisclaimer}</aside>
-      <div className="flex flex-wrap gap-4 mb-8 text-sm font-semibold"><Link to="/learning-resources" className="text-clinical-600 underline underline-offset-4">Study guides, checklists and reflection tools</Link><Link to="/programmes" className="text-clinical-600 underline underline-offset-4">Proposed programme outlines</Link></div>
+      <div className="flex flex-wrap gap-4 mb-8 text-sm font-semibold"><Link to="/learning-resources" className="text-clinical-600 underline underline-offset-4">Study-resource availability</Link><Link to="/programmes" className="text-clinical-600 underline underline-offset-4">Programme availability</Link></div>
       {publishedArticleItems.length > 0 && <div className="bg-navy-50 border border-navy-100 p-5 mb-8">
         <label htmlFor="resource-search" className="block text-sm font-semibold text-navy-800 mb-2">Search resources</label>
         <input id="resource-search" type="search" value={search} onChange={event => setSearch(event.target.value)} placeholder="Search titles, topics or article text" className="w-full px-4 py-3 mb-4 text-sm bg-white border border-navy-200 focus:outline-none focus:ring-2 focus:ring-clinical-500 text-navy-800" />
