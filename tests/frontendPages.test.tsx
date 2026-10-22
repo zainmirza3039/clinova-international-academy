@@ -14,7 +14,7 @@ function renderPage(page: React.ReactNode) { return render(<MemoryRouter>{page}<
 
 beforeEach(() => {
   vi.stubGlobal('IntersectionObserver', class {
-    constructor(_callback: IntersectionObserverCallback) {}
+    constructor() {}
     observe() {}
     unobserve() {}
     disconnect() {}
