@@ -1,6 +1,6 @@
 # Clinova: audit recheck and guarded student access
 
-This is a frontend-only review increment, not a production launch or a working learning-management backend. Authentication, enquiries and indexing stay off by default. No production deployment, database SQL, DNS, domains, paid services or unrelated project resources were changed by this task.
+Historical review snapshot for the original frontend-only increment. It is not the latest backend status. For the read-only Supabase inventory, source-only learner migrations, role-gated admin panel and current release blockers, see [SUPABASE-IMPLEMENTATION-STATUS.md](./SUPABASE-IMPLEMENTATION-STATUS.md). Authentication, enquiries, learner data and indexing remain off by default; no production deployment or live database schema change has been made.
 
 ## What the recheck confirmed
 
