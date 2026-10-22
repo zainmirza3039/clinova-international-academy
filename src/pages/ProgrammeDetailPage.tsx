@@ -29,7 +29,7 @@ export default function ProgrammeDetailPage() {
       </div>
     </section>
     <div className="max-w-4xl mx-auto px-4 mt-6">
-      <p className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950"><strong>Catalogue information.</strong> Availability, dates, fees, delivery, duration, CPD hours, instructor, assessment and certificate arrangements are not confirmed. No enrolment or checkout is available. A title on this page does not establish an available or recognised award.</p>
+      <p className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950"><strong>Catalogue information.</strong> This page is an educational guide for independent study. It does not include course enrolment, fees, graded assessment, accreditation, CPD credit or a certificate.</p>
     </div>
     <section className="py-12 lg:py-16 bg-white">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,7 +45,7 @@ export default function ProgrammeDetailPage() {
           <aside>
             <div className="lg:sticky lg:top-24 rounded-xl border border-navy-100 p-6 bg-white shadow-sm">
               <h2 className="font-heading font-bold text-navy-900 mb-3">Catalogue status</h2>
-              <p className="text-sm text-navy-600 leading-relaxed">Availability, duration, fees, CPD hours, instructors, assessment, certification and delivery must be confirmed before booking. Reading does not create a learner record or demonstrate competence.</p>
+              <p className="text-sm text-navy-600 leading-relaxed">Independent reading does not create a learner record, demonstrate competence or award a qualification or CPD credit.</p>
               <Link to="/programmes" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-clinical-700">Browse catalogue <ArrowRight className="w-4 h-4" /></Link>
             </div>
           </aside>
