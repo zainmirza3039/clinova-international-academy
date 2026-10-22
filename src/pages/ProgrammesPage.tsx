@@ -17,7 +17,7 @@ export default function ProgrammesPage() {
   useSEO({
     title: 'Programmes',
     description:
-      'Browse all healthcare education programmes at Clinova International Academy. Explore draft educational topics by subject category and proposed programme type.',
+      'Browse structured healthcare learning guides by subject and topic for independent study.',
   });
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -50,8 +50,8 @@ export default function ProgrammesPage() {
       <PageHero
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Programmes' }]}
         eyebrow="Programmes"
-        title="Proposed Programme Catalogue"
-        description="Explore draft educational outlines, not confirmed course offers. Availability, duration, delivery, fees, CPD hours and certificates await academy confirmation."
+        title="Healthcare Learning Guides"
+        description="Explore structured self-study outlines across healthcare topics. These guides are educational resources, not enrolment offers or accredited awards."
         image="https://images.pexels.com/photos/8376296/pexels-photo-8376296.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
@@ -88,7 +88,7 @@ export default function ProgrammesPage() {
                 <label htmlFor="programme-duration" className="block text-xs font-medium text-navy-500 mb-1.5">Duration</label>
                 <select id="programme-duration" disabled className={selectClass} value={durationFilter} onChange={(e) => setDurationFilter(e.target.value)}>
                   {durations.map((d) => (
-                    <option key={d} value={d}>{d === 'All' ? 'Duration awaiting confirmation' : d}</option>
+                    <option key={d} value={d}>{d === 'All' ? 'Self-study format' : d}</option>
                   ))}
                 </select>
               </div>
@@ -96,7 +96,7 @@ export default function ProgrammesPage() {
                 <label htmlFor="programme-delivery" className="block text-xs font-medium text-navy-500 mb-1.5">Delivery</label>
                 <select id="programme-delivery" disabled className={selectClass} value={deliveryFilter} onChange={(e) => setDeliveryFilter(e.target.value)}>
                   {deliveries.map((d) => (
-                    <option key={d} value={d}>{d === 'All' ? 'Delivery awaiting confirmation' : d}</option>
+                    <option key={d} value={d}>{d === 'All' ? 'Independent reading' : d}</option>
                   ))}
                 </select>
               </div>
