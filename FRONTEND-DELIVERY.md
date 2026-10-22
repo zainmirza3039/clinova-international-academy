@@ -28,6 +28,10 @@ Use `.env.example`; all `VITE_*` values are public. Never add a service-role key
 
 `VITE_SITE_URL` is intentionally blank in preview. Builds generate disallow-all robots, noindex metadata and an empty XML sitemap. Set a confirmed HTTPS academy origin only when publication is authorised; the post-build script generates canonical sitemap URLs. Admin and application routes remain noindex. This SPA uses runtime per-route metadata; server-rendered per-route social cards and genuine HTTP 404 status require a future prerender/server layer.
 
+## Dependency security
+
+The inherited React Router 6 tree produced two moderate production audit findings. Upgraded `react-router-dom` and `react-router` to 7.18.4; all 111 tests, lint, typecheck and build still pass. Final `npm audit --omit=dev` reports zero production dependency vulnerabilities. This is an advisory check, not a penetration test.
+
 ## Verification commands
 
 ```sh
