@@ -30,6 +30,12 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+      - name: Upload resolved lockfile for repository synchronization
+        uses: actions/upload-artifact@v4
+        with:
+          name: resolved-npm-lockfile
+          path: package-lock.json
+          retention-days: 1
       - name: TypeScript check
         run: npm run typecheck
       - name: Lint
