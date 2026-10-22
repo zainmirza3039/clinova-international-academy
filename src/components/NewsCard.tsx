@@ -30,11 +30,7 @@ export default function NewsCard({ item, index = 0 }: { item: NewsItem; index?: 
             <time dateTime={item.date} className="flex items-center gap-1 text-navy-500">
               <Calendar className="w-3.5 h-3.5" /> {formatResourceDate(item.date)}
             </time>
-          ) : (
-            <span className="flex items-center gap-1 text-navy-500">
-              <Calendar className="w-3.5 h-3.5" /> {formatResourceDate(item.date)}
-            </span>
-          )}
+          ) : null}
         </div>
         <h3 className="font-heading font-bold text-navy-800 text-base leading-snug group-hover:text-clinical-600 transition-colors line-clamp-2">
           {item.title}
