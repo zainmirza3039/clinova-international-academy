@@ -53,8 +53,8 @@ export default function CPDCoursesPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="block text-xs font-medium text-navy-500 mb-1.5">Department</label>
-                <select className={selectClass} value={deptFilter} onChange={(e) => setDeptFilter(e.target.value)}>
+                <label htmlFor="cpd-department" className="block text-xs font-medium text-navy-500 mb-1.5">Department</label>
+                <select id="cpd-department" className={selectClass} value={deptFilter} onChange={(e) => setDeptFilter(e.target.value)}>
                   <option value="All">All Departments</option>
                   {departments.map((d) => (
                     <option key={d.id} value={d.name}>{d.name}</option>
@@ -62,8 +62,8 @@ export default function CPDCoursesPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-navy-500 mb-1.5">CPD Hours</label>
-                <select className={selectClass} value={cpdFilter} onChange={(e) => setCpdFilter(e.target.value)}>
+                <label htmlFor="cpd-hours" className="block text-xs font-medium text-navy-500 mb-1.5">CPD Hours</label>
+                <select id="cpd-hours" className={selectClass} value={cpdFilter} onChange={(e) => setCpdFilter(e.target.value)}>
                   <option value="All">All Hours</option>
                   <option value="5">5 hours</option>
                   <option value="6">6 hours</option>
@@ -73,8 +73,8 @@ export default function CPDCoursesPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-navy-500 mb-1.5">Level</label>
-                <select className={selectClass} value={levelFilter} onChange={(e) => setLevelFilter(e.target.value)}>
+                <label htmlFor="cpd-level" className="block text-xs font-medium text-navy-500 mb-1.5">Level</label>
+                <select id="cpd-level" className={selectClass} value={levelFilter} onChange={(e) => setLevelFilter(e.target.value)}>
                   <option value="All">All Levels</option>
                   <option value="Foundation">Foundation</option>
                   <option value="Intermediate">Intermediate</option>

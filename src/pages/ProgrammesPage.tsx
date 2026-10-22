@@ -20,13 +20,13 @@ export default function ProgrammesPage() {
       'Browse all healthcare education programmes at Clinova International Academy. Filter by department, type, duration and CPD hours.',
   });
 
-  const [searchParams] = useSearchParams();
-  const initialType = searchParams.get('type') || 'All';
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requestedType = searchParams.get('type') || 'All';
+  const typeFilter = programmeTypes.includes(requestedType as ProgrammeCategory | 'All') ? requestedType : 'All';
   const initialFeatured = searchParams.get('featured') === 'true';
 
   const [search, setSearch] = useState('');
   const [deptFilter, setDeptFilter] = useState('All');
-  const [typeFilter, setTypeFilter] = useState(initialType);
   const [durationFilter, setDurationFilter] = useState('All');
   const [deliveryFilter, setDeliveryFilter] = useState('All');
 
@@ -64,8 +64,8 @@ export default function ProgrammesPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div>
-                <label className="block text-xs font-medium text-navy-500 mb-1.5">Department</label>
-                <select className={selectClass} value={deptFilter} onChange={(e) => setDeptFilter(e.target.value)}>
+                <label htmlFor="programme-department" className="block text-xs font-medium text-navy-500 mb-1.5">Department</label>
+                <select id="programme-department" className={selectClass} value={deptFilter} onChange={(e) => setDeptFilter(e.target.value)}>
                   <option value="All">All Departments</option>
                   {departments.map((d) => (
                     <option key={d.id} value={d.slug}>{d.name}</option>
@@ -73,24 +73,28 @@ export default function ProgrammesPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-navy-500 mb-1.5">Programme Type</label>
-                <select className={selectClass} value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
+                <label htmlFor="programme-type" className="block text-xs font-medium text-navy-500 mb-1.5">Programme Type</label>
+                <select id="programme-type" className={selectClass} value={typeFilter} onChange={(e) => {
+                  const next = new URLSearchParams(searchParams);
+                  if (e.target.value === 'All') next.delete('type'); else next.set('type', e.target.value);
+                  setSearchParams(next);
+                }}>
                   {programmeTypes.map((t) => (
                     <option key={t} value={t}>{t === 'All' ? 'All Types' : t}</option>
                   ))}
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-navy-500 mb-1.5">Duration</label>
-                <select className={selectClass} value={durationFilter} onChange={(e) => setDurationFilter(e.target.value)}>
+                <label htmlFor="programme-duration" className="block text-xs font-medium text-navy-500 mb-1.5">Duration</label>
+                <select id="programme-duration" className={selectClass} value={durationFilter} onChange={(e) => setDurationFilter(e.target.value)}>
                   {durations.map((d) => (
                     <option key={d} value={d}>{d === 'All' ? 'All Durations' : d}</option>
                   ))}
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-navy-500 mb-1.5">Delivery</label>
-                <select className={selectClass} value={deliveryFilter} onChange={(e) => setDeliveryFilter(e.target.value)}>
+                <label htmlFor="programme-delivery" className="block text-xs font-medium text-navy-500 mb-1.5">Delivery</label>
+                <select id="programme-delivery" className={selectClass} value={deliveryFilter} onChange={(e) => setDeliveryFilter(e.target.value)}>
                   {deliveries.map((d) => (
                     <option key={d} value={d}>{d === 'All' ? 'All Delivery' : d}</option>
                   ))}

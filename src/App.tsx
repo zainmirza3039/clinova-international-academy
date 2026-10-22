@@ -26,9 +26,14 @@ import CommunityPage, { EventsPage, FacultyPage } from '@/pages/CommunityPage';
 import FAQsPage from '@/pages/FAQsPage';
 import { privacyPolicy, termsAndConditions, cookiePolicy, refundPolicy } from '@/data/legalContent';
 
+import { AuthProvider, ProtectedStudentRoute } from '@/auth/AuthProvider';
+import AuthPage from '@/pages/AuthPage';
+import StudentDashboardPage from '@/pages/StudentDashboardPage';
+
 export default function App() {
   return (
     <BrowserRouter>
+      <AuthProvider>
       <ScrollToTop />
       <div className="flex flex-col min-h-screen">
         <a href="#main-content" className="skip-link">Skip to content</a>
@@ -38,6 +43,11 @@ export default function App() {
           <ErrorBoundary>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/sign-in" element={<AuthPage mode="sign-in" />} />
+            <Route path="/sign-up" element={<AuthPage mode="sign-up" />} />
+            <Route path="/forgot-password" element={<AuthPage mode="forgot-password" />} />
+            <Route path="/reset-password" element={<AuthPage mode="reset-password" />} />
+            <Route path="/student/*" element={<ProtectedStudentRoute><StudentDashboardPage /></ProtectedStudentRoute>} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/admissions" element={<AdmissionsPage />} />
             <Route path="/apply" element={<ApplicationPage />} />
@@ -74,6 +84,7 @@ export default function App() {
         </main>
         <Footer />
       </div>
+    </AuthProvider>
     </BrowserRouter>
   );
 }

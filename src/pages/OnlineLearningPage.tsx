@@ -41,8 +41,8 @@ export default function OnlineLearningPage() {
         <div className="max-w-editorial mx-auto px-6 lg:px-10">
           <SectionHeader
             eyebrow="The Learning Experience"
-            title="Everything You Need to Succeed"
-            description="A comprehensive online learning environment built for healthcare professionals."
+            title="Proposed learning features"
+            description="These are proposed features, not a claim that a learning platform, videos or assessments are currently available."
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {features.map((item, i) => (
@@ -64,7 +64,7 @@ export default function OnlineLearningPage() {
           <SectionHeader
             eyebrow="Learning Dashboard"
             title="Your Personal Learning Dashboard"
-            description="A central hub for your learning journey — track progress, access materials and manage your programmes."
+            description="Illustrative layout only. The example enrolments, CPD hours, certificates and progress percentages below are fictional, not learner records."
           />
           <div className="max-w-5xl mx-auto bg-white rounded-2xl border border-navy-50 shadow-lg overflow-hidden">
             {/* Dashboard header */}
@@ -73,7 +73,7 @@ export default function OnlineLearningPage() {
                 <div className="w-8 h-8  bg-teal-500 flex items-center justify-center">
                   <Monitor className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-white font-heading font-semibold text-sm">Clinova Learning Dashboard</span>
+                <span className="text-white font-heading font-semibold text-sm">Example Learning Dashboard</span>
               </div>
               <div className="flex gap-1.5">
                 <div className="w-2.5 h-2.5  bg-red-400/80" />

@@ -67,7 +67,7 @@ export default function NewsletterForm() {
       {submitted ? (
         <div role="status" aria-live="polite" className="flex items-center gap-2 p-4 bg-teal-50 text-teal-700 rounded-lg">
           <CheckCircle className="w-5 h-5" />
-          <span className="text-sm font-medium">Thank you for subscribing. We'll be in touch with updates soon.</span>
+          <span className="text-sm font-medium">Thank you for subscribing. Your subscription request has been received.</span>
         </div>
       ) : (
         <form aria-label="Newsletter subscription" onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
@@ -92,7 +92,7 @@ export default function NewsletterForm() {
         </form>
       )}
       <p className="text-xs text-navy-400 mt-3">
-        By subscribing, you agree to our Privacy Policy. You can unsubscribe at any time.
+        Read our <a href="/privacy-policy" className="underline">draft Privacy Policy</a>. Newsletter delivery and unsubscribe arrangements must be confirmed before subscriptions are enabled.
       </p>
     </div>
   );
