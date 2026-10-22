@@ -115,9 +115,9 @@ export default function ContactPage() {
                   <h3 className="font-heading text-xl font-bold text-navy-800 mb-2">Message Sent</h3>
                   <p className="text-sm text-navy-600">Your enquiry was accepted. Response arrangements are awaiting academy confirmation.</p>
                 </div>
-              ) : (
+              ) : enquiriesEnabled ? (
                 <form aria-label="Contact enquiry" onSubmit={handleSubmit} className="space-y-5 bg-surface-50 p-6 md:p-8 border border-navy-100">
-                  {!enquiriesEnabled && <p className="text-sm text-navy-700 border-l-2 border-teal-500 pl-3 mb-4">{enquiryUnavailable}</p>}
+                  
                   {error && <p role="alert" aria-live="assertive" className="text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
                   <p className="text-sm text-navy-700">Do not include patient information, medical records, passwords or payment details. Read the <Link to="/privacy-policy" className="underline text-clinical-600">draft privacy policy</Link>. No delivery or response time is promised.</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -161,6 +161,11 @@ export default function ContactPage() {
                     {submitting ? 'Sending…' : 'Send Message'}
                   </button>
                 </form>
+              ) : (
+                <div role="status" aria-live="polite" className="border border-navy-100 bg-surface-50 p-6 md:p-8">
+                  <h3 className="font-heading text-lg font-bold text-navy-900">Enquiry service unavailable</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-navy-700">{enquiryUnavailable} The form is hidden so you cannot enter details that this website cannot submit. No message has been sent.</p>
+                </div>
               )}
             </div>
 
