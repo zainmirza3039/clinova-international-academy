@@ -10,13 +10,13 @@ export default function CPDCourseDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const course = cpdCourses.find(item => item.slug === slug);
   const draft = slug ? getCPDCurriculum(slug) : undefined;
-  useSEO({ title: course?.title ?? 'CPD Course Not Found', description: course?.description ?? 'The requested CPD course could not be found.', ogImage: course?.image });
-  if (!course) return <div className="min-h-screen flex items-center justify-center"><div className="text-center"><h1 className="font-heading text-2xl font-bold text-navy-900 mb-4">CPD Course Not Found</h1><Link to="/cpd-courses" className="text-clinical-600">Browse CPD courses</Link></div></div>;
+  useSEO({ title: course?.title ?? 'Learning Guide Not Found', description: course?.description ?? 'The requested CPD course could not be found.', ogImage: course?.image });
+  if (!course) return <div className="min-h-screen flex items-center justify-center"><div className="text-center"><h1 className="font-heading text-2xl font-bold text-navy-900 mb-4">Learning Guide Not Found</h1><Link to="/cpd-courses" className="text-clinical-600">Browse learning guides</Link></div></div>;
   const related = cpdCourses.filter(item => item.slug !== course.slug && item.department === course.department).slice(0, 3);
   return <>
     <section className="bg-navy-900 pt-28 pb-14">
       <div className="max-w-editorial mx-auto px-6 lg:px-10">
-        <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'CPD Courses', to: '/cpd-courses' }, { label: course.title }]} />
+        <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Professional Development', to: '/cpd-courses' }, { label: course.title }]} />
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mt-8 items-end">
           <div className="lg:col-span-7">
             <div className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-300 mb-4">CPD topic · {course.department}</div>
