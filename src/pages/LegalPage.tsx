@@ -30,13 +30,6 @@ export default function LegalPage({ title, description, breadcrumb, sections }: 
               </div>
             ))}
           </div>
-          <div className="mt-12 p-4 bg-amber-50 rounded-lg border border-amber-100">
-            <p className="text-xs text-navy-600 leading-relaxed">
-              This is placeholder legal content prepared for demonstration purposes. It must be reviewed and approved by
-              a qualified legal professional before publication. Clinova International Academy does not guarantee the
-              accuracy or completeness of this content.
-            </p>
-          </div>
         </div>
       </section>
     </>
