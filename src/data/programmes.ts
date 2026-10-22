@@ -3,6 +3,7 @@ import type { Programme } from './types';
 export const programmes: Programme[] = [
   {
     id: 'p1',
+    publicationStatus: 'published',
     slug: 'certificate-in-musculoskeletal-assessment',
     title: 'Certificate in Musculoskeletal Assessment',
     department: 'Physical Therapy & Rehabilitation',
@@ -43,6 +44,7 @@ export const programmes: Programme[] = [
   },
   {
     id: 'p2',
+    publicationStatus: 'published',
     slug: 'certificate-in-clinical-pain-management',
     title: 'Certificate in Clinical Pain Management',
     department: 'Physical Therapy & Rehabilitation',
@@ -83,6 +85,7 @@ export const programmes: Programme[] = [
   },
   {
     id: 'p3',
+    publicationStatus: 'published',
     slug: 'professional-development-in-sports-rehabilitation',
     title: 'Professional Development in Sports Rehabilitation',
     department: 'Sports & Exercise',
@@ -123,6 +126,7 @@ export const programmes: Programme[] = [
   },
   {
     id: 'p4',
+    publicationStatus: 'published',
     slug: 'certificate-in-patient-centred-healthcare-practice',
     title: 'Certificate in Patient-Centred Healthcare Practice',
     department: 'Nursing & Allied Health',
@@ -163,6 +167,7 @@ export const programmes: Programme[] = [
   },
   {
     id: 'p5',
+    publicationStatus: 'published',
     slug: 'diploma-in-rehabilitation-practice',
     title: 'Diploma in Rehabilitation Practice',
     department: 'Physical Therapy & Rehabilitation',
@@ -203,6 +208,7 @@ export const programmes: Programme[] = [
   },
   {
     id: 'p6',
+    publicationStatus: 'published',
     slug: 'certificate-in-healthcare-communication',
     title: 'Certificate in Healthcare Communication',
     department: 'Healthcare Management',
@@ -243,6 +249,7 @@ export const programmes: Programme[] = [
   },
   {
     id: 'p7',
+    publicationStatus: 'published',
     slug: 'certificate-in-cognitive-behavioural-therapy-fundamentals',
     title: 'Certificate in Cognitive Behavioural Therapy Fundamentals',
     department: 'Psychology & Mental Health',
@@ -283,6 +290,7 @@ export const programmes: Programme[] = [
   },
   {
     id: 'p8',
+    publicationStatus: 'published',
     slug: 'professional-development-in-healthcare-leadership',
     title: 'Professional Development in Healthcare Leadership',
     department: 'Healthcare Management',
@@ -323,14 +331,16 @@ export const programmes: Programme[] = [
   },
 ];
 
+export const publishedProgrammes = programmes.filter((programme) => programme.publicationStatus === 'published');
+
 export function getProgrammeBySlug(slug: string): Programme | undefined {
-  return programmes.find((p) => p.slug === slug);
+  return publishedProgrammes.find((p) => p.slug === slug);
 }
 
 export function getProgrammesByDepartment(departmentSlug: string): Programme[] {
-  return programmes.filter((p) => p.departmentSlug === departmentSlug);
+  return publishedProgrammes.filter((p) => p.departmentSlug === departmentSlug);
 }
 
 export function getFeaturedProgrammes(): Programme[] {
-  return programmes.filter((p) => p.featured);
+  return publishedProgrammes.filter((p) => p.featured);
 }

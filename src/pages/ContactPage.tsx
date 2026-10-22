@@ -27,6 +27,12 @@ export default function ContactPage() {
     setSubmitting(true);
     setError('');
 
+    if (!supabase) {
+      setSubmitting(false);
+      setError('Contact submission is temporarily unavailable while the academy connection is being configured.');
+      return;
+    }
+
     const formData = new FormData(e.currentTarget);
     const { error: submissionError } = await supabase.from('contact_submissions').insert({
       name: String(formData.get('name') ?? '').trim(),

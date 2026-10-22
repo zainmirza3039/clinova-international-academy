@@ -22,6 +22,10 @@ export default function CertificateVerificationPage() {
     setCertificate(null);
     setError('');
     if (!/^[A-Z0-9-]{8,80}$/.test(normalizedId)) return;
+    if (!supabase) {
+      setError('Verification is temporarily unavailable while the academy connection is being configured.');
+      return;
+    }
     setLoading(true);
     const { data, error: queryError } = await supabase.from('public_certificates').select('certificate_id, holder_name, course_title, issue_date, cpd_hours, status').eq('certificate_id', normalizedId).maybeSingle();
     setLoading(false);

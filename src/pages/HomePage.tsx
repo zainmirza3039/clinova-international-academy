@@ -9,14 +9,13 @@ import Reveal from '@/components/Reveal';
 import DepartmentCard from '@/components/DepartmentCard';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import CPDCard from '@/components/CPDCard';
-import TestimonialCard from '@/components/TestimonialCard';
 import NewsCard from '@/components/NewsCard';
 import FAQAccordion from '@/components/FAQAccordion';
 import NewsletterForm from '@/components/NewsletterForm';
 import { departments } from '@/data/departments';
 import { getFeaturedProgrammes } from '@/data/programmes';
-import { cpdCourses, cpdFilters } from '@/data/cpdCourses';
-import { testimonials, newsItems, generalFAQs } from '@/data/testimonials';
+import { publishedCPDCourses, cpdFilters } from '@/data/cpdCourses';
+import { newsItems, generalFAQs } from '@/data/content';
 import { useState } from 'react';
 
 const learningSteps = [
@@ -53,8 +52,8 @@ export default function HomePage() {
 
   const filteredCPD =
     cpdFilter === 'All'
-      ? cpdCourses.slice(0, 4)
-      : cpdCourses.filter((c) => c.department.toLowerCase().includes(cpdFilter.toLowerCase())).slice(0, 4);
+      ? publishedCPDCourses.slice(0, 4)
+      : publishedCPDCourses.filter((c) => c.department.toLowerCase().includes(cpdFilter.toLowerCase())).slice(0, 4);
 
   return (
     <>
@@ -428,20 +427,30 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS — editorial pull quotes on dark navy */}
+      {/* LEARNING PRINCIPLES — transparent alternative to unverified testimonials */}
       <section className="py-20 lg:py-32 bg-navy-800">
         <div className="max-w-editorial mx-auto px-6 lg:px-10">
           <Reveal className="max-w-2xl mb-12 lg:mb-16">
             <div className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-400 mb-4">
-              Testimonials
+              Our approach
             </div>
             <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-white leading-[1.15] text-balance">
-              What learners say about Clinova
+              Learning designed for professional practice
             </h2>
+            <p className="mt-5 text-sm leading-relaxed text-navy-100/70">
+              We do not publish unverified learner testimonials or invented outcomes. Instead, our programmes are structured around clear objectives, practical application and honest communication about what is and is not currently available.
+            </p>
           </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
-            {testimonials.map((t, i) => (
-              <TestimonialCard key={t.id} testimonial={t} index={i} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              ['Clear outcomes', 'Each programme describes who it is for, what it covers and what a learner should be able to do after completing the learning.'],
+              ['Evidence-informed content', 'Resources explain clinical concepts in an educational context and encourage appropriate professional judgement rather than one-size-fits-all advice.'],
+              ['Respect for scope', 'Accreditation, partnerships, learner outcomes and certificates are described only when the relevant facts and workflows are confirmed.'],
+            ].map(([title, description]) => (
+              <div key={title} className="border-t border-white/15 pt-5">
+                <h3 className="font-heading font-bold text-white text-lg">{title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-navy-100/65">{description}</p>
+              </div>
             ))}
           </div>
         </div>

@@ -10,7 +10,7 @@ import FAQAccordion from '@/components/FAQAccordion';
 import CTASection from '@/components/CTASection';
 import { getDepartmentBySlug } from '@/data/departments';
 import { getProgrammesByDepartment } from '@/data/programmes';
-import { cpdCourses } from '@/data/cpdCourses';
+import { publishedCPDCourses } from '@/data/cpdCourses';
 import type { FAQ } from '@/data/types';
 
 export default function DepartmentDetailPage() {
@@ -39,7 +39,7 @@ export default function DepartmentDetailPage() {
   const programmes = getProgrammesByDepartment(department.slug);
   const certificates = programmes.filter((p) => p.category === 'Certificate');
   const diplomas = programmes.filter((p) => p.category === 'Diploma');
-  const relatedCPD = cpdCourses.filter((c) => c.department === department.name).slice(0, 4);
+  const relatedCPD = publishedCPDCourses.filter((c) => c.department === department.name).slice(0, 4);
 
   const deptFAQs: FAQ[] = [
     { id: 'df1', question: `What programmes are available in ${department.name}?`, answer: `We offer a range of certificate courses, diploma programmes and CPD-focused courses in ${department.name}. Browse the programmes listed above or view our full catalogue for more details.` },

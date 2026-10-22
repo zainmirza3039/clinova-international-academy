@@ -54,8 +54,24 @@ export default function CPDCourseDetailPage() {
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-900 mb-5">Focused learning for professional practice</h2>
               <p className="text-base text-navy-600 leading-relaxed">{course.description} This short course is designed to support structured professional development alongside clinical work.</p>
               <div className="mt-10 border-t border-navy-100 pt-8">
+                <h2 className="font-heading text-xl font-bold text-navy-900 mb-4">Learning outcomes</h2>
+                <ul className="list-disc pl-5 space-y-2 text-sm text-navy-600 leading-relaxed">
+                  {course.learningOutcomes.map((outcome) => <li key={outcome}>{outcome}</li>)}
+                </ul>
+              </div>
+              <div className="mt-10 border-t border-navy-100 pt-8">
+                <h2 className="font-heading text-xl font-bold text-navy-900 mb-4">Course modules</h2>
+                <ol className="list-decimal pl-5 space-y-3 text-sm text-navy-600 leading-relaxed">
+                  {course.modules.map((module) => <li key={module}>{module}</li>)}
+                </ol>
+              </div>
+              <div className="mt-10 border-t border-navy-100 pt-8">
                 <h2 className="font-heading text-xl font-bold text-navy-900 mb-4">Who this course is for</h2>
                 <p className="text-base text-navy-600 leading-relaxed">Healthcare professionals and learners working in or preparing for roles related to {course.department.toLowerCase()}.</p>
+              </div>
+              <div className="mt-10 border-t border-navy-100 pt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div><h2 className="font-heading text-xl font-bold text-navy-900 mb-3">Prerequisites</h2><p className="text-sm text-navy-600 leading-relaxed">{course.prerequisites}</p></div>
+                <div><h2 className="font-heading text-xl font-bold text-navy-900 mb-3">Assessment</h2><p className="text-sm text-navy-600 leading-relaxed">{course.assessment}</p></div>
               </div>
             </div>
 

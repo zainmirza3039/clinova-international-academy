@@ -5,7 +5,7 @@ import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import NewsCard from '@/components/NewsCard';
 import CTASection from '@/components/CTASection';
-import { newsItems, newsCategories } from '@/data/testimonials';
+import { publishedNewsItems, newsCategories } from '@/data/content';
 
 export function ResourcesPage() {
   useSEO({
@@ -18,7 +18,7 @@ export function ResourcesPage() {
   const [category, setCategory] = useState('All');
 
   const filtered = useMemo(() => {
-    return newsItems.filter((item) => {
+    return publishedNewsItems.filter((item) => {
       if (category !== 'All' && item.category !== category) return false;
       if (search && !item.title.toLowerCase().includes(search.toLowerCase()) && !item.excerpt.toLowerCase().includes(search.toLowerCase()))
         return false;
@@ -100,7 +100,7 @@ export function ResourcesPage() {
 
 export function ResourceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const item = newsItems.find((n) => n.slug === slug);
+  const item = publishedNewsItems.find((n) => n.slug === slug);
 
   useSEO({
     title: item ? item.title : 'Article Not Found',
@@ -122,7 +122,7 @@ export function ResourceDetailPage() {
     );
   }
 
-  const related = newsItems.filter((n) => n.id !== item.id && n.category === item.category).slice(0, 3);
+  const related = publishedNewsItems.filter((n) => n.id !== item.id && n.category === item.category).slice(0, 3);
   const formatDate = (dateStr: string) => new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
   return (
@@ -155,13 +155,23 @@ export function ResourceDetailPage() {
           </div>
           <div className="prose prose-sm max-w-none">
             <p className="text-base text-navy-600 leading-relaxed">{item.excerpt}</p>
-            <p className="mt-4 text-base text-navy-600 leading-relaxed">
-              This is a sample article. Full content will be added before publication. The article would explore the topic
-              in detail, providing evidence-informed insights relevant to healthcare professionals.
-            </p>
+            {item.sections.map((section) => (
+              <section key={section.heading} className="mt-8">
+                <h2 className="font-heading text-xl font-bold text-navy-900 mb-3">{section.heading}</h2>
+                {section.paragraphs.map((paragraph) => (
+                  <p key={paragraph} className="mt-3 text-base text-navy-600 leading-relaxed">{paragraph}</p>
+                ))}
+              </section>
+            ))}
           </div>
-          <div className="mt-8 p-4 bg-amber-50 rounded-lg border border-amber-100">
-            <p className="text-xs text-navy-600">This is a demo article. Content will be replaced with verified information before publication.</p>
+          <div className="mt-8 p-6 bg-teal-50 border border-teal-100">
+            <h2 className="font-heading text-lg font-bold text-navy-900 mb-3">Key points</h2>
+            <ul className="list-disc pl-5 space-y-2 text-sm text-navy-700">
+              {item.takeaways.map((takeaway) => <li key={takeaway}>{takeaway}</li>)}
+            </ul>
+            <p className="mt-5 pt-4 border-t border-teal-100 text-xs text-navy-600 leading-relaxed">
+              This article is general educational information, not individual medical advice. Clinical decisions should be made by appropriately qualified professionals using the person’s full history, examination and applicable local guidance.
+            </p>
           </div>
         </div>
       </section>
