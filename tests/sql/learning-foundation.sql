@@ -113,6 +113,46 @@ DO $$ BEGIN
   EXCEPTION WHEN insufficient_privilege THEN NULL; END;
 END $$;
 
+-- Frontend-shaped reads: explicit columns, owner scoping, stable pagination, and
+-- course/module/publication filters. All additional rows are synthetic and local.
+SET ROLE service_role;
+INSERT INTO public.student_enrolments(user_id, course_id, status)
+VALUES ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000003', 'active');
+INSERT INTO public.learning_courses(slug, title, summary, publication_status)
+SELECT format('alice-page-course-%s', lpad(g::text, 2, '0')), format('Alice page course %s', g), 'Synthetic pagination fixture', 'published'
+FROM generate_series(1, 11) AS s(g);
+INSERT INTO public.student_enrolments(user_id, course_id, status)
+SELECT '00000000-0000-0000-0000-000000000001', c.id, 'active'
+FROM public.learning_courses c
+WHERE c.slug LIKE 'alice-page-course-%';
+RESET ROLE;
+SET ROLE authenticated;
+SELECT set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-000000000001', false);
+SELECT public.set_my_lesson_completion('30000000-0000-0000-0000-000000000001', true);
+SELECT pg_temp.assert_true((SELECT count(*) = 1 AND bool_and(user_id = auth.uid()) AND min(display_name) = 'Alice Updated'
+  FROM public.student_profiles), 'frontend_own_profile_projection');
+SELECT pg_temp.assert_true((SELECT count(*) = 13 AND bool_and(user_id = auth.uid())
+  FROM public.student_enrolments), 'frontend_own_enrolment_projection');
+SELECT pg_temp.assert_true((WITH own_course_ids AS (
+    SELECT course_id FROM public.student_enrolments WHERE user_id = auth.uid() ORDER BY enrolled_at, id LIMIT 10
+  ) SELECT count(*) = 10 AND bool_and(public.learning_courses.publication_status = 'published')
+  FROM public.learning_courses JOIN own_course_ids ON own_course_ids.course_id = public.learning_courses.id),
+  'frontend_published_courses_by_current_10_enrolment_ids');
+SELECT pg_temp.assert_true((WITH own_course_ids AS (
+    SELECT course_id FROM public.student_enrolments WHERE user_id = auth.uid() ORDER BY enrolled_at, id OFFSET 10 LIMIT 10
+  ) SELECT count(*) = 3 FROM public.learning_courses JOIN own_course_ids ON own_course_ids.course_id = public.learning_courses.id),
+  'frontend_enrolment_course_pagination_page_2');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 AND bool_and(m.course_id = '10000000-0000-0000-0000-000000000003'::uuid)
+  FROM public.learning_modules m WHERE m.course_id = '10000000-0000-0000-0000-000000000003'),
+  'frontend_module_course_filter');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 AND bool_and(l.course_id = '10000000-0000-0000-0000-000000000003'::uuid)
+  FROM public.learning_lessons l JOIN public.learning_modules m ON m.id = l.module_id AND m.course_id = l.course_id
+  WHERE l.course_id = '10000000-0000-0000-0000-000000000003' AND l.module_id = '20000000-0000-0000-0000-000000000003'
+    AND l.publication_status = 'published'), 'frontend_lesson_course_module_published_filter');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 AND bool_and(user_id = auth.uid()) AND bool_and(course_id = '10000000-0000-0000-0000-000000000001'::uuid)
+  FROM public.lesson_progress WHERE user_id = auth.uid() AND course_id = '10000000-0000-0000-0000-000000000001'),
+  'frontend_own_progress_filtered_course');
+
 -- Cross-user reads/writes are denied, including profile ownership update.
 SELECT set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-000000000002', false);
 SELECT pg_temp.assert_true((SELECT count(*) = 1 AND min(display_name) = 'Bob' FROM public.student_profiles), 'bob_sees_only_own_profile');
@@ -139,7 +179,7 @@ SET ROLE service_role;
 UPDATE public.student_enrolments SET status = 'completed' WHERE user_id = '00000000-0000-0000-0000-000000000001';
 RESET ROLE;
 SET ROLE authenticated;
-SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.learning_lessons), 'completed_can_read_lessons');
+SELECT pg_temp.assert_true((SELECT count(*) = 2 FROM public.learning_lessons), 'completed_can_read_lessons');
 DO $$ BEGIN
   BEGIN PERFORM public.set_my_lesson_completion('30000000-0000-0000-0000-000000000001', true); RAISE EXCEPTION 'completed progress write unexpectedly succeeded';
   EXCEPTION WHEN insufficient_privilege THEN NULL; END;

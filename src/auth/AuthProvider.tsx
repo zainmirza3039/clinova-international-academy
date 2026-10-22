@@ -32,6 +32,7 @@ export type AuthStatus = 'loading' | 'ready' | 'disabled' | 'error';
 export type AuthActionResult = { error: Error | null };
 type AuthContextValue = {
   enabled: boolean; status: AuthStatus; session: Session | null; error: string | null; recovery: boolean;
+  client: SupabaseClient | null;
   signIn: (email: string, password: string) => Promise<AuthActionResult>;
   signUp: (email: string, password: string) => Promise<AuthActionResult>;
   sendPasswordReset: (email: string, redirectTo?: string) => Promise<AuthActionResult>;
@@ -101,6 +102,7 @@ export function AuthProvider({ children, client }: { children: ReactNode; client
 
   const value = useMemo<AuthContextValue>(() => ({
     enabled, status, session, error, recovery,
+    client: enabled && status === 'ready' && session && !recovery ? configuredClient : null,
     signIn: (email, password) => call(() => configuredClient!.auth.signInWithPassword({ email, password })),
     signUp: (email, password) => call(() => configuredClient!.auth.signUp({ email, password })),
     sendPasswordReset: (email) => call(() => configuredClient!.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/reset-password` })),

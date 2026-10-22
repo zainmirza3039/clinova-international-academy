@@ -4,7 +4,7 @@
 
 An additive SQL migration supplies an empty, least-privilege foundation for real learner records. It does not create users, publish proposed courses, enrol anyone, or issue certificates. It does not alter frontend/auth files, DNS, domains, existing enquiries, or live service settings.
 
-The migration is `supabase/migrations/20261022090000_create_learning_foundation.sql`. It is a **local release candidate, not an applied live migration or a working end-to-end LMS**. The correct live Clinova project is `ssxpmcbqfdggfsoqbxac`; this task's Supabase connector inventory exposes only an unrelated project, which was not used. The earlier live enquiry migration remains the only migration known to have been applied.
+The migration is `supabase/migrations/20261022090000_create_learning_foundation.sql`. It is a **local release candidate, not an applied live migration or a working end-to-end LMS**. The coordinator’s latest read-only metadata confirms Clinova project `ssxpmcbqfdggfsoqbxac` as `ACTIVE_HEALTHY` in `ap-southeast-2`. Table metadata lists only the three existing RLS-enabled enquiry tables (`contact_submissions`, `partnership_inquiries`, `newsletter_subscriptions`), not learner tables. The migration ledger is empty despite the earlier report of a manual enquiry SQL Editor application; a separate public-schema inspection also returned no rows. These inventory/ledger discrepancies remain unresolved and do not authorise any repair, SQL, migration or write. See [the local frontend integration handoff](CLINOVA-LOCAL-LEARNER-INTEGRATION.md) for the default-off student UI and local tests. The unrelated project was not used.
 
 ## Data and access contract
 
