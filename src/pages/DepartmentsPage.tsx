@@ -6,9 +6,9 @@ import { departments } from '@/data/departments';
 
 export default function DepartmentsPage() {
   useSEO({
-    title: 'Proposed Subject Areas',
+    title: 'Healthcare Learning Areas',
     description:
-      'Explore proposed healthcare subject areas for reading and study planning. These labels are an educational organisation of topics, not evidence of established departments or services.',
+      'Explore healthcare subject areas and related educational resources for independent study.',
   });
 
   return (
@@ -16,8 +16,8 @@ export default function DepartmentsPage() {
       <PageHero
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Departments' }]}
         eyebrow="Departments"
-        title="Explore Our Proposed Subject Areas"
-        description="A draft organisation of healthcare topics for reading and study planning. Course availability, delivery, assessment and recognition require academy confirmation."
+        title="Explore Healthcare Subject Areas"
+        description="Browse organised healthcare subject areas and follow topics into related educational reading and self-study guides."
         image="https://images.pexels.com/photos/5452233/pexels-photo-5452233.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
@@ -32,10 +32,10 @@ export default function DepartmentsPage() {
       </section>
 
       <CTASection
-        title="Plan your next learning question"
-        description="Read the draft library, use study tools and review proposed outlines. No employment, outcome, certificate or recognition is guaranteed."
-        primaryCTA={{ label: 'View Proposed Outlines', to: '/programmes' }}
-        secondaryCTA={{ label: 'Browse Draft Reading', to: '/cpd-courses' }}
+        title="Continue your learning"
+        description="Explore educational articles and study tools to identify the questions you want to investigate next."
+        primaryCTA={{ label: 'View Learning Guides', to: '/programmes' }}
+        secondaryCTA={{ label: 'Browse Learning Library', to: '/cpd-courses' }}
       />
     </>
   );
