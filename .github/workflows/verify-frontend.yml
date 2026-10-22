@@ -1,0 +1,52 @@
+name: Verify Clinova frontend
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - review/clinova-all-updates-20261022
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-clinova-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Typecheck, test, lint and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Run tests
+        run: npm test
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build with public-facing services disabled
+        env:
+          VITE_VERIFICATION_ENABLED: 'false'
+          VITE_AUTH_ENABLED: 'false'
+          VITE_LEARNER_DATA_ENABLED: 'false'
+          VITE_ENQUIRIES_ENABLED: 'false'
+          VITE_INDEXING_ENABLED: 'false'
+        run: npm run build
