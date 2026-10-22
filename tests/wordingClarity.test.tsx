@@ -32,14 +32,12 @@ describe('concise wording with truthful availability disclosures', () => {
     expect(container.textContent).not.toMatch(/draft|preview/i);
   });
   it.each([
-    ['/programmes', programmes[0].slug, <ProgrammeDetailPage />],
-    ['/cpd-courses', cpdCourses[0].slug, <CPDCourseDetailPage />],
-  ])('keeps material unconfirmed terms and non-enrolment disclosure on %s details', (base, slug, element) => {
+    ['/programmes', programmes[0].slug, <ProgrammeDetailPage />, 'Programme Not Found'],
+    ['/cpd-courses', cpdCourses[0].slug, <CPDCourseDetailPage />, 'CPD Course Not Found'],
+  ])('does not expose unapproved catalogue details at %s', (base, slug, element, heading) => {
     render(<MemoryRouter initialEntries={[`${base}/${slug}`]}><Routes><Route path={`${base}/:slug`} element={element} /></Routes></MemoryRouter>);
-    expect(screen.getByText('Proposed catalogue entry.')).toBeTruthy();
-    expect(screen.getByText(/No (enrolment or checkout|checkout or enrolment) is available/)).toBeTruthy();
-    expect(screen.getByRole('heading', { name: 'Overview' })).toBeTruthy();
-    expect(screen.getByRole('heading', { name: 'Modules and lessons' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: heading })).toBeTruthy();
+    expect(screen.queryByText('Proposed catalogue entry.')).toBeNull();
     expect(screen.queryByRole('button', { name: /^(enrol(?: now)?|buy(?: now)?|complete(?: lesson)?|save(?: progress)?)$/i })).toBeNull();
   });
   it.each([ResourcesPage, LearningResourcesPage])('keeps qualified review status without repeated draft titles', Page => {
