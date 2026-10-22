@@ -90,12 +90,16 @@ export function AuthProvider({ children, client }: { children: ReactNode; client
     return () => { active = false; subscription?.unsubscribe(); };
   }, [configuredClient, enabled]);
 
-  const call = useCallback(async (operation: () => Promise<{ error: unknown }>): Promise<AuthActionResult> => {
+  const call = useCallback(async (operation: () => Promise<{ error: unknown; data?: unknown }>, adoptSession = false): Promise<AuthActionResult> => {
     if (!enabled || !configuredClient) return { error: new Error('Authentication is currently unavailable.') };
     setError(null);
     try {
       const result = await operation();
       if (result.error) { const next = new Error(errorMessage(result.error)); setError(next.message); return { error: next }; }
+      const returnedSession = adoptSession && result.data && typeof result.data === 'object' && 'session' in result.data
+        ? (result.data as { session?: Session | null }).session
+        : null;
+      if (returnedSession) { setSession(returnedSession); setRecovery(false); setStatus('ready'); }
       return { error: null };
     } catch (reason) { const next = new Error(errorMessage(reason)); setError(next.message); return { error: next }; }
   }, [configuredClient, enabled]);
@@ -103,8 +107,8 @@ export function AuthProvider({ children, client }: { children: ReactNode; client
   const value = useMemo<AuthContextValue>(() => ({
     enabled, status, session, error, recovery,
     client: enabled && status === 'ready' && session && !recovery ? configuredClient : null,
-    signIn: (email, password) => call(() => configuredClient!.auth.signInWithPassword({ email, password })),
-    signUp: (email, password) => call(() => configuredClient!.auth.signUp({ email, password })),
+    signIn: (email, password) => call(() => configuredClient!.auth.signInWithPassword({ email, password }), true),
+    signUp: (email, password) => call(() => configuredClient!.auth.signUp({ email, password }), true),
     sendPasswordReset: (email) => call(() => configuredClient!.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/reset-password` })),
     updatePassword: (password) => {
       if (!recovery || !session) return Promise.resolve({ error: new Error('Password recovery must be started from a valid recovery link.') });

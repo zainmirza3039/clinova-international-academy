@@ -42,6 +42,24 @@ describe('auth foundation', () => {
     expect(screen.queryByText('private')).toBeNull();
   });
 
+  it('adopts a successful sign-in session before a delayed auth event', async () => {
+    vi.stubEnv('VITE_AUTH_ENABLED', 'true');
+    vi.stubEnv('VITE_SUPABASE_URL', 'https://ssxpmcbqfdggfsoqbxac.supabase.co');
+    vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'mock-key');
+    vi.resetModules();
+    const { AuthProvider: Provider, useAuth } = await import('@/auth/AuthProvider');
+    const client = makeClient();
+    function Probe() {
+      const auth = useAuth();
+      return <><button onClick={() => void auth.signIn('student@example.test', 'password')}>sign in</button><span>{auth.session?.user.id ?? 'signed out'}</span></>;
+    }
+    render(<Provider client={client}><Probe /></Provider>);
+    await waitFor(() => expect(screen.getByText('signed out')).toBeTruthy());
+    screen.getByText('sign in').click();
+    await waitFor(() => expect(screen.getByText('user-1')).toBeTruthy());
+    expect(client.auth.signInWithPassword).toHaveBeenCalledWith({ email: 'student@example.test', password: 'password' });
+  });
+
   it('accepts a recovery event and allows update, but rejects ordinary sessions', async () => {
     vi.stubEnv('VITE_AUTH_ENABLED', 'true');
     vi.stubEnv('VITE_SUPABASE_URL', 'https://ssxpmcbqfdggfsoqbxac.supabase.co');
