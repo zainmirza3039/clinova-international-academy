@@ -43,7 +43,7 @@ export default function HomePage() {
       '@type': 'EducationalOrganization',
       name: 'Clinova International Academy',
       description: 'Online healthcare education, CPD and professional development for healthcare professionals.',
-      url: 'https://clinovaacademy.co.uk',
+      url: 'https://clinovainternationalacademy.co.uk',
     },
   });
 

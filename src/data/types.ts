@@ -79,13 +79,3 @@ export interface FAQ {
   question: string;
   answer: string;
 }
-
-export interface Certificate {
-  id: string;
-  certificateId: string;
-  holder: string;
-  course: string;
-  issueDate: string;
-  cpdHours: number;
-  status: 'verified' | 'not-found';
-}

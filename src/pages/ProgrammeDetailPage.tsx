@@ -27,7 +27,7 @@ export default function ProgrammeDetailPage() {
       provider: {
         '@type': 'Organization',
         name: 'Clinova International Academy',
-        url: 'https://clinovaacademy.co.uk',
+        url: 'https://clinovainternationalacademy.co.uk',
       },
     } : undefined,
   });

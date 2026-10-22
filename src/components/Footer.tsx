@@ -40,8 +40,8 @@ export default function Footer() {
               development for healthcare professionals worldwide.
             </p>
             <div className="space-y-2.5">
-              <a href="mailto:info@clinovaacademy.co.uk" className="flex items-center gap-2 text-sm text-navy-100/60 hover:text-teal-400 transition-colors">
-                <Mail className="w-4 h-4 shrink-0" /> info@clinovaacademy.co.uk
+              <a href="mailto:info@clinovainternationalacademy.co.uk" className="flex items-center gap-2 text-sm text-navy-100/60 hover:text-teal-400 transition-colors">
+                <Mail className="w-4 h-4 shrink-0" /> info@clinovainternationalacademy.co.uk
               </a>
 
             </div>

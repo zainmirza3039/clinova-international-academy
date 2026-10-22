@@ -1,4 +1,4 @@
-import type { Testimonial, NewsItem, FAQ, Certificate } from './types';
+import type { Testimonial, NewsItem, FAQ } from './types';
 
 export const testimonials: Testimonial[] = [
   {
@@ -134,27 +134,6 @@ export const generalFAQs: FAQ[] = [
     question: 'How long do I have access to course materials?',
     answer:
       'You will have access to programme materials for the duration of your enrolment period, plus an additional period to complete any outstanding assessments. Specific access periods are noted on each programme page.',
-  },
-];
-
-export const certificateDatabase: Certificate[] = [
-  {
-    id: 'cert1',
-    certificateId: 'CIA-2026-000001',
-    holder: 'Sample Certificate Holder',
-    course: 'Certificate in Musculoskeletal Assessment',
-    issueDate: '2026-06-15',
-    cpdHours: 40,
-    status: 'verified',
-  },
-  {
-    id: 'cert2',
-    certificateId: 'CIA-2026-000002',
-    holder: 'Demo Learner',
-    course: 'Certificate in Clinical Pain Management',
-    issueDate: '2026-07-20',
-    cpdHours: 35,
-    status: 'verified',
   },
 ];
 

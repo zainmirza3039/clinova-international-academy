@@ -16,7 +16,7 @@ export const privacyPolicy: LegalContent = {
     { heading: 'Information We Collect', content: 'We may collect personal information including your name, email address, phone number, country and professional details when you complete forms, subscribe to our newsletter or enrol in programmes. We also collect usage data such as pages visited and time spent on our website.' },
     { heading: 'How We Use Your Information', content: 'We use your information to respond to enquiries, process programme enrolments, send updates about our services, improve our website and comply with legal obligations. We do not sell your personal information to third parties.' },
     { heading: 'Data Storage and Security', content: 'We take reasonable measures to protect your personal information using appropriate technical and organisational safeguards. Your data is stored securely and access is restricted to authorised personnel only.' },
-    { heading: 'Your Rights', content: 'You have the right to access, correct or delete your personal information. You may also withdraw consent for processing at any time. To exercise these rights, please contact us at info@clinovaacademy.co.uk.' },
+    { heading: 'Your Rights', content: 'You have the right to access, correct or delete your personal information. You may also withdraw consent for processing at any time. To exercise these rights, please contact us at info@clinovainternationalacademy.co.uk.' },
     { heading: 'Cookies', content: 'Our website uses cookies to improve your browsing experience. Please refer to our Cookie Policy for detailed information about the cookies we use and how to manage them.' },
     { heading: 'Changes to This Policy', content: 'We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date.' },
   ],
@@ -55,10 +55,10 @@ export const refundPolicy: LegalContent = {
   description: 'Clinova International Academy refund and cancellation policy for programmes and services.',
   breadcrumb: [{ label: 'Home', to: '/' }, { label: 'Refund Policy' }],
   sections: [
-    { heading: 'Cancellation by the Learner', content: 'Learners may request a cancellation and refund within 14 days of enrolment, provided that no more than 25% of the programme content has been accessed. Requests should be sent to info@clinovaacademy.co.uk.' },
+    { heading: 'Cancellation by the Learner', content: 'Learners may request a cancellation and refund within 14 days of enrolment, provided that no more than 25% of the programme content has been accessed. Requests should be sent to info@clinovainternationalacademy.co.uk.' },
     { heading: 'Non-Refundable Circumstances', content: 'Refunds will not be issued after the 14-day cancellation period, or if more than 25% of programme content has been accessed, or if a certificate has already been issued for the programme.' },
     { heading: 'Cancellation by Clinova', content: 'If Clinova International Academy cancels a programme, learners will receive a full refund or the option to transfer to an alternative programme. We are not liable for any incidental costs incurred by learners.' },
     { heading: 'Refund Processing', content: 'Approved refunds will be processed using the original payment method within 14 working days of approval. The time taken for the refund to appear in your account may vary depending on your payment provider.' },
-    { heading: 'Contact', content: 'For any questions about our refund policy, please contact us at info@clinovaacademy.co.uk.' },
+    { heading: 'Contact', content: 'For any questions about our refund policy, please contact us at info@clinovainternationalacademy.co.uk.' },
   ],
 };
