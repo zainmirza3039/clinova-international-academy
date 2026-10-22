@@ -116,7 +116,7 @@ export default function TrainingPartnersPage() {
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Benefits"
-            title="What to discuss in an enquiry"
+            title="Partnership information"
             description="Use an enquiry to ask precise questions about subject matter, audience, review status, delivery, data handling, fees and any recognition. The form is not evidence that a partnership programme exists."
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -140,9 +140,9 @@ export default function TrainingPartnersPage() {
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-900 mb-4">Who Can Apply?</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-900 mb-4">Potential organisation types</h2>
               <p className="text-sm text-navy-500 leading-relaxed mb-6">
-                Organisations may use the proposed enquiry route to describe a possible collaboration; acceptance, capability and terms require owner confirmation.
+                No partnership submissions are currently accepted. These examples describe possible future audiences only and do not imply an open application process or confirmed delivery capability.
               </p>
               <div className="space-y-3">
                 {whoCanApply.map((item) => (
@@ -179,7 +179,7 @@ export default function TrainingPartnersPage() {
           <SectionHeader
             eyebrow="Enquiry status"
             title="Partnership submissions are not currently available"
-            description="The form is retained in its existing disabled state when enquiries are not enabled. If enabled by the owner, use it to request information rather than assume an offer."
+            description="Online submissions are disabled. The form is hidden until a secure enquiry workflow is verified and explicitly enabled by the academy owner."
           />
           {submitted ? (
             <div role="status" aria-live="polite" className="text-center py-12 bg-teal-50 rounded-xl border border-teal-100">
