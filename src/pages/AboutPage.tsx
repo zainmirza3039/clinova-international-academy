@@ -11,37 +11,37 @@ const sections = [
     icon: Target,
     title: 'Our Mission',
     content:
-      'Proposed principle for owner review: make careful healthcare learning easier to explore through clear subject maps, original educational drafts and practical reflection tools. This is a content direction, not a statement of established services.',
+      'Make healthcare learning easier to explore through clear subject guides, educational reading and practical reflection tools.',
   },
   {
     icon: Eye,
     title: 'Our Vision',
     content:
-      'Proposed principle for owner review: build a transparent learning resource that distinguishes educational discussion from clinical guidance and clearly identifies what has, and has not, been confirmed.',
+      'Provide a transparent learning resource that distinguishes general education from clinical advice and describes programme arrangements accurately.',
   },
   {
     icon: Compass,
     title: 'Our Approach',
     content:
-      'The proposed approach is to use plain language, evidence-aware reading, explicit limitations and reflection prompts. Any course design, teaching model, review process or delivery arrangement remains subject to academy confirmation.',
+      'Our approach prioritises plain language, evidence-aware reading, clear scope limits and practical reflection. Programme delivery and assessment details are published only when confirmed.',
   },
   {
     icon: Users,
     title: 'Who We Serve',
     content:
-      'The draft content is intended for healthcare professionals, learners and organisations exploring topics such as physiotherapy, nursing, medicine, pharmacy, psychology, nutrition, occupational therapy, sports and healthcare management. Readers should work within their training and scope of practice.',
+      'Our educational resources cover topics across physiotherapy, nursing, medicine, pharmacy, psychology, nutrition, occupational therapy, sport and healthcare management. Readers should work within their training and scope of practice.',
   },
   {
     icon: Monitor,
     title: 'How We Teach',
     content:
-      'The current site provides draft reading and proposed study themes. Live teaching, video lessons, interactive assessment, progress tracking, pacing and learner support are not claimed here; ask the academy to confirm any future offering.',
+      'The website provides educational reading and subject-area information. Teaching formats, assessment, learner support and programme delivery are described on individual programme pages where those details are available.',
   },
   {
     icon: ShieldCheck,
     title: 'Quality & Learning Standards',
     content:
-      'Educational integrity principles proposed for owner review include transparent draft status, careful sourcing, clear scope limits, clinical/editorial review before publication and no implication of competency, employment, accreditation or professional recognition. No certificate or formal accreditation is promised.',
+      'We aim to distinguish educational information from clinical advice and formal qualifications. No accreditation, certificate, employment outcome or professional recognition should be assumed unless it is explicitly documented for a specific offering.',
   },
 ];
 
@@ -58,7 +58,7 @@ export default function AboutPage() {
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'About' }]}
         eyebrow="About Us"
         title="About Clinova International Academy"
-        description="Explore the proposed approach to healthcare education at Clinova. Academy location, delivery arrangements and institutional details await confirmation."
+        description="Explore Clinova's healthcare learning resources and subject areas."
         image="https://images.pexels.com/photos/5452189/pexels-photo-5452189.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
@@ -78,10 +78,10 @@ export default function AboutPage() {
                   Professional healthcare education, delivered online
                 </h2>
                 <p className="mt-6 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-                  This website presents a proposed content direction for Clinova International Academy: structured healthcare reading, subject-area maps and possible programme outlines. Academy history, institutional status, faculty, accreditation, fees and delivery arrangements have not been supplied and are not asserted here.
+                  Clinova International Academy brings together healthcare subject areas, educational reading and study resources designed to support professional learning and reflection. Programme availability, fees, delivery and recognition depend on the details published for each offering.
                 </p>
                 <p className="mt-4 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-                  Readers may use the drafts to identify questions, reflect on practice and request accurate information from the owner. No programme, assessment, certificate, employment outcome or professional recognition should be inferred from this catalogue.
+                  Readers can use these resources to explore topics and reflect on practice. Programme-specific requirements and any certificate or recognition should be checked against the published terms for that offering.
                 </p>
               </Reveal>
             </div>
@@ -120,8 +120,8 @@ export default function AboutPage() {
       </section>
 
       <CTASection
-        title="Explore the proposed learning direction"
-        description="Read the draft library and compare proposed subject areas. Confirm availability, terms and intended use with the academy before making a decision."
+        title="Explore healthcare learning"
+        description="Explore educational reading and subject areas. Review published programme details before making a learning commitment."
         primaryCTA={{ label: 'Explore Programmes', to: '/programmes' }}
         secondaryCTA={{ label: 'Contact Academy', to: '/contact' }}
       />
