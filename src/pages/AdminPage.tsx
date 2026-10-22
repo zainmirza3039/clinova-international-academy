@@ -11,7 +11,7 @@ type Enrollment = { id: string; student_id: string; programme_slug: string; prog
 type Progress = { id: string; student_id: string; enrollment_id: string; progress_percent: number; completed_lessons: number; total_lessons: number; updated_at: string };
 type Certificate = { id: string; student_id: string; enrollment_id: string; certificate_number: string; programme_title: string; status: 'issued' | 'revoked'; issued_at: string; revoked_at: string | null };
 
-const sections = ['Enrolments', 'Learning progress', 'Certificates'];
+const sections = ['Courses', 'Applications', 'Inquiries', 'Content', 'Events', 'Faculty', 'Settings'];
 const inputClass = 'mt-1 w-full rounded-lg border border-navy-200 px-3 py-2.5 text-sm text-navy-800';
 const labelClass = 'block text-sm font-medium text-navy-700';
 
