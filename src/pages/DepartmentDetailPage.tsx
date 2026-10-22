@@ -80,8 +80,8 @@ export default function DepartmentDetailPage() {
       {/* Learning Areas */}
       <section className="py-12 lg:py-16 bg-navy-50">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-bold text-navy-900 mb-3 text-center">Proposed topic coverage</h2>
-          <p className="text-center text-sm text-navy-600 mb-8">Subject categories for educational exploration, not an established department curriculum.</p>
+          <h2 className="font-heading text-2xl font-bold text-navy-900 mb-3 text-center">Topic areas</h2>
+          <p className="text-center text-sm text-navy-600 mb-8">Topic categories only. No related programme or CPD course is currently approved for public listing.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {department.learningAreas.map((area, i) => (
               <Reveal key={area} delay={(i % 4) * 60} className="flex items-center gap-3 p-4 bg-white rounded-lg border border-navy-100">
