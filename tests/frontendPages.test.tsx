@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import AdmissionsPage from '@/pages/AdmissionsPage';
 import ApplicationPage from '@/pages/ApplicationPage';
 import AdminPage from '@/pages/AdminPage';
@@ -12,7 +12,19 @@ vi.mock('@/components/Reveal', () => ({ default: ({ children }: { children: Reac
 
 function renderPage(page: React.ReactNode) { return render(<MemoryRouter>{page}</MemoryRouter>); }
 
-afterEach(() => cleanup());
+beforeEach(() => {
+  vi.stubGlobal('IntersectionObserver', class {
+    constructor(_callback: IntersectionObserverCallback) {}
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+    takeRecords(): IntersectionObserverEntry[] { return []; }
+  });
+});
+afterEach(() => {
+  cleanup();
+  vi.unstubAllGlobals();
+});
 
 describe('completion frontend pages', () => {
   it('explains that application submission and persistence are unavailable', () => {
