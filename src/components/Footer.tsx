@@ -1,3 +1,4 @@
+import BrandLogo from '@/components/BrandLogo';
 import { Link } from 'react-router-dom';
 import { academyPublicAddress } from '@/data/publicContact';
 
@@ -38,7 +39,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-5">
             <Link to="/" className="inline-block mb-6">
-              <img src="/clinova-logo-white.svg" alt="Clinova International Academy" className="w-[200px] h-auto" />
+              <BrandLogo variant="white" className="w-[240px] max-w-full" />
             </Link>
             <p className="text-sm text-navy-100/60 leading-[1.65] mb-6 max-w-md">
               Explore proposed healthcare learning pathways and original educational drafts.

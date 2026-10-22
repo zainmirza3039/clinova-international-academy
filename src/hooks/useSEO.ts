@@ -40,10 +40,10 @@ export function useSEO({ title, description, canonical, ogImage, structuredData,
       !siteOrigin || privateRoute ? 'noindex, nofollow' : 'index, follow';
     document.head.querySelector('meta[property="og:image"]')?.remove();
     document.head.querySelector('meta[name="twitter:image"]')?.remove();
-    if (ogImage) {
-      ensureMeta('meta[property="og:image"]', 'property', 'og:image').content = ogImage;
-      ensureMeta('meta[name="twitter:image"]', 'name', 'twitter:image').content = ogImage;
-    }
+    const image = ogImage ?? '/brand/clinova-social.png';
+    const imageUrl = siteOrigin ? new URL(image, siteOrigin).href : image;
+    ensureMeta('meta[property="og:image"]', 'property', 'og:image').content = imageUrl;
+    ensureMeta('meta[name="twitter:image"]', 'name', 'twitter:image').content = imageUrl;
     ensureMeta('meta[name="twitter:title"]', 'name', 'twitter:title').content = fullTitle;
     ensureMeta('meta[name="twitter:description"]', 'name', 'twitter:description').content = description;
 

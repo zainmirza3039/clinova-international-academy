@@ -1,3 +1,4 @@
+import BrandLogo from '@/components/BrandLogo';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { UnavailableAuth, safeReturnTarget, useAuth } from '@/auth/AuthProvider';
@@ -64,7 +65,7 @@ export default function AuthPage({ mode: initialMode = 'sign-in' }: Props) {
   const submitLabel = { 'sign-in': 'Sign in', 'sign-up': 'Create account', 'forgot-password': 'Send recovery email', 'reset-password': 'Update password' };
   return <section className="mx-auto max-w-xl px-6 py-16" aria-labelledby="auth-title">
     <div className="rounded-2xl border border-navy-100 bg-white p-8 shadow-sm">
-      <p className="text-sm font-semibold uppercase tracking-wide text-teal-600">Clinova Academy</p>
+      <BrandLogo className="w-[240px] max-w-full mb-6" />
       <h1 id="auth-title" className="mt-2 text-3xl font-bold text-navy-900">{titles[mode]}</h1>
       <p className="mt-3 text-navy-600">Use your account to access student learning information.</p>
       <form className="mt-8 space-y-5" onSubmit={submit} noValidate>

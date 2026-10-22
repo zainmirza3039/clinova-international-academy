@@ -1,3 +1,4 @@
+import BrandLogo from '@/components/BrandLogo';
 import { Link } from 'react-router-dom';
 import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
@@ -84,7 +85,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center shrink-0" onClick={() => setMobileOpen(false)}>
-            <img src="/clinova-logo.svg" alt="Clinova International Academy" className="w-[160px] sm:w-[180px] lg:w-[200px] h-auto" />
+            <BrandLogo className="w-[180px] sm:w-[200px] lg:w-[220px]" />
           </Link>
 
           {/* Desktop Navigation */}

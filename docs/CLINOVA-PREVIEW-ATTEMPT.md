@@ -1,6 +1,6 @@
-# Clinova deployment is READY; Preview target remains unconfirmed
+# Clinova Preview is READY; hosted app is SSO-protected
 
-The corrected, authorised source-file request created a deployment, but the connector returns `target: null` rather than confirming Preview. Testing stopped as instructed. Cancellation was attempted while the last observed state was BUILDING; the cancellation returned HTTP 400. A subsequent metadata read shows READY. No second request or alternate target was tried after the correction.
+The corrected, authorised source-file request created a deployment. Vercel's [official Create a New Deployment documentation](https://vercel.com/docs/rest-api/deployments/create-a-new-deployment) says an omitted target defaults to Preview and a response `target: null` denotes Preview, so this deployment is confirmed as Preview. It reached READY with no aliases. Anonymous requests returned Vercel's SSO login page; no login was attempted. Cancellation was requested while BUILDING but returned HTTP 400 because the deployment became READY. Production aliases remained unchanged.
 
 ## Result
 
@@ -11,10 +11,10 @@ The corrected, authorised source-file request created a deployment, but the conn
 - Verified source SHA: `fc0995317e3ff5815901fee3663f8b2935d25298`.
 - Verified branch metadata: `feat/clinova-local-learner-ui`.
 - Final state: **READY**.
-- Returned target: **null** in creation and both detail reads. Preview classification is **not confirmed**; do not call this a Preview-tested result.
+- Returned target: **null** in creation and both detail reads; Vercel documents `null` as the Preview target. The deployment is a Preview, but its app content was not accessible for testing because SSO is enabled.
 - Returned aliases: empty array. No alias, promotion or project/environment setting was requested.
 
-No browser or anonymous HTTP request was made to this deployment URL. There is no hosted route, mobile, auth, persistence or student-data test result.
+Anonymous fetches of `/`, `/student`, and `/programmes` returned Vercel's “Login – Vercel” SSO page. This confirms the deployment is protected, not that the application routes work. No credentials were submitted; there is no hosted route, mobile, auth, persistence or student-data test result.
 
 ## What was authorised and sent
 
@@ -22,7 +22,7 @@ The earlier task wording required a literal `target: preview` API field; that fi
 
 The coordinator then corrected that wording: the owner had authorised deploy/test under no-Production restrictions, not a particular literal field. The full `create_deployment` definition explicitly documents omitted target as Preview. One new request was therefore authorised with **the target property omitted**. It used only the exact Clinova project/team and the previously verified local source payload. It did not include `production`, `staging`, a custom environment, `gitSource`, settings, paid build machine or aliases. No branch was pushed.
 
-The creation response returned the correct project and source SHA, INITIALIZING and `target: null`. An immediate detail read returned the same project/SHA and null target, with state BUILDING. Because Preview could not be confirmed, no testing was started and cancellation was requested.
+The creation response returned the correct project and source SHA, INITIALIZING and `target: null`. An immediate detail read returned the same project/SHA and null target, with state BUILDING. The official API documentation defines this null target as Preview. Anonymous route checks then showed the SSO login page, so application testing stopped without signing in.
 
 ## Cancellation outcome
 
@@ -32,7 +32,11 @@ The creation response returned the correct project and source SHA, INITIALIZING 
 
 Cancellation request ID: `iad1:sfo1::n2kh6-1792663861531-62c65f472603`.
 
-The final read returned READY, with `ready: 1792663850113`. That ready timestamp precedes the cancellation request timestamp. Cancellation was not repeated and the READY deployment was not deleted, promoted, aliased or tested. The connector did not return an explicit Preview classification, so this task stops here rather than inferring permission to continue.
+The final read returned READY, with `ready: 1792663850113`. That ready timestamp precedes the cancellation request timestamp. Cancellation was not repeated and the READY Preview was not deleted, promoted or aliased. The site was not tested past the anonymous SSO response.
+
+## Fresh Production alias check
+
+The Backend Developer's read-only Vercel check after creation confirmed that the current production deployment remains `dpl_BMaYjgA62VFeHf2F4JDy481Yj2h6`, READY at commit `759019cd95200c7ff118424399e15ccb5632a039`. Its aliases remain `clinova-international-academy.vercel.app`, `clinova-international-academy-zainmirza3039s-projects.vercel.app`, and `clinova-international-academ-git-e3e6a2-zainmirza3039s-projects.vercel.app`. The `...-git-main-...` alias remains on older Production deployment `dpl_D9yzWGhZT3tZsHm5CbapTiC8n8Pv` at `033b8cdc…`. New deployment `dpl_HmoWoAB5WFiEGsNCiy3NnDEz4cK7` has `target: null` (Preview per Vercel's documented response semantics) and no aliases; no Production alias points to it. This was a separate read-only check; no alias was changed.
 
 ## Source and local QA
 
@@ -42,7 +46,7 @@ The internal payload at `/workspace/clinova-preview-payload-fc099.mOlz` comprise
 
 The complete application previously passed 268 frontend tests, 34 disposable SQL assertions, typecheck and a default-off build. Lint has zero errors and four pre-existing fast-refresh warnings. Local browser checks cover draft public pages, disabled real auth/student routes and isolated synthetic learner states, including 375px/768px iframe layouts. The separate disposable payload build passed locally with noindex, disallow-all robots, an empty sitemap and no synthetic harness fixtures. See [implementation details](CLINOVA-LOCAL-LEARNER-INTEGRATION.md).
 
-READY is a returned deployment status, not proof that hosted learner behaviour, Preview classification or active runtime flags were independently tested.
+READY is the deployment build state. Preview classification is confirmed by the API's documented `target: null` semantics; hosted learner behaviour and active runtime flags were not independently tested because SSO blocked anonymous access.
 
 ## Protection and launch limits
 
