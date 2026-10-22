@@ -25,6 +25,8 @@ const programmeMenuItems = [
   { label: 'Featured Programmes', to: '/programmes?featured=true', desc: 'Explore our highlights' },
 ];
 
+const mobileSubmenuId = (label: string) => `mobile-submenu-${label.toLowerCase().replace(/\s+/g, '-')}`;
+
 export default function Header() {
   const isScrolled = useScrollPosition();
   const { pathname } = useLocation();
@@ -33,7 +35,8 @@ export default function Header() {
   const mobilePanelRef = useRef<HTMLDivElement>(null);
   const [megaMenu, setMegaMenu] = useState<string | null>(null);
   const [mobileMegaMenu, setMobileMegaMenu] = useState<string | null>(null);
-  useEffect(() => { setMobileOpen(false); setMegaMenu(null); }, [pathname]);
+  useEffect(() => { setMobileOpen(false); setMegaMenu(null); setMobileMegaMenu(null); }, [pathname]);
+  useEffect(() => { if (!mobileOpen) setMobileMegaMenu(null); }, [mobileOpen]);
   useEffect(() => {
     const close = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -206,9 +209,11 @@ export default function Header() {
                   </Link>
                   {link.hasMegaMenu && (
                     <button
+                      type="button"
                       className="p-3 text-navy-600"
                       onClick={() => setMobileMegaMenu(mobileMegaMenu === link.label ? null : link.label)}
-                      aria-label={`Expand ${link.label} submenu`}
+                      aria-controls={mobileSubmenuId(link.label)}
+                      aria-label={`${mobileMegaMenu === link.label ? 'Collapse' : 'Expand'} ${link.label} submenu`}
                       aria-expanded={mobileMegaMenu === link.label}
                     >
                       <ChevronDown className={`w-5 h-5 transition-transform ${mobileMegaMenu === link.label ? 'rotate-180' : ''}`} />
@@ -217,7 +222,7 @@ export default function Header() {
                 </div>
                 {/* Mobile submenu - Departments */}
                 {link.hasMegaMenu && mobileMegaMenu === link.label && link.label === 'Departments' && (
-                  <div className="pl-4 py-1 space-y-0.5">
+                  <div id={mobileSubmenuId(link.label)} className="pl-4 py-1 space-y-0.5">
                     {departments.map((dept) => (
                       <Link
                         key={dept.id}
@@ -232,7 +237,7 @@ export default function Header() {
                 )}
                 {/* Mobile submenu - Programmes */}
                 {link.hasMegaMenu && mobileMegaMenu === link.label && link.label === 'Programmes' && (
-                  <div className="pl-4 py-1 space-y-0.5">
+                  <div id={mobileSubmenuId(link.label)} className="pl-4 py-1 space-y-0.5">
                     {programmeMenuItems.map((item) => (
                       <Link
                         key={item.label}

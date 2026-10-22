@@ -1,9 +1,11 @@
 import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Mail, CheckCircle, MessageSquare, GraduationCap, Handshake } from 'lucide-react';
 import { enquiriesEnabled, enquiryUnavailable } from '@/lib/siteConfig';
 import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import { validateFormFields } from '@/lib/formValidation';
+import { academyPublicAddress } from '@/data/publicContact';
 
 const enquiryTypes = ['General Enquiry', 'Academic Enquiry', 'Partnership Enquiry', 'Technical Support'];
 
@@ -95,7 +97,7 @@ export default function ContactPage() {
                 <card.icon className="w-5 h-5 text-teal-500 mb-4" strokeWidth={1.5} />
                 <h3 className="font-heading font-bold text-navy-800 text-base mb-2">{card.title}</h3>
                 <p className="text-sm text-navy-600/70 leading-relaxed mb-3">{card.desc}</p>
-                <p className="text-sm text-navy-600">Contact address awaiting academy confirmation.</p>
+                <p className="text-sm text-navy-600">Email channel awaiting academy confirmation.</p>
               </div>
             ))}
           </div>
@@ -116,6 +118,7 @@ export default function ContactPage() {
                 <form aria-label="Contact enquiry" onSubmit={handleSubmit} className="space-y-5 bg-surface-50 p-6 md:p-8 border border-navy-100">
                   {!enquiriesEnabled && <p className="text-sm text-navy-700 border-l-2 border-teal-500 pl-3 mb-4">{enquiryUnavailable}</p>}
                   {error && <p role="alert" aria-live="assertive" className="text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
+                  <p className="text-sm text-navy-700">Do not include patient information, medical records, passwords or payment details. Read the <Link to="/privacy-policy" className="underline text-clinical-600">draft privacy policy</Link>. No delivery or response time is promised.</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className={labelClass} htmlFor="name">Name *</label>
@@ -165,6 +168,11 @@ export default function ContactPage() {
               <div className="bg-navy-800 p-8 text-white">
                 <h2 className="font-heading text-xl font-bold mb-6">Contact Details</h2>
                 <div className="space-y-5">
+                  <div>
+                    <div className="text-xs text-navy-100/80 mb-1">Public academy address</div>
+                    <address className="not-italic text-sm leading-relaxed">{academyPublicAddress}</address>
+                    <p className="mt-2 text-xs text-navy-100/80">Visiting arrangements and opening hours have not been confirmed.</p>
+                  </div>
                   <div className="flex items-start gap-3">
                     <Mail className="w-5 h-5 text-teal-400 shrink-0 mt-0.5" />
                     <div>

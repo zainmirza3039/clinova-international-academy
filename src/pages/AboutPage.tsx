@@ -11,37 +11,37 @@ const sections = [
     icon: Target,
     title: 'Our Mission',
     content:
-      'To make high-quality healthcare professional education more accessible through flexible digital learning. We aim to support healthcare professionals in maintaining and developing their knowledge, skills and professional practice throughout their careers.',
+      'Proposed principle for owner review: make careful healthcare learning easier to explore through clear subject maps, original educational drafts and practical reflection tools. This is a content direction, not a statement of established services.',
   },
   {
     icon: Eye,
     title: 'Our Vision',
     content:
-      'To be a trusted online healthcare education provider, recognised for delivering clinically relevant, structured learning that supports the professional development of healthcare practitioners worldwide.',
+      'Proposed principle for owner review: build a transparent learning resource that distinguishes educational discussion from clinical guidance and clearly identifies what has, and has not, been confirmed.',
   },
   {
     icon: Compass,
     title: 'Our Approach',
     content:
-      'We design programmes around the realities of professional practice. Our courses combine evidence-informed content with practical clinical relevance, delivered through an accessible online platform that accommodates the demands of working healthcare professionals.',
+      'The proposed approach is to use plain language, evidence-aware reading, explicit limitations and reflection prompts. Any course design, teaching model, review process or delivery arrangement remains subject to academy confirmation.',
   },
   {
     icon: Users,
     title: 'Who We Serve',
     content:
-      'Clinova serves qualified healthcare professionals and those in training across a range of disciplines, including physiotherapy, nursing, medicine, pharmacy, psychology, nutrition, occupational therapy, sports medicine and healthcare management.',
+      'The draft content is intended for healthcare professionals, learners and organisations exploring topics such as physiotherapy, nursing, medicine, pharmacy, psychology, nutrition, occupational therapy, sports and healthcare management. Readers should work within their training and scope of practice.',
   },
   {
     icon: Monitor,
     title: 'How We Teach',
     content:
-      'Our online learning model integrates video lessons, reading resources, interactive assessments and progress tracking. Programmes are self-paced where applicable, allowing learners to study at times that suit their professional and personal commitments.',
+      'The current site provides draft reading and proposed study themes. Live teaching, video lessons, interactive assessment, progress tracking, pacing and learner support are not claimed here; ask the academy to confirm any future offering.',
   },
   {
     icon: ShieldCheck,
     title: 'Quality & Learning Standards',
     content:
-      'We are committed to maintaining educational quality through structured programme design, evidence-informed content and clear learning outcomes. Our programmes are CPD-focused and provide Certificates of Completion. We do not currently claim formal accreditation from any regulatory body.',
+      'Educational integrity principles proposed for owner review include transparent draft status, careful sourcing, clear scope limits, clinical/editorial review before publication and no implication of competency, employment, accreditation or professional recognition. No certificate or formal accreditation is promised.',
   },
 ];
 
@@ -78,14 +78,10 @@ export default function AboutPage() {
                   Professional healthcare education, delivered online
                 </h2>
                 <p className="mt-6 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-                  Clinova International Academy is a virtual healthcare education institute offering structured online
-                  learning for healthcare professionals. We provide certificate courses, diploma programmes and
-                  CPD-focused professional development across a range of healthcare disciplines.
+                  This website presents a proposed content direction for Clinova International Academy: structured healthcare reading, subject-area maps and possible programme outlines. Academy history, institutional status, faculty, accreditation, fees and delivery arrangements have not been supplied and are not asserted here.
                 </p>
                 <p className="mt-4 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-                  Our programmes are designed for qualified healthcare professionals who want to expand their knowledge,
-                  maintain their professional development and develop clinically relevant skills — all through a flexible
-                  online platform that fits around their working lives.
+                  Readers may use the drafts to identify questions, reflect on practice and request accurate information from the owner. No programme, assessment, certificate, employment outcome or professional recognition should be inferred from this catalogue.
                 </p>
               </Reveal>
             </div>
@@ -124,8 +120,8 @@ export default function AboutPage() {
       </section>
 
       <CTASection
-        title="Start Your Professional Development Journey"
-        description="Explore our healthcare education programmes and take the next step in your career."
+        title="Explore the proposed learning direction"
+        description="Read the draft library and compare proposed subject areas. Confirm availability, terms and intended use with the academy before making a decision."
         primaryCTA={{ label: 'Explore Programmes', to: '/programmes' }}
         secondaryCTA={{ label: 'Contact Academy', to: '/contact' }}
       />

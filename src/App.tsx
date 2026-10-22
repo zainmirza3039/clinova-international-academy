@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -13,7 +14,7 @@ import CPDCourseDetailPage from '@/pages/CPDCourseDetailPage';
 import OnlineLearningPage from '@/pages/OnlineLearningPage';
 import TrainingPartnersPage from '@/pages/TrainingPartnersPage';
 import CertificateVerificationPage from '@/pages/CertificateVerificationPage';
-import { ResourcesPage, ResourceDetailPage } from '@/pages/ResourcesPage';
+
 import ContactPage from '@/pages/ContactPage';
 import LegalPage from '@/pages/LegalPage';
 import NotFoundPage from '@/pages/NotFoundPage';
@@ -30,6 +31,11 @@ import { AuthProvider, ProtectedStudentRoute } from '@/auth/AuthProvider';
 import AuthPage from '@/pages/AuthPage';
 import StudentDashboardPage from '@/pages/StudentDashboardPage';
 
+const ResourcesPage = lazy(() => import('@/pages/ResourcesPage').then(module => ({ default: module.ResourcesPage })));
+const ResourceDetailPage = lazy(() => import('@/pages/ResourcesPage').then(module => ({ default: module.ResourceDetailPage })));
+const LearningResourcesPage = lazy(() => import('@/pages/LearningResourcesPage'));
+const LearningResourceDetailPage = lazy(() => import('@/pages/LearningResourcesPage').then(module => ({ default: module.LearningResourceDetailPage })));
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -41,6 +47,7 @@ export default function App() {
         <main id="main-content" tabIndex={-1} className="flex-1">
           <div className="preview-notice">{siteSettings.contentStatus}</div>
           <ErrorBoundary>
+          <Suspense fallback={<p role="status" aria-live="polite" className="px-6 py-20 text-center text-navy-700">Loading educational resources…</p>}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/sign-in" element={<AuthPage mode="sign-in" />} />
@@ -72,6 +79,8 @@ export default function App() {
             <Route path="/training-partners" element={<TrainingPartnersPage />} />
             <Route path="/verify" element={<CertificateVerificationPage />} />
             <Route path="/resources" element={<ResourcesPage />} />
+            <Route path="/learning-resources" element={<LearningResourcesPage />} />
+            <Route path="/learning-resources/:slug" element={<LearningResourceDetailPage />} />
             <Route path="/resources/:slug" element={<ResourceDetailPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy-policy" element={<LegalPage {...privacyPolicy} />} />
@@ -80,6 +89,7 @@ export default function App() {
             <Route path="/refund-policy" element={<LegalPage {...refundPolicy} />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
+          </Suspense>
           </ErrorBoundary>
         </main>
         <Footer />

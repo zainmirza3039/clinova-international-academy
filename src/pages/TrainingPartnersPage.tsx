@@ -8,19 +8,19 @@ import Reveal from '@/components/Reveal';
 import { validateFormFields } from '@/lib/formValidation';
 
 const benefits = [
-  { icon: FileText, title: 'Structured Programmes', desc: 'Access organised, structured educational content for your team.' },
-  { icon: Users, title: 'Learner Support', desc: 'Comprehensive support for learners throughout their journey.' },
-  { icon: Award, title: 'Digital Certification', desc: 'Digital certificates for programme completions.' },
-  { icon: FileText, title: 'Professional Resources', desc: 'A library of professional educational resources.' },
-  { icon: ShieldCheck, title: 'Quality Assurance', desc: 'Evidence-informed content with clear learning outcomes.' },
-  { icon: Handshake, title: 'Partnership Support', desc: 'Dedicated support from our partnership team.' },
+  { icon: FileText, title: 'Share your context', desc: 'Describe your organisation, audience and learning questions.' },
+  { icon: Users, title: 'Discuss learner needs', desc: 'Explain the support and access arrangements you would need.' },
+  { icon: Award, title: 'Ask about recognition', desc: 'Request accurate information; certificates and recognition are not promised.' },
+  { icon: FileText, title: 'Review draft resources', desc: 'Use the existing reading library to frame a possible conversation.' },
+  { icon: ShieldCheck, title: 'Clarify review', desc: 'Ask what has been reviewed, approved or published.' },
+  { icon: Handshake, title: 'Consider terms', desc: 'Discuss any partnership only after the owner confirms capability and terms.' },
 ];
 
 const howItWorks = [
-  { step: '01', title: 'Submit Enquiry', desc: 'Complete the partnership enquiry form below.' },
-  { step: '02', title: 'Initial Discussion', desc: 'We will discuss your organisation needs and objectives.' },
-  { step: '03', title: 'Partnership Agreement', desc: 'We formalise the partnership and agree on delivery.' },
-  { step: '04', title: 'Programme Delivery', desc: 'Your team begins learning through our platform.' },
+  { step: '01', title: 'Share an enquiry', desc: 'Use the form to describe your organisation and learning context.' },
+  { step: '02', title: 'Request confirmation', desc: 'Ask which content, delivery and support arrangements are actually available.' },
+  { step: '03', title: 'Review terms', desc: 'Consider any written scope, responsibilities, privacy and commercial terms.' },
+  { step: '04', title: 'Decide cautiously', desc: 'Do not assume a partnership, programme, certificate or outcome until confirmed.' },
 ];
 
 const whoCanApply = [
@@ -36,7 +36,7 @@ export default function TrainingPartnersPage() {
   useSEO({
     title: 'Training Partners',
     description:
-      'Become a Clinova Training Partner. Deliver structured professional healthcare education within your organisation.',
+      'Discuss a possible training partnership. Share a possible education enquiry; partnership capabilities and terms are not yet confirmed.',
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -105,8 +105,8 @@ export default function TrainingPartnersPage() {
       <PageHero
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Training Partners' }]}
         eyebrow="Training Partners"
-        title="Become a Clinova Training Partner"
-        description="Work with Clinova to deliver structured professional education within your organisation or professional network."
+        title="Discuss a possible training partnership"
+        description="This page is a proposal for organisations to share a learning need. It does not promise contracts, courses, certificates, learner support, delivery or employment outcomes."
         image="https://images.pexels.com/photos/6129499/pexels-photo-6129499.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
@@ -115,8 +115,8 @@ export default function TrainingPartnersPage() {
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Benefits"
-            title="Why Partner With Clinova?"
-            description="Our partnership programme provides organisations with structured educational resources and support."
+            title="What to discuss in an enquiry"
+            description="Use an enquiry to ask precise questions about subject matter, audience, review status, delivery, data handling, fees and any recognition. The form is not evidence that a partnership programme exists."
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {benefits.map((item, i) => (
@@ -141,7 +141,7 @@ export default function TrainingPartnersPage() {
             <div>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-900 mb-4">Who Can Apply?</h2>
               <p className="text-sm text-navy-500 leading-relaxed mb-6">
-                We welcome partnerships with a range of organisations involved in healthcare education and service delivery.
+                Organisations may use the proposed enquiry route to describe a possible collaboration; acceptance, capability and terms require owner confirmation.
               </p>
               <div className="space-y-3">
                 {whoCanApply.map((item) => (
@@ -177,14 +177,14 @@ export default function TrainingPartnersPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Apply Now"
-            title="Partnership Enquiry Form"
-            description="Complete the form below and our team will be in touch to discuss your partnership."
+            title="Proposed partnership enquiry"
+            description="The form is retained in its existing disabled state when enquiries are not enabled. If enabled by the owner, use it to request information rather than assume an offer."
           />
           {submitted ? (
             <div role="status" aria-live="polite" className="text-center py-12 bg-teal-50 rounded-xl border border-teal-100">
               <CheckCircle className="w-12 h-12 text-teal-600 mx-auto mb-4" />
               <h3 className="font-heading text-xl font-bold text-navy-900 mb-2">Enquiry Submitted</h3>
-              <p className="text-sm text-navy-600">Thank you for your interest in partnering with Clinova. Our team will be in touch with you soon.</p>
+              <p className="text-sm text-navy-600">Your message was received by the configured enquiry service. This does not confirm a partnership, course, certificate or support arrangement.</p>
             </div>
           ) : (
             <form aria-label="Partnership enquiry" onSubmit={handleSubmit} className="space-y-5 bg-navy-50 p-6 md:p-8 rounded-xl border border-navy-100">

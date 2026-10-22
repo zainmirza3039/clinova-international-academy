@@ -10,14 +10,14 @@ import { departments } from '@/data/departments';
 import type { ProgrammeCategory } from '@/data/types';
 
 const programmeTypes: (ProgrammeCategory | 'All')[] = ['All', 'Certificate', 'Diploma', 'Professional Development', 'CPD'];
-const durations = ['All', '8 weeks', '10 weeks', '12 weeks', '14 weeks', '16 weeks', '24 weeks'];
-const deliveries = ['All', 'Online'];
+const durations = ['All'];
+const deliveries = ['All'];
 
 export default function ProgrammesPage() {
   useSEO({
     title: 'Programmes',
     description:
-      'Browse all healthcare education programmes at Clinova International Academy. Filter by department, type, duration and CPD hours.',
+      'Browse all healthcare education programmes at Clinova International Academy. Explore draft educational topics by subject category and proposed programme type.',
   });
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -50,8 +50,8 @@ export default function ProgrammesPage() {
       <PageHero
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Programmes' }]}
         eyebrow="Programmes"
-        title="All Programmes"
-        description="Browse our complete catalogue of certificate courses, diploma programmes and professional development courses across all healthcare departments."
+        title="Proposed Programme Catalogue"
+        description="Explore draft educational outlines, not confirmed course offers. Availability, duration, delivery, fees, CPD hours and certificates await academy confirmation."
         image="https://images.pexels.com/photos/8376296/pexels-photo-8376296.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
@@ -86,17 +86,17 @@ export default function ProgrammesPage() {
               </div>
               <div>
                 <label htmlFor="programme-duration" className="block text-xs font-medium text-navy-500 mb-1.5">Duration</label>
-                <select id="programme-duration" className={selectClass} value={durationFilter} onChange={(e) => setDurationFilter(e.target.value)}>
+                <select id="programme-duration" disabled className={selectClass} value={durationFilter} onChange={(e) => setDurationFilter(e.target.value)}>
                   {durations.map((d) => (
-                    <option key={d} value={d}>{d === 'All' ? 'All Durations' : d}</option>
+                    <option key={d} value={d}>{d === 'All' ? 'Duration awaiting confirmation' : d}</option>
                   ))}
                 </select>
               </div>
               <div>
                 <label htmlFor="programme-delivery" className="block text-xs font-medium text-navy-500 mb-1.5">Delivery</label>
-                <select id="programme-delivery" className={selectClass} value={deliveryFilter} onChange={(e) => setDeliveryFilter(e.target.value)}>
+                <select id="programme-delivery" disabled className={selectClass} value={deliveryFilter} onChange={(e) => setDeliveryFilter(e.target.value)}>
                   {deliveries.map((d) => (
-                    <option key={d} value={d}>{d === 'All' ? 'All Delivery' : d}</option>
+                    <option key={d} value={d}>{d === 'All' ? 'Delivery awaiting confirmation' : d}</option>
                   ))}
                 </select>
               </div>

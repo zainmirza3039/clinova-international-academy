@@ -19,29 +19,29 @@ import { newsItems, generalFAQs } from '@/data/testimonials';
 import { useState } from 'react';
 
 const learningSteps = [
-  { number: '01', title: 'Choose Your Programme', desc: 'Browse our catalogue and select a programme that fits your professional goals.' },
-  { number: '02', title: 'Study Online', desc: 'Access video lessons, reading materials and resources through our online platform.' },
-  { number: '03', title: 'Complete Assessment', desc: 'Demonstrate your understanding through quizzes, assignments and case studies.' },
-  { number: '04', title: 'Receive Your Certificate', desc: 'Get your digital Certificate of Completion upon successful programme completion.' },
+  { number: '01', title: 'Read a draft', desc: 'Start with an educational article or subject-area outline and note what you want to explore.' },
+  { number: '02', title: 'Reflect on practice', desc: 'Use the learning resources to connect ideas with your role, scope of practice and local guidance.' },
+  { number: '03', title: 'Ask the owner', desc: 'Contact the academy to request confirmation of any course, delivery, dates or assessment arrangements.' },
+  { number: '04', title: 'Choose carefully', desc: 'Only proceed when the academy has confirmed the offering and its terms directly.' },
 ];
 
 const pathwaySteps = [
-  { label: 'Certificate Courses', desc: 'Start with focused short programmes' },
-  { label: 'Professional Development', desc: 'Build specialised professional skills' },
-  { label: 'Diploma Programmes', desc: 'Undertake comprehensive study' },
-  { label: 'Advanced Learning', desc: 'Continue your educational journey' },
+  { label: 'Subject areas', desc: 'Start with a draft topic map' },
+  { label: 'Learning library', desc: 'Read articles and use reflection tools' },
+  { label: 'Proposed outlines', desc: 'Compare educational ideas, not commitments' },
+  { label: 'Owner confirmation', desc: 'Ask what is actually available' },
 ];
 
 export default function HomePage() {
   useSEO({
     title: 'Clinova International Academy | Advancing Healthcare Through Professional Education',
     description:
-      'Flexible online healthcare education for professionals. CPD-focused courses, certificate and diploma programmes across physiotherapy, nursing, medicine, psychology and more.',
+      'Proposed healthcare subject areas, educational article drafts and study tools. Course availability, delivery, assessment and recognition require academy confirmation.',
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'EducationalOrganization',
       name: 'Clinova International Academy',
-      description: 'Online healthcare education, CPD and professional development for healthcare professionals.',
+      description: 'Proposed healthcare learning content and subject-area resources for professional discussion.',
     },
   });
 
@@ -79,25 +79,24 @@ export default function HomePage() {
               </span>
             </div>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white leading-[1.08] text-balance">
-              Advance your healthcare career through professional education
+              Explore a thoughtful approach to healthcare learning
             </h1>
             <p className="mt-7 text-lg text-navy-100/65 leading-[1.6] max-w-xl">
-              Flexible online learning designed for healthcare professionals seeking practical knowledge, professional
-              development and CPD-focused education.
+              A proposed collection of healthcare subject areas, educational reading and study tools. Use the material to explore questions; confirm any academy offering before relying on it.
             </p>
             <div className="mt-9 flex flex-col sm:flex-row gap-3">
               <Link
                 to="/programmes"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-clinical-500 text-white font-semibold hover:bg-clinical-600 transition-colors"
               >
-                Explore Programmes
+                Explore Proposed Outlines
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/cpd-courses"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-transparent text-white font-semibold border border-white/25 hover:bg-white/10 transition-colors"
               >
-                Browse CPD Courses
+                Browse Draft Reading
               </Link>
             </div>
           </div>
@@ -110,7 +109,7 @@ export default function HomePage() {
               {[
                 { label: 'Flexible Study' },
                 { label: 'CPD-focused learning' },
-                { label: 'Certificate details pending' },
+                { label: 'Offering details pending' },
                 { label: 'Global Access' },
                 { label: 'Self-Paced' },
               ].map((item) => (
@@ -137,7 +136,7 @@ export default function HomePage() {
                   <div className="border-t border-navy-100 pt-4">
                     <div className="flex items-center gap-2 text-navy-600">
                       <Globe className="w-4 h-4 text-teal-500" />
-                      <span>Worldwide online learning</span>
+                      <span>Draft learning resources</span>
                     </div>
                   </div>
                 </div>
@@ -149,12 +148,12 @@ export default function HomePage() {
                   Professional education for the modern healthcare workforce
                 </h2>
                 <p className="mt-6 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-                  This draft catalogue explores online educational opportunities for healthcare professionals who want to
-                  expand knowledge, maintain professional development and develop clinically relevant skills. Programme outlines span healthcare disciplines. Availability, delivery and admissions details await academy confirmation.
+                  This draft catalogue organises proposed subject areas, educational article drafts and study tools for healthcare professionals. Use it to frame questions and reflect on practice; availability, delivery, admissions and outcomes require academy confirmation.
                 </p>
                 <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-10 border-t border-navy-100 pt-10">
                   {[
                     { stat: 'Explore', label: 'Draft study areas' },
+                    { stat: String(newsItems.length), label: 'Draft articles to read' },
                     { stat: 'Compare', label: 'Proposed programme outlines' },
                     { stat: 'Plan', label: 'Your next learning step' },
                   ].map((item) => (
@@ -179,7 +178,7 @@ export default function HomePage() {
                 Departments
               </div>
               <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
-                Ten healthcare disciplines, one learning platform
+                Proposed subject areas for healthcare learning
               </h2>
             </Reveal>
             <Link
@@ -317,11 +316,10 @@ export default function HomePage() {
                 Healthcare education without borders
               </h2>
               <p className="mt-5 text-base text-navy-600/80 leading-[1.65]">
-                Clinova's virtual learning model enables healthcare professionals to access educational content regardless
-                of location. Our online platform brings structured healthcare education to professionals across the world.
+                This draft platform groups reading and proposed study themes so healthcare professionals can explore ideas from wherever they are. It does not establish a live teaching service, clinical supervision or a guaranteed course pathway.
               </p>
               <div className="mt-8 space-y-3">
-                {['Learn from anywhere with an internet connection', 'Study at your own pace and schedule', 'Join a global community of healthcare learners', 'Access the same quality content worldwide'].map((point) => (
+                {['Read draft material at a time that suits you', 'Use reflection prompts alongside local guidance', 'Compare topics before asking about an offering', 'Treat every outline as subject to owner confirmation'].map((point) => (
                   <div key={point} className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 text-teal-500 shrink-0 mt-0.5" />
                     <span className="text-sm text-navy-700 leading-relaxed">{point}</span>
@@ -332,7 +330,7 @@ export default function HomePage() {
                 to="/programmes"
                 className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-navy-800 text-white font-semibold hover:bg-navy-700 transition-colors"
               >
-                Explore Online Programmes
+                Explore Proposed Outlines
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </Reveal>
@@ -385,18 +383,18 @@ export default function HomePage() {
                 Training Partners
               </div>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-800 leading-[1.15] text-balance">
-                Become a Clinova training partner
+                Explore a possible training partnership
               </h2>
               <p className="mt-5 text-base text-navy-600/80 leading-[1.65]">
-                Work with Clinova to deliver structured professional education within your organisation or professional network.
+                Organisations can use this page to outline a possible education enquiry. Partnership terms, resources, support and delivery arrangements are not yet confirmed.
               </p>
               <div className="mt-8 space-y-3">
                 {[
-                  'Structured programmes tailored to your organisation',
-                  'Comprehensive learner support',
-                  'Digital certification for your team',
-                  'Professional educational resources',
-                  'Dedicated partnership support',
+                  'Share your organisation’s learning context',
+                  'Describe the topics you want to explore',
+                  'Ask about possible delivery models',
+                  'Request confirmation of available resources',
+                  'Discuss terms only after owner review',
                 ].map((benefit) => (
                   <div key={benefit} className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 text-teal-500 shrink-0 mt-0.5" />
@@ -408,7 +406,7 @@ export default function HomePage() {
                 to="/training-partners"
                 className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-clinical-500 text-white font-semibold hover:bg-clinical-600 transition-colors"
               >
-                Partner With Clinova
+                Send an Enquiry
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </Reveal>
@@ -436,7 +434,7 @@ export default function HomePage() {
                 News &amp; Resources
               </div>
               <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
-                Latest from Clinova
+                Draft learning library
               </h2>
             </Reveal>
             <Link
@@ -487,10 +485,10 @@ export default function HomePage() {
                 <span className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-400">Get Started</span>
               </div>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-white leading-[1.2] text-balance">
-                Ready to advance your healthcare career?
+                Ready to explore a learning question?
               </h2>
               <p className="mt-4 text-base text-white/70 leading-[1.65] max-w-lg">
-                Explore our programmes and start your professional development journey today.
+                Begin with draft reading and study tools. Course availability, assessment, recognition and outcomes require direct confirmation from the academy.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 <Link

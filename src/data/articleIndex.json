@@ -1,0 +1,137 @@
+[
+  {
+    "id": "article-1",
+    "slug": "physiotherapy-assessment-structured-approach",
+    "title": "DRAFT: A Structured Approach to Physiotherapy Assessment",
+    "excerpt": "A function-led framework for a safe history, examination and shared plan.",
+    "category": "Assessment",
+    "date": "Draft — publication date awaiting academy confirmation",
+    "image": "https://images.pexels.com/photos/5407204/pexels-photo-5407204.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  },
+  {
+    "id": "article-2",
+    "slug": "musculoskeletal-pain-and-function",
+    "title": "DRAFT: Musculoskeletal Pain and Function: Looking Beyond a Pain Score",
+    "excerpt": "How pain, capacity, context and participation interact in person-centred rehabilitation.",
+    "category": "Musculoskeletal",
+    "date": "Draft — publication date awaiting academy confirmation",
+    "image": "https://images.pexels.com/photos/4506169/pexels-photo-4506169.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  },
+  {
+    "id": "article-3",
+    "slug": "therapeutic-exercise-safe-progression",
+    "title": "DRAFT: Therapeutic Exercise: Principles for Safe Progression",
+    "excerpt": "A cautious guide to selecting, adapting and progressing therapeutic exercise while monitoring response.",
+    "category": "Rehabilitation",
+    "date": "Draft — publication date awaiting academy confirmation",
+    "image": "https://images.pexels.com/photos/5934556/pexels-photo-5934556.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  },
+  {
+    "id": "article-4",
+    "slug": "knee-osteoarthritis-rehabilitation",
+    "title": "DRAFT: Knee Osteoarthritis: Exercise, Function and Rehabilitation",
+    "excerpt": "How education, tailored exercise and functional goals fit into knee osteoarthritis care, with attention to flares and referral.",
+    "category": "Rehabilitation",
+    "date": "Draft — publication date awaiting academy confirmation",
+    "image": "https://images.pexels.com/photos/5407204/pexels-photo-5407204.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  },
+  {
+    "id": "article-5",
+    "slug": "low-back-pain-rehabilitation",
+    "title": "DRAFT: Low Back Pain: Assessment, Education and Rehabilitation",
+    "excerpt": "A safety-conscious overview of low back pain assessment, education, activity and rehabilitation, including escalation.",
+    "category": "Rehabilitation",
+    "date": "Draft — publication date awaiting academy confirmation",
+    "image": "https://images.pexels.com/photos/4506169/pexels-photo-4506169.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  },
+  {
+    "id": "article-6",
+    "slug": "shoulder-pain-assessment-rehabilitation",
+    "title": "DRAFT: Shoulder Pain Assessment and Rehabilitation: A Reasoned Clinical Approach",
+    "excerpt": "A clinically grounded overview of shoulder assessment, differential reasoning, progressive rehabilitation, safety-netting, and return to meaningful activity.",
+    "category": "Rehabilitation",
+    "date": "Draft — publication date awaiting academy confirmation",
+    "image": "https://images.pexels.com/photos/5934556/pexels-photo-5934556.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  },
+  {
+    "id": "article-7",
+    "slug": "stroke-rehabilitation-functional-goals",
+    "title": "DRAFT: Stroke Rehabilitation: Setting Functional Goals With the Whole Team",
+    "excerpt": "How stroke rehabilitation teams translate assessment into meaningful, measurable, revisable goals across body functions, activity, participation, and context.",
+    "category": "Rehabilitation",
+    "date": "Draft — publication date awaiting academy confirmation",
+    "image": "https://images.pexels.com/photos/5407204/pexels-photo-5407204.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  },
+  {
+    "id": "article-8",
+    "slug": "balance-training-fall-prevention",
+    "title": "DRAFT: Balance Training and Fall Prevention in Older Adults",
+    "excerpt": "A person-centred guide to falls assessment, progressive balance and strength training, environmental change, and clinical safety.",
+    "category": "Rehabilitation",
+    "date": "Draft — publication date awaiting academy confirmation",
+    "image": "https://images.pexels.com/photos/4506169/pexels-photo-4506169.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  },
+  {
+    "id": "article-9",
+    "slug": "ankle-sprain-return-to-activity",
+    "title": "DRAFT: Ankle Sprain Rehabilitation and Return to Activity",
+    "excerpt": "A criterion-informed approach to lateral ankle sprain recovery, loading, neuromuscular training, and graduated return to work or sport.",
+    "category": "Sports rehabilitation",
+    "date": "Draft — publication date awaiting academy confirmation",
+    "image": "https://images.pexels.com/photos/5934556/pexels-photo-5934556.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  },
+  {
+    "id": "article-10",
+    "slug": "acl-rehabilitation-clinical-considerations",
+    "title": "DRAFT: ACL Rehabilitation Stages and Clinical Considerations",
+    "excerpt": "A criterion-based overview of ACL rehabilitation, from prehabilitation and early recovery to sport-specific preparation and return to performance.",
+    "category": "Sports rehabilitation",
+    "date": "Draft — publication date awaiting academy confirmation",
+    "image": "https://images.pexels.com/photos/5407204/pexels-photo-5407204.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  },
+  {
+    "id": "article-11",
+    "slug": "range-of-motion-strength-functional-assessment",
+    "title": "DRAFT: ROM, Strength and Function: Turning Measurements into Clinical Decisions",
+    "excerpt": "A practical framework for selecting, interpreting and communicating range-of-motion, strength and functional measures without mistaking a score for a diagnosis.",
+    "category": "Assessment",
+    "date": "Draft — publication date awaiting academy confirmation",
+    "image": "https://images.pexels.com/photos/4506169/pexels-photo-4506169.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  },
+  {
+    "id": "article-12",
+    "slug": "gait-assessment-clinical-reasoning",
+    "title": "DRAFT: Gait Observation as Clinical Reasoning, Not a Parade of Deviations",
+    "excerpt": "How to observe walking safely, form testable hypotheses and connect gait findings with function, context and patient priorities.",
+    "category": "Assessment",
+    "date": "Draft — publication date awaiting academy confirmation",
+    "image": "https://images.pexels.com/photos/5934556/pexels-photo-5934556.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  },
+  {
+    "id": "article-13",
+    "slug": "evidence-based-practice-physiotherapy",
+    "title": "DRAFT: Evidence-Based Physiotherapy: Integrating Research, Expertise and What Matters to the Person",
+    "excerpt": "A practical account of evidence-based practice as a cycle of questions, appraisal, shared decisions, implementation and review.",
+    "category": "Professional practice",
+    "date": "Draft — publication date awaiting academy confirmation",
+    "image": "https://images.pexels.com/photos/5407204/pexels-photo-5407204.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  },
+  {
+    "id": "article-14",
+    "slug": "patient-safety-red-flags-referral",
+    "title": "DRAFT: Patient Safety, Red Flags and Referral: Managing Uncertainty Responsibly",
+    "excerpt": "A safety-first approach to screening, escalation, safety netting and referral without overclaiming what red flags can diagnose.",
+    "category": "Patient safety",
+    "date": "Draft — publication date awaiting academy confirmation",
+    "image": "https://images.pexels.com/photos/4506169/pexels-photo-4506169.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  },
+  {
+    "id": "article-15",
+    "slug": "clinical-documentation-communication",
+    "title": "DRAFT: Clinical Documentation and Patient Communication: Making Care Understandable and Traceable",
+    "excerpt": "Principles for records and conversations that support consent, continuity, shared decisions, safety and professional accountability.",
+    "category": "Professional practice",
+    "date": "Draft — publication date awaiting academy confirmation",
+    "image": "https://images.pexels.com/photos/5934556/pexels-photo-5934556.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  }
+]

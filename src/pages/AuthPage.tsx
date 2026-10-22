@@ -33,11 +33,12 @@ export default function AuthPage({ mode: initialMode = 'sign-in' }: Props) {
   }, [auth.recovery, auth.session, auth.status, mode, navigate]);
 
   if (!auth.enabled || auth.status === 'error') return <UnavailableAuth message={auth.error ?? 'Authentication is not enabled for this site.'} />;
+  if (auth.status === 'loading') return <section className="mx-auto max-w-3xl px-6 py-20 text-center" role="status" aria-live="polite"><h1 className="text-3xl font-bold text-navy-900">Checking your student session…</h1><p className="mt-4 text-navy-600">Please wait while we check authentication.</p></section>;
   if (mode === 'reset-password' && auth.session && !auth.recovery) return <UnavailableAuth message="Password changes require a valid recovery link." />;
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
-    if (busyRef.current) return;
+    if (busyRef.current || auth.status !== 'ready') return;
     setMessage(null); setLocalError(null);
     const trimmedEmail = email.trim();
     if (mode !== 'reset-password' && (!trimmedEmail || trimmedEmail.length > EMAIL_MAX || !emailPattern.test(trimmedEmail))) { setLocalError('Enter a valid email address.'); return; }
@@ -72,7 +73,7 @@ export default function AuthPage({ mode: initialMode = 'sign-in' }: Props) {
         {mode === 'reset-password' && <label className="block text-sm font-medium text-navy-700">Confirm new password<input className="mt-2 w-full rounded-lg border border-navy-200 px-3 py-3" type="password" autoComplete="new-password" maxLength={PASSWORD_MAX} value={confirmation} onChange={e => setConfirmation(e.target.value)} /></label>}
         {(localError || auth.error) && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-800" role="alert">{localError || auth.error}</p>}
         {message && <p className="rounded-lg bg-teal-50 p-3 text-sm text-teal-800" role="status">{message}</p>}
-        <button className="w-full rounded-lg bg-teal-600 px-4 py-3 font-semibold text-white hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-60" type="submit" disabled={busy || auth.status === 'loading' || (mode === 'reset-password' && !auth.recovery)}>{busy ? 'Please wait…' : submitLabel[mode]}</button>
+        <button className="w-full rounded-lg bg-teal-600 px-4 py-3 font-semibold text-white hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-60" type="submit" disabled={busy || (mode === 'reset-password' && !auth.recovery)}>{busy ? 'Please wait…' : submitLabel[mode]}</button>
       </form>
       <nav className="mt-6 flex flex-wrap gap-4 text-sm text-teal-700" aria-label="Account options">
         {mode === 'sign-in' && <><Link to="/forgot-password">Forgot password?</Link><Link to="/sign-up">Create an account</Link></>}

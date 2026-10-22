@@ -141,6 +141,18 @@ describe('AuthProvider safety and session lifecycle', () => {
 });
 
 describe('safe return targets and AuthPage validation', () => {
+  it('renders a noninteractive loading state until authentication is ready', async () => {
+    validEnv();
+    let resolveSession!: (value: unknown) => void;
+    const client = makeClient({ getSession: new Promise(resolve => { resolveSession = resolve; }) });
+    const { AuthProvider, AuthPage, MemoryRouter } = await loadBoth();
+    render(<AuthProvider client={client as unknown as SupabaseClient}><MemoryRouter><AuthPage mode="sign-in" /></MemoryRouter></AuthProvider>);
+    expect(screen.getByRole('status').textContent).toContain('Checking your student session');
+    expect(screen.queryByRole('form')).toBeNull();
+    await act(async () => { resolveSession({ data: { session: null }, error: null }); });
+    expect(await screen.findByRole('button', { name: 'Sign in' })).toBeTruthy();
+  });
+
   it.each(['https://evil.test', '//evil.test/student', '/student/../sign-in', '/student/%2e%2e/sign-in', '/student\\evil'])('rejects unsafe return target %s', async target => {
     const { safeReturnTarget } = await loadAuth();
     expect(safeReturnTarget(target)).toBe('/student');
@@ -153,7 +165,11 @@ describe('safe return targets and AuthPage validation', () => {
     client.auth.signInWithPassword.mockReturnValueOnce(new Promise(resolve => { resolveSignIn = resolve; }));
     const { AuthProvider, AuthPage, MemoryRouter } = await loadBoth();
     render(<AuthProvider client={client as unknown as SupabaseClient}><MemoryRouter><AuthPage mode="sign-in" /></MemoryRouter></AuthProvider>);
-    const form = document.querySelector('form')!;
+    const form = await waitFor(() => {
+      const currentForm = document.querySelector('form');
+      if (!currentForm) throw new Error('Auth form is still loading');
+      return currentForm;
+    });
     const email = form.querySelector('input[type="email"]')!;
     const password = form.querySelector('input[type="password"]')!;
     fireEvent.change(email, { target: { value: 'not-an-email' } });

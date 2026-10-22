@@ -2,14 +2,10 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar } from 'lucide-react';
 import type { NewsItem } from '@/data/types';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { formatResourceDate, isValidIsoDate } from '@/lib/resourceDate';
 
 export default function NewsCard({ item, index = 0 }: { item: NewsItem; index?: number }) {
   const { ref, isVisible } = useScrollAnimation();
-
-  const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-  };
 
   return (
     <Link
@@ -30,9 +26,15 @@ export default function NewsCard({ item, index = 0 }: { item: NewsItem; index?: 
         <div className="flex items-center gap-3 text-xs mb-2">
           <span className="font-medium text-clinical-500">{item.category}</span>
           <span className="text-navy-400">/</span>
-          <span className="flex items-center gap-1 text-navy-500">
-            <Calendar className="w-3.5 h-3.5" /> {formatDate(item.date)}
-          </span>
+          {isValidIsoDate(item.date) ? (
+            <time dateTime={item.date} className="flex items-center gap-1 text-navy-500">
+              <Calendar className="w-3.5 h-3.5" /> {formatResourceDate(item.date)}
+            </time>
+          ) : (
+            <span className="flex items-center gap-1 text-navy-500">
+              <Calendar className="w-3.5 h-3.5" /> {formatResourceDate(item.date)}
+            </span>
+          )}
         </div>
         <h3 className="font-heading font-bold text-navy-800 text-base leading-snug group-hover:text-clinical-600 transition-colors line-clamp-2">
           {item.title}

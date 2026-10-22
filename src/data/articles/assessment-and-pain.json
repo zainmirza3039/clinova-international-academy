@@ -1,0 +1,416 @@
+[
+  {
+    "id": "article-1",
+    "slug": "physiotherapy-assessment-structured-approach",
+    "title": "A Structured Approach to Physiotherapy Assessment",
+    "excerpt": "A function-led framework for a safe history, examination and shared plan.",
+    "category": "Assessment",
+    "status": "draft",
+    "seoTitle": "Structured Physiotherapy Assessment | Clinova",
+    "seoDescription": "How a structured physiotherapy assessment links symptoms, function, context, safety screening and shared goals. Draft for review.",
+    "sections": [
+      {
+        "heading": "Why structure matters",
+        "paragraphs": [
+          "A good assessment is more than locating a painful body part. It is a reasoned process for deciding what may be contributing to difficulty, what must not be missed and what information will change the next step. A consistent structure reduces omissions while leaving room for clinical judgement. It also makes the encounter understandable: the person can see why questions, observations and tests are being used.",
+          "The WHO International Classification of Functioning, Disability and Health (ICF) is a useful organising idea. Consider body functions and structures, activities, participation, and environmental and personal context together. Pain intensity may be relevant, but it is not a complete measure of health or progress."
+        ]
+      },
+      {
+        "heading": "Start with the person’s story",
+        "paragraphs": [
+          "Begin with an open account: what happened, what is most difficult now and what would make the consultation useful? Clarify onset, time course, irritability, location and symptom behaviour. Ask about quality and distribution, but do not treat descriptors as a diagnosis in isolation. Explore sleep, general health, medication, previous episodes, trauma, work and activity demands.",
+          "Screen for factors that alter safety or urgency. Depending on the presentation, these may include fever or systemic illness, unexplained weight change, significant trauma, cancer history, immunosuppression, progressive neurological change, severe unremitting pain, vascular symptoms or a hot, acutely swollen joint. These prompts support escalation; they do not rule out serious disease by themselves.",
+          "A review is also an opportunity to consider whether the original question was answered. If a person expected a diagnosis but the findings support a symptom-based classification, explain why that is still clinically useful. If the examination is limited by pain, language, fatigue or access, record the limitation rather than implying that an absent finding was normal. Where possible, involve the person in selecting the most relevant task to observe.",
+          "Good communication includes checking what the person heard. Ask them to summarise the working explanation, the next step and the warning signs. This is especially important when information is delivered through an interpreter, remotely or in a stressful consultation. Written information should complement—not replace—discussion and should direct readers to appropriate services for urgent concerns.",
+          "Clinical reasoning is iterative. A finding should be interpreted in relation to prior probability, test limitations and change over time. Repeating a test without a reason can create false certainty. Conversely, a new symptom or a failure to progress may justify a broader assessment. The structured approach is therefore a safety tool and a way to make uncertainty visible."
+        ]
+      },
+      {
+        "heading": "Examine to answer questions",
+        "paragraphs": [
+          "Select examination components because they test a hypothesis or establish a baseline. Observation may include swelling, skin change, gait and assistive-device use. Functional tasks can reveal what matters: a sit-to-stand, step, reach, walk or work simulation may be more informative than an isolated range measurement. Asymmetry is a finding, not automatically a problem.",
+          "Assess relevant active and passive movement, strength or load tolerance, sensation, reflexes and coordination when indicated. Interpret special tests with the history and other findings; no single test should carry more certainty than its accuracy and context allow. Explain before touching or asking for a challenging movement, and stop or modify if symptoms suggest risk or distress."
+        ]
+      },
+      {
+        "heading": "Reason, communicate and document",
+        "paragraphs": [
+          "Synthesis should distinguish what is known, plausible and uncertain. A working classification may be more honest than a premature tissue label. Explain findings in plain language, including reassuring features and limitations. Imaging can show structural change that does not explain symptoms, while normal imaging does not invalidate pain; decisions depend on the clinical picture and likely impact on management.",
+          "Document goals, history, examination, safety screen, functional baseline, agreed plan and review triggers. Record consent and communication needs. Measures support consistency but do not replace conversation. Reassessment should ask what changed in symptoms, capacity, confidence or participation and whether that changes the working hypothesis.",
+          "Consider health literacy and consent throughout. Some people want detailed reasoning; others need a short plan and time to reflect. Offer choices about examination and explain that consent can be withdrawn. A respectful assessment can improve the quality of information obtained because people are more likely to report concerns that they do not feel judged for having.",
+          "If referral is advised, explain its purpose and urgency, what information will be shared and what to do while waiting. Handover should preserve the person’s goals and relevant functional findings, not just a pain score. This supports continuity and reduces the risk that a change in service becomes a loss of context."
+        ]
+      },
+      {
+        "heading": "Make it collaborative",
+        "paragraphs": [
+          "Shared decision-making means presenting options, likely benefits, burdens and uncertainty, then checking what fits priorities and circumstances. A plan might include education, activity modification, exercise, self-management or onward referral; the combination depends on assessment. Do not imply one intervention is universally necessary or that improvement proves a particular diagnosis.",
+          "Set an observable everyday outcome and a review point. Agree what to do if symptoms flare, neurological signs develop or function deteriorates. A safety-net tells the person when to contact the service, seek urgent help or pause an activity. This is both clinical reasoning and the beginning of a transparent therapeutic relationship.",
+          "The record should also make the next clinician’s job easier: state the working explanation, the evidence supporting it, unresolved questions and the agreed review trigger. This is particularly important when care crosses professions or settings. Clear reasoning protects the person from repeated, disconnected assessments and helps ensure that escalation is timely when the course changes."
+        ]
+      }
+    ],
+    "takeaways": [
+      "Use a repeatable structure, keeping the person’s story central.",
+      "Screen for urgent or non-musculoskeletal causes before routine rehabilitation.",
+      "Choose tests for a clinical question and interpret them in context.",
+      "Track function, participation and confidence alongside pain.",
+      "Qualified clinical and editorial review is required before publication."
+    ],
+    "references": [
+      {
+        "title": "WHO International Classification of Functioning, Disability and Health (ICF)",
+        "url": "https://www.who.int/standards/classifications/international-classification-of-functioning-disability-and-health"
+      },
+      {
+        "title": "NICE: Musculoskeletal conditions",
+        "url": "https://www.nice.org.uk/guidance/conditions-and-diseases/musculoskeletal-conditions"
+      },
+      {
+        "title": "CSP: Musculoskeletal physiotherapy service standards",
+        "url": "https://www.csp.org.uk/system/files/publication_files/001900_MSK%20service%20standards_A4_Final4.pdf"
+      }
+    ],
+    "relatedArticleSlugs": [
+      "musculoskeletal-pain-and-function",
+      "therapeutic-exercise-safe-progression"
+    ],
+    "relatedProgrammeSlugs": [
+      "certificate-in-musculoskeletal-assessment"
+    ]
+  },
+  {
+    "id": "article-2",
+    "slug": "musculoskeletal-pain-and-function",
+    "title": "Musculoskeletal Pain and Function: Looking Beyond a Pain Score",
+    "excerpt": "How pain, capacity, context and participation interact in person-centred rehabilitation.",
+    "category": "Musculoskeletal",
+    "status": "draft",
+    "seoTitle": "Musculoskeletal Pain and Function | Clinova",
+    "seoDescription": "Why musculoskeletal pain and function can diverge, how context shapes symptoms and how education supports realistic rehabilitation.",
+    "sections": [
+      {
+        "heading": "Pain is real, not a simple damage meter",
+        "paragraphs": [
+          "Pain is an important protective experience, yet intensity is not a direct readout of tissue damage. Sensitivity can be influenced by sleep, stress, prior experiences, expectations, illness, workload and social circumstances. This does not make pain imaginary; it means a useful explanation must make room for biology and lived experience without claiming certainty assessment cannot provide.",
+          "People can have substantial structural findings with little pain, or marked pain with no clear structural explanation. The response is neither to dismiss symptoms nor assume every painful movement causes harm. Ask what pain means to this person, what it restricts and what signs would require a different pathway.",
+          "A person-centred plan also includes practical follow-through. Agree how progress will be reviewed, what information the person should bring and which service to contact if circumstances change. Consider transport, digital access, language, cost and caring responsibilities when suggesting resources. These factors are part of clinical reasoning, not peripheral details. A plan that fits real life is more likely to be repeated and easier to evaluate. Where evidence is uncertain or recommendations conflict, say so and explain how a qualified clinician can help weigh options. This keeps education honest, supports shared decisions and avoids turning general guidance into an unintended prescription."
+        ]
+      },
+      {
+        "heading": "Function has several layers",
+        "paragraphs": [
+          "Function includes body capacity, actual activity and participation in real life. Someone may show adequate strength in clinic but avoid stairs because of fear, fatigue, transport barriers or a demanding home environment. Conversely, someone may keep working while compensating heavily and sleeping poorly. Ask about dressing, lifting, walking outdoors, caring, sport, concentration and rest.",
+          "Use repeatable measures that match the goal: a timed task, distance, symptom-limited tolerance, validated questionnaire or activity diary. Interpret change against normal variation and measurement error. A small improvement in confidence or participation may matter even when pain changes little.",
+          "Context can alter the meaning of the same task. A person may tolerate a short walk but not a crowded commute, or lift in a clinic but not at the end of a shift. Ask about timing, environment, support and the consequences of symptoms. Functional goals should be negotiated in the person’s actual life rather than inferred from a standard exercise list.",
+          "Avoid a false choice between biomedical and psychosocial explanations. Tissue irritability, sleep, mood, beliefs and social conditions can coexist and interact. Education is most credible when it acknowledges what is known and does not use psychological language to dismiss physical symptoms. Referral for additional support should be framed as expanding care, not declaring that pain is imaginary.",
+          "Progress can be non-linear. A diary or brief review can identify whether increased activity, altered sleep or an unrelated illness explains a temporary setback. Look for trends rather than one difficult day. If self-management advice increases fear or monitoring, simplify it and return to the person’s values and practical priorities."
+        ]
+      },
+      {
+        "heading": "Education that supports agency",
+        "paragraphs": [
+          "Useful education is specific, balanced and actionable. Explain that symptoms fluctuate, gradual movement is often compatible with recovery and a flare does not automatically mean new damage. Avoid absolute reassurance: severe, progressive or unusual symptoms still need review. Invite the person’s explanation and correct misunderstandings collaboratively.",
+          "Discuss load in terms of what the person is doing, recovering from and adapting to. A sudden increase in walking, repetitive work, low sleep or emotional strain may alter tolerance. This is a reason to adjust and observe, not evidence of failure. Education should leave room for choice; access, culture, finances and confidence matter."
+        ]
+      },
+      {
+        "heading": "Avoid boom-and-bust cycles",
+        "paragraphs": [
+          "Pacing means planning activity and rest so useful activity can be repeated rather than alternating overexertion with prolonged avoidance. It is not a fixed pain-number rule and should not become fear-based monitoring. Start from a sustainable baseline, change one variable at a time and review symptoms and function over the following period.",
+          "During a flare, temporarily reducing a demanding task while retaining gentle, safe movement may be reasonable. Sleep and stress can influence tolerance. NHS Inform describes flares as common in chronic pain and not necessarily evidence of worsening, while advising professional help when needed. Medication changes belong with an appropriate prescriber.",
+          "Pain-related language can influence behaviour. Words such as ‘damage’, ‘wear’ or ‘unstable’ may be interpreted as reasons to avoid all movement, while vague reassurance can feel invalidating. Use precise, conditional language: describe what the examination suggests, what it cannot establish and how activity can be adjusted while uncertainty is resolved.",
+          "A review should include outcomes the person values and outcomes needed for safety. If pain is unchanged but walking, sleep or participation improves, that is meaningful progress. If pain improves but weakness, falls or work difficulty persist, the plan still needs attention. This balanced view prevents one number from hiding important change."
+        ]
+      },
+      {
+        "heading": "When pain and function do not align",
+        "paragraphs": [
+          "Persistent disability, escalating distress, widespread symptoms, neurological change or inability to manage essential activities may require multidisciplinary support. Consider occupational, psychological, medical or social input where relevant and consented. Review if the expected trajectory is not occurring, new signs appear or the goal changes.",
+          "Avoid ranking people by resilience or compliance. Barriers may include poverty, unsafe work, caring demands, discrimination, language, transport or previous harmful healthcare experiences. A function-led plan acknowledges constraints and identifies adaptations. A plateau prompts reassessment rather than blame.",
+          "Progress is best understood as a pattern across days and contexts. Ask what the person can now do, how much recovery it requires and whether the change is worth sustaining. This avoids treating a single good day as proof of cure or a single flare as proof of damage. The aim is informed, flexible participation with appropriate safety-netting."
+        ]
+      }
+    ],
+    "takeaways": [
+      "Pain intensity and function can change at different rates.",
+      "Validate pain while avoiding unsupported tissue-damage claims.",
+      "Measure meaningful activities and participation, not only scores.",
+      "Pacing aims for sustainable repetition, not complete avoidance.",
+      "Escalate unusual or progressive presentations."
+    ],
+    "references": [
+      {
+        "title": "WHO ICF",
+        "url": "https://www.who.int/standards/classifications/international-classification-of-functioning-disability-and-health"
+      },
+      {
+        "title": "NHS Inform: Coping with a flare up of chronic pain",
+        "url": "https://www.nhsinform.scot/illnesses-and-conditions/brain-nervs-and-spinal-cord/chronic-pain/coping-with-a-flare-up-of-chronic-pain/"
+      },
+      {
+        "title": "WHO: Physical activity fact sheet",
+        "url": "https://www.who.int/news-room/fact-sheets/detail/physical-activity"
+      }
+    ],
+    "relatedArticleSlugs": [
+      "physiotherapy-assessment-structured-approach",
+      "therapeutic-exercise-safe-progression",
+      "low-back-pain-rehabilitation"
+    ],
+    "relatedProgrammeSlugs": [
+      "certificate-in-musculoskeletal-assessment"
+    ]
+  },
+  {
+    "id": "article-3",
+    "slug": "therapeutic-exercise-safe-progression",
+    "title": "Therapeutic Exercise: Principles for Safe Progression",
+    "excerpt": "A cautious guide to selecting, adapting and progressing therapeutic exercise while monitoring response.",
+    "category": "Rehabilitation",
+    "status": "draft",
+    "seoTitle": "Therapeutic Exercise and Safe Progression | Clinova",
+    "seoDescription": "Principles for exercise selection, response monitoring, adaptation, pacing and referral. Educational draft, not a prescription.",
+    "sections": [
+      {
+        "heading": "Purpose and choice",
+        "paragraphs": [
+          "Therapeutic exercise is planned movement used to support a defined goal: strength, endurance, mobility, coordination, balance, confidence or tolerance of a task. It is not therapeutic merely because of its name; relevance depends on person, goal, dose, context and progression.",
+          "Evidence may support exercise as one component of care, but rarely identifies one universally superior routine. Programmes may be home-based, supervised, aquatic, group-based or integrated into daily activity. Choice should account for health, access, equipment, preference and previous response.",
+          "A person-centred plan also includes practical follow-through. Agree how progress will be reviewed, what information the person should bring and which service to contact if circumstances change. Consider transport, digital access, language, cost and caring responsibilities when suggesting resources. These factors are part of clinical reasoning, not peripheral details. A plan that fits real life is more likely to be repeated and easier to evaluate. Where evidence is uncertain or recommendations conflict, say so and explain how a qualified clinician can help weigh options. This keeps education honest, supports shared decisions and avoids turning general guidance into an unintended prescription."
+        ]
+      },
+      {
+        "heading": "Establish a baseline",
+        "paragraphs": [
+          "Before progressing, establish what the person can do safely and repeatably. Record the task, effort, symptom response, movement quality and recovery—not only repetitions. A baseline could be walking to a shop, rising from a chair or lifting a light object. Avoid testing to exhaustion when it adds risk or little information.",
+          "Explain expected effort and the difference between manageable sensation, a familiar transient symptom and a warning sign. The response is individual and condition-dependent; fixed pain rules can mislead. Dizziness, chest symptoms, unusual breathlessness, new neurological symptoms, marked swelling or collapse require stopping and appropriate advice.",
+          "A programme should also account for skill learning. Demonstrate the movement, use plain cues and ask the person what they notice. External cues linked to a task can be more useful than a long list of anatomical instructions. Check that the person can reproduce the exercise in their own environment, including how to set up safely and what alternative is available if equipment is unavailable.",
+          "Adherence is not simply willpower. Time, pain, fatigue, cost, transport, caregiving and confidence all affect participation. Offer a menu of equivalent options, agree a minimum that feels achievable and revisit barriers without blame. Supervision may be valuable early on, while independence may be a later goal; both should be reviewed rather than assumed.",
+          "Progression should preserve recovery capacity. If several life demands increase at once, hold the exercise level steady or reduce it temporarily. A return to the prior baseline after illness or travel may be sensible. The clinician should document why a progression was selected and what evidence would prompt a change, making the plan safer and easier to hand over."
+        ]
+      },
+      {
+        "heading": "Progress one challenge",
+        "paragraphs": [
+          "Progression can change frequency, duration, load, range, speed, complexity, balance demand, environment or independence. Change one variable when the current task is controlled and recovery acceptable. Regression is not failure: reducing range, support or volume may keep practice safe during illness or a flare.",
+          "Use the least complicated progression that serves the goal. A sophisticated device is not required, and intensity is not automatically better. Quality includes breathing, control, confidence and transfer to the real task. Review adherence barriers and whether the original goal still applies."
+        ]
+      },
+      {
+        "heading": "Monitor the whole response",
+        "paragraphs": [
+          "Response includes symptoms during activity, later that day, next morning and across the week. Delayed aggravation may mean overall load is too high. Consider sleep, work, stress, other exercise and illness. An activity diary can identify patterns, but excessive checking may increase worry.",
+          "Pacing can prevent boom-and-bust cycles: alternate demanding and easier tasks, plan recovery and build from a sustainable amount. During a flare, retain safe movement where possible while modifying provocative demands. Severe, progressive or unusual symptoms need review rather than self-progression.",
+          "Rest is not the only recovery strategy. Alternating task types, improving sleep opportunity, planning easier days and reducing unnecessary complexity can help a person tolerate training. Recovery needs vary with age, illness, stress and total workload. A clinician should avoid presenting a universal timetable and instead use response, goals and risk to guide review.",
+          "When an exercise repeatedly provokes a concerning or prolonged response, do not simply encourage persistence. Recheck technique, load, diagnosis, medication and contributing health factors. Modification may be enough, but referral may be safer. Clear documentation of the response and decision supports continuity with another clinician."
+        ]
+      },
+      {
+        "heading": "Safety and shared decisions",
+        "paragraphs": [
+          "A safe programme includes instructions, alternatives, environmental advice and a plan for missed sessions or changing symptoms. Falls risk, pregnancy, osteoporosis, cardiopulmonary disease, diabetes, medication effects and post-operative restrictions may alter the plan and require qualified assessment.",
+          "Shared decisions improve fit: discuss options, uncertainty and what success means. WHO notes that any activity is better than none for many populations, but recommendations vary by age, condition and disability. Individualize and review rather than copy a generic protocol.",
+          "A progression is justified when it is relevant, feasible and tolerated—not simply because a standard programme says it should occur. Conversely, holding steady can be a clinically sound decision while another health demand settles. Record the reason for the decision and the review point so the programme remains responsive rather than rigid."
+        ]
+      }
+    ],
+    "takeaways": [
+      "Progress meaningful capacity, not a detached number.",
+      "Change one variable at a time and allow recovery to guide decisions.",
+      "Monitor delayed response and use regression as normal adaptation.",
+      "Screen relevant risks and define stop/referral advice.",
+      "No exercise dose here is an individualized prescription."
+    ],
+    "references": [
+      {
+        "title": "WHO: Physical activity fact sheet",
+        "url": "https://www.who.int/news-room/fact-sheets/detail/physical-activity"
+      },
+      {
+        "title": "NHS Inform: Coping with a flare up of chronic pain",
+        "url": "https://www.nhsinform.scot/illnesses-and-conditions/brain-nervs-and-spinal-cord/chronic-pain/coping-with-a-flare-up-of-chronic-pain/"
+      },
+      {
+        "title": "JOSPT: Interventions for the Management of Acute and Chronic Low Back Pain",
+        "url": "https://www.jospt.org/doi/10.2519/jospt.2021.0304"
+      }
+    ],
+    "relatedArticleSlugs": [
+      "musculoskeletal-pain-and-function",
+      "knee-osteoarthritis-rehabilitation",
+      "low-back-pain-rehabilitation"
+    ],
+    "relatedProgrammeSlugs": [
+      "certificate-in-clinical-pain-management"
+    ]
+  },
+  {
+    "id": "article-4",
+    "slug": "knee-osteoarthritis-rehabilitation",
+    "title": "Knee Osteoarthritis: Exercise, Function and Rehabilitation",
+    "excerpt": "How education, tailored exercise and functional goals fit into knee osteoarthritis care, with attention to flares and referral.",
+    "category": "Rehabilitation",
+    "status": "draft",
+    "seoTitle": "Knee Osteoarthritis Exercise and Rehabilitation | Clinova",
+    "seoDescription": "An evidence-informed overview of knee osteoarthritis rehabilitation, exercise selection, function, flares and referral.",
+    "sections": [
+      {
+        "heading": "Condition and goals",
+        "paragraphs": [
+          "Knee osteoarthritis is a clinical condition involving joint symptoms and functional impact; it is not diagnosed from an image alone. NICE guidance emphasizes diagnosis, information, non-pharmacological management and review. Pain, stiffness, swelling, strength, confidence and walking tolerance vary. Rehabilitation aims to support meaningful activity and quality of life, not promise reversal of every structural change.",
+          "Ask what the knee prevents or makes harder: stairs, rising, work, walking, sleep or recreation. Discuss injury, locking, giving way, other joints and general health. A hot, acutely swollen knee, fever, major trauma or rapidly worsening inability to bear weight needs timely medical assessment rather than routine self-management.",
+          "A person-centred plan also includes practical follow-through. Agree how progress will be reviewed, what information the person should bring and which service to contact if circumstances change. Consider transport, digital access, language, cost and caring responsibilities when suggesting resources. These factors are part of clinical reasoning, not peripheral details. A plan that fits real life is more likely to be repeated and easier to evaluate. Where evidence is uncertain or recommendations conflict, say so and explain how a qualified clinician can help weigh options. This keeps education honest, supports shared decisions and avoids turning general guidance into an unintended prescription."
+        ]
+      },
+      {
+        "heading": "Education and expectations",
+        "paragraphs": [
+          "Symptoms and radiographic appearance may not match closely. A diagnosis can coexist with capacity to improve strength, confidence and activity. Exercise is recommended as a core treatment, but response varies and usually requires sustained participation and adjustment. Weight-related conversations should be respectful; body size is not a moral judgement and weight management is not a prerequisite for help.",
+          "A flare does not automatically mean harm, but substantial swelling, prolonged loss of function or new symptoms should prompt review. Temporarily reducing the most demanding activity while keeping safe movement and returning gradually may be preferable to complete inactivity. Medication, injections and surgery belong with qualified professionals.",
+          "Strength and aerobic work can be complementary. A person may need enough lower-limb strength for a chair rise, but also enough walking tolerance to reach a destination. Select tasks that are enjoyable or useful where possible, because sustainability matters. Group or supervised options may add confidence and social support, while home-based options may improve access; neither is automatically superior.",
+          "Assistive devices and environmental changes can support participation while capacity develops. A rail, appropriately fitted walking aid, seat height adjustment or planned rest may reduce risk and preserve independence. These choices should be assessed for fit and safety. They should not be presented as evidence that exercise has failed.",
+          "Review the broader health picture, including other painful joints, sleep, mood, falls, cardiovascular risk and medication effects. Knee symptoms may be only one contributor to reduced mobility. Coordinated care can prevent the rehabilitation plan from focusing narrowly on one joint while missing a problem that changes safety or priorities."
+        ]
+      },
+      {
+        "heading": "Choosing exercise",
+        "paragraphs": [
+          "Selection should follow the goal and presentation. Options may include knee movement, lower-limb strengthening, aerobic activity, balance and task practice. A chair rise may be more relevant than an isolated contraction if rising is the goal. Walking, cycling, water-based exercise or home strengthening can be considered according to preference, access and tolerance. There is no single best exercise for everyone.",
+          "Begin at a repeatable level and adjust range, support, resistance, speed or volume. Judge success by task performance and recovery, not forcing through severe pain. Consider footwear, aids, stairs, work demands and the other limb. Significant comorbidity, instability, recent surgery or diagnostic uncertainty warrant clinician-led planning."
+        ]
+      },
+      {
+        "heading": "Measure and maintain progress",
+        "paragraphs": [
+          "Useful outcomes include a timed sit-to-stand, walking distance, stair confidence, validated questionnaire or ability to attend a valued activity. Repeat under similar conditions and interpret with priorities. A modest symptom change can matter if participation returns; a stronger test may not help if fear or access remains a barrier.",
+          "Long-term care is usually adaptation rather than waiting for a perfect knee. Alternate heavier and lighter tasks, build recovery into the week and use enjoyable movement. Review if progress plateaus, symptoms change or the plan is unsustainable. Multidisciplinary input may help with pain, work, mobility, mental health or surgical discussion.",
+          "A person’s confidence is an outcome in its own right. Fear of movement may reduce practice, while a successful, supported task can increase willingness to participate. Build challenge gradually and celebrate useful function rather than perfect form. Avoid promising that pain must disappear before activity can resume, but do not pressure someone to ignore severe or unfamiliar symptoms.",
+          "Follow-up can identify whether the plan is reaching the intended dose in real life. Ask what was actually done, what got in the way and which activity felt worthwhile. Revise the plan collaboratively. A sustainable programme that is modest and repeated may be more useful than an ambitious programme that cannot be maintained."
+        ]
+      },
+      {
+        "heading": "Referral and uncertainty",
+        "paragraphs": [
+          "Refer when presentation is atypical, the knee is acutely inflamed, trauma is significant, neurological or vascular features appear or function deteriorates beyond expected fluctuation. Persistent disabling symptoms despite appropriately delivered non-surgical care may warrant further discussion through local pathways.",
+          "Do not claim exercise prevents surgery, repairs cartilage or guarantees relief. Evidence supports exercise as an important management component while benefit differs in size and timing. This framework is not a personalized programme and requires qualified clinical and editorial review before publication.",
+          "Review should also consider whether the person can maintain gains without frequent professional input. Teach problem-solving: how to choose an easier variation, distribute activity and ask for help. Independence is not doing everything alone; it can mean having a reliable plan and knowing when expert reassessment is needed."
+        ]
+      }
+    ],
+    "takeaways": [
+      "Exercise and education are core components, but plans must be individualized.",
+      "Use stairs, walking and chair rises to guide choices.",
+      "Expect variability; modify load during flares without defaulting to inactivity.",
+      "Atypical features and red flags need medical review.",
+      "Interpret NICE guidance with clinical judgement and local pathways."
+    ],
+    "references": [
+      {
+        "title": "NICE: Osteoarthritis in over 16s: diagnosis and management (NG226)",
+        "url": "https://www.nice.org.uk/guidance/ng226"
+      },
+      {
+        "title": "NICE: Osteoarthritis recommendations",
+        "url": "https://www.nice.org.uk/guidance/ng226/chapter/Recommendations"
+      },
+      {
+        "title": "WHO ICF",
+        "url": "https://www.who.int/standards/classifications/international-classification-of-functioning-disability-and-health"
+      }
+    ],
+    "relatedArticleSlugs": [
+      "therapeutic-exercise-safe-progression",
+      "musculoskeletal-pain-and-function"
+    ],
+    "relatedProgrammeSlugs": []
+  },
+  {
+    "id": "article-5",
+    "slug": "low-back-pain-rehabilitation",
+    "title": "Low Back Pain: Assessment, Education and Rehabilitation",
+    "excerpt": "A safety-conscious overview of low back pain assessment, education, activity and rehabilitation, including escalation.",
+    "category": "Rehabilitation",
+    "status": "draft",
+    "seoTitle": "Low Back Pain Assessment and Rehabilitation | Clinova",
+    "seoDescription": "A cautious framework for assessing low back pain, explaining uncertainty, supporting activity and recognizing referral needs.",
+    "sections": [
+      {
+        "heading": "Safety and context",
+        "paragraphs": [
+          "Low back pain has many presentations. Assessment starts with onset, mechanism, distribution, irritability, sleep and work impact, prior episodes, health conditions and fears. Ask about leg symptoms, altered sensation, weakness and bladder or bowel changes when relevant. Screen for trauma, fever, unexplained weight loss, cancer history, immunosuppression, infection risk, severe unremitting pain and progressive neurological deficit.",
+          "Urgent pathways depend on combinations and severity. New saddle numbness, loss of bladder or bowel control, rapidly progressive weakness, major trauma or systemic illness can require urgent medical assessment. An article cannot rule out serious disease. Atypical or worsening presentations require reassessment and referral.",
+          "A person-centred plan also includes practical follow-through. Agree how progress will be reviewed, what information the person should bring and which service to contact if circumstances change. Consider transport, digital access, language, cost and caring responsibilities when suggesting resources. These factors are part of clinical reasoning, not peripheral details. A plan that fits real life is more likely to be repeated and easier to evaluate. Where evidence is uncertain or recommendations conflict, say so and explain how a qualified clinician can help weigh options. This keeps education honest, supports shared decisions and avoids turning general guidance into an unintended prescription."
+        ]
+      },
+      {
+        "heading": "Explain without overpromising",
+        "paragraphs": [
+          "NICE describes physical and psychological approaches to help people manage low back pain and sciatica in daily life, with clinical judgement. Recovery is not always linear and persistent pain does not mean failure. Imaging is not automatically useful: findings can be common without symptoms, so it is considered when likely to change management or serious pathology is suspected.",
+          "A helpful explanation connects symptoms with sensitivity, movement, sleep, stress, workload and confidence without claiming a single cause. Ask what the person thinks is happening and what they need to return to. Reassurance should be conditional: encourage safe activity while giving advice about weakness, systemic symptoms or escalating disability.",
+          "Leg pain does not automatically mean that a person needs imaging or surgery. Clarify distribution, sensory change, weakness and how symptoms respond to movement, then interpret findings in context. Neurological examination and medical review may be appropriate when symptoms are persistent, progressive or functionally significant. Avoid using a label such as sciatica as a substitute for assessment.",
+          "Work and daily activity advice should be practical. A temporary change in lifting position, task rotation, planned breaks or gradual return may be more useful than telling someone to protect the back completely. Employers and occupational-health professionals may help where consented. Advice must account for the actual job and should not imply that every person can modify work without support.",
+          "Psychological support can be relevant without implying that symptoms are ‘all in the mind’. Fear, low mood, poor sleep and persistent pain can reinforce one another, and addressing any part of that cycle may help function. Use respectful language, ask permission before discussing it and refer to appropriately qualified services when needed. Review the plan collaboratively and keep safety-netting visible."
+        ]
+      },
+      {
+        "heading": "Rehabilitation as capacity",
+        "paragraphs": [
+          "The JOSPT guideline supports exercise training for chronic low back pain, including strengthening and endurance, multimodal, aerobic, aquatic and general exercise; it notes gaps about optimal dosage and subgroup matching. This supports choice rather than one branded method. Acute care may use gentle, task-focused movement; persistent symptoms can be progressed.",
+          "Start with a repeatable baseline. Progress duration, load, range, speed, complexity or participation one at a time and consider delayed response. Walking, trunk movement, strengthening, general conditioning and meaningful tasks can be options when clinically appropriate. Pregnancy, osteoporosis, neurological disease, surgery and cardiopulmonary conditions may change the plan."
+        ]
+      },
+      {
+        "heading": "Self-management and flares",
+        "paragraphs": [
+          "Pacing can reduce boom-and-bust patterns by balancing activity and recovery. During a flare, scale back demanding activity, maintain safe movement if possible and return gradually. NHS Inform notes chronic pain flares are not necessarily evidence of worsening, while emphasizing preparation, diaries and professional support. New or unusual signs still need review.",
+          "Discuss sleep, stress, work adaptations and social barriers. A sustainable plan fits responsibilities and resources. Use a meaningful outcome—sitting through a journey, work tasks or walking locally—and review it alongside pain and confidence. Consider multidisciplinary care when distress, disability, medication or work issues require added expertise.",
+          "Education should include a route back to care. Contact a clinician for a new pattern of weakness or numbness, bowel or bladder change, fever, major trauma, unexplained systemic symptoms or rapidly worsening function. The exact urgency depends on the presentation and local services. These warnings are not intended to create alarm; they make self-management safer.",
+          "Outcomes should be reviewed over time rather than judged after one session. Function, confidence, sleep and participation may change before pain, and the reverse can also occur. If the plan is not helping, revisit the diagnosis, barriers and options. Avoid escalating exercise simply because a calendar says it is time."
+        ]
+      },
+      {
+        "heading": "Review and communicate uncertainty",
+        "paragraphs": [
+          "Review whether symptoms, function and participation change as expected. Reconsider the working classification if leg symptoms progress, strength or sensation changes, pain becomes systemic or essential activities cannot be managed. Persistent pain may benefit from coordinated medical, physical and psychological support; this is not a judgement about motivation.",
+          "Distinguish evidence from hypothesis, avoid guarantees and state limits. NICE NG59 was last updated in July 2026 on the accessed page; guidelines and local pathways change, so clinicians should check the current source. This draft does not diagnose, determine imaging or prescribe exercises and requires qualified review.",
+          "Finally, avoid implying that a particular posture, scan finding or exercise technique explains every episode. Low back pain can recur for many reasons, and recurrence is not necessarily evidence of failed rehabilitation. A plan that supports confidence, varied movement and early recognition of concerning change is more useful than a promise of permanent symptom elimination."
+        ]
+      }
+    ],
+    "takeaways": [
+      "Screen for serious pathology and progressive neurological change first.",
+      "Use reassurance that is clear but conditional.",
+      "Offer exercise choice and progress capacity gradually.",
+      "Measure meaningful function and participation alongside pain.",
+      "Use current NICE and local pathways; this is not individualized treatment."
+    ],
+    "references": [
+      {
+        "title": "NICE: Low back pain and sciatica in over 16s: assessment and management (NG59)",
+        "url": "https://www.nice.org.uk/guidance/ng59"
+      },
+      {
+        "title": "JOSPT: Interventions for the Management of Acute and Chronic Low Back Pain",
+        "url": "https://www.jospt.org/doi/10.2519/jospt.2021.0304"
+      },
+      {
+        "title": "NHS Inform: Coping with a flare up of chronic pain",
+        "url": "https://www.nhsinform.scot/illnesses-and-conditions/brain-nervs-and-spinal-cord/chronic-pain/coping-with-a-flare-up-of-chronic-pain/"
+      },
+      {
+        "title": "WHO: Physical activity fact sheet",
+        "url": "https://www.who.int/news-room/fact-sheets/detail/physical-activity"
+      }
+    ],
+    "relatedArticleSlugs": [
+      "physiotherapy-assessment-structured-approach",
+      "therapeutic-exercise-safe-progression",
+      "musculoskeletal-pain-and-function"
+    ],
+    "relatedProgrammeSlugs": [
+      "certificate-in-clinical-pain-management"
+    ]
+  }
+]
