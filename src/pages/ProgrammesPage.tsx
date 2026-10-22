@@ -58,7 +58,7 @@ export default function ProgrammesPage() {
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-editorial mx-auto px-6 lg:px-10">
           {/* Search + Filters */}
-          <div className="bg-surface-50 p-6 mb-12 border border-navy-100">
+          {publishedProgrammes.length > 0 && <div className="bg-surface-50 p-6 mb-12 border border-navy-100">
             <div className="mb-4">
               <SearchBar value={search} onChange={setSearch} placeholder="Search programmes..." />
             </div>
@@ -101,7 +101,7 @@ export default function ProgrammesPage() {
                 </select>
               </div>
             </div>
-          </div>
+          </div>}
 
           {/* Results */}
           <div className="mb-8 flex items-center justify-between">
