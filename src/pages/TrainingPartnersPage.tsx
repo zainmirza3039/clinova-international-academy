@@ -11,13 +11,13 @@ const benefits = [
   { icon: FileText, title: 'Share your context', desc: 'Describe your organisation, audience and learning questions.' },
   { icon: Users, title: 'Discuss learner needs', desc: 'Explain the support and access arrangements you would need.' },
   { icon: Award, title: 'Ask about recognition', desc: 'Request accurate information; certificates and recognition are not promised.' },
-  { icon: FileText, title: 'Review draft resources', desc: 'Use the existing reading library to frame a possible conversation.' },
+  { icon: FileText, title: 'Check publication status', desc: 'Public educational materials will appear after the required review is complete.' },
   { icon: ShieldCheck, title: 'Clarify review', desc: 'Ask what has been reviewed, approved or published.' },
   { icon: Handshake, title: 'Consider terms', desc: 'Discuss any partnership only after the owner confirms capability and terms.' },
 ];
 
 const howItWorks = [
-  { step: '01', title: 'Share an enquiry', desc: 'Use the form to describe your organisation and learning context.' },
+  { step: '01', title: 'Wait for the enquiry service', desc: 'Online partnership submissions are disabled until the secure workflow is verified.' },
   { step: '02', title: 'Request confirmation', desc: 'Ask which content, delivery and support arrangements are actually available.' },
   { step: '03', title: 'Review terms', desc: 'Consider any written scope, responsibilities, privacy and commercial terms.' },
   { step: '04', title: 'Decide cautiously', desc: 'Do not assume a partnership, programme, certificate or outcome until confirmed.' },
@@ -177,8 +177,8 @@ export default function TrainingPartnersPage() {
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            eyebrow="Apply Now"
-            title="Proposed partnership enquiry"
+            eyebrow="Enquiry status"
+            title="Partnership submissions are not currently available"
             description="The form is retained in its existing disabled state when enquiries are not enabled. If enabled by the owner, use it to request information rather than assume an offer."
           />
           {submitted ? (
