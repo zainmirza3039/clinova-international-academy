@@ -108,7 +108,7 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-2">
               {[
                 { label: 'Flexible Study' },
-                { label: 'CPD-focused learning' },
+                { label: 'Professional development' },
                 { label: 'Clear programme information' },
                 { label: 'Global Access' },
                 { label: 'Self-Paced' },
@@ -231,7 +231,7 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <Reveal className="max-w-2xl">
               <div className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-400 mb-4">
-                CPD Courses
+                Professional Development
               </div>
               <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-white leading-[1.15] text-balance">
                 Continue your professional development
@@ -241,7 +241,7 @@ export default function HomePage() {
               to="/cpd-courses"
               className="inline-flex items-center gap-2 text-sm font-semibold text-teal-400 hover:text-teal-300 transition-colors shrink-0"
             >
-              View All CPD Courses
+              View All Professional Development
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -502,7 +502,7 @@ export default function HomePage() {
                   to="/cpd-courses"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-transparent text-white font-semibold border border-white/30 hover:bg-white/10 transition-colors"
                 >
-                  Browse CPD Courses
+                  Browse Professional Development
                 </Link>
               </div>
             </div>
