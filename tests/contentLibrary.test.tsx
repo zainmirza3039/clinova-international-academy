@@ -102,7 +102,9 @@ describe('reading-based resources and confirmed contact fact', () => {
     render(<MemoryRouter><ContactPage /><Footer /></MemoryRouter>);
     expect(academyPublicAddress).toBe('1 Unity St, Bristol BS1 5HH, United Kingdom');
     expect(screen.getAllByText(academyPublicAddress)).toHaveLength(2);
-    expect((screen.getByRole('button', { name: 'Send Message' }) as HTMLButtonElement).disabled).toBe(true);
+    expect(screen.getByRole('heading', { name: /enquiry service unavailable/i })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: 'Send Message' })).toBeNull();
+    expect(screen.queryByRole('form', { name: 'Contact enquiry' })).toBeNull();
     expect(screen.getByText(/Visiting arrangements and opening hours have not been confirmed/)).toBeTruthy();
   });
 });
