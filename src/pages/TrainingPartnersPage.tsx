@@ -11,7 +11,7 @@ const benefits = [
   { icon: FileText, title: 'Share your context', desc: 'Describe your organisation, audience and learning questions.' },
   { icon: Users, title: 'Discuss learner needs', desc: 'Explain the support and access arrangements you would need.' },
   { icon: Award, title: 'Ask about recognition', desc: 'Request accurate information; certificates and recognition are not promised.' },
-  { icon: FileText, title: 'Review draft resources', desc: 'Use the existing reading library to frame a possible conversation.' },
+  { icon: FileText, title: 'Review learning resources', desc: 'Use the learning library to identify shared educational interests.' },
   { icon: ShieldCheck, title: 'Clarify review', desc: 'Ask what has been reviewed, approved or published.' },
   { icon: Handshake, title: 'Consider terms', desc: 'Discuss any partnership only after the owner confirms capability and terms.' },
 ];
@@ -36,7 +36,7 @@ export default function TrainingPartnersPage() {
   useSEO({
     title: 'Training Partners',
     description:
-      'Discuss a possible training partnership. Share a possible education enquiry; partnership capabilities and terms are not yet confirmed.',
+      'Discuss potential collaboration and describe your organisation's educational needs. Any partnership depends on agreed scope, resources and written terms.',
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -141,7 +141,7 @@ export default function TrainingPartnersPage() {
             <div>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-900 mb-4">Who Can Apply?</h2>
               <p className="text-sm text-navy-500 leading-relaxed mb-6">
-                Organisations may use the proposed enquiry route to describe a possible collaboration; acceptance, capability and terms require owner confirmation.
+                Organisations can use this enquiry route to describe potential collaboration. Acceptance, capability and terms depend on review and written agreement.
               </p>
               <div className="space-y-3">
                 {whoCanApply.map((item) => (
@@ -177,7 +177,7 @@ export default function TrainingPartnersPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Apply Now"
-            title="Proposed partnership enquiry"
+            title="Training partnership enquiry"
             description="The form is retained in its existing disabled state when enquiries are not enabled. If enabled by the owner, use it to request information rather than assume an offer."
           />
           {submitted ? (
