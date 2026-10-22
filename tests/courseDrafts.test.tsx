@@ -41,12 +41,10 @@ describe('proposed course drafts', () => {
     expect(cpdCard.container.textContent).not.toMatch(/\d+ CPD|weeks|Certificate|Enrol/i);
   });
 
-  it('renders lesson content inside collapsed details with no learner completion controls', () => {
+  it('blocks draft programme detail routes until the course is approved', () => {
     render(<MemoryRouter initialEntries={['/programmes/certificate-in-musculoskeletal-assessment']}><Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes></MemoryRouter>);
-    expect(screen.getByText('Proposed catalogue entry.')).toBeTruthy();
-    expect(screen.getAllByText(/Reflective activity:/i)).toHaveLength(3);
-    expect(document.querySelectorAll('details[open]')).toHaveLength(0);
-    expect(screen.queryByRole('button', { name: /complete|save/i })).toBeNull();
-    expect(document.body.textContent).not.toMatch(/digital Certificate|you will receive|\b40 CPD hours\b/);
+    expect(screen.getByRole('heading', { name: 'Programme Not Found' })).toBeTruthy();
+    expect(screen.queryByText('Proposed catalogue entry.')).toBeNull();
+    expect(screen.queryByText(/Reflective activity:/i)).toBeNull();
   });
 });
