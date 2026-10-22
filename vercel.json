@@ -2,7 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "git": {
     "deploymentEnabled": {
-      "feat/clinova-safe-auth-Sh2gdLt": false
+      "feat/clinova-safe-auth-Sh2gdLt": false,
+      "review/clinova-all-updates-20261022": false
     }
   },
   "routes": [
