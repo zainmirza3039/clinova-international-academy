@@ -38,11 +38,14 @@ describe('migration-aligned validation', () => {
 describe('Vercel SPA configuration', () => {
   it('serves existing files first, then falls back to the router entrypoint', () => {
     const config = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
-    expect(config.routes).toEqual([
+    expect(config.routes[0].continue).toBe(true);
+    expect(config.routes[0].headers["X-Content-Type-Options"]).toBe("nosniff");
+    expect(config.routes[0].headers["X-Frame-Options"]).toBe("DENY");
+    expect(config.routes.slice(1)).toEqual([
       { handle: 'filesystem' },
       { src: '/.*', dest: '/index.html' },
     ]);
-    const fallback = new RegExp(`^${config.routes[1].src}$`);
+    const fallback = new RegExp(`^${config.routes[2].src}$`);
     for (const path of ['/contact', '/training-partners', '/programmes/example', '/unknown-route']) {
       expect(fallback.test(path)).toBe(true);
     }

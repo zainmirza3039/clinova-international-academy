@@ -27,7 +27,6 @@ export default function ProgrammeDetailPage() {
       provider: {
         '@type': 'Organization',
         name: 'Clinova International Academy',
-        url: 'https://clinovaacademy.co.uk',
       },
     } : undefined,
   });
@@ -53,9 +52,9 @@ export default function ProgrammeDetailPage() {
   const courseFAQs: FAQ[] = [
     { id: 'cf1', question: 'How is this programme delivered?', answer: `The ${programme.title} is delivered entirely online through our learning platform. You can access video lessons, reading materials and assessments at any time that suits your schedule.` },
     { id: 'cf2', question: 'How long does it take to complete?', answer: `The programme duration is ${programme.duration}. As the programme is self-paced, you can study at a speed that works around your professional commitments.` },
-    { id: 'cf3', question: 'Will I receive a certificate?', answer: `Yes, upon successful completion you will receive a ${programme.certificate}, which can be verified through our online certificate verification system.` },
+    { id: 'cf3', question: 'Will I receive a certificate?', answer: `Yes, upon successful completion you will receive a ${programme.certificate}, and any verification process are awaiting academy confirmation.` },
     { id: 'cf4', question: 'What are the assessment methods?', answer: programme.assessment },
-    { id: 'cf5', question: 'Is this programme accredited?', answer: 'Our programmes are CPD-focused educational courses. We do not currently claim formal accreditation from any regulatory body. This programme offers a Certificate of Completion.' },
+    { id: 'cf5', question: 'Is this programme accredited?', answer: 'Our programmes are CPD-focused educational courses. We do not currently claim formal accreditation from any regulatory body. Certificate arrangements await academy confirmation.' },
   ];
 
   const sidebarItems = [

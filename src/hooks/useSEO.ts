@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { siteOrigin } from '@/lib/siteConfig';
 
 interface SEOProps {
   title: string;
@@ -31,7 +32,11 @@ export function useSEO({ title, description, canonical, ogImage, structuredData 
     ensureMeta('meta[property="og:description"]', 'property', 'og:description').content = description;
     ensureMeta('meta[property="og:type"]', 'property', 'og:type').content = 'website';
     ensureMeta('meta[property="og:url"]', 'property', 'og:url').content =
-      `https://clinovaacademy.co.uk${canonical ?? location.pathname}`;
+      siteOrigin ? `${siteOrigin}${canonical ?? location.pathname}` : '';
+    const privateRoute = /^\/(admin|apply|application)(\/|$)/.test(location.pathname);
+    ensureMeta('meta[name="robots"]', 'name', 'robots').content =
+      !siteOrigin || privateRoute ? 'noindex, nofollow' : 'index, follow';
+    document.head.querySelector('meta[property="og:image"]')?.remove();
     if (ogImage) {
       ensureMeta('meta[property="og:image"]', 'property', 'og:image').content = ogImage;
     }
@@ -44,11 +49,12 @@ export function useSEO({ title, description, canonical, ogImage, structuredData 
       link.setAttribute('rel', 'canonical');
       document.head.appendChild(link);
     }
-    link.href = `https://clinovaacademy.co.uk${canonical ?? location.pathname}`;
+    if (siteOrigin && !privateRoute) link.href = `${siteOrigin}${canonical ?? location.pathname}`;
+    else link.remove();
 
     const existingScript = document.head.querySelector('#structured-data');
     if (existingScript) existingScript.remove();
-    if (structuredData) {
+    if (structuredData && siteOrigin && !privateRoute) {
       const script = document.createElement('script');
       script.id = 'structured-data';
       script.type = 'application/ld+json';

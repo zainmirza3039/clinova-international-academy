@@ -58,7 +58,7 @@ export default function AboutPage() {
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'About' }]}
         eyebrow="About Us"
         title="About Clinova International Academy"
-        description="A UK-based virtual healthcare education institute providing flexible online learning, CPD-focused professional development and structured educational programmes for healthcare professionals."
+        description="Explore the proposed approach to healthcare education at Clinova. Academy location, delivery arrangements and institutional details await confirmation."
         image="https://images.pexels.com/photos/5452189/pexels-photo-5452189.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 

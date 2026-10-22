@@ -7,6 +7,10 @@ import NewsletterForm from '@/components/NewsletterForm';
 
 const { insert, from } = vi.hoisted(() => ({ insert: vi.fn(), from: vi.fn() }));
 vi.mock('@/lib/supabase', () => ({ supabase: { from } }));
+vi.mock('@/lib/siteConfig', async (importOriginal) => ({
+  ...await importOriginal<typeof import('@/lib/siteConfig')>(),
+  enquiriesEnabled: true,
+}));
 vi.mock('@/hooks/useScrollAnimation', () => ({
   useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }),
 }));
@@ -121,7 +125,7 @@ for (const scenario of scenarios) {
         fireEvent.submit(form);
         fireEvent.submit(form);
       });
-      expect(insert).toHaveBeenCalledTimes(1);
+      await waitFor(() => expect(insert).toHaveBeenCalledTimes(1));
       expect((form.querySelector('button') as HTMLButtonElement).disabled).toBe(true);
       await act(async () => { resolve({ error: null }); });
       expect(screen.getByRole('status').textContent).toContain(scenario.success);
