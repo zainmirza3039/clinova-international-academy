@@ -90,7 +90,7 @@ export default function TrainingPartnersPage() {
       form.reset();
       setSubmitted(true);
     } catch {
-      setError('We could not submit your enquiry. Please try again or contact us directly.');
+      setError('We could not submit your enquiry. Please try again later; no confirmed direct contact route is available.');
     } finally {
       submittingRef.current = false;
       setSubmitting(false);
