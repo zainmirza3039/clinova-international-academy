@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useScrollPosition } from '@/hooks/useScrollAnimation';
 import { departments } from '@/data/departments';
 
@@ -10,7 +11,7 @@ const navLinks = [
   { label: 'Departments', to: '/departments', hasMegaMenu: true },
   { label: 'Programmes', to: '/programmes', hasMegaMenu: true },
   { label: 'CPD Courses', to: '/cpd-courses' },
-  { label: 'Online Learning', to: '/online-learning' },
+  { label: 'Admissions', to: '/admissions' },
   { label: 'Training Partners', to: '/training-partners' },
   { label: 'Resources', to: '/resources' },
   { label: 'Contact', to: '/contact' },
@@ -26,9 +27,16 @@ const programmeMenuItems = [
 
 export default function Header() {
   const isScrolled = useScrollPosition();
+  const { pathname } = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [megaMenu, setMegaMenu] = useState<string | null>(null);
   const [mobileMegaMenu, setMobileMegaMenu] = useState<string | null>(null);
+  useEffect(() => { setMobileOpen(false); setMegaMenu(null); }, [pathname]);
+  useEffect(() => {
+    const close = (e: KeyboardEvent) => { if (e.key === 'Escape') { setMobileOpen(false); setMegaMenu(null); } };
+    document.addEventListener('keydown', close);
+    return () => document.removeEventListener('keydown', close);
+  }, []);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -168,7 +176,7 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {mobileOpen && (
-        <div className="xl:hidden fixed inset-x-0 top-16 bottom-0 bg-white overflow-y-auto border-t border-navy-100">
+        <div className="xl:hidden fixed inset-x-0 top-16 lg:top-20 bottom-0 bg-white overflow-y-auto border-t border-navy-100">
           <nav className="px-6 py-6 space-y-1" aria-label="Mobile navigation">
             {navLinks.map((link) => (
               <div key={link.label}>

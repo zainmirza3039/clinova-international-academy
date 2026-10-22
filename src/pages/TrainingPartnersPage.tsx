@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { CheckCircle, Handshake, Users, FileText, Award, ShieldCheck } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { enquiriesEnabled, enquiryUnavailable } from '@/lib/siteConfig';
 import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import SectionHeader from '@/components/SectionHeader';
@@ -47,6 +47,7 @@ export default function TrainingPartnersPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (submittingRef.current) return;
+    if (!enquiriesEnabled) { setError(enquiryUnavailable); return; }
     submittingRef.current = true;
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -74,6 +75,7 @@ export default function TrainingPartnersPage() {
     }
 
     try {
+      const { supabase } = await import('@/lib/supabase');
       const { error: submissionError } = await supabase.from('partnership_inquiries').insert({
         full_name: values.fullName,
         organisation: values.organisation,
@@ -185,8 +187,9 @@ export default function TrainingPartnersPage() {
               <p className="text-sm text-navy-600">Thank you for your interest in partnering with Clinova. Our team will be in touch with you soon.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-5 bg-navy-50 p-6 md:p-8 rounded-xl border border-navy-100">
-              {error && <p role="alert" aria-live="assertive" className="text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
+            <form aria-label="Partnership enquiry" onSubmit={handleSubmit} className="space-y-5 bg-navy-50 p-6 md:p-8 rounded-xl border border-navy-100">
+              {!enquiriesEnabled && <p className="text-sm text-navy-700 border-l-2 border-teal-500 pl-3 mb-4">{enquiryUnavailable}</p>}
+                  {error && <p role="alert" aria-live="assertive" className="text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className={labelClass} htmlFor="fullName">Full Name *</label>
@@ -227,7 +230,7 @@ export default function TrainingPartnersPage() {
               </div>
               <button
                 type="submit"
-                disabled={submitting}
+                disabled={submitting || !enquiriesEnabled}
                 className="w-full px-6 py-3.5 bg-clinical-600 text-white font-semibold rounded-lg hover:bg-clinical-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors shadow-sm"
               >
                 {submitting ? 'Submitting…' : 'Submit Partnership Enquiry'}

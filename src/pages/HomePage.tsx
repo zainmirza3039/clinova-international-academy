@@ -9,14 +9,13 @@ import Reveal from '@/components/Reveal';
 import DepartmentCard from '@/components/DepartmentCard';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import CPDCard from '@/components/CPDCard';
-import TestimonialCard from '@/components/TestimonialCard';
 import NewsCard from '@/components/NewsCard';
 import FAQAccordion from '@/components/FAQAccordion';
 import NewsletterForm from '@/components/NewsletterForm';
 import { departments } from '@/data/departments';
 import { getFeaturedProgrammes } from '@/data/programmes';
 import { cpdCourses, cpdFilters } from '@/data/cpdCourses';
-import { testimonials, newsItems, generalFAQs } from '@/data/testimonials';
+import { newsItems, generalFAQs } from '@/data/testimonials';
 import { useState } from 'react';
 
 const learningSteps = [
@@ -43,7 +42,6 @@ export default function HomePage() {
       '@type': 'EducationalOrganization',
       name: 'Clinova International Academy',
       description: 'Online healthcare education, CPD and professional development for healthcare professionals.',
-      url: 'https://clinovaacademy.co.uk',
     },
   });
 
@@ -112,7 +110,7 @@ export default function HomePage() {
               {[
                 { label: 'Flexible Study' },
                 { label: 'CPD-focused learning' },
-                { label: 'Digital Certificates' },
+                { label: 'Certificate details pending' },
                 { label: 'Global Access' },
                 { label: 'Self-Paced' },
               ].map((item) => (
@@ -151,16 +149,14 @@ export default function HomePage() {
                   Professional education for the modern healthcare workforce
                 </h2>
                 <p className="mt-6 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-                  Clinova provides structured online educational opportunities for healthcare professionals who want to
-                  expand knowledge, maintain professional development and develop clinically relevant skills. Our
-                  programmes span ten healthcare disciplines and are delivered entirely online, designed to fit around
-                  the demands of clinical practice.
+                  This draft catalogue explores online educational opportunities for healthcare professionals who want to
+                  expand knowledge, maintain professional development and develop clinically relevant skills. Programme outlines span healthcare disciplines. Availability, delivery and admissions details await academy confirmation.
                 </p>
                 <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-10 border-t border-navy-100 pt-10">
                   {[
-                    { stat: '10', label: 'Healthcare departments' },
-                    { stat: '12+', label: 'CPD courses available' },
-                    { stat: '100%', label: 'Online delivery' },
+                    { stat: 'Explore', label: 'Draft study areas' },
+                    { stat: 'Compare', label: 'Proposed programme outlines' },
+                    { stat: 'Plan', label: 'Your next learning step' },
                   ].map((item) => (
                     <div key={item.label}>
                       <div className="font-heading text-3xl font-bold text-navy-800 tabular-nums">{item.stat}</div>
@@ -429,23 +425,7 @@ export default function HomePage() {
       </section>
 
       {/* TESTIMONIALS — editorial pull quotes on dark navy */}
-      <section className="py-20 lg:py-32 bg-navy-800">
-        <div className="max-w-editorial mx-auto px-6 lg:px-10">
-          <Reveal className="max-w-2xl mb-12 lg:mb-16">
-            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-400 mb-4">
-              Testimonials
-            </div>
-            <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-white leading-[1.15] text-balance">
-              What learners say about Clinova
-            </h2>
-          </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
-            {testimonials.map((t, i) => (
-              <TestimonialCard key={t.id} testimonial={t} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* NEWS & RESOURCES — 3-col, left-aligned header */}
       <section className="py-20 lg:py-32 bg-white">

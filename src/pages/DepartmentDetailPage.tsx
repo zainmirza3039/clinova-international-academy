@@ -45,7 +45,7 @@ export default function DepartmentDetailPage() {
     { id: 'df1', question: `What programmes are available in ${department.name}?`, answer: `We offer a range of certificate courses, diploma programmes and CPD-focused courses in ${department.name}. Browse the programmes listed above or view our full catalogue for more details.` },
     { id: 'df2', question: 'How are the programmes delivered?', answer: 'All programmes are delivered entirely online through our learning platform, allowing you to study flexibly around your professional commitments.' },
     { id: 'df3', question: 'Will I receive a certificate?', answer: 'Yes, upon successful completion of a programme, you will receive a digital Certificate of Completion that can be verified through our online system.' },
-    { id: 'df4', question: 'Are these programmes accredited?', answer: 'Our programmes are CPD-focused educational courses. We do not currently claim formal accreditation. All programmes offer a Certificate of Completion.' },
+    { id: 'df4', question: 'Are these programmes accredited?', answer: 'Our programmes are CPD-focused educational courses. We do not currently claim formal accreditation. Certificate arrangements await academy confirmation.' },
   ];
 
   return (

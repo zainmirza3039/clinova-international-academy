@@ -17,6 +17,13 @@ import { ResourcesPage, ResourceDetailPage } from '@/pages/ResourcesPage';
 import ContactPage from '@/pages/ContactPage';
 import LegalPage from '@/pages/LegalPage';
 import NotFoundPage from '@/pages/NotFoundPage';
+import ErrorBoundary from '@/components/ErrorBoundary';
+import { siteSettings } from '@/lib/siteConfig';
+import AdmissionsPage from '@/pages/AdmissionsPage';
+import ApplicationPage from '@/pages/ApplicationPage';
+import AdminPage from '@/pages/AdminPage';
+import CommunityPage, { EventsPage, FacultyPage } from '@/pages/CommunityPage';
+import FAQsPage from '@/pages/FAQsPage';
 import { privacyPolicy, termsAndConditions, cookiePolicy, refundPolicy } from '@/data/legalContent';
 
 export default function App() {
@@ -24,11 +31,27 @@ export default function App() {
     <BrowserRouter>
       <ScrollToTop />
       <div className="flex flex-col min-h-screen">
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <Header />
-        <main className="flex-1">
+        <main id="main-content" tabIndex={-1} className="flex-1">
+          <div className="preview-notice">{siteSettings.contentStatus}</div>
+          <ErrorBoundary>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/admissions" element={<AdmissionsPage />} />
+            <Route path="/apply" element={<ApplicationPage />} />
+            <Route path="/application" element={<ApplicationPage />} />
+            <Route path="/community" element={<CommunityPage />} />
+            <Route path="/admin/*" element={<AdminPage />} />
+            <Route path="/events" element={<EventsPage />} />
+            <Route path="/faculty" element={<FacultyPage />} />
+            <Route path="/faqs" element={<FAQsPage />} />
+            <Route path="/courses" element={<ProgrammesPage />} />
+            <Route path="/courses/:slug" element={<ProgrammeDetailPage />} />
+            <Route path="/blog" element={<ResourcesPage />} />
+            <Route path="/blog/:slug" element={<ResourceDetailPage />} />
+            <Route path="/announcements" element={<ResourcesPage />} />
             <Route path="/departments" element={<DepartmentsPage />} />
             <Route path="/departments/:slug" element={<DepartmentDetailPage />} />
             <Route path="/programmes" element={<ProgrammesPage />} />
@@ -47,6 +70,7 @@ export default function App() {
             <Route path="/refund-policy" element={<LegalPage {...refundPolicy} />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
+          </ErrorBoundary>
         </main>
         <Footer />
       </div>

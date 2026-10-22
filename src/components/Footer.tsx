@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Mail } from 'lucide-react';
 
 const academyLinks = [
   { label: 'About', to: '/about' },
@@ -13,11 +12,15 @@ const professionalLinks = [
   { label: 'Training Partners', to: '/training-partners' },
   { label: 'Resources', to: '/resources' },
   { label: 'Certificate Verification', to: '/verify' },
-  { label: 'FAQs', to: '/about#faqs' },
+  { label: 'FAQs', to: '/faqs' },
+  { label: 'Events', to: '/events' },
+  { label: 'Faculty', to: '/faculty' },
 ];
 
 const supportLinks = [
   { label: 'Contact', to: '/contact' },
+  { label: 'Admissions', to: '/admissions' },
+  { label: 'Administration', to: '/admin' },
   { label: 'Privacy Policy', to: '/privacy-policy' },
   { label: 'Terms & Conditions', to: '/terms-and-conditions' },
   { label: 'Cookie Policy', to: '/cookie-policy' },
@@ -40,9 +43,7 @@ export default function Footer() {
               development for healthcare professionals worldwide.
             </p>
             <div className="space-y-2.5">
-              <a href="mailto:info@clinovaacademy.co.uk" className="flex items-center gap-2 text-sm text-navy-100/60 hover:text-teal-400 transition-colors">
-                <Mail className="w-4 h-4 shrink-0" /> info@clinovaacademy.co.uk
-              </a>
+              <p className="text-sm text-navy-100/80">Contact details awaiting academy confirmation.</p>
 
             </div>
           </div>

@@ -15,7 +15,7 @@ const features = [
   { icon: BookOpen, title: 'Learning Resources', desc: 'Curated reading materials, reference guides and downloadable resources.' },
   { icon: ClipboardCheck, title: 'Assessments', desc: 'Test your knowledge through quizzes, assignments and case studies.' },
   { icon: Clock, title: 'Progress Tracking', desc: 'Monitor completion rates and see how far you have come.' },
-  { icon: Award, title: 'Digital Certificates', desc: 'Receive verified digital certificates upon programme completion.' },
+  { icon: Award, title: 'Certificate arrangements', desc: 'Certificate availability and verification are awaiting academy confirmation.' },
   { icon: ShieldCheck, title: 'Quality Learning', desc: 'Structured, evidence-informed content designed for healthcare professionals.' },
 ];
 
@@ -23,7 +23,7 @@ export default function OnlineLearningPage() {
   useSEO({
     title: 'Online Learning',
     description:
-      'Discover the Clinova online learning experience — video lessons, reading resources, assessments, progress tracking and digital certificates.',
+      'Explore the proposed online learning experience. Platform features, access, assessments and certificates are awaiting academy confirmation.',
   });
 
   return (
@@ -32,7 +32,7 @@ export default function OnlineLearningPage() {
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Online Learning' }]}
         eyebrow="Online Learning"
         title="Learn Around Your Professional Life"
-        description="Our online platform gives you everything you need to study effectively, wherever you are. Flexible, structured learning designed for working healthcare professionals."
+        description="This page describes a proposed learning experience only. Platform availability, delivery format and suitability for working professionals require academy confirmation."
         image="https://images.pexels.com/photos/5934556/pexels-photo-5934556.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
@@ -133,7 +133,7 @@ export default function OnlineLearningPage() {
 
       <CTASection
         title="Start Your Online Learning Journey"
-        description="Enrol in a programme today and gain access to our full online learning platform."
+        description="Programme availability and platform access are awaiting academy confirmation; no checkout or enrolment is available here."
         primaryCTA={{ label: 'Explore Programmes', to: '/programmes' }}
         secondaryCTA={{ label: 'Browse CPD Courses', to: '/cpd-courses' }}
         variant="teal"

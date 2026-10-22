@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Mail, CheckCircle } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { enquiriesEnabled, enquiryUnavailable } from '@/lib/siteConfig';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { validateFormFields } from '@/lib/formValidation';
 
@@ -15,6 +15,7 @@ export default function NewsletterForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (submittingRef.current) return;
+    if (!enquiriesEnabled) { setError(enquiryUnavailable); return; }
     submittingRef.current = true;
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -33,6 +34,7 @@ export default function NewsletterForm() {
     }
 
     try {
+      const { supabase } = await import('@/lib/supabase');
       const { error: submissionError } = await supabase.from('newsletter_subscriptions').insert({ email: values.email });
       if (submissionError && submissionError.code !== '23505') throw submissionError;
       form.reset();
@@ -60,14 +62,15 @@ export default function NewsletterForm() {
       <p className="text-sm text-navy-500 leading-relaxed mb-5">
         Receive updates about new programmes, educational resources and academy announcements.
       </p>
-      {error && <p role="alert" aria-live="assertive" className="mb-4 text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
+      {!enquiriesEnabled && <p className="text-sm text-navy-700 border-l-2 border-teal-500 pl-3 mb-4">{enquiryUnavailable}</p>}
+                  {error && <p role="alert" aria-live="assertive" className="mb-4 text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
       {submitted ? (
         <div role="status" aria-live="polite" className="flex items-center gap-2 p-4 bg-teal-50 text-teal-700 rounded-lg">
           <CheckCircle className="w-5 h-5" />
           <span className="text-sm font-medium">Thank you for subscribing. We'll be in touch with updates soon.</span>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+        <form aria-label="Newsletter subscription" onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
           <input
             name="email"
             type="email"
@@ -81,7 +84,7 @@ export default function NewsletterForm() {
           />
           <button
             type="submit"
-            disabled={submitting}
+            disabled={submitting || !enquiriesEnabled}
             className="px-6 py-3 bg-clinical-600 text-white text-sm font-semibold rounded-lg hover:bg-clinical-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors shadow-sm whitespace-nowrap"
           >
             {submitting ? 'Subscribing…' : 'Subscribe'}

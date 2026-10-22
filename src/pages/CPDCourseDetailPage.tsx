@@ -46,6 +46,7 @@ export default function CPDCourseDetailPage() {
         </div>
       </section>
 
+      <div className="mx-auto max-w-4xl px-6 lg:px-10 mt-6 p-4 rounded-lg border border-amber-200 bg-amber-50 text-sm text-navy-700">Draft catalogue: availability, dates, duration, fees, delivery, assessment and certificate details require academy confirmation. No checkout or enrolment is available on this page.</div>
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-editorial mx-auto px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">

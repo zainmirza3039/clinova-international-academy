@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Mail, CheckCircle, MessageSquare, GraduationCap, Handshake } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { enquiriesEnabled, enquiryUnavailable } from '@/lib/siteConfig';
 import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import { validateFormFields } from '@/lib/formValidation';
@@ -8,9 +8,9 @@ import { validateFormFields } from '@/lib/formValidation';
 const enquiryTypes = ['General Enquiry', 'Academic Enquiry', 'Partnership Enquiry', 'Technical Support'];
 
 const contactCards = [
-  { icon: MessageSquare, title: 'General Enquiries', email: 'info@clinovaacademy.co.uk', desc: 'Questions about our academy, programmes or services.' },
-  { icon: GraduationCap, title: 'Academic Enquiries', email: 'academic@clinovaacademy.co.uk', desc: 'Questions about specific programmes or enrolment.' },
-  { icon: Handshake, title: 'Partnership Enquiries', email: 'partnerships@clinovaacademy.co.uk', desc: 'Interested in becoming a training partner.' },
+  { icon: MessageSquare, title: 'General Enquiries', email: '', desc: 'Questions about our academy, programmes or services.' },
+  { icon: GraduationCap, title: 'Academic Enquiries', email: '', desc: 'Questions about specific programmes or enrolment.' },
+  { icon: Handshake, title: 'Partnership Enquiries', email: '', desc: 'Interested in becoming a training partner.' },
 ];
 
 export default function ContactPage() {
@@ -27,6 +27,7 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (submittingRef.current) return;
+    if (!enquiriesEnabled) { setError(enquiryUnavailable); return; }
     submittingRef.current = true;
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -52,6 +53,7 @@ export default function ContactPage() {
     }
 
     try {
+      const { supabase } = await import('@/lib/supabase');
       const { error: submissionError } = await supabase.from('contact_submissions').insert({
         name: values.name,
         email: values.email,
@@ -64,7 +66,7 @@ export default function ContactPage() {
       form.reset();
       setSubmitted(true);
     } catch {
-      setError('We could not send your message. Please try again or email us directly.');
+      setError('We could not send your message. Nothing was confirmed; please try again later.');
     } finally {
       submittingRef.current = false;
       setSubmitting(false);
@@ -93,9 +95,7 @@ export default function ContactPage() {
                 <card.icon className="w-5 h-5 text-teal-500 mb-4" strokeWidth={1.5} />
                 <h3 className="font-heading font-bold text-navy-800 text-base mb-2">{card.title}</h3>
                 <p className="text-sm text-navy-600/70 leading-relaxed mb-3">{card.desc}</p>
-                <a href={`mailto:${card.email}`} className="text-sm font-semibold text-clinical-600 hover:text-clinical-700 transition-colors">
-                  {card.email}
-                </a>
+                <p className="text-sm text-navy-600">Contact address awaiting academy confirmation.</p>
               </div>
             ))}
           </div>
@@ -110,10 +110,11 @@ export default function ContactPage() {
                 <div role="status" aria-live="polite" className="text-center py-16 bg-teal-50 border border-teal-100">
                   <CheckCircle className="w-12 h-12 text-teal-500 mx-auto mb-4" />
                   <h3 className="font-heading text-xl font-bold text-navy-800 mb-2">Message Sent</h3>
-                  <p className="text-sm text-navy-600">Thank you for contacting Clinova. Our team will respond to your enquiry shortly.</p>
+                  <p className="text-sm text-navy-600">Your enquiry was accepted. Response arrangements are awaiting academy confirmation.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5 bg-surface-50 p-6 md:p-8 border border-navy-100">
+                <form aria-label="Contact enquiry" onSubmit={handleSubmit} className="space-y-5 bg-surface-50 p-6 md:p-8 border border-navy-100">
+                  {!enquiriesEnabled && <p className="text-sm text-navy-700 border-l-2 border-teal-500 pl-3 mb-4">{enquiryUnavailable}</p>}
                   {error && <p role="alert" aria-live="assertive" className="text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
@@ -150,7 +151,7 @@ export default function ContactPage() {
                   </div>
                   <button
                     type="submit"
-                    disabled={submitting}
+                    disabled={submitting || !enquiriesEnabled}
                     className="w-full px-6 py-3.5 bg-clinical-500 text-white font-semibold hover:bg-clinical-600 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
                   >
                     {submitting ? 'Sending…' : 'Send Message'}
@@ -168,14 +169,12 @@ export default function ContactPage() {
                     <Mail className="w-5 h-5 text-teal-400 shrink-0 mt-0.5" />
                     <div>
                       <div className="text-xs text-navy-100/50 mb-1">Email</div>
-                      <a href="mailto:info@clinovaacademy.co.uk" className="text-sm font-medium hover:text-teal-400 transition-colors">
-                        info@clinovaacademy.co.uk
-                      </a>
+                      <p className="text-sm">Awaiting academy confirmation</p>
                     </div>
                   </div>
                   <div className="border-t border-white/10 pt-5">
                     <div className="text-xs text-navy-100/60 mb-1">Response times</div>
-                    <div className="text-sm text-navy-100/80">We aim to respond within two business days.</div>
+                    <div className="text-sm text-navy-100/80">Response arrangements are awaiting academy confirmation.</div>
                   </div>
                 </div>
               </div>
@@ -183,9 +182,9 @@ export default function ContactPage() {
               <div className="bg-surface-50 p-6 border border-navy-100">
                 <h3 className="font-heading font-semibold text-navy-800 text-sm mb-3">Response Times</h3>
                 <ul className="space-y-2 text-sm text-navy-600">
-                  <li>General enquiries: within 2 business days</li>
-                  <li>Academic enquiries: within 3 business days</li>
-                  <li>Partnership enquiries: within 5 business days</li>
+                  <li>General enquiries: to be confirmed</li>
+                  <li>Academic enquiries: to be confirmed</li>
+                  <li>Partnership enquiries: to be confirmed</li>
                 </ul>
               </div>
             </div>
