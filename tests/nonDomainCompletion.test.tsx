@@ -49,13 +49,11 @@ describe('honest and accessible public states', () => {
     expect(screen.queryByLabelText('Search resources')).toBeNull();
     expect(screen.queryByRole('button', { name: /Assessment|Rehabilitation|Clinical Education/ })).toBeNull();
   });
-  it('does not present fictional learner totals or progress as real records', () => {
+  it('shows only the real student-access availability state, not an illustrative dashboard', () => {
     const { container } = render(<MemoryRouter><OnlineLearningPage /></MemoryRouter>);
-    expect(screen.getByRole('heading', { name: 'An Illustrative Dashboard Concept' })).toBeTruthy();
-    expect(screen.getAllByText('Progress unavailable')).toHaveLength(3);
-    expect(screen.getAllByText('Illustrative only')).toHaveLength(3);
-    expect(container.textContent).not.toMatch(/75%|100%|30%|Completed|In Progress/);
-    expect(screen.queryByText('45')).toBeNull();
-    expect(screen.getByRole('heading', { name: 'Proposed Video Lessons' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Student learning access is not yet available' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Learner services are unavailable' })).toBeTruthy();
+    expect(screen.getByRole('link', { name: /Student sign-in status/ })).toBeTruthy();
+    expect(container.textContent).not.toMatch(/Illustrative Dashboard|Proposed Video Lessons|Progress unavailable|Example CPD total|45|75%|100%|30%/);
   });
 });
