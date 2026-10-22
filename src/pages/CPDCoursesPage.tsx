@@ -11,7 +11,7 @@ export default function CPDCoursesPage() {
   useSEO({
     title: 'CPD Courses',
     description:
-      'Browse proposed professional-development topics. CPD accreditation, recognised hours, delivery and enrolment are not confirmed.',
+      'Explore professional-development topics. Recognised CPD hours, accreditation, delivery and enrolment are confirmed only for specific published offerings.',
   });
 
   const [search, setSearch] = useState('');
@@ -39,8 +39,8 @@ export default function CPDCoursesPage() {
       <PageHero
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'CPD Courses' }]}
         eyebrow="CPD Courses"
-        title="Proposed Professional Development Topics"
-        description="Explore draft professional-development topics. No recognised CPD hours, course availability, accreditation, assessment or certificate is confirmed."
+        title="Professional Development Topics"
+        description="Explore professional-development topics and review the details published for each offering. CPD hours, accreditation, availability, assessment and certification must be confirmed before booking."
         image="https://images.pexels.com/photos/5452222/pexels-photo-5452222.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
