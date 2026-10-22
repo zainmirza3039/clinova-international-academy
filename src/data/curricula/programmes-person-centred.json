@@ -2,7 +2,7 @@
   {
     "programmeSlug": "certificate-in-patient-centred-healthcare-practice",
     "status": "draft",
-    "reviewNotice": "Proposed professional-learning educational material only. Content, scope, accessibility, clinical accuracy and any future delivery or recognition arrangements require qualified clinical and academy review. It is not legal or medical advice, does not promise a certified skill, and has no confirmed completion, tracking, backend or delivery arrangements.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Describe how person-centred practice joins the person’s goals, evidence, professional judgement and context.",
       "Structure collaborative conversations that make choices, uncertainty and safety-netting understandable.",
@@ -70,13 +70,13 @@
             "text": "Warmth and continuity do not require a professional to become a friend, advocate beyond their mandate or informal therapist. HCPC standards require appropriate boundaries, practice within knowledge and skills, referral beyond scope, and supervision for delegated work. Comparable responsibilities are expressed differently by regulators and employers, so identify the governing standard for your profession and setting. Be alert to gifts, private messaging, social media contact, dual relationships, financial pressure and requests for special access. Boundaries should be explained respectfully rather than enforced as punishment. Supervision is not a sign of failure: bring uncertainty, bias, a near miss or a difficult emotional response early, while sharing only the information necessary for safe consultation. In a fictional team, a support worker is asked to perform a task outside training; a safe response pauses, checks delegation and arranges qualified oversight instead of relying on confidence. Document facts and actions without judgemental labels. If immediate risk exists, use the urgent pathway first. This educational material does not define a certified skill or authorise independent practice."
           }
         ],
-        "reflectiveActivity": "Write a de-identified supervision note about a fictional boundary or safeguarding dilemma. Separate observed facts, your emotional response, risk, policy question and proposed escalation."
+        "reflectiveActivity": "Write a de-identified supervision note about a fictional boundary or safeguarding dilemma. Separate observed facts, your emotional response, risk, policy question and suggested escalation."
       }
     ],
     "faqs": [
       {
         "question": "Is this programme available for enrolment?",
-        "answer": "No. It is a catalogue overview outline; availability, delivery, instructors and enrolment arrangements are unknown and unconfirmed."
+        "answer": "No. It is a catalogue overview outline; availability, delivery, instructors and enrolment arrangements are not provided."
       },
       {
         "question": "Does it award a certificate, CPD hours or professional recognition?",
@@ -135,7 +135,7 @@
   {
     "programmeSlug": "certificate-in-healthcare-communication",
     "status": "draft",
-    "reviewNotice": "Proposed professional-learning educational material only. Content, scope, accessibility, clinical accuracy and any future delivery or recognition arrangements require qualified clinical and academy review. It is not legal or medical advice, does not promise a certified skill, and has no confirmed completion, tracking, backend or delivery arrangements.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Use listening, structuring and plain-language techniques to support safer healthcare conversations.",
       "Check understanding and communicate uncertainty, risk and next steps without coercion or overclaiming.",
