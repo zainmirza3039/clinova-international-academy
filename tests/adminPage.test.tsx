@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import AdminPage from '@/pages/AdminPage';
 
 const state = vi.hoisted(() => ({
@@ -27,7 +28,7 @@ afterEach(() => {
 
 describe('admin role and data gates', () => {
   it('denies a signed-in student and does not query private tables', () => {
-    render(<AdminPage />);
+    render(<MemoryRouter><AdminPage /></MemoryRouter>);
     expect(screen.getByRole('heading', { name: 'Admin access denied' })).toBeTruthy();
     expect(state.from).not.toHaveBeenCalled();
   });
