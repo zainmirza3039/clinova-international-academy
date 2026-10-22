@@ -6,9 +6,9 @@ import { departments } from '@/data/departments';
 
 export default function DepartmentsPage() {
   useSEO({
-    title: 'Academic Departments',
+    title: 'Proposed Subject Areas',
     description:
-      'Explore Clinova International Academy academic departments — physiotherapy, nursing, medicine, dentistry, pharmacy, psychology, nutrition, sports, occupational therapy and healthcare management.',
+      'Explore proposed healthcare subject areas for reading and study planning. These labels are an educational organisation of topics, not evidence of established departments or services.',
   });
 
   return (
@@ -16,8 +16,8 @@ export default function DepartmentsPage() {
       <PageHero
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Departments' }]}
         eyebrow="Departments"
-        title="Explore Our Academic Departments"
-        description="Structured online healthcare education across ten disciplines, each offering certificate courses, diplomas and CPD-focused professional development."
+        title="Explore Our Proposed Subject Areas"
+        description="A draft organisation of healthcare topics for reading and study planning. Course availability, delivery, assessment and recognition require academy confirmation."
         image="https://images.pexels.com/photos/5452233/pexels-photo-5452233.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
@@ -32,10 +32,10 @@ export default function DepartmentsPage() {
       </section>
 
       <CTASection
-        title="Find the Right Programme for You"
-        description="Browse our full catalogue of certificate, diploma and CPD courses across all departments."
-        primaryCTA={{ label: 'View All Programmes', to: '/programmes' }}
-        secondaryCTA={{ label: 'Browse CPD Courses', to: '/cpd-courses' }}
+        title="Plan your next learning question"
+        description="Read the draft library, use study tools and review proposed outlines. No employment, outcome, certificate or recognition is guaranteed."
+        primaryCTA={{ label: 'View Proposed Outlines', to: '/programmes' }}
+        secondaryCTA={{ label: 'Browse Draft Reading', to: '/cpd-courses' }}
       />
     </>
   );

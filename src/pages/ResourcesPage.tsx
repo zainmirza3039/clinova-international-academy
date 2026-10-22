@@ -1,193 +1,63 @@
-import { useState, useMemo } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { Calendar, Search as SearchIcon } from 'lucide-react';
+import { newsItems as mainArticleSnapshots } from '@/data/content';
+import { useMemo, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import NewsCard from '@/components/NewsCard';
-import CTASection from '@/components/CTASection';
-import { publishedNewsItems, newsCategories } from '@/data/content';
+import { newsItems, newsCategories } from '@/data/resourceDrafts';
+import { educationalArticleCards, educationalDisclaimer, draftDateLabel, getEducationalArticle } from '@/data/educationalArticles';
+import { programmes } from '@/data/programmes';
 
 export function ResourcesPage() {
-  useSEO({
-    title: 'Resources & News',
-    description:
-      'Clinical education insights, professional development articles, healthcare insights and academy news from Clinova International Academy.',
-  });
-
+  useSEO({ title: 'Draft Educational Article Library', description: 'Original professional-learning drafts on assessment, rehabilitation, evidence and patient safety. Clinical and editorial review is required before publication.' });
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('All');
-
   const filtered = useMemo(() => {
-    return publishedNewsItems.filter((item) => {
+    const query = search.trim().toLocaleLowerCase('en-GB');
+    return newsItems.filter(item => {
       if (category !== 'All' && item.category !== category) return false;
-      if (search && !item.title.toLowerCase().includes(search.toLowerCase()) && !item.excerpt.toLowerCase().includes(search.toLowerCase()))
-        return false;
-      return true;
+      const article = getEducationalArticle(item.slug);
+      const text = [item.title, item.excerpt, ...(article?.sections.flatMap(section => [section.heading, ...section.paragraphs]) ?? [])].join(' ').toLocaleLowerCase('en-GB');
+      return !query || text.includes(query);
     });
   }, [search, category]);
-
-  return (
-    <>
-      <PageHero
-        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Resources' }]}
-        eyebrow="Resources & News"
-        title="Latest From Clinova"
-        description="Clinical education insights, professional development articles, healthcare insights and academy updates."
-        image="https://images.pexels.com/photos/6770532/pexels-photo-6770532.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-      />
-
-      <section className="py-12 lg:py-16 bg-white">
-        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-navy-50 rounded-xl p-6 mb-8 border border-navy-100">
-            <div className="relative mb-4">
-              <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-navy-400 pointer-events-none" />
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search resources..."
-                aria-label="Search resources"
-                className="w-full pl-12 pr-4 py-3 text-sm bg-white border border-navy-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-transparent text-navy-800 placeholder:text-navy-400"
-              />
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {['All', ...newsCategories].map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setCategory(cat)}
-                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
-                    category === cat
-                      ? 'bg-navy-900 text-white'
-                      : 'bg-white text-navy-600 border border-navy-200 hover:border-navy-300'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="mb-6">
-            <p className="text-sm text-navy-500">
-              Showing <span className="font-semibold text-navy-800">{filtered.length}</span> article{filtered.length !== 1 ? 's' : ''}
-            </p>
-          </div>
-
-          {filtered.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filtered.map((item, i) => (
-                <NewsCard key={item.id} item={item} index={i} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-16 bg-navy-50 rounded-xl border border-navy-100">
-              <p className="text-navy-500 mb-2">No articles match your search.</p>
-              <p className="text-sm text-navy-400">Try a different search term or category.</p>
-            </div>
-          )}
-        </div>
-      </section>
-
-      <CTASection
-        title="Stay Updated With Clinova"
-        description="Subscribe to our newsletter for updates on new programmes and resources."
-        primaryCTA={{ label: 'Explore Programmes', to: '/programmes' }}
-        secondaryCTA={{ label: 'Contact Academy', to: '/contact' }}
-      />
-    </>
-  );
+  return <>
+    <PageHero breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Resources' }]} eyebrow="Educational drafts" title="Explore the Learning Library" description="Original draft reading for healthcare professionals. Review materials, not academy announcements, published clinical guidance or a live course service." />
+    <section className="py-12 lg:py-16 bg-white"><div className="max-w-editorial mx-auto px-6 lg:px-10">
+      <aside className="bg-amber-50 border border-amber-200 p-5 mb-8 text-sm text-navy-700 leading-relaxed"><strong>Draft / clinical review required.</strong> {educationalDisclaimer}</aside>
+      <div className="flex flex-wrap gap-4 mb-8 text-sm font-semibold"><Link to="/learning-resources" className="text-clinical-600 underline underline-offset-4">Study guides, checklists and reflection tools</Link><Link to="/programmes" className="text-clinical-600 underline underline-offset-4">Proposed programme outlines</Link></div>
+      <div className="bg-navy-50 border border-navy-100 p-5 mb-8">
+        <label htmlFor="resource-search" className="block text-sm font-semibold text-navy-800 mb-2">Search resources</label>
+        <input id="resource-search" type="search" value={search} onChange={event => setSearch(event.target.value)} placeholder="Search titles, topics or article text" className="w-full px-4 py-3 mb-4 text-sm bg-white border border-navy-200 focus:outline-none focus:ring-2 focus:ring-clinical-500 text-navy-800" />
+        <div className="flex flex-wrap gap-2" role="group" aria-label="Filter articles by topic">{['All', ...newsCategories].map(cat => <button type="button" key={cat} onClick={() => setCategory(cat)} aria-pressed={category === cat} className={`px-4 py-2 text-sm font-medium border ${category === cat ? 'bg-navy-900 text-white border-navy-900' : 'bg-white text-navy-700 border-navy-200'}`}>{cat}</button>)}</div>
+      </div>
+      <p className="mb-6 text-sm text-navy-600" role="status" aria-live="polite" aria-atomic="true">Showing {filtered.length} article{filtered.length !== 1 ? 's' : ''} — all drafts</p>
+      {filtered.length ? <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">{filtered.map((item, index) => <NewsCard key={item.id} item={item} index={index} />)}</div> : <div className="text-center py-12 bg-navy-50"><p className="font-semibold text-navy-800">No articles match your search.</p><p className="mt-2 text-sm text-navy-600">Try a broader term or another topic.</p><button type="button" onClick={() => { setSearch(''); setCategory('All'); }} className="mt-5 px-5 py-2 bg-navy-900 text-white">Clear filters</button></div>}
+      <section className="mt-12 border-t border-navy-100 pt-8"><h2 className="text-2xl font-bold text-navy-900">Existing editorial review snapshots</h2><p className="mt-3 mb-6 text-sm text-navy-600">Copy retained from the current main branch for review; not a newly approved publication or course offering.</p><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">{mainArticleSnapshots.map(item => <NewsCard key={item.id} item={{ ...item, title: `REVIEW SNAPSHOT: ${item.title}`, date: draftDateLabel }} />)}</div></section>
+    </div></section>
+  </>;
 }
 
 export function ResourceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const item = publishedNewsItems.find((n) => n.slug === slug);
-
-  useSEO({
-    title: item ? item.title : 'Article Not Found',
-    description: item?.excerpt ?? 'Article not found.',
-    ogImage: item?.image,
-  });
-
-  if (!item) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-white pt-20">
-        <div className="text-center px-4">
-          <h1 className="font-heading text-2xl font-bold text-navy-900 mb-4">Article Not Found</h1>
-          <p className="text-navy-500 mb-6">The article you're looking for may have moved or no longer exists.</p>
-          <Link to="/resources" className="inline-flex items-center gap-2 px-6 py-3 bg-navy-900 text-white font-semibold rounded-lg hover:bg-navy-800 transition-colors">
-            View All Resources
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
-  const related = publishedNewsItems.filter((n) => n.id !== item.id && n.category === item.category).slice(0, 3);
-  const formatDate = (dateStr: string) => new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-
-  return (
-    <>
-      <section className="bg-navy-900 pt-20 pb-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="mb-6 flex items-center gap-1.5 text-sm">
-            <Link to="/" className="text-navy-300 hover:text-teal-400">Home</Link>
-            <span className="text-navy-500">/</span>
-            <Link to="/resources" className="text-navy-300 hover:text-teal-400">Resources</Link>
-            <span className="text-navy-500">/</span>
-            <span className="text-white">{item.category}</span>
-          </nav>
-          <div className="inline-block px-2.5 py-1 text-xs font-semibold rounded-md bg-teal-600 text-white mb-3">
-            {item.category}
-          </div>
-          <h1 className="font-heading text-3xl md:text-4xl font-bold text-white leading-tight text-balance">
-            {item.title}
-          </h1>
-          <div className="mt-4 flex items-center gap-2 text-sm text-navy-300">
-            <Calendar className="w-4 h-4" /> {formatDate(item.date)}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-12 lg:py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative aspect-[16/9] rounded-xl overflow-hidden mb-8">
-            <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
-          </div>
-          <div className="prose prose-sm max-w-none">
-            <p className="text-base text-navy-600 leading-relaxed">{item.excerpt}</p>
-            {item.sections.map((section) => (
-              <section key={section.heading} className="mt-8">
-                <h2 className="font-heading text-xl font-bold text-navy-900 mb-3">{section.heading}</h2>
-                {section.paragraphs.map((paragraph) => (
-                  <p key={paragraph} className="mt-3 text-base text-navy-600 leading-relaxed">{paragraph}</p>
-                ))}
-              </section>
-            ))}
-          </div>
-          <div className="mt-8 p-6 bg-teal-50 border border-teal-100">
-            <h2 className="font-heading text-lg font-bold text-navy-900 mb-3">Key points</h2>
-            <ul className="list-disc pl-5 space-y-2 text-sm text-navy-700">
-              {item.takeaways.map((takeaway) => <li key={takeaway}>{takeaway}</li>)}
-            </ul>
-            <p className="mt-5 pt-4 border-t border-teal-100 text-xs text-navy-600 leading-relaxed">
-              This article is general educational information, not individual medical advice. Clinical decisions should be made by appropriately qualified professionals using the person’s full history, examination and applicable local guidance.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {related.length > 0 && (
-        <section className="py-12 lg:py-16 bg-navy-50">
-          <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="font-heading text-2xl font-bold text-navy-900 mb-8">Related Articles</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {related.map((r, i) => (
-                <NewsCard key={r.id} item={r} index={i} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-    </>
-  );
+  const article = getEducationalArticle(slug);
+  useSEO({ title: article ? `Draft: ${article.seoTitle}` : 'Article Not Found', description: article?.seoDescription ?? 'The requested educational article could not be found.' });
+  if (!article) return <section className="max-w-3xl mx-auto px-6 py-24 text-center"><h1 className="text-3xl font-bold text-navy-900">Article Not Found</h1><p className="mt-4 text-navy-600">This address does not match a draft in the library.</p><Link className="inline-block mt-6 text-clinical-600 underline" to="/resources">View All Resources</Link></section>;
+  const explicitRelated = article.relatedArticleSlugs.map(relatedSlug => educationalArticleCards.find(item => item.slug === relatedSlug)).filter((item): item is typeof newsItems[number] => Boolean(item));
+  const related = (explicitRelated.length ? explicitRelated : educationalArticleCards.filter(item => item.slug !== article.slug && item.category === article.category)).slice(0, 3);
+  const relatedProgrammes = article.relatedProgrammeSlugs.map(programmeSlug => programmes.find(item => item.slug === programmeSlug)).filter((item): item is typeof programmes[number] => Boolean(item));
+  return <>
+    <header className="bg-navy-900 pt-28 pb-12 lg:pt-36"><div className="max-w-4xl mx-auto px-6"><Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Resources', to: '/resources' }, { label: article.category }]} /><p className="mt-6 text-sm font-semibold text-teal-300">Draft / {article.category}</p><h1 className="mt-3 text-3xl md:text-4xl font-heading font-bold text-white leading-tight">{article.title}</h1><p className="mt-5 text-navy-200 leading-relaxed">{article.excerpt}</p><p className="mt-4 text-sm text-navy-300">{draftDateLabel}</p></div></header>
+    <article className="max-w-4xl mx-auto px-6 py-12">
+      <aside aria-label="Educational status" className="p-5 bg-amber-50 border border-amber-200 text-sm text-navy-700 leading-relaxed"><strong>Not clinically approved or published.</strong> {educationalDisclaimer}</aside>
+      <nav aria-label="Article contents" className="my-8 border border-navy-100 p-5"><h2 className="font-semibold text-navy-900">In this article</h2><ol className="mt-3 list-decimal pl-5 space-y-2">{article.sections.map((section, index) => <li key={section.heading}><a className="text-clinical-600 underline underline-offset-2" href={`#article-section-${index + 1}`}>{section.heading}</a></li>)}</ol></nav>
+      {article.sections.map((section, index) => <section key={section.heading} id={`article-section-${index + 1}`} className="mt-9 scroll-mt-28"><h2 className="text-2xl font-heading font-bold text-navy-900">{section.heading}</h2>{section.paragraphs.map((paragraph, paragraphIndex) => <p key={paragraphIndex} className="mt-4 text-base text-navy-700 leading-relaxed">{paragraph}</p>)}</section>)}
+      <section className="mt-10 p-6 bg-surface-50"><h2 className="text-xl font-bold text-navy-900">Practical educational takeaways</h2><ul className="mt-4 list-disc pl-5 space-y-3 text-navy-700">{article.takeaways.map(takeaway => <li key={takeaway}>{takeaway}</li>)}</ul></section>
+      <section className="mt-10"><h2 className="text-xl font-bold text-navy-900">References and further reading</h2><p className="mt-3 text-sm text-navy-600">Check the current source, local guidance and population before applying recommendations. Citations inform the draft and are not endorsement of this website.</p><ul className="mt-4 list-disc pl-5 space-y-3">{article.references.map(reference => <li key={reference.url}><a href={reference.url} target="_blank" rel="noopener noreferrer" className="text-clinical-600 underline break-words">{reference.title}<span className="sr-only"> (opens in a new tab)</span></a></li>)}</ul></section>
+      {relatedProgrammes.length > 0 && <section className="mt-10"><h2 className="text-xl font-bold text-navy-900">Related proposed programmes</h2><p className="mt-3 text-sm text-navy-600">Draft outlines only; no enrolment, accreditation or certificate is offered through these pages.</p><ul className="mt-4 space-y-3">{relatedProgrammes.map(programme => <li key={programme.slug}><Link to={`/programmes/${programme.slug}`} className="text-clinical-600 underline">{programme.title} — draft outline</Link></li>)}</ul></section>}
+      <p className="mt-8 text-sm"><Link to="/learning-resources" className="text-clinical-600 underline">Use the draft learning and reflection resources</Link></p>
+    </article>
+    {related.length > 0 && <section className="bg-surface-50 py-12"><div className="max-w-editorial mx-auto px-6 lg:px-10"><h2 className="text-2xl font-bold text-navy-900 mb-8">Related article drafts</h2><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">{related.map((item, index) => <NewsCard key={item.id} item={item} index={index} />)}</div></div></section>}
+  </>;
 }

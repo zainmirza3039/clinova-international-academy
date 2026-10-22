@@ -1,6 +1,8 @@
+import BrandLogo from '@/components/BrandLogo';
 import { Link } from 'react-router-dom';
 import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useScrollPosition } from '@/hooks/useScrollAnimation';
 import { departments } from '@/data/departments';
 
@@ -10,7 +12,7 @@ const navLinks = [
   { label: 'Departments', to: '/departments', hasMegaMenu: true },
   { label: 'Programmes', to: '/programmes', hasMegaMenu: true },
   { label: 'CPD Courses', to: '/cpd-courses' },
-  { label: 'Online Learning', to: '/online-learning' },
+  { label: 'Admissions', to: '/admissions' },
   { label: 'Training Partners', to: '/training-partners' },
   { label: 'Resources', to: '/resources' },
   { label: 'Contact', to: '/contact' },
@@ -24,11 +26,35 @@ const programmeMenuItems = [
   { label: 'Featured Programmes', to: '/programmes?featured=true', desc: 'Explore our highlights' },
 ];
 
+const mobileSubmenuId = (label: string) => `mobile-submenu-${label.toLowerCase().replace(/\s+/g, '-')}`;
+
 export default function Header() {
   const isScrolled = useScrollPosition();
+  const { pathname } = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const mobileToggleRef = useRef<HTMLButtonElement>(null);
+  const mobilePanelRef = useRef<HTMLDivElement>(null);
   const [megaMenu, setMegaMenu] = useState<string | null>(null);
   const [mobileMegaMenu, setMobileMegaMenu] = useState<string | null>(null);
+  useEffect(() => { setMobileOpen(false); setMegaMenu(null); setMobileMegaMenu(null); }, [pathname]);
+  useEffect(() => { if (!mobileOpen) setMobileMegaMenu(null); }, [mobileOpen]);
+  useEffect(() => {
+    const close = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileOpen(false); setMegaMenu(null);
+        if (mobileOpen) mobileToggleRef.current?.focus();
+      }
+      if (e.key === 'Tab' && mobileOpen) {
+        const links = Array.from(mobilePanelRef.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? []);
+        const targets = [mobileToggleRef.current, ...links].filter((item): item is HTMLElement => Boolean(item));
+        const first = targets[0]; const last = targets[targets.length - 1];
+        if (e.shiftKey && (document.activeElement === first || !targets.includes(document.activeElement as HTMLElement))) { e.preventDefault(); last?.focus(); }
+        else if (!e.shiftKey && (document.activeElement === last || !targets.includes(document.activeElement as HTMLElement))) { e.preventDefault(); first?.focus(); }
+      }
+    };
+    document.addEventListener('keydown', close);
+    return () => document.removeEventListener('keydown', close);
+  }, [mobileOpen]);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -59,7 +85,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center shrink-0" onClick={() => setMobileOpen(false)}>
-            <img src="/clinova-logo.svg" alt="Clinova International Academy" className="w-[160px] sm:w-[180px] lg:w-[200px] h-auto" />
+            <BrandLogo className="w-[180px] sm:w-[200px] lg:w-[220px]" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -148,13 +174,15 @@ export default function Header() {
           {/* CTA + Mobile Toggle */}
           <div className="flex items-center gap-4">
             <Link
-              to="/programmes"
+              to="/student"
               className="hidden lg:inline-flex items-center gap-2 text-sm font-semibold text-navy-800 hover:text-clinical-600 transition-colors"
             >
-              Explore Courses
+              Student access
               <ArrowRight className="w-4 h-4" />
             </Link>
             <button
+              ref={mobileToggleRef}
+              aria-controls="mobile-navigation"
               className="xl:hidden p-2 text-navy-700 hover:bg-surface-50 transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
@@ -168,7 +196,7 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {mobileOpen && (
-        <div className="xl:hidden fixed inset-x-0 top-16 bottom-0 bg-white overflow-y-auto border-t border-navy-100">
+        <div ref={mobilePanelRef} id="mobile-navigation" className="xl:hidden fixed inset-x-0 top-16 lg:top-20 bottom-0 bg-white overflow-y-auto border-t border-navy-100">
           <nav className="px-6 py-6 space-y-1" aria-label="Mobile navigation">
             {navLinks.map((link) => (
               <div key={link.label}>
@@ -182,9 +210,12 @@ export default function Header() {
                   </Link>
                   {link.hasMegaMenu && (
                     <button
+                      type="button"
                       className="p-3 text-navy-600"
                       onClick={() => setMobileMegaMenu(mobileMegaMenu === link.label ? null : link.label)}
-                      aria-label={`Expand ${link.label} submenu`}
+                      aria-controls={mobileSubmenuId(link.label)}
+                      aria-label={`${mobileMegaMenu === link.label ? 'Collapse' : 'Expand'} ${link.label} submenu`}
+                      aria-expanded={mobileMegaMenu === link.label}
                     >
                       <ChevronDown className={`w-5 h-5 transition-transform ${mobileMegaMenu === link.label ? 'rotate-180' : ''}`} />
                     </button>
@@ -192,7 +223,7 @@ export default function Header() {
                 </div>
                 {/* Mobile submenu - Departments */}
                 {link.hasMegaMenu && mobileMegaMenu === link.label && link.label === 'Departments' && (
-                  <div className="pl-4 py-1 space-y-0.5">
+                  <div id={mobileSubmenuId(link.label)} className="pl-4 py-1 space-y-0.5">
                     {departments.map((dept) => (
                       <Link
                         key={dept.id}
@@ -207,7 +238,7 @@ export default function Header() {
                 )}
                 {/* Mobile submenu - Programmes */}
                 {link.hasMegaMenu && mobileMegaMenu === link.label && link.label === 'Programmes' && (
-                  <div className="pl-4 py-1 space-y-0.5">
+                  <div id={mobileSubmenuId(link.label)} className="pl-4 py-1 space-y-0.5">
                     {programmeMenuItems.map((item) => (
                       <Link
                         key={item.label}
@@ -223,11 +254,11 @@ export default function Header() {
               </div>
             ))}
             <Link
-              to="/programmes"
+              to="/student"
               className="block mt-4 py-3 bg-navy-800 text-white text-center font-semibold"
               onClick={() => setMobileOpen(false)}
             >
-              Explore Courses
+              Student access
             </Link>
           </nav>
         </div>

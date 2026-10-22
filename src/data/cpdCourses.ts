@@ -3,7 +3,7 @@ import type { CPDCourse } from './types';
 export const cpdCourses: CPDCourse[] = [
   {
     id: 'c1',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     slug: 'clinical-assessment-of-low-back-pain',
     title: 'Clinical Assessment of Low Back Pain',
     department: 'Physical Therapy & Rehabilitation',
@@ -19,7 +19,7 @@ export const cpdCourses: CPDCourse[] = [
   },
   {
     id: 'c2',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     slug: 'introduction-to-sports-rehabilitation',
     title: 'Introduction to Sports Rehabilitation',
     department: 'Sports & Exercise',
@@ -35,7 +35,7 @@ export const cpdCourses: CPDCourse[] = [
   },
   {
     id: 'c3',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     slug: 'pain-management-fundamentals',
     title: 'Pain Management Fundamentals',
     department: 'Physical Therapy & Rehabilitation',
@@ -51,7 +51,7 @@ export const cpdCourses: CPDCourse[] = [
   },
   {
     id: 'c4',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     slug: 'clinical-communication-skills',
     title: 'Clinical Communication Skills',
     department: 'Healthcare Management',
@@ -67,7 +67,7 @@ export const cpdCourses: CPDCourse[] = [
   },
   {
     id: 'c5',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     slug: 'wound-care-essentials',
     title: 'Wound Care Essentials',
     department: 'Nursing & Allied Health',
@@ -83,7 +83,7 @@ export const cpdCourses: CPDCourse[] = [
   },
   {
     id: 'c6',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     slug: 'pharmacotherapy-updates-in-chronic-disease',
     title: 'Pharmacotherapy Updates in Chronic Disease',
     department: 'Pharmacy',
@@ -99,7 +99,7 @@ export const cpdCourses: CPDCourse[] = [
   },
   {
     id: 'c7',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     slug: 'cbt-for-anxiety-disorders',
     title: 'CBT for Anxiety Disorders',
     department: 'Psychology & Mental Health',
@@ -115,7 +115,7 @@ export const cpdCourses: CPDCourse[] = [
   },
   {
     id: 'c8',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     slug: 'clinical-nutrition-for-chronic-disease',
     title: 'Clinical Nutrition for Chronic Disease',
     department: 'Nutrition & Dietetics',
@@ -131,7 +131,7 @@ export const cpdCourses: CPDCourse[] = [
   },
   {
     id: 'c9',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     slug: 'patient-safety-in-clinical-practice',
     title: 'Patient Safety in Clinical Practice',
     department: 'Medicine',
@@ -147,7 +147,7 @@ export const cpdCourses: CPDCourse[] = [
   },
   {
     id: 'c10',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     slug: 'motor-control-relearning-in-neurorehabilitation',
     title: 'Motor Control & Relearning in Neurorehabilitation',
     department: 'Physical Therapy & Rehabilitation',
@@ -163,7 +163,7 @@ export const cpdCourses: CPDCourse[] = [
   },
   {
     id: 'c11',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     slug: 'infection-prevention-and-control',
     title: 'Infection Prevention and Control',
     department: 'Nursing & Allied Health',
@@ -179,7 +179,7 @@ export const cpdCourses: CPDCourse[] = [
   },
   {
     id: 'c12',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     slug: 'quality-improvement-in-healthcare',
     title: 'Quality Improvement in Healthcare',
     department: 'Healthcare Management',
@@ -207,3 +207,5 @@ export const cpdFilters = [
 ];
 
 export const publishedCPDCourses = cpdCourses.filter((course) => course.publicationStatus === 'published');
+
+export const reviewCPDCourses = cpdCourses.filter((course) => course.publicationStatus === 'draft' || course.publicationStatus === 'published');

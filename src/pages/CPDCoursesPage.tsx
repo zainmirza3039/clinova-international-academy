@@ -3,7 +3,7 @@ import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import CPDCard from '@/components/CPDCard';
 import SearchBar from '@/components/SearchBar';
-import { publishedCPDCourses } from '@/data/cpdCourses';
+import { reviewCPDCourses } from '@/data/cpdCourses';
 import { departments } from '@/data/departments';
 import { ChevronDown } from 'lucide-react';
 
@@ -11,7 +11,7 @@ export default function CPDCoursesPage() {
   useSEO({
     title: 'CPD Courses',
     description:
-      'Browse CPD-focused online courses at Clinova International Academy. Filter by department, CPD hours and level. Flexible online learning for healthcare professionals.',
+      'Browse proposed professional-development topics. CPD accreditation, recognised hours, delivery and enrolment are not confirmed.',
   });
 
   const [search, setSearch] = useState('');
@@ -21,7 +21,7 @@ export default function CPDCoursesPage() {
   const [visibleCount, setVisibleCount] = useState(8);
 
   const filtered = useMemo(() => {
-    return publishedCPDCourses.filter((c) => {
+    return reviewCPDCourses.filter((c) => {
       if (deptFilter !== 'All' && c.department !== deptFilter) return false;
       if (cpdFilter !== 'All' && c.cpdHours !== parseInt(cpdFilter)) return false;
       if (levelFilter !== 'All' && c.level !== levelFilter) return false;
@@ -39,8 +39,8 @@ export default function CPDCoursesPage() {
       <PageHero
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'CPD Courses' }]}
         eyebrow="CPD Courses"
-        title="CPD-Focused Online Learning"
-        description="Continue your professional development with flexible online CPD courses. Build knowledge, strengthen skills and maintain your professional growth."
+        title="Proposed Professional Development Topics"
+        description="Explore draft professional-development topics. No recognised CPD hours, course availability, accreditation, assessment or certificate is confirmed."
         image="https://images.pexels.com/photos/5452222/pexels-photo-5452222.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
@@ -53,8 +53,8 @@ export default function CPDCoursesPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="block text-xs font-medium text-navy-500 mb-1.5">Department</label>
-                <select className={selectClass} value={deptFilter} onChange={(e) => setDeptFilter(e.target.value)}>
+                <label htmlFor="cpd-department" className="block text-xs font-medium text-navy-500 mb-1.5">Department</label>
+                <select id="cpd-department" className={selectClass} value={deptFilter} onChange={(e) => setDeptFilter(e.target.value)}>
                   <option value="All">All Departments</option>
                   {departments.map((d) => (
                     <option key={d.id} value={d.name}>{d.name}</option>
@@ -62,19 +62,15 @@ export default function CPDCoursesPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-navy-500 mb-1.5">CPD Hours</label>
-                <select className={selectClass} value={cpdFilter} onChange={(e) => setCpdFilter(e.target.value)}>
-                  <option value="All">All Hours</option>
-                  <option value="5">5 hours</option>
-                  <option value="6">6 hours</option>
-                  <option value="8">8 hours</option>
-                  <option value="10">10 hours</option>
-                  <option value="12">12 hours</option>
+                <label htmlFor="cpd-hours" className="block text-xs font-medium text-navy-500 mb-1.5">CPD Hours</label>
+                <select id="cpd-hours" disabled aria-describedby="cpd-hours-note" className={selectClass} value={cpdFilter} onChange={(e) => setCpdFilter(e.target.value)}>
+                  <option value="All">Hours awaiting confirmation</option>
                 </select>
+                <p id="cpd-hours-note" className="mt-2 text-xs text-navy-600">No verified CPD hours are available to filter.</p>
               </div>
               <div>
-                <label className="block text-xs font-medium text-navy-500 mb-1.5">Level</label>
-                <select className={selectClass} value={levelFilter} onChange={(e) => setLevelFilter(e.target.value)}>
+                <label htmlFor="cpd-level" className="block text-xs font-medium text-navy-500 mb-1.5">Level</label>
+                <select id="cpd-level" className={selectClass} value={levelFilter} onChange={(e) => setLevelFilter(e.target.value)}>
                   <option value="All">All Levels</option>
                   <option value="Foundation">Foundation</option>
                   <option value="Intermediate">Intermediate</option>
@@ -85,7 +81,7 @@ export default function CPDCoursesPage() {
           </div>
 
           {/* Results */}
-          <div className="mb-8">
+          <div className="mb-8" role="status" aria-live="polite" aria-atomic="true">
             <p className="text-sm text-navy-500">
               Showing <span className="font-semibold text-navy-800">{visible.length}</span> of {filtered.length} course{filtered.length !== 1 ? 's' : ''}
             </p>

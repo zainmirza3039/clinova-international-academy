@@ -1,95 +1,53 @@
 import { Link, useParams } from 'react-router-dom';
-import { Award, ArrowRight, Clock, Monitor, Signal } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import CurriculumDraftContent from '@/components/CurriculumDraftContent';
 import { cpdCourses } from '@/data/cpdCourses';
+import { getCPDCurriculum } from '@/data/cpdCurricula';
 
 export default function CPDCourseDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const course = cpdCourses.find((item) => item.slug === slug);
-
-  useSEO({
-    title: course?.title ?? 'CPD Course Not Found',
-    description: course?.description ?? 'The requested CPD course could not be found.',
-    ogImage: course?.image,
-  });
-
-  if (!course) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-white pt-20">
-        <div className="text-center px-6">
-          <h1 className="font-heading text-2xl font-bold text-navy-900 mb-4">CPD Course Not Found</h1>
-          <p className="text-navy-500 mb-6">The course you are looking for may have moved or is no longer available.</p>
-          <Link to="/cpd-courses" className="inline-flex items-center gap-2 px-6 py-3 bg-navy-900 text-white font-semibold hover:bg-navy-800 transition-colors">
-            Browse CPD Courses
-          </Link>
+  const course = cpdCourses.find(item => item.slug === slug);
+  const draft = slug ? getCPDCurriculum(slug) : undefined;
+  useSEO({ title: course?.title ?? 'CPD Course Not Found', description: course?.description ?? 'The requested CPD course could not be found.', ogImage: course?.image });
+  if (!course) return <div className="min-h-screen flex items-center justify-center"><div className="text-center"><h1 className="font-heading text-2xl font-bold text-navy-900 mb-4">CPD Course Not Found</h1><Link to="/cpd-courses" className="text-clinical-600">Browse CPD courses</Link></div></div>;
+  const related = cpdCourses.filter(item => item.slug !== course.slug && item.department === course.department).slice(0, 3);
+  return <>
+    <section className="bg-navy-900 pt-28 pb-14">
+      <div className="max-w-editorial mx-auto px-6 lg:px-10">
+        <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'CPD Courses', to: '/cpd-courses' }, { label: course.title }]} />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mt-8 items-end">
+          <div className="lg:col-span-7">
+            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-300 mb-4">Proposed draft · {course.department}</div>
+            <h1 className="font-heading text-3xl md:text-5xl font-bold text-white leading-tight">{course.title}</h1>
+            <p className="mt-5 text-lg text-navy-100/80 leading-relaxed">{course.description}</p>
+          </div>
+          <img src={course.image} alt="" className="lg:col-span-5 aspect-[4/3] object-cover" />
         </div>
       </div>
-    );
-  }
-
-  return (
-    <>
-      <section className="bg-navy-900 pt-28 pb-14 lg:pt-36 lg:pb-20">
-        <div className="max-w-editorial mx-auto px-6 lg:px-10">
-          <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'CPD Courses', to: '/cpd-courses' }, { label: course.title }]} />
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mt-8 items-end">
-            <div className="lg:col-span-7">
-              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-300 mb-4">{course.department}</div>
-              <h1 className="font-heading text-3xl md:text-5xl font-bold text-white leading-tight text-balance">{course.title}</h1>
-              <p className="mt-5 text-base md:text-lg text-navy-100/80 leading-relaxed max-w-2xl">{course.description}</p>
+    </section>
+    <p className="max-w-4xl mx-auto px-6 mt-6 p-4 rounded-lg border border-amber-200 bg-amber-50 text-sm text-amber-950"><strong>Proposed draft catalogue entry.</strong> Availability, dates, fees, duration, CPD hours, delivery, assessment, instructors and certificates require academy confirmation. No checkout or enrolment is available. CPD is a catalogue category, not a claim of accredited or awarded hours.</p>
+    <section className="py-12 lg:py-16 bg-white">
+      <div className="max-w-editorial mx-auto px-6 lg:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-8 space-y-10">
+            <div>
+              <h2 className="font-heading text-2xl font-bold text-navy-900 mb-4">Draft overview</h2>
+              <p className="text-sm text-navy-600 leading-relaxed">These proposed reading materials support critical reflection and recognition of professional limits. They do not establish clinical competence, eligibility to practise, prescribing authority or a qualification. Qualified review is required before any future course offering.</p>
             </div>
-            <div className="lg:col-span-5 aspect-[4/3] overflow-hidden">
-              <img src={course.image} alt="" className="w-full h-full object-cover" />
-            </div>
+            {draft ? <CurriculumDraftContent draft={draft} /> : <p className="text-sm text-navy-700">A detailed curriculum is not available for this draft. A catalogue entry is not evidence of a reviewed or delivered course.</p>}
           </div>
-        </div>
-      </section>
-
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-editorial mx-auto px-6 lg:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-            <div className="lg:col-span-7">
-              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-clinical-500 mb-4">Course overview</div>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-900 mb-5">Focused learning for professional practice</h2>
-              <p className="text-base text-navy-600 leading-relaxed">{course.description} This short course is designed to support structured professional development alongside clinical work.</p>
-              <div className="mt-10 border-t border-navy-100 pt-8">
-                <h2 className="font-heading text-xl font-bold text-navy-900 mb-4">Learning outcomes</h2>
-                <ul className="list-disc pl-5 space-y-2 text-sm text-navy-600 leading-relaxed">
-                  {course.learningOutcomes.map((outcome) => <li key={outcome}>{outcome}</li>)}
-                </ul>
-              </div>
-              <div className="mt-10 border-t border-navy-100 pt-8">
-                <h2 className="font-heading text-xl font-bold text-navy-900 mb-4">Course modules</h2>
-                <ol className="list-decimal pl-5 space-y-3 text-sm text-navy-600 leading-relaxed">
-                  {course.modules.map((module) => <li key={module}>{module}</li>)}
-                </ol>
-              </div>
-              <div className="mt-10 border-t border-navy-100 pt-8">
-                <h2 className="font-heading text-xl font-bold text-navy-900 mb-4">Who this course is for</h2>
-                <p className="text-base text-navy-600 leading-relaxed">Healthcare professionals and learners working in or preparing for roles related to {course.department.toLowerCase()}.</p>
-              </div>
-              <div className="mt-10 border-t border-navy-100 pt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div><h2 className="font-heading text-xl font-bold text-navy-900 mb-3">Prerequisites</h2><p className="text-sm text-navy-600 leading-relaxed">{course.prerequisites}</p></div>
-                <div><h2 className="font-heading text-xl font-bold text-navy-900 mb-3">Assessment</h2><p className="text-sm text-navy-600 leading-relaxed">{course.assessment}</p></div>
-              </div>
+          <aside className="lg:col-span-4">
+            <div className="lg:sticky lg:top-24 border border-navy-200 p-6">
+              <h2 className="font-heading text-lg font-bold text-navy-900 mb-4">Catalogue status</h2>
+              <p className="text-sm text-navy-600 leading-relaxed">Proposed draft only. CPD hours, duration, fees, delivery format, assessment and certification are awaiting confirmation. Reflection is not submitted, graded, saved or counted as completion.</p>
+              <Link to="/cpd-courses" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-clinical-700">Browse other drafts <ArrowRight className="w-4 h-4" /></Link>
             </div>
-
-            <aside className="lg:col-span-5">
-              <div className="border border-navy-200 p-6 lg:p-8">
-                <h2 className="font-heading text-lg font-bold text-navy-900 mb-6">Course information</h2>
-                <dl className="space-y-4">
-                  <div className="flex items-center justify-between gap-4 border-b border-navy-100 pb-4"><dt className="flex items-center gap-2 text-sm text-navy-500"><Clock className="w-4 h-4 text-teal-600" /> Duration</dt><dd className="text-sm font-semibold text-navy-800">{course.duration}</dd></div>
-                  <div className="flex items-center justify-between gap-4 border-b border-navy-100 pb-4"><dt className="flex items-center gap-2 text-sm text-navy-500"><Award className="w-4 h-4 text-teal-600" /> CPD hours</dt><dd className="text-sm font-semibold text-navy-800">{course.cpdHours}</dd></div>
-                  <div className="flex items-center justify-between gap-4 border-b border-navy-100 pb-4"><dt className="flex items-center gap-2 text-sm text-navy-500"><Signal className="w-4 h-4 text-teal-600" /> Level</dt><dd className="text-sm font-semibold text-navy-800">{course.level}</dd></div>
-                  <div className="flex items-center justify-between gap-4"><dt className="flex items-center gap-2 text-sm text-navy-500"><Monitor className="w-4 h-4 text-teal-600" /> Format</dt><dd className="text-sm font-semibold text-navy-800">Online</dd></div>
-                </dl>
-                <Link to="/contact" className="mt-8 inline-flex w-full items-center justify-center gap-2 bg-clinical-600 px-5 py-3 text-sm font-semibold text-white hover:bg-clinical-700 transition-colors">Ask about this course <ArrowRight className="w-4 h-4" /></Link>
-              </div>
-            </aside>
-          </div>
+          </aside>
         </div>
-      </section>
-    </>
-  );
+      </div>
+    </section>
+    {related.length > 0 && <section className="py-10 bg-navy-50"><div className="max-w-editorial mx-auto px-6 lg:px-10"><h2 className="font-heading text-2xl font-bold text-navy-900">Related proposed CPD topics</h2><ul className="mt-5 space-y-3">{related.map(item => <li key={item.slug}><Link className="text-sm font-semibold text-clinical-700 underline underline-offset-4" to={`/cpd-courses/${item.slug}`}>{item.title}</Link></li>)}</ul></div></section>}
+  </>;
 }

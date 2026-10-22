@@ -1,25 +1,26 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { CheckCircle, Handshake, Users, FileText, Award, ShieldCheck } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { enquiriesEnabled, enquiryUnavailable } from '@/lib/siteConfig';
 import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import SectionHeader from '@/components/SectionHeader';
 import Reveal from '@/components/Reveal';
+import { validateFormFields } from '@/lib/formValidation';
 
 const benefits = [
-  { icon: FileText, title: 'Structured Programmes', desc: 'Access organised, structured educational content for your team.' },
-  { icon: Users, title: 'Learner Support', desc: 'Comprehensive support for learners throughout their journey.' },
-  { icon: Award, title: 'Digital Certification', desc: 'Digital certificates for programme completions.' },
-  { icon: FileText, title: 'Professional Resources', desc: 'A library of professional educational resources.' },
-  { icon: ShieldCheck, title: 'Quality Assurance', desc: 'Evidence-informed content with clear learning outcomes.' },
-  { icon: Handshake, title: 'Partnership Support', desc: 'Dedicated support from our partnership team.' },
+  { icon: FileText, title: 'Share your context', desc: 'Describe your organisation, audience and learning questions.' },
+  { icon: Users, title: 'Discuss learner needs', desc: 'Explain the support and access arrangements you would need.' },
+  { icon: Award, title: 'Ask about recognition', desc: 'Request accurate information; certificates and recognition are not promised.' },
+  { icon: FileText, title: 'Review draft resources', desc: 'Use the existing reading library to frame a possible conversation.' },
+  { icon: ShieldCheck, title: 'Clarify review', desc: 'Ask what has been reviewed, approved or published.' },
+  { icon: Handshake, title: 'Consider terms', desc: 'Discuss any partnership only after the owner confirms capability and terms.' },
 ];
 
 const howItWorks = [
-  { step: '01', title: 'Submit Enquiry', desc: 'Complete the partnership enquiry form below.' },
-  { step: '02', title: 'Initial Discussion', desc: 'We will discuss your organisation needs and objectives.' },
-  { step: '03', title: 'Partnership Agreement', desc: 'We formalise the partnership and agree on delivery.' },
-  { step: '04', title: 'Programme Delivery', desc: 'Your team begins learning through our platform.' },
+  { step: '01', title: 'Share an enquiry', desc: 'Use the form to describe your organisation and learning context.' },
+  { step: '02', title: 'Request confirmation', desc: 'Ask which content, delivery and support arrangements are actually available.' },
+  { step: '03', title: 'Review terms', desc: 'Consider any written scope, responsibilities, privacy and commercial terms.' },
+  { step: '04', title: 'Decide cautiously', desc: 'Do not assume a partnership, programme, certificate or outcome until confirmed.' },
 ];
 
 const whoCanApply = [
@@ -35,44 +36,66 @@ export default function TrainingPartnersPage() {
   useSEO({
     title: 'Training Partners',
     description:
-      'Become a Clinova Training Partner. Deliver structured professional healthcare education within your organisation.',
+      'Discuss a possible training partnership. Share a possible education enquiry; partnership capabilities and terms are not yet confirmed.',
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const submittingRef = useRef(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (submittingRef.current) return;
+    if (!enquiriesEnabled) { setError(enquiryUnavailable); return; }
+    submittingRef.current = true;
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     setSubmitting(true);
     setError('');
 
-    if (!supabase) {
+    const { values, error: validationError } = validateFormFields(
+      Object.fromEntries(formData.entries()),
+      {
+        fullName: { required: true, maxLength: 160 },
+        organisation: { required: true, maxLength: 200 },
+        role: { required: true, maxLength: 160 },
+        email: { required: true, maxLength: 320, kind: 'email' },
+        phone: { maxLength: 80 },
+        country: { required: true, maxLength: 120 },
+        website: { maxLength: 500, kind: 'url' },
+        message: { required: true, maxLength: 5000 },
+      },
+    );
+    if (validationError) {
+      setError(validationError);
+      submittingRef.current = false;
       setSubmitting(false);
-      setError('Partnership enquiries are temporarily unavailable while the academy connection is being configured.');
       return;
     }
 
-    const formData = new FormData(e.currentTarget);
-    const { error: submissionError } = await supabase.from('partnership_inquiries').insert({
-      full_name: String(formData.get('fullName') ?? '').trim(),
-      organisation: String(formData.get('organisation') ?? '').trim(),
-      role: String(formData.get('role') ?? '').trim(),
-      email: String(formData.get('email') ?? '').trim(),
-      phone: String(formData.get('phone') ?? '').trim() || null,
-      country: String(formData.get('country') ?? '').trim(),
-      website: String(formData.get('website') ?? '').trim() || null,
-      message: String(formData.get('message') ?? '').trim(),
-    });
-
-    setSubmitting(false);
-    if (submissionError) {
+    try {
+      const { supabase } = await import('@/lib/supabase');
+      if (!supabase) throw new Error('Supabase is not configured');
+      const { error: submissionError } = await supabase.from('partnership_inquiries').insert({
+        full_name: values.fullName,
+        organisation: values.organisation,
+        role: values.role,
+        email: values.email,
+        phone: values.phone,
+        country: values.country,
+        website: values.website,
+        message: values.message,
+      });
+      if (submissionError) throw submissionError;
+      form.reset();
+      setSubmitted(true);
+    } catch {
       setError('We could not submit your enquiry. Please try again or contact us directly.');
-      return;
+    } finally {
+      submittingRef.current = false;
+      setSubmitting(false);
     }
-
-    e.currentTarget.reset();
-    setSubmitted(true);
   };
 
   const inputClass = 'w-full px-4 py-3 text-sm bg-white border border-navy-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-transparent text-navy-800 placeholder:text-navy-400';
@@ -83,8 +106,8 @@ export default function TrainingPartnersPage() {
       <PageHero
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Training Partners' }]}
         eyebrow="Training Partners"
-        title="Become a Clinova Training Partner"
-        description="Work with Clinova to deliver structured professional education within your organisation or professional network."
+        title="Discuss a possible training partnership"
+        description="This page is a proposal for organisations to share a learning need. It does not promise contracts, courses, certificates, learner support, delivery or employment outcomes."
         image="https://images.pexels.com/photos/6129499/pexels-photo-6129499.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
@@ -93,8 +116,8 @@ export default function TrainingPartnersPage() {
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Benefits"
-            title="Why Partner With Clinova?"
-            description="Our partnership programme provides organisations with structured educational resources and support."
+            title="What to discuss in an enquiry"
+            description="Use an enquiry to ask precise questions about subject matter, audience, review status, delivery, data handling, fees and any recognition. The form is not evidence that a partnership programme exists."
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {benefits.map((item, i) => (
@@ -119,7 +142,7 @@ export default function TrainingPartnersPage() {
             <div>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-900 mb-4">Who Can Apply?</h2>
               <p className="text-sm text-navy-500 leading-relaxed mb-6">
-                We welcome partnerships with a range of organisations involved in healthcare education and service delivery.
+                Organisations may use the proposed enquiry route to describe a possible collaboration; acceptance, capability and terms require owner confirmation.
               </p>
               <div className="space-y-3">
                 {whoCanApply.map((item) => (
@@ -155,59 +178,60 @@ export default function TrainingPartnersPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Apply Now"
-            title="Partnership Enquiry Form"
-            description="Complete the form below and our team will be in touch to discuss your partnership."
+            title="Proposed partnership enquiry"
+            description="The form is retained in its existing disabled state when enquiries are not enabled. If enabled by the owner, use it to request information rather than assume an offer."
           />
           {submitted ? (
-            <div className="text-center py-12 bg-teal-50 rounded-xl border border-teal-100">
+            <div role="status" aria-live="polite" className="text-center py-12 bg-teal-50 rounded-xl border border-teal-100">
               <CheckCircle className="w-12 h-12 text-teal-600 mx-auto mb-4" />
               <h3 className="font-heading text-xl font-bold text-navy-900 mb-2">Enquiry Submitted</h3>
-              <p className="text-sm text-navy-600">Thank you for your interest in partnering with Clinova. Our team will be in touch with you soon.</p>
+              <p className="text-sm text-navy-600">Your message was received by the configured enquiry service. This does not confirm a partnership, course, certificate or support arrangement.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-5 bg-navy-50 p-6 md:p-8 rounded-xl border border-navy-100">
-              {error && <p role="alert" className="text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
+            <form aria-label="Partnership enquiry" onSubmit={handleSubmit} className="space-y-5 bg-navy-50 p-6 md:p-8 rounded-xl border border-navy-100">
+              {!enquiriesEnabled && <p className="text-sm text-navy-700 border-l-2 border-teal-500 pl-3 mb-4">{enquiryUnavailable}</p>}
+                  {error && <p role="alert" aria-live="assertive" className="text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className={labelClass} htmlFor="fullName">Full Name *</label>
-                  <input id="fullName" name="fullName" type="text" required className={inputClass} placeholder="Your full name" />
+                  <input id="fullName" name="fullName" type="text" required maxLength={160} className={inputClass} placeholder="Your full name" />
                 </div>
                 <div>
                   <label className={labelClass} htmlFor="organisation">Organisation *</label>
-                  <input id="organisation" name="organisation" type="text" required className={inputClass} placeholder="Organisation name" />
+                  <input id="organisation" name="organisation" type="text" required maxLength={200} className={inputClass} placeholder="Organisation name" />
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className={labelClass} htmlFor="role">Professional Role *</label>
-                  <input id="role" name="role" type="text" required className={inputClass} placeholder="Your role" />
+                  <input id="role" name="role" type="text" required maxLength={160} className={inputClass} placeholder="Your role" />
                 </div>
                 <div>
                   <label className={labelClass} htmlFor="email">Email *</label>
-                  <input id="email" name="email" type="email" required className={inputClass} placeholder="you@organisation.com" />
+                  <input id="email" name="email" type="email" required maxLength={320} className={inputClass} placeholder="you@organisation.com" />
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className={labelClass} htmlFor="phone">Phone</label>
-                  <input id="phone" name="phone" type="tel" className={inputClass} placeholder="Phone number" />
+                  <input id="phone" name="phone" type="tel" maxLength={80} className={inputClass} placeholder="Phone number" />
                 </div>
                 <div>
                   <label className={labelClass} htmlFor="country">Country *</label>
-                  <input id="country" name="country" type="text" required className={inputClass} placeholder="Country" />
+                  <input id="country" name="country" type="text" required maxLength={120} className={inputClass} placeholder="Country" />
                 </div>
               </div>
               <div>
                 <label className={labelClass} htmlFor="website">Organisation Website</label>
-                <input id="website" name="website" type="url" className={inputClass} placeholder="https://..." />
+                <input id="website" name="website" type="url" maxLength={500} className={inputClass} placeholder="https://..." />
               </div>
               <div>
                 <label className={labelClass} htmlFor="message">Message *</label>
-                <textarea id="message" name="message" required rows={4} className={inputClass} placeholder="Tell us about your partnership interests..." />
+                <textarea id="message" name="message" required maxLength={5000} rows={4} className={inputClass} placeholder="Tell us about your partnership interests..." />
               </div>
               <button
                 type="submit"
-                disabled={submitting}
+                disabled={submitting || !enquiriesEnabled}
                 className="w-full px-6 py-3.5 bg-clinical-600 text-white font-semibold rounded-lg hover:bg-clinical-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors shadow-sm"
               >
                 {submitting ? 'Submitting…' : 'Submit Partnership Enquiry'}

@@ -10,6 +10,7 @@ export default function FilterBar({ filters, active, onChange }: FilterBarProps)
       {filters.map((filter) => (
         <button
           key={filter}
+          type="button"
           onClick={() => onChange(filter)}
           className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
             active === filter

@@ -1,5 +1,6 @@
+import BrandLogo from '@/components/BrandLogo';
 import { Link } from 'react-router-dom';
-import { Mail } from 'lucide-react';
+import { academyPublicAddress } from '@/data/publicContact';
 
 const academyLinks = [
   { label: 'About', to: '/about' },
@@ -12,12 +13,17 @@ const academyLinks = [
 const professionalLinks = [
   { label: 'Training Partners', to: '/training-partners' },
   { label: 'Resources', to: '/resources' },
+  { label: 'Study Tools', to: '/learning-resources' },
   { label: 'Certificate Verification', to: '/verify' },
-  { label: 'FAQs', to: '/about#faqs' },
+  { label: 'FAQs', to: '/faqs' },
+  { label: 'Events', to: '/events' },
+  { label: 'Faculty', to: '/faculty' },
 ];
 
 const supportLinks = [
   { label: 'Contact', to: '/contact' },
+  { label: 'Admissions', to: '/admissions' },
+  { label: 'Administration', to: '/admin' },
   { label: 'Privacy Policy', to: '/privacy-policy' },
   { label: 'Terms & Conditions', to: '/terms-and-conditions' },
   { label: 'Cookie Policy', to: '/cookie-policy' },
@@ -33,17 +39,15 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-5">
             <Link to="/" className="inline-block mb-6">
-              <img src="/clinova-logo-white.svg" alt="Clinova International Academy" className="w-[200px] h-auto" />
+              <BrandLogo variant="white" className="w-[240px] max-w-full" />
             </Link>
             <p className="text-sm text-navy-100/60 leading-[1.65] mb-6 max-w-md">
-              Advancing healthcare through professional education. Online healthcare education, CPD and professional
-              development for healthcare professionals worldwide.
+              Explore proposed healthcare learning pathways and original educational drafts.
+              Courses and learning services await confirmation; no enrolment is available here.
             </p>
             <div className="space-y-2.5">
-              <a href="mailto:info@clinovainternationalacademy.co.uk" className="flex items-center gap-2 text-sm text-navy-100/60 hover:text-teal-400 transition-colors">
-                <Mail className="w-4 h-4 shrink-0" /> info@clinovainternationalacademy.co.uk
-              </a>
-
+              <address className="not-italic text-sm text-navy-100/80">{academyPublicAddress}</address>
+              <p className="text-xs text-navy-100/80">Phone, email and visiting arrangements await confirmation.</p>
             </div>
           </div>
 
