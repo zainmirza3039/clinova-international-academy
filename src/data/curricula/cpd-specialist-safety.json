@@ -2,7 +2,7 @@
   {
     "courseSlug": "wound-care-essentials",
     "status": "draft",
-    "reviewNotice": "Proposed professional-learning draft only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
+    "reviewNotice": "Proposed professional-learning educational material only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
     "outcomes": [
       "Describe a person-centred wound history without treating a checklist as a diagnosis.",
       "Recognise colonisation, infection and systemic or vascular risk signals that require escalation.",
@@ -15,7 +15,7 @@
     ],
     "prerequisites": [
       "A relevant regulated-health or supervised clinical foundation.",
-      "Access to a supervisor and local wound, infection and urgent-referral pathways; this draft does not authorise procedures or prescribing."
+      "Access to a supervisor and local wound, infection and urgent-referral pathways; this educational material does not authorise procedures or prescribing."
     ],
     "modules": [
       {
@@ -42,7 +42,7 @@
           {
             "title": "Colonisation is not clinical infection",
             "description": "Use NICE distinctions cautiously and recognise why appearance alone cannot settle the question.",
-            "text": "NICE NG152 notes that many leg ulcers are colonised and that antibiotics do not promote healing when a leg ulcer is not clinically infected. The important learning point is not memorising a treatment threshold; it is asking whether there are new or spreading clinical signs, increasing pain, fever, systemic illness or another explanation for change. Ask about trajectory and compare with the person’s baseline. Consider diabetes, immunosuppression, vascular disease and previous antimicrobial exposure because they alter risk and the need for specialist advice. A swab result or odour should not be treated as a diagnosis in isolation. Explain the uncertainty and identify who can perform the qualified assessment. This draft deliberately excludes antibiotic selection, dosage and route. If deterioration is rapid, pain is severe or disproportionate, or the person is systemically unwell, use the urgent local pathway rather than waiting for a learning exercise. Document the trigger, advice given, responsible clinician and review plan."
+            "text": "NICE NG152 notes that many leg ulcers are colonised and that antibiotics do not promote healing when a leg ulcer is not clinically infected. The important learning point is not memorising a treatment threshold; it is asking whether there are new or spreading clinical signs, increasing pain, fever, systemic illness or another explanation for change. Ask about trajectory and compare with the person’s baseline. Consider diabetes, immunosuppression, vascular disease and previous antimicrobial exposure because they alter risk and the need for specialist advice. A swab result or odour should not be treated as a diagnosis in isolation. Explain the uncertainty and identify who can perform the qualified assessment. This educational material deliberately excludes antibiotic selection, dosage and route. If deterioration is rapid, pain is severe or disproportionate, or the person is systemically unwell, use the urgent local pathway rather than waiting for a learning exercise. Document the trigger, advice given, responsible clinician and review plan."
           },
           {
             "title": "Risk signals and escalation",
@@ -64,7 +64,7 @@
           {
             "title": "Referral as a clinical handover",
             "description": "Provide the receiving team with relevant facts, uncertainty, urgency and the person’s priorities.",
-            "text": "A useful referral answers a question rather than forwarding a pile of observations. Begin with the person’s immediate concern and functional impact, then summarise onset, trajectory, relevant comorbidities, medicines, allergies if known, observations, consent and actions already taken within scope. Separate what you saw from what you suspect, and identify missing information that the receiving clinician should obtain. State why the referral is urgent, rapid or routine according to local criteria, without promising a response time that has not been confirmed. Ask the person whether they need an interpreter, carer involvement or an accessible format. Confirm who owns follow-up and what the person should do if symptoms worsen before contact. NICE pressure-ulcer and diabetic-foot guidance emphasises risk-aware care and local multidisciplinary responsibility, but neither guideline grants this draft authority to perform procedures. A referral is complete only when communication, accountability and safety-netting are traceable in the record."
+            "text": "A useful referral answers a question rather than forwarding a pile of observations. Begin with the person’s immediate concern and functional impact, then summarise onset, trajectory, relevant comorbidities, medicines, allergies if known, observations, consent and actions already taken within scope. Separate what you saw from what you suspect, and identify missing information that the receiving clinician should obtain. State why the referral is urgent, rapid or routine according to local criteria, without promising a response time that has not been confirmed. Ask the person whether they need an interpreter, carer involvement or an accessible format. Confirm who owns follow-up and what the person should do if symptoms worsen before contact. NICE pressure-ulcer and diabetic-foot guidance emphasises risk-aware care and local multidisciplinary responsibility, but neither guideline grants this educational material authority to perform procedures. A referral is complete only when communication, accountability and safety-netting are traceable in the record."
           }
         ],
         "reflectiveActivity": "Compose a concise referral handover with consent, relevant comorbidities, uncertainty, accessibility needs and a named follow-up owner."
@@ -73,7 +73,7 @@
     "faqs": [
       {
         "question": "Does this teach dressing, compression or debridement?",
-        "answer": "No. Procedures and treatment selection are outside this draft; qualified clinicians must follow local policy."
+        "answer": "No. Procedures and treatment selection are outside this educational material; qualified clinicians must follow local policy."
       },
       {
         "question": "Can it diagnose wound infection?",
@@ -103,7 +103,7 @@
         "organisation": "NICE",
         "title": "Leg ulcer infection: antimicrobial prescribing (NG152)",
         "url": "https://www.nice.org.uk/guidance/ng152/chapter/Recommendations",
-        "note": "Supports the distinction between colonisation and clinical infection, reassessment and specialist referral; antibiotic choice and dose are outside this draft."
+        "note": "Supports the distinction between colonisation and clinical infection, reassessment and specialist referral; antibiotic choice and dose are outside this educational material."
       },
       {
         "organisation": "NICE",
@@ -122,7 +122,7 @@
   {
     "courseSlug": "pharmacotherapy-updates-in-chronic-disease",
     "status": "draft",
-    "reviewNotice": "Proposed professional-learning draft only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
+    "reviewNotice": "Proposed professional-learning educational material only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
     "outcomes": [
       "Explain medicines reconciliation, review and shared decision-making as distinct activities.",
       "Recognise polypharmacy, monitoring concerns and suspected adverse reactions requiring qualified review.",
@@ -150,7 +150,7 @@
           {
             "title": "Local formulary and professional role",
             "description": "Map external evidence to jurisdiction, governance and the limits of your role.",
-            "text": "Guidelines do not erase local governance. Compare an external recommendation with the local formulary, prescribing restrictions, monitoring arrangements, commissioning rules and the person’s actual care setting. Confirm whether the source is current and whether a national recommendation has a local implementation caveat. Clarify who is authorised to prescribe, reconcile, administer, monitor and communicate in your service; role titles alone do not prove competence. A supervised learner can identify a discrepancy or question, but must not convert that observation into an independent medicine change. Record the source checked, the unresolved conflict and the professional asked to decide. Include accessibility and language needs so safety information is usable. Keep the scope explicit when handing over: this draft is an educational outline, not an exhaustive update, prescribing qualification or jurisdiction-neutral protocol. When a medicine concern is time-critical, follow local urgent escalation and emergency arrangements, whose availability and hours are UNKNOWN here."
+            "text": "Guidelines do not erase local governance. Compare an external recommendation with the local formulary, prescribing restrictions, monitoring arrangements, commissioning rules and the person’s actual care setting. Confirm whether the source is current and whether a national recommendation has a local implementation caveat. Clarify who is authorised to prescribe, reconcile, administer, monitor and communicate in your service; role titles alone do not prove competence. A supervised learner can identify a discrepancy or question, but must not convert that observation into an independent medicine change. Record the source checked, the unresolved conflict and the professional asked to decide. Include accessibility and language needs so safety information is usable. Keep the scope explicit when handing over: this educational material is an educational outline, not an exhaustive update, prescribing qualification or jurisdiction-neutral protocol. When a medicine concern is time-critical, follow local urgent escalation and emergency arrangements, whose availability and hours are UNKNOWN here."
           }
         ],
         "reflectiveActivity": "Annotate a fictional medicines headline with population, outcome, source date, applicability limits and the question to take to a pharmacist."
@@ -192,7 +192,7 @@
     ],
     "faqs": [
       {
-        "question": "Can this draft be used to start, stop or change a medicine?",
+        "question": "Can this educational material be used to start, stop or change a medicine?",
         "answer": "No. It gives no dosing or treatment-change authority; contact the responsible prescriber or pharmacist."
       },
       {
@@ -223,7 +223,7 @@
         "organisation": "NICE",
         "title": "Medicines optimisation (NG5)",
         "url": "https://www.nice.org.uk/guidance/ng5/chapter/1-recommendations",
-        "note": "Supports reconciliation, structured review, patient involvement, adverse-reaction consideration and monitoring; it does not make this draft a prescribing guide."
+        "note": "Supports reconciliation, structured review, patient involvement, adverse-reaction consideration and monitoring; it does not make this educational material a prescribing guide."
       },
       {
         "organisation": "NICE",
@@ -242,7 +242,7 @@
   {
     "courseSlug": "cbt-for-anxiety-disorders",
     "status": "draft",
-    "reviewNotice": "Proposed professional-learning draft only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
+    "reviewNotice": "Proposed professional-learning educational material only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
     "outcomes": [
       "Describe anxiety experiences and a provisional formulation without premature diagnosis.",
       "Recognise impairment, risk and complexity requiring qualified assessment, supervision or urgent referral.",
@@ -255,7 +255,7 @@
     ],
     "prerequisites": [
       "Relevant professional or academic foundation and access to a qualified CBT supervisor.",
-      "This draft does not teach psychotherapy delivery, exposure scripts, diagnosis or independent practice."
+      "This educational material does not teach psychotherapy delivery, exposure scripts, diagnosis or independent practice."
     ],
     "modules": [
       {
@@ -299,7 +299,7 @@
           {
             "title": "Recognising risk and crisis",
             "description": "Notice urgent indicators and connect the person with qualified or emergency support rather than attempting DIY therapy.",
-            "text": "Anxiety can coexist with depression, self-harm thoughts, substance use, psychosis, trauma, domestic abuse or serious physical illness. A safe professional conversation asks enough about immediate safety, function and support to identify whether routine discussion is appropriate, using the service’s approved assessment process. Do not promise confidentiality beyond policy or manage a crisis alone. If there is imminent danger, severe deterioration or a medical emergency, contact local emergency or urgent mental-health services; their numbers, availability and hours are not supplied by this draft and must be verified locally. For non-immediate concern, document the risk information, protective factors, consent and escalation agreed with the accountable clinician. Avoid interpreting calm presentation as low risk or anxiety as the sole explanation. NICE CG113 describes stepped-care principles for relevant adult anxiety presentations, but it does not replace clinical assessment or local crisis arrangements. This course includes no crisis script, diagnosis or exposure exercise. Recognition, supervision and timely handover are the intended skills."
+            "text": "Anxiety can coexist with depression, self-harm thoughts, substance use, psychosis, trauma, domestic abuse or serious physical illness. A safe professional conversation asks enough about immediate safety, function and support to identify whether routine discussion is appropriate, using the service’s approved assessment process. Do not promise confidentiality beyond policy or manage a crisis alone. If there is imminent danger, severe deterioration or a medical emergency, contact local emergency or urgent mental-health services; their numbers, availability and hours are not supplied by this educational material and must be verified locally. For non-immediate concern, document the risk information, protective factors, consent and escalation agreed with the accountable clinician. Avoid interpreting calm presentation as low risk or anxiety as the sole explanation. NICE CG113 describes stepped-care principles for relevant adult anxiety presentations, but it does not replace clinical assessment or local crisis arrangements. This course includes no crisis script, diagnosis or exposure exercise. Recognition, supervision and timely handover are the intended skills."
           },
           {
             "title": "Referral and outcome review",
@@ -307,7 +307,7 @@
             "text": "A referral should say why help is needed, what has been assessed, what remains uncertain and what the person wants from support. Include functional impact, relevant health or safeguarding context, consent, communication needs and urgency according to local criteria. Do not refer simply because a formulation is tidy; check whether the receiving service accepts the presentation, age group and level of risk. Explain that waiting times, eligibility and service names vary, and do not invent availability or fees. Agree the contingency to follow before contact if symptoms deteriorate, using verified local information. At review, ask whether the pathway helped, whether goals or risks changed and whether the original formulation still fits. NHS Talking Therapies and NICE guidance describe service and treatment contexts, but a general outline cannot promise access or a particular therapy. Escalate uncertainty to a qualified clinician. The record should show accountability and next steps, not a claim that referral equals treatment or recovery."
           }
         ],
-        "reflectiveActivity": "Draft a fictional risk-and-referral note with immediate safety questions, uncertainty, local escalation and no therapy script."
+        "reflectiveActivity": "educational material a fictional risk-and-referral note with immediate safety questions, uncertainty, local escalation and no therapy script."
       }
     ],
     "faqs": [
@@ -321,7 +321,7 @@
       },
       {
         "question": "What should happen in a crisis?",
-        "answer": "Use verified local urgent or emergency mental-health services and follow safeguarding policy; this draft does not provide a crisis script."
+        "answer": "Use verified local urgent or emergency mental-health services and follow safeguarding policy; this educational material does not provide a crisis script."
       },
       {
         "question": "Are dates, hours, fees, instructors, assessment, certification or accreditation confirmed?",
@@ -343,7 +343,7 @@
         "organisation": "NICE",
         "title": "Generalised anxiety disorder and panic disorder in adults: management (CG113)",
         "url": "https://www.nice.org.uk/guidance/cg113",
-        "note": "Supports stepped-care, individualised judgement and scope for adult anxiety presentations; it does not authorise diagnosis or therapy delivery by this draft."
+        "note": "Supports stepped-care, individualised judgement and scope for adult anxiety presentations; it does not authorise diagnosis or therapy delivery by this educational material."
       },
       {
         "organisation": "NHS England",
@@ -355,14 +355,14 @@
         "organisation": "HCPC",
         "title": "Standards of continuing professional development",
         "url": "https://www.hcpc-uk.org/standards/standards-of-continuing-professional-development/",
-        "note": "Supports relevant, reflective learning and safe practice; reading this draft does not confer psychotherapy competence or registration."
+        "note": "Supports relevant, reflective learning and safe practice; reading this educational material does not confer psychotherapy competence or registration."
       }
     ]
   },
   {
     "courseSlug": "clinical-nutrition-for-chronic-disease",
     "status": "draft",
-    "reviewNotice": "Proposed professional-learning draft only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
+    "reviewNotice": "Proposed professional-learning educational material only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
     "outcomes": [
       "Explain what nutrition screening can and cannot establish in chronic disease.",
       "Recognise malnutrition, refeeding and comorbidity signals requiring specialist assessment.",
@@ -375,7 +375,7 @@
     ],
     "prerequisites": [
       "A relevant health foundation and access to local nutrition, safeguarding and urgent pathways.",
-      "This draft does not prescribe diets, supplements, enteral feeding or refeeding regimens."
+      "This educational material does not prescribe diets, supplements, enteral feeding or refeeding regimens."
     ],
     "modules": [
       {
@@ -424,7 +424,7 @@
           {
             "title": "Equity, communication and review",
             "description": "Adapt nutrition conversations to culture, resources, disability and changing clinical priorities.",
-            "text": "Nutrition care is equitable only when recommendations can be understood, afforded, prepared and safely consumed. Ask about language, religion, culture, allergies, sensory needs, disability, food insecurity, housing, cooking equipment and who controls food decisions. Do not assume that a familiar food is available or that refusal reflects poor motivation. Use interpreters and accessible materials through approved services, and invite the person to correct assumptions. Review whether the proposed pathway remains acceptable as symptoms, finances, function or disease status change. Pay attention to weight stigma and eating-disorder risk; a target weight or food rule may cause harm when introduced without specialist assessment. WHO’s broad principles are population-level context, not a personal prescription. Record what the person wants, what is uncertain, what support is needed and who will revisit it. Escalate acute deterioration or safeguarding concerns through local services. This learning draft has no assessment, certification or authority to prescribe diets; qualified teams retain accountability."
+            "text": "Nutrition care is equitable only when recommendations can be understood, afforded, prepared and safely consumed. Ask about language, religion, culture, allergies, sensory needs, disability, food insecurity, housing, cooking equipment and who controls food decisions. Do not assume that a familiar food is available or that refusal reflects poor motivation. Use interpreters and accessible materials through approved services, and invite the person to correct assumptions. Review whether the proposed pathway remains acceptable as symptoms, finances, function or disease status change. Pay attention to weight stigma and eating-disorder risk; a target weight or food rule may cause harm when introduced without specialist assessment. WHO’s broad principles are population-level context, not a personal prescription. Record what the person wants, what is uncertain, what support is needed and who will revisit it. Escalate acute deterioration or safeguarding concerns through local services. This learning educational material has no assessment, certification or authority to prescribe diets; qualified teams retain accountability."
           }
         ],
         "reflectiveActivity": "Write an equitable dietitian referral including culture, communication, food access, consent, urgency and the accountable follow-up owner."
@@ -463,7 +463,7 @@
         "organisation": "NICE",
         "title": "Nutrition support for adults (CG32)",
         "url": "https://www.nice.org.uk/guidance/cg32",
-        "note": "Supports screening, malnutrition-risk recognition, nutrition-support governance and monitoring context; this draft excludes prescriptions and regimens."
+        "note": "Supports screening, malnutrition-risk recognition, nutrition-support governance and monitoring context; this educational material excludes prescriptions and regimens."
       },
       {
         "organisation": "WHO",
