@@ -64,7 +64,7 @@ describe('completion frontend pages', () => {
     renderPage(<ContactPage />);
     expect(screen.getByRole('heading', { name: /enquiry service unavailable/i })).toBeTruthy();
     expect(screen.queryByLabelText(/your name/i)).toBeNull();
-    expect(screen.queryByLabelText(/your message/i)).toBeNull();
+    expect(screen.queryByLabelText(/^message \*/i)).toBeNull();
     expect(screen.queryByRole('button', { name: /send message/i })).toBeNull();
   });
 
