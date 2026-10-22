@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import AdmissionsPage from '@/pages/AdmissionsPage';
 import ApplicationPage from '@/pages/ApplicationPage';
 import AdminPage from '@/pages/AdminPage';
@@ -8,6 +8,7 @@ import CommunityPage, { EventsPage, FacultyPage } from '@/pages/CommunityPage';
 import FAQsPage from '@/pages/FAQsPage';
 import ContactPage from '@/pages/ContactPage';
 import TrainingPartnersPage from '@/pages/TrainingPartnersPage';
+vi.mock('@/components/Reveal', () => ({ default: ({ children }: { children: React.ReactNode }) => children }));
 
 function renderPage(page: React.ReactNode) { return render(<MemoryRouter>{page}</MemoryRouter>); }
 
@@ -50,7 +51,7 @@ describe('completion frontend pages', () => {
   it('states that admissions are not open while linking to the local-only planner', () => {
     renderPage(<AdmissionsPage />);
     expect(screen.getByRole('heading', { name: /admissions are not yet open/i })).toBeTruthy();
-    expect(screen.getByText(/No programme is currently approved for enrolment/)).toBeTruthy();
+    expect(screen.getAllByText(/No programme is currently approved for enrolment/)).toHaveLength(2);
     expect(screen.getByRole('link', { name: /open application planner/i }).getAttribute('href')).toBe('/application');
   });
 
