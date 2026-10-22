@@ -2,7 +2,7 @@
   {
     "courseSlug": "clinical-communication-skills",
     "status": "draft",
-    "reviewNotice": "Proposed professional-learning educational material only. Content, scope, accessibility, clinical accuracy and any future delivery or recognition arrangements require qualified clinical and academy review. It is not medical advice, does not enable enrolment, and does not establish competence, licensure or local authorisation.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Use person-centred listening, accessible information and teach-back.",
       "Explain options, uncertainty, consent and review without coercion.",
@@ -73,7 +73,7 @@
     "faqs": [
       {
         "question": "Is this educational material open for enrolment or does it include CPD hours?",
-        "answer": "No. It is a proposed outline only. No delivery, hours, fees, dates, enrolment, assessment, tracking, recognition or certificate arrangements are confirmed."
+        "answer": "No. It is a suggested outline only. No delivery, hours, fees, dates, enrolment, assessment, tracking, recognition or certificate arrangements are confirmed."
       },
       {
         "question": "Does it establish competence or authorise practice?",
@@ -85,7 +85,7 @@
       },
       {
         "question": "Who reviewed the content?",
-        "answer": "Qualified clinical, subject-matter, accessibility and academy review is proposed but not claimed. Sources are provided for later verification and local adaptation."
+        "answer": "Qualified clinical, subject-matter, accessibility and academy review is suggested but not claimed. Sources are provided for later verification and local adaptation."
       }
     ],
     "relatedArticles": [
@@ -116,7 +116,7 @@
   {
     "courseSlug": "patient-safety-in-clinical-practice",
     "status": "draft",
-    "reviewNotice": "Proposed professional-learning educational material only. Content, scope, accessibility, clinical accuracy and any future delivery or recognition arrangements require qualified clinical and academy review. It is not medical advice, does not enable enrolment, and does not establish competence, licensure or local authorisation.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Describe safety as a systems and human-factors discipline.",
       "Recognise risk, escalate and document factual information through local routes.",
@@ -187,7 +187,7 @@
     "faqs": [
       {
         "question": "Is this educational material open for enrolment or does it include CPD hours?",
-        "answer": "No. It is a proposed outline only. No delivery, hours, fees, dates, enrolment, assessment, tracking, recognition or certificate arrangements are confirmed."
+        "answer": "No. It is a suggested outline only. No delivery, hours, fees, dates, enrolment, assessment, tracking, recognition or certificate arrangements are confirmed."
       },
       {
         "question": "Does it establish competence or authorise practice?",
@@ -199,7 +199,7 @@
       },
       {
         "question": "Who reviewed the content?",
-        "answer": "Qualified clinical, subject-matter, accessibility and academy review is proposed but not claimed. Sources are provided for later verification and local adaptation."
+        "answer": "Qualified clinical, subject-matter, accessibility and academy review is suggested but not claimed. Sources are provided for later verification and local adaptation."
       }
     ],
     "relatedArticles": [
@@ -230,7 +230,7 @@
   {
     "courseSlug": "infection-prevention-and-control",
     "status": "draft",
-    "reviewNotice": "Proposed professional-learning educational material only. Content, scope, accessibility, clinical accuracy and any future delivery or recognition arrangements require qualified clinical and academy review. It is not medical advice, does not enable enrolment, and does not establish competence, licensure or local authorisation.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Explain transmission-risk reasoning, standard precautions and local IPC policy.",
       "Identify hand-hygiene and environmental hazards without treating this as procedural training.",
@@ -301,7 +301,7 @@
     "faqs": [
       {
         "question": "Is this educational material open for enrolment or does it include CPD hours?",
-        "answer": "No. It is a proposed outline only. No delivery, hours, fees, dates, enrolment, assessment, tracking, recognition or certificate arrangements are confirmed."
+        "answer": "No. It is a suggested outline only. No delivery, hours, fees, dates, enrolment, assessment, tracking, recognition or certificate arrangements are confirmed."
       },
       {
         "question": "Does it establish competence or authorise practice?",
@@ -313,7 +313,7 @@
       },
       {
         "question": "Who reviewed the content?",
-        "answer": "Qualified clinical, subject-matter, accessibility and academy review is proposed but not claimed. Sources are provided for later verification and local adaptation."
+        "answer": "Qualified clinical, subject-matter, accessibility and academy review is suggested but not claimed. Sources are provided for later verification and local adaptation."
       }
     ],
     "relatedArticles": [
@@ -344,7 +344,7 @@
   {
     "courseSlug": "quality-improvement-in-healthcare",
     "status": "draft",
-    "reviewNotice": "Proposed professional-learning educational material only. Content, scope, accessibility, clinical accuracy and any future delivery or recognition arrangements require qualified clinical and academy review. It is not medical advice, does not enable enrolment, and does not establish competence, licensure or local authorisation.",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Write a person-centred improvement aim with equity and governance boundaries.",
       "Map a system and distinguish drivers, variation, constraints and hypotheses.",
@@ -415,7 +415,7 @@
     "faqs": [
       {
         "question": "Is this educational material open for enrolment or does it include CPD hours?",
-        "answer": "No. It is a proposed outline only. No delivery, hours, fees, dates, enrolment, assessment, tracking, recognition or certificate arrangements are confirmed."
+        "answer": "No. It is a suggested outline only. No delivery, hours, fees, dates, enrolment, assessment, tracking, recognition or certificate arrangements are confirmed."
       },
       {
         "question": "Does it establish competence or authorise practice?",
@@ -427,7 +427,7 @@
       },
       {
         "question": "Who reviewed the content?",
-        "answer": "Qualified clinical, subject-matter, accessibility and academy review is proposed but not claimed. Sources are provided for later verification and local adaptation."
+        "answer": "Qualified clinical, subject-matter, accessibility and academy review is suggested but not claimed. Sources are provided for later verification and local adaptation."
       }
     ],
     "relatedArticles": [
