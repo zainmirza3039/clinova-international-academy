@@ -1,0 +1,379 @@
+[
+  {
+    "id": "article-6",
+    "slug": "shoulder-pain-assessment-rehabilitation",
+    "title": "Shoulder Pain Assessment and Rehabilitation: A Reasoned Clinical Approach",
+    "excerpt": "A clinically grounded overview of shoulder assessment, differential reasoning, progressive rehabilitation, safety-netting, and return to meaningful activity.",
+    "category": "Rehabilitation",
+    "status": "draft",
+    "seoTitle": "Shoulder Pain Assessment and Rehabilitation | Clinova",
+    "seoDescription": "Learn how clinicians assess shoulder pain, screen for serious causes, select progressive rehabilitation, and plan review without rigid protocols.",
+    "sections": [
+      {
+        "heading": "Why shoulder pain needs a hypothesis, not a label",
+        "paragraphs": [
+          "This educational draft is not individualized medical advice. Assessment and rehabilitation should be adapted by an appropriately qualified clinician, with local pathways, comorbidities, patient goals, and informed preferences considered. Clinical and editorial review is required before publication. Shoulder pain may arise from rotator cuff-related pain, adhesive capsulitis, instability, osteoarthritis, cervical or thoracic referral, trauma, or systemic disease. Similar symptoms can reflect different mechanisms, so a label such as “impingement” should not replace a history and examination. The clinician should establish the person’s principal activity limitation, symptom behaviour, irritability, work or sport demands, previous episodes, health conditions, medication, and concerns.",
+          "Ask what the person cannot do: reaching, dressing, lifting, sleeping, or working. Pain intensity matters, but so do function, confidence, and trajectory. Sudden traumatic weakness, deformity, an acutely hot or swollen joint, fever, unexplained weight loss, chest symptoms, neurological deficit, or severe unremitting night pain warrants appropriate urgent or medical assessment rather than routine exercise progression."
+        ]
+      },
+      {
+        "heading": "Assessment: combine history with examination",
+        "paragraphs": [
+          "A focused examination can include observation, cervical and neurological screening, active and passive range of motion, resisted testing, scapular and thoracic movement, and task-based assessment. Compare sides cautiously: asymmetry may be normal, and pain during a single test rarely identifies one tissue with certainty. Measure meaningful functions and use repeatable patient-reported tools when appropriate. Strength testing should account for pain inhibition, effort, leverage, and available equipment.",
+          "Imaging is not automatically the next step. Clinical findings and the expected effect on management should guide referral or imaging; structural findings can be present without symptoms. The JOSPT rotator-cuff guideline supports evidence-based conservative care and emphasizes prognosis and work context, while recognising that tears, marked traumatic weakness, and failure to progress may need specialist review. Document a working hypothesis, uncertainty, baseline function, and agreed review triggers."
+        ]
+      },
+      {
+        "heading": "Rehabilitation: load, movement, and confidence",
+        "paragraphs": [
+          "For many non-traumatic shoulder presentations, rehabilitation is an active programme rather than rest alone. Early work may target comfortable movement, daily-activity modification, and education about symptom monitoring. Progressively loaded strengthening can address the rotator cuff and scapular or shoulder-girdle muscles, with dosage shaped by irritability, recovery after sessions, technique, and goals. Mobility work is useful when restriction is a meaningful impairment; it should not be forced through escalating pain.",
+          "Progression is better based on response and capability than a universal calendar. Increase one meaningful challenge at a time—range, resistance, repetitions, speed, or task complexity—while retaining exercises that improve function. A temporary reduction in aggravating overhead volume may help, but complete avoidance can reduce capacity and confidence. Consider sleep positioning, pacing, work redesign, and graded exposure to feared movements. Manual therapy or medication may be adjuncts, not substitutes for an active plan."
+        ]
+      },
+      {
+        "heading": "Review, referral, and contextual care",
+        "paragraphs": [
+          "Review should test whether the hypothesis still fits: is function improving, are symptoms less irritable, and can the person tolerate the required load? If progress stalls, reassess adherence barriers, dose, technique, cervical contribution, psychosocial context, and alternative diagnoses rather than simply adding exercises. Persistent substantial disability, recurrent instability, suspected full-thickness traumatic tear, inflammatory features, or neurological signs may justify medical or specialist referral.",
+          "Contraindications and precautions are context-specific. Postoperative shoulders, fractures, dislocations, inflammatory disease, significant osteoporosis, anticoagulation, and cardiopulmonary conditions require coordination with the responsible team. Do not promise a fixed recovery time or use pain-free performance as the sole clearance criterion. Shared decisions should balance symptom relief, tissue protection, work and sport demands, and the person’s acceptable risk."
+        ]
+      },
+      {
+        "heading": "Clinical limitations and communication",
+        "paragraphs": [
+          "Evidence and recommendations do not remove the need for examination. Studies often group different presentations, use different doses, and measure outcomes over different periods, so an intervention that helps one person may be unsuitable for another. Explain uncertainty clearly and reconsider the working diagnosis when the pattern changes or expected progress does not occur.",
+          "Context can determine whether a plan is feasible. Caring responsibilities, insecure work, limited equipment, language barriers, fatigue, low confidence, transport, and cost may alter delivery. Record consent, goals, baseline measures, instructions, and safety-netting. Adapt the setting and support rather than interpreting every missed session as poor motivation.",
+          "Review should include symptoms, objective performance, participation, confidence, and adverse events. Escalate new neurological or cardiopulmonary symptoms, marked swelling, deformity, infection signs, neurovascular change, unexplained deterioration, or inability to progress through the appropriate local clinical pathway. Do not promise a fixed recovery time or guaranteed outcome.",
+          "This educational draft cannot replace assessment, diagnosis, medication review, imaging decisions, operative instructions, or emergency care. Qualified clinicians should adapt recommendations to the person, procedure, comorbidities, goals, and local guidance. Clinicians and editors should verify the final copy and referral information before publication.",
+          "Use shared decisions to define what improvement means and which trade-offs are acceptable. A person may prioritise sleep, independent transfers, work tolerance, confidence, or social participation over a normalised test. Explain how to scale an activity down and back up, and arrange review when the response is unexpectedly painful, fatiguing, or unsafe.",
+          "The article’s clinical examples are deliberately illustrative rather than a protocol. Exercise choice, supervision, dosage, aids, medication, referral, and precautions depend on examination and diagnosis. Preserve a clear distinction between education and treatment advice, and ensure the final published version carries the required professional review and local safety information. Reassessment is preferable to escalating a generic programme when symptoms, function, or safety concerns do not follow the expected pattern."
+        ]
+      }
+    ],
+    "takeaways": [
+      "A shoulder diagnosis is a working hypothesis supported by history, examination, and response—not a single provocative test.",
+      "Screen red flags, major trauma, neurological signs, and systemic illness before routine rehabilitation.",
+      "Use progressive, goal-linked loading and movement exposure, adjusted to irritability and recovery.",
+      "Review function and context; refer when the course, examination, or risk profile is atypical."
+    ],
+    "references": [
+      {
+        "title": "Rotator Cuff Tendinopathy Diagnosis, Nonsurgical Medical Care, and Rehabilitation: A Clinical Practice Guideline (2025)",
+        "url": "https://www.jospt.org/doi/10.2519/jospt.2025.13182"
+      },
+      {
+        "title": "PubMed: 2025 rotator cuff tendinopathy guideline record",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40165544/"
+      }
+    ],
+    "relatedArticleSlugs": [
+      "stroke-rehabilitation-functional-goals",
+      "balance-training-fall-prevention",
+      "ankle-sprain-return-to-activity",
+      "acl-rehabilitation-clinical-considerations"
+    ],
+    "relatedProgrammeSlugs": [
+      "certificate-in-musculoskeletal-assessment"
+    ]
+  },
+  {
+    "id": "article-7",
+    "slug": "stroke-rehabilitation-functional-goals",
+    "title": "Stroke Rehabilitation: Setting Functional Goals With the Whole Team",
+    "excerpt": "How stroke rehabilitation teams translate assessment into meaningful, measurable, revisable goals across body functions, activity, participation, and context.",
+    "category": "Rehabilitation",
+    "status": "draft",
+    "seoTitle": "Stroke Rehabilitation Goals and Team Care | Clinova",
+    "seoDescription": "Understand person-centred stroke rehabilitation goals, multidisciplinary roles, intensity, review, and safety considerations based on NICE guidance.",
+    "sections": [
+      {
+        "heading": "Start with the person and the whole impact of stroke",
+        "paragraphs": [
+          "This educational draft is not individualized medical advice. Assessment and rehabilitation should be adapted by an appropriately qualified clinician, with local pathways, comorbidities, patient goals, and informed preferences considered. Clinical and editorial review is required before publication. Stroke can affect movement, sensation, balance, vision, communication, swallowing, cognition, mood, continence, fatigue, and participation. NICE recommends a comprehensive assessment that considers previous ability, body-function impairment, activity limitation, participation restriction, psychological and neuropsychological changes, and environmental factors. The goal is not merely a better test score; it is safer and more meaningful participation in life.",
+          "Ask about roles and priorities: getting to the bathroom, preparing food, communicating with family, returning to work, managing a hobby, or travelling independently. Include family and carers when appropriate, while preserving the person’s autonomy. Check capacity, communication access, cultural needs, and fatigue. A person who cannot speak easily may still have clear preferences and should receive supported communication rather than passive goal selection."
+        ]
+      },
+      {
+        "heading": "Make goals functional, challenging, and revisable",
+        "paragraphs": [
+          "Useful goals describe an observable activity or participation outcome, the conditions in which it matters, and how progress will be judged. NICE describes goals as meaningful and relevant, activity- and participation-focused, challenging but achievable, and including short- and long-term elements. “Improve strength” may be a treatment target; “stand from the dining chair and walk to the kitchen with the agreed aid” is a functional goal that can guide practice.",
+          "Goals should be agreed, documented in accessible language, and reviewed at planned meetings. A goal may need to change when recovery, fatigue, mood, home circumstances, or medical status changes. Avoid equating a slower pace with failure: quality, safety, confidence, efficiency, and reduced carer burden can all be important outcomes. Use valid measures where suitable, but interpret them alongside the person’s lived experience and real-world performance."
+        ]
+      },
+      {
+        "heading": "The multidisciplinary team turns goals into practice",
+        "paragraphs": [
+          "A coordinated team may include rehabilitation medicine, nursing, physiotherapy, occupational therapy, speech and language therapy, psychology, dietetics, pharmacy, social care, and specialist nursing, depending on needs. Each discipline contributes a different lens: gait and transfers, upper-limb activity, communication and swallowing, cognition, mood, self-care, medication, nutrition, equipment, and discharge context. The team should share a coherent plan rather than deliver disconnected exercises.",
+          "NICE recommends needs-based rehabilitation covering a range of multidisciplinary therapy, with intensity and content tailored to goals, medical needs, fatigue, mood, and the person’s agreement. “Intensity” is not a reason to ignore safety or consent. Repetition should be purposeful, with opportunities to practise tasks in relevant environments and involve carers appropriately. Build rest, positioning, skin care, falls prevention, and management of pain or spasticity into the plan."
+        ]
+      },
+      {
+        "heading": "Safety, transitions, and realistic expectations",
+        "paragraphs": [
+          "New neurological deterioration, reduced consciousness, chest pain, severe headache, aspiration concerns, seizures, acute infection, or sudden change in function requires prompt medical assessment. Exercise and mobility may need modification for blood-pressure instability, cardiac disease, osteoporosis, shoulder pain, neglect, visual field loss, communication barriers, or severe fatigue. Transfers and equipment should be taught and checked by appropriately trained professionals; written advice alone may be unsafe.",
+          "Discharge is a transition, not the end of rehabilitation. Coordinate equipment, home adaptations, medication, transport, community therapy, carers’ needs, and follow-up. Progress may be uneven, and a plateau should trigger reassessment rather than an assumption that no further benefit is possible. Outcomes should include participation and quality of life, not only impairment reduction. The person’s priorities, risk tolerance, resources, and social environment shape what a feasible plan looks like."
+        ]
+      },
+      {
+        "heading": "Clinical limitations and communication",
+        "paragraphs": [
+          "Evidence and recommendations do not remove the need for examination. Studies often group different presentations, use different doses, and measure outcomes over different periods, so an intervention that helps one person may be unsuitable for another. Explain uncertainty clearly and reconsider the working diagnosis when the pattern changes or expected progress does not occur.",
+          "Context can determine whether a plan is feasible. Caring responsibilities, insecure work, limited equipment, language barriers, fatigue, low confidence, transport, and cost may alter delivery. Record consent, goals, baseline measures, instructions, and safety-netting. Adapt the setting and support rather than interpreting every missed session as poor motivation.",
+          "Review should include symptoms, objective performance, participation, confidence, and adverse events. Escalate new neurological or cardiopulmonary symptoms, marked swelling, deformity, infection signs, neurovascular change, unexplained deterioration, or inability to progress through the appropriate local clinical pathway. Do not promise a fixed recovery time or guaranteed outcome.",
+          "This educational draft cannot replace assessment, diagnosis, medication review, imaging decisions, operative instructions, or emergency care. Qualified clinicians should adapt recommendations to the person, procedure, comorbidities, goals, and local guidance. Clinicians and editors should verify the final copy and referral information before publication.",
+          "Use shared decisions to define what improvement means and which trade-offs are acceptable. A person may prioritise sleep, independent transfers, work tolerance, confidence, or social participation over a normalised test. Explain how to scale an activity down and back up, and arrange review when the response is unexpectedly painful, fatiguing, or unsafe.",
+          "The article’s clinical examples are deliberately illustrative rather than a protocol. Exercise choice, supervision, dosage, aids, medication, referral, and precautions depend on examination and diagnosis. Preserve a clear distinction between education and treatment advice, and ensure the final published version carries the required professional review and local safety information. Reassessment is preferable to escalating a generic programme when symptoms, function, or safety concerns do not follow the expected pattern."
+        ]
+      }
+    ],
+    "takeaways": [
+      "Assess cognition, communication, mood, sensation, balance, strength, pain, function, and environment—not motor ability alone.",
+      "Set meaningful activity and participation goals with the person and, when appropriate, family or carers.",
+      "Coordinate disciplines around shared goals; intensity must remain needs-based, safe, and fatigue-aware.",
+      "Review goals and the transition plan regularly, and escalate new neurological or medical concerns promptly."
+    ],
+    "references": [
+      {
+        "title": "Stroke rehabilitation in adults: NICE guideline NG236—Recommendations",
+        "url": "https://www.nice.org.uk/guidance/ng236/chapter/Recommendations"
+      }
+    ],
+    "relatedArticleSlugs": [
+      "shoulder-pain-assessment-rehabilitation",
+      "balance-training-fall-prevention",
+      "ankle-sprain-return-to-activity",
+      "acl-rehabilitation-clinical-considerations"
+    ],
+    "relatedProgrammeSlugs": []
+  },
+  {
+    "id": "article-8",
+    "slug": "balance-training-fall-prevention",
+    "title": "Balance Training and Fall Prevention in Older Adults",
+    "excerpt": "A person-centred guide to falls assessment, progressive balance and strength training, environmental change, and clinical safety.",
+    "category": "Rehabilitation",
+    "status": "draft",
+    "seoTitle": "Balance Training and Fall Prevention for Older Adults | Clinova",
+    "seoDescription": "Explore multifactorial falls assessment, progressive balance and functional exercise, medication and home safety, and referral considerations.",
+    "sections": [
+      {
+        "heading": "Falls are multifactorial and worth asking about",
+        "paragraphs": [
+          "This educational draft is not individualized medical advice. Assessment and rehabilitation should be adapted by an appropriately qualified clinician, with local pathways, comorbidities, patient goals, and informed preferences considered. Clinical and editorial review is required before publication. A fall may reflect an interaction between gait, vision, medication, orthostatic symptoms, footwear, environment, cognition, strength, reaction, confidence, and an acute illness. Asking routinely and non-judgementally about falls, near-falls, fear, and activity avoidance can uncover risk that a person has not volunteered. A fall is not simply evidence of “weak legs,” and a generic balance class may miss treatable contributors.",
+          "Urgent assessment is needed after a potentially serious injury, head impact with concerning symptoms, loss of consciousness, chest pain, palpitations, new neurological signs, severe illness, or recurrent unexplained falls. Dizziness, fainting, sudden visual change, or medication-related symptoms need appropriate medical review. Exercise should be supervised or safely arranged when a person has marked instability, cognitive impairment, severe orthostatic symptoms, or cannot rise from the floor safely."
+        ]
+      },
+      {
+        "heading": "Assessment should identify modifiable risks",
+        "paragraphs": [
+          "NICE’s comprehensive falls assessment includes cardiovascular and lying-to-standing blood pressure assessment where appropriate, cognition and mood, dizziness, footwear and feet, functional ability, gait, balance, mobility, strength, hearing and vision, long-term conditions, medication, neurological factors, continence, diet, and osteoporosis risk. The World Falls Guidelines similarly support opportunistic case-finding and comprehensive multifactorial assessment for people at high risk.",
+          "Use observation and functional tasks to understand real-world difficulty: sit-to-stand, turning, stepping, gait speed, dual-task demands, reaching, and navigating a person’s own environment. A numerical screen is not a diagnosis and should not replace clinical reasoning. Ask what the person wants to keep doing, what they fear, and which changes are acceptable. This makes prevention collaborative rather than a list of prohibitions."
+        ]
+      },
+      {
+        "heading": "Build progressive, functional exercise",
+        "paragraphs": [
+          "Effective programmes commonly challenge balance and function while developing lower-limb strength and power. Examples may include repeated sit-to-stand, stepping in different directions, reaching, turning, obstacle negotiation, and walking tasks, selected and graded by an appropriately trained professional. The World Falls Guidelines recommend individualised, progressed programmes with balance-challenging and functional exercise, commonly at least three sessions weekly for at least 12 weeks, while noting that longer continuation can produce greater effect. These are population recommendations, not a prescription for every person.",
+          "Progress can alter base of support, speed, surface, visual input, cognitive demand, resistance, or task complexity, but only when the current level is controlled. Provide a stable support nearby, suitable footwear, clear space, and a plan for supervision or assistance. Strength and balance are complementary; confidence and exposure matter too. Tai Chi or resistance training may suit some people, while others need one-to-one therapy, aids, or a slower progression."
+        ]
+      },
+      {
+        "heading": "Address the person’s environment and treatment context",
+        "paragraphs": [
+          "Exercise is one part of a multidomain plan. Review medicines with the prescriber or pharmacist, especially fall-risk-increasing medicines; address vision and hearing; consider foot care and footwear; and arrange a validated home hazard assessment, often with occupational therapy input. Hydration, nutrition, continence, sleep, and management of orthostatic hypotension may be relevant. Do not recommend supplements as a stand-alone falls treatment or tell someone to stop a medicine independently.",
+          "Reassess falls, near-falls, confidence, participation, and adverse symptoms. A person may become stronger yet remain at risk because of vision loss or an unsafe bathroom, or may reduce activity because of fear. Tailor education and involve carers without removing autonomy. Document the assistance level and escalation plan. There is no guaranteed prevention programme; the goal is to reduce modifiable risk while preserving valued activity and dignity."
+        ]
+      },
+      {
+        "heading": "Clinical limitations and communication",
+        "paragraphs": [
+          "Evidence and recommendations do not remove the need for examination. Studies often group different presentations, use different doses, and measure outcomes over different periods, so an intervention that helps one person may be unsuitable for another. Explain uncertainty clearly and reconsider the working diagnosis when the pattern changes or expected progress does not occur.",
+          "Context can determine whether a plan is feasible. Caring responsibilities, insecure work, limited equipment, language barriers, fatigue, low confidence, transport, and cost may alter delivery. Record consent, goals, baseline measures, instructions, and safety-netting. Adapt the setting and support rather than interpreting every missed session as poor motivation.",
+          "Review should include symptoms, objective performance, participation, confidence, and adverse events. Escalate new neurological or cardiopulmonary symptoms, marked swelling, deformity, infection signs, neurovascular change, unexplained deterioration, or inability to progress through the appropriate local clinical pathway. Do not promise a fixed recovery time or guaranteed outcome.",
+          "This educational draft cannot replace assessment, diagnosis, medication review, imaging decisions, operative instructions, or emergency care. Qualified clinicians should adapt recommendations to the person, procedure, comorbidities, goals, and local guidance. Clinicians and editors should verify the final copy and referral information before publication.",
+          "Use shared decisions to define what improvement means and which trade-offs are acceptable. A person may prioritise sleep, independent transfers, work tolerance, confidence, or social participation over a normalised test. Explain how to scale an activity down and back up, and arrange review when the response is unexpectedly painful, fatiguing, or unsafe.",
+          "The article’s clinical examples are deliberately illustrative rather than a protocol. Exercise choice, supervision, dosage, aids, medication, referral, and precautions depend on examination and diagnosis. Preserve a clear distinction between education and treatment advice, and ensure the final published version carries the required professional review and local safety information. Reassessment is preferable to escalating a generic programme when symptoms, function, or safety concerns do not follow the expected pattern."
+        ]
+      }
+    ],
+    "takeaways": [
+      "Ask about falls and near-falls, then investigate medical, functional, medication, sensory, and environmental contributors.",
+      "Use individualised progressive balance, functional, and strength exercise with safe supervision.",
+      "Combine exercise with medication review, vision and footwear care, orthostatic assessment, and home hazard intervention.",
+      "Avoid rigid prescriptions and unsafe challenge; review confidence, participation, and new symptoms."
+    ],
+    "references": [
+      {
+        "title": "Falls: assessment and prevention in older people and people aged 50 and over at higher risk—NICE NG249",
+        "url": "https://www.nice.org.uk/guidance/ng249/chapter/Recommendations"
+      },
+      {
+        "title": "World guidelines for falls prevention and management for older adults: a global initiative",
+        "url": "https://academic.oup.com/ageing/article/51/9/afac205/6730755"
+      }
+    ],
+    "relatedArticleSlugs": [
+      "shoulder-pain-assessment-rehabilitation",
+      "stroke-rehabilitation-functional-goals",
+      "ankle-sprain-return-to-activity",
+      "acl-rehabilitation-clinical-considerations"
+    ],
+    "relatedProgrammeSlugs": []
+  },
+  {
+    "id": "article-9",
+    "slug": "ankle-sprain-return-to-activity",
+    "title": "Ankle Sprain Rehabilitation and Return to Activity",
+    "excerpt": "A criterion-informed approach to lateral ankle sprain recovery, loading, neuromuscular training, and graduated return to work or sport.",
+    "category": "Sports rehabilitation",
+    "status": "draft",
+    "seoTitle": "Ankle Sprain Rehabilitation and Return to Activity | Clinova",
+    "seoDescription": "Learn evidence-informed ankle sprain management, progressive loading, rehabilitation components, and PAASS-informed return-to-sport decisions.",
+    "sections": [
+      {
+        "heading": "Classify the injury and protect what needs protection",
+        "paragraphs": [
+          "This educational draft is not individualized medical advice. Assessment and rehabilitation should be adapted by an appropriately qualified clinician, with local pathways, comorbidities, patient goals, and informed preferences considered. Clinical and editorial review is required before publication. Most lateral ankle sprains involve an inversion mechanism, but a “simple sprain” assumption can miss fracture, syndesmotic injury, tendon injury, osteochondral lesion, dislocation, or neurovascular compromise. Mechanism, immediate function, swelling, bruising, tenderness, weight-bearing, previous injury, and activity demands inform examination and referral. Inability to bear weight, bony tenderness, deformity, marked instability, disproportionate pain, or persistent locking warrants appropriate medical assessment and imaging pathways.",
+          "Protection does not mean prolonged rest for everyone. The 2021 JOSPT guideline supports external support and progressive weight bearing, with the brace, tape, assistive device, or brief immobilisation chosen according to severity, tissue healing, pain, and preference. More severe injuries may require a short period of immobilisation, while routine prolonged casting can delay work and sport recovery. Reassess when swelling and irritability change."
+        ]
+      },
+      {
+        "heading": "Early and postacute rehabilitation",
+        "paragraphs": [
+          "Early care may combine comfortable active range of motion, swelling management, gait practice, and graded loading. As tolerated, rehabilitation adds calf and ankle strengthening, mobility, balance, proprioceptive or neuromuscular work, and task-specific practice. The JOSPT guideline recommends a structured therapeutic exercise component selected for injury severity, impairments, preferences, learning needs, and social barriers. Manual therapy can be an adjunct within pain-free movement; it should not displace active rehabilitation.",
+          "Progress based on quality and response: walking pattern, range, strength, single-leg control, hopping tolerance, and symptoms over the next day. Increase volume, speed, surface, or complexity gradually and adjust when swelling or giving-way returns. A home programme should be teachable and accessible, with technology used only when it supports learning. Bracing or taping may support early activity and later sport, particularly where recurrence risk is high, but it is not a substitute for neuromuscular training."
+        ]
+      },
+      {
+        "heading": "Return to activity is a decision, not a date",
+        "paragraphs": [
+          "Returning to work, recreation, or sport should consider the actual demand: prolonged walking, uneven ground, jumping, cutting, contact, footwear, and the ability to complete a full session. The BJSM PAASS consensus groups assessment into Pain, Ankle impairments, Athlete perception, Sensorimotor control, and Sport or functional performance. This framework is useful because symptom improvement alone can coexist with poor dynamic balance, weakness, fear, or inability to tolerate repeated tasks.",
+          "Use graded exposure: begin with controlled drills, then increase speed, direction changes, reactive decisions, and training volume before unrestricted competition. Clearance should be shared with the person and relevant team, reflect the consequences of recurrence, and include a plan for support or modification. Do not promise that a particular number of days is safe; athletes often return before impairments resolve, and recurrent instability can develop."
+        ]
+      },
+      {
+        "heading": "Persistent symptoms and prevention",
+        "paragraphs": [
+          "Pain or swelling that does not steadily settle, repeated giving-way, inability to progress loading, marked motion loss, or symptoms suggesting syndesmotic or osteochondral injury merits reassessment. Chronic ankle instability may need a longer programme addressing strength, balance, hip or trunk control, footwear, and sport technique, with specialist input where appropriate. Comorbidities, diabetes, inflammatory disease, fracture risk, and prior surgery change precautions.",
+          "Education should explain that early improvement does not guarantee full recovery. Continue selected balance and strengthening work after return, use external support when indicated, and build training load rather than jumping from rehabilitation to competition. Monitor the ankle during and after activity, and have a clear plan for recurrence. Clinical review should integrate examination, patient confidence, functional performance, and the person’s goals rather than rely on a single test."
+        ]
+      },
+      {
+        "heading": "Clinical limitations and communication",
+        "paragraphs": [
+          "Evidence and recommendations do not remove the need for examination. Studies often group different presentations, use different doses, and measure outcomes over different periods, so an intervention that helps one person may be unsuitable for another. Explain uncertainty clearly and reconsider the working diagnosis when the pattern changes or expected progress does not occur.",
+          "Context can determine whether a plan is feasible. Caring responsibilities, insecure work, limited equipment, language barriers, fatigue, low confidence, transport, and cost may alter delivery. Record consent, goals, baseline measures, instructions, and safety-netting. Adapt the setting and support rather than interpreting every missed session as poor motivation.",
+          "Review should include symptoms, objective performance, participation, confidence, and adverse events. Escalate new neurological or cardiopulmonary symptoms, marked swelling, deformity, infection signs, neurovascular change, unexplained deterioration, or inability to progress through the appropriate local clinical pathway. Do not promise a fixed recovery time or guaranteed outcome.",
+          "This educational draft cannot replace assessment, diagnosis, medication review, imaging decisions, operative instructions, or emergency care. Qualified clinicians should adapt recommendations to the person, procedure, comorbidities, goals, and local guidance. Clinicians and editors should verify the final copy and referral information before publication.",
+          "Use shared decisions to define what improvement means and which trade-offs are acceptable. A person may prioritise sleep, independent transfers, work tolerance, confidence, or social participation over a normalised test. Explain how to scale an activity down and back up, and arrange review when the response is unexpectedly painful, fatiguing, or unsafe.",
+          "The article’s clinical examples are deliberately illustrative rather than a protocol. Exercise choice, supervision, dosage, aids, medication, referral, and precautions depend on examination and diagnosis. Preserve a clear distinction between education and treatment advice, and ensure the final published version carries the required professional review and local safety information. Reassessment is preferable to escalating a generic programme when symptoms, function, or safety concerns do not follow the expected pattern."
+        ]
+      }
+    ],
+    "takeaways": [
+      "Exclude fracture, syndesmotic injury, dislocation, tendon or neurovascular injury, and other important diagnoses when indicated.",
+      "Use support plus progressive weight bearing and structured exercise, adapting to severity and impairments.",
+      "Use PAASS domains—pain, impairments, perception, sensorimotor control, and sport function—to inform return decisions.",
+      "Continue prevention work and reassess persistent pain, swelling, instability, or inability to progress."
+    ],
+    "references": [
+      {
+        "title": "Lateral Ankle Ligament Sprains: Clinical Practice Guideline Revision 2021",
+        "url": "https://www.jospt.org/doi/10.2519/jospt.2021.0302"
+      },
+      {
+        "title": "Return to sport decisions after an acute lateral ankle sprain injury: PAASS framework",
+        "url": "https://bjsm.bmj.com/content/55/22/1270"
+      }
+    ],
+    "relatedArticleSlugs": [
+      "shoulder-pain-assessment-rehabilitation",
+      "stroke-rehabilitation-functional-goals",
+      "balance-training-fall-prevention",
+      "acl-rehabilitation-clinical-considerations"
+    ],
+    "relatedProgrammeSlugs": [
+      "certificate-in-musculoskeletal-assessment"
+    ]
+  },
+  {
+    "id": "article-10",
+    "slug": "acl-rehabilitation-clinical-considerations",
+    "title": "ACL Rehabilitation Stages and Clinical Considerations",
+    "excerpt": "A criterion-based overview of ACL rehabilitation, from prehabilitation and early recovery to sport-specific preparation and return to performance.",
+    "category": "Sports rehabilitation",
+    "status": "draft",
+    "seoTitle": "ACL Rehabilitation Stages and Clinical Considerations | Clinova",
+    "seoDescription": "Understand ACL rehabilitation stages, objective and psychological criteria, concomitant injury precautions, and why time alone cannot clear sport.",
+    "sections": [
+      {
+        "heading": "Rehabilitation begins with a clinical map",
+        "paragraphs": [
+          "This educational draft is not individualized medical advice. Assessment and rehabilitation should be adapted by an appropriately qualified clinician, with local pathways, comorbidities, patient goals, and informed preferences considered. Clinical and editorial review is required before publication. ACL rehabilitation differs after non-operative management, reconstruction, repair, or combined ligament, meniscal, cartilage, or fracture procedures. The surgeon’s restrictions and graft or repair details matter. Early assessment considers swelling, range—especially extension—quadriceps activation, gait, pain, effusion, strength, confidence, goals, and the demands of work or sport. Recurrent giving-way, locking, infection signs, calf symptoms, or concerning postoperative changes need prompt review rather than exercise experimentation.",
+          "Prehabilitation may improve modifiable impairments and prepare the person for surgery or a rehabilitation decision, but it is not appropriate to delay urgent care for an unstable or complex knee. Discuss expectations honestly: return to some activity, previous level, and competitive performance are different outcomes. Psychological readiness, access to supervised rehabilitation, sleep, workload, and social support influence the pathway."
+        ]
+      },
+      {
+        "heading": "Stage one: restore the foundations",
+        "paragraphs": [
+          "The early phase generally prioritises controlling effusion and pain, regaining full extension and usable flexion, restoring quadriceps activation, normalising safe gait, and maintaining general conditioning within restrictions. Exercise selection and open- or closed-chain loading should follow the procedure and clinician’s assessment; “protective” does not mean avoiding all muscle work. Patellar mobility, hip and trunk capacity, and cardiovascular alternatives may be relevant when safe.",
+          "Progress when objective findings and movement quality support it, not because a calendar says the knee is ready. Persistent effusion, loss of extension, poor quadriceps control, or compensatory gait should prompt adjustment. Concomitant meniscal or cartilage procedures can impose different loading or range restrictions. Coordinate surgeon, physiotherapist, and other clinicians; do not generalise an isolated ACL reconstruction protocol to every knee injury."
+        ]
+      },
+      {
+        "heading": "Stage two: strength, control, and capacity",
+        "paragraphs": [
+          "The middle phase builds progressive quadriceps and hamstring strength, single-leg control, lower-limb alignment, trunk and hip capacity, and aerobic fitness. Motor-control drills can progress from predictable balance tasks to deceleration, landing, and change-of-direction demands. Strength and motor control complement each other; one cannot reliably replace the other. Use repeatable measures such as range, effusion, dynamometry or strength testing, hop performance, movement quality, and patient-reported function when available.",
+          "Load should be dosed around symptom response and the person’s current capacity. A temporary flare is information, not proof of graft failure, but recurring swelling or instability requires reassessment. Avoid chasing symmetry alone: limb symmetry can look acceptable when both limbs are deconditioned. Compare absolute performance, movement quality, task tolerance, and the sport’s actual demands. Continue rehabilitation for general health even when sport is not the chosen goal."
+        ]
+      },
+      {
+        "heading": "Stage three: running, sport preparation, and return to performance",
+        "paragraphs": [
+          "Running and pivoting are milestones that require more than elapsed time. Aspetar recommendations describe criteria such as near-full flexion, full extension, minimal effusion, adequate quadriceps capacity, and tolerance of pain-free preparatory tasks for running; sport clearance adds stability, subjective function, psychological readiness, strength, jump and running mechanics, and completion of sports-specific training. These criteria support clinical reasoning but are not a guarantee and may not be fully validated for every population.",
+          "A transition from clinic clearance to training and then competition is essential. Gradually expose the athlete to speed, fatigue, contact, reactive decisions, volume, and positional demands, while monitoring the knee and confidence. The 2016 consensus guideline describes criterion-based phases and recommends a battery of strength, hop, movement-quality, and psychological tests; it also reports rehabilitation commonly continuing for 9–12 months. That timeframe is context, not an automatic clearance date."
+        ]
+      },
+      {
+        "heading": "Risk, uncertainty, and shared decisions",
+        "paragraphs": [
+          "Return-to-sport decisions balance reinjury risk, knee health, performance goals, age, sport, season pressure, resources, and the person’s values. Fear of reinjury may reduce participation and should be addressed with graded exposure, education, and psychological support rather than dismissed. A failed test should guide targeted rehabilitation, not become a label. Conversely, passing a battery does not eliminate risk; testing conditions may not reproduce competition.",
+          "Continue prevention-focused strength, landing, and change-of-direction work after return. Reassess after setbacks, new swelling, instability, or changes in training load. Explain uncertainty and document who is responsible for progression, what restrictions apply, and what symptoms trigger review. Clinical decisions should be shared across the person, rehabilitation team, surgeon when involved, and coach or employer where appropriate."
+        ]
+      },
+      {
+        "heading": "Clinical limitations and communication",
+        "paragraphs": [
+          "Evidence and recommendations do not remove the need for examination. Studies often group different presentations, use different doses, and measure outcomes over different periods, so an intervention that helps one person may be unsuitable for another. Explain uncertainty clearly and reconsider the working diagnosis when the pattern changes or expected progress does not occur.",
+          "Context can determine whether a plan is feasible. Caring responsibilities, insecure work, limited equipment, language barriers, fatigue, low confidence, transport, and cost may alter delivery. Record consent, goals, baseline measures, instructions, and safety-netting. Adapt the setting and support rather than interpreting every missed session as poor motivation.",
+          "Review should include symptoms, objective performance, participation, confidence, and adverse events. Escalate new neurological or cardiopulmonary symptoms, marked swelling, deformity, infection signs, neurovascular change, unexplained deterioration, or inability to progress through the appropriate local clinical pathway. Do not promise a fixed recovery time or guaranteed outcome.",
+          "This educational draft cannot replace assessment, diagnosis, medication review, imaging decisions, operative instructions, or emergency care. Qualified clinicians should adapt recommendations to the person, procedure, comorbidities, goals, and local guidance. Clinicians and editors should verify the final copy and referral information before publication."
+        ]
+      }
+    ],
+    "takeaways": [
+      "Clarify the procedure, concomitant injuries, restrictions, goals, and baseline impairments before choosing a pathway.",
+      "Use criterion-based progression: effusion, range, strength, movement quality, function, and psychological readiness matter.",
+      "Running and sport require graded, sport-specific exposure; time since surgery is necessary but not sufficient.",
+      "Use shared decisions and continued prevention work; no test battery guarantees a safe outcome."
+    ],
+    "references": [
+      {
+        "title": "Aspetar clinical practice guideline on rehabilitation after anterior cruciate ligament reconstruction",
+        "url": "https://bjsm.bmj.com/content/57/9/500"
+      },
+      {
+        "title": "Evidence-based clinical practice update: practice guidelines for ACL rehabilitation",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27539507/"
+      }
+    ],
+    "relatedArticleSlugs": [
+      "shoulder-pain-assessment-rehabilitation",
+      "stroke-rehabilitation-functional-goals",
+      "balance-training-fall-prevention",
+      "ankle-sprain-return-to-activity"
+    ],
+    "relatedProgrammeSlugs": [
+      "certificate-in-musculoskeletal-assessment"
+    ]
+  }
+]

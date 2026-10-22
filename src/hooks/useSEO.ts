@@ -8,9 +8,10 @@ interface SEOProps {
   canonical?: string;
   ogImage?: string;
   structuredData?: object;
+  noindex?: boolean;
 }
 
-export function useSEO({ title, description, canonical, ogImage, structuredData }: SEOProps) {
+export function useSEO({ title, description, canonical, ogImage, structuredData, noindex = false }: SEOProps) {
   const location = useLocation();
 
   useEffect(() => {
@@ -31,14 +32,17 @@ export function useSEO({ title, description, canonical, ogImage, structuredData 
     ensureMeta('meta[property="og:title"]', 'property', 'og:title').content = fullTitle;
     ensureMeta('meta[property="og:description"]', 'property', 'og:description').content = description;
     ensureMeta('meta[property="og:type"]', 'property', 'og:type').content = 'website';
-    ensureMeta('meta[property="og:url"]', 'property', 'og:url').content =
-      siteOrigin ? `${siteOrigin}${canonical ?? location.pathname}` : '';
-    const privateRoute = /^\/(admin|apply|application)(\/|$)/.test(location.pathname);
+    const publicPath = canonical ?? location.pathname.replace(/^\/courses(?=\/|$)/, '/programmes').replace(/^\/(blog|announcements)(?=\/|$)/, '/resources');
+    const privateRoute = noindex || /^\/(admin|apply|application|sign-in|sign-up|forgot-password|reset-password|student)(\/|$)/.test(location.pathname);
+    document.head.querySelector('meta[property="og:url"]')?.remove();
+    if (siteOrigin && !privateRoute) ensureMeta('meta[property="og:url"]', 'property', 'og:url').content = `${siteOrigin}${publicPath}`;
     ensureMeta('meta[name="robots"]', 'name', 'robots').content =
       !siteOrigin || privateRoute ? 'noindex, nofollow' : 'index, follow';
     document.head.querySelector('meta[property="og:image"]')?.remove();
+    document.head.querySelector('meta[name="twitter:image"]')?.remove();
     if (ogImage) {
       ensureMeta('meta[property="og:image"]', 'property', 'og:image').content = ogImage;
+      ensureMeta('meta[name="twitter:image"]', 'name', 'twitter:image').content = ogImage;
     }
     ensureMeta('meta[name="twitter:title"]', 'name', 'twitter:title').content = fullTitle;
     ensureMeta('meta[name="twitter:description"]', 'name', 'twitter:description').content = description;
@@ -49,7 +53,7 @@ export function useSEO({ title, description, canonical, ogImage, structuredData 
       link.setAttribute('rel', 'canonical');
       document.head.appendChild(link);
     }
-    if (siteOrigin && !privateRoute) link.href = `${siteOrigin}${canonical ?? location.pathname}`;
+    if (siteOrigin && !privateRoute) link.href = `${siteOrigin}${publicPath}`;
     else link.remove();
 
     const existingScript = document.head.querySelector('#structured-data');
@@ -61,5 +65,5 @@ export function useSEO({ title, description, canonical, ogImage, structuredData 
       script.textContent = JSON.stringify(structuredData);
       document.head.appendChild(script);
     }
-  }, [title, description, canonical, ogImage, structuredData, location.pathname]);
+  }, [title, description, canonical, ogImage, structuredData, noindex, location.pathname]);
 }

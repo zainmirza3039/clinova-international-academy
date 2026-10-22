@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { academyPublicAddress } from '@/data/publicContact';
 
 const academyLinks = [
   { label: 'About', to: '/about' },
@@ -11,6 +12,7 @@ const academyLinks = [
 const professionalLinks = [
   { label: 'Training Partners', to: '/training-partners' },
   { label: 'Resources', to: '/resources' },
+  { label: 'Study Tools', to: '/learning-resources' },
   { label: 'Certificate Verification', to: '/verify' },
   { label: 'FAQs', to: '/faqs' },
   { label: 'Events', to: '/events' },
@@ -39,12 +41,12 @@ export default function Footer() {
               <img src="/clinova-logo-white.svg" alt="Clinova International Academy" className="w-[200px] h-auto" />
             </Link>
             <p className="text-sm text-navy-100/60 leading-[1.65] mb-6 max-w-md">
-              Advancing healthcare through professional education. Online healthcare education, CPD and professional
-              development for healthcare professionals worldwide.
+              Explore proposed healthcare learning pathways and original educational drafts.
+              Courses and learning services await confirmation; no enrolment is available here.
             </p>
             <div className="space-y-2.5">
-              <p className="text-sm text-navy-100/80">Contact details awaiting academy confirmation.</p>
-
+              <address className="not-italic text-sm text-navy-100/80">{academyPublicAddress}</address>
+              <p className="text-xs text-navy-100/80">Phone, email and visiting arrangements await confirmation.</p>
             </div>
           </div>
 

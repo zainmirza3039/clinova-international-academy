@@ -1,5 +1,7 @@
 # Clinova frontend delivery
 
+> Follow-up: see [the current audit recheck and guarded student access handoff](docs/CLINOVA-AUDIT-RECHECK.md). This file records the earlier PR #3 increment; its auth and deployment-status statements are historical, not the current live deployment assessment.
+
 This is a frontend-only, preview-safe increment. It is not a completed production full-stack application.
 
 ## Source and ownership

@@ -1,13 +1,10 @@
+import educationalArticleCards from './articleIndex.json';
 import type { NewsItem, FAQ, Certificate } from './types';
 
 /** Editorial placeholders only; no learner testimonials are published here. */
 export const testimonials: never[] = [];
 
-export const newsItems: NewsItem[] = [
-  { id: 'draft-1', slug: 'draft-cpd-in-healthcare-practice', category: 'Draft editorial', date: 'Draft — publication date awaiting academy confirmation', title: 'DRAFT: The role of CPD in healthcare practice', excerpt: 'Editorial concept only. This article has not been published or endorsed by the academy; content and sources require review before publication.', image: 'https://images.pexels.com/photos/5407204/pexels-photo-5407204.jpeg?auto=compress&cs=tinysrgb&h=650&w=940' },
-  { id: 'draft-2', slug: 'draft-evidence-informed-pain-management', category: 'Draft editorial', date: 'Draft — publication date awaiting academy confirmation', title: 'DRAFT: Evidence-informed approaches to pain management', excerpt: 'Editorial concept only. Any clinical claims, references and publication status require academy review before use.', image: 'https://images.pexels.com/photos/4506169/pexels-photo-4506169.jpeg?auto=compress&cs=tinysrgb&h=650&w=940' },
-  { id: 'draft-3', slug: 'draft-clinical-communication', category: 'Draft editorial', date: 'Draft — publication date awaiting academy confirmation', title: 'DRAFT: Communication skills in clinical practice', excerpt: 'Editorial concept only. This is not an academy announcement and is not yet approved for publication.', image: 'https://images.pexels.com/photos/5934556/pexels-photo-5934556.jpeg?auto=compress&cs=tinysrgb&h=650&w=940' },
-];
+export const newsItems: NewsItem[] = educationalArticleCards;
 
 export const generalFAQs: FAQ[] = [
   { id: 'f1', question: 'Are the listed programmes accredited?', answer: 'Accreditation status is not confirmed in this draft catalogue. Please contact the academy for current confirmation before relying on any programme for professional or regulatory requirements.' },
@@ -20,4 +17,4 @@ export const generalFAQs: FAQ[] = [
 
 /** Empty until a connected, academy-authorised verification service exists. */
 export const certificateDatabase: Certificate[] = [];
-export const newsCategories = ['Draft editorial'];
+export const newsCategories = [...new Set(newsItems.map(item => item.category))];

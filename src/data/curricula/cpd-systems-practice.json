@@ -1,0 +1,458 @@
+[
+  {
+    "courseSlug": "clinical-communication-skills",
+    "status": "draft",
+    "reviewNotice": "Proposed professional-learning draft only. Content, scope, accessibility, clinical accuracy and any future delivery or recognition arrangements require qualified clinical and academy review. It is not medical advice, does not enable enrolment, and does not establish competence, licensure or local authorisation.",
+    "outcomes": [
+      "Use person-centred listening, accessible information and teach-back.",
+      "Explain options, uncertainty, consent and review without coercion.",
+      "Structure handovers and records around facts, ownership, urgency and preferences.",
+      "Recognise barriers, distress and safeguarding concerns and escalate appropriately."
+    ],
+    "intendedAudience": [
+      "Regulated health professionals, support workers and supervised learners.",
+      "Teams reviewing person-centred communication and accessibility."
+    ],
+    "prerequisites": [
+      "Relevant health or care foundation and access to local consent, safeguarding and information-governance policies.",
+      "Qualified supervision and local scope remain prerequisites for real interaction."
+    ],
+    "modules": [
+      {
+        "title": "Foundations of safe communication",
+        "description": "Set purpose, listen and support access.",
+        "lessons": [
+          {
+            "title": "Prepare the conversation",
+            "description": "Set purpose, priorities and communication access.",
+            "text": "Begin by asking what the person wants from the encounter, what they already understand and whether there are immediate concerns. Introduce your role, confirm identity using local requirements and agree an agenda. Ask about hearing, vision, language, cognition, literacy, preferred name and need for an interpreter or advocate. Check privacy and whether someone else should be present. Use plain language, short sections and accessible written or visual support. Observe hesitation or distress and pause to explore it. Record communication needs so they are not repeatedly rediscovered. Never infer capacity, consent or agreement from silence, nodding or fluent speech; check understanding and choice respectfully. A fictional outpatient team finds a noisy waiting area disrupts the first explanation. It asks which format and setting would help, records the adjustment, and reviews whether the next conversation is easier to follow."
+          },
+          {
+            "title": "Listen and check understanding",
+            "description": "Use listening and teach-back to reveal goals and uncertainty.",
+            "text": "Active listening reduces risk because missed information can alter assessment, consent and follow-up. Start open, then clarify timing, impact, concerns and priorities. Reflect back the main points without premature reassurance. Acknowledge fear or frustration without promising an outcome. NICE shared-decision guidance recommends manageable information, chunk-and-check and teach-back; ask the person to explain the plan in their own words, not to pass a test. If their explanation differs, repair the communication rather than blame. Use interpreters appropriately and speak to the person. Summarise actions, warning signs and contacts, invite correction and document material preferences. Escalate unanswered safety questions. A fictional person repeats a plan and reveals unclear timing. The practitioner thanks them, revises the sequence, and asks what would make it workable at home before documenting the next contact. and records the agreed meaning clearly."
+          }
+        ],
+        "reflectiveActivity": "Write a fictional dialogue where teach-back repairs a misunderstood follow-up plan."
+      },
+      {
+        "title": "Shared decisions and handover",
+        "description": "Explain options and transfer information safely.",
+        "lessons": [
+          {
+            "title": "Explain options and consent",
+            "description": "Discuss choices, uncertainty and review without coercion.",
+            "text": "Shared decision making is a process, not a form or persuasion exercise. Explain the purpose of each test, treatment or care option, then discuss relevant benefits, risks, burdens, consequences and no-change options in the person’s context. Separate known evidence from uncertainty and allow time for questions. NICE NG197 advises agreeing what matters, using manageable chunks, checking understanding and recording what influenced the decision. Consent must be voluntary, informed and ongoing within the applicable framework; disagreement is not non-compliance. If capacity, safeguarding or communication concerns complicate the discussion, follow local policy and seek expertise. Document preferences, alternatives, review point and information shared. This draft cannot determine legal validity. A fictional person values independence more than speed and is uncertain about two options. The practitioner explores that priority, explains uncertainty, and schedules a review so the decision can be revisited."
+          },
+          {
+            "title": "Handover for continuity",
+            "description": "Make communication across settings concise, accurate and actionable.",
+            "text": "A handover should convey the situation, relevant background, current findings, actions, uncertainty and next owner. Use a locally approved structure only if your organisation supports it; a mnemonic cannot guarantee completeness. State the person’s priorities, relevant precautions, change from baseline and exact request or urgency. Distinguish observed facts from interpretation and do not copy unverified assumptions. Read back critical information when policy requires it, especially during interruptions or telephone calls. The receiving professional should acknowledge ownership and clarify next steps. Documentation must respect privacy, access controls and retention rules. Name missing or contradictory information and escalate rather than fill gaps. No universal script replaces judgement or local records policy. A fictional handover identifies a new concern, last confirmed observation, unanswered question and responsible colleague. The receiver reads back the request, notices a missing time detail, and agrees where the update belongs."
+          }
+        ],
+        "reflectiveActivity": "Draft a fictional handover with facts, uncertainty, urgency, ownership and one question."
+      },
+      {
+        "title": "Repair and inclusion",
+        "description": "Respond to distress and communicate across difference.",
+        "lessons": [
+          {
+            "title": "Repair difficult conversations",
+            "description": "Respond to distress, disagreement and breakdown with curiosity and boundaries.",
+            "text": "When a conversation becomes difficult, slow down and name what you notice, such as worry or frustration. Ask what needs clarification. Do not argue about intent; acknowledge impact and correct factual errors. If an apology is appropriate, make it specific without speculating about blame or promising an outcome outside your control. Explain the next safe step, responsible person and update route under local policy. Aggression, safeguarding concerns or deterioration require the organisation’s escalation process, not merely communication technique. Teams can use supervision and psychologically safe feedback. Record relevant facts and actions, not pejorative labels. Privacy applies when discussing incidents or complaints. Qualified local leadership must guide disclosure, complaints and legal questions. In a fictional complaint, a staff member reflects concern instead of defending the service. They correct one factual error, name the follow-up route, and ask a senior colleague to review disclosure plans."
+          },
+          {
+            "title": "Communicate across difference",
+            "description": "Adapt communication to disability, culture, trauma, language and power.",
+            "text": "Equitable communication asks what makes participation possible. Offer interpreters, accessible formats, communication aids or extra processing time through approved routes. Ask permission before sensitive topics and avoid stereotypes. Trauma-aware practice offers choice, explains what will happen and avoids unnecessary repetition while still gathering safety information. Check whether family involvement is wanted and appropriate; do not let a companion speak over the person by default. Digital or telephone encounters need explicit privacy, identity and understanding checks. Document adjustments proportionately so future staff can act on them. If an adjustment is unavailable, seek help rather than proceeding with a high-stakes discussion the person cannot access. Meaningful participation is more than delivering words. A fictional service learns its reminder is inaccessible. With permission, it arranges an approved format, checks privacy with the chosen supporter, and asks the person to describe the next step."
+          }
+        ],
+        "reflectiveActivity": "Plan an accessible fictional conversation, interpreter arrangement, privacy check and teach-back method."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is this draft open for enrolment or does it include CPD hours?",
+        "answer": "No. It is a proposed outline only. No delivery, hours, fees, dates, enrolment, assessment, tracking, recognition or certificate arrangements are confirmed."
+      },
+      {
+        "question": "Does it establish competence or authorise practice?",
+        "answer": "No. It is educational reading and reflection, not a competency assessment, licence, clearance or permission to act. Follow local scope, supervision, policy and escalation requirements."
+      },
+      {
+        "question": "Can I apply the examples directly to a patient or service?",
+        "answer": "No. Examples are fictional and illustrative. Real action requires qualified review, appropriate governance, confidentiality safeguards and local professional requirements."
+      },
+      {
+        "question": "Who reviewed the content?",
+        "answer": "Qualified clinical, subject-matter, accessibility and academy review is proposed but not claimed. Sources are provided for later verification and local adaptation."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "A Structured Approach to Physiotherapy Assessment",
+        "slug": "physiotherapy-assessment-structured-approach"
+      },
+      {
+        "title": "Evidence-Based Practice in Physiotherapy",
+        "slug": "evidence-based-practice-physiotherapy"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "NICE",
+        "title": "Shared decision making (NG197) recommendations",
+        "url": "https://www.nice.org.uk/guidance/ng197/chapter/recommendations",
+        "note": "Opened source: agenda-setting, chunk-and-check, teach-back, risks, preferences, review and recording decisions."
+      },
+      {
+        "organisation": "HCPC",
+        "title": "Standards of conduct, performance and ethics",
+        "url": "https://www.hcpc-uk.org/standards/standards-of-conduct-performance-and-ethics/",
+        "note": "Opened source for later qualified review of communication, consent, confidentiality, partnership and scope."
+      }
+    ]
+  },
+  {
+    "courseSlug": "patient-safety-in-clinical-practice",
+    "status": "draft",
+    "reviewNotice": "Proposed professional-learning draft only. Content, scope, accessibility, clinical accuracy and any future delivery or recognition arrangements require qualified clinical and academy review. It is not medical advice, does not enable enrolment, and does not establish competence, licensure or local authorisation.",
+    "outcomes": [
+      "Describe safety as a systems and human-factors discipline.",
+      "Recognise risk, escalate and document factual information through local routes.",
+      "Explain PSIRF-informed learning, compassionate engagement and proportionate response.",
+      "Propose monitored, governed safety actions within scope and confidentiality."
+    ],
+    "intendedAudience": [
+      "Regulated health professionals, support workers and supervised learners.",
+      "Quality, governance and education staff."
+    ],
+    "prerequisites": [
+      "Relevant foundation and access to local reporting, safeguarding, candour and governance policies.",
+      "This draft does not provide legal advice or determine thresholds."
+    ],
+    "modules": [
+      {
+        "title": "Systems and human factors",
+        "description": "Understand work conditions and error traps.",
+        "lessons": [
+          {
+            "title": "Safety as a systems property",
+            "description": "Use systems thinking rather than individual blame.",
+            "text": "Patient safety incidents are shaped by interactions among people, tasks, technology, environments and organisational decisions. WHO’s curriculum treats safety as a discipline including systems thinking, teamwork, communication and learning. Ask what happened, what normally happens and which pressures or safeguards were present, including workload, interruptions, equipment, information design, handoffs and competing goals. Systems thinking does not remove accountability; it identifies controls that can reduce recurrence. Seek perspectives of people doing the work and separate immediate protective action from later learning. Do not infer causation from hindsight or use this draft to decide blame, negligence or legal duties. Real concerns belong in local reporting, governance and escalation channels. A fictional unit maps interruptions, staffing changes, handoff gaps and equipment access before judging anyone. The map supports a governed discussion about which barrier to reduce first and what evidence would show safer work."
+          },
+          {
+            "title": "Human factors in daily work",
+            "description": "Anticipate predictable error traps in work design.",
+            "text": "Human factors examines how capabilities and limitations meet the design of work. Attention narrows under stress, memory is vulnerable to interruptions, and similar packaging or ambiguous interfaces invite slips. Before adding a checklist or alert, ask what task it supports and what new work it creates. Observe workflow, physical layout, team roles and access to reliable information. Use standardisation or independent checks only when locally assessed and maintained; workarounds may add risk. Ask staff what makes the safe action difficult. Do not diagnose an individual with human-factors language. Any change affecting care requires governance, approved evaluation and supervision rather than informal experimentation. In a fictional handoff, staff find an interrupted screen hides the ownership field. They propose supervised design review, invite users to test it, and check whether the change creates another omission."
+          }
+        ],
+        "reflectiveActivity": "Map a fictional medication handoff across task, technology, team, environment and organisation."
+      },
+      {
+        "title": "Response and involvement",
+        "description": "Respond, report and engage affected people.",
+        "lessons": [
+          {
+            "title": "Respond, escalate and report",
+            "description": "Take proportionate action through local routes.",
+            "text": "When harm or potential harm is identified, attend immediate needs and obtain qualified help within scope. Preserve relevant information without altering records and tell the responsible professional using the local route. Reporting forms, timeframes and duties vary, so do not invent a universal threshold. Describe what was observed, when, where, who was affected, actions taken and uncertainty; avoid assigning cause in the initial account. NHS PSIRF promotes proportionate, data-informed responses, compassionate engagement and system-based learning. Follow local policy for communication with patients, families and staff. Confidentiality, information governance and safeguarding still apply. A learning draft cannot determine reporting obligations. In a fictional scenario, one person supports immediate needs, another records observable facts and contacts the designated route, while a supervisor confirms what may be shared as uncertainty remains. while preserving a factual timeline for review."
+          },
+          {
+            "title": "Involve people after incidents",
+            "description": "Engage affected people and staff compassionately.",
+            "text": "PSIRF describes compassionate engagement with patients, families and staff, including meaningful involvement when people wish to participate. Listen to questions, explain what is known and unknown, and signpost support or advocacy. Do not speculate, rehearse a defence or promise an investigation outcome. Staff may need psychological support and protected time. Explore what made sense at the time, adaptations required and system conditions influencing actions. Distinguish a patient explanation, governance review, complaint response and HR process; they have different purposes. Seek senior help for disclosure, safeguarding, media or legal questions. The aim is respectful learning, not a convenient narrative. A fictional family asks why an event occurred while staff recollections differ. The facilitator acknowledges questions, separates known facts from investigation work, offers support, and records what would make learning respectful. so their perspective remains part of the review."
+          }
+        ],
+        "reflectiveActivity": "Draft fictional opening statements for an affected family and staff; mark senior-support needs."
+      },
+      {
+        "title": "Learning and speaking up",
+        "description": "Turn learning into action and concerns into escalation.",
+        "lessons": [
+          {
+            "title": "From learning to safer action",
+            "description": "Translate findings into owned, monitored improvement.",
+            "text": "A report is not an improvement. Agree actions linked to contributory factors, with an owner, governance route, intended effect and review method. Prefer stronger controls over reminders relying on perfect memory. Test whether an action works during real workload and whether it creates inequity or new hazards. Use process, outcome and balancing information where appropriate. Close the loop with affected people and teams while respecting confidentiality. Urgent risk should be escalated through governance rather than waiting for a project. PSIRF places response within broader improvement and oversight; it does not prescribe one tool for every event. Do not claim prevention from a small observation. A fictional review finds a reminder failed during peak workload. The team examines workflow, assigns an owner, chooses a monitored control, and agrees what result or burden would require governance review."
+          },
+          {
+            "title": "Speak up safely",
+            "description": "Make concerns specific, discussable and appropriately escalated.",
+            "text": "A useful concern states the observed risk, why it matters, the immediate request and the next route if unresolved. Use a local speaking-up tool when available, but act urgently when delay is unsafe. Leaders can model curiosity by asking what they missed and thanking people who identify hazards. Psychological safety does not mean avoiding accountability or suppressing legitimate concerns. Follow policy for whistleblowing, safeguarding, discrimination or retaliation. Offer distressed colleagues support and signpost formal help; do not counsel beyond competence. Document actions and decisions accurately. This draft cannot guarantee protection, resolve employment matters or replace a trained guardian, manager or regulator. In a fictional shift, a colleague raises a possible safety risk. The listener repeats the observed concern, asks for the immediate request, records the escalation route, and checks back without promising an outcome."
+          }
+        ],
+        "reflectiveActivity": "Write a fictional speaking-up exchange about delayed escalation and an unresolved next route."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is this draft open for enrolment or does it include CPD hours?",
+        "answer": "No. It is a proposed outline only. No delivery, hours, fees, dates, enrolment, assessment, tracking, recognition or certificate arrangements are confirmed."
+      },
+      {
+        "question": "Does it establish competence or authorise practice?",
+        "answer": "No. It is educational reading and reflection, not a competency assessment, licence, clearance or permission to act. Follow local scope, supervision, policy and escalation requirements."
+      },
+      {
+        "question": "Can I apply the examples directly to a patient or service?",
+        "answer": "No. Examples are fictional and illustrative. Real action requires qualified review, appropriate governance, confidentiality safeguards and local professional requirements."
+      },
+      {
+        "question": "Who reviewed the content?",
+        "answer": "Qualified clinical, subject-matter, accessibility and academy review is proposed but not claimed. Sources are provided for later verification and local adaptation."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Patient Safety: Red Flags and Referral",
+        "slug": "patient-safety-red-flags-referral"
+      },
+      {
+        "title": "Evidence-Based Practice in Physiotherapy",
+        "slug": "evidence-based-practice-physiotherapy"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "World Health Organization",
+        "title": "Patient safety curriculum guide: multi-professional edition",
+        "url": "https://www.who.int/publications/i/item/9789241501958",
+        "note": "Opened source: multi-professional systems, teamwork, communication and patient-safety learning topics."
+      },
+      {
+        "organisation": "NHS England",
+        "title": "Patient Safety Incident Response Framework",
+        "url": "https://www.england.nhs.uk/patient-safety/patient-safety-incident-response-framework/",
+        "note": "Opened source: compassionate engagement, system-based learning, proportionate response and oversight."
+      }
+    ]
+  },
+  {
+    "courseSlug": "infection-prevention-and-control",
+    "status": "draft",
+    "reviewNotice": "Proposed professional-learning draft only. Content, scope, accessibility, clinical accuracy and any future delivery or recognition arrangements require qualified clinical and academy review. It is not medical advice, does not enable enrolment, and does not establish competence, licensure or local authorisation.",
+    "outcomes": [
+      "Explain transmission-risk reasoning, standard precautions and local IPC policy.",
+      "Identify hand-hygiene and environmental hazards without treating this as procedural training.",
+      "Use supervised reasoning to pause, escalate and report uncertainty or exposure.",
+      "Distinguish awareness from aseptic, PPE, decontamination and clearance decisions."
+    ],
+    "intendedAudience": [
+      "Health and care professionals, support workers and supervised learners.",
+      "Teams orienting to local IPC governance and escalation."
+    ],
+    "prerequisites": [
+      "Relevant foundation, local IPC policy and supervised practical training where duties require it.",
+      "This draft does not authorise aseptic or PPE practice or work clearance."
+    ],
+    "modules": [
+      {
+        "title": "Risk and transmission",
+        "description": "Assess risk and layered controls.",
+        "lessons": [
+          {
+            "title": "Assess infection risk",
+            "description": "Connect precautions to task, person and environment.",
+            "text": "Infection prevention begins with risk assessment, not a memorised product list. Consider the task, likely contact with blood or body fluids, non-intact skin or mucous membranes, respiratory symptoms, environment, equipment and vulnerability. Standard precautions apply according to local policy and transmission-based measures may be added when indicated. The NHS NIPCM is evidence-based guidance for England; other jurisdictions have their own requirements. Identify uncertainty and consult the IPC team. This draft does not teach aseptic or PPE technique, certify clearance or replace supervised practical training. Do not infer that a precaution is unnecessary because no infection is known. Document and escalate hazards or exposure concerns through local routes. A fictional clinic task changes and may involve a different exposure pathway. The learner pauses, describes uncertainty to the IPC contact, and waits for approved direction rather than choosing from memory."
+          },
+          {
+            "title": "Reason about transmission",
+            "description": "Consider layered controls without oversimplifying routes.",
+            "text": "Ask how a microorganism could move in the task and which controls interrupt that pathway. Consider source control, hand hygiene, equipment cleaning, ventilation, spatial separation, appropriate PPE and administrative arrangements as a layered system. Contact, droplet and airborne labels prompt local assessment; they are not permission to choose a universal protocol. Distinguish a clean field from an aseptic procedure and seek trained supervision for invasive or high-risk work. Check current policy, product instructions and occupational-health advice because concentrations, contact times, reprocessing and isolation vary. If a control is unavailable, pause and escalate rather than improvise. Explain precautions respectfully to reduce stigma. This course cannot diagnose infection or make work-clearance decisions. In a fictional room change, the team identifies workflow points where contamination could move and the layers addressing each. When a control is unavailable, they pause and contact the IPC lead."
+          }
+        ],
+        "reflectiveActivity": "For a fictional outpatient task, identify pathways, layered controls and IPC questions."
+      },
+      {
+        "title": "Hand hygiene and environment",
+        "description": "Recognise hygiene, equipment and surface hazards.",
+        "lessons": [
+          {
+            "title": "Hand hygiene awareness",
+            "description": "Use WHO principles as a reasoning aid, not a procedural test.",
+            "text": "WHO guidelines review evidence and recommendations intended for any setting where care is delivered. The five moments help notice when hands may transmit organisms: before touching a person, before a clean or aseptic task, after body-fluid exposure risk, after touching a person and after surroundings. Product choice, technique, skin condition, jewellery, nails, sinks, supplies and local policy still matter. This lesson does not replace competency teaching or specify universal timing; follow approved instruction and manufacturer guidance. Observe whether workflow makes hand hygiene feasible. Dermatitis support should follow occupational-health advice. If supplies are missing or contaminated, stop and escalate. Avoid shaming individuals; investigate system barriers and provide respectful feedback. A fictional ward finds a dispenser difficult to reach during transition. The team records the environmental barrier, seeks approved supplies advice, and checks access without turning observation into a competency assessment."
+          },
+          {
+            "title": "Equipment and surfaces",
+            "description": "Recognise that cleaning and reprocessing depend on item and policy.",
+            "text": "Objects can transmit organisms when cleaning, disinfection, sterilisation, storage or waste segregation is poorly designed. Identify the item, intended use, contact with intact skin or sterile tissue, and responsible reprocessing role. Follow manufacturer instructions and local decontamination policy; do not assume a wipe suits every material or organism. Keep clean and used items separate, contain them as required and report damaged packaging, failed equipment or unclear ownership. Waste categories, sharps and spills are setting-specific; use approved procedures and trained help. This outline avoids universal chemical timings and control protocols. If exposure or injury may have occurred, obtain prompt occupational-health or clinical advice. Record hazards without unnecessary patient identifiers. A fictional service finds an item’s reprocessing status unclear. Staff quarantine the uncertainty locally, identify who can verify its instruction, and review the handoff so clean and used equipment are not confused."
+          }
+        ],
+        "reflectiveActivity": "Audit a fictional treatment room, marking risks, responsible roles and IPC-team questions."
+      },
+      {
+        "title": "Supervision and policy",
+        "description": "Escalate uncertainty and use local governance.",
+        "lessons": [
+          {
+            "title": "Escalate uncertainty and exposure",
+            "description": "Pause safely and avoid clearance claims.",
+            "text": "Safe IPC practice includes recognising when knowledge or authority is exceeded. Pause if supplies, isolation instructions, reprocessing status, PPE fit, ventilation or local advice are uncertain. Tell the IPC lead or responsible clinician what was observed, the planned task, who may be affected and any containment. If exposure, injury or symptoms are possible, follow occupational-health and urgent-care routes; do not self-clear or advise colleagues to return. Maintain privacy and share necessary information only. A risk assessment is not a diagnosis, and no symptoms do not establish no infection. Use hazard-reporting systems for recurring barriers. Supervision should include observation and confirmation of competence requirements. This draft cannot authorise aseptic work, PPE selection or decontamination. A fictional learner notices a possible exposure but cannot tell whether the event meets the local reporting threshold. They move away from improvisation, preserve the relevant facts, contact the designated supervisor, and record the question so the IPC response can address both immediate safety and later learning."
+          },
+          {
+            "title": "Use policy and audit",
+            "description": "Improve reliability through local documents and respectful feedback.",
+            "text": "Policies translate evidence into requirements for a particular service, population, building and equipment. Check version, scope, owner, exceptions and escalation contacts before acting. A small audit can ask whether a required opportunity occurred and whether staff had resources, but a percentage alone does not explain risk. Protect privacy and avoid identifying people in teaching materials. Share findings through IPC governance, invite staff explanation and distinguish knowledge gaps from supply, layout or workflow problems. Use specific, non-punitive feedback and verify whether changes persist. Do not invent thresholds, re-audit intervals or control measures. If local policy conflicts with a general resource, follow the authorised route while seeking clarification. Qualified IPC professionals must review education, audit design and changes. A fictional team compares observed hand-hygiene opportunities with its approved policy and asks whether the audit method reflects real workflow. It discusses findings without naming individuals, checks for access barriers, and agrees a governed feedback cycle rather than treating a percentage as proof of safe practice."
+          }
+        ],
+        "reflectiveActivity": "Review a fictional policy excerpt for scope, owner, contact and one audit question."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is this draft open for enrolment or does it include CPD hours?",
+        "answer": "No. It is a proposed outline only. No delivery, hours, fees, dates, enrolment, assessment, tracking, recognition or certificate arrangements are confirmed."
+      },
+      {
+        "question": "Does it establish competence or authorise practice?",
+        "answer": "No. It is educational reading and reflection, not a competency assessment, licence, clearance or permission to act. Follow local scope, supervision, policy and escalation requirements."
+      },
+      {
+        "question": "Can I apply the examples directly to a patient or service?",
+        "answer": "No. Examples are fictional and illustrative. Real action requires qualified review, appropriate governance, confidentiality safeguards and local professional requirements."
+      },
+      {
+        "question": "Who reviewed the content?",
+        "answer": "Qualified clinical, subject-matter, accessibility and academy review is proposed but not claimed. Sources are provided for later verification and local adaptation."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Patient Safety: Red Flags and Referral",
+        "slug": "patient-safety-red-flags-referral"
+      },
+      {
+        "title": "A Structured Approach to Physiotherapy Assessment",
+        "slug": "physiotherapy-assessment-structured-approach"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "NHS England",
+        "title": "National infection prevention and control manual for England",
+        "url": "https://www.england.nhs.uk/national-infection-prevention-and-control-manual-nipcm-for-england/",
+        "note": "Opened source: evidence-based manual, NHS adoption and cross-setting IPC principles."
+      },
+      {
+        "organisation": "World Health Organization",
+        "title": "WHO guidelines on hand hygiene in health care",
+        "url": "https://www.who.int/publications/i/item/9789241597906",
+        "note": "Opened source: evidence review and recommendations for hand hygiene across care settings."
+      }
+    ]
+  },
+  {
+    "courseSlug": "quality-improvement-in-healthcare",
+    "status": "draft",
+    "reviewNotice": "Proposed professional-learning draft only. Content, scope, accessibility, clinical accuracy and any future delivery or recognition arrangements require qualified clinical and academy review. It is not medical advice, does not enable enrolment, and does not establish competence, licensure or local authorisation.",
+    "outcomes": [
+      "Write a person-centred improvement aim with equity and governance boundaries.",
+      "Map a system and distinguish drivers, variation, constraints and hypotheses.",
+      "Select outcome, process and balancing measures with confidentiality safeguards.",
+      "Describe small approved PDSA-style tests before implementation or spread."
+    ],
+    "intendedAudience": [
+      "Regulated professionals, improvement practitioners and supervised learners.",
+      "Teams developing measured, equitable improvement vocabulary."
+    ],
+    "prerequisites": [
+      "Relevant foundation and access to local improvement, audit, research, information-governance and clinical-governance policies.",
+      "No project approval, data access or authority to change care is provided."
+    ],
+    "modules": [
+      {
+        "title": "Frame the problem",
+        "description": "Set an equitable aim and map current work.",
+        "lessons": [
+          {
+            "title": "Set an aim with equity",
+            "description": "Define a meaningful, bounded improvement purpose.",
+            "text": "An improvement aim states what should improve, for whom and in which setting; dates and boundaries belong to an authorised project. IHI begins with “What are we trying to accomplish?” Define a population and process carefully, considering access, disability, language, deprivation and other equity dimensions so an average gain does not widen gaps. Involve people receiving and delivering the service. Clarify what is outside scope and which governance route applies. Do not collect identifiable data for a learning exercise or assume a local result generalises. A qualified improvement lead should approve the aim, data plan, resources and safeguards before work begins. This draft offers a framing method, not project authorisation. A fictional service proposes to shorten follow-up waits but discovers that the average hides poorer access for people needing interpreters. The group narrows the aim, includes those affected in its definition of success, and asks the improvement lead to confirm boundaries before collecting information."
+          },
+          {
+            "title": "Map the current system",
+            "description": "Describe workflow, variation, stakeholders and constraints first.",
+            "text": "A process map traces the person’s need through handoffs, decisions, queues, rework and information dependencies. Walk the process with different roles and compare written policy with actual work without treating variation as misconduct. Identify delays, omissions and duplication, including what matters to patients and staff. A driver diagram can link an aim to primary drivers, secondary drivers and possible ideas, but it is a hypothesis rather than proof. Include staffing, digital access, equipment, language and competing priorities. Mark safety-critical points. Use fictional or aggregated examples in education; real data needs approved governance, lawful access and secure handling. Mapping should produce questions to test, not a blame list. A fictional team walks a referral process with people from reception, clinical work and records. It finds a queue created by an unclear handoff, marks where language access can be lost, and turns those observations into questions for an approved review rather than assigning fault."
+          }
+        ],
+        "reflectiveActivity": "Create a fictional follow-up process map with need, handoffs, equity risk and validation question."
+      },
+      {
+        "title": "Measure and interpret",
+        "description": "Choose measures and understand variation.",
+        "lessons": [
+          {
+            "title": "Choose useful measures",
+            "description": "Define outcome, process and balancing measures with safeguards.",
+            "text": "A measure is useful when its definition, numerator, denominator, population, timing and source are clear enough for consistent interpretation. Outcomes describe results people experience; process measures show whether a step occurred; balancing measures look for harm, workload, delay or inequity elsewhere. IHI’s Model for Improvement includes establishing measures alongside aims and change selection. Use the smallest defensible collection, protect confidentiality and avoid tiny counts that identify someone. A run chart may show shifts, but variation can reflect seasonality, case mix or recording changes. Do not claim causation from before-and-after comparison alone. Agree who reviews data and what action follows. Governance and information-governance leads must approve real data access and retention. A fictional improvement group defines outcome, process and balancing measures before collecting data. It tests each definition, removes an unnecessary field, and asks governance colleagues to confirm the dataset is safe."
+          },
+          {
+            "title": "Interpret variation honestly",
+            "description": "Distinguish signal, noise, context and unintended effects.",
+            "text": "Ask whether a change is meaningful, reproducible and safe. Plot data in sequence where appropriate, annotate staffing or technology changes and invite frontline interpretation. A single excellent week may be noise; an average may hide deterioration for a subgroup. Stratify only when lawful, useful and sufficiently protected, avoiding deficit narratives. Review balancing measures with the primary outcome: faster processing is not improvement if errors, inequity or staff burden rise. When results worsen, investigate the system and hypothesis rather than an individual. Share uncertainty and define what would prompt stopping, adapting or escalating. This is not statistical certification; qualified improvement and clinical governance review is required before care decisions. A fictional run chart improves after a staffing change, but one subgroup reports longer waits. The team annotates both findings and withholds a success claim until balancing effects are reviewed."
+          }
+        ],
+        "reflectiveActivity": "Examine a fictional run chart with faster referrals but incomplete information."
+      },
+      {
+        "title": "Test and spread",
+        "description": "Use approved tests and responsible implementation.",
+        "lessons": [
+          {
+            "title": "Test a small approved change",
+            "description": "Use PDSA thinking while protecting governance and people.",
+            "text": "IHI describes Plan-Do-Study-Act as a way to test and adapt changes, linked to three fundamental questions. A plan names the prediction, small context, change, measures and safety monitoring. Do records what happened, including deviations and workload. Study compares observations with prediction and unintended effects. Act decides whether to adapt, abandon or proceed through an authorised route. Small does not mean risk-free: changes to assessment, treatment, escalation or access require approval and supervision, and must not be treated as experimental care by an independent learner. Use simulated or low-risk workflow tests where approved. Document stop criteria. Never bypass consent, confidentiality, IPC or governance for a cleaner test. A fictional team predicts an appointment prompt will reduce missing information without increasing burden. In approved simulation, it records deviations and stop criteria before taking results to the improvement forum."
+          },
+          {
+            "title": "Implement and spread responsibly",
+            "description": "Treat change ideas as hypotheses requiring ownership and review.",
+            "text": "A change idea is not an instruction to deploy everywhere. Consider standard work, reminders, team roles, digital design or scheduling, then ask which mechanism should alter the measure and for whom it may fail. Implementation needs ownership, training, resources, feedback and sustainability planning. Before spread, check whether context, population, staffing, technology or risk differs from the original test. Monitor outcome, process reliability and balancing measures after adoption. Include affected people and document barriers rather than labelling them resistance. Local governance should decide whether work is improvement, audit, research or another category and which approvals apply. Stop and escalate unexpected harm or inequity. This course cannot confer authority, approve a project, promise benefit or replace clinical review. A fictional service sees promise in one setting but different staffing elsewhere. Before spread, the team consults affected people, checks balancing information, names an owner, and treats the second context as a new hypothesis."
+          }
+        ],
+        "reflectiveActivity": "Design a fictional approved reminder test with prediction, measures, stop condition and authorisation."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is this draft open for enrolment or does it include CPD hours?",
+        "answer": "No. It is a proposed outline only. No delivery, hours, fees, dates, enrolment, assessment, tracking, recognition or certificate arrangements are confirmed."
+      },
+      {
+        "question": "Does it establish competence or authorise practice?",
+        "answer": "No. It is educational reading and reflection, not a competency assessment, licence, clearance or permission to act. Follow local scope, supervision, policy and escalation requirements."
+      },
+      {
+        "question": "Can I apply the examples directly to a patient or service?",
+        "answer": "No. Examples are fictional and illustrative. Real action requires qualified review, appropriate governance, confidentiality safeguards and local professional requirements."
+      },
+      {
+        "question": "Who reviewed the content?",
+        "answer": "Qualified clinical, subject-matter, accessibility and academy review is proposed but not claimed. Sources are provided for later verification and local adaptation."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Patient Safety: Red Flags and Referral",
+        "slug": "patient-safety-red-flags-referral"
+      },
+      {
+        "title": "Evidence-Based Practice in Physiotherapy",
+        "slug": "evidence-based-practice-physiotherapy"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "Institute for Healthcare Improvement",
+        "title": "Model for Improvement",
+        "url": "https://www.ihi.org/library/model-for-improvement",
+        "note": "Opened source: three questions, PDSA testing, measures, equity lens and spread."
+      },
+      {
+        "organisation": "NHS England",
+        "title": "Patient Safety Incident Response Framework",
+        "url": "https://www.england.nhs.uk/patient-safety/patient-safety-incident-response-framework/",
+        "note": "Opened source: connects learning, governance and improvement; safety context for QI boundaries."
+      }
+    ]
+  }
+]

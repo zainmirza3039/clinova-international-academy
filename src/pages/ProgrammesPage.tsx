@@ -10,23 +10,23 @@ import { departments } from '@/data/departments';
 import type { ProgrammeCategory } from '@/data/types';
 
 const programmeTypes: (ProgrammeCategory | 'All')[] = ['All', 'Certificate', 'Diploma', 'Professional Development', 'CPD'];
-const durations = ['All', '8 weeks', '10 weeks', '12 weeks', '14 weeks', '16 weeks', '24 weeks'];
-const deliveries = ['All', 'Online'];
+const durations = ['All'];
+const deliveries = ['All'];
 
 export default function ProgrammesPage() {
   useSEO({
     title: 'Programmes',
     description:
-      'Browse all healthcare education programmes at Clinova International Academy. Filter by department, type, duration and CPD hours.',
+      'Browse all healthcare education programmes at Clinova International Academy. Explore draft educational topics by subject category and proposed programme type.',
   });
 
-  const [searchParams] = useSearchParams();
-  const initialType = searchParams.get('type') || 'All';
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requestedType = searchParams.get('type') || 'All';
+  const typeFilter = programmeTypes.includes(requestedType as ProgrammeCategory | 'All') ? requestedType : 'All';
   const initialFeatured = searchParams.get('featured') === 'true';
 
   const [search, setSearch] = useState('');
   const [deptFilter, setDeptFilter] = useState('All');
-  const [typeFilter, setTypeFilter] = useState(initialType);
   const [durationFilter, setDurationFilter] = useState('All');
   const [deliveryFilter, setDeliveryFilter] = useState('All');
 
@@ -50,8 +50,8 @@ export default function ProgrammesPage() {
       <PageHero
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Programmes' }]}
         eyebrow="Programmes"
-        title="All Programmes"
-        description="Browse our complete catalogue of certificate courses, diploma programmes and professional development courses across all healthcare departments."
+        title="Proposed Programme Catalogue"
+        description="Explore draft educational outlines, not confirmed course offers. Availability, duration, delivery, fees, CPD hours and certificates await academy confirmation."
         image="https://images.pexels.com/photos/8376296/pexels-photo-8376296.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
@@ -64,8 +64,8 @@ export default function ProgrammesPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div>
-                <label className="block text-xs font-medium text-navy-500 mb-1.5">Department</label>
-                <select className={selectClass} value={deptFilter} onChange={(e) => setDeptFilter(e.target.value)}>
+                <label htmlFor="programme-department" className="block text-xs font-medium text-navy-500 mb-1.5">Department</label>
+                <select id="programme-department" className={selectClass} value={deptFilter} onChange={(e) => setDeptFilter(e.target.value)}>
                   <option value="All">All Departments</option>
                   {departments.map((d) => (
                     <option key={d.id} value={d.slug}>{d.name}</option>
@@ -73,26 +73,30 @@ export default function ProgrammesPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-navy-500 mb-1.5">Programme Type</label>
-                <select className={selectClass} value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
+                <label htmlFor="programme-type" className="block text-xs font-medium text-navy-500 mb-1.5">Programme Type</label>
+                <select id="programme-type" className={selectClass} value={typeFilter} onChange={(e) => {
+                  const next = new URLSearchParams(searchParams);
+                  if (e.target.value === 'All') next.delete('type'); else next.set('type', e.target.value);
+                  setSearchParams(next);
+                }}>
                   {programmeTypes.map((t) => (
                     <option key={t} value={t}>{t === 'All' ? 'All Types' : t}</option>
                   ))}
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-navy-500 mb-1.5">Duration</label>
-                <select className={selectClass} value={durationFilter} onChange={(e) => setDurationFilter(e.target.value)}>
+                <label htmlFor="programme-duration" className="block text-xs font-medium text-navy-500 mb-1.5">Duration</label>
+                <select id="programme-duration" disabled className={selectClass} value={durationFilter} onChange={(e) => setDurationFilter(e.target.value)}>
                   {durations.map((d) => (
-                    <option key={d} value={d}>{d === 'All' ? 'All Durations' : d}</option>
+                    <option key={d} value={d}>{d === 'All' ? 'Duration awaiting confirmation' : d}</option>
                   ))}
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-navy-500 mb-1.5">Delivery</label>
-                <select className={selectClass} value={deliveryFilter} onChange={(e) => setDeliveryFilter(e.target.value)}>
+                <label htmlFor="programme-delivery" className="block text-xs font-medium text-navy-500 mb-1.5">Delivery</label>
+                <select id="programme-delivery" disabled className={selectClass} value={deliveryFilter} onChange={(e) => setDeliveryFilter(e.target.value)}>
                   {deliveries.map((d) => (
-                    <option key={d} value={d}>{d === 'All' ? 'All Delivery' : d}</option>
+                    <option key={d} value={d}>{d === 'All' ? 'Delivery awaiting confirmation' : d}</option>
                   ))}
                 </select>
               </div>

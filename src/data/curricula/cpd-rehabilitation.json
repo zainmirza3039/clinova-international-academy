@@ -1,0 +1,486 @@
+[
+  {
+    "courseSlug": "clinical-assessment-of-low-back-pain",
+    "status": "draft",
+    "reviewNotice": "Draft professional-learning outline only. Qualified clinical and editorial review is required before publication; local licensure, scope, supervision, referral pathways and accessibility requirements always apply. No CPD duration, assessment, certificate, accreditation, fees, instructor, dates or availability are confirmed.",
+    "outcomes": [
+      "Structure a person-centred low-back-pain history and examination while keeping alternative diagnoses in view.",
+      "Use function, neurological findings, context and risk information to form a revisable working hypothesis.",
+      "Communicate uncertainty, imaging limitations, safety-netting and shared decisions in accessible language.",
+      "Recognise when findings exceed scope and require supervision, urgent escalation or another service."
+    ],
+    "intendedAudience": [
+      "Regulated physiotherapists and other health professionals developing low-back-pain assessment reasoning.",
+      "Supervised learners in musculoskeletal or primary-care environments."
+    ],
+    "prerequisites": [
+      "Foundational anatomy, physiology, communication and clinical-safety knowledge.",
+      "A relevant regulated role or supervised educational setting; this draft does not confer assessment competence."
+    ],
+    "modules": [
+      {
+        "title": "History, context and hypotheses",
+        "description": "Move from the person’s story to a cautious, testable formulation.",
+        "lessons": [
+          {
+            "title": "The first conversation",
+            "description": "Elicit symptoms, goals, context and change without premature labelling.",
+            "text": "A useful low-back-pain history begins with the person’s account rather than a diagnostic checklist. Ask what changed, what activity is difficult, what the person fears, and what a helpful consultation would achieve. Clarify distribution, irritability, sleep, work, caring, previous episodes, trauma, general health and relevant neurological symptoms. Ask open questions before narrowing them, and reflect the person’s language back to check meaning. Pain intensity is important but does not by itself identify tissue damage or urgency. Consider communication, culture, health literacy and previous experiences of care. Explain why particular questions matter and obtain consent before examination. NICE NG59 covers assessment and management of low back pain and sciatica in people aged 16 and over; its scope does not authorise applying recommendations to every spinal or paediatric presentation. Treat the formulation as provisional. New or changed symptoms should trigger renewed consideration of alternatives, supervision and an appropriate local pathway."
+          },
+          {
+            "title": "Risk, red flags and differential thinking",
+            "description": "Use contextual risk reasoning rather than a memorised alarm list.",
+            "text": "NICE NG59 advises considering alternative diagnoses in new or changed low-back symptoms and excluding causes such as cancer, infection, trauma and inflammatory disease when relevant. The educational task is not to “clear” serious disease with a checklist. Ask about systemic illness, significant trauma, progressive neurological change, constitutional features and context-specific risks, then interpret answers alongside examination and trajectory. A single symptom rarely determines urgency in isolation. If serious pathology is suspected, pause routine rehabilitation, seek senior or medical input and communicate the concern without alarming or dismissing the person. Record what was asked, what was found, what remains uncertain and why the chosen escalation is proportionate. Safety-netting should name meaningful changes, the service to contact and urgency. A fictional case of a 58-year-old with new night pain after cancer treatment is a prompt to rehearse referral reasoning, not an invitation to diagnose from prose. Local pathways and professional scope remain decisive."
+          }
+        ],
+        "reflectiveActivity": "In a fictional case, write a structured history for a warehouse worker with recurrent back pain and identify three answers that would change your differential or urgency. Explain one consent adaptation."
+      },
+      {
+        "title": "Examination and decision-making",
+        "description": "Select tests that answer questions and connect findings to safe next steps.",
+        "lessons": [
+          {
+            "title": "Neurological and functional examination",
+            "description": "Link neurological findings to function, irritability and escalation decisions.",
+            "text": "An examination should follow an explicit question: for example, whether leg symptoms are associated with neurological change, whether walking tolerance is limited by pain or another system, or which task matters most to the person. Explain each component, obtain ongoing consent and choose a safe sequence. Observe transfers, gait and a meaningful task when appropriate; assess relevant movement, strength, sensation, reflexes or neural function according to competence and indication. Document side, position, assistance, response and limitations rather than a vague normal or abnormal label. Interpret asymmetry cautiously and do not treat one test as diagnostic in isolation. New weakness, altered bladder or bowel function, saddle sensory change, systemic deterioration or rapidly worsening symptoms need prompt escalation under local policy. A fictional case of a runner with radiating pain and worsening foot clearance should prompt supervision and a focused neurological pathway, not an exercise prescription. Examination informs a working hypothesis; it does not replace medical review or confer independent competence."
+          },
+          {
+            "title": "Imaging, information and shared decisions",
+            "description": "Explain when imaging may or may not change management.",
+            "text": "NICE NG59 states that imaging should not routinely be offered in a non-specialist setting for low back pain or sciatica, and that specialist imaging should be considered only when the result is likely to change management. This is a scope-specific recommendation, not a dismissal of symptoms or a rule for every spinal condition. Explore what the person hopes a scan will answer, explain that structural findings may not map neatly onto pain, and acknowledge uncertainty. Discuss observation, activity, rehabilitation, referral and review in terms of goals, benefits, burdens and alternatives, without promising a result. Use teach-back and record the person’s questions. A fictional case of a teacher requesting imaging after a flare can be used to practise respectful explanation: validate distress, review red flags and neurological status, then identify what decision the image would alter. If the presentation is atypical or worsening, seek clinical review rather than repeating reassurance. Local imaging pathways and prescriber or specialist roles remain outside this draft."
+          }
+        ],
+        "reflectiveActivity": "In a fictional case, compare two reasonable next steps for a person worried about a disc injury. Write the uncertainty statement, safety-net and referral trigger you would discuss under supervision."
+      },
+      {
+        "title": "Function, communication and review",
+        "description": "Translate findings into a revisable plan without universal timelines.",
+        "lessons": [
+          {
+            "title": "Function-led formulation",
+            "description": "Use activity, participation and context to make the assessment meaningful.",
+            "text": "Low-back-pain assessment becomes more useful when it describes what the person cannot or will not do, not only where symptoms are felt. Ask about walking, sitting, lifting, sleep, work, relationships, exercise and valued roles. A performance observed in clinic is a sample shaped by fear, fatigue, equipment and instructions; it should not be mistaken for a complete forecast. Select a small number of repeatable outcomes that answer the person’s question, such as tolerance of a work task or confidence with stairs, and note the conditions. Consider access, transport, caring, income and language when interpreting adherence or apparent progress. NICE NG59 recommends advice tailored to needs and capabilities and encouragement to continue normal activities where appropriate; this should be adapted, not converted into a universal demand. A fictional case of a new parent avoiding lifting illustrates how sleep and role expectations can matter alongside pain. Review trends and participation, and reconsider the formulation if the course changes or safety concerns emerge."
+          },
+          {
+            "title": "Documentation, safety-netting and review",
+            "description": "Make reasoning auditable and the handover useful.",
+            "text": "A defensible note separates observed facts from interpretation. Summarise goals, symptom behaviour, safety screen, examination findings, functional baseline, uncertainty, agreed actions and review triggers. State why referral, monitoring or a conservative pathway was selected and what information would change it. Use plain language with the person and confirm understanding; a handover should preserve their priorities rather than reduce the case to a pain score. Review is an opportunity to ask whether the hypothesis still fits, whether function or confidence changed, and whether new symptoms require a different pathway. Do not promise a universal recovery timeline or independent return-to-work or sport clearance. A fictional case of a cyclist whose symptoms persist despite an unchanged programme should prompt reassessment of diagnosis, barriers, load, context and referral need rather than automatic escalation of exercises. Supervision is essential when findings are complex, outside scope or inconsistent. Documentation supports continuity; it cannot make an unsafe decision safe after the event."
+          }
+        ],
+        "reflectiveActivity": "In a fictional handover, distinguish facts, working hypotheses, uncertainty and urgency for a person whose back pain has changed. Add one accessible safety-net sentence."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is this a confirmed course?",
+        "answer": "No. It is an original draft only and is not open for enrolment; delivery arrangements are unknown."
+      },
+      {
+        "question": "Does it provide CPD hours or certification?",
+        "answer": "No duration, CPD hours, assessment, certificate, accreditation or recognition is confirmed."
+      },
+      {
+        "question": "Can it be used to diagnose or clear a person for sport?",
+        "answer": "No. It is educational material, not a diagnostic or independent clearance pathway; use qualified supervision and local referral rules."
+      },
+      {
+        "question": "What guidance informs the draft?",
+        "answer": "NICE NG59 is cited for adults aged 16 and over with low back pain or sciatica; its scope and current recommendations must be checked at review."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "A Structured Approach to Physiotherapy Assessment",
+        "slug": "physiotherapy-assessment-structured-approach"
+      },
+      {
+        "title": "Musculoskeletal Pain and Function: Looking Beyond a Pain Score",
+        "slug": "musculoskeletal-pain-and-function"
+      },
+      {
+        "title": "Patient Safety: Red Flags and Referral",
+        "slug": "patient-safety-red-flags-referral"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "NICE",
+        "title": "Low back pain and sciatica in over 16s: assessment and management (NG59)",
+        "url": "https://www.nice.org.uk/guidance/ng59/chapter/recommendations",
+        "note": "Opened recommendations: scope is people aged 16 and over; alternative diagnoses, risk stratification, non-routine imaging, tailored self-management and exercise are addressed."
+      },
+      {
+        "organisation": "NICE",
+        "title": "Chronic pain (primary and secondary) in over 16s (NG193)",
+        "url": "https://www.nice.org.uk/guidance/ng193/chapter/Recommendations",
+        "note": "Opened recommendations: person-centred assessment and shared planning for chronic primary and secondary pain in people aged 16 and over; not a substitute for NG59-specific pathways."
+      },
+      {
+        "organisation": "WHO",
+        "title": "Rehabilitation fact sheet",
+        "url": "https://www.who.int/news-room/fact-sheets/detail/rehabilitation",
+        "note": "Opened definition frames rehabilitation as person-centred interventions that optimise functioning and reduce disability in interaction with environment."
+      }
+    ]
+  },
+  {
+    "courseSlug": "pain-management-fundamentals",
+    "status": "draft",
+    "reviewNotice": "Draft professional-learning outline only. Qualified clinical and editorial review is required before publication; local licensure, scope, supervision, referral pathways and accessibility requirements always apply. No CPD duration, assessment, certificate, accreditation, fees, instructor, dates or availability are confirmed.",
+    "outcomes": [
+      "Describe pain as a multidimensional lived experience without equating intensity with tissue damage.",
+      "Conduct a respectful, person-centred pain history that includes function, context, strengths and safety.",
+      "Discuss rehabilitation and self-management options with transparent benefits, burdens and uncertainty.",
+      "Recognise changing presentations, distress, medicine-related questions and indications for multidisciplinary or medical review."
+    ],
+    "intendedAudience": [
+      "Regulated health professionals who support people living with persistent or recurrent pain.",
+      "Supervised rehabilitation learners developing communication and formulation skills."
+    ],
+    "prerequisites": [
+      "Foundational health, communication and rehabilitation knowledge.",
+      "Awareness that medication decisions, diagnosis and escalation remain within scope and local policy."
+    ],
+    "modules": [
+      {
+        "title": "Understanding pain and the person",
+        "description": "Build a formulation that validates experience and preserves uncertainty.",
+        "lessons": [
+          {
+            "title": "Pain is real and contextual",
+            "description": "Explain multidimensional pain without invalidating the person.",
+            "text": "Pain is a real sensory and emotional experience, but intensity is not a simple meter of tissue damage. A careful conversation can hold biology, learning, sleep, stress, illness, expectations and social circumstances together without declaring that symptoms are imaginary. Ask what pain means to the person, what it prevents, what they fear and what they still value. Avoid a forced choice between a physical and psychological explanation; several contributors may coexist. Use ordinary language, check cultural meanings and acknowledge previous invalidating encounters with services. NICE NG193 covers assessment of chronic primary and secondary pain, defined in its recommendations as pain persisting or recurring for more than three months, and says the categories can coexist. That scope does not turn every pain presentation into chronic primary pain. A fictional case of an office worker whose pain increased after sleep loss invites reflection on validation and formulation. Explain limits honestly, obtain consent and return to safety screening when symptoms change. Education should expand agency, never blame."
+          },
+          {
+            "title": "History, impact and strengths",
+            "description": "Gather information about life impact, resources and priorities.",
+            "text": "A pain history should include pattern, irritability, sleep, activity, work, relationships, mood, previous care and the person’s understanding of causes and possible futures. NICE NG193 recommends exploring how pain affects life and how life may affect pain, including social, cultural, financial and housing concerns, while also asking about strengths and existing coping skills. This is not permission to interrogate or pathologise adversity. Ask what the person already does that helps, what a worthwhile change would look like and who should be involved. Use questionnaires only when their purpose, language and burden fit the consultation. A fictional case of a student missing classes because of abdominal pain and fatigue illustrates why participation and education belong in the formulation. Summarise what you heard and ask for correction. Record uncertainty, communication needs and safety-netting. If distress, substance-related concerns, new neurological signs or systemic features emerge, seek appropriate supervision or referral rather than treating a self-management conversation as sufficient care."
+          }
+        ],
+        "reflectiveActivity": "In a fictional case, write a person-centred summary that includes pain impact, strengths, one social barrier, one goal and one question requiring referral or supervision."
+      },
+      {
+        "title": "Collaborative management conversations",
+        "description": "Balance evidence, preferences, pacing and safety.",
+        "lessons": [
+          {
+            "title": "Shared planning and meaningful goals",
+            "description": "Turn a broad pain story into negotiated participation goals.",
+            "text": "A care plan begins with a decision, not a list of interventions. Ask whether the priority is sleep, movement, work, social contact, confidence, flare management or understanding a diagnosis. NICE NG193 recommends discussing priorities, abilities, goals, current helpful strategies and the evidence, risks and uncertainties of management options. Goals should be observable and personally meaningful, while allowing for fluctuation and the possibility that quality of life can improve even when pain remains. Avoid promising a fixed reduction or timeline. Discuss barriers such as transport, fatigue, cost, caring and unsafe environments, then adapt the plan with the relevant team. A fictional case of a retail worker wanting to stand through a shift may need an environmental and occupational conversation, not simply more exercises. Use teach-back and agree what change would prompt review. This outline cannot prescribe dosage, choose medicines or replace assessment. Qualified clinicians must determine whether an option is suitable, and multidisciplinary input should be sought when complexity exceeds scope."
+          },
+          {
+            "title": "Flare-ups, pacing and graded participation",
+            "description": "Use flexible activity reasoning rather than rigid calendars or avoidance.",
+            "text": "Flare-ups are changes in symptoms, function or distress, not automatic evidence of new damage; they still deserve careful assessment when severe, unusual or progressive. Explore what preceded the change, what the person stopped doing, sleep and recovery, illness, stress, medication questions and environmental demands. Pacing may mean alternating effort and rest, reducing a task temporarily, or returning to a valued activity in smaller steps; it is not a universal schedule. A graded approach should be negotiated and monitored for confidence, function, fatigue and adverse response. NICE NG193 asks clinicians to discuss fluctuation, possible ongoing management and the possibility of improvement in quality of life without pain elimination. A fictional case of a gardener who alternates overactivity and bed rest can prompt analysis of boom-and-bust patterns without blaming motivation. If symptoms change character or safety concerns arise, pause the educational plan and follow local escalation. Do not provide drug advice; medicine review belongs to appropriately qualified prescribers."
+          }
+        ],
+        "reflectiveActivity": "In a fictional case, redesign a boom-and-bust week around a valued activity. State what would be monitored, what would be adapted and which change would trigger clinical review."
+      },
+      {
+        "title": "Safety, communication and review",
+        "description": "Recognise limits, distress and the need for escalation or team care.",
+        "lessons": [
+          {
+            "title": "Communicating uncertainty and avoiding harm",
+            "description": "Offer credible explanations without overclaiming certainty.",
+            "text": "People living with pain may have received conflicting labels, normal test results or advice that felt dismissive. Explain that a normal or negative result can be reassuring about one concern while not invalidating pain. NICE NG193 specifically recommends sensitivity when communicating normal results and encourages collaborative supportive relationships. Use a working formulation, state what is known and unknown, and describe why a proposed next step fits the person’s priorities. Avoid saying pain is “just psychological,” that tissue damage is impossible, or that improvement proves a mechanism. Ask the person to explain the plan back in their own words and offer accessible written information. A fictional case of a person frightened by an MRI report can be used to practise translating findings without interpreting images beyond competence. Persistent distress, safeguarding concerns, suicidal thoughts, substance-related risk, new systemic symptoms or neurological change require appropriate referral and immediate local action as indicated. This draft does not provide crisis advice, medication instructions or a substitute for clinical assessment."
+          },
+          {
+            "title": "Review, medicines questions and multidisciplinary care",
+            "description": "Know when a pain conversation must widen to another service.",
+            "text": "Review is not merely a pain score. Ask about participation, sleep, confidence, function, side effects, distress, goals and whether the working formulation still fits. NICE NG193 separates assessment of all chronic pain from management recommendations for chronic primary pain and directs clinicians to condition-specific guidance when an underlying condition explains pain and impact. That distinction matters when deciding who should review the person. If someone asks to start, stop or alter medicine, acknowledge the question and refer to an appropriately qualified prescriber or pharmacist; do not offer dosage, tapering or drug-selection advice in educational copy. A fictional case of a person with chronic pain, diabetes and increasing falls illustrates why rehabilitation, medical, pharmacy, psychological and social-care perspectives may need coordination. Document consent, roles, handover and urgency. Review sooner when symptoms change or risk rises. There is no universal timeline or guaranteed outcome; local licensure, supervision and referral pathways govern safe action."
+          }
+        ],
+        "reflectiveActivity": "In a fictional multidisciplinary case, draft a handover that identifies the person’s goal, current risk, unanswered question, responsible service and review trigger."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is this medical advice?",
+        "answer": "No. It is a draft educational outline and cannot diagnose, prescribe, replace review or direct an individual’s care."
+      },
+      {
+        "question": "Does it promise pain relief or a fixed recovery time?",
+        "answer": "No. Fluctuation and uncertainty are acknowledged; no universal timeline or guaranteed outcome is provided."
+      },
+      {
+        "question": "Can it advise on medicines?",
+        "answer": "No. Medicine questions require an appropriately qualified prescriber or pharmacist and local policy; no dosage or drug advice is included."
+      },
+      {
+        "question": "What is NG193’s scope?",
+        "answer": "NICE NG193 addresses assessment of chronic primary and secondary pain in people aged 16 and over and management of chronic primary pain; condition-specific guidance may apply."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Musculoskeletal Pain and Function: Looking Beyond a Pain Score",
+        "slug": "musculoskeletal-pain-and-function"
+      },
+      {
+        "title": "A Structured Approach to Physiotherapy Assessment",
+        "slug": "physiotherapy-assessment-structured-approach"
+      },
+      {
+        "title": "Evidence-Based Practice in Physiotherapy",
+        "slug": "evidence-based-practice-physiotherapy"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "NICE",
+        "title": "Chronic pain (primary and secondary) in over 16s: assessment and management (NG193)",
+        "url": "https://www.nice.org.uk/guidance/ng193/chapter/Recommendations",
+        "note": "Opened recommendations: scope, person-centred assessment, social context, strengths, shared planning, fluctuation and condition-specific pathways."
+      },
+      {
+        "organisation": "NICE",
+        "title": "Low back pain and sciatica in over 16s (NG59)",
+        "url": "https://www.nice.org.uk/guidance/ng59/chapter/recommendations",
+        "note": "Opened recommendations provide a condition-specific example of alternative-diagnosis screening, tailored information, activity and exercise; not a universal pain protocol."
+      },
+      {
+        "organisation": "WHO",
+        "title": "Rehabilitation fact sheet",
+        "url": "https://www.who.int/news-room/fact-sheets/detail/rehabilitation",
+        "note": "Opened source defines rehabilitation as person-centred interventions optimising functioning and reducing disability in interaction with environment."
+      }
+    ]
+  },
+  {
+    "courseSlug": "introduction-to-sports-rehabilitation",
+    "status": "draft",
+    "reviewNotice": "Draft professional-learning outline only. Qualified clinical and editorial review is required before publication; local licensure, scope, supervision, referral pathways and accessibility requirements always apply. No CPD duration, assessment, certificate, accreditation, fees, instructor, dates or availability are confirmed.",
+    "outcomes": [
+      "Describe staged sports rehabilitation as a criteria-informed, person-centred process rather than a calendar.",
+      "Relate assessment and loading decisions to sport demands, symptoms, confidence, environment and reinjury risk.",
+      "Plan communication among athlete, clinicians, coaching staff and relevant medical professionals.",
+      "Distinguish participation, sport and competition decisions and recognise that independent clearance is outside this draft."
+    ],
+    "intendedAudience": [
+      "Sports physiotherapists, athletic trainers and regulated rehabilitation professionals at an introductory level.",
+      "Supervised learners supporting recreational or performance athletes within a multidisciplinary team."
+    ],
+    "prerequisites": [
+      "Foundational anatomy, exercise science, injury mechanisms and clinical safety knowledge.",
+      "Access to qualified supervision and local sport, safeguarding and referral procedures."
+    ],
+    "modules": [
+      {
+        "title": "From injury to rehabilitation plan",
+        "description": "Frame rehabilitation around the athlete, demands and safe criteria.",
+        "lessons": [
+          {
+            "title": "Sport demands and the athlete’s context",
+            "description": "Map the activity, person and environment before selecting tests.",
+            "text": "Sports rehabilitation starts with the athlete’s goals and the demands of the activity, not a generic exercise sheet. Clarify the injury story, current symptoms, previous episodes, training role, competition context, equipment, surface, travel, sleep, work, confidence and support. Analyse the sport’s actions: acceleration, deceleration, cutting, landing, contact, overhead skill, endurance or repeated decision-making. The same knee finding may matter differently to a recreational hiker and a goalkeeper. Include safeguarding, consent, language and power dynamics when working with young or dependent athletes. A fictional case of a university basketball player returning after an ankle injury can expose gaps in access, academic pressure and coach expectations. Build a working hypothesis, define what information is missing and identify who must be consulted. Consensus resources from ISEPA/IFSPT are professional references, not automatic local rules. Rehabilitation must remain within licensure and supervision; no lesson here independently diagnoses an injury or clears an athlete."
+          },
+          {
+            "title": "Criteria, stages and progression",
+            "description": "Use evidence-informed milestones instead of a universal calendar.",
+            "text": "A staged rehabilitation model can move from protection and symptom management toward capacity, sport-specific reconditioning, practice participation and competition, but the stages overlap and are not a fixed timetable. Criteria should reflect tissue or medical status, movement quality, strength, endurance, confidence, skill and the demands of the sport. The peer-reviewed sports rehabilitation review by Dhillon and colleagues describes return to participation, return to sport and return to competition as distinct points, with graded exposure and load monitoring. A fictional case of a sprinter who feels better but cannot tolerate repeated high-speed efforts illustrates why symptom change alone is insufficient. Select tests because they answer a decision question, standardise conditions and consider measurement error. If a milestone is not met, modify the plan or seek review rather than forcing progression. Medical restrictions, surgery-specific instructions and safeguarding rules take priority. This draft provides no dosage, timeline or independent clearance; qualified clinicians and the athlete’s team must make decisions together."
+          }
+        ],
+        "reflectiveActivity": "In a fictional case, map an athlete’s route from protected activity to team practice. List three decision criteria, two environmental constraints and one reason to pause or refer."
+      },
+      {
+        "title": "Loading, skill and readiness",
+        "description": "Develop capacity while monitoring response, confidence and risk.",
+        "lessons": [
+          {
+            "title": "Progressive loading and monitoring",
+            "description": "Increase relevant capacity without pretending risk can be eliminated.",
+            "text": "Loading should be connected to the sport’s demands and adjusted according to symptoms, performance, fatigue, recovery and the athlete’s circumstances. Progression might change complexity, speed, direction, contact, volume or decision pressure, but the choice must follow assessment and medical guidance. Avoid presenting a numerical recipe or acute-to-chronic ratio as a universal safety threshold; measures are context-sensitive and evidence is evolving. Record what was attempted, how it was tolerated during and after, and what the athlete noticed. A fictional case of a football midfielder whose sprint volume rose while sleep and travel deteriorated highlights why external workload and recovery context matter. Use monitoring to start a conversation, not to police the athlete or guarantee prevention. Escalate persistent swelling, instability, neurological or systemic symptoms, disproportionate pain or a concerning change. Coaches may adapt drills, but clinical restrictions and safeguarding responsibilities remain with the appropriate professionals. Review the hypothesis when performance stalls instead of simply adding intensity."
+          },
+          {
+            "title": "Skill, confidence and decision readiness",
+            "description": "Include psychological readiness and sport-specific uncertainty in review.",
+            "text": "Readiness is multidimensional. An athlete may demonstrate strength in a controlled test yet hesitate during an unplanned cut, contact situation or crowded practice. Observe skill under progressively realistic conditions, alongside communication, confidence, fatigue and decision-making. The sports rehabilitation literature identifies physical and psychological readiness as relevant to return-to-sport decisions, while emphasising that criteria vary with injury, tissue and sport. Ask what the athlete expects, fears and is willing to risk; do not treat a questionnaire as a clearance stamp. A fictional case of a goalkeeper avoiding dives after shoulder injury invites a graded, consent-based conversation and possible psychology referral. Use shared language across the team and document who is responsible for each decision. If the person is under pressure to return, pause and escalate the concern. There is no universal pain-free threshold, test battery or calendar. The aim is informed progression with review, not certainty. Independent return-to-sport clearance is expressly outside this educational draft."
+          }
+        ],
+        "reflectiveActivity": "In a fictional case, compare a controlled hop test with a reactive team drill. Explain what each can and cannot tell the team and how you would discuss confidence."
+      },
+      {
+        "title": "Return decisions and prevention",
+        "description": "Coordinate participation, competition and longer-term risk management.",
+        "lessons": [
+          {
+            "title": "Return to participation, sport and competition",
+            "description": "Separate decisions and communicate residual risk honestly.",
+            "text": "Return is better understood as a sequence than a single gate. Return to participation may involve modified training; return to sport may involve broader practice demands; return to competition adds selection, pressure, contact, travel and unpredictable intensity. The athlete’s informed view matters, but a decision should be shared with the rehabilitation and medical team, coaching staff and governing requirements. IFSPT/ISEPA’s consensus collection identifies return-to-sport criteria and rehabilitation planning as areas for structured professional guidance. A fictional case of a semi-professional rugby player selected for a match before completing contact progression illustrates the need to name unresolved risks and negotiate alternatives. Document restrictions, communication responsibilities, monitoring and the route for reassessment. Do not promise that criteria eliminate reinjury or independently clear participation. If symptoms deteriorate, neurological or cardiopulmonary signs appear, or medical advice conflicts, stop the progression and seek appropriate review. Local regulations, safeguarding and team policies may supersede this outline."
+          },
+          {
+            "title": "Prevention, transition and learning",
+            "description": "Turn the rehabilitation episode into safer ongoing participation.",
+            "text": "Prevention is not a guarantee and should not become blame after an injury. Review modifiable and non-modifiable contributors: prior injury, exposure, technique, fatigue, equipment, surface, schedule, recovery, communication and access to care. Agree practical strategies with the athlete and coaching team, then evaluate whether they are feasible in real training. The review by Dhillon and colleagues highlights staged rehabilitation, sport-specific testing and avoiding sudden workload peaks; these concepts must be interpreted with current evidence and the individual’s medical context. A fictional case of a youth athlete moving clubs can reveal a dangerous loss of records, unclear restrictions and pressure to conceal symptoms. Handover should include goals, current capacity, red flags, responsible contacts and review triggers. Encourage reporting rather than rewarding silence. Refer when risk exceeds competence or the presentation changes. This draft has no injury-prevention prescription, dosage, dates or clearance authority; qualified clinicians must adapt decisions to local licensure and governance."
+          }
+        ],
+        "reflectiveActivity": "In a fictional club transition, draft a handover that protects the athlete’s privacy while stating current restrictions, unresolved risk, contacts and review conditions."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Does this course clear an athlete to return?",
+        "answer": "No. It is a draft educational outline and never replaces assessment, medical restrictions, team governance or qualified clearance."
+      },
+      {
+        "question": "Does it give a universal return-to-sport timeline or test battery?",
+        "answer": "No. Criteria and progression depend on injury, sport, athlete, environment, evidence and local policy; no calendar or universal threshold is supplied."
+      },
+      {
+        "question": "Can coaches use it as a treatment plan?",
+        "answer": "No. Coaches should coordinate with qualified clinicians and follow medical, safeguarding and governing-body requirements."
+      },
+      {
+        "question": "Which sports sources were opened?",
+        "answer": "IFSPT/ISEPA’s consensus-paper collection and a peer-reviewed sports injury rehabilitation review were opened; both require contextual interpretation and do not override local rules."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Ankle Sprain: Return to Activity Without a Universal Timeline",
+        "slug": "ankle-sprain-return-to-activity"
+      },
+      {
+        "title": "ACL Rehabilitation: Clinical Considerations",
+        "slug": "acl-rehabilitation-clinical-considerations"
+      },
+      {
+        "title": "Shoulder Pain Assessment and Rehabilitation: A Reasoned Clinical Approach",
+        "slug": "shoulder-pain-assessment-rehabilitation"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "IFSPT/ISEPA",
+        "title": "Consensus Papers",
+        "url": "https://ifspt.org/research/consensus-papers",
+        "note": "Opened collection describes international consensus resources on injury prevention, return-to-sport criteria, rehabilitation planning and athlete development."
+      },
+      {
+        "organisation": "International Journal of Orthopaedics",
+        "title": "Current Concepts in Sports Injury Rehabilitation",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5609374/",
+        "note": "Opened peer-reviewed review discusses staged rehabilitation, return to participation/sport/competition, sport-specific testing, psychological readiness and team decisions."
+      }
+    ]
+  },
+  {
+    "courseSlug": "motor-control-relearning-in-neurorehabilitation",
+    "status": "draft",
+    "reviewNotice": "Draft professional-learning outline only. Qualified clinical and editorial review is required before publication; local licensure, scope, supervision, referral pathways and accessibility requirements always apply. No CPD duration, assessment, certificate, accreditation, fees, instructor, dates or availability are confirmed.",
+    "outcomes": [
+      "Explain motor-control relearning as goal-linked practice shaped by task, person and environment.",
+      "Use stroke-specific examples to connect assessment, cognition, communication, sensation, balance and participation.",
+      "Plan supervised practice with feedback, fatigue awareness, consent and multidisciplinary coordination.",
+      "Recognise safety concerns and referral needs, including new neurological change, falls, swallowing, mood and medical instability."
+    ],
+    "intendedAudience": [
+      "Regulated neurorehabilitation professionals and multidisciplinary team members.",
+      "Supervised learners working with adults after stroke or developing neurorehabilitation reasoning."
+    ],
+    "prerequisites": [
+      "Foundational neuroanatomy, movement science, communication and clinical-safety knowledge.",
+      "A supervised setting with access to stroke pathways and relevant multidisciplinary expertise."
+    ],
+    "modules": [
+      {
+        "title": "Assessing the person after stroke",
+        "description": "Start with comprehensive assessment, meaningful goals and supported participation.",
+        "lessons": [
+          {
+            "title": "A whole-person stroke assessment",
+            "description": "Connect impairment, activity, participation and environment.",
+            "text": "Motor-control relearning after stroke begins with a broad assessment, not a limb-strength score alone. NICE NG236 recommends considering previous function, cognition, perception, communication, emotional and behavioural change, mental health, body-function impairment including pain, activity limitation, participation restriction and environmental factors. Ask what the person wants to regain: preparing food, using public transport, speaking with family, returning to work or walking outdoors. Include carers appropriately while preserving autonomy and supported communication. Check vision, hearing, fatigue, attention, neglect, sensation, balance, tone and medical stability according to competence. A fictional case of a person with right-sided weakness and aphasia may require communication supports before any motor test can be interpreted. Document assistance, context and consent. New focal neurological change, reduced consciousness, chest symptoms, seizure, aspiration concern or acute infection needs prompt medical action. This draft is stroke-focused in its examples and does not claim to cover every neurological diagnosis or confer independent assessment competence."
+          },
+          {
+            "title": "Goals that guide relearning",
+            "description": "Make goals meaningful, challenging, achievable and revisable.",
+            "text": "NICE NG236 recommends that people after stroke have rehabilitation goals that are meaningful and relevant, focus on activity and participation, are challenging but achievable, and include short- and long-term elements. A goal such as “improve motor control” may guide analysis, but “prepare a simple breakfast using the agreed adaptations” tells the team what practice should resemble. Explain the goal-setting process in accessible formats, involve family or carers where appropriate and review goals regularly. Consider fatigue, mood, cognition, language, transport, housing and cultural routines when judging feasibility. A fictional case of an older adult whose priority is caring for a grandchild illustrates why a technically improved reach may matter only if it transfers to a safe home task. Measures can support communication but do not replace lived outcomes. Document what the person agreed, what help was needed to decide and what would prompt revision. Goals are not guarantees or universal timelines; they are hypotheses for purposeful, supervised rehabilitation."
+          }
+        ],
+        "reflectiveActivity": "In a fictional stroke case, rewrite three impairment goals as activity or participation goals and identify one communication adaptation for the goal-setting meeting."
+      },
+      {
+        "title": "Practice, feedback and adaptation",
+        "description": "Use task-specific, safe and responsive practice within a team.",
+        "lessons": [
+          {
+            "title": "Task practice and feedback",
+            "description": "Select practice that is purposeful, adaptable and linked to the person’s goals.",
+            "text": "Motor-control practice is most meaningful when it resembles a valued task and can be adjusted to the person’s current ability. Decide whether the challenge concerns initiation, force, timing, coordination, attention, balance, sensation or environmental setup. Use demonstration, tactile or verbal feedback only with consent and consider whether the cue supports learning or creates dependence. Alter task complexity, support, speed, objects or context after assessment; do not prescribe a universal repetition or intensity dose in educational copy. NICE NG236 states that rehabilitation sessions should include activities linked to goals and be tailored to medical needs, fatigue, psychological factors and the person’s agreement. A fictional case of a person struggling to transfer from a low chair can prompt analysis of seat height, attention, foot placement, fear, orthostatic symptoms and carer technique. Stop for dizziness, chest symptoms, acute neurological change, unsafe fatigue or loss of balance. Qualified staff must select handling and equipment methods."
+          },
+          {
+            "title": "Feedback, fatigue and carryover",
+            "description": "Balance challenge with recovery, learning and real-world transfer.",
+            "text": "Feedback can help a person notice a movement strategy, but excessive correction may narrow attention or make practice dependent on the therapist. Ask what the person felt, what they were trying to do and which cue was useful. Consider blocked and variable practice, meaningful repetition and opportunities to use a skill in the environment where it matters, while respecting cognition and fatigue. NICE NG236 recommends tailoring timing, sequencing and content to goals, interests, needs, medical requirements, mood and the person’s agreement. A fictional case of a person who walks well in the gym but freezes in a busy kitchen illustrates why carryover needs environmental practice and occupational-therapy input. Monitor response during and after sessions without imposing a universal threshold. Carers should be taught only by appropriately trained professionals and should know when to stop and seek help. Review whether practice improves safety, confidence and participation, not merely therapist-observed form."
+          }
+        ],
+        "reflectiveActivity": "In a fictional case, compare two feedback strategies for a kitchen task. Explain how fatigue, aphasia and environmental noise would alter your supervision plan."
+      },
+      {
+        "title": "Team safety and participation",
+        "description": "Coordinate progression, referral and transitions without overclaiming recovery.",
+        "lessons": [
+          {
+            "title": "Multidisciplinary safety and intensity",
+            "description": "Coordinate needs-based rehabilitation with medical, psychological and social care.",
+            "text": "Stroke rehabilitation is team work. Depending on need, physiotherapy, occupational therapy, speech and language therapy, nursing, psychology, rehabilitation medicine, dietetics, pharmacy and social care may each contribute to motor relearning and participation. NICE NG236 recommends needs-based rehabilitation covering multidisciplinary therapy, with sessions linked to goals and adapted to medical needs, fatigue, mood and agreement. The guideline’s service recommendations must not be copied as a self-directed prescription or detached from safety, capacity and local resources. A fictional case of a person with neglect, shoulder pain, low mood and swallowing concerns requires coordinated priorities rather than competing exercise lists. Clarify who assesses transfers, equipment, swallowing, medication, mood and home risk. New neurological deterioration, aspiration, seizures, falls, chest symptoms, severe headache or sudden functional change requires prompt medical review. Supervision, safeguarding and referral are explicit responsibilities. This outline is not a handling manual and does not cover every diagnosis; local stroke pathways and professional competence govern practice."
+          },
+          {
+            "title": "Transition, participation and review",
+            "description": "Keep rehabilitation connected to home, community and changing goals.",
+            "text": "Review should ask what the person can do in real contexts, what support is required, how safe and confident they feel, and whether the goal still matters. NICE NG236 recommends regular review of goals and rehabilitation plans, multidisciplinary communication and support for community participation suited to goals, needs and preferences. Prepare transitions with accessible information, equipment and adaptation checks, named contacts and follow-up responsibilities; discharge is a change of setting, not proof that learning is complete. A fictional case of a person returning home to a two-storey flat illustrates why stairs, transport, carer capacity, fatigue and emergency contacts matter as much as clinic performance. Record uncertainty and escalation triggers. A plateau should prompt reassessment of cognition, mood, pain, environment, practice and diagnosis rather than a universal conclusion about potential. Do not promise recovery dates or independent safety clearance. Qualified clinicians must review the person and local services must determine what support is available."
+          }
+        ],
+        "reflectiveActivity": "In a fictional discharge meeting, write a concise transition plan covering one participation goal, environmental barrier, responsible professional, carer support and urgent review trigger."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is this for every neurological diagnosis?",
+        "answer": "No. Examples are intentionally stroke-specific and do not generalise to every neurological condition; local specialist review is required."
+      },
+      {
+        "question": "Does it teach independent handling or exercise prescription?",
+        "answer": "No. It is a draft learning outline; handling, equipment, intensity and exercise selection require qualified supervision and local policy."
+      },
+      {
+        "question": "Does it promise a recovery timeline?",
+        "answer": "No. Recovery and participation vary; no universal timeline, dosage, assessment or clearance is provided."
+      },
+      {
+        "question": "What is the main evidence scope?",
+        "answer": "NICE NG236 recommendations for adults after stroke were opened for assessment, goal-setting, multidisciplinary rehabilitation, safety and community participation; scope must be checked before use."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Stroke Rehabilitation: Setting Functional Goals With the Whole Team",
+        "slug": "stroke-rehabilitation-functional-goals"
+      },
+      {
+        "title": "Gait Observation as Clinical Reasoning, Not a Parade of Deviations",
+        "slug": "gait-assessment-clinical-reasoning"
+      },
+      {
+        "title": "ROM, Strength and Function: Turning Measurements into Clinical Decisions",
+        "slug": "range-of-motion-strength-functional-assessment"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "NICE",
+        "title": "Stroke rehabilitation in adults (NG236)",
+        "url": "https://www.nice.org.uk/guidance/ng236/chapter/recommendations",
+        "note": "Opened recommendations: comprehensive post-stroke assessment, meaningful goals, regular review, needs-based multidisciplinary rehabilitation, fatigue/mood adaptation and community participation."
+      },
+      {
+        "organisation": "WHO",
+        "title": "Rehabilitation fact sheet",
+        "url": "https://www.who.int/news-room/fact-sheets/detail/rehabilitation",
+        "note": "Opened definition frames rehabilitation as person-centred interventions optimising functioning and reducing disability in interaction with environment, with multidisciplinary delivery."
+      }
+    ]
+  }
+]

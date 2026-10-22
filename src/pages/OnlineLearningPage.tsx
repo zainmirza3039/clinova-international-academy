@@ -9,14 +9,14 @@ import Reveal from '@/components/Reveal';
 import CTASection from '@/components/CTASection';
 
 const features = [
-  { icon: Monitor, title: 'How It Works', desc: 'Enrol in a programme, access materials through our platform and study at your own pace.' },
-  { icon: Compass, title: 'Learning Dashboard', desc: 'Track your progress, view upcoming assessments and manage your learning journey.' },
-  { icon: Play, title: 'Video Lessons', desc: 'Engaging video content delivered by experienced educators.' },
-  { icon: BookOpen, title: 'Learning Resources', desc: 'Curated reading materials, reference guides and downloadable resources.' },
-  { icon: ClipboardCheck, title: 'Assessments', desc: 'Test your knowledge through quizzes, assignments and case studies.' },
-  { icon: Clock, title: 'Progress Tracking', desc: 'Monitor completion rates and see how far you have come.' },
-  { icon: Award, title: 'Certificate arrangements', desc: 'Certificate availability and verification are awaiting academy confirmation.' },
-  { icon: ShieldCheck, title: 'Quality Learning', desc: 'Structured, evidence-informed content designed for healthcare professionals.' },
+  { icon: Monitor, title: 'How It Could Work', desc: 'Proposed concept only: programme access and self-paced study arrangements await academy confirmation.' },
+  { icon: Compass, title: 'Proposed Learning Dashboard', desc: 'Illustrative concept for progress and assessment views; no learner dashboard is live here.' },
+  { icon: Play, title: 'Proposed Video Lessons', desc: 'Illustrative content concept only; video delivery and educator materials are not live or confirmed.' },
+  { icon: BookOpen, title: 'Proposed Learning Resources', desc: 'A suggested area for reading materials and reference guides, awaiting confirmation.' },
+  { icon: ClipboardCheck, title: 'Proposed Assessments', desc: 'Illustrative quiz, assignment and case-study options only; no assessment service is live.' },
+  { icon: Clock, title: 'Proposed Progress Tracking', desc: 'Illustrative completion views only; learner progress tracking is not currently available.' },
+  { icon: Award, title: 'Proposed Certificate Arrangements', desc: 'Certificate availability and verification are awaiting academy confirmation; this is not a promise.' },
+  { icon: ShieldCheck, title: 'Proposed Quality Framework', desc: 'A suggested evidence-informed structure for healthcare learning, pending academy confirmation.' },
 ];
 
 export default function OnlineLearningPage() {
@@ -41,8 +41,8 @@ export default function OnlineLearningPage() {
         <div className="max-w-editorial mx-auto px-6 lg:px-10">
           <SectionHeader
             eyebrow="The Learning Experience"
-            title="Everything You Need to Succeed"
-            description="A comprehensive online learning environment built for healthcare professionals."
+            title="Proposed learning features"
+            description="These are proposed features, not a claim that a learning platform, videos or assessments are currently available."
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {features.map((item, i) => (
@@ -63,8 +63,8 @@ export default function OnlineLearningPage() {
         <div className="max-w-editorial mx-auto px-6 lg:px-10">
           <SectionHeader
             eyebrow="Learning Dashboard"
-            title="Your Personal Learning Dashboard"
-            description="A central hub for your learning journey — track progress, access materials and manage your programmes."
+            title="An Illustrative Dashboard Concept"
+            description="Illustrative layout only, not connected to learner records. Enrolment, CPD totals, certificates and progress tracking are unavailable."
           />
           <div className="max-w-5xl mx-auto bg-white rounded-2xl border border-navy-50 shadow-lg overflow-hidden">
             {/* Dashboard header */}
@@ -73,7 +73,7 @@ export default function OnlineLearningPage() {
                 <div className="w-8 h-8  bg-teal-500 flex items-center justify-center">
                   <Monitor className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-white font-heading font-semibold text-sm">Clinova Learning Dashboard</span>
+                <span className="text-white font-heading font-semibold text-sm">Proposed Clinova Dashboard</span>
               </div>
               <div className="flex gap-1.5">
                 <div className="w-2.5 h-2.5  bg-red-400/80" />
@@ -85,23 +85,23 @@ export default function OnlineLearningPage() {
             <div className="p-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div className="bg-surface-50  p-4 border border-navy-50">
-                  <div className="text-xs text-navy-400 mb-1">Enrolled Programmes</div>
-                  <div className="text-2xl font-heading font-bold text-navy-800">3</div>
+                  <div className="text-xs text-navy-400 mb-1">Example programme count</div>
+                  <div className="text-2xl font-heading font-bold text-navy-800">—</div>
                 </div>
                 <div className="bg-surface-50  p-4 border border-navy-50">
-                  <div className="text-xs text-navy-400 mb-1">CPD Hours Earned</div>
-                  <div className="text-2xl font-heading font-bold text-navy-800">45</div>
+                  <div className="text-xs text-navy-400 mb-1">Example CPD total</div>
+                  <div className="text-2xl font-heading font-bold text-navy-800">—</div>
                 </div>
                 <div className="bg-surface-50  p-4 border border-navy-50">
-                  <div className="text-xs text-navy-400 mb-1">Certificates Earned</div>
-                  <div className="text-2xl font-heading font-bold text-navy-800">2</div>
+                  <div className="text-xs text-navy-400 mb-1">Example certificate total</div>
+                  <div className="text-2xl font-heading font-bold text-navy-800">—</div>
                 </div>
               </div>
               <div className="space-y-3">
                 {[
-                  { title: 'Certificate in Musculoskeletal Assessment', progress: 75, status: 'In Progress' },
-                  { title: 'Certificate in Clinical Pain Management', progress: 100, status: 'Completed' },
-                  { title: 'Clinical Communication Skills', progress: 30, status: 'In Progress' },
+                  { title: 'Proposed programme example: Musculoskeletal Assessment' },
+                  { title: 'Proposed programme example: Clinical Pain Management' },
+                  { title: 'Proposed programme example: Clinical Communication' },
                 ].map((course) => (
                   <div key={course.title} className="flex items-center gap-4 p-4 bg-surface-50  border border-navy-50">
                     <div className="w-10 h-10  bg-white border border-navy-50 flex items-center justify-center shrink-0">
@@ -109,25 +109,15 @@ export default function OnlineLearningPage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="text-sm font-semibold text-navy-800 truncate">{course.title}</div>
-                      <div className="mt-2 h-2 bg-navy-100  overflow-hidden">
-                        <div
-                          className={`h-full  ${course.progress === 100 ? 'bg-teal-500' : 'bg-clinical-500'}`}
-                          style={{ width: `${course.progress}%` }}
-                        />
-                      </div>
+                      <p className="mt-2 text-xs text-navy-500">Progress unavailable</p>
                     </div>
-                    <div className="shrink-0 text-right">
-                      <div className="text-xs font-semibold text-navy-700">{course.progress}%</div>
-                      <div className={`text-[10px] ${course.progress === 100 ? 'text-teal-500' : 'text-navy-400'}`}>
-                        {course.status}
-                      </div>
-                    </div>
+                    <div className="shrink-0 text-right text-xs text-navy-500">Illustrative only</div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-          <p className="text-center text-xs text-navy-400 mt-4">Sample dashboard — for illustration purposes only.</p>
+          <p className="text-center text-xs text-navy-400 mt-4">Illustrative mock-up only — not a live dashboard, enrolment area, assessment tool, progress record or certificate record.</p>
         </div>
       </section>
 

@@ -1,0 +1,482 @@
+[
+  {
+    "courseSlug": "wound-care-essentials",
+    "status": "draft",
+    "reviewNotice": "Proposed professional-learning draft only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
+    "outcomes": [
+      "Describe a person-centred wound history without treating a checklist as a diagnosis.",
+      "Recognise colonisation, infection and systemic or vascular risk signals that require escalation.",
+      "Communicate consent, uncertainty, safety-netting and referral within role.",
+      "Document observations, hypotheses and accountable next steps for multidisciplinary review."
+    ],
+    "intendedAudience": [
+      "Registered nurses, podiatrists, doctors and other regulated clinicians who encounter wounds.",
+      "Supervised learners developing wound-risk recognition and referral awareness."
+    ],
+    "prerequisites": [
+      "A relevant regulated-health or supervised clinical foundation.",
+      "Access to a supervisor and local wound, infection and urgent-referral pathways; this draft does not authorise procedures or prescribing."
+    ],
+    "modules": [
+      {
+        "title": "History and observation",
+        "description": "Build a person-centred account before interpreting wound findings.",
+        "lessons": [
+          {
+            "title": "The person’s wound story",
+            "description": "Ask about onset, change, pain, function, context and goals without assuming a cause.",
+            "text": "A wound history starts with the person rather than the photographed surface. Invite an account of when the area changed, what the person noticed first, how pain or function has shifted, and what outcome matters to them. Ask about mobility, pressure exposure, diabetes, vascular disease, immune status, previous wounds, medicines and access to supplies or care. Explore language, cognition, sensory loss and cultural preferences because these affect both the story and the feasibility of follow-up. Treat each answer as information that shapes questions, not as a diagnosis. Record the person’s words alongside observable facts and clearly mark what remains unknown. Explain why you are asking and obtain consent for any observation within your role. If the history suggests rapid deterioration, systemic illness or disproportionate pain, pause routine education and use the locally defined urgent route. This lesson supports recognition and communication only; it does not instruct treatment, dressing choice or procedural care."
+          },
+          {
+            "title": "Describing without over-reading",
+            "description": "Separate observable wound features from assumptions about cause, severity or treatment.",
+            "text": "Good documentation makes a wound review reviewable by someone who was not present. Describe location, surrounding skin, visible changes, exudate, odour, pain reported, function and relevant comparison points using neutral language. Avoid converting colour, smell or a single photograph into a label such as infection, pressure injury or poor healing. Note lighting, positioning, consent, privacy and any feature you could not assess. A measurement or risk tool can structure attention, but its result is not a stand-alone decision and may be unreliable when context is missing. Distinguish direct observation from the working explanation and state which professional needs to answer the unresolved question. Use accessible language when sharing the record with the person, and check that their priorities are represented. Local policy may specify documentation fields and review intervals; follow that policy rather than this outline. Never infer a need for debridement, compression or antibiotics from descriptive information. Escalate uncertainty to a suitably qualified clinician."
+          }
+        ],
+        "reflectiveActivity": "Write a fictional wound history that separates the person’s account, observed facts, unknowns and the question for qualified review."
+      },
+      {
+        "title": "Colonisation, infection and risk",
+        "description": "Reason about change and risk without selecting antimicrobials or performing procedures.",
+        "lessons": [
+          {
+            "title": "Colonisation is not clinical infection",
+            "description": "Use NICE distinctions cautiously and recognise why appearance alone cannot settle the question.",
+            "text": "NICE NG152 notes that many leg ulcers are colonised and that antibiotics do not promote healing when a leg ulcer is not clinically infected. The important learning point is not memorising a treatment threshold; it is asking whether there are new or spreading clinical signs, increasing pain, fever, systemic illness or another explanation for change. Ask about trajectory and compare with the person’s baseline. Consider diabetes, immunosuppression, vascular disease and previous antimicrobial exposure because they alter risk and the need for specialist advice. A swab result or odour should not be treated as a diagnosis in isolation. Explain the uncertainty and identify who can perform the qualified assessment. This draft deliberately excludes antibiotic selection, dosage and route. If deterioration is rapid, pain is severe or disproportionate, or the person is systemically unwell, use the urgent local pathway rather than waiting for a learning exercise. Document the trigger, advice given, responsible clinician and review plan."
+          },
+          {
+            "title": "Risk signals and escalation",
+            "description": "Connect comorbidity, perfusion concerns and systemic features to proportionate referral.",
+            "text": "A safe escalation decision considers the whole person, not an isolated wound descriptor. Ask whether there is diabetes, loss of protective sensation, suspected ischaemia, immunosuppression, lymphangitis, spreading inflammation, fever, new confusion or functional decline. Severe pain out of proportion, rapid progression and signs of sepsis or possible deeper involvement demand urgent local assessment. NICE NG19 supports multidisciplinary diabetic-foot pathways, while NG152 identifies higher-risk comorbidities as reasons to seek specialist advice in infected leg ulcers. These sources guide recognition, not a substitute for local triage criteria. State the urgency in plain terms, confirm that the person knows where to go, and communicate the relevant history to the receiving service. Do not reassure simply because a checklist score is low or because a photograph looks stable. Record the evidence for urgency and the limits of your assessment. Qualified clinicians decide investigations and treatment; this course teaches the handoff that helps them act safely."
+          }
+        ],
+        "reflectiveActivity": "For a fictional deteriorating wound, list the risk signals, urgency rationale, accountable service and safety-netting message without naming a treatment."
+      },
+      {
+        "title": "Safety-netting and referral",
+        "description": "Make boundaries, consent and multidisciplinary accountability explicit.",
+        "lessons": [
+          {
+            "title": "Safety-netting within scope",
+            "description": "Give clear monitoring information without turning general education into wound self-treatment.",
+            "text": "Safety-netting is a communication task: explain what change should prompt help, whom to contact and what to do if the usual route is unavailable. Tailor the message to the person’s language, sensory needs, mobility, health literacy and ability to obtain transport or supplies. Avoid procedural instructions about cleansing, dressing, compression or debridement, and do not imply that self-care can safely replace assessment. Confirm understanding with teach-back and ask the person to describe the plan in their own words. Include a time or event for review only when it is authorised by the responsible service; do not invent availability or opening hours. A new fever, rapidly spreading redness, marked deterioration, systemic illness or severe unexplained pain should be treated according to urgent local services. Document consent, advice, escalation triggers and the named accountable professional. The educational aim is safer recognition and continuity, never independent wound-care competence or a treatment plan."
+          },
+          {
+            "title": "Referral as a clinical handover",
+            "description": "Provide the receiving team with relevant facts, uncertainty, urgency and the person’s priorities.",
+            "text": "A useful referral answers a question rather than forwarding a pile of observations. Begin with the person’s immediate concern and functional impact, then summarise onset, trajectory, relevant comorbidities, medicines, allergies if known, observations, consent and actions already taken within scope. Separate what you saw from what you suspect, and identify missing information that the receiving clinician should obtain. State why the referral is urgent, rapid or routine according to local criteria, without promising a response time that has not been confirmed. Ask the person whether they need an interpreter, carer involvement or an accessible format. Confirm who owns follow-up and what the person should do if symptoms worsen before contact. NICE pressure-ulcer and diabetic-foot guidance emphasises risk-aware care and local multidisciplinary responsibility, but neither guideline grants this draft authority to perform procedures. A referral is complete only when communication, accountability and safety-netting are traceable in the record."
+          }
+        ],
+        "reflectiveActivity": "Compose a concise referral handover with consent, relevant comorbidities, uncertainty, accessibility needs and a named follow-up owner."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Does this teach dressing, compression or debridement?",
+        "answer": "No. Procedures and treatment selection are outside this draft; qualified clinicians must follow local policy."
+      },
+      {
+        "question": "Can it diagnose wound infection?",
+        "answer": "No. It supports recognition and handover only; urgent concerns require qualified assessment through local services."
+      },
+      {
+        "question": "Are antibiotic choices or doses included?",
+        "answer": "No. NG152 is cited for recognition and referral context, not as a prescribing lesson."
+      },
+      {
+        "question": "Is any course date, duration, fee, instructor, assessment, certificate or accreditation confirmed?",
+        "answer": "No. All availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN; no competence award is offered."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Patient Safety: Red Flags and Referral",
+        "slug": "patient-safety-red-flags-referral"
+      },
+      {
+        "title": "Clinical Documentation and Patient Communication: Making Care Understandable and Traceable",
+        "slug": "clinical-documentation-communication"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "NICE",
+        "title": "Leg ulcer infection: antimicrobial prescribing (NG152)",
+        "url": "https://www.nice.org.uk/guidance/ng152/chapter/Recommendations",
+        "note": "Supports the distinction between colonisation and clinical infection, reassessment and specialist referral; antibiotic choice and dose are outside this draft."
+      },
+      {
+        "organisation": "NICE",
+        "title": "Pressure ulcers: prevention and management (CG179)",
+        "url": "https://www.nice.org.uk/guidance/cg179",
+        "note": "Supports risk assessment and person-centred prevention and management context; it does not authorise procedures in this course."
+      },
+      {
+        "organisation": "NICE",
+        "title": "Diabetic foot problems: prevention and management (NG19)",
+        "url": "https://www.nice.org.uk/guidance/ng19/chapter/recommendations",
+        "note": "Supports multidisciplinary diabetic-foot risk recognition and escalation; local pathways and qualified assessment remain necessary."
+      }
+    ]
+  },
+  {
+    "courseSlug": "pharmacotherapy-updates-in-chronic-disease",
+    "status": "draft",
+    "reviewNotice": "Proposed professional-learning draft only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
+    "outcomes": [
+      "Explain medicines reconciliation, review and shared decision-making as distinct activities.",
+      "Recognise polypharmacy, monitoring concerns and suspected adverse reactions requiring qualified review.",
+      "Assess the limits of a non-exhaustive evidence update across populations and jurisdictions.",
+      "Communicate medicines uncertainty and escalation without initiating, stopping or dosing treatment."
+    ],
+    "intendedAudience": [
+      "Registered pharmacists, prescribers, nurses and other clinicians involved in chronic-disease medicines conversations.",
+      "Supervised learners developing safe medicines-reasoning and communication habits."
+    ],
+    "prerequisites": [
+      "Relevant registration, supervised practice or health foundation and access to a current local formulary.",
+      "This is not a prescribing course and does not authorise starting, stopping or changing medicines."
+    ],
+    "modules": [
+      {
+        "title": "Evidence and scope",
+        "description": "Interrogate an update before applying its claims to a person.",
+        "lessons": [
+          {
+            "title": "Reading a medicines update",
+            "description": "Classify a claim by population, decision, evidence strength, safety issue and date.",
+            "text": "A medicines headline is not yet a clinical recommendation. First identify the decision it addresses: effectiveness, safety, monitoring, interaction, formulation, service process or policy. Then check the studied population, exclusions, comparator, outcome and follow-up period. A result in one chronic condition may not transfer to multimorbidity, frailty, pregnancy, renal impairment or a different jurisdiction. Note whether the source is a guideline, regulator communication, trial, review or commentary, and record its publication and update dates. Ask what information is missing before discussing relevance with a qualified colleague. Avoid turning a relative effect into a promise for an individual. This course provides no dosing tables and cannot replace the British National Formulary, product information, local formulary or current safety alerts. A defensible learning note records the source, applicability concern, uncertainty and action owner. If a claim could alter therapy, route it to the authorised prescriber or pharmacist rather than acting on a summary."
+          },
+          {
+            "title": "Local formulary and professional role",
+            "description": "Map external evidence to jurisdiction, governance and the limits of your role.",
+            "text": "Guidelines do not erase local governance. Compare an external recommendation with the local formulary, prescribing restrictions, monitoring arrangements, commissioning rules and the person’s actual care setting. Confirm whether the source is current and whether a national recommendation has a local implementation caveat. Clarify who is authorised to prescribe, reconcile, administer, monitor and communicate in your service; role titles alone do not prove competence. A supervised learner can identify a discrepancy or question, but must not convert that observation into an independent medicine change. Record the source checked, the unresolved conflict and the professional asked to decide. Include accessibility and language needs so safety information is usable. Keep the scope explicit when handing over: this draft is an educational outline, not an exhaustive update, prescribing qualification or jurisdiction-neutral protocol. When a medicine concern is time-critical, follow local urgent escalation and emergency arrangements, whose availability and hours are UNKNOWN here."
+          }
+        ],
+        "reflectiveActivity": "Annotate a fictional medicines headline with population, outcome, source date, applicability limits and the question to take to a pharmacist."
+      },
+      {
+        "title": "Person-centred medicines review",
+        "description": "Use the person’s complete medicine story to frame safe review questions.",
+        "lessons": [
+          {
+            "title": "Reconciliation as comparison",
+            "description": "Build an accurate current list and make discrepancies visible for a trained professional to resolve.",
+            "text": "NICE NG5 defines medicines reconciliation as identifying the person’s current prescribed, over-the-counter and complementary medicines, comparing sources, resolving discrepancies and communicating changes. The learning task is to discover differences without silently correcting them. Ask what the person actually takes, how they obtain it, what they call it, why they think it is used, and whether a carer or pharmacy record adds information. Note allergies, previous reactions, adherence barriers, access problems and recent transitions between care settings. Distinguish an absent record from a medicine that was stopped, and an omitted product from a deliberate change. A trained and competent health professional must resolve the discrepancy under local governance. Use an interpreter or accessible format where needed. Document the date, sources, uncertainty and accountable reviewer. Do not recommend a dose, restart, discontinuation or substitution. Reconciliation is a safety process, not permission for an unqualified person to prescribe."
+          },
+          {
+            "title": "Purposeful medication review",
+            "description": "Frame polypharmacy review around outcomes, burden, monitoring and the person’s priorities.",
+            "text": "A structured medication review asks whether each medicine has a current purpose, meaningful benefit, acceptable burden and appropriate monitoring in this person’s context. NICE NG5 highlights long-term conditions, older age and multiple medicines as situations in which a review may be appropriate, while stressing patient views and professional knowledge. Invite the person to name benefits they notice, harms they fear, practical difficulties and outcomes they value. Include prescribed, non-prescription and complementary products, recent changes, adherence and relevant monitoring information. Do not assume that a larger list is automatically inappropriate or that a single symptom proves an adverse effect. Separate a question for review from a recommendation to alter therapy. Summarise competing considerations for the responsible pharmacist, prescriber or multidisciplinary team, who decides within local scope. Explain uncertainty plainly and arrange an accountable follow-up. No dose, initiation or stopping instruction belongs in this lesson."
+          }
+        ],
+        "reflectiveActivity": "Create a reconciliation note showing two conflicting medicine lists, the person’s account, unresolved discrepancies and the authorised reviewer."
+      },
+      {
+        "title": "Adverse reactions and communication",
+        "description": "Recognise potential harm and communicate escalation without altering treatment independently.",
+        "lessons": [
+          {
+            "title": "Suspected adverse reactions",
+            "description": "Describe timing, severity, exposure and competing explanations so qualified reviewers can act.",
+            "text": "When a person reports a possible medicine-related problem, listen without dismissing it or declaring causality. Record the product as known, the reported effect, onset, timing relative to exposure, severity, functional impact, relevant co-morbidities, other medicines and what happened previously. Ask about red-flag symptoms using the service’s approved process, and seek urgent local help when the presentation may be life-threatening. A temporal association is evidence to investigate, not proof that a medicine caused the event. Do not advise the person to stop, restart or alter treatment unless an authorised clinician gives that instruction. NICE NG5 links adverse-reaction consideration to structured review and reporting arrangements such as the Yellow Card Scheme; local governance determines who reports and how. Explain the next step, name the accountable professional and record the person’s questions. This course intentionally omits drug-specific management, doses and switching. The safe contribution is a precise history and timely escalation."
+          },
+          {
+            "title": "Communicating uncertainty and decisions",
+            "description": "Support informed medicines conversations while preserving consent, autonomy and professional accountability.",
+            "text": "A safe medicines conversation begins by asking how much involvement the person wants and what matters most about treatment. Explain the relevant benefit, burden, uncertainty and reasonable alternatives in everyday language, without presenting a guideline as a guarantee. Check understanding with teach-back and make space for cultural beliefs, previous experiences, carers and communication adjustments. Shared decision-making does not mean transferring prescribing responsibility to the person or learner. Document the options discussed, preferences expressed, agreed review point, safety-net and the professional responsible for any change. If the person disagrees with a recommendation, record the concern and escalate for respectful review rather than arguing or withholding information. NICE NG197 and NG5 support values-sensitive, evidence-informed discussion, but local consent, capacity and safeguarding procedures still apply. Avoid exposure to dosing examples or instructions to initiate or discontinue medicines. The outcome of this lesson is a clearer handover, not a prescription or competence award."
+          }
+        ],
+        "reflectiveActivity": "Write a fictional adverse-reaction handover that distinguishes timing and observation from causality, includes urgency and avoids treatment changes."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Can this draft be used to start, stop or change a medicine?",
+        "answer": "No. It gives no dosing or treatment-change authority; contact the responsible prescriber or pharmacist."
+      },
+      {
+        "question": "Is it an exhaustive update for every chronic disease?",
+        "answer": "No. Population, evidence, formulary and jurisdiction limits must be checked in current local sources."
+      },
+      {
+        "question": "Does it teach prescribing or confer competence?",
+        "answer": "No. It is not prescribing training and grants no competence, licence, certificate or independent practice."
+      },
+      {
+        "question": "Are dates, duration, fees, instructors, assessment, certification or accreditation known?",
+        "answer": "No. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Patient Safety: Red Flags and Referral",
+        "slug": "patient-safety-red-flags-referral"
+      },
+      {
+        "title": "Clinical Documentation and Patient Communication: Making Care Understandable and Traceable",
+        "slug": "clinical-documentation-communication"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "NICE",
+        "title": "Medicines optimisation (NG5)",
+        "url": "https://www.nice.org.uk/guidance/ng5/chapter/1-recommendations",
+        "note": "Supports reconciliation, structured review, patient involvement, adverse-reaction consideration and monitoring; it does not make this draft a prescribing guide."
+      },
+      {
+        "organisation": "NICE",
+        "title": "Shared decision making (NG197)",
+        "url": "https://www.nice.org.uk/guidance/ng197",
+        "note": "Supports values-sensitive evidence-informed conversations; individual decisions remain within professional scope and local governance."
+      },
+      {
+        "organisation": "HCPC",
+        "title": "Standards of continuing professional development",
+        "url": "https://www.hcpc-uk.org/standards/standards-of-continuing-professional-development/",
+        "note": "Supports current, relevant learning and reflection linked to safe practice; CPD does not itself confer prescribing authority."
+      }
+    ]
+  },
+  {
+    "courseSlug": "cbt-for-anxiety-disorders",
+    "status": "draft",
+    "reviewNotice": "Proposed professional-learning draft only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
+    "outcomes": [
+      "Describe anxiety experiences and a provisional formulation without premature diagnosis.",
+      "Recognise impairment, risk and complexity requiring qualified assessment, supervision or urgent referral.",
+      "Explain why CBT methods must be adapted by trained practitioners rather than copied as scripts.",
+      "Use consent, cultural humility, shared decisions and review when discussing possible support."
+    ],
+    "intendedAudience": [
+      "Registered mental-health professionals and qualified therapists supporting anxiety care.",
+      "Supervised clinicians or learners seeking formulation, communication and referral awareness."
+    ],
+    "prerequisites": [
+      "Relevant professional or academic foundation and access to a qualified CBT supervisor.",
+      "This draft does not teach psychotherapy delivery, exposure scripts, diagnosis or independent practice."
+    ],
+    "modules": [
+      {
+        "title": "Anxiety theory and formulation",
+        "description": "Use collaborative hypotheses to understand maintaining patterns without labelling prematurely.",
+        "lessons": [
+          {
+            "title": "Anxiety as an experience",
+            "description": "Explore threat, uncertainty, bodily sensations, attention and valued activity in the person’s own language.",
+            "text": "Anxiety may include fear, apprehension, bodily arousal, intrusive predictions and changes in behaviour, but no single symptom establishes a disorder. Ask what the person notices, when it occurs, what they predict will happen, how they respond and what activities have narrowed as a result. Consider sleep, physical health, substances, trauma, medicines, culture and social stressors without reducing the account to any one factor. Validate distress while keeping explanations provisional. A questionnaire can support conversation, but it is not a diagnosis or a substitute for a full assessment. Reflect the person’s goals, preferred language and concerns about treatment. If physical symptoms are new or severe, or anxiety is entangled with another condition, seek appropriate clinical review. This course does not teach a self-help protocol, exposure task or therapeutic script. Its purpose is to help professionals describe patterns clearly, recognise limits and bring a respectful question to supervision or referral."
+          },
+          {
+            "title": "Formulation as a revisable map",
+            "description": "Link triggers, appraisals, sensations, behaviours and consequences while testing alternative explanations.",
+            "text": "A CBT formulation is a working map of how a difficulty may be maintained, not a verdict about character or cause. With appropriate training and consent, a clinician might explore a recent situation, the meaning attached to it, physical responses, coping behaviour and short- and longer-term consequences. Keep the map collaborative: ask what fits, what does not, and what important context is missing. Avoid treating avoidance as wilful non-compliance; it may protect the person from feared outcomes, stigma, sensory overload or previous harm. Consider safeguarding, trauma, neurodiversity, language and social conditions that a narrow model could obscure. Formulations should change when new information appears and should guide qualified clinical decisions, not amateur experimentation. Record uncertainty and the supervisor’s question rather than claiming a diagnosis from a brief conversation. No exposure hierarchy or behavioural experiment is provided here. When risk, impairment or complexity exceeds the service’s remit, use the agreed referral pathway."
+          }
+        ],
+        "reflectiveActivity": "Create a fictional formulation map in words, marking hypotheses, missing context, consent questions and the point requiring supervision."
+      },
+      {
+        "title": "Training, consent and scope",
+        "description": "Distinguish psychoeducation from regulated therapy and protect consent throughout.",
+        "lessons": [
+          {
+            "title": "What training permits",
+            "description": "Clarify the difference between understanding CBT concepts and delivering CBT treatment.",
+            "text": "Knowing terms such as automatic thought, safety behaviour or avoidance does not make someone a CBT therapist. Competent delivery requires relevant training, supervised practice, service governance and a scope appropriate to the presentation. Before discussing an intervention, state your role, what you can offer, what you cannot offer and how the person can decline or pause. Do not copy a workbook exercise, exposure instruction or cognitive restructuring dialogue from this outline. A qualified practitioner adapts methods to formulation, risk, culture, developmental needs and consent, then reviews response. Referral may be more appropriate when symptoms are severe, comorbid, medically unexplained, trauma-related or outside the service’s remit. Document the discussion and the professional responsible for the next decision. NICE CG113 applies to adults with generalised anxiety disorder or panic disorder and must be interpreted alongside individual needs and local provision. This lesson confers no therapy competence, accreditation or permission to practise."
+          },
+          {
+            "title": "Consent, collaboration and accessibility",
+            "description": "Make participation voluntary, understandable and responsive to communication, culture and power.",
+            "text": "Consent in psychological care is more than agreement at the first appointment. Explain the purpose of assessment or discussion, likely benefits and burdens, alternatives, confidentiality limits and what will happen if risk emerges. Ask how the person describes their distress and what language, interpreter, supporter or accessibility adjustment would help. Check understanding without turning teach-back into a test. Collaboration means the person can question a formulation, reject a proposed focus and revisit choices as circumstances change. Be alert to power differences, stigma, coercion and the possibility that a standard anxiety narrative does not fit the person’s cultural context. Record preferences and unresolved concerns, then consult the qualified supervisor when the boundary is unclear. Do not encourage unsupervised exposure or ask a person to reproduce therapy techniques from this course. If consent is uncertain or capacity, safeguarding or risk issues arise, follow applicable law and local policy. The educational output is a safer conversation and referral, not treatment delivery."
+          }
+        ],
+        "reflectiveActivity": "Write a role-boundary conversation explaining what a learner can offer, what requires a trained therapist and how the person can pause or decline."
+      },
+      {
+        "title": "Risk and referral",
+        "description": "Recognise crisis, impairment and service boundaries at the point of contact.",
+        "lessons": [
+          {
+            "title": "Recognising risk and crisis",
+            "description": "Notice urgent indicators and connect the person with qualified or emergency support rather than attempting DIY therapy.",
+            "text": "Anxiety can coexist with depression, self-harm thoughts, substance use, psychosis, trauma, domestic abuse or serious physical illness. A safe professional conversation asks enough about immediate safety, function and support to identify whether routine discussion is appropriate, using the service’s approved assessment process. Do not promise confidentiality beyond policy or manage a crisis alone. If there is imminent danger, severe deterioration or a medical emergency, contact local emergency or urgent mental-health services; their numbers, availability and hours are not supplied by this draft and must be verified locally. For non-immediate concern, document the risk information, protective factors, consent and escalation agreed with the accountable clinician. Avoid interpreting calm presentation as low risk or anxiety as the sole explanation. NICE CG113 describes stepped-care principles for relevant adult anxiety presentations, but it does not replace clinical assessment or local crisis arrangements. This course includes no crisis script, diagnosis or exposure exercise. Recognition, supervision and timely handover are the intended skills."
+          },
+          {
+            "title": "Referral and outcome review",
+            "description": "Match need to qualified services and review whether the agreed pathway remains suitable.",
+            "text": "A referral should say why help is needed, what has been assessed, what remains uncertain and what the person wants from support. Include functional impact, relevant health or safeguarding context, consent, communication needs and urgency according to local criteria. Do not refer simply because a formulation is tidy; check whether the receiving service accepts the presentation, age group and level of risk. Explain that waiting times, eligibility and service names vary, and do not invent availability or fees. Agree the contingency to follow before contact if symptoms deteriorate, using verified local information. At review, ask whether the pathway helped, whether goals or risks changed and whether the original formulation still fits. NHS Talking Therapies and NICE guidance describe service and treatment contexts, but a general outline cannot promise access or a particular therapy. Escalate uncertainty to a qualified clinician. The record should show accountability and next steps, not a claim that referral equals treatment or recovery."
+          }
+        ],
+        "reflectiveActivity": "Draft a fictional risk-and-referral note with immediate safety questions, uncertainty, local escalation and no therapy script."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Does this teach CBT or exposure scripts?",
+        "answer": "No. It discusses theory, consent, formulation and referral only; qualified practitioners must deliver adapted therapy."
+      },
+      {
+        "question": "Can it diagnose an anxiety disorder?",
+        "answer": "No. Assessment, diagnosis and risk decisions require appropriate qualified clinicians and local pathways."
+      },
+      {
+        "question": "What should happen in a crisis?",
+        "answer": "Use verified local urgent or emergency mental-health services and follow safeguarding policy; this draft does not provide a crisis script."
+      },
+      {
+        "question": "Are dates, hours, fees, instructors, assessment, certification or accreditation confirmed?",
+        "answer": "No. All availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN; no therapy competence is awarded."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Patient Safety: Red Flags and Referral",
+        "slug": "patient-safety-red-flags-referral"
+      },
+      {
+        "title": "Clinical Documentation and Patient Communication: Making Care Understandable and Traceable",
+        "slug": "clinical-documentation-communication"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "NICE",
+        "title": "Generalised anxiety disorder and panic disorder in adults: management (CG113)",
+        "url": "https://www.nice.org.uk/guidance/cg113",
+        "note": "Supports stepped-care, individualised judgement and scope for adult anxiety presentations; it does not authorise diagnosis or therapy delivery by this draft."
+      },
+      {
+        "organisation": "NHS England",
+        "title": "NHS Talking Therapies for anxiety and depression manual",
+        "url": "https://www.england.nhs.uk/wp-content/uploads/2018/06/nhs-talking-therapies-manual-v7.1-updated.pdf",
+        "note": "Provides service-context information for talking therapies; access, eligibility and local crisis arrangements remain variable and UNKNOWN here."
+      },
+      {
+        "organisation": "HCPC",
+        "title": "Standards of continuing professional development",
+        "url": "https://www.hcpc-uk.org/standards/standards-of-continuing-professional-development/",
+        "note": "Supports relevant, reflective learning and safe practice; reading this draft does not confer psychotherapy competence or registration."
+      }
+    ]
+  },
+  {
+    "courseSlug": "clinical-nutrition-for-chronic-disease",
+    "status": "draft",
+    "reviewNotice": "Proposed professional-learning draft only. Qualified clinical and academy review is required before any delivery. It is not medical advice and does not establish competence, licensure, prescribing authority, psychotherapy training, enrolment or independent practice. Availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN. Follow current local guidance, employer policy, jurisdictional scope and urgent local services.",
+    "outcomes": [
+      "Explain what nutrition screening can and cannot establish in chronic disease.",
+      "Recognise malnutrition, refeeding and comorbidity signals requiring specialist assessment.",
+      "Coordinate respectful, equitable communication with dietitians and the wider team.",
+      "Avoid diet prescriptions while documenting uncertainty, access barriers and escalation needs."
+    ],
+    "intendedAudience": [
+      "Registered clinicians and supervised learners who encounter nutrition concerns in chronic disease.",
+      "Teams seeking cautious screening, referral and communication awareness."
+    ],
+    "prerequisites": [
+      "A relevant health foundation and access to local nutrition, safeguarding and urgent pathways.",
+      "This draft does not prescribe diets, supplements, enteral feeding or refeeding regimens."
+    ],
+    "modules": [
+      {
+        "title": "Screening and interpretation",
+        "description": "Use nutrition screening as a prompt for assessment, not a diagnosis or diet plan.",
+        "lessons": [
+          {
+            "title": "What screening can tell you",
+            "description": "Understand screening signals, limitations and the need for fuller nutritional assessment.",
+            "text": "Nutrition screening can identify people who may be malnourished or at risk, but it does not explain why intake changed or prescribe what should happen next. Ask about unintentional weight change, appetite, intake, swallowing, gastrointestinal symptoms, function, disease burden and social access, using an approved local tool if one exists. Interpret scores alongside age, body composition, fluid status, ethnicity, disability and the clinical context; a reassuring number can miss risk, and a high number is not a diagnosis. NICE CG32 covers screening and support for adults in hospital, home and care-home settings, but local pathways determine who assesses, reviews and monitors. Explain the purpose of questions and protect dignity, especially where weight is sensitive or disordered eating is possible. Record the tool, date, missing information and referral trigger. Do not convert a screening result into calories, supplements or a meal plan. Escalate uncertainty to a dietitian or responsible clinician."
+          },
+          {
+            "title": "Malnutrition as a clinical and social concern",
+            "description": "Connect intake, illness, function and food access without blaming the person.",
+            "text": "Malnutrition is not simply a matter of motivation or food choice. Chronic disease, inflammation, pain, nausea, swallowing difficulty, dental problems, medication effects, fatigue and altered ability to shop or cook can all affect intake. Poverty, housing, transport, culture, isolation and caring responsibilities may determine whether advice is feasible. Ask open questions about what food is available, who prepares it and what the person can tolerate, without assuming that a standard diet is acceptable. Consider whether weight change reflects fluid or another medical process, and seek clinical interpretation rather than guessing. Use the person’s goals and preferred foods when handing information to a qualified professional, while avoiding prescriptive portions or supplement recommendations. NICE CG32 identifies malnutrition risk across community and institutional settings and emphasises assessment and monitoring. Document barriers, safeguarding concerns, consent and the named referral owner. A respectful response addresses access and illness alongside nutrition; it never assigns blame or promises that a generic plan will work."
+          }
+        ],
+        "reflectiveActivity": "Complete a fictional screening reflection that distinguishes score, clinical context, access barriers, missing information and referral trigger."
+      },
+      {
+        "title": "Risk, comorbidity and specialist care",
+        "description": "Recognise situations in which generic nutrition messages are unsafe or insufficient.",
+        "lessons": [
+          {
+            "title": "Refeeding risk needs specialist judgement",
+            "description": "Recognise risk patterns and escalate before nutrition support is changed.",
+            "text": "Refeeding risk is a specialist safety concern because rapid changes in nutritional support after prolonged low intake can produce dangerous metabolic disturbance. Warning contexts may include substantial recent weight loss, very little intake, alcohol dependence, malabsorption or other severe illness, but a list cannot replace a trained assessment. Ask what has happened to intake and weight, review relevant history within scope, and flag concern before anyone starts, increases or changes nutritional support. Do not supply a refeeding formula, rate, electrolyte regimen or monitoring schedule. NICE CG32 provides guidance on identifying risk and managing nutrition support, while local protocols specify qualified review, laboratory monitoring and escalation. Explain to the person why a specialist may need to assess them and avoid alarming language that implies a diagnosis. If they are acutely unwell, confused, collapsing or otherwise unsafe, use urgent local medical services. Record the trigger, uncertainty, consent and accountable clinician. This lesson teaches recognition and referral only, not nutritional treatment."
+          },
+          {
+            "title": "Comorbidity changes the question",
+            "description": "Consider renal, cardiac, diabetic, gastrointestinal and swallowing contexts before generalising advice.",
+            "text": "A broad healthy-diet message can become unsafe when chronic disease changes nutritional requirements or tolerance. Kidney disease, heart failure, diabetes, liver disease, gastrointestinal disorders, cancer treatment, dysphagia and frailty may each alter the relevance of generic information, while multiple conditions can create competing priorities. Ask which clinical question the team is trying to answer and what monitoring already exists. Do not infer a dietary prescription from a diagnosis, laboratory value or social-media claim. Flag interactions between nutrition concerns and medicines, fluid status, swallowing, wound healing or functional decline to the appropriate clinician. WHO describes healthy diets through adequacy, balance, moderation and diversity, while also noting that composition varies with individual characteristics and context; those principles do not replace individual dietetic assessment. Record the limitation, the person’s preferences and the referral question. Dietitians and the wider team determine tailored support within local governance. No meal plan, restriction or supplement dose belongs in this course."
+          }
+        ],
+        "reflectiveActivity": "List the facts that would make generic nutrition advice unsafe in a fictional multimorbid case and formulate a question for specialist review."
+      },
+      {
+        "title": "Coordination and equity",
+        "description": "Make referrals, communication and follow-up accountable and culturally safe.",
+        "lessons": [
+          {
+            "title": "Working with a dietitian and team",
+            "description": "Translate screening information into a focused referral that supports coordinated care.",
+            "text": "A nutrition referral should make the receiving question clear: possible malnutrition, poor intake, refeeding concern, swallowing issue, symptom burden, access barrier or conflict between comorbidities. Include trajectory, relevant diagnoses, medicines, allergies if known, screening result and limitations, functional context, permission to share, preferred communication format and time sensitivity. Do not send a score without the person’s story or a story without the data needed to interpret it. Clarify who will monitor, who will update the person and what happens if the situation worsens while waiting. Dietitians may need information from nursing, medicine, speech and language therapy, pharmacy, social care or safeguarding colleagues; coordination is not a transfer of responsibility. Avoid promising appointment times, fees or service eligibility because these are UNKNOWN and locally variable. Document the handover and follow-up owner. The course does not authorise oral supplements, enteral feeding, parenteral nutrition or diet changes. Its practical contribution is a respectful, complete and reviewable referral."
+          },
+          {
+            "title": "Equity, communication and review",
+            "description": "Adapt nutrition conversations to culture, resources, disability and changing clinical priorities.",
+            "text": "Nutrition care is equitable only when recommendations can be understood, afforded, prepared and safely consumed. Ask about language, religion, culture, allergies, sensory needs, disability, food insecurity, housing, cooking equipment and who controls food decisions. Do not assume that a familiar food is available or that refusal reflects poor motivation. Use interpreters and accessible materials through approved services, and invite the person to correct assumptions. Review whether the proposed pathway remains acceptable as symptoms, finances, function or disease status change. Pay attention to weight stigma and eating-disorder risk; a target weight or food rule may cause harm when introduced without specialist assessment. WHO’s broad principles are population-level context, not a personal prescription. Record what the person wants, what is uncertain, what support is needed and who will revisit it. Escalate acute deterioration or safeguarding concerns through local services. This learning draft has no assessment, certification or authority to prescribe diets; qualified teams retain accountability."
+          }
+        ],
+        "reflectiveActivity": "Write an equitable dietitian referral including culture, communication, food access, consent, urgency and the accountable follow-up owner."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Does this provide a diet plan or supplement prescription?",
+        "answer": "No. It covers screening limits, risk recognition and referral; dietitians and qualified clinicians tailor support."
+      },
+      {
+        "question": "Can it assess or manage refeeding syndrome?",
+        "answer": "No. It highlights risk signals only. Specialist assessment, monitoring and local urgent pathways are required."
+      },
+      {
+        "question": "Does a WHO healthy-diet summary apply to every person with chronic disease?",
+        "answer": "No. WHO principles are broad population guidance; comorbidity, access and clinical context require individual specialist review."
+      },
+      {
+        "question": "Are dates, hours, fees, instructors, assessment, certification or accreditation confirmed?",
+        "answer": "No. All availability, hours, duration, fees, dates, instructors, assessment, certification and accreditation are UNKNOWN; no competence award is offered."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Patient Safety: Red Flags and Referral",
+        "slug": "patient-safety-red-flags-referral"
+      },
+      {
+        "title": "Clinical Documentation and Patient Communication: Making Care Understandable and Traceable",
+        "slug": "clinical-documentation-communication"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "NICE",
+        "title": "Nutrition support for adults (CG32)",
+        "url": "https://www.nice.org.uk/guidance/cg32",
+        "note": "Supports screening, malnutrition-risk recognition, nutrition-support governance and monitoring context; this draft excludes prescriptions and regimens."
+      },
+      {
+        "organisation": "WHO",
+        "title": "Healthy diet",
+        "url": "https://www.who.int/news-room/fact-sheets/detail/healthy-diet",
+        "note": "Supports broad principles of adequacy, balance, moderation and diversity while recognising individual and cultural variation; it is not an individual diet plan."
+      },
+      {
+        "organisation": "HCPC",
+        "title": "Standards of continuing professional development",
+        "url": "https://www.hcpc-uk.org/standards/standards-of-continuing-professional-development/",
+        "note": "Supports relevant reflective learning linked to safe practice and service-user benefit; it does not establish dietetic competence."
+      }
+    ]
+  }
+]
