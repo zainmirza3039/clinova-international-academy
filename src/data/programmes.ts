@@ -174,7 +174,7 @@ export const programmes: Programme[] = [
     category: 'Learning Guide',
     description: 'A structured guide to rehabilitation principles, team roles, functional goals and professional scope.',
     overview:
-      'This proposed curriculum connects rehabilitation reasoning, participation goals, team coordination and specialist boundaries across neurological, musculoskeletal and cardiopulmonary examples. The draft title does not establish a diploma award or specialist clinical competence; individual care remains subject to qualified assessment, professional scope and local pathways.',
+      'This educational outline connects rehabilitation reasoning, participation goals, team coordination and specialist boundaries across neurological, musculoskeletal and cardiopulmonary examples. The catalogue title does not establish a diploma award or specialist clinical competence; individual care remains subject to qualified assessment, professional scope and local pathways.',
     duration: 'Awaiting confirmation',
     cpdHours: null,
     delivery: 'Awaiting confirmation',
@@ -256,7 +256,7 @@ export const programmes: Programme[] = [
     category: 'Learning Guide',
     description: 'An educational introduction to CBT concepts, formulation and professional training limits; it does not qualify a therapist.',
     overview:
-      'This proposed reading curriculum introduces CBT theory, formulation concepts, evidence limits and the requirements for specialist training and supervision. It does not qualify a therapist, authorise diagnosis or treatment, or provide instructions for delivering psychotherapy.',
+      'This educational outline introduces CBT theory, formulation concepts, evidence limits and the requirements for specialist training and supervision. It does not qualify a therapist, authorise diagnosis or treatment, or provide instructions for delivering psychotherapy.',
     duration: 'Awaiting confirmation',
     cpdHours: null,
     delivery: 'Awaiting confirmation',
