@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import AdmissionsPage from '@/pages/AdmissionsPage';
 import ApplicationPage from '@/pages/ApplicationPage';
 import AdminPage from '@/pages/AdminPage';
+import { AuthProvider } from '@/auth/AuthProvider';
 import CommunityPage, { EventsPage, FacultyPage } from '@/pages/CommunityPage';
 import FAQsPage from '@/pages/FAQsPage';
 
@@ -22,7 +23,7 @@ describe('completion frontend pages', () => {
   });
 
   it('keeps admin access blocked without presenting credentials or fake records', () => {
-    renderPage(<AdminPage />);
+    render(<MemoryRouter><AuthProvider><AdminPage /></AuthProvider></MemoryRouter>);
     expect(screen.getByRole('heading', { name: /administration is not enabled/i })).toBeTruthy();
     expect(screen.getByText(/server-side authentication and role contract/i)).toBeTruthy();
     expect(screen.queryByLabelText(/password|email/i)).toBeNull();
