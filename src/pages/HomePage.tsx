@@ -19,17 +19,17 @@ import { newsItems, generalFAQs } from '@/data/content';
 import { useState } from 'react';
 
 const learningSteps = [
-  { number: '01', title: 'Choose Your Programme', desc: 'Browse our catalogue and select a programme that fits your professional goals.' },
-  { number: '02', title: 'Study Online', desc: 'Access video lessons, reading materials and resources through our online platform.' },
-  { number: '03', title: 'Complete Assessment', desc: 'Demonstrate your understanding through quizzes, assignments and case studies.' },
-  { number: '04', title: 'Receive Your Certificate', desc: 'Get your digital Certificate of Completion upon successful programme completion.' },
+  { number: '01', title: 'Review a Proposed Programme', desc: 'Browse illustrative catalogue outlines and consider which topics may fit your professional goals.' },
+  { number: '02', title: 'Explore Illustrative Materials', desc: 'Read proposed learning themes, resources and activities for professional reflection.' },
+  { number: '03', title: 'Reflect on Relevance', desc: 'Consider how a topic relates to your role, scope of practice and further learning needs.' },
+  { number: '04', title: 'Confirm Before Enrolment', desc: 'Ask the academy to confirm availability, terms and any assessment or recognition before making plans.' },
 ];
 
 const pathwaySteps = [
-  { label: 'Certificate Courses', desc: 'Start with focused short programmes' },
-  { label: 'Professional Development', desc: 'Build specialised professional skills' },
-  { label: 'Diploma Programmes', desc: 'Undertake comprehensive study' },
-  { label: 'Advanced Learning', desc: 'Continue your educational journey' },
+  { label: 'Proposed Short Courses', desc: 'Review focused illustrative topic outlines' },
+  { label: 'Professional Development Topics', desc: 'Explore proposed skill-building themes' },
+  { label: 'Proposed Diploma Outlines', desc: 'Consider illustrative study structures' },
+  { label: 'Further Learning Ideas', desc: 'Use the catalogue for planning, not enrolment' },
 ];
 
 export default function HomePage() {
@@ -111,7 +111,7 @@ export default function HomePage() {
               {[
                 { label: 'Flexible Study' },
                 { label: 'CPD-focused learning' },
-                { label: 'Digital Certificates' },
+                { label: 'Proposed learning outlines' },
                 { label: 'Global Access' },
                 { label: 'Self-Paced' },
               ].map((item) => (
@@ -285,8 +285,9 @@ export default function HomePage() {
               How It Works
             </div>
             <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
-              Your learning journey
+              An illustrative learning journey
             </h2>
+            <p className="mt-4 text-sm text-navy-600/70 leading-relaxed">This proposed pathway is illustrative only. It does not represent an active enrolment, confirmed assessment, successful completion or certificate.</p>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {learningSteps.map((step, i) => (
@@ -354,7 +355,7 @@ export default function HomePage() {
               Professional pathways
             </h2>
             <p className="mt-5 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-              A conceptual learning pathway to guide your professional development — from foundational certificates to advanced study.
+              A proposed, illustrative learning pathway for professional development planning — not an active enrolment or a promise of certificates or outcomes.
             </p>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-8">

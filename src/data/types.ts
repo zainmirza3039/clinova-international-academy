@@ -30,7 +30,7 @@ export interface Programme {
   description: string;
   overview: string;
   duration: string;
-  cpdHours: number;
+  cpdHours: number | null;
   delivery: string;
   level: ProgrammeLevel;
   certificate: string;
@@ -45,7 +45,7 @@ export interface Programme {
 
 export type ProgrammeCategory = 'Certificate' | 'Diploma' | 'Professional Development' | 'CPD';
 export type ProgrammeLevel = 'Foundation' | 'Intermediate' | 'Advanced';
-export type ProgrammeStatus = 'Open' | 'Coming Soon';
+export type ProgrammeStatus = 'Draft' | 'Open' | 'Coming Soon';
 
 export interface CPDCourse {
   id: string;
@@ -53,7 +53,7 @@ export interface CPDCourse {
   slug: string;
   title: string;
   department: string;
-  cpdHours: number;
+  cpdHours: number | null;
   duration: string;
   level: ProgrammeLevel;
   description: string;

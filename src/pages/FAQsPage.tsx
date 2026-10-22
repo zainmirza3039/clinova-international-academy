@@ -1,0 +1,15 @@
+import { useState } from 'react';
+import { ChevronDown, MessageCircleQuestion } from 'lucide-react';
+import PageHero from '@/components/PageHero';
+import { useSEO } from '@/hooks/useSEO';
+
+const faqs = [
+  ['How do I choose a programme?', 'Start with the programme and department pages, then contact the academy if you need help understanding which route fits your goals. Requirements and suitability can vary by programme.'],
+  ['How can I ask about admissions?', 'Use the Contact page for an admissions enquiry. Please do not send sensitive documents until the academy confirms what is needed and how it should be shared.'],
+  ['Can I submit an application online?', 'The application planner is not a live submission service. It does not save or transmit information. A confirmed application process will be published here when the secure workflow is available.'],
+  ['Where can I find course details?', 'Browse the Programmes and CPD Courses sections for the information currently published on this site. If something is unclear, ask the team directly.'],
+  ['What fees or funding are available?', 'Fees and funding are programme-specific and are not stated here without confirmed information. Please contact the academy for current details rather than relying on estimates.'],
+  ['How do I contact Clinova?', 'Use the Contact page for general, academic and partnership enquiries. It provides the currently supported contact route and expected response guidance.'],
+];
+
+export default function FAQsPage() { useSEO({ title: 'Frequently asked questions', description: 'Helpful general answers about programmes, admissions and contacting Clinova International Academy.' }); const [open, setOpen] = useState<number | null>(0); return <><PageHero breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'FAQs' }]} eyebrow="FAQs" title="Helpful answers, clearly stated" description="A reviewed starting point for common questions. Where details depend on a programme or are not confirmed, we say so." /><section className="py-16 lg:py-24 bg-surface-50"><div className="max-w-3xl mx-auto px-6 lg:px-10"><div className="flex items-center gap-3 mb-8"><MessageCircleQuestion className="w-6 h-6 text-teal-500" aria-hidden="true" /><h2 className="font-heading text-2xl font-bold text-navy-800">Common questions</h2></div><div className="space-y-3">{faqs.map(([question, answer], index) => { const expanded = open === index; return <div key={question} className="bg-white border border-navy-200"><button type="button" className="w-full flex items-center justify-between gap-4 p-5 text-left" aria-expanded={expanded} aria-controls={`faq-answer-${index}`} onClick={() => setOpen(expanded ? null : index)}><span className="font-heading font-semibold text-navy-800">{question}</span><ChevronDown className={`w-5 h-5 text-clinical-600 shrink-0 transition-transform ${expanded ? 'rotate-180' : ''}`} aria-hidden="true" /></button><div id={`faq-answer-${index}`} role="region" hidden={!expanded} className="px-5 pb-5 text-sm leading-relaxed text-navy-600">{answer}</div></div>; })}</div></div></section></>; }

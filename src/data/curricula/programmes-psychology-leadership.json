@@ -1,0 +1,260 @@
+[
+  {
+    "programmeSlug": "certificate-in-cognitive-behavioural-therapy-fundamentals",
+    "status": "draft",
+    "reviewNotice": "Proposed introductory professional-learning draft only. It requires qualified clinical, safeguarding, accessibility and editorial review, plus jurisdiction-specific review before any publication. Reading does not qualify a CBT therapist, diagnose, authorise treatment or provide clinical competence. Future hours, duration, fees, instructors, availability, assessment, accreditation and certificates are unknown; no pass rules are set.",
+    "outcomes": [
+      "Describe the links among situations, interpretations, emotions, bodily responses and behaviour in introductory CBT theory.",
+      "Use a fictional case to distinguish a tentative, collaborative formulation from a diagnosis or treatment plan.",
+      "Recognise consent, confidentiality, safeguarding, referral and scope-of-practice boundaries in mental-health learning.",
+      "Discuss how culture, inequality, accessibility and power can shape formulation and engagement.",
+      "Identify why qualified mental-health supervision and local crisis pathways matter when risk or complexity increases."
+    ],
+    "intendedAudience": [
+      "Health, social-care, education and voluntary-sector workers seeking a cautious introduction to CBT concepts.",
+      "Learners considering further regulated or professionally supervised mental-health training.",
+      "Managers and educators who need shared language for psychologically informed, non-therapeutic conversations."
+    ],
+    "prerequisites": [
+      "Basic familiarity with professional confidentiality, consent and safeguarding responsibilities.",
+      "Capacity to work with fictional scenarios without using personal records or identifiable service-user information.",
+      "This draft does not establish competence to assess, diagnose, formulate clinically, treat, use exposure techniques or provide therapy; follow local law, employer policy, scope and supervision."
+    ],
+    "modules": [
+      {
+        "title": "CBT as a collaborative explanatory model",
+        "description": "Introduce core CBT ideas without presenting a learning outline as therapy training or a diagnostic method.",
+        "lessons": [
+          {
+            "title": "The CBT map: events, meanings and responses",
+            "description": "Learn a simple, non-mechanical account of how context and interpretation can influence patterns.",
+            "text": "CBT often begins by asking how a situation, its meaning, emotional and bodily responses, and subsequent behaviour may interact. This is a map for curiosity, not proof that thoughts cause every difficulty or that a person is responsible for distress. A fictional example might show a missed message being interpreted as rejection, followed by anxiety, checking and withdrawal; other explanations, relationships and material pressures remain possible. The model is provisional, collaborative and revisable. Describe automatic thoughts as rapid interpretations rather than facts, and distinguish them from values, memories and observations. Avoid turning the model into a worksheet imposed on someone who does not find it useful. Culture, discrimination, poverty, disability, trauma and physical health can shape both situations and available choices. This introductory lesson uses no personal records and offers no DIY therapy script. It cannot diagnose or authorise treatment; practitioners must work within scope, seek qualified mental-health supervision and use local pathways when concerns exceed their role."
+          },
+          {
+            "title": "Patterns, maintenance and strengths",
+            "description": "Consider cycles that maintain distress while noticing resources and exceptions.",
+            "text": "A CBT formulation may explore how short-term coping can unintentionally maintain a problem. In a fictional case, avoiding a crowded shop may reduce anxiety immediately while narrowing activity and reinforcing a prediction of danger. That hypothesis must be tested respectfully, not announced as a truth. Ask what happens before and after a pattern, what the person hopes to protect, and when the pattern does not occur. Include strengths, supportive relationships, practical resources, identity and reasons the response may have made sense. Do not reduce complex trauma, neurodivergence, grief or social threat to an individual cognitive error. A formulation is not a diagnosis, risk assessment or treatment authorisation, and a diagram cannot replace a full assessment by an appropriately qualified professional. Learners should practise describing alternative hypotheses and uncertainty using fictional material only. If a real conversation reveals serious risk, abuse or inability to stay safe, stop educational discussion, follow safeguarding duties and contact qualified supervision and urgent local crisis or emergency services as appropriate."
+          }
+        ],
+        "reflectiveActivity": "Using a wholly fictional scenario, draw two possible situation–meaning–response cycles, then identify one strength, one contextual factor and one uncertainty. Do not use personal records, names or clinical advice."
+      },
+      {
+        "title": "Ethical formulation and inclusive practice",
+        "description": "Practise careful language, consent and culturally responsive thinking around fictional cases.",
+        "lessons": [
+          {
+            "title": "Formulation as a shared, bounded hypothesis",
+            "description": "Separate observation, interpretation, diagnosis and intervention when discussing a case.",
+            "text": "A safe introductory formulation distinguishes what a fictional person reports, what an observer notices, and what remains a hypothesis. Use tentative language such as ‘one possibility’ and invite correction. Ask what the person wants understood, what has helped before, and what explanation fits their culture, relationships and environment. Do not infer a disorder from a symptom, assign a label from a vignette, or promise that changing a thought will change an outcome. A formulation should have a purpose, be proportionate to the role and be reviewed when information changes. Consent includes explaining why information is being discussed, who may see it and how the person can decline; fictional learning activities should not solicit sensitive disclosures. HCPC standards emphasise lawful, ethical practice, safeguarding, valid consent, appropriate referral and work within scope. Those standards are not conferred by this draft. Any real clinical formulation requires appropriate training, governance and qualified supervision. Jurisdictional rules differ, so learners must follow local professional requirements rather than assuming UK guidance applies elsewhere."
+          },
+          {
+            "title": "Power, culture and accessibility",
+            "description": "Notice how social position and service design affect CBT conversations and hypotheses.",
+            "text": "A formulation can reproduce harm if it treats an inaccessible service, discrimination or unsafe housing as an individual belief problem. Consider whose interpretation is treated as credible, who controls the agenda, and whether language, disability, neurodivergence, faith, race, gender, sexuality, age or migration experience affects trust and options. Reasonable adjustments may include communication aids, pacing, interpreters or alternative formats, subject to local policy and informed consent. Avoid assuming that eye contact, emotional expression or family involvement has one meaning. Invite the person to name priorities and disagreement, while recognising that a power imbalance can make refusal difficult. Work with observable context before hypothesising about cognition, and record uncertainty rather than inventing certainty. This is reflective education, not cultural competence certification or a treatment protocol. Use fictional, de-identified scenarios only; never paste records into a learning exercise. Where a real person may be at risk of harm, abuse or exploitation, follow safeguarding procedures, obtain qualified supervision and use urgent local crisis or emergency services when indicated."
+          }
+        ],
+        "reflectiveActivity": "Review a fictional vignette for three assumptions about culture, access or power. Rewrite each as a respectful question, add one reasonable adjustment, and state what information remains unknown."
+      },
+      {
+        "title": "Boundaries, referral and safe next steps",
+        "description": "Recognise when introductory CBT knowledge must stop and qualified care or crisis support must begin.",
+        "lessons": [
+          {
+            "title": "Scope, supervision and referral boundaries",
+            "description": "Understand why reading about CBT is not therapist training or authority to intervene.",
+            "text": "HCPC describes scope of practice as the knowledge, skills and experience needed to practise lawfully, safely and effectively, and expects professionals to identify limits, seek advice and refer. BABCP’s public minimum-training information describes substantial specialist teaching, supervised clinical practice and ongoing supervision for accreditation; this introductory draft supplies none of those requirements. Therefore learners must not diagnose, deliver CBT, write treatment plans, run exposure exercises, advise medication, or represent themselves as qualified therapists on the basis of reading. In a fictional handover, state the observed concern, uncertainty, urgency and appropriate receiving service rather than prescribing a technique. Qualified mental-health supervision is essential when a real situation is emotionally complex, outside role, or affected by risk. Follow employer policy, consent, information governance and jurisdiction-specific law. If a person discloses serious risk, abuse, imminent danger or inability to stay safe, pause educational conversation and use local safeguarding, crisis and emergency pathways. This lesson does not provide a risk algorithm; local services determine the response."
+          },
+          {
+            "title": "Safety, stepped care and uncertainty",
+            "description": "Read guidance critically and communicate limits without making promises.",
+            "text": "NICE CG113 addresses adults with generalised anxiety disorder or panic disorder and includes principles of care and stepped-care recommendations. Its population, evidence and local implementation context matter; it is not a universal script, diagnosis tool or substitute for professional judgement. NICE also notes that recommendations should be considered alongside individual needs, preferences and values. In fictional learning, compare two possible next steps and ask what information, consent, risk review and qualified role would be needed before action. Communicate that uncertainty honestly, avoid implying that a guideline guarantees remission, and safety-net with an appropriate service rather than offering unsupported reassurance. Serious risk, safeguarding concerns or rapid deterioration require qualified assessment and urgent local crisis or emergency services, not self-guided CBT exercises. No exposure instructions, thought-challenging scripts or DIY therapy are included here. Learners should record what they do not know and seek supervision. UK sources may not govern other jurisdictions, so verify local referral numbers, law, professional titles and service access before applying any principle."
+          }
+        ],
+        "reflectiveActivity": "Write a fictional referral note with facts, uncertainty, scope limit, urgency and receiving service. Add a sentence explaining why a CBT technique would be inappropriate for the learner to provide."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Does this make me a CBT therapist or allow me to diagnose?",
+        "answer": "No. It is an introductory proposed curriculum and does not qualify a CBT therapist, diagnose, authorise treatment, or establish clinical competence. Specialist training, supervised practice, registration or accreditation requirements vary by role and jurisdiction."
+      },
+      {
+        "question": "Can I use the lessons as a therapy script or practise exposure?",
+        "answer": "No. No DIY therapy scripts or exposure techniques are provided. Do not use the material to treat yourself or another person. Seek an appropriately qualified professional and follow local clinical pathways."
+      },
+      {
+        "question": "What should I do if a real person may be unsafe?",
+        "answer": "Stop the educational exercise, follow your safeguarding and employer procedures, obtain qualified mental-health supervision, and contact urgent local crisis or emergency services when serious or imminent risk is present. Local pathways and laws govern the response."
+      },
+      {
+        "question": "Are hours, instructors, assessment, accreditation or certificates confirmed?",
+        "answer": "No. Future hours, duration, fees, instructors, availability, assessment, accreditation and certificates are unknown. There are no actual pass rules, enrolment arrangements or recognition claims in this draft."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Musculoskeletal Pain and Function: Looking Beyond a Pain Score",
+        "slug": "musculoskeletal-pain-and-function"
+      },
+      {
+        "title": "Clinical Documentation and Patient Communication: Making Care Understandable and Traceable",
+        "slug": "clinical-documentation-communication"
+      },
+      {
+        "title": "Evidence-Based Physiotherapy: Integrating Research, Expertise and What Matters to the Person",
+        "slug": "evidence-based-practice-physiotherapy"
+      },
+      {
+        "title": "Patient Safety, Red Flags and Referral: Managing Uncertainty Responsibly",
+        "slug": "patient-safety-red-flags-referral"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "NICE",
+        "title": "Generalised anxiety disorder and panic disorder in adults: management (CG113)",
+        "url": "https://www.nice.org.uk/guidance/cg113",
+        "note": "Opened source: defines adult scope, principles of care and stepped-care recommendations; apply with individual needs, values, local pathways and professional judgement."
+      },
+      {
+        "organisation": "HCPC",
+        "title": "Standards of proficiency: practitioner psychologists",
+        "url": "https://www.hcpc-uk.org/standards/standards-of-proficiency/practitioner-psychologists/",
+        "note": "Opened source: scope, ethical boundaries, consent, safeguarding, referral, equality and supervision expectations."
+      },
+      {
+        "organisation": "BABCP",
+        "title": "Minimum Training Standards for the practice of Cognitive Behavioural Therapy",
+        "url": "https://babcp.com/about/who-are-babcp/our-policies/minimum-training-standards/",
+        "note": "Opened source: accreditation benchmark includes specialist teaching, supervised clinical practice and ongoing supervision; this draft does not provide those requirements."
+      }
+    ]
+  },
+  {
+    "programmeSlug": "professional-development-in-healthcare-leadership",
+    "status": "draft",
+    "reviewNotice": "Proposed professional-development draft only. It requires qualified leadership, patient-safety, equality, accessibility and editorial review, with jurisdiction-specific governance review before publication. It creates no credential, authority, appointment or decision rights. Future hours, duration, fees, instructors, availability, assessment, accreditation and certificates are unknown; no pass rules are set.",
+    "outcomes": [
+      "Describe how leadership behaviours, structures and culture influence safety, care quality and staff experience.",
+      "Use systems and human-factors thinking to explore why work varies without reducing incidents to individual blame.",
+      "Plan a bounded improvement conversation using measures, stakeholder involvement, equity checks and iterative learning.",
+      "Practise psychologically safer team learning, feedback, escalation and transparent communication in fictional scenarios.",
+      "Recognise the limits of an educational outline and the need to follow local governance, professional accountability and escalation routes."
+    ],
+    "intendedAudience": [
+      "Current or aspiring healthcare team leads, educators, improvement practitioners and service managers.",
+      "Clinicians and operational colleagues who want a systems-oriented introduction to leadership for safer care.",
+      "Cross-disciplinary teams building shared language for learning, equity and quality improvement."
+    ],
+    "prerequisites": [
+      "Experience of working in or alongside a health, care, public-health or community service is helpful but not required.",
+      "Willingness to examine power, bias, uncertainty and the difference between influence and formal authority.",
+      "Use fictional scenarios only; do not include patient records, confidential incident details or identifiable staff information. This draft does not confer a leadership credential or decision-making authority."
+    ],
+    "modules": [
+      {
+        "title": "Leadership as a system practice",
+        "description": "Connect leadership behaviour with context, relationships, structures and safe care rather than heroic individualism.",
+        "lessons": [
+          {
+            "title": "From heroic leader to learning system",
+            "description": "Explore how conditions of work shape behaviour, outcomes and improvement capacity.",
+            "text": "Healthcare leadership is not only a personal style or a senior title. Work is shaped by staffing, workload, technology, policies, incentives, physical space, relationships and the wider community. A useful leader asks how these conditions make safe or unsafe actions easier, rather than explaining every outcome as individual competence or attitude. In a fictional service, map the people, processes, dependencies and constraints around a recurring delay. Include patient and family voices, but protect confidentiality and avoid inventing facts. Distinguish formal authority from influence: a coordinator may change a handover conversation while needing escalation for staffing or infrastructure. NHS England’s patient-safety strategy describes safer culture and safer systems, with insight, involvement and improvement as strategic aims. This lesson does not grant authority to change a real service or investigate an incident. Leaders must use local governance, professional accountability and escalation routes. The purpose is to build curiosity, fairness and practical listening before selecting an intervention or attributing blame."
+          },
+          {
+            "title": "Values, purpose and distributed leadership",
+            "description": "Align everyday decisions with shared purpose while making power and accountability visible.",
+            "text": "A credible leadership purpose translates values such as dignity, safety, equity and stewardship into observable choices. Ask whose outcomes count, what trade-offs are being made and how people can challenge a decision. Distributed leadership means expertise can be exercised at the point of work; it does not erase accountability, role boundaries or the need for a clear decision owner. In a fictional multidisciplinary meeting, invite quieter voices, name uncertainty, check assumptions and explain what can and cannot be decided today. Avoid calling consultation participation when the outcome is already fixed. Consider how hierarchy, profession, race, disability, gender, language, status and employment conditions affect speaking up. Make disagreement safe without treating all claims as equally evidenced: leaders still need transparent reasoning and appropriate review. A learning outline cannot appoint anyone, authorise clinical decisions or replace statutory duties. Use local policies for consent, information governance, safeguarding, workforce relations and incident response. Effective leadership creates conditions for reliable care, not personal loyalty to a leader."
+          }
+        ],
+        "reflectiveActivity": "Using a fictional delayed-care scenario, map five system conditions, two sources of formal authority and three sources of informal influence. Identify whose voice is missing and one safe escalation route."
+      },
+      {
+        "title": "Human factors, equity and team learning",
+        "description": "Use non-blaming analysis and inclusive team practices to understand variation and prevent avoidable harm.",
+        "lessons": [
+          {
+            "title": "Human factors and resilient work",
+            "description": "Examine how design, workload and interruptions interact with human performance.",
+            "text": "People work within systems that shape attention, memory, decision-making and recovery. Interruptions, confusing interfaces, ambiguous labels, fatigue, workload, handover gaps and competing priorities can combine in predictable ways. Human-factors thinking asks what happened, what made sense at the time, and how design can support safer action. It does not excuse reckless conduct or remove professional accountability; it prevents a simplistic ‘who failed?’ investigation from stopping learning. In a fictional medication handover, examine task demands, information flow, equipment, staffing and local adaptations before proposing a fix. Separate facts from assumptions and avoid using confidential incident records in learning activities. Test whether a proposed barrier creates new work or shifts risk elsewhere. NHS England frames patient safety around culture, systems, insight, involvement and improvement, while local organisations determine their incident processes and governance. This draft is not a safety investigation method, legal advice or authority to alter a clinical process. Escalate actual hazards through local reporting and safety channels, preserving evidence and confidentiality."
+          },
+          {
+            "title": "Equity, voice and psychological safety",
+            "description": "Make inclusion and speaking up practical parts of team performance and learning.",
+            "text": "A team can be polite yet unsafe if people cannot challenge decisions, report near misses or describe unequal impact. Psychological safety is not comfort without accountability; it is a condition in which questions, uncertainty and concerns can be raised without humiliation or retaliation. Leaders should model curiosity, thank people for speaking up, close feedback loops and address harmful conduct. Examine who receives workload, development, flexibility and credibility, and whether a service change creates barriers for disabled people, minoritised groups, carers, people with limited digital access or people who need language support. Use disaggregated data carefully, protect small groups from identification and combine numbers with lived experience. Do not ask a marginalised colleague to educate the team or disclose personal trauma. In fictional exercises, build an equity check into the decision record: affected groups, potential benefit, potential burden, adjustment and review signal. Local equality law, workforce policy and safeguarding duties apply. This lesson offers no leadership certification and cannot replace specialist advice or formal routes for discrimination, bullying or whistleblowing."
+          }
+        ],
+        "reflectiveActivity": "Role-play a fictional team debrief after a near miss. Write three leader responses that increase psychological safety, one that would silence people, and an equity question for the improvement plan."
+      },
+      {
+        "title": "Improvement, communication and accountability",
+        "description": "Turn learning into proportionate experiments, measures and honest communication without overclaiming results.",
+        "lessons": [
+          {
+            "title": "Improvement questions and useful measures",
+            "description": "Frame a small change, learn from variation and avoid metric-driven unintended harm.",
+            "text": "Quality improvement begins with a clear problem and a shared definition of better, not with a fashionable tool. In a fictional outpatient pathway, ask what matters to patients and staff, where variation occurs, and what change might plausibly help. Choose a small, reversible test where possible; identify an outcome measure, a process measure and a balancing measure such as workload or unequal access. Review data over time and listen for unintended consequences. A target is not the same as an improvement, and a dashboard cannot explain causation on its own. Involve those who do the work and those affected by it, including people who may be under-represented in routine data. Record assumptions, decision owner, review date, escalation threshold and what would prompt stopping or adapting the test. NHS England’s patient-safety approach links insight, involvement and improvement, but local quality-governance arrangements determine approval and oversight. This draft does not authorise a service change, prescribe a QI method or promise results. Protect confidentiality and use synthetic examples only."
+          },
+          {
+            "title": "Communication, accountability and learning loops",
+            "description": "Communicate uncertainty and close the loop with patients, families, staff and partners.",
+            "text": "Trust grows when leaders explain what is known, what is uncertain, what is being done and when people will hear more. In a fictional service change, tailor communication to patients, families, staff, community partners and regulators rather than sending one generic message. Use plain language, accessible formats and interpreters or communication support where needed. Do not promise outcomes before evidence exists, conceal adverse effects, or imply that listening guarantees agreement. Accountability includes naming the decision process and owner, documenting dissent, responding to concerns and reviewing whether the intervention helped or harmed. Team learning requires a loop: gather insight, agree an action, test it, share findings, adapt and check whether benefits are sustained and equitably distributed. Serious incidents, safeguarding matters and professional concerns require local reporting, duty-of-candour or other jurisdiction-specific processes as applicable; this educational draft is not legal or governance advice. It creates no authority, credential or appointment. Leaders should seek specialist advice when communications involve confidentiality, litigation, media, employment or significant patient harm."
+          }
+        ],
+        "reflectiveActivity": "Create a fictional one-page improvement brief with problem, affected groups, proposed small test, three measures, decision owner, equity check, review date and a plain-language uncertainty statement."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Does this curriculum make me a healthcare leader or give me authority?",
+        "answer": "No. It is a proposed professional-development outline, not a credential, appointment or delegation of authority. Leadership responsibilities, decision rights, professional accountability and governance remain defined by the employing organisation and applicable law."
+      },
+      {
+        "question": "Can I use it to investigate an incident or change a clinical process?",
+        "answer": "No. Use local patient-safety reporting, investigation, quality-governance, information-governance and escalation procedures. This draft uses fictional examples and does not replace specialist safety, legal, clinical or workforce advice."
+      },
+      {
+        "question": "How are equity and human factors treated here?",
+        "answer": "They are treated as core systems concerns: examine workload, design, hierarchy, access, unequal impact, speaking up and unintended consequences. The outline does not certify competence in equality, human factors or quality improvement."
+      },
+      {
+        "question": "Are hours, instructors, assessment, accreditation or certificates confirmed?",
+        "answer": "No. Future hours, duration, fees, instructors, availability, assessment, accreditation and certificates are unknown. There are no actual pass rules, enrolment arrangements or recognition claims in this draft."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Clinical Documentation and Patient Communication: Making Care Understandable and Traceable",
+        "slug": "clinical-documentation-communication"
+      },
+      {
+        "title": "Evidence-Based Physiotherapy: Integrating Research, Expertise and What Matters to the Person",
+        "slug": "evidence-based-practice-physiotherapy"
+      },
+      {
+        "title": "Patient Safety, Red Flags and Referral: Managing Uncertainty Responsibly",
+        "slug": "patient-safety-red-flags-referral"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "NHS England",
+        "title": "Patient safety",
+        "url": "https://www.england.nhs.uk/patient-safety/",
+        "note": "Opened source: defines patient safety and describes safer culture and systems, with insight, involvement and improvement."
+      },
+      {
+        "organisation": "World Health Organization",
+        "title": "Global Patient Safety Action Plan 2021–2030",
+        "url": "https://www.who.int/publications/i/item/9789240032705",
+        "note": "International policy context for reducing avoidable harm, engaging people and strengthening safety systems; jurisdictional implementation varies."
+      },
+      {
+        "organisation": "NHS England",
+        "title": "NHS Patient Safety Strategy",
+        "url": "https://www.england.nhs.uk/patient-safety/the-nhs-patient-safety-strategy/",
+        "note": "Opened-linked NHS source for patient-safety culture, systems, learning and improvement; local governance remains controlling."
+      }
+    ]
+  }
+]

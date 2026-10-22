@@ -6,11 +6,11 @@ export const departments: Department[] = [
     slug: 'physical-therapy-rehabilitation',
     name: 'Physical Therapy & Rehabilitation',
     shortName: 'Physical Therapy',
-    description: 'Evidence-informed education in musculoskeletal, neurological and sports rehabilitation.',
+    description: 'Proposed educational subject area for reading, reflection and study planning.',
     overview:
-      'Our Physical Therapy & Rehabilitation department provides structured online education focused on clinical assessment, therapeutic exercise, manual therapy techniques and rehabilitation science. Programmes are designed for physiotherapists and rehabilitation professionals seeking to deepen their practical knowledge.',
+      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
     image: 'https://images.pexels.com/photos/20860622/pexels-photo-20860622.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 12,
+    programmeCount: 3,
     learningAreas: [
       'Musculoskeletal Physiotherapy',
       'Neurological Rehabilitation',
@@ -27,11 +27,11 @@ export const departments: Department[] = [
     slug: 'nursing-allied-health',
     name: 'Nursing & Allied Health',
     shortName: 'Nursing',
-    description: 'Professional development for nurses and allied health practitioners.',
+    description: 'Proposed educational subject area for reading, reflection and study planning.',
     overview:
-      'The Nursing & Allied Health department offers online education tailored to the needs of registered nurses, healthcare assistants and allied health professionals. Our programmes cover clinical skills, patient-centred care and professional practice development.',
+      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
     image: 'https://images.pexels.com/photos/32115899/pexels-photo-32115899.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 10,
+    programmeCount: 1,
     learningAreas: [
       'Patient Assessment',
       'Wound Care Management',
@@ -48,11 +48,11 @@ export const departments: Department[] = [
     slug: 'medicine',
     name: 'Medicine',
     shortName: 'Medicine',
-    description: 'Continuing medical education for doctors and medical practitioners.',
+    description: 'Proposed educational subject area for reading, reflection and study planning.',
     overview:
-      'Our Medicine department provides continuing medical education for qualified doctors and medical practitioners. Programmes focus on clinical updates, diagnostic reasoning and evidence-informed practice across a range of medical specialities.',
+      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
     image: 'https://images.pexels.com/photos/6762866/pexels-photo-6762866.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 8,
+    programmeCount: 0,
     learningAreas: [
       'Clinical Diagnostics',
       'Evidence-Based Medicine',
@@ -69,11 +69,11 @@ export const departments: Department[] = [
     slug: 'dentistry',
     name: 'Dentistry',
     shortName: 'Dentistry',
-    description: 'Professional education for dental practitioners and dental teams.',
+    description: 'Proposed educational subject area for reading, reflection and study planning.',
     overview:
-      'The Dentistry department offers structured online education for dental professionals. Programmes cover clinical techniques, patient management and professional development for the modern dental practice.',
+      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
     image: 'https://images.pexels.com/photos/8413334/pexels-photo-8413334.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 6,
+    programmeCount: 0,
     learningAreas: [
       'Restorative Dentistry',
       'Patient Communication',
@@ -90,11 +90,11 @@ export const departments: Department[] = [
     slug: 'pharmacy',
     name: 'Pharmacy',
     shortName: 'Pharmacy',
-    description: 'Continuing education for pharmacists and pharmacy professionals.',
+    description: 'Proposed educational subject area for reading, reflection and study planning.',
     overview:
-      'Our Pharmacy department provides online continuing education for pharmacists and pharmacy professionals. Programmes focus on pharmacotherapy updates, patient counselling and clinical pharmacy practice.',
+      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
     image: 'https://images.pexels.com/photos/14797864/pexels-photo-14797864.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 7,
+    programmeCount: 0,
     learningAreas: [
       'Pharmacotherapy Updates',
       'Patient Counselling',
@@ -111,11 +111,11 @@ export const departments: Department[] = [
     slug: 'psychology-mental-health',
     name: 'Psychology & Mental Health',
     shortName: 'Psychology',
-    description: 'Education in psychological practice and mental health care.',
+    description: 'Proposed educational subject area for reading, reflection and study planning.',
     overview:
-      'The Psychology & Mental Health department offers online education for psychologists, counsellors and mental health practitioners. Programmes cover therapeutic approaches, assessment skills and evidence-informed mental health practice.',
+      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
     image: 'https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 9,
+    programmeCount: 1,
     learningAreas: [
       'Cognitive Behavioural Therapy',
       'Psychological Assessment',
@@ -132,11 +132,11 @@ export const departments: Department[] = [
     slug: 'nutrition-dietetics',
     name: 'Nutrition & Dietetics',
     shortName: 'Nutrition',
-    description: 'Education in clinical nutrition, dietetics and dietary management.',
+    description: 'Proposed educational subject area for reading, reflection and study planning.',
     overview:
-      'Our Nutrition & Dietetics department provides online education for nutritionists, dietitians and healthcare professionals working in dietary management. Programmes cover clinical nutrition, evidence-based dietary interventions and patient counselling.',
+      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
     image: 'https://images.pexels.com/photos/15319047/pexels-photo-15319047.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 6,
+    programmeCount: 0,
     learningAreas: [
       'Clinical Nutrition',
       'Dietary Assessment',
@@ -153,11 +153,11 @@ export const departments: Department[] = [
     slug: 'sports-exercise',
     name: 'Sports & Exercise',
     shortName: 'Sports & Exercise',
-    description: 'Education in sports medicine, exercise science and athletic care.',
+    description: 'Proposed educational subject area for reading, reflection and study planning.',
     overview:
-      'The Sports & Exercise department offers online education for sports medicine professionals, exercise scientists and athletic trainers. Programmes cover injury prevention, performance optimisation and rehabilitation in sport.',
+      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
     image: 'https://images.pexels.com/photos/39219676/pexels-photo-39219676.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 7,
+    programmeCount: 1,
     learningAreas: [
       'Sports Injury Prevention',
       'Exercise Prescription',
@@ -174,11 +174,11 @@ export const departments: Department[] = [
     slug: 'occupational-therapy',
     name: 'Occupational Therapy',
     shortName: 'Occupational Therapy',
-    description: 'Education in occupational therapy practice and rehabilitation.',
+    description: 'Proposed educational subject area for reading, reflection and study planning.',
     overview:
-      'Our Occupational Therapy department provides online education for occupational therapists and rehabilitation professionals. Programmes focus on functional assessment, therapeutic interventions and evidence-based practice.',
+      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
     image: 'https://images.pexels.com/photos/4566528/pexels-photo-4566528.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 5,
+    programmeCount: 0,
     learningAreas: [
       'Functional Assessment',
       'Adaptive Techniques',
@@ -195,11 +195,11 @@ export const departments: Department[] = [
     slug: 'healthcare-management',
     name: 'Healthcare Management',
     shortName: 'Healthcare Management',
-    description: 'Education in healthcare leadership, administration and quality improvement.',
+    description: 'Proposed educational subject area for reading, reflection and study planning.',
     overview:
-      'The Healthcare Management department offers online education for healthcare managers, clinical leads and administrators. Programmes cover leadership, quality improvement, service delivery and healthcare systems management.',
+      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
     image: 'https://images.pexels.com/photos/5407235/pexels-photo-5407235.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 6,
+    programmeCount: 2,
     learningAreas: [
       'Healthcare Leadership',
       'Quality Improvement',

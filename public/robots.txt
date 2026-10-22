@@ -1,3 +1,2 @@
 User-agent: *
-Allow: /
-Sitemap: https://clinovainternationalacademy.co.uk/sitemap.xml
+Disallow: /

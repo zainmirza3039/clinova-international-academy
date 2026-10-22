@@ -1,0 +1,10 @@
+import { LockKeyhole, ShieldAlert } from 'lucide-react';
+import PageHero from '@/components/PageHero';
+import { useSEO } from '@/hooks/useSEO';
+
+const sections = ['Courses', 'Applications', 'Inquiries', 'Content', 'Events', 'Faculty', 'Settings'];
+
+export default function AdminPage() {
+  useSEO({ title: 'Admin access', description: 'Secure administration setup for Clinova is not enabled in this environment.' });
+  return <><PageHero breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Admin access' }]} eyebrow="Restricted area" title="Administration is not enabled" description="This screen deliberately contains no login, credentials, registration flow or private records." /><section className="py-16 lg:py-24 bg-surface-50"><div className="max-w-editorial mx-auto px-6 lg:px-10"><div className="max-w-3xl mx-auto bg-white border border-navy-200 p-7 md:p-10"><div className="flex items-start gap-4"><ShieldAlert className="w-7 h-7 text-amber-600 shrink-0" aria-hidden="true" /><div><h2 className="font-heading text-2xl font-bold text-navy-800">Secure setup required</h2><p className="mt-3 text-sm leading-relaxed text-navy-600">Admin access is blocked until the application has a real server-side authentication and role contract. A production implementation must verify identity, enforce least-privilege roles on the server and audit access to private records.</p></div></div><div className="mt-8 border-t border-navy-100 pt-7"><h3 className="font-heading text-base font-bold text-navy-800">Protected areas</h3><div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-4">{sections.map((section) => <div key={section} className="flex items-center gap-2 border border-navy-100 bg-surface-50 px-3 py-3 text-sm text-navy-500"><LockKeyhole className="w-4 h-4 shrink-0" aria-hidden="true" />{section}</div>)}</div></div><p role="status" className="mt-8 bg-navy-50 px-4 py-3 text-sm text-navy-700">No sign-in is offered and no private data has been requested or displayed.</p></div></div></section></>;
+}
