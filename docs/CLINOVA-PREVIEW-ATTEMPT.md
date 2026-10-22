@@ -1,49 +1,51 @@
-# Clinova Preview: request rejected, nothing deployed
+# Clinova deployment is READY; Preview target remains unconfirmed
 
-The default-off learner frontend is implemented and locally verified at app source commit `fc0995317e3ff5815901fee3663f8b2935d25298` on `feat/clinova-local-learner-ui`. PR #4 remains unchanged at `4ae53c2382541b6f8a4e7c804d0ace57c5e60f94`. The owner subsequently authorised an explicit Preview deployment only; no Production or branch-push fallback was authorised.
+The corrected, authorised source-file request created a deployment, but the connector returns `target: null` rather than confirming Preview. Testing stopped as instructed. Cancellation was attempted while the last observed state was BUILDING; the cancellation returned HTTP 400. A subsequent metadata read shows READY. No second request or alternate target was tried after the correction.
 
-## Exact deployment blocker
+## Result
 
-A single `POST /v13/deployments` request used:
+- Deployment: `dpl_HmoWoAB5WFiEGsNCiy3NnDEz4cK7`.
+- URL: https://clinova-international-academy-2dno6kzxn-zainmirza3039s-projects.vercel.app
+- Verified project: `prj_zurasqRt9svFH1F9JGhXxve5C8WR` / `clinova-international-academy`.
+- Request team: `team_J2SEYRfmaWXwhvx7IpC1EXA2`.
+- Verified source SHA: `fc0995317e3ff5815901fee3663f8b2935d25298`.
+- Verified branch metadata: `feat/clinova-local-learner-ui`.
+- Final state: **READY**.
+- Returned target: **null** in creation and both detail reads. Preview classification is **not confirmed**; do not call this a Preview-tested result.
+- Returned aliases: empty array. No alias, promotion or project/environment setting was requested.
 
-- Project: `prj_zurasqRt9svFH1F9JGhXxve5C8WR` / `clinova-international-academy`.
-- Team: `team_J2SEYRfmaWXwhvx7IpC1EXA2`.
-- Target: explicitly `preview`.
-- Source metadata: local integration SHA above, branch `feat/clinova-local-learner-ui`, `dirty: true` to disclose additional deployment-bootstrap files.
-- No `gitSource`, project settings, aliases, paid build machine or production target.
+No browser or anonymous HTTP request was made to this deployment URL. There is no hosted route, mobile, auth, persistence or student-data test result.
 
-Vercel rejected the request with **HTTP 400 `bad_request`**:
+## What was authorised and sent
 
-> Invalid request: `target` should be 'production', 'staging', or a custom environment identifier.
+The earlier task wording required a literal `target: preview` API field; that first request was rejected with HTTP 400 `bad_request`: “target should be production, staging, or a custom environment identifier.” Its request ID was `iad1:sfo1::7p9fb-1792663400238-c667e6566f73`, and no resource was created by that request.
 
-Request ID: `iad1:sfo1::7p9fb-1792663400238-c667e6566f73`.
+The coordinator then corrected that wording: the owner had authorised deploy/test under no-Production restrictions, not a particular literal field. The full `create_deployment` definition explicitly documents omitted target as Preview. One new request was therefore authorised with **the target property omitted**. It used only the exact Clinova project/team and the previously verified local source payload. It did not include `production`, `staging`, a custom environment, `gitSource`, settings, paid build machine or aliases. No branch was pushed.
 
-The tool description says an omitted target defaults to Preview, but the owner required an explicit Preview target. We therefore **did not omit the target, substitute `staging`, create a custom environment, repeat creation, push a branch or change settings**. A subsequent exact-project/SHA deployment query returned zero results. There is no new deployment ID, URL, build status or hosted test result to provide. The available Vercel CLI was absent, and a saved-token lookup found no match; no login or new credential was requested.
+The creation response returned the correct project and source SHA, INITIALIZING and `target: null`. An immediate detail read returned the same project/SHA and null target, with state BUILDING. Because Preview could not be confirmed, no testing was started and cancellation was requested.
 
-## Access and safety checks
+## Cancellation outcome
 
-This task’s Vercel read access works; the earlier coordinator 403 is not the current blocker. Project metadata confirmed the correct Clinova project, Vite and Node 24. Existing SSO protection is enabled for `all_except_custom_domains`; it was not changed or bypassed. No protected URL was opened using a bypass link.
+`PATCH /v12/deployments/dpl_HmoWoAB5WFiEGsNCiy3NnDEz4cK7/cancel` returned **HTTP 400 `deployment_not_canceled`**:
 
-Existing deployment metadata includes Production deployment `dpl_BMaYjgA62VFeHf2F4JDy481Yj2h6` from the old feature branch `feat/clinova-frontend-completion`, commit `759019cd95200c7ff118424399e15ccb5632a039`. This is an existing deployment, **not created by this task**. Its presence reinforces why a branch push was not an acceptable Preview-only workaround. No Production deployment or alias was touched.
+> Could not cancel the deployment: dpl_HmoWoAB5WFiEGsNCiy3NnDEz4cK7
 
-Project environment metadata was read without decryption: only the existing Supabase URL and browser-key entries were listed for Production/Preview. No feature flags, domain-origin variables or environment entries were added/changed.
+Cancellation request ID: `iad1:sfo1::n2kh6-1792663861531-62c65f472603`.
 
-## Locally verified source payload
+The final read returned READY, with `ready: 1792663850113`. That ready timestamp precedes the cancellation request timestamp. Cancellation was not repeated and the READY deployment was not deleted, promoted, aliased or tested. The connector did not return an explicit Preview classification, so this task stops here rather than inferring permission to continue.
 
-To avoid a branch push, an internal four-file deployment bootstrap was prepared at `/workspace/clinova-preview-payload-fc099.mOlz`:
+## Source and local QA
 
-`package.json`, `hydrate.mjs`, `local.patch.gz`, `source-hashes.json`.
+Before the corrected request, all 94 app-build files in the local worktree were rechecked against the already-tested manifest. Source-manifest SHA-256: `ac358dd4630a8bfdc1ea50b98390c2aba3fd06c14236797119da8682ff489626`. Compressed patch SHA-256: `22c54843a930ba2e80081a051e79c2b86d4144e66475b2ed791fb36bda99da1b`.
 
-It fetches the exact public [baseline GitHub commit](https://github.com/zainmirza3039/clinova-international-academy/tree/4ae53c2382541b6f8a4e7c804d0ace57c5e60f94), applies the local app patch and verifies SHA-256 hashes for all 94 app-build files before copying only those files. Docs, tests, SQL and archive extras are excluded. The original package and lockfile are restored before installation/build. The child build explicitly forces auth, enquiries, learner data and indexing false without touching `VITE_SITE_URL`, canonical configuration or the repository deployment guard.
+The internal payload at `/workspace/clinova-preview-payload-fc099.mOlz` comprises `package.json`, `hydrate.mjs`, `local.patch.gz` and `source-hashes.json`. It reconstructs the exact public baseline commit plus the local app patch, verifies all app-build hashes, and copies only whitelisted build files. SQL, tests, documentation and archive extras are excluded. The original package/lockfile is restored before installation/build. The child build forces auth, enquiries, learner data and indexing false; `VITE_SITE_URL`, canonical configuration and the repository deployment guard are unchanged.
 
-The four files total 20,035 bytes. Source-manifest SHA-256: `ac358dd4630a8bfdc1ea50b98390c2aba3fd06c14236797119da8682ff489626`.
+The complete application previously passed 268 frontend tests, 34 disposable SQL assertions, typecheck and a default-off build. Lint has zero errors and four pre-existing fast-refresh warnings. Local browser checks cover draft public pages, disabled real auth/student routes and isolated synthetic learner states, including 375px/768px iframe layouts. The separate disposable payload build passed locally with noindex, disallow-all robots, an empty sitemap and no synthetic harness fixtures. See [implementation details](CLINOVA-LOCAL-LEARNER-INTEGRATION.md).
 
-An exact disposable bootstrap build passed locally, including source verification, dependency installation, Vite build and postbuild preview safeguards: noindex, disallow-all robots, empty sitemap, no synthetic harness fixtures. The rejected API request never reached a hosted build, so this pipeline is **not Vercel-build-verified**.
+READY is a returned deployment status, not proof that hosted learner behaviour, Preview classification or active runtime flags were independently tested.
 
-## What the QA proves—and does not
+## Protection and launch limits
 
-The main integration has 268 passing frontend tests, a passing default-off build, 34 passing disposable PostgreSQL assertions and local browser checks for public draft pages, disabled real student/auth routes, synthetic loading/empty/error/reading/completion states, and 375px/768px synthetic dashboard iframe viewports. See [the implementation handoff](CLINOVA-LOCAL-LEARNER-INTEGRATION.md) for files and coverage.
+The project preflight showed SSO protection enabled for `all_except_custom_domains`. It was not changed or bypassed. Deployment-specific SSO behaviour was not checked after the target classification failed.
 
-None of this is hosted student E2E. Clinova’s latest metadata shows no learner tables and an empty migration ledger despite the prior manual enquiry-migration report. No repair or live migration was attempted. Auth redirects/callbacks, hosted RLS/PostgREST, real persistence, abuse controls and multi-account behavior remain unverified. Retention/CASCADE deletion and inherited own-profile-write policy remain unresolved launch blockers. All real learner/auth/enquiry/indexing features stay off; educational content stays draft.
-
-A future attempt needs an approved, supported explicit-Preview deployment path. Do not silently reinterpret this failed request as permission to omit/change its target, bypass SSO, enable features or use Production.
+No Production target, promotion, aliases, project/environment changes, branch push, login, domain/DNS/canonical changes or live database writes were requested. No student rows were read. The latest coordinator schema metadata still reports no learner tables and an empty migration ledger despite the earlier manual enquiry-migration report; no repair or migration was attempted. Retention/CASCADE deletion and own-profile-write policy remain unresolved. Live Auth redirects/callbacks, hosted RLS/PostgREST, persistence and abuse controls remain unverified. Learner/auth/enquiry/indexing flags remain off in the source/payload, and educational content remains draft.
