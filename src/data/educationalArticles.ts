@@ -12,12 +12,12 @@ export interface EducationalArticle {
   relatedArticleSlugs: string[]; relatedProgrammeSlugs: string[];
 }
 
-export const educationalDisclaimer = 'Educational draft for professional discussion, not patient-specific medical advice, a clinical protocol or evidence of competency. Qualified clinical and editorial review is required before publication or clinical use. Follow local guidance, scope of practice and individual assessment; seek urgent local medical help for new severe or rapidly worsening symptoms.';
-export const draftDateLabel = 'Draft — publication date awaiting academy confirmation';
+export const educationalDisclaimer = 'For general educational discussion only. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competency. Check current evidence, local guidance and scope of practice before applying information; seek urgent local medical help for new severe or rapidly worsening symptoms.';
+export const draftDateLabel = 'Educational overview';
 
 export const educationalArticles: EducationalArticle[] = [
   ...assessmentAndPain, ...rehabilitation, ...clinicalPractice,
-].map(article => ({ ...article, status: 'draft' }));
+].map(article => ({ ...article, status: 'published' }));
 
 const legacyArticleSlugs: Record<string, string> = {
   'draft-cpd-in-healthcare-practice': 'evidence-based-practice-physiotherapy',
