@@ -40,7 +40,7 @@ This report records read-only inspection of the connected Supabase project and t
 3. Apply the learner migration only to a non-production database, then run RLS isolation tests with at least two synthetic users and an admin claim.
 4. Add an abuse-control path for public submissions (server-side validation, durable rate limits and bot protection) before enabling public forms.
 5. Configure and test Auth email confirmation and password-reset callbacks on an explicitly approved origin. Never expose service-role keys to the browser.
-6. Implement an authenticated admin UI only after trusted admin identity is provisioned. No public admin signup or user-controlled role assignment.
+6. Provision a trusted admin identity out-of-band, then test the role-gated admin UI against the non-production database. No public admin signup or user-controlled role assignment.
 7. Design a separate, privacy-minimizing certificate verification endpoint before enabling public verification. Do not grant anonymous SELECT on student/certificate tables.
 8. Confirm lawful privacy/retention wording, newsletter consent and unsubscribe behavior before collecting real submissions.
 9. Keep deployment, production schema changes, domain/DNS/email configuration and indexing off until separately approved.
