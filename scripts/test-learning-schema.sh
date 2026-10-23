@@ -25,4 +25,5 @@ mkdir -p "$SOCKET_DIR"
 "$PG_BIN/pg_ctl" -D "$DATA_DIR" -o "-c listen_addresses='' -c unix_socket_directories=$SOCKET_DIR -c port=$PORT" -w start >/dev/null
 
 "$PG_BIN/psql" -X -v ON_ERROR_STOP=1 -f "$ROOT_DIR/tests/sql/learning-foundation.sql"
-printf '\nLearning foundation schema tests: PASS\n'
+"$PG_BIN/psql" -X -v ON_ERROR_STOP=1 -f "$ROOT_DIR/tests/sql/assessment-workflows.sql"
+printf '\nLearning foundation and assessment workflow schema tests: PASS\n'
