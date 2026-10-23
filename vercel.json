@@ -26,5 +26,5 @@
       "dest": "/index.html"
     }
   ],
-  "buildCommand": "if [ \"$VERCEL_ENV\" = \"production\" ]; then VITE_VERIFICATION_ENABLED=false VITE_AUTH_ENABLED=false VITE_LEARNER_DATA_ENABLED=false VITE_ENQUIRIES_ENABLED=false VITE_INDEXING_ENABLED=true npm run build; else VITE_VERIFICATION_ENABLED=false VITE_AUTH_ENABLED=false VITE_LEARNER_DATA_ENABLED=false VITE_ENQUIRIES_ENABLED=false VITE_INDEXING_ENABLED=false npm run build; fi"
+  "buildCommand": "bash scripts/vercel-build.sh"
 }
