@@ -6,9 +6,37 @@ END $assert$;
 \echo 'Applying authenticated assessment workflow migration'
 \i supabase/migrations/20261023030000_add_assessment_attempt_workflows.sql
 
+-- Published but empty assessment must not consume a learner attempt.
+INSERT INTO public.learning_assessments(id, course_id, title, publication_status, max_attempts)
+VALUES ('40000000-0000-0000-0000-000000000002',
+        '10000000-0000-0000-0000-000000000001',
+        'Empty assessment guard', 'published', 3);
+
 \echo 'Testing owner-bound attempt creation and full-payload submission'
 SET ROLE authenticated;
 SELECT set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-000000000001', false);
+
+DO $empty_assessment$
+DECLARE
+  v_rejected boolean := false;
+BEGIN
+  BEGIN
+    PERFORM * FROM public.start_my_assessment_attempt('40000000-0000-0000-0000-000000000002');
+  EXCEPTION WHEN SQLSTATE '22023' THEN
+    v_rejected := true;
+  END;
+  IF NOT v_rejected THEN
+    RAISE EXCEPTION 'empty assessment unexpectedly accepted';
+  END IF;
+  IF EXISTS (
+    SELECT 1 FROM public.learning_assessment_attempts
+    WHERE assessment_id = '40000000-0000-0000-0000-000000000002'
+      AND user_id = auth.uid()
+  ) THEN
+    RAISE EXCEPTION 'empty assessment consumed an attempt';
+  END IF;
+END
+$empty_assessment$;
 
 SELECT attempt_id AS alice_attempt_1, attempt_number AS alice_attempt_number_1
 FROM public.start_my_assessment_attempt('40000000-0000-0000-0000-000000000001')
