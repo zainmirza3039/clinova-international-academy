@@ -39,11 +39,19 @@ CREATE TABLE public.learning_assessment_questions (
   UNIQUE (assessment_id, position),
   UNIQUE (id, assessment_id),
   CHECK (
-    (question_type IN ('single_choice', 'multiple_choice')
-      AND jsonb_typeof(choices) = 'array' AND jsonb_array_length(choices) BETWEEN 2 AND 100)
+    (
+      question_type IN ('single_choice', 'multiple_choice')
+      AND CASE
+        WHEN jsonb_typeof(choices) = 'array'
+          THEN jsonb_array_length(choices) BETWEEN 2 AND 100
+        ELSE FALSE
+      END
+    )
     OR
-    (question_type IN ('true_false', 'short_answer')
-      AND (choices IS NULL OR choices = 'null'::jsonb))
+    (
+      question_type IN ('true_false', 'short_answer')
+      AND (choices IS NULL OR choices = 'null'::jsonb)
+    )
   )
 );
 
