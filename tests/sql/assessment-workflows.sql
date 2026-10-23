@@ -29,7 +29,7 @@ DO $repeat_submit$
 BEGIN
   BEGIN
     PERFORM public.submit_my_assessment_attempt(
-      :'alice_attempt_1'::uuid,
+      (SELECT id FROM public.learning_assessment_attempts WHERE user_id = auth.uid() AND assessment_id = '40000000-0000-0000-0000-000000000001' AND attempt_number = 1),
       '[{"question_id":"50000000-0000-0000-0000-000000000001","answer":"b"},{"question_id":"50000000-0000-0000-0000-000000000002","answer":"Another answer"}]'::jsonb
     );
     RAISE EXCEPTION 'resubmitting a submitted attempt unexpectedly succeeded';
