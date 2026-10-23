@@ -2,14 +2,14 @@
 
 ## Status
 
-This is a **review-only schema proposal** on `review/clinova-assessment-schema-20261023`. It has not been applied to Supabase and must not be deployed to production until the learner data-retention decision and staging verification are complete. Production project `ssxpmcbqfdggfsoqbxac` currently has only the three enquiry tables in `public`; the learner foundation, assessments, staff roles, and audit tables are absent.
+The learner and assessment schema migrations are committed to `main` but **have not been applied to Supabase**. The latest main commit is `dce71b0d1902c51b9c28617a80a10178e5e65c93`; its Git-triggered Vercel production deployment `dpl_DseLZBgi4h2AVc36VBvjx6qAYeb6` is READY. A Vercel deployment does not execute SQL migrations. Live project `ssxpmcbqfdggfsoqbxac` currently has only three public enquiry tables; learner, assessment, staff-role and audit tables are absent. Auth, learner data, enquiries and public certificate verification remain forced off. This is not launch approval.
 
 ## Added migration
 
-`supabase/migrations/20261023010000_create_assessment_engine.sql` adds:
+`supabase/migrations/20261023010000_create_assessment_engine.sql` adds the assessment tables and private staff/audit structures. Follow-up migration `20261023020000_harden_assessment_choice_validation.sql` adds strict choice payload validation:
 
 - `learning_assessments`: course-linked assessment configuration, pass threshold, attempt limit and publication status.
-- `learning_assessment_questions`: ordered question prompts and choices, with composite keys preventing questions from being attached to another course's assessment.
+- `learning_assessment_questions`: ordered question prompts and choices, with composite keys preventing questions from being attached to another course's assessment; the follow-up migration requires each choice to have a unique non-empty string ID and label, rejects extra fields, and prevents answer-key data being smuggled into choice objects.
 - `app_private.assessment_answer_keys`: correct answers and grading explanations outside the exposed public schema.
 - `learning_assessment_attempts`: learner-owned attempts and controlled state transitions (in progress, submitted, graded, voided).
 - `learning_assessment_responses`: responses constrained to questions belonging to the attempt's assessment.
@@ -33,7 +33,8 @@ The isolated SQL suite now applies the proposal after the learner foundation and
 - enrolled learner access to published assessments/questions;
 - owner-only attempt/response reads;
 - answer-key isolation from browser roles; and
-- rejection of client-created attempts.
+- rejection of client-created attempts;
+- malformed choices (single-item lists, missing/invalid IDs or labels, duplicate IDs and extra keys) rejected by the follow-up constraint.
 
 Run `bash scripts/test-learning-schema.sh` with the documented PostgreSQL 16 binaries, then `npm run typecheck`, `npm run lint`, `npm test`, and a forced-off build. These are local/CI checks only. They do not authorize a hosted migration or prove Supabase Data API behavior. Before a staging migration, also run the Supabase security/performance advisors and verify the actual policies with two separate test accounts.
 
@@ -47,4 +48,4 @@ Run `bash scripts/test-learning-schema.sh` with the documented PostgreSQL 16 bin
 6. Finalize the academy’s legal/privacy text, enquiry processing and notification/retention workflow.
 7. Run authenticated browser tests with two approved accounts before considering feature flags.
 
-No production schema, auth settings, edge functions, secrets, deployment, domain or DNS settings were changed by this proposal.
+A Git-triggered production Vercel deployment for `dce71b0d1902c51b9c28617a80a10178e5e65c93` is READY. No Supabase schema migration/live database write, auth setting, Edge Function, secret, domain or DNS setting was changed. The SQL migrations remain unapplied; feature flags remain off. Production indexing is enabled by the build script, while previews remain non-indexable.

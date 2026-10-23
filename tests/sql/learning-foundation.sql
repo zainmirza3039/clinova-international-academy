@@ -21,6 +21,7 @@ GRANT EXECUTE ON FUNCTION auth.uid() TO anon, authenticated, service_role;
 \echo 'Applying migration under test'
 \i supabase/migrations/20261022090000_create_learning_foundation.sql
 \i supabase/migrations/20261023010000_create_assessment_engine.sql
+\i supabase/migrations/20261023020000_harden_assessment_choice_validation.sql
 
 \echo 'Loading local-only fixtures as service_role'
 SET ROLE service_role;
@@ -243,30 +244,33 @@ INSERT INTO public.learning_assessment_responses(attempt_id, assessment_id, ques
 VALUES ('60000000-0000-0000-0000-000000000001', '40000000-0000-0000-0000-000000000001', '50000000-0000-0000-0000-000000000001', '"a"'::jsonb);
 
 DO $choices_validation$
+DECLARE
+  v_choices jsonb;
+  v_position integer := 3;
 BEGIN
-  BEGIN
-    INSERT INTO public.learning_assessment_questions(
-      assessment_id, course_id, prompt, question_type, choices, points, position
-    ) VALUES (
-      '40000000-0000-0000-0000-000000000001',
-      '10000000-0000-0000-0000-000000000001',
-      'Invalid null choices', 'single_choice', NULL, 1, 3
-    );
-    RAISE EXCEPTION 'single-choice question with NULL choices unexpectedly accepted';
-  EXCEPTION WHEN check_violation THEN NULL;
-  END;
-
-  BEGIN
-    INSERT INTO public.learning_assessment_questions(
-      assessment_id, course_id, prompt, question_type, choices, points, position
-    ) VALUES (
-      '40000000-0000-0000-0000-000000000001',
-      '10000000-0000-0000-0000-000000000001',
-      'Invalid scalar choices', 'multiple_choice', '{"not":"an array"}'::jsonb, 1, 4
-    );
-    RAISE EXCEPTION 'multiple-choice question with non-array choices unexpectedly accepted';
-  EXCEPTION WHEN check_violation THEN NULL;
-  END;
+  -- The schema must reject malformed choice payloads, not just non-array JSON.
+  FOREACH v_choices IN ARRAY ARRAY[
+    '[{"id":"a","label":"A"}]'::jsonb,
+    '[{"label":"A"},{"id":"b","label":"B"}]'::jsonb,
+    '[{"id":7,"label":"A"},{"id":"b","label":"B"}]'::jsonb,
+    '[{"id":"a","label":""},{"id":"b","label":"B"}]'::jsonb,
+    '[{"id":"a","label":"A"},{"id":"a","label":"Duplicate"}]'::jsonb,
+    '[{"id":"a","label":"A","correct":true},{"id":"b","label":"B"}]'::jsonb
+  ]
+  LOOP
+    BEGIN
+      INSERT INTO public.learning_assessment_questions(
+        assessment_id, course_id, prompt, question_type, choices, points, position
+      ) VALUES (
+        '40000000-0000-0000-0000-000000000001',
+        '10000000-0000-0000-0000-000000000001',
+        'Invalid choice fixture', 'single_choice', v_choices, 1, v_position
+      );
+      RAISE EXCEPTION 'malformed choice payload unexpectedly accepted: %', v_choices;
+    EXCEPTION WHEN check_violation THEN NULL;
+    END;
+    v_position := v_position + 1;
+  END LOOP;
 END
 $choices_validation$;
 RESET ROLE;
