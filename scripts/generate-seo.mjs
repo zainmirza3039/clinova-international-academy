@@ -34,7 +34,7 @@ writeFileSync('dist/robots.txt', origin ? 'User-agent: *\nDisallow: /admin\nDisa
 // Keep preview HTML noindexed while allowing indexing only in explicitly enabled production builds.
 const htmlFile = 'dist/index.html';
 const html = readFileSync(htmlFile, 'utf8');
-const robotsMeta = /<meta\s+name="robots"\s+content="[^"]*"\s*\\/?\s*>/i;
+const robotsMeta = /<meta\s+name="robots"\s+content="[^"]*"\s*\/?\s*>/i;
 const replacement = origin
   ? '<meta name="robots" content="index, follow" />'
   : '<meta name="robots" content="noindex, nofollow" />';
