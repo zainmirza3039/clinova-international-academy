@@ -2,7 +2,7 @@
 
 ## Status
 
-The learner and assessment schema migrations are committed to `main` but **have not been applied to Supabase**. The latest main commit is `dce71b0d1902c51b9c28617a80a10178e5e65c93`; its Git-triggered Vercel production deployment `dpl_DseLZBgi4h2AVc36VBvjx6qAYeb6` is READY. A Vercel deployment does not execute SQL migrations. Live project `ssxpmcbqfdggfsoqbxac` currently has only three public enquiry tables; learner, assessment, staff-role and audit tables are absent. Auth, learner data, enquiries and public certificate verification remain forced off. This is not launch approval.
+The learner and assessment schema migrations are committed to `main` but **have not been applied to Supabase**. Assessment attempt start/submission workflows were merged by PR #16; the latest main commit is `bcefc0693673d694ad25fb579b9c0b9886b240fb`, and production deployment `dpl_EqQkmMLGmmsnyf1bmesD3omLqNax` is READY. GitHub Actions run [39923211421](https://github.com/zainmirza3039/clinova-international-academy/actions/runs/39923211421) passed typecheck, all tests, lint, the disposable PostgreSQL schema suite and the forced-off build. A Vercel deployment does not execute SQL migrations. Live project `ssxpmcbqfdggfsoqbxac` currently has only three public enquiry tables; learner, assessment, staff-role and audit tables are absent. Auth, learner data, enquiries and public certificate verification remain forced off. This is not launch approval.
 
 ## Added migration
 
@@ -16,9 +16,9 @@ The learner and assessment schema migrations are committed to `main` but **have 
 - `app_private.academy_staff_roles`: trusted server-side role assignments; never exposed to browser roles.
 - `app_private.academy_audit_events`: service-only audit events for privileged operations.
 
-The migration creates no users, course content, questions, answers, attempts, staff assignments, grades, or certificates. Browser roles have read-only access to published assessments/questions for enrolled learners, and can read only their own attempts/responses. All assessment writes and all private-schema access are reserved for the trusted server-side `service_role`; never put that key in a Vite/browser variable.
+The migration creates no users, course content, questions, answers, attempts, staff assignments, grades, or certificates. Browser roles have read-only access to published assessments/questions for enrolled learners, and can read only their own attempts/responses. The two narrowly scoped authenticated RPCs described below are the only learner-facing write path for starting and submitting attempts; direct table writes and all private-schema access remain reserved for the trusted server-side `service_role`. Never put that key in a Vite/browser variable.
 
-## Attempt workflow increment (review branch)
+## Attempt workflow increment (merged in PR #16)
 
 The follow-up migration `supabase/migrations/20261023030000_add_assessment_attempt_workflows.sql` adds two authenticated, owner-bound RPCs:
 
@@ -57,4 +57,4 @@ Run `bash scripts/test-learning-schema.sh` with the documented PostgreSQL 16 bin
 6. Finalize the academy’s legal/privacy text, enquiry processing and notification/retention workflow.
 7. Run authenticated browser tests with two approved accounts before considering feature flags.
 
-A Git-triggered production Vercel deployment for `dce71b0d1902c51b9c28617a80a10178e5e65c93` is READY. No Supabase schema migration/live database write, auth setting, Edge Function, secret, domain or DNS setting was changed. The SQL migrations remain unapplied; feature flags remain off. Production indexing is enabled by the build script, while previews remain non-indexable.
+Production deployment `dpl_EqQkmMLGmmsnyf1bmesD3omLqNax` for `bcefc0693673d694ad25fb579b9c0b9886b240fb` is READY. No Supabase schema migration/live database write, auth setting, Edge Function, secret, domain or DNS setting was changed. The SQL migrations remain unapplied; feature flags remain off. Production indexing is enabled by the build script, while previews remain non-indexable.
