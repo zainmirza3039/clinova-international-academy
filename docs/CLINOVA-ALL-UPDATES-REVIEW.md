@@ -26,6 +26,10 @@ These checks establish build and test behavior, not production readiness. The is
 
 Regression coverage includes deployment gate overrides, server noindex/SPA safeguards, logo asset presence, nullable public client and disabled public-client auth sessions, certificate verification gating, draft discoverability and preservation of current-main article routes.
 
+## Follow-up assessment workflow review (2026-10-23)
+
+A review branch adds `20261023030000_add_assessment_attempt_workflows.sql` with authenticated RPCs for owner-bound attempt creation and validated response submission, plus `tests/sql/assessment-workflows.sql` for attempt-limit, invalid-payload, duplicate/cross-user and submission-state regression coverage. The schema test runner now invokes this additional suite. The RPCs do not grade attempts, mark free-text responses, grant staff privileges, or issue certificates. This branch has not been merged or deployed, and no live database was changed. Run the complete CI and disposable PostgreSQL checks before considering merge.
+
 ## Boundaries and remaining verification
 
 Schema foundation and assessment migrations were merged into `main` by [PR #13](https://github.com/zainmirza3039/clinova-international-academy/pull/13). Git integration then created production deployment `dpl_DseLZBgi4h2AVc36VBvjx6qAYeb6` for commit `dce71b0d1902c51b9c28617a80a10178e5e65c93` (READY). The deployment did not execute SQL. Live Supabase remains unchanged: only the three enquiry tables are present, and learner/auth/enquiry/verification flags remain off. The schema review is code-only until a safe non-production target is available; no learner migration should be applied to production.
