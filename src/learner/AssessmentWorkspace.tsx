@@ -147,7 +147,7 @@ export default function AssessmentWorkspace({ api, courseId, active }: { api: Le
           {attempt.status === 'submitted' && <p className="mt-1 text-sm">Submitted for grading; no pass result is available yet.</p>}
           {attempt.status === 'in_progress' && active && <button type="button" className={`${buttonClass} mt-2`} disabled={busy} onClick={() => resumeAttempt(attempt)}>Resume attempt {attempt.attempt_number}</button>}
         </li>)}</ul>
-        <button type="button" className={`${buttonClass} mt-3`} disabled={attempts.state.status === 'loading'} onClick={attempts.reload}>Reload attempts</button>
+        <button type="button" className={`${buttonClass} mt-3`} disabled={busy} onClick={attempts.reload}>Reload attempts</button>
         <nav aria-label="Attempt pagination" className="mt-3 flex items-center gap-3">
           <button type="button" className={buttonClass} disabled={attemptPage === 0} onClick={() => setAttemptPage(value => value - 1)}>Previous attempts</button>
           <span>Page {attemptPage + 1}</span>
