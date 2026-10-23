@@ -9,7 +9,7 @@ try {
   if (env.VITE_INDEXING_ENABLED === 'true' && u.protocol === 'https:' && u.pathname === '/' && !u.username && !u.password && !u.search && !u.hash && !previewHost) origin = u.origin;
 } catch { /* Preview builds remain unindexed. */ }
 
-const fixed = ['/', '/about', '/departments', '/programmes', '/cpd-courses', '/online-learning', '/training-partners', '/resources', '/contact', '/admissions', '/events', '/faculty', '/faqs', '/privacy-policy', '/terms-and-conditions', '/cookie-policy', '/refund-policy'];
+const fixed = ['/', '/about', '/departments', '/programmes', '/cpd-courses', '/online-learning', '/training-partners', '/resources', '/contact', '/admissions', '/events', '/faculty', '/faqs'];
 
 // Department pages are public category pages. Course detail URLs must be explicitly published.
 const departmentSource = readFileSync('src/data/departments.ts', 'utf8');
