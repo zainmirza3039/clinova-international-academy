@@ -17,7 +17,10 @@ describe('integrated review safety', () => {
     expect(buildScript).toContain('VITE_INDEXING_ENABLED=false');
     expect(config.routes.some((route: { handle?: string }) => route.handle === 'filesystem')).toBe(true);
     expect(config.routes.at(-1).dest).toBe('/index.html');
-    expect(config.routes[0].headers['X-Robots-Tag']).toBeUndefined();
+    const privateRoute = config.routes.find((route: { headers?: Record<string, string> }) => route.headers?.['X-Robots-Tag'] === 'noindex, nofollow');
+    expect(privateRoute?.src).toContain('sign-in');
+    const globalHeaders = config.routes.find((route: { src?: string; headers?: Record<string, string> }) => route.src === '/.*');
+    expect(globalHeaders?.headers?.['X-Robots-Tag']).toBeUndefined();
   });
   it('retains the patched router and supplied logo-only assets', () => {
     const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
