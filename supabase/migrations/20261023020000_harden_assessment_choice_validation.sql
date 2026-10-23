@@ -14,8 +14,10 @@ DECLARE
   v_id text;
   v_ids text[] := ARRAY[]::text[];
 BEGIN
-  IF pg_catalog.jsonb_typeof(p_choices) IS DISTINCT FROM 'array'
-     OR pg_catalog.jsonb_array_length(p_choices) NOT BETWEEN 2 AND 100 THEN
+  IF pg_catalog.jsonb_typeof(p_choices) IS DISTINCT FROM 'array' THEN
+    RETURN false;
+  END IF;
+  IF pg_catalog.jsonb_array_length(p_choices) NOT BETWEEN 2 AND 100 THEN
     RETURN false;
   END IF;
 
