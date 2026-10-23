@@ -20,7 +20,7 @@ Publication-only exports remain publication-only. Explicit review catalogue expo
 
 ## Verification status
 
-Historical GitHub Actions run [39872609985](https://github.com/zainmirza3039/clinova-international-academy/actions/runs/39872609985) passed for the earlier frontend commit `5b37f8a14d79a1d8c3609e2022c42c2f34267ab6`; it is not evidence for the latest schema changes. The assessment branch's latest CI run [39878938785](https://github.com/zainmirza3039/clinova-international-academy/actions/runs/39878938785) passed before the follow-up choice-validation migration was added. CI must run again for the current branch head.
+Historical GitHub Actions run [39872609985](https://github.com/zainmirza3039/clinova-international-academy/actions/runs/39872609985) passed for the earlier frontend commit `5b37f8a14d79a1d8c3609e2022c42c2f34267ab6`; it is not evidence for the latest schema changes. The follow-up choice-validation changes passed CI in run [39879769588](https://github.com/zainmirza3039/clinova-international-academy/actions/runs/39879769588) for commit `59fd0caaa062b0cba136f82fb7e6e63ef266a0db`: disposable PostgreSQL schema tests, TypeScript typecheck, application tests, lint, and the forced-off build all succeeded. Re-run these checks for any subsequent code changes.
 
 These checks establish build and test behavior, not production readiness. The isolated PostgreSQL learner-schema suite previously passed using a disposable Unix-socket-only cluster with synthetic fixtures and cleanup; this is not hosted RLS/PostgREST verification or migration approval.
 
