@@ -23,7 +23,7 @@ Every table has Row Level Security. Explicit grants remove inherited browser tab
 
 Course/module/lesson foreign keys prevent a lesson from claiming a module from another course. Assessment and certificate records require an existing enrolment for the same learner and course. Revoked certificates require a revocation timestamp. These are integrity constraints, not automated award eligibility checks.
 
-Deleting an Auth user is destructive: their profile, enrolments, progress, assessment records and certificates cascade away. Direct enrolment deletion remains restricted while assessment/certificate records reference it. The owner must approve this deletion/retention contract before launch; if awards need legally justified retention, replace account deletion with an explicit reviewed anonymization workflow first. Browser users have no account/table-delete grant in this migration.
+Auth-user deletion is deliberately blocked while learner records reference that account (`ON DELETE RESTRICT`); this prevents accidental loss of enrolments, progress, assessment history and certificate records. It is a fail-closed guard, not a complete deletion/retention workflow. Before launch, the owner must approve a lawful retention/export/deletion policy and implement an explicit reviewed anonymization or records-disposition process where required. Browser users have no account/table-delete grant in this migration.
 
 ## Frontend integration for the auth owner
 
