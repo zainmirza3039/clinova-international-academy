@@ -29,6 +29,14 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Install PostgreSQL 16 for isolated learner schema tests
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-16
+
+      - name: Test learner and assessment schema in disposable local PostgreSQL
+        run: bash scripts/test-learning-schema.sh
+
       - name: Typecheck
         run: npm run typecheck
 
