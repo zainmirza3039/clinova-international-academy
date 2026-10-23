@@ -8,9 +8,13 @@ afterEach(() => { vi.unstubAllEnvs(); vi.resetModules(); createClient.mockClear(
 describe('integrated review safety', () => {
   it('forces all live feature flags off in the review deployment build', () => {
     const config = JSON.parse(readFileSync('vercel.json', 'utf8'));
-    for (const flag of ['AUTH', 'LEARNER_DATA', 'ENQUIRIES', 'INDEXING', 'VERIFICATION']) {
-      expect(config.buildCommand).toContain(`VITE_${flag}_ENABLED=false`);
+    expect(config.buildCommand).toBe('bash scripts/vercel-build.sh');
+    const buildScript = readFileSync('scripts/vercel-build.sh', 'utf8');
+    for (const flag of ['AUTH', 'LEARNER_DATA', 'ENQUIRIES', 'VERIFICATION']) {
+      expect(buildScript).toContain(`VITE_${flag}_ENABLED=false`);
     }
+    expect(buildScript).toContain('VITE_INDEXING_ENABLED=true');
+    expect(buildScript).toContain('VITE_INDEXING_ENABLED=false');
     expect(config.routes.some((route: { handle?: string }) => route.handle === 'filesystem')).toBe(true);
     expect(config.routes.at(-1).dest).toBe('/index.html');
     expect(config.routes[0].headers['X-Robots-Tag']).toBeUndefined();
