@@ -132,8 +132,10 @@ BEGIN
     SELECT item.value
     FROM pg_catalog.jsonb_array_elements(p_responses) AS item(value)
   LOOP
-    IF pg_catalog.jsonb_typeof(v_response) IS DISTINCT FROM 'object'
-       OR (SELECT count(*) FROM pg_catalog.jsonb_object_keys(v_response)) <> 2
+    IF pg_catalog.jsonb_typeof(v_response) IS DISTINCT FROM 'object' THEN
+      RAISE EXCEPTION 'Each response must be an object' USING ERRCODE = '22023';
+    END IF;
+    IF (SELECT count(*) FROM pg_catalog.jsonb_object_keys(v_response)) <> 2
        OR NOT (v_response ? 'question_id')
        OR NOT (v_response ? 'answer')
        OR pg_catalog.jsonb_typeof(v_response -> 'question_id') IS DISTINCT FROM 'string' THEN
