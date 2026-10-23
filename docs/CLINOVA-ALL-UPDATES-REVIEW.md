@@ -2,7 +2,7 @@
 
 ## Decision required before any learner launch
 
-**Do not apply `20261022090000_create_learning_foundation.sql`, enable auth/learner data, or treat this review as launch approval.** The proposed schema still contains Auth-user `ON DELETE CASCADE` relationships. The owner must decide what happens to profiles, enrolments, completion, assessment and certificate records when an account is deleted: delete, retain under a lawful policy, or anonymize. Review the composite enrolment/assessment/certificate relationships and their deletion behavior too; do not infer a retention policy from passing SQL tests. Existing own-profile-write permissions also need explicit review. The migration is retained unchanged as a proposal, not applied.
+**Do not apply `20261022090000_create_learning_foundation.sql`, enable auth/learner data, or treat this review as launch approval.** The migration now uses `ON DELETE RESTRICT` for Auth-user foreign keys, preventing accidental loss of profiles, enrolments, progress, assessment records and certificates. This is a fail-closed safeguard, not a final deletion/retention workflow. The owner must still approve the lawful retention/export/deletion policy, review composite enrolment/assessment/certificate relationships and own-profile-write permissions, and implement any required anonymization process. Do not infer launch readiness from passing SQL tests. The migration remains unapplied.
 
 ## What was integrated
 
