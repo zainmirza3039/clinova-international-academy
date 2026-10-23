@@ -18,9 +18,18 @@ The learner and assessment schema migrations are committed to `main` but **have 
 
 The migration creates no users, course content, questions, answers, attempts, staff assignments, grades, or certificates. Browser roles have read-only access to published assessments/questions for enrolled learners, and can read only their own attempts/responses. All assessment writes and all private-schema access are reserved for the trusted server-side `service_role`; never put that key in a Vite/browser variable.
 
+## Attempt workflow increment (review branch)
+
+The follow-up migration `supabase/migrations/20261023030000_add_assessment_attempt_workflows.sql` adds two authenticated, owner-bound RPCs:
+
+- `start_my_assessment_attempt(assessment_id)` locks the assessment while allocating an attempt number, requires a published assessment/course and an active enrolment, and enforces the configured maximum attempt count.
+- `submit_my_assessment_attempt(attempt_id, responses)` locks the caller's in-progress attempt, requires exactly one response per question, validates answer shapes and choice IDs, rejects cross-assessment question IDs and duplicate question responses, validates the whole payload before inserting anything, and locks the attempt after submission.
+
+Both functions are `SECURITY DEFINER` with an empty search path, derive the learner identity from `auth.uid()`, accept no caller-supplied owner ID, and revoke execution from `PUBLIC` and `anon`. Submission deliberately does not grade or mark a learner as passed. The private answer keys remain inaccessible to browser roles.
+
 ## Important limits
 
-This migration supplies data structures and access boundaries, **not a complete assessment product**. A trusted backend must still implement and test: start-attempt/attempt-limit enforcement under concurrency, answer submission, submission locking, objective grading, assessor marking for free text, final outcome recording, audit writes, staff authorization, and certificate issuance/revocation. It must validate every state transition on the server. Client-side gating is not authorization.
+This remains a schema-and-RPC proposal, **not a complete assessment product**. Trusted grading for objective answers, assessor marking for free text, final outcome recording, audit writes, staff authorization, and certificate issuance/revocation remain unimplemented. The owner must also decide whether completed enrolments can start assessments and how to handle questions changed after an attempt starts. Client-side gating is not authorization.
 
 The migration uses restrictive relationships between attempts and enrolments so an account/enrolment cannot silently erase assessment history. This deliberately makes the owner’s deletion/retention/anonymization decision a launch blocker; do not weaken those constraints or turn on Auth/learner data without an approved policy. The base learner migration has been hardened to use `ON DELETE RESTRICT` for Auth-user foreign keys. This blocks account deletion while learner records exist, but the final retention/export/deletion or anonymization workflow still requires owner approval and implementation.
 
