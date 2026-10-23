@@ -289,10 +289,10 @@ DO $retention$ BEGIN
 END $retention$;
 SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM auth.users WHERE id = '00000000-0000-0000-0000-000000000001'), 'account_retained_until_retention_workflow');
 SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_profiles WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'profile_retained');
-SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_enrolments WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'enrolment_retained');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_enrolments WHERE user_id = '00000000-0000-0000-0000-000000000001' AND course_id = '10000000-0000-0000-0000-000000000001'), 'enrolment_retained');
 SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.lesson_progress WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'progress_retained');
 SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_assessment_records WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'assessment_retained');
-SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_certificates WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'certificate_retained');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_certificates WHERE user_id = '00000000-0000-0000-0000-000000000001' AND certificate_reference = 'issued-certificate-0001'), 'certificate_retained');
 SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM auth.users WHERE id = '00000000-0000-0000-0000-000000000002'), 'other_user_retained');
 SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_enrolments WHERE user_id = '00000000-0000-0000-0000-000000000002'), 'other_user_enrolment_retained');
 RESET ROLE;
