@@ -12,7 +12,7 @@ Publication-only exports remain publication-only. Explicit review catalogue expo
 
 ## Review build safeguards
 
-- Auth, learner data, enquiries, indexing and public verification are explicitly forced off by the repository's Vercel build command, even if inherited environment values are true.
+- Auth, learner data, enquiries and public verification are explicitly forced off by the repository's Vercel build command, even if inherited environment values are true. Indexing is enabled only for the production build; preview builds keep indexing disabled.
 - Security headers, server-side `X-Robots-Tag: noindex, nofollow`, static-file-first handling and SPA fallback are present. Review SEO generates no public sitemap entries or canonical origin.
 - Main's nullable public Supabase client behavior is preserved. That client cannot persist, refresh or recover student sessions; only the separately gated AuthProvider owns student auth.
 - The local patched React Router 7.18.4 dependency is retained. The review notes that reverting to the previous major version produced moderate npm audit findings; dependency changes should remain covered by CI.
@@ -20,7 +20,7 @@ Publication-only exports remain publication-only. Explicit review catalogue expo
 
 ## Verification status
 
-GitHub Actions run [39872609985](https://github.com/zainmirza3039/clinova-international-academy/actions/runs/39872609985) passed for commit `5b37f8a14d79a1d8c3609e2022c42c2f34267ab6`: `npm ci`, TypeScript typecheck, 295 tests across 20 test files, ESLint, and production build with auth, learner data, enquiries, verification and indexing disabled. The corresponding code-scanning AI findings run also completed successfully: [39872613103](https://github.com/zainmirza3039/clinova-international-academy/actions/runs/39872613103).
+Historical GitHub Actions run [39872609985](https://github.com/zainmirza3039/clinova-international-academy/actions/runs/39872609985) passed for the earlier frontend commit `5b37f8a14d79a1d8c3609e2022c42c2f34267ab6`; it is not evidence for the latest schema changes. The assessment branch's latest CI run [39878938785](https://github.com/zainmirza3039/clinova-international-academy/actions/runs/39878938785) passed before the follow-up choice-validation migration was added. CI must run again for the current branch head.
 
 These checks establish build and test behavior, not production readiness. The isolated PostgreSQL learner-schema suite previously passed using a disposable Unix-socket-only cluster with synthetic fixtures and cleanup; this is not hosted RLS/PostgREST verification or migration approval.
 
@@ -28,6 +28,6 @@ Regression coverage includes deployment gate overrides, server noindex/SPA safeg
 
 ## Boundaries and remaining verification
 
-The assessment-schema proposal is under review in [PR #13](https://github.com/zainmirza3039/clinova-international-academy/pull/13). No production database migration or live database write is included. This PR's changes are limited to reviewable schema SQL, isolated PostgreSQL tests, CI wiring and documentation; learner/auth/enquiry/verification flags remain disabled. Historical CI run links above refer to the earlier frontend baseline, not the current PR head; use the checks on PR #13 for current verification. Do not merge or apply hosted migrations until current checks pass and the retention, staging-access and backend-readiness blockers are resolved.
+Schema foundation and assessment migrations were merged into `main` by [PR #13](https://github.com/zainmirza3039/clinova-international-academy/pull/13). Git integration then created production deployment `dpl_DseLZBgi4h2AVc36VBvjx6qAYeb6` for commit `dce71b0d1902c51b9c28617a80a10178e5e65c93` (READY). The deployment did not execute SQL. Live Supabase remains unchanged: only the three enquiry tables are present, and learner/auth/enquiry/verification flags remain off. The schema review is code-only until a safe non-production target is available; no learner migration should be applied to production.
 
 Hosted auth, email/recovery, real learner persistence, multi-account RLS, abuse controls, accessibility and end-to-end UI verification remain launch work. Confirm live email delivery, contact channels, legal policy text, public SEO/indexing and production environment configuration before enabling services. Do not enable features merely because CI or a Preview build passes.
