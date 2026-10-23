@@ -87,6 +87,36 @@ BEGIN
 END
 $invalid_payload$;
 
+DO $malformed_payloads$
+DECLARE
+  v_attempt_id uuid;
+  v_payload jsonb;
+BEGIN
+  SELECT id INTO v_attempt_id
+  FROM public.learning_assessment_attempts
+  WHERE user_id = auth.uid()
+    AND assessment_id = '40000000-0000-0000-0000-000000000001'
+    AND attempt_number = 3;
+
+  FOREACH v_payload IN ARRAY ARRAY[
+    '[{"question_id":"50000000-0000-0000-0000-000000000001","answer":"b"}]'::jsonb,
+    '[{"question_id":"50000000-0000-0000-0000-000000000001","answer":"b"},{"question_id":"50000000-0000-0000-0000-000000000001","answer":"a"}]'::jsonb,
+    '[{"question_id":"50000000-0000-0000-0000-000000000001","answer":"b","extra":true},{"question_id":"50000000-0000-0000-0000-000000000002","answer":"Reasoning"}]'::jsonb,
+    '[1,{"question_id":"50000000-0000-0000-0000-000000000002","answer":"Reasoning"}]'::jsonb
+  ]
+  LOOP
+    BEGIN
+      PERFORM public.submit_my_assessment_attempt(v_attempt_id, v_payload);
+      RAISE EXCEPTION 'malformed response payload unexpectedly succeeded: %', v_payload;
+    EXCEPTION WHEN SQLSTATE '22023' THEN NULL;
+    END;
+    IF (SELECT count(*) FROM public.learning_assessment_responses WHERE attempt_id = v_attempt_id) <> 0 THEN
+      RAISE EXCEPTION 'malformed payload wrote partial response rows: %', v_payload;
+    END IF;
+  END LOOP;
+END
+$malformed_payloads$;
+
 DO $cross_user_attempt$
 BEGIN
   BEGIN
