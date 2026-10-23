@@ -6,7 +6,7 @@
 
 ## What was integrated
 
-The existing review branch `review/clinova-all-updates-20261022` contains the integrated homepage, programme/CPD pages and data, legal/contact/partner content, verification, branding, SEO, routing and dependency updates. Main's deletion of the testimonials file is retained. Draft article cards live in `resourceDrafts.ts`, not a resurrected testimonials module. Main's existing editorial article routes remain available as clearly labelled review snapshots alongside the fifteen educational drafts. Proposed programme and CPD curricula, study resources and default-off learner frontend are included.
+The integrated homepage, programme/CPD pages and data, legal/contact/partner content, verification, branding, SEO, routing and dependency updates were introduced on the historical review branch `review/clinova-all-updates-20261022` and reconciled into `main` before this assessment-schema proposal. Main's deletion of the testimonials file is retained. Draft article cards live in `resourceDrafts.ts`, not a resurrected testimonials module. Main's existing editorial article routes remain available as clearly labelled review snapshots alongside the fifteen educational drafts. Proposed programme and CPD curricula, study resources and default-off learner frontend are included.
 
 Publication-only exports remain publication-only. Explicit review catalogue exports expose draft outlines without relabelling them as published. Course availability, duration, CPD hours, awards, accreditation, enrolment and checkout are not confirmed. Existing public certificate lookup functionality remains behind a separate, default-off approval flag, rather than being removed or silently enabled.
 
@@ -28,6 +28,6 @@ Regression coverage includes deployment gate overrides, server noindex/SPA safeg
 
 ## Boundaries and remaining verification
 
-This branch is under review in [draft PR #10](https://github.com/zainmirza3039/clinova-international-academy/pull/10). No remote-main merge, Production deployment, promotion, alias/domain/DNS/project-setting change, hosted migration or live database write is included. Automatic Vercel deployment for this review branch is disabled. The branch has diverged from current main and must be reconciled and re-tested before any merge; do not force-push or merge it without review.
+The assessment-schema proposal is under review in [PR #13](https://github.com/zainmirza3039/clinova-international-academy/pull/13). No production database migration or live database write is included. This PR's changes are limited to reviewable schema SQL, isolated PostgreSQL tests, CI wiring and documentation; learner/auth/enquiry/verification flags remain disabled. Historical CI run links above refer to the earlier frontend baseline, not the current PR head; use the checks on PR #13 for current verification. Do not merge or apply hosted migrations until current checks pass and the retention, staging-access and backend-readiness blockers are resolved.
 
 Hosted auth, email/recovery, real learner persistence, multi-account RLS, abuse controls, accessibility and end-to-end UI verification remain launch work. Confirm live email delivery, contact channels, legal policy text, public SEO/indexing and production environment configuration before enabling services. Do not enable features merely because CI or a Preview build passes.
