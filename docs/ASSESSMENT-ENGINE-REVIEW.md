@@ -16,7 +16,7 @@ The learner and assessment schema migrations are committed to `main` but **have 
 - `app_private.academy_staff_roles`: trusted server-side role assignments; never exposed to browser roles.
 - `app_private.academy_audit_events`: service-only audit events for privileged operations.
 
-The migration creates no users, course content, questions, answers, attempts, staff assignments, grades, or certificates. Browser roles have read-only access to published assessments/questions for enrolled learners, and can read only their own attempts/responses. All assessment writes and all private-schema access are reserved for the trusted server-side `service_role`; never put that key in a Vite/browser variable.
+The migration creates no users, course content, questions, answers, attempts, staff assignments, grades, or certificates. Browser roles have read-only access to published assessments/questions for enrolled learners, and can read only their own attempts/responses. The two narrowly scoped authenticated RPCs described below are the only learner-facing write path for starting and submitting attempts; direct table writes and all private-schema access remain reserved for the trusted server-side `service_role`. Never put that key in a Vite/browser variable.
 
 ## Attempt workflow increment (merged in PR #16)
 
