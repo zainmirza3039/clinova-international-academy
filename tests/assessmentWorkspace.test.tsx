@@ -36,7 +36,7 @@ describe('AssessmentWorkspace', () => {
 
     await waitFor(() => expect(screen.getByText('Clinical knowledge check')).toBeTruthy());
     fireEvent.click(screen.getByRole('button', { name: 'Start new attempt' }));
-    await screen.findByText(/Which option is correct/);
+    await screen.findByRole('group', { name: /Which option is correct/ });
 
     fireEvent.click(screen.getByLabelText('Option B'));
     fireEvent.click(screen.getByRole('button', { name: 'Submit assessment' }));
@@ -49,7 +49,7 @@ describe('AssessmentWorkspace', () => {
     const api = makeApi();
     render(<AssessmentWorkspace api={api as unknown as ReturnType<typeof createLearnerApi>} courseId={courseId} active={false} />);
     await waitFor(() => expect(screen.getByText('Clinical knowledge check')).toBeTruthy());
-    expect(screen.queryByRole('button', { name: 'Start new attempt' })).toBeNull();
+    await waitFor(() => expect(screen.queryByRole('button', { name: 'Start new attempt' })).toBeNull());
     expect(screen.getByText(/read-only/)).toBeTruthy();
     expect(api.startAssessmentAttempt).not.toHaveBeenCalled();
   });
