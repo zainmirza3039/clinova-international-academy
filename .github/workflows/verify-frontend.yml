@@ -38,6 +38,14 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Install PostgreSQL 16 for isolated learner schema tests
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-16 postgresql-client-16
+
+      - name: Test learner schema in disposable local PostgreSQL
+        run: bash scripts/test-learning-schema.sh
+
       - name: Build with public-facing services disabled
         env:
           VITE_VERIFICATION_ENABLED: 'false'
