@@ -31,9 +31,12 @@ const escape = s => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAl
 const urls = origin ? [...new Set(fixed)].map(path => '  <url><loc>' + escape(origin + path) + '</loc></url>').join('\n') : '';
 writeFileSync('dist/sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + '\n</urlset>\n');
 writeFileSync('dist/robots.txt', origin ? 'User-agent: *\nDisallow: /admin\nDisallow: /apply\nDisallow: /application\nDisallow: /sign-in\nDisallow: /sign-up\nDisallow: /forgot-password\nDisallow: /reset-password\nDisallow: /student\nSitemap: ' + origin + '/sitemap.xml\n' : 'User-agent: *\nDisallow: /\n');
-// Update server-delivered robots metadata as well as runtime route metadata.
-if (origin) {
-  const file = 'dist/index.html';
-  writeFileSync(file, readFileSync(file, 'utf8').replace('content="noindex, nofollow"', 'content="index, follow"'));
-}
+// Keep preview HTML noindexed while allowing indexing only in explicitly enabled production builds.
+const htmlFile = 'dist/index.html';
+const html = readFileSync(htmlFile, 'utf8');
+const robotsMeta = /<meta\\s+name="robots"\\s+content="[^"]*"\\s*\\/?\\s*>/i;
+const replacement = origin
+  ? '<meta name="robots" content="index, follow" />'
+  : '<meta name="robots" content="noindex, nofollow" />';
+writeFileSync(htmlFile, robotsMeta.test(html) ? html.replace(robotsMeta, replacement) : html.replace('</head>', '    ' + replacement + '\\n  </head>'));
 console.log(origin ? 'SEO assets generated for configured origin.' : 'Preview SEO safeguards generated: noindex, no public sitemap entries.');
