@@ -14,6 +14,7 @@ DECLARE
   v_course_id uuid;
   v_max_attempts integer;
   v_active_attempt_count bigint;
+  v_question_count bigint;
   v_next_attempt_number integer;
   v_attempt_id uuid;
 BEGIN
@@ -46,6 +47,16 @@ BEGIN
 
   IF NOT FOUND THEN
     RAISE EXCEPTION 'Assessment is not available' USING ERRCODE = '42501';
+  END IF;
+
+  SELECT count(*) INTO v_question_count
+  FROM public.learning_assessment_questions AS q
+  WHERE q.assessment_id = p_assessment_id AND q.course_id = v_course_id;
+
+  -- The learner UI intentionally supports at most 100 questions. Do not consume
+  -- an attempt for an empty assessment or create an attempt the UI cannot render.
+  IF v_question_count NOT BETWEEN 1 AND 100 THEN
+    RAISE EXCEPTION 'Assessment questions are not available' USING ERRCODE = '22023';
   END IF;
 
   SELECT count(*) FILTER (WHERE a.status <> 'voided'),
