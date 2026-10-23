@@ -244,12 +244,12 @@ VALUES ('60000000-0000-0000-0000-000000000001', '40000000-0000-0000-0000-0000000
 RESET ROLE;
 
 SET ROLE anon;
-DO $ BEGIN
+DO $$ BEGIN
   BEGIN PERFORM count(*) FROM public.learning_assessments; RAISE EXCEPTION 'anonymous assessment read unexpectedly succeeded';
   EXCEPTION WHEN insufficient_privilege THEN NULL; END;
   BEGIN PERFORM count(*) FROM app_private.assessment_answer_keys; RAISE EXCEPTION 'anonymous answer-key read unexpectedly succeeded';
   EXCEPTION WHEN insufficient_privilege THEN NULL; END;
-END $;
+END $$;
 RESET ROLE;
 
 SET ROLE authenticated;
@@ -257,7 +257,7 @@ SELECT set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-000000000001
 SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.learning_assessments), 'enrolled_learner_reads_published_assessment');
 SELECT pg_temp.assert_true((SELECT count(*) = 2 FROM public.learning_assessment_questions), 'enrolled_learner_reads_questions');
 SELECT pg_temp.assert_true((SELECT count(*) = 0 FROM public.learning_assessment_attempts), 'learner_cannot_read_other_attempt');
-DO $ BEGIN
+DO $$ BEGIN
   BEGIN PERFORM count(*) FROM app_private.assessment_answer_keys; RAISE EXCEPTION 'learner answer-key read unexpectedly succeeded';
   EXCEPTION WHEN insufficient_privilege THEN NULL; END;
   BEGIN
@@ -265,7 +265,7 @@ DO $ BEGIN
     VALUES (auth.uid(), '10000000-0000-0000-0000-000000000001', '40000000-0000-0000-0000-000000000001', 1);
     RAISE EXCEPTION 'learner self-created attempt unexpectedly succeeded';
   EXCEPTION WHEN insufficient_privilege THEN NULL; END;
-END $;
+END $$;
 SELECT set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-000000000002', false);
 SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.learning_assessment_attempts), 'learner_reads_own_attempt');
 SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.learning_assessment_responses), 'learner_reads_own_response');
