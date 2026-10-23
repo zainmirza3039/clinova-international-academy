@@ -21,6 +21,7 @@ GRANT EXECUTE ON FUNCTION auth.uid() TO anon, authenticated, service_role;
 \echo 'Applying migration under test'
 \i supabase/migrations/20261022090000_create_learning_foundation.sql
 \i supabase/migrations/20261023010000_create_assessment_engine.sql
+\i supabase/migrations/20261023020000_harden_assessment_choice_validation.sql
 
 \echo 'Loading local-only fixtures as service_role'
 SET ROLE service_role;
