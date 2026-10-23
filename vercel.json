@@ -8,13 +8,6 @@
   },
   "routes": [
     {
-      "src": "/(admin|apply|application|sign-in|sign-up|forgot-password|reset-password|student|verify|privacy-policy|terms-and-conditions|cookie-policy|refund-policy)(/.*)?",
-      "headers": {
-        "X-Robots-Tag": "noindex, nofollow"
-      },
-      "continue": true
-    },
-    {
       "src": "/.*",
       "headers": {
         "X-Content-Type-Options": "nosniff",
@@ -22,6 +15,13 @@
         "Referrer-Policy": "strict-origin-when-cross-origin",
         "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
         "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.pexels.com; connect-src 'self' https://*.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+      },
+      "continue": true
+    },
+    {
+      "src": "/(admin|apply|application|sign-in|sign-up|forgot-password|reset-password|student|verify|privacy-policy|terms-and-conditions|cookie-policy|refund-policy)(/.*)?",
+      "headers": {
+        "X-Robots-Tag": "noindex, nofollow"
       },
       "continue": true
     },
