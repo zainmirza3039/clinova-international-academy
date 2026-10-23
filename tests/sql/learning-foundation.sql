@@ -271,7 +271,7 @@ SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.learning_assessment_
 SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.learning_assessment_responses), 'learner_reads_own_response');
 RESET ROLE;
 
-\echo 'Testing auth.users cascade cleanup and restrictive enrollment deletion'
+\echo 'Testing auth.users deletion is blocked pending approved retention workflow'
 SET ROLE authenticated;
 SELECT set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-000000000001', false);
 SELECT public.set_my_lesson_completion('30000000-0000-0000-0000-000000000001', true);
@@ -281,16 +281,18 @@ INSERT INTO public.student_assessment_records(user_id, course_id, assessment_tit
 VALUES ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000001', 'Local assessment', 'passed');
 INSERT INTO public.student_certificates(user_id, course_id, certificate_reference)
 VALUES ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000001', 'issued-certificate-0001');
-DO $$ BEGIN
+DO $retention$ BEGIN
   BEGIN DELETE FROM public.student_enrolments WHERE user_id = '00000000-0000-0000-0000-000000000001'; RAISE EXCEPTION 'enrolment with awards unexpectedly deleted';
   EXCEPTION WHEN foreign_key_violation THEN NULL; END;
-END $$;
-DELETE FROM auth.users WHERE id = '00000000-0000-0000-0000-000000000001';
-SELECT pg_temp.assert_true((SELECT count(*) = 0 FROM public.student_profiles WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'deleted_user_profile');
-SELECT pg_temp.assert_true((SELECT count(*) = 0 FROM public.student_enrolments WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'deleted_user_enrolment');
-SELECT pg_temp.assert_true((SELECT count(*) = 0 FROM public.lesson_progress WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'deleted_user_progress');
-SELECT pg_temp.assert_true((SELECT count(*) = 0 FROM public.student_assessment_records WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'deleted_user_assessments');
-SELECT pg_temp.assert_true((SELECT count(*) = 0 FROM public.student_certificates WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'deleted_user_certificates');
+  BEGIN DELETE FROM auth.users WHERE id = '00000000-0000-0000-0000-000000000001'; RAISE EXCEPTION 'auth user deletion unexpectedly succeeded while learner records exist';
+  EXCEPTION WHEN foreign_key_violation THEN NULL; END;
+END $retention$;
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM auth.users WHERE id = '00000000-0000-0000-0000-000000000001'), 'account_retained_until_retention_workflow');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_profiles WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'profile_retained');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_enrolments WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'enrolment_retained');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.lesson_progress WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'progress_retained');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_assessment_records WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'assessment_retained');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_certificates WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'certificate_retained');
 SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM auth.users WHERE id = '00000000-0000-0000-0000-000000000002'), 'other_user_retained');
 SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_enrolments WHERE user_id = '00000000-0000-0000-0000-000000000002'), 'other_user_enrolment_retained');
 RESET ROLE;
