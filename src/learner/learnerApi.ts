@@ -25,6 +25,36 @@ export type LessonProgress = {
   lesson_id: string;
   completed_at: string;
 };
+export type LearningAssessment = {
+  id: string;
+  course_id: string;
+  title: string;
+  instructions: string | null;
+  max_attempts: number;
+};
+export type AssessmentChoice = { id: string; label: string };
+export type AssessmentQuestion = {
+  id: string;
+  assessment_id: string;
+  course_id: string;
+  prompt: string;
+  question_type: 'single_choice' | 'multiple_choice' | 'true_false' | 'short_answer';
+  choices: AssessmentChoice[] | null;
+  points: number;
+  position: number;
+};
+export type AssessmentAnswer = string | string[] | boolean;
+export type AssessmentResponseInput = { question_id: string; answer: AssessmentAnswer };
+export type AssessmentAttempt = {
+  id: string;
+  assessment_id: string;
+  attempt_number: number;
+  status: 'in_progress' | 'submitted' | 'graded' | 'voided';
+  score_percent: number | null;
+  passed: boolean | null;
+  started_at: string;
+  submitted_at: string | null;
+};
 
 const PROFILE_COLUMNS = 'user_id, display_name';
 const ENROLMENT_COLUMNS = 'id, course_id, status, enrolled_at';
@@ -32,8 +62,12 @@ const COURSE_COLUMNS = 'id, slug, title, summary';
 const MODULE_COLUMNS = 'id, course_id, title, position';
 const LESSON_COLUMNS = 'id, course_id, module_id, title, body_markdown, position';
 const PROGRESS_COLUMNS = 'user_id, course_id, lesson_id, completed_at';
+const ASSESSMENT_COLUMNS = 'id, course_id, title, instructions, max_attempts';
+const QUESTION_COLUMNS = 'id, assessment_id, course_id, prompt, question_type, choices, points, position';
+const ATTEMPT_COLUMNS = 'id, assessment_id, attempt_number, status, score_percent, passed, started_at, submitted_at';
 const SAFE_LOAD_ERROR = 'Unable to load learner data. Please try again.';
 const SAFE_WRITE_ERROR = 'Unable to update lesson progress. Please try again.';
+const SAFE_ASSESSMENT_ERROR = 'Unable to complete the assessment action. Please try again.';
 const SAFE_UNAVAILABLE_ERROR = 'Learner access is currently unavailable.';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -47,8 +81,8 @@ function validPage(page: number) {
   return Number.isSafeInteger(page) && page >= 0 && Number.isSafeInteger((page + 1) * LEARNER_PAGE_SIZE);
 }
 
-function safeError(kind: 'load' | 'write' | 'unavailable') {
-  return new Error(kind === 'write' ? SAFE_WRITE_ERROR : kind === 'unavailable' ? SAFE_UNAVAILABLE_ERROR : SAFE_LOAD_ERROR);
+function safeError(kind: 'load' | 'write' | 'assessment' | 'unavailable') {
+  return new Error(kind === 'write' ? SAFE_WRITE_ERROR : kind === 'assessment' ? SAFE_ASSESSMENT_ERROR : kind === 'unavailable' ? SAFE_UNAVAILABLE_ERROR : SAFE_LOAD_ERROR);
 }
 
 function assertResponse<T>(result: QueryResult<T>, kind: 'load' | 'write'): T {
@@ -171,5 +205,97 @@ export function createLearnerApi(client: SupabaseClient | null, enabled: boolean
     }
   };
 
-  return { getProfile, listEnrolments, listCourses, listModules, listLessons, listProgress, setLessonCompletion };
+  const listAssessments = async (courseId: string, page = 0): Promise<LearningAssessment[]> => {
+    if (!available) return unavailable();
+    assertUuid(courseId, 'course ID');
+    assertPage(page);
+    const [from, to] = pageRange(page);
+    try {
+      const result = await client!.from('learning_assessments').select(ASSESSMENT_COLUMNS)
+        .eq('course_id', courseId).eq('publication_status', 'published')
+        .order('title', { ascending: true }).order('id', { ascending: true }).range(from, to);
+      return assertList(result, 'load') as LearningAssessment[];
+    } catch (error) {
+      if (error instanceof Error && error.message === SAFE_LOAD_ERROR) throw error;
+      throw safeError('load');
+    }
+  };
+
+  const listAssessmentQuestions = async (assessmentId: string, courseId: string): Promise<AssessmentQuestion[]> => {
+    if (!available) return unavailable();
+    assertUuid(assessmentId, 'assessment ID');
+    assertUuid(courseId, 'course ID');
+    try {
+      // A bounded read prevents a malformed content record from loading an unbounded quiz.
+      const result = await client!.from('learning_assessment_questions').select(QUESTION_COLUMNS)
+        .eq('assessment_id', assessmentId).eq('course_id', courseId)
+        .order('position', { ascending: true }).order('id', { ascending: true }).range(0, 100);
+      const questions = assertList(result, 'load') as AssessmentQuestion[];
+      if (questions.length > 100) throw safeError('assessment');
+      return questions;
+    } catch (error) {
+      if (error instanceof Error && (error.message === SAFE_LOAD_ERROR || error.message === SAFE_ASSESSMENT_ERROR)) throw error;
+      throw safeError('load');
+    }
+  };
+
+  const listAssessmentAttempts = async (assessmentId: string, page = 0): Promise<AssessmentAttempt[]> => {
+    if (!available) return unavailable();
+    assertUuid(assessmentId, 'assessment ID');
+    assertPage(page);
+    const [from, to] = pageRange(page);
+    try {
+      const result = await client!.from('learning_assessment_attempts').select(ATTEMPT_COLUMNS)
+        .eq('user_id', userId!).eq('assessment_id', assessmentId)
+        .order('attempt_number', { ascending: false }).range(from, to);
+      return assertList(result, 'load') as AssessmentAttempt[];
+    } catch (error) {
+      if (error instanceof Error && error.message === SAFE_LOAD_ERROR) throw error;
+      throw safeError('load');
+    }
+  };
+
+  const startAssessmentAttempt = async (assessmentId: string): Promise<{ attemptId: string; attemptNumber: number }> => {
+    if (!available) return unavailable();
+    assertUuid(assessmentId, 'assessment ID');
+    try {
+      const result = await client!.rpc('start_my_assessment_attempt', { p_assessment_id: assessmentId });
+      if (result.error || !Array.isArray(result.data) || result.data.length !== 1) throw safeError('assessment');
+      const row = result.data[0] as { attempt_id?: unknown; attempt_number?: unknown };
+      if (typeof row.attempt_id !== 'string' || !UUID.test(row.attempt_id) ||
+          !Number.isSafeInteger(row.attempt_number) || (row.attempt_number as number) < 1) throw safeError('assessment');
+      return { attemptId: row.attempt_id, attemptNumber: row.attempt_number as number };
+    } catch (error) {
+      if (error instanceof Error && error.message === SAFE_ASSESSMENT_ERROR) throw error;
+      throw safeError('assessment');
+    }
+  };
+
+  const submitAssessmentAttempt = async (attemptId: string, responses: AssessmentResponseInput[]): Promise<void> => {
+    if (!available) return unavailable();
+    assertUuid(attemptId, 'attempt ID');
+    if (!Array.isArray(responses) || responses.length < 1 || responses.length > 100) throw new Error('Invalid assessment responses.');
+    const seen = new Set<string>();
+    for (const response of responses) {
+      if (!response || typeof response !== 'object' || Object.keys(response).length !== 2 ||
+          typeof response.question_id !== 'string' || !UUID.test(response.question_id) ||
+          seen.has(response.question_id)) throw new Error('Invalid assessment responses.');
+      seen.add(response.question_id);
+      const answer = response.answer;
+      const validAnswer = typeof answer === 'boolean'
+        || (typeof answer === 'string' && answer.trim().length > 0 && answer.length <= 10000)
+        || (Array.isArray(answer) && answer.length > 0 && answer.length <= 100 && answer.every(item => typeof item === 'string' && item.trim().length > 0 && item.length <= 100));
+      if (!validAnswer) throw new Error('Invalid assessment responses.');
+    }
+    try {
+      const result = await client!.rpc('submit_my_assessment_attempt', { p_attempt_id: attemptId, p_responses: responses });
+      if (result.error) throw safeError('assessment');
+    } catch (error) {
+      if (error instanceof Error && error.message === SAFE_ASSESSMENT_ERROR) throw error;
+      throw safeError('assessment');
+    }
+  };
+
+  return { getProfile, listEnrolments, listCourses, listModules, listLessons, listProgress, setLessonCompletion,
+    listAssessments, listAssessmentQuestions, listAssessmentAttempts, startAssessmentAttempt, submitAssessmentAttempt };
 }

@@ -3,7 +3,8 @@
   "git": {
     "deploymentEnabled": {
       "feat/clinova-safe-auth-Sh2gdLt": false,
-      "review/clinova-all-updates-20261022": false
+      "review/clinova-all-updates-20261022": false,
+      "fix/clinova-assessment-workflows-20261023": false
     }
   },
   "routes": [

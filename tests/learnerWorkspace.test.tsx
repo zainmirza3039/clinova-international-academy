@@ -17,6 +17,11 @@ type Api = {
   listLessons: ReturnType<typeof vi.fn>;
   listProgress: ReturnType<typeof vi.fn>;
   setLessonCompletion: ReturnType<typeof vi.fn>;
+  listAssessments: ReturnType<typeof vi.fn>;
+  listAssessmentAttempts: ReturnType<typeof vi.fn>;
+  listAssessmentQuestions: ReturnType<typeof vi.fn>;
+  startAssessmentAttempt: ReturnType<typeof vi.fn>;
+  submitAssessmentAttempt: ReturnType<typeof vi.fn>;
 };
 const apiFactory = vi.fn();
 const auth = { enabled: true, status: 'ready', recovery: false, session: { user: { id: USER } }, client: {}, signOut: vi.fn().mockResolvedValue({ error: null }) };
@@ -35,6 +40,11 @@ function makeApi(overrides: Partial<Api> = {}): Api {
     listLessons: vi.fn().mockResolvedValue([{ id: LESSON, course_id: COURSE, module_id: MODULE, title: 'Lesson One', body_markdown: '<script>alert(1)</script> **plain**', position: 1 }]),
     listProgress: vi.fn().mockResolvedValue([]),
     setLessonCompletion: vi.fn().mockResolvedValue(undefined),
+    listAssessments: vi.fn().mockResolvedValue([]),
+    listAssessmentAttempts: vi.fn().mockResolvedValue([]),
+    listAssessmentQuestions: vi.fn().mockResolvedValue([]),
+    startAssessmentAttempt: vi.fn().mockResolvedValue({ attemptId: '66666666-6666-4666-8666-666666666666', attemptNumber: 1 }),
+    submitAssessmentAttempt: vi.fn().mockResolvedValue(undefined),
     ...overrides,
   };
 }

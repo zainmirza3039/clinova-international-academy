@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { createLearnerApi, LEARNER_PAGE_SIZE, type Enrolment, type LearningCourse, type LearningLesson, type LearningModule } from './learnerApi';
 import { useLearnerRead } from './useLearnerRead';
+import AssessmentWorkspace from './AssessmentWorkspace';
 
 type LearnerApi = ReturnType<typeof createLearnerApi>;
 const buttonClass = 'rounded-lg border border-teal-600 px-3 py-2 text-sm font-semibold text-teal-800 disabled:opacity-50';
@@ -68,6 +69,7 @@ function CourseReading({ api, course, enrolment }: { api: LearnerApi; course: Le
   const [busy, setBusy] = useState(false);
   const busyRef = useRef(false);
   const [verificationPending, setVerificationPending] = useState(false);
+  const [showAssessments, setShowAssessments] = useState(false);
   const recorded = useMemo(() => progress.state.status === 'ready' ? new Set(progress.state.data.map(marker => marker.lesson_id)) : new Set<string>(), [progress.state]);
   const reloadProgress = () => {
     setVerificationPending(true);
@@ -111,6 +113,14 @@ function CourseReading({ api, course, enrolment }: { api: LearnerApi; course: Le
       {modules.state.data.map(module => <ModuleReading key={module.id} api={api} module={module} active={enrolment.status === 'active'} writeLocked={writeLocked} onComplete={complete} recorded={recorded} />)}
       <Pages name="modules" page={modulePage} rows={modules.state.data.length} setPage={setModulePage} />
     </>}
+    <section className={panelClass} aria-labelledby="course-assessments-toggle">
+      <h3 id="course-assessments-toggle" className="text-lg font-semibold">Assessments</h3>
+      <p className="mt-2 text-sm">Assessment records are loaded only when you open this section.</p>
+      <button type="button" className={`${buttonClass} mt-3`} aria-expanded={showAssessments} aria-controls="course-assessments-panel" onClick={() => setShowAssessments(value => !value)}>
+        {showAssessments ? 'Hide assessments' : 'View assessments'}
+      </button>
+      {showAssessments && <div id="course-assessments-panel"><AssessmentWorkspace api={api} courseId={course.id} active={enrolment.status === 'active'} /></div>}
+    </section>
   </section>;
 }
 
