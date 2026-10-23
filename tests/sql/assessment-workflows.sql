@@ -1,8 +1,8 @@
 \set ON_ERROR_STOP on
 CREATE FUNCTION pg_temp.assert_true(condition boolean, message text) RETURNS void
-LANGUAGE plpgsql AS $ BEGIN
+LANGUAGE plpgsql AS $assert$ BEGIN
   IF condition IS DISTINCT FROM true THEN RAISE EXCEPTION 'Assertion failed: %', message; END IF;
-END $;
+END $assert$;
 \echo 'Applying authenticated assessment workflow migration'
 \i supabase/migrations/20261023030000_add_assessment_attempt_workflows.sql
 
