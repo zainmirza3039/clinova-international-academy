@@ -241,6 +241,34 @@ INSERT INTO public.learning_assessment_attempts(id, user_id, course_id, assessme
 VALUES ('60000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000002', '10000000-0000-0000-0000-000000000001', '40000000-0000-0000-0000-000000000001', 1, 'submitted', now());
 INSERT INTO public.learning_assessment_responses(attempt_id, assessment_id, question_id, answer)
 VALUES ('60000000-0000-0000-0000-000000000001', '40000000-0000-0000-0000-000000000001', '50000000-0000-0000-0000-000000000001', '"a"'::jsonb);
+
+DO $choices_validation$
+BEGIN
+  BEGIN
+    INSERT INTO public.learning_assessment_questions(
+      assessment_id, course_id, prompt, question_type, choices, points, position
+    ) VALUES (
+      '40000000-0000-0000-0000-000000000001',
+      '10000000-0000-0000-0000-000000000001',
+      'Invalid null choices', 'single_choice', NULL, 1, 3
+    );
+    RAISE EXCEPTION 'single-choice question with NULL choices unexpectedly accepted';
+  EXCEPTION WHEN check_violation THEN NULL;
+  END;
+
+  BEGIN
+    INSERT INTO public.learning_assessment_questions(
+      assessment_id, course_id, prompt, question_type, choices, points, position
+    ) VALUES (
+      '40000000-0000-0000-0000-000000000001',
+      '10000000-0000-0000-0000-000000000001',
+      'Invalid scalar choices', 'multiple_choice', '{"not":"an array"}'::jsonb, 1, 4
+    );
+    RAISE EXCEPTION 'multiple-choice question with non-array choices unexpectedly accepted';
+  EXCEPTION WHEN check_violation THEN NULL;
+  END;
+END
+$choices_validation$;
 RESET ROLE;
 
 SET ROLE anon;
