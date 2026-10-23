@@ -4,7 +4,7 @@ React, TypeScript and Vite healthcare education website. This review build inclu
 
 ## Review safety
 
-**Do not apply the learner migration or enable learner/auth features until the owner approves the auth-user deletion and record-retention policy.** The proposed SQL currently cascades auth-user deletion into learner records. Local tests establish behavior, not approval. See [the integration review](docs/CLINOVA-ALL-UPDATES-REVIEW.md).
+**Do not apply the learner migration or enable learner/auth features until the owner approves the account-retention policy and hosted access checks pass.** The learner migration now blocks Auth-user deletion while learner records exist (`ON DELETE RESTRICT`); this is a protective stop, not a finished deletion/anonymization workflow. Local tests establish behavior, not hosted readiness. See [the integration review](docs/CLINOVA-ALL-UPDATES-REVIEW.md).
 
 Auth, learner data, public enquiries, public verification and indexing default to off. The Vercel build command explicitly keeps those five flags off, regardless of inherited environment values. No hosted migration or production deployment is part of this review. The public Supabase client stays nullable without configuration and never manages student sessions.
 

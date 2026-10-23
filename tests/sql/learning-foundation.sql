@@ -20,6 +20,7 @@ GRANT EXECUTE ON FUNCTION auth.uid() TO anon, authenticated, service_role;
 
 \echo 'Applying migration under test'
 \i supabase/migrations/20261022090000_create_learning_foundation.sql
+\i supabase/migrations/20261023010000_create_assessment_engine.sql
 
 \echo 'Loading local-only fixtures as service_role'
 SET ROLE service_role;
@@ -225,7 +226,80 @@ UPDATE public.learning_courses SET summary = 'Service role updated' WHERE slug =
 SELECT pg_temp.assert_true((SELECT summary = 'Service role updated' FROM public.learning_courses WHERE slug = 'service-managed-course'), 'service_role_can_manage');
 RESET ROLE;
 
-\echo 'Testing auth.users cascade cleanup and restrictive enrollment deletion'
+
+\echo 'Testing assessment visibility, private answer keys, and server-only writes'
+SET ROLE service_role;
+INSERT INTO public.learning_assessments(id, course_id, title, publication_status, max_attempts)
+VALUES ('40000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000001', 'Clinical Knowledge Check', 'published', 3);
+INSERT INTO public.learning_assessment_questions(id, assessment_id, course_id, prompt, question_type, choices, points, position)
+VALUES
+  ('50000000-0000-0000-0000-000000000001', '40000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000001', 'Choose the best answer', 'single_choice', '[{"id":"a","label":"Option A"},{"id":"b","label":"Option B"}]'::jsonb, 1, 1),
+  ('50000000-0000-0000-0000-000000000002', '40000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000001', 'Explain your reasoning', 'short_answer', NULL, 2, 2);
+INSERT INTO app_private.assessment_answer_keys(question_id, correct_answer, explanation)
+VALUES ('50000000-0000-0000-0000-000000000001', '"b"'::jsonb, 'Illustrative local-only answer key');
+INSERT INTO public.learning_assessment_attempts(id, user_id, course_id, assessment_id, attempt_number, status, submitted_at)
+VALUES ('60000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000002', '10000000-0000-0000-0000-000000000001', '40000000-0000-0000-0000-000000000001', 1, 'submitted', now());
+INSERT INTO public.learning_assessment_responses(attempt_id, assessment_id, question_id, answer)
+VALUES ('60000000-0000-0000-0000-000000000001', '40000000-0000-0000-0000-000000000001', '50000000-0000-0000-0000-000000000001', '"a"'::jsonb);
+
+DO $choices_validation$
+BEGIN
+  BEGIN
+    INSERT INTO public.learning_assessment_questions(
+      assessment_id, course_id, prompt, question_type, choices, points, position
+    ) VALUES (
+      '40000000-0000-0000-0000-000000000001',
+      '10000000-0000-0000-0000-000000000001',
+      'Invalid null choices', 'single_choice', NULL, 1, 3
+    );
+    RAISE EXCEPTION 'single-choice question with NULL choices unexpectedly accepted';
+  EXCEPTION WHEN check_violation THEN NULL;
+  END;
+
+  BEGIN
+    INSERT INTO public.learning_assessment_questions(
+      assessment_id, course_id, prompt, question_type, choices, points, position
+    ) VALUES (
+      '40000000-0000-0000-0000-000000000001',
+      '10000000-0000-0000-0000-000000000001',
+      'Invalid scalar choices', 'multiple_choice', '{"not":"an array"}'::jsonb, 1, 4
+    );
+    RAISE EXCEPTION 'multiple-choice question with non-array choices unexpectedly accepted';
+  EXCEPTION WHEN check_violation THEN NULL;
+  END;
+END
+$choices_validation$;
+RESET ROLE;
+
+SET ROLE anon;
+DO $$ BEGIN
+  BEGIN PERFORM count(*) FROM public.learning_assessments; RAISE EXCEPTION 'anonymous assessment read unexpectedly succeeded';
+  EXCEPTION WHEN insufficient_privilege THEN NULL; END;
+  BEGIN PERFORM count(*) FROM app_private.assessment_answer_keys; RAISE EXCEPTION 'anonymous answer-key read unexpectedly succeeded';
+  EXCEPTION WHEN insufficient_privilege THEN NULL; END;
+END $$;
+RESET ROLE;
+
+SET ROLE authenticated;
+SELECT set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-000000000001', false);
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.learning_assessments), 'enrolled_learner_reads_published_assessment');
+SELECT pg_temp.assert_true((SELECT count(*) = 2 FROM public.learning_assessment_questions), 'enrolled_learner_reads_questions');
+SELECT pg_temp.assert_true((SELECT count(*) = 0 FROM public.learning_assessment_attempts), 'learner_cannot_read_other_attempt');
+DO $$ BEGIN
+  BEGIN PERFORM count(*) FROM app_private.assessment_answer_keys; RAISE EXCEPTION 'learner answer-key read unexpectedly succeeded';
+  EXCEPTION WHEN insufficient_privilege THEN NULL; END;
+  BEGIN
+    INSERT INTO public.learning_assessment_attempts(user_id, course_id, assessment_id, attempt_number)
+    VALUES (auth.uid(), '10000000-0000-0000-0000-000000000001', '40000000-0000-0000-0000-000000000001', 1);
+    RAISE EXCEPTION 'learner self-created attempt unexpectedly succeeded';
+  EXCEPTION WHEN insufficient_privilege THEN NULL; END;
+END $$;
+SELECT set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-000000000002', false);
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.learning_assessment_attempts), 'learner_reads_own_attempt');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.learning_assessment_responses), 'learner_reads_own_response');
+RESET ROLE;
+
+\echo 'Testing auth.users deletion is blocked pending approved retention workflow'
 SET ROLE authenticated;
 SELECT set_config('request.jwt.claim.sub', '00000000-0000-0000-0000-000000000001', false);
 SELECT public.set_my_lesson_completion('30000000-0000-0000-0000-000000000001', true);
@@ -235,16 +309,18 @@ INSERT INTO public.student_assessment_records(user_id, course_id, assessment_tit
 VALUES ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000001', 'Local assessment', 'passed');
 INSERT INTO public.student_certificates(user_id, course_id, certificate_reference)
 VALUES ('00000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000001', 'issued-certificate-0001');
-DO $$ BEGIN
+DO $retention$ BEGIN
   BEGIN DELETE FROM public.student_enrolments WHERE user_id = '00000000-0000-0000-0000-000000000001'; RAISE EXCEPTION 'enrolment with awards unexpectedly deleted';
   EXCEPTION WHEN foreign_key_violation THEN NULL; END;
-END $$;
-DELETE FROM auth.users WHERE id = '00000000-0000-0000-0000-000000000001';
-SELECT pg_temp.assert_true((SELECT count(*) = 0 FROM public.student_profiles WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'deleted_user_profile');
-SELECT pg_temp.assert_true((SELECT count(*) = 0 FROM public.student_enrolments WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'deleted_user_enrolment');
-SELECT pg_temp.assert_true((SELECT count(*) = 0 FROM public.lesson_progress WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'deleted_user_progress');
-SELECT pg_temp.assert_true((SELECT count(*) = 0 FROM public.student_assessment_records WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'deleted_user_assessments');
-SELECT pg_temp.assert_true((SELECT count(*) = 0 FROM public.student_certificates WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'deleted_user_certificates');
+  BEGIN DELETE FROM auth.users WHERE id = '00000000-0000-0000-0000-000000000001'; RAISE EXCEPTION 'auth user deletion unexpectedly succeeded while learner records exist';
+  EXCEPTION WHEN foreign_key_violation THEN NULL; END;
+END $retention$;
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM auth.users WHERE id = '00000000-0000-0000-0000-000000000001'), 'account_retained_until_retention_workflow');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_profiles WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'profile_retained');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_enrolments WHERE user_id = '00000000-0000-0000-0000-000000000001' AND course_id = '10000000-0000-0000-0000-000000000001'), 'enrolment_retained');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.lesson_progress WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'progress_retained');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_assessment_records WHERE user_id = '00000000-0000-0000-0000-000000000001'), 'assessment_retained');
+SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_certificates WHERE user_id = '00000000-0000-0000-0000-000000000001' AND certificate_reference = 'issued-certificate-0001'), 'certificate_retained');
 SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM auth.users WHERE id = '00000000-0000-0000-0000-000000000002'), 'other_user_retained');
 SELECT pg_temp.assert_true((SELECT count(*) = 1 FROM public.student_enrolments WHERE user_id = '00000000-0000-0000-0000-000000000002'), 'other_user_enrolment_retained');
 RESET ROLE;
