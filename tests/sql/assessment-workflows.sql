@@ -91,10 +91,7 @@ DO $cross_user_attempt$
 BEGIN
   BEGIN
     PERFORM public.submit_my_assessment_attempt(
-      (SELECT id FROM public.learning_assessment_attempts
-       WHERE user_id = '00000000-0000-0000-0000-000000000002'
-         AND assessment_id = '40000000-0000-0000-0000-000000000001'
-       LIMIT 1),
+      '60000000-0000-0000-0000-000000000001'::uuid,
       '[{"question_id":"50000000-0000-0000-0000-000000000001","answer":"b"},{"question_id":"50000000-0000-0000-0000-000000000002","answer":"Answer"}]'::jsonb
     );
     RAISE EXCEPTION 'cross-user attempt submission unexpectedly succeeded';
