@@ -1,15 +1,30 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import AdmissionsPage from '@/pages/AdmissionsPage';
 import ApplicationPage from '@/pages/ApplicationPage';
 import AdminPage from '@/pages/AdminPage';
 import CommunityPage, { EventsPage, FacultyPage } from '@/pages/CommunityPage';
 import FAQsPage from '@/pages/FAQsPage';
+import ContactPage from '@/pages/ContactPage';
+import TrainingPartnersPage from '@/pages/TrainingPartnersPage';
+vi.mock('@/components/Reveal', () => ({ default: ({ children }: { children: React.ReactNode }) => children }));
 
 function renderPage(page: React.ReactNode) { return render(<MemoryRouter>{page}</MemoryRouter>); }
 
-afterEach(() => cleanup());
+beforeEach(() => {
+  vi.stubGlobal('IntersectionObserver', class {
+    constructor() {}
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+    takeRecords(): IntersectionObserverEntry[] { return []; }
+  });
+});
+afterEach(() => {
+  cleanup();
+  vi.unstubAllGlobals();
+});
 
 describe('completion frontend pages', () => {
   it('explains that application submission and persistence are unavailable', () => {
@@ -45,9 +60,10 @@ describe('completion frontend pages', () => {
     expect(screen.queryByText(/£|accredited by/i)).toBeNull();
   });
 
-  it('renders admissions guidance and the application preview link', () => {
+  it('states that admissions are not open while linking to the local-only planner', () => {
     renderPage(<AdmissionsPage />);
-    expect(screen.getByRole('heading', { name: /clear next step/i })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: /admissions are not yet open/i })).toBeTruthy();
+    expect(screen.getAllByText(/No programme is currently approved for enrolment/)).toHaveLength(2);
     expect(screen.getByRole('link', { name: /open application planner/i }).getAttribute('href')).toBe('/application');
   });
 
@@ -55,5 +71,21 @@ describe('completion frontend pages', () => {
     renderPage(<CommunityPage />);
     expect(screen.getByRole('heading', { name: /thoughtful learning community/i })).toBeTruthy();
     expect(screen.getByRole('link', { name: /events/i }).getAttribute('href')).toBe('/events');
+  });
+
+  it('does not collect contact details while online submissions are disabled', () => {
+    renderPage(<ContactPage />);
+    expect(screen.getByRole('heading', { name: /enquiry service unavailable/i })).toBeTruthy();
+    expect(screen.queryByLabelText(/your name/i)).toBeNull();
+    expect(screen.queryByLabelText(/^message \*/i)).toBeNull();
+    expect(screen.queryByRole('button', { name: /send message/i })).toBeNull();
+  });
+
+  it('does not collect partnership details while online submissions are disabled', () => {
+    renderPage(<TrainingPartnersPage />);
+    expect(screen.getByRole('heading', { name: /enquiry service unavailable/i })).toBeTruthy();
+    expect(screen.queryByLabelText(/full name/i)).toBeNull();
+    expect(screen.queryByLabelText(/organisation/i)).toBeNull();
+    expect(screen.queryByRole('button', { name: /submit partnership enquiry/i })).toBeNull();
   });
 });

@@ -10,9 +10,12 @@ import FAQAccordion from '@/components/FAQAccordion';
 import CTASection from '@/components/CTASection';
 import { getDepartmentBySlug } from '@/data/departments';
 import { getProgrammesByDepartment } from '@/data/programmes';
-import { cpdCourses } from '@/data/cpdCourses';
+import { publishedCPDCourses } from '@/data/cpdCourses';
 import type { FAQ } from '@/data/types';
 import { newsItems } from '@/data/resourceDrafts';
+import { getEducationalArticle } from '@/data/educationalArticles';
+
+const publishedRelatedArticles = newsItems.filter(article => getEducationalArticle(article.slug)?.status === 'published');
 
 export default function DepartmentDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -41,13 +44,13 @@ export default function DepartmentDetailPage() {
   const certificates = programmes.filter((p) => p.category === 'Certificate');
   const diplomas = programmes.filter((p) => p.category === 'Diploma');
   const articleSlugs = ['physiotherapy-assessment-structured-approach', 'musculoskeletal-pain-and-function', 'evidence-based-practice-physiotherapy', 'patient-safety-red-flags-referral'];
-  const relatedArticles = articleSlugs.map((articleSlug) => newsItems.find((article) => article.slug === articleSlug)).filter(Boolean);
-  const relatedCPD = cpdCourses.filter((c) => c.department === department.name).slice(0, 4);
+  const relatedArticles = articleSlugs.map((articleSlug) => publishedRelatedArticles.find((article) => article.slug === articleSlug)).filter(Boolean);
+  const relatedCPD = publishedCPDCourses.filter((c) => c.department === department.name).slice(0, 4);
 
   const deptFAQs: FAQ[] = [
     { id: 'df1', question: `What is this ${department.shortName} page?`, answer: `It is a proposed subject-area organisation for educational reading and study planning. It is not evidence of an established academic department or a live service.` },
     { id: 'df2', question: 'Who might use these materials?', answer: 'Healthcare professionals, learners and organisations may use the drafts to frame questions. Readers should consider their training, role, local guidance and scope of practice.' },
-    { id: 'df3', question: 'Are the listed programmes available?', answer: 'Programme records are proposed outlines shown for exploration only. Ask the academy to confirm availability, dates, fees, delivery, assessment and any entry requirements.' },
+    { id: 'df3', question: 'Are the listed programmes available?', answer: 'No programme or CPD course is currently approved for public listing. This page is a proposed subject-area overview only; no enrolment is offered here.' },
     { id: 'df4', question: 'Do these pages provide a qualification or clinical authority?', answer: 'No. These pages do not promise a certificate, accreditation, competence, employment, professional recognition or permission to practise.' },
   ];
 
@@ -70,15 +73,15 @@ export default function DepartmentDetailPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-900 mb-4">Subject-area overview</h2>
           <p className="text-base text-navy-600 leading-relaxed">{department.overview}</p>
-          <p className="mt-4 text-sm text-navy-500 leading-relaxed">Use this as a starting point: read a draft, reflect on how it relates to your role, and ask the owner to confirm any offering before relying on it.</p>
+          <p className="mt-4 text-sm text-navy-500 leading-relaxed">This page is a subject-area overview only. It is not a course offering or an established academic department.</p>
         </div>
       </section>
 
       {/* Learning Areas */}
       <section className="py-12 lg:py-16 bg-navy-50">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-bold text-navy-900 mb-3 text-center">Proposed topic coverage</h2>
-          <p className="text-center text-sm text-navy-600 mb-8">Subject categories for educational exploration, not an established department curriculum.</p>
+          <h2 className="font-heading text-2xl font-bold text-navy-900 mb-3 text-center">Topic areas</h2>
+          <p className="text-center text-sm text-navy-600 mb-8">Topic categories only. No related programme or CPD course is currently approved for public listing.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {department.learningAreas.map((area, i) => (
               <Reveal key={area} delay={(i % 4) * 60} className="flex items-center gap-3 p-4 bg-white rounded-lg border border-navy-100">

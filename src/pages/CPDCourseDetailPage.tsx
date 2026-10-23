@@ -3,16 +3,16 @@ import { ArrowRight } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import CurriculumDraftContent from '@/components/CurriculumDraftContent';
-import { cpdCourses } from '@/data/cpdCourses';
+import { publishedCPDCourses } from '@/data/cpdCourses';
 import { getCPDCurriculum } from '@/data/cpdCurricula';
 
 export default function CPDCourseDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const course = cpdCourses.find(item => item.slug === slug);
+  const course = publishedCPDCourses.find(item => item.slug === slug);
   const draft = slug ? getCPDCurriculum(slug) : undefined;
   useSEO({ title: course?.title ?? 'CPD Course Not Found', description: course?.description ?? 'The requested CPD course could not be found.', ogImage: course?.image });
   if (!course) return <div className="min-h-screen flex items-center justify-center"><div className="text-center"><h1 className="font-heading text-2xl font-bold text-navy-900 mb-4">CPD Course Not Found</h1><Link to="/cpd-courses" className="text-clinical-600">Browse CPD courses</Link></div></div>;
-  const related = cpdCourses.filter(item => item.slug !== course.slug && item.department === course.department).slice(0, 3);
+  const related = publishedCPDCourses.filter(item => item.slug !== course.slug && item.department === course.department).slice(0, 3);
   return <>
     <section className="bg-navy-900 pt-28 pb-14">
       <div className="max-w-editorial mx-auto px-6 lg:px-10">

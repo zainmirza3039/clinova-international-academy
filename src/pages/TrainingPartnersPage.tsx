@@ -11,13 +11,13 @@ const benefits = [
   { icon: FileText, title: 'Share your context', desc: 'Describe your organisation, audience and learning questions.' },
   { icon: Users, title: 'Discuss learner needs', desc: 'Explain the support and access arrangements you would need.' },
   { icon: Award, title: 'Ask about recognition', desc: 'Request accurate information; certificates and recognition are not promised.' },
-  { icon: FileText, title: 'Review draft resources', desc: 'Use the existing reading library to frame a possible conversation.' },
+  { icon: FileText, title: 'Check publication status', desc: 'Public educational materials will appear after the required review is complete.' },
   { icon: ShieldCheck, title: 'Clarify review', desc: 'Ask what has been reviewed, approved or published.' },
   { icon: Handshake, title: 'Consider terms', desc: 'Discuss any partnership only after the owner confirms capability and terms.' },
 ];
 
 const howItWorks = [
-  { step: '01', title: 'Share an enquiry', desc: 'Use the form to describe your organisation and learning context.' },
+  { step: '01', title: 'Wait for the enquiry service', desc: 'Online partnership submissions are disabled until the secure workflow is verified.' },
   { step: '02', title: 'Request confirmation', desc: 'Ask which content, delivery and support arrangements are actually available.' },
   { step: '03', title: 'Review terms', desc: 'Consider any written scope, responsibilities, privacy and commercial terms.' },
   { step: '04', title: 'Decide cautiously', desc: 'Do not assume a partnership, programme, certificate or outcome until confirmed.' },
@@ -116,7 +116,7 @@ export default function TrainingPartnersPage() {
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Benefits"
-            title="What to discuss in an enquiry"
+            title="Partnership information"
             description="Use an enquiry to ask precise questions about subject matter, audience, review status, delivery, data handling, fees and any recognition. The form is not evidence that a partnership programme exists."
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -140,9 +140,9 @@ export default function TrainingPartnersPage() {
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-900 mb-4">Who Can Apply?</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-900 mb-4">Potential organisation types</h2>
               <p className="text-sm text-navy-500 leading-relaxed mb-6">
-                Organisations may use the proposed enquiry route to describe a possible collaboration; acceptance, capability and terms require owner confirmation.
+                No partnership submissions are currently accepted. These examples describe possible future audiences only and do not imply an open application process or confirmed delivery capability.
               </p>
               <div className="space-y-3">
                 {whoCanApply.map((item) => (
@@ -177,9 +177,9 @@ export default function TrainingPartnersPage() {
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            eyebrow="Apply Now"
-            title="Proposed partnership enquiry"
-            description="The form is retained in its existing disabled state when enquiries are not enabled. If enabled by the owner, use it to request information rather than assume an offer."
+            eyebrow="Enquiry status"
+            title="Partnership submissions are not currently available"
+            description="Online submissions are disabled. The form is hidden until a secure enquiry workflow is verified and explicitly enabled by the academy owner."
           />
           {submitted ? (
             <div role="status" aria-live="polite" className="text-center py-12 bg-teal-50 rounded-xl border border-teal-100">
@@ -187,9 +187,9 @@ export default function TrainingPartnersPage() {
               <h3 className="font-heading text-xl font-bold text-navy-900 mb-2">Enquiry Submitted</h3>
               <p className="text-sm text-navy-600">Your message was received by the configured enquiry service. This does not confirm a partnership, course, certificate or support arrangement.</p>
             </div>
-          ) : (
+          ) : enquiriesEnabled ? (
             <form aria-label="Partnership enquiry" onSubmit={handleSubmit} className="space-y-5 bg-navy-50 p-6 md:p-8 rounded-xl border border-navy-100">
-              {!enquiriesEnabled && <p className="text-sm text-navy-700 border-l-2 border-teal-500 pl-3 mb-4">{enquiryUnavailable}</p>}
+              
                   {error && <p role="alert" aria-live="assertive" className="text-sm text-red-700 bg-red-50 border border-red-200 p-3">{error}</p>}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -237,6 +237,11 @@ export default function TrainingPartnersPage() {
                 {submitting ? 'Submitting…' : 'Submit Partnership Enquiry'}
               </button>
             </form>
+          ) : (
+            <div role="status" aria-live="polite" className="border border-navy-100 bg-navy-50 p-6 md:p-8 rounded-xl">
+              <h3 className="font-heading text-lg font-bold text-navy-900">Enquiry service unavailable</h3>
+              <p className="mt-3 text-sm leading-relaxed text-navy-700">{enquiryUnavailable} The form is hidden so you cannot enter details that this website cannot submit. No partnership enquiry has been sent.</p>
+            </div>
           )}
         </div>
       </section>

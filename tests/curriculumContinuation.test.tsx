@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { courseDrafts, getCourseDraft } from '@/data/courseDrafts';
@@ -77,11 +77,6 @@ function assertDraftShape(draft: CourseDraft | CPDCurriculumDraft | undefined, m
   }
 }
 
-function assertNoLearnerWorkflow(container: HTMLElement) {
-  expect(container.querySelector('form,input,textarea,select,[download],button[type="submit"]')).toBeNull();
-  expect(container.querySelector('a[href^="/apply"],a[href^="/student"],a[href^="/sign-up"],a[href*="checkout"],a[href*="enrol"]')).toBeNull();
-  expect(container.textContent).not.toMatch(/certificate earned|progress saved|completion recorded/i);
-}
 
 describe('complete continuation catalogue and curriculum contracts', () => {
   it('covers exactly every programme and CPD catalogue slug with one draft and no extras', () => {
@@ -133,89 +128,27 @@ describe('complete continuation catalogue and curriculum contracts', () => {
   });
 });
 
-describe('direct programme and CPD detail rendering', () => {
-  it.each(allProgrammeSlugs)('renders programme detail safely for %s', (slug) => {
+describe('public publication gate for programme and CPD detail routes', () => {
+  it.each(allProgrammeSlugs)('does not expose draft programme detail %s', (slug) => {
     const programme = programmes.find((item) => item.slug === slug)!;
-    const { container } = render(
-      <MemoryRouter initialEntries={[`/programmes/${slug}`]}>
-        <Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes>
-      </MemoryRouter>,
-    );
-    expect(screen.getByRole('heading', { level: 1, name: programme.title })).toBeTruthy();
-    expect(screen.getByText(/Proposed catalogue entry/i)).toBeTruthy();
-    expect(screen.getByRole('navigation', { name: 'Curriculum sections' })).toBeTruthy();
-    expect(screen.getByRole('heading', { name: 'Sources and scope notes' })).toBeTruthy();
-    const details = container.querySelectorAll('details');
-    expect(details).toHaveLength(3);
-    expect([...details].every((detail) => !detail.open)).toBe(true);
-    expect([...container.querySelectorAll('details h3')]).toHaveLength(6);
-    assertNoLearnerWorkflow(container);
-    for (const link of container.querySelectorAll('a[target="_blank"]')) {
-      expect(link.getAttribute('rel')).toContain('noopener');
-      expect(link.getAttribute('rel')).toContain('noreferrer');
-      expect(link.textContent).toMatch(/opens in a new tab/i);
-    }
-    const ids = [...container.querySelectorAll('[id]')].map((element) => element.id);
-    expect(new Set(ids).size).toBe(ids.length);
-    for (const link of container.querySelectorAll('a[href^="#"]')) {
-      expect(ids).toContain(link.getAttribute('href')!.slice(1));
-    }
-  });
-
-  it.each(allCpdSlugs)('renders CPD detail safely for %s', (slug) => {
-    const course = cpdCourses.find((item) => item.slug === slug)!;
-    const { container } = render(
-      <MemoryRouter initialEntries={[`/cpd-courses/${slug}`]}>
-        <Routes><Route path="/cpd-courses/:slug" element={<CPDCourseDetailPage />} /></Routes>
-      </MemoryRouter>,
-    );
-    expect(screen.getByRole('heading', { level: 1, name: course.title })).toBeTruthy();
-    expect(screen.getByText(/Proposed catalogue entry/i)).toBeTruthy();
-    expect(screen.getByRole('navigation', { name: 'Curriculum sections' })).toBeTruthy();
-    expect(screen.getByRole('heading', { name: 'Sources and scope notes' })).toBeTruthy();
-    const details = container.querySelectorAll('details');
-    expect(details).toHaveLength(3);
-    expect([...details].every((detail) => !detail.open)).toBe(true);
-    expect([...container.querySelectorAll('details h3')]).toHaveLength(6);
-    assertNoLearnerWorkflow(container);
-    for (const link of container.querySelectorAll('a[target="_blank"]')) {
-      expect(link.getAttribute('rel')).toContain('noopener');
-      expect(link.getAttribute('rel')).toContain('noreferrer');
-      expect(link.textContent).toMatch(/opens in a new tab/i);
-    }
-    const ids = [...container.querySelectorAll('[id]')].map((element) => element.id);
-    expect(new Set(ids).size).toBe(ids.length);
-    for (const link of container.querySelectorAll('a[href^="#"]')) {
-      expect(ids).toContain(link.getAttribute('href')!.slice(1));
-    }
-  });
-
-  it('does not pretend a collapsed module is a learner interaction or save state', () => {
-    const slug = allProgrammeSlugs[0];
-    const { container } = render(
-      <MemoryRouter initialEntries={[`/programmes/${slug}`]}>
-        <Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes>
-      </MemoryRouter>,
-    );
-    const summary = container.querySelector('details summary');
-    expect(summary).toBeTruthy();
-    fireEvent.click(summary!);
-    expect(container.querySelector('form,input,textarea,[download]')).toBeNull();
-    expect(container.textContent).toMatch(/reflective activit/i);
-  });
-
-  it('shows safe not-found states for unknown direct programme and CPD paths', () => {
-    const { rerender } = render(
-      <MemoryRouter initialEntries={['/programmes/no-such-programme']}>
-        <Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes>
-      </MemoryRouter>,
-    );
+    render(<MemoryRouter initialEntries={['/programmes/' + slug]}><Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes></MemoryRouter>);
     expect(screen.getByRole('heading', { name: 'Programme Not Found' })).toBeTruthy();
-    rerender(
-      <MemoryRouter key="missing-cpd" initialEntries={['/cpd-courses/no-such-cpd']}>
-        <Routes><Route path="/cpd-courses/:slug" element={<CPDCourseDetailPage />} /></Routes>
-      </MemoryRouter>,
-    );
+    expect(screen.queryByRole('navigation', { name: 'Curriculum sections' })).toBeNull();
+    expect(screen.queryByRole('heading', { name: programme.title })).toBeNull();
+  });
+
+  it.each(allCpdSlugs)('does not expose draft CPD detail %s', (slug) => {
+    const course = cpdCourses.find((item) => item.slug === slug)!;
+    render(<MemoryRouter initialEntries={['/cpd-courses/' + slug]}><Routes><Route path="/cpd-courses/:slug" element={<CPDCourseDetailPage />} /></Routes></MemoryRouter>);
+    expect(screen.getByRole('heading', { name: 'CPD Course Not Found' })).toBeTruthy();
+    expect(screen.queryByRole('navigation', { name: 'Curriculum sections' })).toBeNull();
+    expect(screen.queryByRole('heading', { name: course.title })).toBeNull();
+  });
+
+  it('keeps unknown direct paths in safe not-found states', () => {
+    const { rerender } = render(<MemoryRouter initialEntries={['/programmes/no-such-programme']}><Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes></MemoryRouter>);
+    expect(screen.getByRole('heading', { name: 'Programme Not Found' })).toBeTruthy();
+    rerender(<MemoryRouter key="missing-cpd" initialEntries={['/cpd-courses/no-such-cpd']}><Routes><Route path="/cpd-courses/:slug" element={<CPDCourseDetailPage />} /></Routes></MemoryRouter>);
     expect(screen.getByRole('heading', { name: 'CPD Course Not Found' })).toBeTruthy();
   });
 });

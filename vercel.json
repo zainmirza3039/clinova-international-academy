@@ -2,7 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "git": {
     "deploymentEnabled": {
-      "feat/clinova-safe-auth-Sh2gdLt": false
+      "feat/clinova-safe-auth-Sh2gdLt": false,
+      "review/clinova-all-updates-20261022": false
     }
   },
   "routes": [
@@ -25,5 +26,5 @@
       "dest": "/index.html"
     }
   ],
-  "buildCommand": "VITE_VERIFICATION_ENABLED=false VITE_AUTH_ENABLED=false VITE_LEARNER_DATA_ENABLED=false VITE_ENQUIRIES_ENABLED=false npm run build"
+  "buildCommand": "if [ \"$VERCEL_ENV\" = \"production\" ]; then VITE_VERIFICATION_ENABLED=false VITE_AUTH_ENABLED=false VITE_LEARNER_DATA_ENABLED=false VITE_ENQUIRIES_ENABLED=false VITE_INDEXING_ENABLED=true npm run build; else VITE_VERIFICATION_ENABLED=false VITE_AUTH_ENABLED=false VITE_LEARNER_DATA_ENABLED=false VITE_ENQUIRIES_ENABLED=false VITE_INDEXING_ENABLED=false npm run build; fi"
 }

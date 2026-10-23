@@ -3,7 +3,7 @@ import type { FAQ, NewsItem } from './types';
 export const newsItems: NewsItem[] = [
   {
     id: 'n1', slug: 'principles-of-physiotherapy-assessment', category: 'Clinical Education', date: '2026-10-01',
-    publicationStatus: 'published',
+    publicationStatus: 'review',
     title: 'Principles of Physiotherapy Assessment',
     excerpt: 'A practical framework for gathering a focused history, selecting examination measures and connecting findings to a defensible clinical hypothesis.',
     image: 'https://images.pexels.com/photos/20860610/pexels-photo-20860610.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -16,7 +16,7 @@ export const newsItems: NewsItem[] = [
   },
   {
     id: 'n2', slug: 'clinical-reasoning-and-evidence-based-practice', category: 'Clinical Education', date: '2026-09-27',
-    publicationStatus: 'published',
+    publicationStatus: 'review',
     title: 'Clinical Reasoning and Evidence-Informed Practice',
     excerpt: 'How clinicians can combine research evidence, professional judgement and the individual person’s goals when making rehabilitation decisions.',
     image: 'https://images.pexels.com/photos/5407204/pexels-photo-5407204.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -29,7 +29,7 @@ export const newsItems: NewsItem[] = [
   },
   {
     id: 'n3', slug: 'low-back-pain-assessment-and-management', category: 'Clinical Education', date: '2026-09-23',
-    publicationStatus: 'published',
+    publicationStatus: 'review',
     title: 'Low Back Pain: Assessment and Management Principles',
     excerpt: 'A person-centred approach to classifying low back pain, screening for concerns and supporting safe activity without overpromising certainty.',
     image: 'https://images.pexels.com/photos/4506169/pexels-photo-4506169.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -42,7 +42,7 @@ export const newsItems: NewsItem[] = [
   },
   {
     id: 'n4', slug: 'knee-osteoarthritis-and-therapeutic-exercise', category: 'Clinical Education', date: '2026-09-19',
-    publicationStatus: 'published',
+    publicationStatus: 'review',
     title: 'Knee Osteoarthritis and Therapeutic Exercise',
     excerpt: 'Key considerations for explaining knee osteoarthritis and building an adaptable exercise plan around strength, confidence and daily function.',
     image: 'https://images.pexels.com/photos/6111589/pexels-photo-6111589.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -55,7 +55,7 @@ export const newsItems: NewsItem[] = [
   },
   {
     id: 'n5', slug: 'shoulder-pain-assessment', category: 'Clinical Education', date: '2026-09-15',
-    publicationStatus: 'published',
+    publicationStatus: 'review',
     title: 'Shoulder Pain Assessment: From History to Plan',
     excerpt: 'A structured approach to shoulder assessment that prioritises function, irritability, neurological screening and shared decisions.',
     image: 'https://images.pexels.com/photos/20860596/pexels-photo-20860596.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -68,7 +68,7 @@ export const newsItems: NewsItem[] = [
   },
   {
     id: 'n6', slug: 'stroke-rehabilitation-fundamentals', category: 'Rehabilitation', date: '2026-09-11',
-    publicationStatus: 'published',
+    publicationStatus: 'review',
     title: 'Stroke Rehabilitation Fundamentals',
     excerpt: 'An introduction to goal-led stroke rehabilitation, task practice, communication and safe progression within a multidisciplinary team.',
     image: 'https://images.pexels.com/photos/6129151/pexels-photo-6129151.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -81,7 +81,7 @@ export const newsItems: NewsItem[] = [
   },
   {
     id: 'n7', slug: 'balance-training-and-falls-prevention', category: 'Rehabilitation', date: '2026-09-07',
-    publicationStatus: 'published',
+    publicationStatus: 'review',
     title: 'Balance Training and Falls Prevention',
     excerpt: 'How to assess falls risk factors and design a progressive balance plan that includes strength, environment and confidence.',
     image: 'https://images.pexels.com/photos/6111616/pexels-photo-6111616.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -94,7 +94,7 @@ export const newsItems: NewsItem[] = [
   },
   {
     id: 'n8', slug: 'ankle-sprain-rehabilitation', category: 'Rehabilitation', date: '2026-09-03',
-    publicationStatus: 'published',
+    publicationStatus: 'review',
     title: 'Ankle Sprain Rehabilitation',
     excerpt: 'A staged overview of ankle sprain rehabilitation, from early protection and movement to strength, balance and return to activity.',
     image: 'https://images.pexels.com/photos/7187811/pexels-photo-7187811.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -107,7 +107,7 @@ export const newsItems: NewsItem[] = [
   },
   {
     id: 'n9', slug: 'acl-rehabilitation-principles', category: 'Rehabilitation', date: '2026-08-30',
-    publicationStatus: 'published',
+    publicationStatus: 'review',
     title: 'ACL Rehabilitation Principles',
     excerpt: 'Planning ACL rehabilitation around milestones, strength, movement quality, psychological readiness and shared return-to-sport decisions.',
     image: 'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -120,7 +120,7 @@ export const newsItems: NewsItem[] = [
   },
   {
     id: 'n10', slug: 'range-of-motion-and-strength-assessment', category: 'Clinical Education', date: '2026-08-26',
-    publicationStatus: 'published',
+    publicationStatus: 'review',
     title: 'Range of Motion and Strength Assessment',
     excerpt: 'Practical considerations for collecting repeatable range-of-motion and strength measures without losing sight of function or context.',
     image: 'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -133,7 +133,7 @@ export const newsItems: NewsItem[] = [
   },
   {
     id: 'n11', slug: 'gait-assessment-fundamentals', category: 'Clinical Education', date: '2026-08-22',
-    publicationStatus: 'published',
+    publicationStatus: 'review',
     title: 'Gait Assessment Fundamentals',
     excerpt: 'A structured way to observe walking, identify meaningful limitations and choose interventions that transfer to everyday mobility.',
     image: 'https://images.pexels.com/photos/7659564/pexels-photo-7659564.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -146,7 +146,7 @@ export const newsItems: NewsItem[] = [
   },
   {
     id: 'n12', slug: 'exercise-progression-and-load-management', category: 'Professional Development', date: '2026-08-18',
-    publicationStatus: 'published',
+    publicationStatus: 'review',
     title: 'Exercise Progression and Load Management',
     excerpt: 'A practical model for adjusting exercise difficulty, volume and recovery while keeping progression aligned with goals and response.',
     image: 'https://images.pexels.com/photos/4162451/pexels-photo-4162451.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -159,7 +159,7 @@ export const newsItems: NewsItem[] = [
   },
   {
     id: 'n13', slug: 'clinical-documentation-and-outcome-measures', category: 'Professional Development', date: '2026-08-14',
-    publicationStatus: 'published',
+    publicationStatus: 'review',
     title: 'Clinical Documentation and Outcome Measures',
     excerpt: 'How clear records and appropriate outcome measures support continuity, safety, reflection and shared understanding of progress.',
     image: 'https://images.pexels.com/photos/5214958/pexels-photo-5214958.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -172,7 +172,7 @@ export const newsItems: NewsItem[] = [
   },
   {
     id: 'n14', slug: 'red-flags-and-referral-considerations', category: 'Clinical Education', date: '2026-08-10',
-    publicationStatus: 'published',
+    publicationStatus: 'review',
     title: 'Red Flags and Referral Considerations',
     excerpt: 'Why safety screening is a continuing clinical responsibility and how to communicate escalation decisions clearly.',
     image: 'https://images.pexels.com/photos/7659570/pexels-photo-7659570.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -185,7 +185,7 @@ export const newsItems: NewsItem[] = [
   },
   {
     id: 'n15', slug: 'patient-communication-and-shared-decision-making', category: 'Professional Development', date: '2026-08-06',
-    publicationStatus: 'published',
+    publicationStatus: 'review',
     title: 'Patient Communication and Shared Decision-Making',
     excerpt: 'Practical communication habits that help people understand options, express priorities and take part in decisions about care.',
     image: 'https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',

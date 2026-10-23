@@ -4,7 +4,7 @@ import { useSEO } from '@/hooks/useSEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import CurriculumDraftContent from '@/components/CurriculumDraftContent';
 import ProgrammeCard from '@/components/ProgrammeCard';
-import { getProgrammeBySlug, programmes } from '@/data/programmes';
+import { getProgrammeBySlug, publishedProgrammes } from '@/data/programmes';
 import { getCourseDraft } from '@/data/courseDrafts';
 
 export default function ProgrammeDetailPage() {
@@ -13,7 +13,7 @@ export default function ProgrammeDetailPage() {
   const draft = slug ? getCourseDraft(slug) : undefined;
   useSEO({ title: programme?.title ?? 'Programme Not Found', description: programme?.description ?? 'Programme not found.', ogImage: programme?.image });
   if (!programme) return <div className="min-h-screen flex items-center justify-center"><div className="text-center"><h1 className="font-heading text-2xl font-bold text-navy-900 mb-4">Programme Not Found</h1><Link to="/programmes" className="text-clinical-600">View all programmes</Link></div></div>;
-  const related = programmes.filter(item => item.departmentSlug === programme.departmentSlug && item.id !== programme.id).slice(0, 3);
+  const related = publishedProgrammes.filter(item => item.departmentSlug === programme.departmentSlug && item.id !== programme.id).slice(0, 3);
   return <>
     <section className="bg-navy-900 pt-28 lg:pt-36 pb-12">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">

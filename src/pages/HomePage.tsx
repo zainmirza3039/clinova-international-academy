@@ -15,35 +15,28 @@ import NewsletterForm from '@/components/NewsletterForm';
 import { departments } from '@/data/departments';
 import { getFeaturedProgrammes } from '@/data/programmes';
 import { publishedCPDCourses, cpdFilters } from '@/data/cpdCourses';
-import { newsItems, generalFAQs } from '@/data/content';
+import { publishedNewsItems as newsItems, generalFAQs } from '@/data/content';
 import { useState } from 'react';
 
 const learningSteps = [
-  { number: '01', title: 'Review a Proposed Programme', desc: 'Browse illustrative catalogue outlines and consider which topics may fit your professional goals.' },
-  { number: '02', title: 'Explore Illustrative Materials', desc: 'Read proposed learning themes, resources and activities for professional reflection.' },
-  { number: '03', title: 'Reflect on Relevance', desc: 'Consider how a topic relates to your role, scope of practice and further learning needs.' },
-  { number: '04', title: 'Confirm Before Enrolment', desc: 'Ask the academy to confirm availability, terms and any assessment or recognition before making plans.' },
+  { number: '01', title: 'Confirm the content', desc: 'Verify the course outline, audience and intended learning outcomes.' },
+  { number: '02', title: 'Review the material', desc: 'Complete appropriate clinical and editorial review before publication.' },
+  { number: '03', title: 'Confirm the terms', desc: 'Verify availability, fees, delivery, assessment and any recognition.' },
+  { number: '04', title: 'Publish verified details', desc: 'Make an offering visible only after the academy approves its public information.' }
 ];
 
 const pathwaySteps = [
-  { label: 'Proposed Short Courses', desc: 'Review focused illustrative topic outlines' },
-  { label: 'Professional Development Topics', desc: 'Explore proposed skill-building themes' },
-  { label: 'Proposed Diploma Outlines', desc: 'Consider illustrative study structures' },
-  { label: 'Further Learning Ideas', desc: 'Use the catalogue for planning, not enrolment' },
+  { label: 'Content review', desc: 'Check accuracy and suitability' },
+  { label: 'Academy confirmation', desc: 'Verify offering details and terms' },
+  { label: 'Publication approval', desc: 'Approve public-facing information' },
+  { label: 'Availability notice', desc: 'Publish only confirmed offerings' }
 ];
 
 export default function HomePage() {
   useSEO({
     title: 'Clinova International Academy | Advancing Healthcare Through Professional Education',
     description:
-      'Flexible online healthcare education for professionals. CPD-focused courses, certificate and diploma programmes across physiotherapy, nursing, medicine, psychology and more.',
-    structuredData: {
-      '@context': 'https://schema.org',
-      '@type': 'EducationalOrganization',
-      name: 'Clinova International Academy',
-      description: 'Online healthcare education, CPD and professional development for healthcare professionals.',
-      url: 'https://clinovainternationalacademy.co.uk',
-    },
+      'Clinova International Academy is preparing healthcare education information for review. Course availability, recognition, delivery and enrolment are not confirmed.'
   });
 
   const featuredProgrammes = getFeaturedProgrammes();
@@ -76,15 +69,14 @@ export default function HomePage() {
             <div className="flex items-center gap-3 mb-8">
               <div className="h-px w-8 bg-teal-400" />
               <span className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-400">
-                Online Healthcare Education
+                Healthcare Education
               </span>
             </div>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white leading-[1.08] text-balance">
-              Advance your healthcare career through professional education
+              Professional learning for healthcare professionals
             </h1>
             <p className="mt-7 text-lg text-navy-100/65 leading-[1.6] max-w-xl">
-              Flexible online learning designed for healthcare professionals seeking practical knowledge, professional
-              development and CPD-focused education.
+              Clinova is preparing educational information for healthcare professionals. Course availability, delivery, recognition and enrolment are not yet confirmed.
             </p>
             <div className="mt-9 flex flex-col sm:flex-row gap-3">
               <Link
@@ -138,7 +130,7 @@ export default function HomePage() {
                   <div className="border-t border-navy-100 pt-4">
                     <div className="flex items-center gap-2 text-navy-600">
                       <Globe className="w-4 h-4 text-teal-500" />
-                      <span>Worldwide online learning</span>
+                      <span>Professional education</span>
                     </div>
                   </div>
                 </div>
@@ -150,22 +142,10 @@ export default function HomePage() {
                   Professional education for the modern healthcare workforce
                 </h2>
                 <p className="mt-6 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-                  Clinova provides structured online educational opportunities for healthcare professionals who want to
-                  expand knowledge, maintain professional development and develop clinically relevant skills. Our
-                  programmes span ten healthcare disciplines and are delivered entirely online, designed to fit around
-                  the demands of clinical practice.
+                  Clinova is preparing educational information for healthcare professionals. Programme availability, delivery, fees, recognition and learner services have not yet been confirmed. Only academy-approved offerings should be presented as available.
                 </p>
-                <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-10 border-t border-navy-100 pt-10">
-                  {[
-                    { stat: '10', label: 'Healthcare departments' },
-                    { stat: '12+', label: 'CPD courses available' },
-                    { stat: '100%', label: 'Online delivery' },
-                  ].map((item) => (
-                    <div key={item.label}>
-                      <div className="font-heading text-3xl font-bold text-navy-800 tabular-nums">{item.stat}</div>
-                      <div className="mt-1 text-sm text-navy-500 leading-snug">{item.label}</div>
-                    </div>
-                  ))}
+                <div className="mt-10 border-t border-navy-100 pt-8">
+                  <p className="text-sm leading-relaxed text-navy-600">Course dates, fees, teaching arrangements, CPD recognition, certificates and learner access will be published only after confirmation.</p>
                 </div>
               </Reveal>
             </div>
@@ -179,10 +159,10 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 lg:mb-16">
             <Reveal className="max-w-2xl">
               <div className="text-xs font-semibold uppercase tracking-[0.18em] text-clinical-500 mb-4">
-                Departments
+                Subject areas
               </div>
               <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
-                Ten healthcare disciplines, one learning platform
+                Healthcare topics under consideration
               </h2>
             </Reveal>
             <Link
@@ -221,11 +201,13 @@ export default function HomePage() {
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
-            {featuredProgrammes.map((prog, i) => (
-              <ProgrammeCard key={prog.id} programme={prog} index={i} />
-            ))}
-          </div>
+          {featuredProgrammes.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
+              {featuredProgrammes.map((prog, i) => <ProgrammeCard key={prog.id} programme={prog} index={i} />)}
+            </div>
+          ) : (
+            <p className="border border-navy-100 bg-surface-50 p-6 text-sm leading-relaxed text-navy-700">No programmes are currently approved for publication. Confirmed offerings will appear here when the academy has verified their availability and terms.</p>
+          )}
         </div>
       </section>
 
@@ -249,30 +231,17 @@ export default function HomePage() {
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <div className="flex flex-wrap gap-1 mb-12">
+          {publishedCPDCourses.length > 0 && <div className="flex flex-wrap gap-1 mb-12">
             {cpdFilters.map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setCpdFilter(filter)}
-                className={`px-4 py-2 text-sm font-medium transition-colors ${
-                  cpdFilter === filter
-                    ? 'bg-white text-navy-800'
-                    : 'text-navy-100/60 hover:text-white border border-white/15'
-                }`}
-              >
-                {filter}
-              </button>
+              <button type="button" key={filter} onClick={() => setCpdFilter(filter)} className={`px-4 py-2 text-sm font-medium transition-colors ${cpdFilter === filter ? 'bg-white text-navy-800' : 'text-navy-100/60 hover:text-white border border-white/15'}`}>{filter}</button>
             ))}
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-            {filteredCPD.map((course, i) => (
-              <CPDCard key={course.id} course={course} index={i} />
-            ))}
-          </div>
-          {filteredCPD.length === 0 && (
-            <div className="text-center py-12 text-navy-100/50">
-              <p className="text-sm">No CPD courses found for this filter. Try another category.</p>
+          </div>}
+{publishedCPDCourses.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+              {filteredCPD.map((course, i) => <CPDCard key={course.id} course={course} index={i} />)}
             </div>
+          ) : (
+            <p className="border border-white/15 bg-white/5 p-6 text-sm leading-relaxed text-navy-100/80">No CPD courses are currently approved for publication. Verified course details and recognised hours will appear here after academy review.</p>
           )}
         </div>
       </section>
@@ -285,9 +254,9 @@ export default function HomePage() {
               How It Works
             </div>
             <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
-              An illustrative learning journey
+              How information reaches publication
             </h2>
-            <p className="mt-4 text-sm text-navy-600/70 leading-relaxed">This proposed pathway is illustrative only. It does not represent an active enrolment, confirmed assessment, successful completion or certificate.</p>
+            <p className="mt-4 text-sm text-navy-600/70 leading-relaxed">Course information is published only after availability, terms and any recognition have been confirmed.</p>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {learningSteps.map((step, i) => (
@@ -315,17 +284,16 @@ export default function HomePage() {
           <div className="lg:col-span-5 flex items-center">
             <Reveal className="px-6 lg:px-12 py-16 lg:py-24 max-w-lg">
               <div className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-500 mb-4">
-                Global Learning
+                Service status
               </div>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-800 leading-[1.15] text-balance">
-                Healthcare education without borders
+                Education details will follow review
               </h2>
               <p className="mt-5 text-base text-navy-600/80 leading-[1.65]">
-                Clinova's virtual learning model enables healthcare professionals to access educational content regardless
-                of location. Our online platform brings structured healthcare education to professionals across the world.
+                Clinova is preparing a proposed approach to professional learning. The academy has not confirmed an active online learning platform, enrolment service or learner dashboard.
               </p>
               <div className="mt-8 space-y-3">
-                {['Learn from anywhere with an internet connection', 'Study at your own pace and schedule', 'Join a global community of healthcare learners', 'Access the same quality content worldwide'].map((point) => (
+                {['Course availability and delivery will be confirmed before enrolment', 'No learner dashboard or progress tracking is currently available', 'Recognition and certificates are not yet confirmed', 'Published content will follow academy review'].map((point) => (
                   <div key={point} className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 text-teal-500 shrink-0 mt-0.5" />
                     <span className="text-sm text-navy-700 leading-relaxed">{point}</span>
@@ -349,13 +317,13 @@ export default function HomePage() {
         <div className="max-w-editorial mx-auto px-6 lg:px-10">
           <Reveal className="max-w-2xl mb-12 lg:mb-16">
             <div className="text-xs font-semibold uppercase tracking-[0.18em] text-clinical-500 mb-4">
-              Learning Pathways
+              Publication process
             </div>
             <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
-              Professional pathways
+              Publication process
             </h2>
             <p className="mt-5 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-              A proposed, illustrative learning pathway for professional development planning — not an active enrolment or a promise of certificates or outcomes.
+              This process describes publication controls, not a course, enrolment pathway or promise of outcomes.
             </p>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-8">
@@ -389,18 +357,18 @@ export default function HomePage() {
                 Training Partners
               </div>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-800 leading-[1.15] text-balance">
-                Become a Clinova training partner
+                Explore future partnership possibilities
               </h2>
               <p className="mt-5 text-base text-navy-600/80 leading-[1.65]">
-                Work with Clinova to deliver structured professional education within your organisation or professional network.
+                Clinova is reviewing potential partnership pathways. No delivery arrangements or partner agreements are currently confirmed.
               </p>
               <div className="mt-8 space-y-3">
                 {[
-                  'Structured programmes tailored to your organisation',
-                  'Comprehensive learner support',
-                  'Digital certification for your team',
-                  'Professional educational resources',
-                  'Dedicated partnership support',
+                  'Partnership criteria and arrangements are being prepared',
+                  'No partnership agreement is implied by this page',
+                  'Delivery and learner support require written confirmation',
+                  'Certification arrangements are not confirmed',
+                  'Enquiries remain unavailable until the submission service is verified',
                 ].map((benefit) => (
                   <div key={benefit} className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 text-teal-500 shrink-0 mt-0.5" />
@@ -412,7 +380,7 @@ export default function HomePage() {
                 to="/training-partners"
                 className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-clinical-500 text-white font-semibold hover:bg-clinical-600 transition-colors"
               >
-                Partner With Clinova
+                Partnership information
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </Reveal>
@@ -439,13 +407,13 @@ export default function HomePage() {
               Learning designed for professional practice
             </h2>
             <p className="mt-5 text-sm leading-relaxed text-navy-100/70">
-              We do not publish unverified learner testimonials or invented outcomes. Instead, our programmes are structured around clear objectives, practical application and honest communication about what is and is not currently available.
+              We do not publish unverified learner testimonials, course claims or outcomes. Availability, recognition and learner-service details are shown only after the relevant facts and workflows are confirmed.
             </p>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              ['Clear outcomes', 'Each programme describes who it is for, what it covers and what a learner should be able to do after completing the learning.'],
-              ['Evidence-informed content', 'Resources explain clinical concepts in an educational context and encourage appropriate professional judgement rather than one-size-fits-all advice.'],
+              ['Clear outcomes', 'Approved learning objectives will be displayed after a programme has been reviewed and made available.'],
+              ['Evidence-informed content', 'Educational resources will be published after clinical and editorial review.'],
               ['Respect for scope', 'Accreditation, partnerships, learner outcomes and certificates are described only when the relevant facts and workflows are confirmed.'],
             ].map(([title, description]) => (
               <div key={title} className="border-t border-white/15 pt-5">
@@ -477,11 +445,13 @@ export default function HomePage() {
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
-            {newsItems.slice(0, 3).map((item, i) => (
-              <NewsCard key={item.id} item={item} index={i} />
-            ))}
-          </div>
+          {newsItems.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
+              {newsItems.slice(0, 3).map((item, i) => <NewsCard key={item.id} item={item} index={i} />)}
+            </div>
+          ) : (
+            <p className="border border-navy-100 bg-surface-50 p-6 text-sm leading-relaxed text-navy-700">Articles will appear here after editorial and clinical approval. No review snapshots are presented as published academy news.</p>
+          )}
         </div>
       </section>
 

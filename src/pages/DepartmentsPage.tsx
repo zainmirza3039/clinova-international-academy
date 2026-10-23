@@ -14,10 +14,10 @@ export default function DepartmentsPage() {
   return (
     <>
       <PageHero
-        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Departments' }]}
-        eyebrow="Departments"
-        title="Explore Our Proposed Subject Areas"
-        description="A draft organisation of healthcare topics for reading and study planning. Course availability, delivery, assessment and recognition require academy confirmation."
+        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Subject areas' }]}
+        eyebrow="Subject areas"
+        title="Explore Healthcare Subject Areas"
+        description="These categories are for navigation and topic exploration only. They do not represent established departments, active courses or accredited programmes."
         image="https://images.pexels.com/photos/5452233/pexels-photo-5452233.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
@@ -33,9 +33,9 @@ export default function DepartmentsPage() {
 
       <CTASection
         title="Plan your next learning question"
-        description="Read the draft library, use study tools and review proposed outlines. No employment, outcome, certificate or recognition is guaranteed."
-        primaryCTA={{ label: 'View Proposed Outlines', to: '/programmes' }}
-        secondaryCTA={{ label: 'Browse Draft Reading', to: '/cpd-courses' }}
+        description="Subject categories are provided for orientation only. No programme or CPD course is currently approved for enrolment, and student services are not live."
+        primaryCTA={{ label: 'Check Programme Availability', to: '/programmes' }}
+        secondaryCTA={{ label: 'Check CPD Availability', to: '/cpd-courses' }}
       />
     </>
   );

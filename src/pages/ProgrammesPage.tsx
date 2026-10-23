@@ -5,7 +5,7 @@ import PageHero from '@/components/PageHero';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import SearchBar from '@/components/SearchBar';
 import CTASection from '@/components/CTASection';
-import { reviewProgrammes } from '@/data/programmes';
+import { publishedProgrammes } from '@/data/programmes';
 import { departments } from '@/data/departments';
 import type { ProgrammeCategory } from '@/data/types';
 
@@ -15,9 +15,9 @@ const deliveries = ['All'];
 
 export default function ProgrammesPage() {
   useSEO({
-    title: 'Programmes',
+    title: 'Confirmed Programmes',
     description:
-      'Browse all healthcare education programmes at Clinova International Academy. Explore proposed educational topics by subject category and proposed programme type.',
+      'Browse academy-approved programmes. Proposed outlines remain unavailable until publication details are confirmed.',
   });
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -31,7 +31,7 @@ export default function ProgrammesPage() {
   const [deliveryFilter, setDeliveryFilter] = useState('All');
 
   const filtered = useMemo(() => {
-    return reviewProgrammes.filter((p) => {
+    return publishedProgrammes.filter((p) => {
       if (initialFeatured && !p.featured) return false;
       if (typeFilter !== 'All' && p.category !== typeFilter) return false;
       if (deptFilter !== 'All' && p.departmentSlug !== deptFilter) return false;
@@ -50,15 +50,15 @@ export default function ProgrammesPage() {
       <PageHero
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Programmes' }]}
         eyebrow="Programmes"
-        title="Proposed Programme Catalogue"
-        description="Explore educational outlines, not confirmed course offers. Availability, duration, delivery, fees, CPD hours and certificates await academy confirmation."
+        title="Programmes"
+        description="Only academy-approved programme offerings appear here. Availability, fees, delivery and recognition will be confirmed before enrolment opens."
         image="https://images.pexels.com/photos/8376296/pexels-photo-8376296.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-editorial mx-auto px-6 lg:px-10">
           {/* Search + Filters */}
-          <div className="bg-surface-50 p-6 mb-12 border border-navy-100">
+          {publishedProgrammes.length > 0 && <div className="bg-surface-50 p-6 mb-12 border border-navy-100">
             <div className="mb-4">
               <SearchBar value={search} onChange={setSearch} placeholder="Search programmes..." />
             </div>
@@ -101,7 +101,7 @@ export default function ProgrammesPage() {
                 </select>
               </div>
             </div>
-          </div>
+          </div>}
 
           {/* Results */}
           <div className="mb-8 flex items-center justify-between">
@@ -118,8 +118,8 @@ export default function ProgrammesPage() {
             </div>
           ) : (
             <div className="text-center py-16 bg-surface-50 border border-navy-100">
-              <p className="text-navy-500 mb-2">No programmes match your current filters.</p>
-              <p className="text-sm text-navy-400">Try adjusting your search or filter criteria.</p>
+              <p className="text-navy-800 mb-2 font-semibold">No programmes are currently approved for publication.</p>
+              <p className="text-sm text-navy-600">Programme information will appear here after the academy confirms availability, delivery, fees and recognition. No enrolment is currently offered through this page.</p>
             </div>
           )}
         </div>
