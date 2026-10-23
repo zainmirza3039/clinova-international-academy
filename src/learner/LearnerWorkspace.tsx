@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { createLearnerApi, LEARNER_PAGE_SIZE, type Enrolment, type LearningCourse, type LearningLesson, type LearningModule } from './learnerApi';
 import { useLearnerRead } from './useLearnerRead';
+import AssessmentWorkspace from './AssessmentWorkspace';
 
 type LearnerApi = ReturnType<typeof createLearnerApi>;
 const buttonClass = 'rounded-lg border border-teal-600 px-3 py-2 text-sm font-semibold text-teal-800 disabled:opacity-50';
@@ -111,6 +112,7 @@ function CourseReading({ api, course, enrolment }: { api: LearnerApi; course: Le
       {modules.state.data.map(module => <ModuleReading key={module.id} api={api} module={module} active={enrolment.status === 'active'} writeLocked={writeLocked} onComplete={complete} recorded={recorded} />)}
       <Pages name="modules" page={modulePage} rows={modules.state.data.length} setPage={setModulePage} />
     </>}
+    <AssessmentWorkspace api={api} courseId={course.id} active={enrolment.status === 'active'} />
   </section>;
 }
 
