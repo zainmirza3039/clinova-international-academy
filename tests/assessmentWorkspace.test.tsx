@@ -1,8 +1,10 @@
 // @vitest-environment jsdom
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import AssessmentWorkspace from '../src/learner/AssessmentWorkspace';
 import type { createLearnerApi } from '../src/learner/learnerApi';
+
+afterEach(() => cleanup());
 
 const courseId = '22222222-2222-4222-8222-222222222222';
 const assessmentId = '55555555-5555-4555-8555-555555555555';
@@ -34,7 +36,7 @@ describe('AssessmentWorkspace', () => {
 
     await waitFor(() => expect(screen.getByText('Clinical knowledge check')).toBeTruthy());
     fireEvent.click(screen.getByRole('button', { name: 'Start new attempt' }));
-    await waitFor(() => expect(screen.getByText('Which option is correct?')).toBeTruthy());
+    await screen.findByText(/Which option is correct/);
 
     fireEvent.click(screen.getByLabelText('Option B'));
     fireEvent.click(screen.getByRole('button', { name: 'Submit assessment' }));
