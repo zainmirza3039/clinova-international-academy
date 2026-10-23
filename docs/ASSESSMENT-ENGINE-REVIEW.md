@@ -36,13 +36,13 @@ The isolated SQL suite now applies the proposal after the learner foundation and
 - rejection of client-created attempts;
 - malformed choices (single-item lists, missing/invalid IDs or labels, duplicate IDs and extra keys) rejected by the follow-up constraint.
 
-Run `bash scripts/test-learning-schema.sh` with the documented PostgreSQL 16 binaries, then `npm run typecheck`, `npm run lint`, `npm test`, and a forced-off build. These are local/CI checks only. They do not authorize a hosted migration or prove Supabase Data API behavior. Before a staging migration, also run the Supabase security/performance advisors and verify the actual policies with two separate test accounts.
+Run `bash scripts/test-learning-schema.sh` with the documented PostgreSQL 16 binaries; it now applies and tests the assessment attempt workflow migration after the learner/assessment foundation. Then run `npm run typecheck`, `npm run lint`, `npm test`, and a forced-off build. These are local/CI checks only. They do not authorize a hosted migration or prove Supabase Data API behavior. Before a staging migration, also run the Supabase security/performance advisors and verify the actual policies with two separate test accounts.
 
 ## Remaining launch work
 
 1. Confirm and document account deletion, award retention and anonymization rules.
 2. Reconcile the existing public-enquiry migration with the live schema and migration ledger; do not replay it blindly.
-3. Apply the base learning and assessment migrations only in an approved isolated non-production target, then verify table grants/RLS via PostgREST.
+3. Apply the base learning, assessment, choice-validation, and attempt-workflow migrations only in an approved isolated non-production target, then verify table grants/RLS/RPC behavior via PostgREST.
 4. Implement server-side enrolment, assessment/marking, content management, certificate issuance/revocation and audit workflows.
 5. Configure and test verified sender/SMTP and recovery email; keep secrets server-side.
 6. Finalize the academy’s legal/privacy text, enquiry processing and notification/retention workflow.
