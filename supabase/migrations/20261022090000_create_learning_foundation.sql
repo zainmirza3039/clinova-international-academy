@@ -3,7 +3,7 @@
 BEGIN;
 
 CREATE TABLE public.student_profiles (
-  user_id uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  user_id uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE RESTRICT,
   display_name text NOT NULL CHECK (char_length(btrim(display_name)) BETWEEN 1 AND 160),
   created_at timestamptz NOT NULL DEFAULT now()
 );
@@ -41,7 +41,7 @@ CREATE TABLE public.learning_lessons (
 
 CREATE TABLE public.student_enrolments (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE RESTRICT,
   course_id uuid NOT NULL REFERENCES public.learning_courses(id),
   status text NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'completed', 'withdrawn')),
   enrolled_at timestamptz NOT NULL DEFAULT now(),
@@ -50,7 +50,7 @@ CREATE TABLE public.student_enrolments (
 
 -- A learner's completion marker is a study aid, not an assessment pass or award.
 CREATE TABLE public.lesson_progress (
-  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE RESTRICT,
   course_id uuid NOT NULL REFERENCES public.learning_courses(id),
   lesson_id uuid NOT NULL,
   completed_at timestamptz NOT NULL DEFAULT now(),
@@ -60,7 +60,7 @@ CREATE TABLE public.lesson_progress (
 
 CREATE TABLE public.student_assessment_records (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE RESTRICT,
   course_id uuid NOT NULL,
   assessment_title text NOT NULL CHECK (char_length(btrim(assessment_title)) BETWEEN 1 AND 200),
   outcome text NOT NULL CHECK (outcome IN ('submitted', 'passed', 'not_passed')),
@@ -73,7 +73,7 @@ CREATE TABLE public.student_assessment_records (
 -- rate-limited server endpoint with an explicit disclosure/consent contract.
 CREATE TABLE public.student_certificates (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE RESTRICT,
   course_id uuid NOT NULL,
   certificate_reference text NOT NULL UNIQUE CHECK (char_length(btrim(certificate_reference)) BETWEEN 16 AND 160),
   status text NOT NULL DEFAULT 'issued' CHECK (status IN ('issued', 'revoked')),
