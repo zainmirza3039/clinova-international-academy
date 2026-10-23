@@ -9,7 +9,7 @@ try {
   if (env.VITE_INDEXING_ENABLED === 'true' && u.protocol === 'https:' && u.pathname === '/' && !u.username && !u.password && !u.search && !u.hash && !previewHost) origin = u.origin;
 } catch { /* Preview builds remain unindexed. */ }
 
-const fixed = ['/', '/about', '/departments', '/programmes', '/cpd-courses', '/online-learning', '/training-partners', '/resources', '/contact', '/admissions', '/events', '/faculty', '/faqs', '/privacy-policy', '/terms-and-conditions', '/cookie-policy', '/refund-policy'];
+const fixed = ['/', '/about', '/departments', '/programmes', '/cpd-courses', '/online-learning', '/training-partners', '/resources', '/contact', '/admissions', '/events', '/faculty', '/faqs'];
 
 // Department pages are public category pages. Course detail URLs must be explicitly published.
 const departmentSource = readFileSync('src/data/departments.ts', 'utf8');
@@ -30,7 +30,7 @@ for (const [file, prefix] of [['programmes', 'programmes'], ['cpdCourses', 'cpd-
 const escape = s => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('"', '&quot;');
 const urls = origin ? [...new Set(fixed)].map(path => '  <url><loc>' + escape(origin + path) + '</loc></url>').join('\n') : '';
 writeFileSync('dist/sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + '\n</urlset>\n');
-writeFileSync('dist/robots.txt', origin ? 'User-agent: *\nDisallow: /admin\nDisallow: /apply\nDisallow: /application\nDisallow: /sign-in\nDisallow: /sign-up\nDisallow: /forgot-password\nDisallow: /reset-password\nDisallow: /student\nSitemap: ' + origin + '/sitemap.xml\n' : 'User-agent: *\nDisallow: /\n');
+writeFileSync('dist/robots.txt', origin ? 'User-agent: *\nSitemap: ' + origin + '/sitemap.xml\n' : 'User-agent: *\nDisallow: /\n');
 // Keep preview HTML noindexed while allowing indexing only in explicitly enabled production builds.
 const htmlFile = 'dist/index.html';
 const html = readFileSync(htmlFile, 'utf8');

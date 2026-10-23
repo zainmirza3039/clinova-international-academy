@@ -41,11 +41,13 @@ describe('Vercel SPA configuration', () => {
     expect(config.routes[0].continue).toBe(true);
     expect(config.routes[0].headers["X-Content-Type-Options"]).toBe("nosniff");
     expect(config.routes[0].headers["X-Frame-Options"]).toBe("DENY");
-    expect(config.routes.slice(1)).toEqual([
+    expect(config.routes[1].headers["X-Robots-Tag"]).toBe("noindex, nofollow");
+    expect(config.routes[1].src).toContain("sign-in");
+    expect(config.routes.slice(2)).toEqual([
       { handle: 'filesystem' },
       { src: '/.*', dest: '/index.html' },
     ]);
-    const fallback = new RegExp(`^${config.routes[2].src}$`);
+    const fallback = new RegExp(`^${config.routes[3].src}$`);
     for (const path of ['/contact', '/training-partners', '/programmes/example', '/unknown-route']) {
       expect(fallback.test(path)).toBe(true);
     }

@@ -38,9 +38,11 @@ describe('explicit publication gate', () => {
       const sitemap = readFileSync(join(dir, 'dist/sitemap.xml'), 'utf8');
       const robots = readFileSync(join(dir, 'dist/robots.txt'), 'utf8');
       expect(sitemap.includes('<loc>')).toBe(valid);
-      expect(sitemap).not.toMatch(/vercel\.app|\/student|\/sign-in|\/sign-up|\/reset-password|\/admin/);
-      if (valid) expect(robots).toContain('Disallow: /student');
-      else expect(robots).toBe('User-agent: *\nDisallow: /\n');
+      expect(sitemap).not.toMatch(/vercel\.app|\/student|\/sign-in|\/sign-up|\/reset-password|\/admin|\/privacy-policy|\/terms-and-conditions|\/cookie-policy|\/refund-policy/);
+      if (valid) {
+        expect(robots).toContain('Sitemap: https://academy.example/sitemap.xml');
+        expect(robots).not.toContain('Disallow: /student');
+      } else expect(robots).toBe('User-agent: *\nDisallow: /\n');
     } finally { rmSync(dir, { recursive: true, force: true }); }
   });
 });

@@ -19,6 +19,13 @@
       "continue": true
     },
     {
+      "src": "/(admin|apply|application|sign-in|sign-up|forgot-password|reset-password|student|verify|privacy-policy|terms-and-conditions|cookie-policy|refund-policy)(/.*)?",
+      "headers": {
+        "X-Robots-Tag": "noindex, nofollow"
+      },
+      "continue": true
+    },
+    {
       "handle": "filesystem"
     },
     {
