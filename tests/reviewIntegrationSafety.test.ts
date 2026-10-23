@@ -13,7 +13,7 @@ describe('integrated review safety', () => {
     }
     expect(config.routes.some((route: { handle?: string }) => route.handle === 'filesystem')).toBe(true);
     expect(config.routes.at(-1).dest).toBe('/index.html');
-    expect(config.routes[0].headers['X-Robots-Tag']).toBe('noindex, nofollow');
+    expect(config.routes[0].headers['X-Robots-Tag']).toBeUndefined();
   });
   it('retains the patched router and supplied logo-only assets', () => {
     const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
