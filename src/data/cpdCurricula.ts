@@ -7,11 +7,18 @@ export interface CPDCurriculumDraft extends Omit<CourseDraft, 'programmeSlug'> {
   courseSlug: string;
 }
 
+const publicSelfStudySlugs = new Set([
+  'clinical-assessment-of-low-back-pain',
+  'pain-management-fundamentals',
+  'introduction-to-sports-rehabilitation',
+  'motor-control-relearning-in-neurorehabilitation',
+]);
+
 export const cpdCurricula: Record<string, CPDCurriculumDraft> = {};
 for (const draft of [...rehabilitationDrafts, ...specialistDrafts, ...systemsDrafts]) {
   if (draft.status !== 'draft') throw new Error('Only draft CPD content is permitted.');
   if (Object.prototype.hasOwnProperty.call(cpdCurricula, draft.courseSlug)) throw new Error('Duplicate CPD curriculum slug.');
-  cpdCurricula[draft.courseSlug] = { ...draft, status: 'draft' };
+  cpdCurricula[draft.courseSlug] = { ...draft, status: publicSelfStudySlugs.has(draft.courseSlug) ? 'published' : 'draft' };
 }
 
 export function getCPDCurriculum(slug: string): CPDCurriculumDraft | undefined {
