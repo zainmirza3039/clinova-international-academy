@@ -39,8 +39,8 @@ export default function CPDCoursesPage() {
       <PageHero
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Professional Development' }]}
         eyebrow="Professional Development"
-        title="Professional Development Topics"
-        description="Explore professional-development topics and review the details published for each offering. CPD hours, accreditation, availability, assessment and certification must be confirmed before booking."
+        title="Physiotherapy & Healthcare Self-Study Courses"
+        description="Study structured lessons, reflective activities and evidence sources across physiotherapy and healthcare. These open self-study courses do not award accredited CPD hours or certificates."
         image="https://images.pexels.com/photos/5452222/pexels-photo-5452222.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
