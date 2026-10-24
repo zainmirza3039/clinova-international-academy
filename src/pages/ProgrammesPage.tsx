@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { BookOpen, Filter, RotateCcw, Search } from 'lucide-react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ArrowRight, BookOpen, Filter, RotateCcw, Search } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import ProgrammeCard from '@/components/ProgrammeCard';
