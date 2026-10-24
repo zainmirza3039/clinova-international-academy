@@ -4,7 +4,7 @@ import { useSEO } from '@/hooks/useSEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import CurriculumDraftContent from '@/components/CurriculumDraftContent';
 import ProgrammeCard from '@/components/ProgrammeCard';
-import { getProgrammeBySlug, programmes } from '@/data/programmes';
+import { getProgrammeBySlug, publishedProgrammes } from '@/data/programmes';
 import { getCourseDraft } from '@/data/courseDrafts';
 
 export default function ProgrammeDetailPage() {
@@ -15,7 +15,7 @@ export default function ProgrammeDetailPage() {
 
   if (!programme) return <section className="mx-auto flex min-h-[60vh] max-w-3xl items-center justify-center px-6 py-24 text-center"><div><h1 className="font-heading text-3xl font-bold text-navy-900">Learning guide not found</h1><p className="mt-3 text-sm text-navy-600">This address does not match a guide in the current catalogue.</p><Link to="/programmes" className="mt-6 inline-flex items-center gap-2 font-semibold text-clinical-700"><ArrowLeft className="h-4 w-4" /> Browse learning guides</Link></div></section>;
 
-  const related = programmes.filter(item => item.departmentSlug === programme.departmentSlug && item.id !== programme.id).slice(0, 3);
+  const related = publishedProgrammes.filter(item => item.departmentSlug === programme.departmentSlug && item.id !== programme.id).slice(0, 3);
 
   return <>
     <header className="relative overflow-hidden bg-navy-900"><div className="absolute inset-0"><img src={programme.image} alt="" className="h-full w-full object-cover opacity-20" /><div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-900/95 to-navy-900/60" /></div>
