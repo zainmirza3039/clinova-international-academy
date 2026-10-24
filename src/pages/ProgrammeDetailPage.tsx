@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Info } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import CurriculumDraftContent from '@/components/CurriculumDraftContent';
@@ -11,47 +11,30 @@ export default function ProgrammeDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const programme = slug ? getProgrammeBySlug(slug) : undefined;
   const draft = slug ? getCourseDraft(slug) : undefined;
-  useSEO({ title: programme?.title ?? 'Programme Not Found', description: programme?.description ?? 'Programme not found.', ogImage: programme?.image });
-  if (!programme) return <div className="min-h-screen flex items-center justify-center"><div className="text-center"><h1 className="font-heading text-2xl font-bold text-navy-900 mb-4">Programme Not Found</h1><Link to="/programmes" className="text-clinical-600">View all programmes</Link></div></div>;
+  useSEO({ title: programme?.title ?? 'Learning Guide Not Found', description: programme?.description ?? 'The requested learning guide could not be found.', ogImage: programme?.image });
+
+  if (!programme) return <section className="mx-auto flex min-h-[60vh] max-w-3xl items-center justify-center px-6 py-24 text-center"><div><h1 className="font-heading text-3xl font-bold text-navy-900">Learning guide not found</h1><p className="mt-3 text-sm text-navy-600">This address does not match a guide in the current catalogue.</p><Link to="/programmes" className="mt-6 inline-flex items-center gap-2 font-semibold text-clinical-700"><ArrowLeft className="h-4 w-4" /> Browse learning guides</Link></div></section>;
+
   const related = programmes.filter(item => item.departmentSlug === programme.departmentSlug && item.id !== programme.id).slice(0, 3);
+
   return <>
-    <section className="bg-navy-900 pt-28 lg:pt-36 pb-12">
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Programmes', to: '/programmes' }, { label: programme.title }]} />
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-6">
-          <div className="lg:col-span-2">
-            <div className="text-xs font-semibold uppercase tracking-wider text-amber-300 mb-2">Learning topic · {programme.category} · {programme.department}</div>
-            <h1 className="font-heading text-3xl md:text-5xl font-bold text-white leading-tight">{programme.title}</h1>
-            <p className="mt-4 text-lg text-navy-200 leading-relaxed max-w-2xl">{programme.description}</p>
-          </div>
-          <img src={programme.image} alt="" className="hidden lg:block w-full aspect-[4/3] object-cover rounded-xl" />
-        </div>
+    <header className="relative overflow-hidden bg-navy-900"><div className="absolute inset-0"><img src={programme.image} alt="" className="h-full w-full object-cover opacity-20" /><div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-900/95 to-navy-900/60" /></div>
+      <div className="relative mx-auto max-w-editorial px-6 pb-14 pt-28 lg:px-10 lg:pb-16 lg:pt-36"><Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Programmes', to: '/programmes' }, { label: programme.title }]} />
+        <div className="mt-8 grid grid-cols-1 items-end gap-8 lg:grid-cols-12"><div className="lg:col-span-8"><p className="text-xs font-semibold uppercase tracking-[0.15em] text-teal-300">{programme.department} · {programme.category}</p><h1 className="mt-4 max-w-4xl font-heading text-3xl font-bold leading-tight text-white md:text-5xl">{programme.title}</h1><p className="mt-5 max-w-3xl text-base leading-7 text-navy-100/80 md:text-lg">{programme.description}</p><div className="mt-6 flex flex-wrap gap-3"><span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white"><BookOpen className="h-4 w-4 text-teal-300" /> Independent study guide</span><span className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white">{programme.level} level</span></div></div><img src={programme.image} alt="" className="hidden aspect-[5/4] w-full rounded-xl border border-white/15 object-cover shadow-xl lg:col-span-4 lg:block" /></div>
       </div>
-    </section>
-    <div className="max-w-4xl mx-auto px-4 mt-6">
-      <p className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950"><strong>Catalogue information.</strong> This page is an educational guide for independent study. It does not include course enrolment, fees, graded assessment, accreditation, CPD credit or a certificate.</p>
-    </div>
-    <section className="py-12 lg:py-16 bg-white">
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          <div className="lg:col-span-2 space-y-10">
-            <div>
-              <h2 className="font-heading text-2xl font-bold text-navy-900 mb-4">Overview</h2>
-              <p className="text-sm text-navy-600 leading-relaxed">{programme.overview}</p>
-              <p className="mt-3 text-sm text-navy-600 leading-relaxed">This learning guide organises topics for independent study. Learning aims are prompts for reflection, not evidence of competence or authority to practise.</p>
-            </div>
-            {draft ? <CurriculumDraftContent draft={draft} /> : <p className="text-sm text-navy-700">Detailed learning content is not available for this topic.</p>}
-          </div>
-          <aside>
-            <div className="lg:sticky lg:top-24 rounded-xl border border-navy-100 p-6 bg-white shadow-sm">
-              <h2 className="font-heading font-bold text-navy-900 mb-3">Catalogue status</h2>
-              <p className="text-sm text-navy-600 leading-relaxed">Independent reading does not create a learner record, demonstrate competence or award a qualification or CPD credit.</p>
-              <Link to="/programmes" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-clinical-700">Browse catalogue <ArrowRight className="w-4 h-4" /></Link>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-    {related.length > 0 && <section className="py-12 bg-navy-50"><div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8"><h2 className="font-heading text-2xl font-bold text-navy-900 mb-8">Related learning topics</h2><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">{related.map((item, index) => <ProgrammeCard key={item.id} programme={item} index={index} />)}</div></div></section>}
+    </header>
+
+    <aside className="border-b border-amber-200 bg-amber-50"><div className="mx-auto flex max-w-editorial items-start gap-3 px-6 py-5 lg:px-10"><Info className="mt-0.5 h-5 w-5 shrink-0 text-amber-800" /><p className="text-sm leading-6 text-amber-950"><strong>Catalogue status:</strong> This is an educational guide for independent study. It does not offer enrolment, fees, graded assessment, accreditation, awarded CPD credit or a certificate. Any formal course offering and its terms must be confirmed by the academy.</p></div></aside>
+
+    <main className="bg-white py-12 lg:py-16"><div className="mx-auto grid max-w-editorial grid-cols-1 gap-10 px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
+      <article className="min-w-0 space-y-10 lg:col-span-8"><section><p className="text-xs font-semibold uppercase tracking-[0.15em] text-clinical-700">About this guide</p><h2 className="mt-3 font-heading text-2xl font-bold text-navy-900 md:text-3xl">Overview</h2><p className="mt-4 text-base leading-7 text-navy-700">{programme.overview}</p><p className="mt-4 text-sm leading-6 text-navy-600">Learning aims support reflection and further study; they are not evidence of assessed competence or professional registration.</p></section>
+      {programme.modules.length > 0 && <section><h2 className="font-heading text-2xl font-bold text-navy-900">Topics covered</h2><p className="mt-2 text-sm leading-6 text-navy-600">An outline of the subject areas included in this guide.</p><ol className="mt-6 space-y-3">{programme.modules.map(module => <li key={module.number} className="rounded-lg border border-navy-100 p-4 md:p-5"><div className="flex items-start gap-4"><span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface-50 text-sm font-bold text-navy-800">{String(module.number).padStart(2, '0')}</span><div className="min-w-0 flex-1"><h3 className="font-semibold text-navy-900">{module.title}</h3><p className="mt-2 text-sm leading-6 text-navy-600">{module.description}</p>{module.topics.length > 0 && <ul className="mt-3 flex flex-wrap gap-2">{module.topics.map(topic => <li key={topic} className="rounded-full bg-surface-50 px-3 py-1 text-xs text-navy-700">{topic}</li>)}</ul>}</div></div></li>)}</ol></section>}
+      {programme.learningOutcomes.length > 0 && <section className="rounded-xl bg-surface-50 p-5 md:p-7"><h2 className="font-heading text-2xl font-bold text-navy-900">Learning aims</h2><p className="mt-2 text-sm leading-6 text-navy-600">Areas for reflection and knowledge development, not assessed outcomes.</p><ul className="mt-5 space-y-3">{programme.learningOutcomes.map(outcome => <li key={outcome} className="flex items-start gap-3 text-sm leading-6 text-navy-700"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-clinical-700" />{outcome}</li>)}</ul></section>}
+      {draft && <section><h2 className="mb-5 font-heading text-2xl font-bold text-navy-900">Further study material</h2><CurriculumDraftContent draft={draft} /></section>}</article>
+
+      <aside className="lg:col-span-4"><div className="rounded-xl border border-navy-100 p-6 shadow-sm lg:sticky lg:top-24"><p className="text-xs font-semibold uppercase tracking-[0.15em] text-clinical-700">At a glance</p><h2 className="mt-3 font-heading text-xl font-bold text-navy-900">Guide information</h2><dl className="mt-5 divide-y divide-navy-100"><div className="py-3"><dt className="text-xs text-navy-500">Subject area</dt><dd className="mt-1 text-sm font-semibold text-navy-800">{programme.department}</dd></div><div className="py-3"><dt className="text-xs text-navy-500">Study level</dt><dd className="mt-1 text-sm font-semibold text-navy-800">{programme.level}</dd></div><div className="py-3"><dt className="text-xs text-navy-500">Format</dt><dd className="mt-1 text-sm font-semibold text-navy-800">Independent reading</dd></div><div className="py-3"><dt className="text-xs text-navy-500">CPD hours / certificate</dt><dd className="mt-1 text-sm font-semibold text-navy-800">Not awarded by this guide</dd></div></dl><div className="mt-5 border-t border-navy-100 pt-5"><p className="text-sm leading-6 text-navy-600">Ask the academy about current offerings and their confirmed terms.</p><Link to="/contact" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-navy-900 px-4 py-3 text-sm font-semibold text-white hover:bg-navy-800">Contact the Academy <ArrowRight className="h-4 w-4" /></Link><Link to="/programmes" className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-md border border-navy-200 px-4 py-3 text-sm font-semibold text-navy-800 hover:bg-surface-50"><ArrowLeft className="h-4 w-4" /> Back to learning guides</Link></div></div></aside>
+    </div></main>
+
+    {related.length > 0 && <section className="bg-surface-50 py-12 lg:py-16"><div className="mx-auto max-w-editorial px-6 lg:px-10"><div className="mb-7 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-xs font-semibold uppercase tracking-[0.15em] text-clinical-700">Keep exploring</p><h2 className="mt-2 font-heading text-2xl font-bold text-navy-900">Related learning guides</h2></div><Link to="/programmes" className="inline-flex items-center gap-2 text-sm font-semibold text-clinical-700">View all guides <ArrowRight className="h-4 w-4" /></Link></div><div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">{related.map((item, index) => <ProgrammeCard key={item.id} programme={item} index={index} />)}</div></div></section>}
   </>;
 }
