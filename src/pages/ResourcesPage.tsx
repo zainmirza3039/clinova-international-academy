@@ -4,9 +4,9 @@ import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import NewsCard from '@/components/NewsCard';
-import { newsItems, newsCategories } from '@/data/testimonials';
-import { educationalArticleCards, educationalDisclaimer, draftDateLabel, getEducationalArticle } from '@/data/educationalArticles';
-import { programmes } from '@/data/programmes';
+import { newsItems } from '@/data/testimonials';
+import { publishedEducationalArticleCards, educationalDisclaimer, draftDateLabel, getPublishedEducationalArticle } from '@/data/educationalArticles';
+import { publishedProgrammes } from '@/data/programmes';
 
 export function ResourcesPage() {
   useSEO({ title: 'Healthcare Learning Library', description: 'Educational articles on assessment, rehabilitation, evidence-informed practice and patient safety.' });
@@ -14,9 +14,9 @@ export function ResourcesPage() {
   const [category, setCategory] = useState('All');
   const filtered = useMemo(() => {
     const query = search.trim().toLocaleLowerCase('en-GB');
-    return newsItems.filter(item => {
+    return publishedEducationalArticleCards.filter(item => {
       if (category !== 'All' && item.category !== category) return false;
-      const article = getEducationalArticle(item.slug);
+      const article = getPublishedEducationalArticle(item.slug);
       const text = [item.title, item.excerpt, ...(article?.sections.flatMap(section => [section.heading, ...section.paragraphs]) ?? [])].join(' ').toLocaleLowerCase('en-GB');
       return !query || text.includes(query);
     });
@@ -29,7 +29,7 @@ export function ResourcesPage() {
       <div className="bg-navy-50 border border-navy-100 p-5 mb-8">
         <label htmlFor="resource-search" className="block text-sm font-semibold text-navy-800 mb-2">Search resources</label>
         <input id="resource-search" type="search" value={search} onChange={event => setSearch(event.target.value)} placeholder="Search titles, topics or article text" className="w-full px-4 py-3 mb-4 text-sm bg-white border border-navy-200 focus:outline-none focus:ring-2 focus:ring-clinical-500 text-navy-800" />
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Filter articles by topic">{['All', ...newsCategories].map(cat => <button type="button" key={cat} onClick={() => setCategory(cat)} aria-pressed={category === cat} className={`px-4 py-2 text-sm font-medium border ${category === cat ? 'bg-navy-900 text-white border-navy-900' : 'bg-white text-navy-700 border-navy-200'}`}>{cat}</button>)}</div>
+        <div className="flex flex-wrap gap-2" role="group" aria-label="Filter articles by topic">{['All', ...new Set(publishedEducationalArticleCards.map(item => item.category))].map(cat => <button type="button" key={cat} onClick={() => setCategory(cat)} aria-pressed={category === cat} className={`px-4 py-2 text-sm font-medium border ${category === cat ? 'bg-navy-900 text-white border-navy-900' : 'bg-white text-navy-700 border-navy-200'}`}>{cat}</button>)}</div>
       </div>
       <p className="mb-6 text-sm text-navy-600" role="status" aria-live="polite" aria-atomic="true">Showing {filtered.length} educational article{filtered.length !== 1 ? 's' : ''}</p>
       {filtered.length ? <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">{filtered.map((item, index) => <NewsCard key={item.id} item={item} index={index} />)}</div> : <div className="text-center py-12 bg-navy-50"><p className="font-semibold text-navy-800">No articles match your search.</p><p className="mt-2 text-sm text-navy-600">Try a broader term or another topic.</p><button type="button" onClick={() => { setSearch(''); setCategory('All'); }} className="mt-5 px-5 py-2 bg-navy-900 text-white">Clear filters</button></div>}
@@ -39,12 +39,12 @@ export function ResourcesPage() {
 
 export function ResourceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const article = getEducationalArticle(slug);
+  const article = getPublishedEducationalArticle(slug);
   useSEO({ title: article ? article.seoTitle : 'Article Not Found', description: article?.seoDescription ?? 'The requested educational article could not be found.' });
   if (!article) return <section className="max-w-3xl mx-auto px-6 py-24 text-center"><h1 className="text-3xl font-bold text-navy-900">Article Not Found</h1><p className="mt-4 text-navy-600">This address does not match an article in the library.</p><Link className="inline-block mt-6 text-clinical-600 underline" to="/resources">View All Resources</Link></section>;
-  const explicitRelated = article.relatedArticleSlugs.map(relatedSlug => educationalArticleCards.find(item => item.slug === relatedSlug)).filter((item): item is typeof newsItems[number] => Boolean(item));
-  const related = (explicitRelated.length ? explicitRelated : educationalArticleCards.filter(item => item.slug !== article.slug && item.category === article.category)).slice(0, 3);
-  const relatedProgrammes = article.relatedProgrammeSlugs.map(programmeSlug => programmes.find(item => item.slug === programmeSlug)).filter((item): item is typeof programmes[number] => Boolean(item));
+  const explicitRelated = article.relatedArticleSlugs.map(relatedSlug => publishedEducationalArticleCards.find(item => item.slug === relatedSlug)).filter((item): item is typeof newsItems[number] => Boolean(item));
+  const related = (explicitRelated.length ? explicitRelated : publishedEducationalArticleCards.filter(item => item.slug !== article.slug && item.category === article.category)).slice(0, 3);
+  const relatedProgrammes = article.relatedProgrammeSlugs.map(programmeSlug => publishedProgrammes.find(item => item.slug === programmeSlug)).filter((item): item is typeof publishedProgrammes[number] => Boolean(item));
   return <>
     <header className="bg-navy-900 pt-28 pb-12 lg:pt-36"><div className="max-w-4xl mx-auto px-6"><Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Resources', to: '/resources' }, { label: article.category }]} /><p className="mt-6 text-sm font-semibold text-teal-300">{article.category}</p><h1 className="mt-3 text-3xl md:text-4xl font-heading font-bold text-white leading-tight">{article.title}</h1><p className="mt-5 text-navy-200 leading-relaxed">{article.excerpt}</p><p className="mt-4 text-sm text-navy-300">{draftDateLabel}</p></div></header>
     <article className="max-w-4xl mx-auto px-6 py-12">
