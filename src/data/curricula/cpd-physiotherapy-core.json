@@ -1,0 +1,414 @@
+[
+  {
+    "courseSlug": "musculoskeletal-assessment-and-clinical-reasoning",
+    "status": "draft",
+    "reviewNotice": "Open self-study course for professional learning and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or accredited CPD credit. Check current evidence, local guidance and professional scope.",
+    "outcomes": [
+      "Structure a person-centred musculoskeletal history and examination.",
+      "Select tests that answer a clinical question and interpret results in context.",
+      "Use red-flag reasoning, function and patient goals to plan safe next steps.",
+      "Document uncertainty, shared decisions and reassessment criteria."
+    ],
+    "intendedAudience": [
+      "Physiotherapists and other regulated clinicians developing MSK assessment reasoning.",
+      "Students and supervised learners in a suitable clinical education setting."
+    ],
+    "prerequisites": [
+      "Foundational anatomy, physiology, communication and clinical-safety knowledge.",
+      "Clinical skills must be practised only within professional scope and appropriate supervision."
+    ],
+    "modules": [
+      {
+        "title": "History and hypothesis formation",
+        "description": "Build a structured, person-centred assessment without premature diagnosis.",
+        "lessons": [
+          {
+            "title": "Start with the person's story",
+            "description": "Connect symptoms to function, context and goals.",
+            "text": "Begin with the person's account: onset, mechanism where relevant, symptom behaviour, previous episodes, sleep, work, valued activity and what they hope to regain. Ask open questions before focused questions, and distinguish reported symptoms from observed findings and your interpretation. Pain location alone rarely identifies a single tissue source. Consider comorbidities, medication, communication needs, culture, health literacy and the person's own explanatory model. Agree the purpose of examination, obtain consent and explain how findings will guide the next decision. A useful working hypothesis is provisional: it should explain the available information, identify uncertainty and state what would change your view. The HCPC physiotherapist standards emphasise appropriate assessment, clinical reasoning, informed consent, scope of practice and referral when needed. This course does not authorise independent practice or replace supervised skills training."
+          },
+          {
+            "title": "Risk and differential reasoning",
+            "description": "Recognise when the presentation does not fit routine MSK care.",
+            "text": "Do not treat a red-flag checklist as a diagnostic test. Consider the whole presentation, including trauma, systemic illness, cancer history, infection risk, inflammatory features, progressive neurological symptoms and change from the person's usual pattern. The relevance of each feature depends on context, combinations and trajectory. If serious pathology is suspected, stop routine progression and follow local urgent referral pathways. Explain the reason for escalation clearly, document the concern and communicate uncertainty without dismissing symptoms. A normal finding on one test cannot rule out every serious condition. For each fictional case, ask: what alternative explanation must remain in view, what finding would change urgency, and who is the appropriate next professional? Work within competence and seek supervision whenever the findings exceed your role."
+          }
+        ],
+        "reflectiveActivity": "Use a fictional shoulder or knee case to write one provisional hypothesis, two alternatives, three findings that would change management, and a safety-net statement."
+      },
+      {
+        "title": "Examination and interpretation",
+        "description": "Choose tests according to the question, not habit.",
+        "lessons": [
+          {
+            "title": "Movement, strength and function",
+            "description": "Choose measures linked to a decision or patient goal.",
+            "text": "Select examination components because they answer a question. Depending on the presentation and competence, these may include active and passive movement, resisted testing, neurological examination, palpation, balance, gait or a meaningful functional task. Explain each step and obtain ongoing consent. Record position, side, assistance, symptom response and limitations so the result can be interpreted and repeated. A single positive special test or isolated strength score should not be treated as a diagnosis in isolation. Compare the finding with the history, baseline function and other evidence. If a test is unsafe, unlikely to change management or outside scope, do not perform it simply because it is familiar. The aim is a coherent clinical picture rather than the largest possible list of tests."
+          },
+          {
+            "title": "From findings to a working formulation",
+            "description": "Separate evidence, interpretation and uncertainty.",
+            "text": "A defensible formulation connects the history, examination and context to a plausible explanation and next step. State what supports the hypothesis, what does not fit, what remains unknown and what would prompt reassessment or referral. Consider symptom irritability, functional impact, patient priorities and relevant medical factors. Avoid equating imaging findings with the source of symptoms or assuming that every asymmetry requires correction. If the presentation changes or the expected trajectory does not occur, revisit the differential rather than repeating the same intervention automatically. Discuss options, likely benefits and burdens, and the person's preferences. Shared decision-making should be documented in language that another clinician can follow."
+          }
+        ],
+        "reflectiveActivity": "For a fictional case, explain how one examination result would change your working hypothesis or plan; if it would change nothing, reconsider whether the test is needed."
+      },
+      {
+        "title": "Plan, communication and review",
+        "description": "Translate assessment into a safe, measurable next step.",
+        "lessons": [
+          {
+            "title": "Goals and shared decisions",
+            "description": "Agree meaningful outcomes rather than vague impairment targets.",
+            "text": "Goals are more useful when they describe a task or participation outcome that matters to the person, such as returning to work, climbing stairs or walking to a local shop. Agree how progress will be measured and under what conditions. Discuss reasonable options, uncertainty, the role of self-management and when further assessment is needed. Adapt communication for language, health literacy, disability and distress. A score or impairment measure can contribute, but should not replace the person's experience and priorities. Avoid promising a cure or presenting one treatment technique as universally necessary."
+          },
+          {
+            "title": "Documentation and reassessment",
+            "description": "Make clinical reasoning auditable and the follow-up plan clear.",
+            "text": "Document relevant history, examination findings, clinical interpretation, consent, decisions discussed, agreed goals, advice, referral actions and safety-netting. Separate objective observations from the person's report and your clinical impression. State the expected review point and the changes that should trigger earlier contact. Reassessment is not just repeating measurements: it tests whether the original explanation and plan remain plausible. Consider symptoms, function, participation, confidence and adverse responses. Use current local guidance and seek senior or medical input when the pattern is atypical, deteriorating or beyond scope."
+          }
+        ],
+        "reflectiveActivity": "Write a concise fictional assessment note with findings, hypothesis, uncertainty, shared plan, outcome measure and safety-netting."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Does this course qualify me to diagnose or practise independently?",
+        "answer": "No. It is open self-study and does not confer a qualification, registration, clinical competence or permission to practise."
+      },
+      {
+        "question": "Are CPD hours or certificates awarded?",
+        "answer": "No accredited CPD hours or certificate are awarded by this self-study material."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "A Structured Approach to Physiotherapy Assessment",
+        "slug": "physiotherapy-assessment-structured-approach"
+      },
+      {
+        "title": "ROM, Strength and Function: Turning Measurements into Clinical Decisions",
+        "slug": "range-of-motion-strength-functional-assessment"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "HCPC",
+        "title": "Standards of proficiency: physiotherapists",
+        "url": "https://www.hcpc-uk.org/standards/standards-of-proficiency/physiotherapists/",
+        "note": "Professional baseline for safe assessment, consent, clinical reasoning, documentation and referral."
+      },
+      {
+        "organisation": "APTA",
+        "title": "Initial Examination and Evaluation",
+        "url": "https://www.apta.org/your-practice/documentation/defensible-documentation/elements-within-the-patientclient-management-model/initial-examination",
+        "note": "Overview of the examination and evaluation stage in patient/client management."
+      },
+      {
+        "organisation": "NICE",
+        "title": "Low back pain and sciatica in over 16s (NG59)",
+        "url": "https://www.nice.org.uk/guidance/ng59",
+        "note": "Condition-specific example of assessment, safety, imaging and management recommendations; check the current version."
+      }
+    ]
+  },
+  {
+    "courseSlug": "knee-osteoarthritis-rehabilitation",
+    "status": "draft",
+    "reviewNotice": "Open self-study course for professional learning and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or accredited CPD credit. Check current evidence, local guidance and professional scope.",
+    "outcomes": [
+      "Explain the role of symptoms and function in osteoarthritis assessment.",
+      "Plan person-centred education and progressive therapeutic exercise.",
+      "Select functional outcomes and review response over time.",
+      "Recognise atypical symptoms and situations requiring medical assessment."
+    ],
+    "intendedAudience": [
+      "Physiotherapists and allied health professionals involved in musculoskeletal rehabilitation.",
+      "Supervised learners developing evidence-informed osteoarthritis management."
+    ],
+    "prerequisites": [
+      "Basic knowledge of musculoskeletal assessment and exercise prescription.",
+      "Use individual clinical assessment and local pathways; this course is not a patient-specific protocol."
+    ],
+    "modules": [
+      {
+        "title": "Understanding symptoms and goals",
+        "description": "Relate osteoarthritis to lived function without over-relying on imaging.",
+        "lessons": [
+          {
+            "title": "Clinical presentation and diagnosis",
+            "description": "Use symptom pattern, function and differential reasoning.",
+            "text": "NICE NG226 states that osteoarthritis can usually be diagnosed clinically in people aged 45 or over who have activity-related joint pain and either no morning joint-related stiffness or stiffness lasting no longer than 30 minutes. Routine imaging is not recommended to diagnose typical osteoarthritis unless atypical features suggest an alternative or additional diagnosis. These criteria are guidance, not a substitute for individual assessment or a rule for every age and presentation. Ask about pain, stiffness, swelling, activity, sleep, previous injury, other joints, general health and what tasks have become difficult. An acutely hot swollen knee, fever, major trauma or rapidly worsening inability to bear weight warrants timely medical assessment rather than routine exercise progression."
+          },
+          {
+            "title": "Function, expectations and shared decisions",
+            "description": "Set meaningful goals and explain what rehabilitation can and cannot promise.",
+            "text": "Osteoarthritis symptoms and radiographic changes do not always correspond closely. Rehabilitation aims to improve function, confidence and quality of life; it cannot promise cartilage repair, complete pain elimination or avoidance of surgery. Ask what matters most: rising from a chair, walking, stairs, work, sleep or recreation. Discuss the likely need for consistent practice and adjustments over time. Weight-related conversations should be respectful and should not be used as a reason to deny support. Explain that some temporary discomfort can occur when beginning exercise, while severe, unusual or persistent worsening requires review. Shared decisions should reflect the person's preferences, health, access and goals."
+          }
+        ],
+        "reflectiveActivity": "Create two functional goals for a fictional person with knee OA and explain how you would measure each without relying on imaging."
+      },
+      {
+        "title": "Exercise selection and progression",
+        "description": "Choose exercise that matches function, preference and capacity.",
+        "lessons": [
+          {
+            "title": "Therapeutic exercise as core management",
+            "description": "Build a flexible exercise plan around meaningful tasks.",
+            "text": "NICE NG226 recommends therapeutic exercise tailored to the person's needs, including local muscle strengthening and general aerobic fitness, and says supervised sessions can be considered. There is no single best exercise for everyone. Options may include sit-to-stand practice, knee strengthening, walking, cycling, balance work or water-based activity depending on health, goals, preference and access. Choose exercises that relate to the desired activity and start at a repeatable level. Adjust range, resistance, volume, speed, support and rest based on the person's response. A programme should be feasible enough to repeat, not impressive only during one clinic session."
+          },
+          {
+            "title": "Load, flare-ups and adherence",
+            "description": "Adapt dose and recovery rather than using a rigid protocol.",
+            "text": "Agree how the person will monitor response during and after activity. If a flare occurs, temporarily reduce the most demanding component while maintaining safe movement where possible, then build back gradually. Avoid telling people to ignore severe or unfamiliar symptoms. Review delayed soreness, swelling, confidence, sleep and the effect on daily tasks. Behavioural support, reminders, enjoyable activities and a manageable plan can improve adherence. Consider barriers such as transport, cost, caring responsibilities and fear of movement. Exercise dose should be individualised and reviewed rather than prescribed as a universal number of repetitions for all presentations."
+          }
+        ],
+        "reflectiveActivity": "For a fictional case, choose one strengthening task and one aerobic option. State starting dose, progression variable, review measure and reasons to pause or refer."
+      },
+      {
+        "title": "Outcomes, referral and long-term management",
+        "description": "Use reassessment to adapt care and identify when other pathways are needed.",
+        "lessons": [
+          {
+            "title": "Measure what matters",
+            "description": "Pair symptoms with repeatable activity and participation outcomes.",
+            "text": "Select measures that answer the person's question. Examples include a timed chair rise, walking tolerance, stair performance, confidence with a valued task or an appropriate validated questionnaire. Repeat under similar conditions and interpret the result alongside symptoms and participation. A modest change may be meaningful if the person returns to an important activity. If function does not improve, reassess diagnosis, dose, barriers, comorbidity and the person's priorities rather than simply adding more exercises."
+          },
+          {
+            "title": "Escalation and onward referral",
+            "description": "Recognise atypical presentations and persistent disabling impact.",
+            "text": "Seek medical assessment for atypical symptoms, acute inflammation, significant trauma, new neurological or vascular signs, unexplained systemic symptoms or rapidly deteriorating function. Persistent disabling symptoms despite appropriate non-surgical management may warrant discussion through local pathways, including surgical opinion when suitable. NICE advises that referral decisions should be based on clinical assessment and the impact on quality of life rather than a numerical severity score alone. Do not exclude someone from referral based solely on age, sex, smoking, comorbidity or body size. Explain uncertainty and document the reason for the next step."
+          }
+        ],
+        "reflectiveActivity": "Review a fictional 6-week case with unchanged stair function. List at least four possible reasons for the result and how you would reassess before changing the plan."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Does this course provide a patient-specific exercise plan?",
+        "answer": "No. It is educational content; exercise prescription requires individual assessment by a qualified professional."
+      },
+      {
+        "question": "Are accredited CPD hours awarded?",
+        "answer": "No. This open self-study course does not award accredited CPD hours or a certificate."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Knee Osteoarthritis: Exercise, Function and Rehabilitation",
+        "slug": "knee-osteoarthritis-rehabilitation"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "NICE",
+        "title": "Osteoarthritis in over 16s: diagnosis and management (NG226)",
+        "url": "https://www.nice.org.uk/guidance/NG226/chapter/recommendations",
+        "note": "Guidance on clinical diagnosis, information, therapeutic exercise and onward referral."
+      },
+      {
+        "organisation": "WHO",
+        "title": "International Classification of Functioning, Disability and Health (ICF)",
+        "url": "https://www.who.int/standards/classifications/international-classification-of-functioning-disability-and-health",
+        "note": "Framework for connecting body functions, activity, participation and context."
+      }
+    ]
+  },
+  {
+    "courseSlug": "stroke-rehabilitation-functional-goals",
+    "status": "draft",
+    "reviewNotice": "Open self-study course for professional learning and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or accredited CPD credit. Check current evidence, local guidance and professional scope.",
+    "outcomes": [
+      "Describe a comprehensive, person-centred stroke rehabilitation assessment.",
+      "Write functional goals linked to activity and participation.",
+      "Explain how task-specific practice and team coordination support rehabilitation.",
+      "Identify clinical changes that require escalation or reassessment."
+    ],
+    "intendedAudience": [
+      "Physiotherapists and multidisciplinary rehabilitation professionals.",
+      "Supervised learners working with adult neurological rehabilitation."
+    ],
+    "prerequisites": [
+      "Foundational knowledge of neurological rehabilitation and clinical safety.",
+      "Transfers, gait training and equipment use require practical training and appropriate supervision."
+    ],
+    "modules": [
+      {
+        "title": "Assessment and meaningful goals",
+        "description": "Connect impairment findings with everyday activity and participation.",
+        "lessons": [
+          {
+            "title": "The whole impact of stroke",
+            "description": "Assess more than strength and movement.",
+            "text": "Stroke may affect movement, sensation, balance, vision, communication, swallowing, cognition, mood, continence, fatigue and participation. NICE NG236 recommends comprehensive assessment that considers previous ability, body-function impairment, activity limitations, participation restrictions, psychological and neuropsychological changes and environmental factors. Ask what the person wants to regain, such as transferring safely, reaching the bathroom, communicating with family or preparing food. Include carers when appropriate while preserving the person's autonomy. Consider communication access, fatigue, cognition, medical stability, home circumstances and consent. A single motor score cannot describe the whole rehabilitation need."
+          },
+          {
+            "title": "Functional goal setting",
+            "description": "Write goals that are observable, meaningful and revisable.",
+            "text": "Useful goals describe an activity or participation outcome, the conditions in which it matters and how progress will be judged. “Improve strength” may be a treatment target; “stand from the dining chair with the agreed assistance and reach the kitchen safely” is a functional goal. NICE advises that stroke rehabilitation goals should be meaningful, relevant, activity- and participation-focused, challenging but achievable, and include short- and long-term elements. Agree goals with the person and review them when health, fatigue, mood or home circumstances change. Quality, safety, confidence and carer burden may matter as much as speed."
+          }
+        ],
+        "reflectiveActivity": "For a fictional adult after stroke, write one short-term transfer goal and one longer-term participation goal. State the assistance level and how you would measure change."
+      },
+      {
+        "title": "Practice, dose and team coordination",
+        "description": "Plan purposeful repetition in context and adapt to the person's needs.",
+        "lessons": [
+          {
+            "title": "Task-specific practice and progression",
+            "description": "Relate practice to a functional goal and reassess response.",
+            "text": "Practice should be purposeful and connected to the activity the person wants to regain. Depending on presentation, this may include sit-to-stand, reaching, stepping, walking, upper-limb tasks, balance or repeated functional transitions. NICE supports needs-based rehabilitation with content and intensity tailored to goals, medical needs, fatigue, mood and the person's agreement. More repetitions are not automatically better if quality, safety, pain, fatigue or consent deteriorate. Grade assistance, environment, task complexity and rest; document the response and progress when the current level is safe and meaningful. This course cannot teach hands-on handling or replace supervised competency assessment."
+          },
+          {
+            "title": "Working with the multidisciplinary team",
+            "description": "Coordinate therapy, equipment, communication and transitions.",
+            "text": "A coordinated team may include physiotherapy, occupational therapy, nursing, speech and language therapy, rehabilitation medicine, psychology, dietetics, pharmacy and social care depending on need. The team should share goals and communicate about transfers, equipment, shoulder protection, swallowing, cognition, fatigue, medication, home access and discharge planning. Each professional contributes a different perspective; isolated exercises can miss the practical barriers to participation. Involve family or carers with consent and teach only tasks they can safely support. Review whether the plan remains feasible after discharge and arrange follow-up and equipment through local pathways."
+          }
+        ],
+        "reflectiveActivity": "Map a fictional stroke goal to two disciplines, a home-context factor, one outcome measure and a safety consideration."
+      },
+      {
+        "title": "Safety and review",
+        "description": "Monitor changing presentation and plan safe transitions.",
+        "lessons": [
+          {
+            "title": "Red flags and safe mobility",
+            "description": "Recognise when routine rehabilitation should pause.",
+            "text": "New neurological deterioration, reduced consciousness, chest pain, severe headache, seizure, aspiration concerns, acute infection or sudden change in function needs prompt medical assessment. Mobility may require modification for blood-pressure instability, cardiac disease, osteoporosis, shoulder pain, neglect, visual-field loss, communication barriers or severe fatigue. Transfers, gait aids and equipment must be selected and taught by appropriately trained professionals in the person's real context. Do not infer safety from one successful attempt or a written guide alone. Follow local emergency and escalation procedures."
+          },
+          {
+            "title": "Outcome review and transitions",
+            "description": "Track function, participation, adverse responses and changing goals.",
+            "text": "Review symptoms, objective performance, assistance needs, participation, confidence, fatigue and adverse events. A plateau should trigger reassessment of goals, dose, medical factors, environment and barriers rather than an automatic conclusion that rehabilitation has no value. Discharge is a transition, not the end of rehabilitation: coordinate equipment, home adaptations, carers' needs, community therapy and follow-up. Record consent, baseline measures, instructions and escalation advice. Explain uncertainty and avoid promising a fixed recovery timeline."
+          }
+        ],
+        "reflectiveActivity": "In a fictional case with new deterioration during a rehabilitation session, identify what you would stop, whom you would contact and what information the handover must include."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Does this course teach hands-on transfer skills?",
+        "answer": "No. Practical handling, equipment use and gait training require supervised skills teaching and competency assessment."
+      },
+      {
+        "question": "Are CPD credits or certificates provided?",
+        "answer": "No accredited CPD credits or certificate are awarded by this self-study course."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Stroke Rehabilitation: Setting Functional Goals With the Whole Team",
+        "slug": "stroke-rehabilitation-functional-goals"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "NICE",
+        "title": "Stroke rehabilitation in adults (NG236)",
+        "url": "https://www.nice.org.uk/guidance/ng236/chapter/Recommendations",
+        "note": "Recommendations on comprehensive assessment, goals, therapy content and rehabilitation intensity."
+      }
+    ]
+  },
+  {
+    "courseSlug": "balance-training-fall-prevention",
+    "status": "draft",
+    "reviewNotice": "Open self-study course for professional learning and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or accredited CPD credit. Check current evidence, local guidance and professional scope.",
+    "outcomes": [
+      "Describe multifactorial contributors to falls in older adults.",
+      "Identify assessment domains that inform fall prevention.",
+      "Explain principles of progressive, individualised balance and functional exercise.",
+      "Recognise when dizziness, injury or acute change requires medical review."
+    ],
+    "intendedAudience": [
+      "Physiotherapists and healthcare professionals working with older adults.",
+      "Supervised learners in falls prevention, community rehabilitation or geriatric care."
+    ],
+    "prerequisites": [
+      "Basic understanding of gait, balance, strength and clinical safety.",
+      "Exercise and mobility activities require individual assessment and appropriate supervision."
+    ],
+    "modules": [
+      {
+        "title": "Falls risk and comprehensive assessment",
+        "description": "Consider the person, health, environment and goals.",
+        "lessons": [
+          {
+            "title": "Falls are multifactorial",
+            "description": "Look beyond lower-limb weakness alone.",
+            "text": "Falls can arise from interacting factors such as gait and balance impairment, strength, vision, hearing, footwear, medication, orthostatic symptoms, cognition, environment, acute illness and confidence. Ask about falls, near-falls, dizziness, loss of consciousness, fear and activity avoidance without blame. A fall is not simply evidence of weak legs, and a generic exercise class may miss treatable contributors. Urgent assessment may be needed after serious injury, concerning head impact, loss of consciousness, chest pain, palpitations, new neurological signs or severe illness. Sudden dizziness or fainting needs appropriate medical review. Use local pathways and stay within professional scope."
+          },
+          {
+            "title": "Assessment domains and risk",
+            "description": "Use comprehensive assessment to identify modifiable contributors.",
+            "text": "NICE NG249 includes cardiovascular assessment and lying-to-standing blood pressure where appropriate, cognition and mood, dizziness, feet and footwear, functional ability, gait, balance, mobility, strength, hearing and vision, long-term conditions, medication, neurological factors, continence, diet and osteoporosis risk. The World Falls Guidelines similarly support comprehensive multifactorial assessment for people at high risk. Functional tasks may include sit-to-stand, turning, stepping, gait speed, reaching and navigating the person's environment. A screening score can support decisions but is not a diagnosis and does not replace clinical reasoning. Ask what the person wants to keep doing and what changes are acceptable."
+          }
+        ],
+        "reflectiveActivity": "For a fictional older adult with two recent falls, list assessment domains, urgent referral triggers and two questions about meaningful participation."
+      },
+      {
+        "title": "Progressive exercise and environmental support",
+        "description": "Develop safe, tailored practice that challenges function.",
+        "lessons": [
+          {
+            "title": "Balance and strength training",
+            "description": "Progress functional tasks according to control and risk.",
+            "text": "NICE NG249 recommends fall-prevention exercise for people who need comprehensive assessment and management. Programmes should be delivered by appropriately trained professionals, progressive and tailored to the person's needs, preferences, goals and abilities, and focus on functional components such as balance, coordination, strength and power with regular review. Possible tasks include repeated chair rises, stepping in different directions, turning, reaching and walking challenges, but selection depends on assessment and safety. Progress only when the current task is controlled, using support, supervision and an appropriate environment. Do not copy a population-level exercise recommendation as a prescription for every person."
+          },
+          {
+            "title": "Environment and multidisciplinary management",
+            "description": "Combine exercise with relevant medical and environmental actions.",
+            "text": "Exercise is one part of a broader plan. Depending on findings, coordinate medication review with a prescriber or pharmacist, vision and hearing assessment, foot care, footwear advice, home hazard assessment, nutrition, hydration, continence support and management of orthostatic hypotension. Do not tell a person to stop medication independently. Occupational therapy may support a validated home hazard assessment; other services may address treatable health risks. Discuss aids and adaptations without treating them as failure. Reassess falls, near-falls, confidence, participation and adverse symptoms over time."
+          }
+        ],
+        "reflectiveActivity": "Design a fictional four-week review plan with one balance task, one strength task, a safety arrangement and outcome measures. Explain how progression will be decided."
+      },
+      {
+        "title": "Review, escalation and shared decisions",
+        "description": "Know when to progress, adapt, pause or refer.",
+        "lessons": [
+          {
+            "title": "Measure meaningful change",
+            "description": "Review falls, near-falls, confidence and daily participation.",
+            "text": "Track falls and near-falls, functional performance, confidence, activity participation and adverse symptoms. A person may become stronger yet remain at risk because of dizziness, vision, medication, environment or cognition. If falls continue, the person develops new symptoms or exercise is not tolerated, reassess the contributing factors and coordinate further review rather than simply increasing exercise difficulty. Discuss goals and risk preferences openly; safety planning should not become blanket restriction of valued activity."
+          },
+          {
+            "title": "Safety-netting and referral",
+            "description": "Recognise symptoms that are not routine exercise responses.",
+            "text": "Pause exercise and arrange appropriate medical review for new fainting, concerning dizziness, chest pain, palpitations, new neurological symptoms, acute confusion, severe illness, significant injury or a rapid change in mobility. Local urgency depends on presentation and services. Document what occurred, the person's baseline, observed change, immediate action and handover. Explain who to contact and what symptoms should prompt urgent help. The educational material does not provide a patient-specific exercise prescription or replace a comprehensive falls assessment."
+          }
+        ],
+        "reflectiveActivity": "For a fictional person with recurrent falls and dizziness on standing, explain why exercise alone is insufficient and how you would coordinate review."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is this a ready-made falls exercise prescription?",
+        "answer": "No. The course teaches general principles; exercise selection and supervision require individual risk assessment."
+      },
+      {
+        "question": "Does the course award a certificate or CPD hours?",
+        "answer": "No. It is open self-study material without accredited CPD credit or certificate."
+      }
+    ],
+    "relatedArticles": [
+      {
+        "title": "Balance Training and Fall Prevention in Older Adults",
+        "slug": "balance-training-fall-prevention"
+      }
+    ],
+    "evidence": [
+      {
+        "organisation": "NICE",
+        "title": "Falls: assessment and prevention in older people and people 50 and over at higher risk (NG249)",
+        "url": "https://www.nice.org.uk/guidance/ng249/chapter/Recommendations",
+        "note": "Current recommendations on assessment, risk factors and tailored progressive exercise."
+      },
+      {
+        "organisation": "World Falls Guidelines",
+        "title": "World guidelines for falls prevention and management for older adults",
+        "url": "https://academic.oup.com/ageing/article/51/9/afac205/6730755",
+        "note": "International multidisciplinary guidance on falls risk assessment and prevention."
+      }
+    ]
+  }
+]
