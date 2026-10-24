@@ -6,7 +6,7 @@ import PageHero from '@/components/PageHero';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import CTASection from '@/components/CTASection';
 import SearchBar from '@/components/SearchBar';
-import { programmes } from '@/data/programmes';
+import { publishedProgrammes } from '@/data/programmes';
 import { departments } from '@/data/departments';
 
 export default function ProgrammesPage() {
@@ -21,7 +21,7 @@ export default function ProgrammesPage() {
   const [levelFilter, setLevelFilter] = useState('All');
   const requestedCategory = searchParams.get('type') || 'All';
   const categories = useMemo(
-    () => [...new Set(programmes.map((programme) => programme.category))].sort(),
+    () => [...new Set(publishedProgrammes.map((programme) => programme.category))].sort(),
     [],
   );
   const categoryFilter = requestedCategory === 'All' || categories.some(category => category === requestedCategory)
@@ -30,7 +30,7 @@ export default function ProgrammesPage() {
 
   const filtered = useMemo(() => {
     const query = search.trim().toLocaleLowerCase('en-GB');
-    return programmes.filter((programme) => {
+    return publishedProgrammes.filter((programme) => {
       if (searchParams.get('featured') === 'true' && !programme.featured) return false;
       if (categoryFilter !== 'All' && programme.category !== categoryFilter) return false;
       if (deptFilter !== 'All' && programme.departmentSlug !== deptFilter) return false;
