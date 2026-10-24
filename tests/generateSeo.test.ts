@@ -8,7 +8,7 @@ const repoRoot = process.cwd();
 const generator = resolve(repoRoot, 'scripts/generate-seo.mjs');
 const temporaryDirectories: string[] = [];
 
-function runGenerator(siteUrl?: string, indexingEnabled = 'true') {
+function runGenerator(siteUrl?: string, indexingEnabled = 'true', vercelEnvironment?: string) {
   const cwd = mkdtempSync(join(tmpdir(), 'clinova-seo-'));
   temporaryDirectories.push(cwd);
   mkdirSync(join(cwd, 'dist'), { recursive: true });
@@ -16,6 +16,8 @@ function runGenerator(siteUrl?: string, indexingEnabled = 'true') {
   const env = { ...process.env, VITE_INDEXING_ENABLED: indexingEnabled };
   if (siteUrl === undefined) delete env.VITE_SITE_URL;
   else env.VITE_SITE_URL = siteUrl;
+  if (vercelEnvironment === undefined) delete env.VERCEL_ENV;
+  else env.VERCEL_ENV = vercelEnvironment;
 
   const result = spawnSync(process.execPath, [generator], { cwd, env, encoding: 'utf8' });
   if (result.status !== 0) {
@@ -88,6 +90,14 @@ describe('build-time SEO publication safeguards', () => {
     ['non-HTTPS origin', 'http://www.clinovainternationalacademy.co.uk/', 'true'],
   ])('keeps public indexing disabled for %s', (_case, siteUrl, enabled) => {
     const output = runGenerator(siteUrl, enabled);
+    expect(output.sitemap).not.toContain('<loc>');
+    expect(output.robots).toContain('Disallow: /');
+    expect(output.robots).not.toContain('Sitemap:');
+    expect(output.html).toContain('content="noindex, nofollow"');
+  });
+
+  it('keeps Vercel preview deployments noindexed even when the production origin is configured', () => {
+    const output = runGenerator('https://www.clinovainternationalacademy.co.uk/', 'true', 'preview');
     expect(output.sitemap).not.toContain('<loc>');
     expect(output.robots).toContain('Disallow: /');
     expect(output.robots).not.toContain('Sitemap:');
