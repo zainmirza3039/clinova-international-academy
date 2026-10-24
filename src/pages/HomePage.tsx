@@ -61,7 +61,7 @@ export default function HomePage() {
         <div aria-hidden="true" className="absolute -right-32 -top-24 h-[30rem] w-[30rem] rounded-full bg-teal-50 blur-3xl" />
         <div className="relative max-w-editorial mx-auto px-6 lg:px-10 pt-14 pb-12 lg:pt-24 lg:pb-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            <div ref={heroRef} className="lg:col-span-7 max-w-3xl">
+            <div ref={heroRef} className={`lg:col-span-7 max-w-3xl ${heroVisible ? 'animate-fade-up' : 'opacity-0'}`}>
               <div className="inline-flex items-center gap-2 rounded-full border border-teal-100 bg-teal-50 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-teal-800">
                 <span className="h-1.5 w-1.5 rounded-full bg-teal-600" />
                 Healthcare education
