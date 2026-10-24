@@ -7,7 +7,7 @@ try {
   const previewHost = /(^|\.)(vercel\.app|manus\.computer|localhost|test|invalid)$/.test(u.hostname);
   if (env.VITE_INDEXING_ENABLED === 'true' && u.protocol === 'https:' && u.pathname === '/' && !u.username && !u.password && !u.search && !u.hash && !previewHost) origin = u.origin;
 } catch { /* Preview builds remain unindexed. */ }
-const fixed = ['/', '/about', '/departments', '/programmes', '/cpd-courses', '/online-learning', '/training-partners', '/resources', '/contact', '/admissions', '/events', '/faculty', '/faqs', '/privacy-policy', '/terms-and-conditions', '/cookie-policy', '/refund-policy'];
+const fixed = ['/', '/about', '/departments', '/cpd-courses', '/online-learning', '/training-partners', '/resources', '/contact', '/admissions', '/events', '/faculty', '/faqs', '/privacy-policy', '/terms-and-conditions', '/cookie-policy', '/refund-policy'];
 // Dynamic department, programme and CPD routes remain excluded until their content is explicitly verified and published.
 const escape = s => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('"', '&quot;');
 writeFileSync('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${origin ? [...new Set(fixed)].map(path => `  <url><loc>${escape(origin + path)}</loc></url>`).join('\n') : ''}\n</urlset>\n`);
