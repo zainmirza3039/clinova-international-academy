@@ -20,14 +20,14 @@ import { useState } from 'react';
 const learningSteps = [
   { number: '01', title: 'Explore a topic', desc: 'Start with an educational article or subject-area guide and identify what you want to learn.' },
   { number: '02', title: 'Reflect on practice', desc: 'Connect learning with your role, professional scope and current local guidance.' },
-  { number: '03', title: 'Review course details', desc: 'Check current availability, delivery, dates and assessment arrangements before enrolling.' },
-  { number: '04', title: 'Choose your next step', desc: 'Review the confirmed requirements and terms for the specific learning opportunity.' },
+  { number: '03', title: 'Review course details', desc: 'Review the learning outcomes, modules and source links before studying.' },
+  { number: '04', title: 'Choose your next step', desc: 'Use the material for reflection and check local guidance before applying it.' },
 ];
 
 const pathwaySteps = [
   { label: 'Subject areas', desc: 'Explore healthcare disciplines' },
   { label: 'Learning library', desc: 'Read articles and use reflection tools' },
-  { label: 'Programme information', desc: 'Review course modules and sources' },
+  { label: 'Course information', desc: 'Review course modules and sources' },
   { label: 'Next steps', desc: 'Confirm current availability and requirements' },
 ];
 
@@ -262,7 +262,7 @@ export default function HomePage() {
           </div>
           {filteredCPD.length === 0 && (
             <div className="text-center py-12 text-navy-100/50">
-              <p className="text-sm">No CPD courses found for this filter. Try another category.</p>
+              <p className="text-sm">No self-study courses found for this filter. Try another category.</p>
             </div>
           )}
         </div>
