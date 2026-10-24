@@ -3,15 +3,15 @@ import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import CPDCard from '@/components/CPDCard';
 import SearchBar from '@/components/SearchBar';
-import { cpdCourses } from '@/data/cpdCourses';
+import { publishedCPDCourses } from '@/data/cpdCourses';
 import { departments } from '@/data/departments';
 import { ChevronDown } from 'lucide-react';
 
 export default function CPDCoursesPage() {
   useSEO({
-    title: 'Professional Development',
+    title: 'Physiotherapy and Healthcare Self-Study Courses',
     description:
-      'Explore professional-development topics. Recognised CPD hours, accreditation, delivery and enrolment are confirmed only for specific published offerings.',
+      'Explore structured self-study courses with learning outcomes, lessons and evidence sources. These open learning courses do not award accredited CPD hours or certificates.',
   });
 
   const [search, setSearch] = useState('');
@@ -21,7 +21,7 @@ export default function CPDCoursesPage() {
   const [visibleCount, setVisibleCount] = useState(8);
 
   const filtered = useMemo(() => {
-    return cpdCourses.filter((c) => {
+    return publishedCPDCourses.filter((c) => {
       if (deptFilter !== 'All' && c.department !== deptFilter) return false;
       if (cpdFilter !== 'All' && c.cpdHours !== parseInt(cpdFilter)) return false;
       if (levelFilter !== 'All' && c.level !== levelFilter) return false;
@@ -49,7 +49,7 @@ export default function CPDCoursesPage() {
           {/* Search + Filters */}
           <div className="bg-surface-50 p-6 mb-12 border border-navy-100">
             <div className="mb-4">
-              <SearchBar value={search} onChange={setSearch} placeholder="Search learning topics..." />
+              <SearchBar value={search} onChange={setSearch} placeholder="Search self-study courses..." />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
@@ -108,7 +108,7 @@ export default function CPDCoursesPage() {
             </>
           ) : (
             <div className="text-center py-16 bg-surface-50 border border-navy-100">
-              <p className="text-navy-500 mb-2">No learning topics match your current filters.</p>
+              <p className="text-navy-500 mb-2">No self-study courses match your current filters.</p>
               <p className="text-sm text-navy-400">Try adjusting your search or filter criteria.</p>
             </div>
           )}
