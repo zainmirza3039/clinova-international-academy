@@ -13,6 +13,8 @@ try {
   const previewHost = /(^|\.)(vercel\.app|manus\.computer|localhost|test|invalid)$/.test(u.hostname);
   if (
     env.VITE_INDEXING_ENABLED === 'true' &&
+    env.VERCEL_ENV !== 'preview' &&
+    env.VERCEL_ENV !== 'development' &&
     u.protocol === 'https:' &&
     u.pathname === '/' &&
     !u.username &&
