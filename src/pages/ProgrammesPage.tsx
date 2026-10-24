@@ -1,135 +1,159 @@
-import { useState, useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { BookOpen, Filter, RotateCcw, Search } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import ProgrammeCard from '@/components/ProgrammeCard';
-import SearchBar from '@/components/SearchBar';
 import CTASection from '@/components/CTASection';
+import SearchBar from '@/components/SearchBar';
 import { programmes } from '@/data/programmes';
 import { departments } from '@/data/departments';
-import type { ProgrammeCategory } from '@/data/types';
-
-const programmeTypes: (ProgrammeCategory | 'All')[] = ['All', 'Certificate', 'Diploma', 'Professional Development', 'CPD'];
-const durations = ['All'];
-const deliveries = ['All'];
 
 export default function ProgrammesPage() {
   useSEO({
-    title: 'Programmes',
-    description:
-      'Browse structured healthcare learning guides by subject and topic for independent study.',
+    title: 'Healthcare Learning Guides',
+    description: 'Browse structured healthcare learning guides by subject, level and topic for independent study.',
   });
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const requestedType = searchParams.get('type') || 'All';
-  const typeFilter = programmeTypes.includes(requestedType as ProgrammeCategory | 'All') ? requestedType : 'All';
-  const initialFeatured = searchParams.get('featured') === 'true';
-
   const [search, setSearch] = useState('');
   const [deptFilter, setDeptFilter] = useState('All');
-  const [durationFilter, setDurationFilter] = useState('All');
-  const [deliveryFilter, setDeliveryFilter] = useState('All');
+  const [levelFilter, setLevelFilter] = useState('All');
+  const requestedCategory = searchParams.get('type') || 'All';
+  const categories = useMemo(
+    () => [...new Set(programmes.map((programme) => programme.category))].sort(),
+    [],
+  );
+  const categoryFilter = requestedCategory === 'All' || categories.includes(requestedCategory)
+    ? requestedCategory
+    : 'All';
 
   const filtered = useMemo(() => {
-    return programmes.filter((p) => {
-      if (initialFeatured && !p.featured) return false;
-      if (typeFilter !== 'All' && p.category !== typeFilter) return false;
-      if (deptFilter !== 'All' && p.departmentSlug !== deptFilter) return false;
-      if (durationFilter !== 'All' && p.duration !== durationFilter) return false;
-      if (deliveryFilter !== 'All' && p.delivery !== deliveryFilter) return false;
-      if (search && !p.title.toLowerCase().includes(search.toLowerCase()) && !p.description.toLowerCase().includes(search.toLowerCase()))
-        return false;
+    const query = search.trim().toLocaleLowerCase('en-GB');
+    return programmes.filter((programme) => {
+      if (searchParams.get('featured') === 'true' && !programme.featured) return false;
+      if (categoryFilter !== 'All' && programme.category !== categoryFilter) return false;
+      if (deptFilter !== 'All' && programme.departmentSlug !== deptFilter) return false;
+      if (levelFilter !== 'All' && programme.level !== levelFilter) return false;
+      if (query && ![programme.title, programme.description, programme.department, programme.category]
+        .some((value) => value.toLocaleLowerCase('en-GB').includes(query))) return false;
       return true;
     });
-  }, [search, deptFilter, typeFilter, durationFilter, deliveryFilter, initialFeatured]);
+  }, [search, deptFilter, levelFilter, categoryFilter, searchParams]);
 
-  const selectClass = 'w-full px-4 py-3 text-sm bg-white border border-navy-200 focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:border-transparent text-navy-800';
+  const selectClass = 'w-full rounded-md px-4 py-3 text-sm bg-white border border-navy-200 text-navy-800 focus:outline-none focus:ring-2 focus:ring-clinical-500';
+  const hasFilters = Boolean(search.trim()) || deptFilter !== 'All' || levelFilter !== 'All' || categoryFilter !== 'All' || searchParams.get('featured') === 'true';
+
+  function resetFilters() {
+    setSearch('');
+    setDeptFilter('All');
+    setLevelFilter('All');
+    setSearchParams({});
+  }
 
   return (
     <>
       <PageHero
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Programmes' }]}
-        eyebrow="Programmes"
-        title="Healthcare Learning Guides"
-        description="Explore structured self-study outlines across healthcare topics. These guides are educational resources, not enrolment offers or accredited awards."
+        eyebrow="Learning library"
+        title="Build your knowledge, one topic at a time."
+        description="Browse structured healthcare learning guides for independent study. Each page explains its scope and current catalogue status so you can decide what to explore next."
         image="https://images.pexels.com/photos/8376296/pexels-photo-8376296.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-editorial mx-auto px-6 lg:px-10">
-          {/* Search + Filters */}
-          <div className="bg-surface-50 p-6 mb-12 border border-navy-100">
-            <div className="mb-4">
-              <SearchBar value={search} onChange={setSearch} placeholder="Search programmes..." />
+      <section className="bg-white py-12 lg:py-20">
+        <div className="mx-auto max-w-editorial px-6 lg:px-10">
+          <div className="mb-8 flex flex-col gap-4 border-b border-navy-100 pb-7 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-700">Explore by interest</p>
+              <h2 className="mt-2 font-heading text-2xl font-bold text-navy-900 md:text-3xl">Healthcare learning guides</h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-navy-600">Use search and filters to narrow the library. These listings are self-study resources, not enrolment or accreditation offers.</p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              <div>
-                <label htmlFor="programme-department" className="block text-xs font-medium text-navy-500 mb-1.5">Department</label>
-                <select id="programme-department" className={selectClass} value={deptFilter} onChange={(e) => setDeptFilter(e.target.value)}>
-                  <option value="All">All Departments</option>
-                  {departments.map((d) => (
-                    <option key={d.id} value={d.slug}>{d.name}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label htmlFor="programme-type" className="block text-xs font-medium text-navy-500 mb-1.5">Programme Type</label>
-                <select id="programme-type" className={selectClass} value={typeFilter} onChange={(e) => {
-                  const next = new URLSearchParams(searchParams);
-                  if (e.target.value === 'All') next.delete('type'); else next.set('type', e.target.value);
-                  setSearchParams(next);
-                }}>
-                  {programmeTypes.map((t) => (
-                    <option key={t} value={t}>{t === 'All' ? 'All Types' : t}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label htmlFor="programme-duration" className="block text-xs font-medium text-navy-500 mb-1.5">Duration</label>
-                <select id="programme-duration" disabled className={selectClass} value={durationFilter} onChange={(e) => setDurationFilter(e.target.value)}>
-                  {durations.map((d) => (
-                    <option key={d} value={d}>{d === 'All' ? 'Self-study format' : d}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label htmlFor="programme-delivery" className="block text-xs font-medium text-navy-500 mb-1.5">Delivery</label>
-                <select id="programme-delivery" disabled className={selectClass} value={deliveryFilter} onChange={(e) => setDeliveryFilter(e.target.value)}>
-                  {deliveries.map((d) => (
-                    <option key={d} value={d}>{d === 'All' ? 'Independent reading' : d}</option>
-                  ))}
-                </select>
-              </div>
+            <div className="inline-flex shrink-0 items-center gap-2 text-sm text-navy-600">
+              <BookOpen className="h-4 w-4 text-clinical-700" aria-hidden="true" />
+              <span>{filtered.length} {filtered.length === 1 ? 'topic' : 'topics'} found</span>
             </div>
           </div>
 
-          {/* Results */}
-          <div className="mb-8 flex items-center justify-between">
-            <p className="text-sm text-navy-500">
-              Showing <span className="font-semibold text-navy-800">{filtered.length}</span> programme{filtered.length !== 1 ? 's' : ''}
+          <div className="mb-10 rounded-xl border border-navy-100 bg-surface-50 p-5 md:p-6">
+            <div className="mb-5 flex items-center gap-2 text-sm font-semibold text-navy-900">
+              <Filter className="h-4 w-4 text-clinical-700" aria-hidden="true" />
+              Find a learning topic
+            </div>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <div className="lg:col-span-1">
+                <label htmlFor="programme-search" className="mb-2 block text-xs font-semibold text-navy-600">Search</label>
+                <div className="relative">
+                  <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-400" aria-hidden="true" />
+                  <input id="programme-search" type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search topics..." className="w-full rounded-md border border-navy-200 bg-white py-3 pl-9 pr-3 text-sm text-navy-800 focus:outline-none focus:ring-2 focus:ring-clinical-500" />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="programme-department" className="mb-2 block text-xs font-semibold text-navy-600">Subject area</label>
+                <select id="programme-department" className={selectClass} value={deptFilter} onChange={(event) => setDeptFilter(event.target.value)}>
+                  <option value="All">All subject areas</option>
+                  {departments.map((department) => <option key={department.id} value={department.slug}>{department.name}</option>)}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="programme-category" className="mb-2 block text-xs font-semibold text-navy-600">Resource type</label>
+                <select id="programme-category" className={selectClass} value={categoryFilter} onChange={(event) => {
+                  const next = new URLSearchParams(searchParams);
+                  if (event.target.value === 'All') next.delete('type');
+                  else next.set('type', event.target.value);
+                  setSearchParams(next);
+                }}>
+                  <option value="All">All resource types</option>
+                  {categories.map((category) => <option key={category} value={category}>{category}</option>)}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="programme-level" className="mb-2 block text-xs font-semibold text-navy-600">Study level</label>
+                <select id="programme-level" className={selectClass} value={levelFilter} onChange={(event) => setLevelFilter(event.target.value)}>
+                  <option value="All">All levels</option>
+                  <option value="Foundation">Foundation</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+                </select>
+              </div>
+            </div>
+            {hasFilters && (
+              <div className="mt-4 flex justify-end">
+                <button type="button" onClick={resetFilters} className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-clinical-700 hover:bg-white focus:outline-none focus:ring-2 focus:ring-clinical-500">
+                  <RotateCcw className="h-4 w-4" aria-hidden="true" /> Clear filters
+                </button>
+              </div>
+            )}
+          </div>
+
+          <div className="mb-6 flex items-center justify-between gap-4">
+            <p className="text-sm text-navy-600" role="status" aria-live="polite" aria-atomic="true">
+              Showing <span className="font-semibold text-navy-900">{filtered.length}</span> learning {filtered.length === 1 ? 'guide' : 'guides'}
             </p>
           </div>
 
           {filtered.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
-              {filtered.map((prog, i) => (
-                <ProgrammeCard key={prog.id} programme={prog} index={i} />
-              ))}
+            <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+              {filtered.map((programme, index) => <ProgrammeCard key={programme.id} programme={programme} index={index} />)}
             </div>
           ) : (
-            <div className="text-center py-16 bg-surface-50 border border-navy-100">
-              <p className="text-navy-500 mb-2">No programmes match your current filters.</p>
-              <p className="text-sm text-navy-400">Try adjusting your search or filter criteria.</p>
+            <div className="border border-dashed border-navy-200 bg-surface-50 px-6 py-16 text-center">
+              <BookOpen className="mx-auto h-8 w-8 text-navy-400" aria-hidden="true" />
+              <h3 className="mt-4 font-heading text-lg font-bold text-navy-900">No matching learning guides</h3>
+              <p className="mt-2 text-sm text-navy-600">Try a different keyword or remove one of your filters.</p>
+              <button type="button" onClick={resetFilters} className="mt-5 inline-flex items-center gap-2 rounded-md bg-navy-900 px-5 py-3 text-sm font-semibold text-white hover:bg-navy-800 focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:ring-offset-2">
+                <RotateCcw className="h-4 w-4" aria-hidden="true" /> Reset search
+              </button>
             </div>
           )}
         </div>
       </section>
 
       <CTASection
-        title="Can't Find What You're Looking For?"
-        description="Contact our team to discuss your professional development needs and find the right programme."
-        primaryCTA={{ label: 'Contact Academy', to: '/contact' }}
-        secondaryCTA={{ label: 'Browse CPD Courses', to: '/cpd-courses' }}
+        title="Have a topic in mind?"
+        description="Contact the academy to ask about educational resources or discuss a subject area you would like to see covered."
+        primaryCTA={{ label: 'Contact the Academy', to: '/contact' }}
+        secondaryCTA={{ label: 'Explore Departments', to: '/departments' }}
       />
     </>
   );
