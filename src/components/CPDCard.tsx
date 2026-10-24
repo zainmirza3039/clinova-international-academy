@@ -34,7 +34,7 @@ export default function CPDCard({ course, index = 0 }: { course: CPDCourse; inde
             View guide <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </span>
         </div>
-        <p className="mt-3 text-[11px] leading-relaxed text-navy-500">Accreditation, CPD hours and course availability are confirmed separately.</p>
+        <p className="mt-3 text-[11px] leading-relaxed text-navy-500">Open self-study course. No accredited CPD hours or certificate are awarded.</p>
       </div>
     </Link>
   );
