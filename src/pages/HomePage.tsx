@@ -20,14 +20,14 @@ import { useState } from 'react';
 const learningSteps = [
   { number: '01', title: 'Explore a topic', desc: 'Start with an educational article or subject-area guide and identify what you want to learn.' },
   { number: '02', title: 'Reflect on practice', desc: 'Connect learning with your role, professional scope and current local guidance.' },
-  { number: '03', title: 'Confirm programme details', desc: 'Check current availability, delivery, dates and assessment arrangements before enrolling.' },
+  { number: '03', title: 'Review course details', desc: 'Check current availability, delivery, dates and assessment arrangements before enrolling.' },
   { number: '04', title: 'Choose your next step', desc: 'Review the confirmed requirements and terms for the specific learning opportunity.' },
 ];
 
 const pathwaySteps = [
   { label: 'Subject areas', desc: 'Explore healthcare disciplines' },
   { label: 'Learning library', desc: 'Read articles and use reflection tools' },
-  { label: 'Programme information', desc: 'Review published programme details' },
+  { label: 'Programme information', desc: 'Review course modules and sources' },
   { label: 'Next steps', desc: 'Confirm current availability and requirements' },
 ];
 
@@ -79,7 +79,7 @@ export default function HomePage() {
                 </Link>
               </div>
               <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 border-t border-navy-100 pt-5 text-sm text-navy-600">
-                {['Clinical subject areas', 'Learning resources', 'Clear programme information'].map((item) => (
+                {['Clinical subject areas', 'Learning resources', 'Clear course information'].map((item) => (
                   <div key={item} className="inline-flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 shrink-0 text-teal-700" />
                     <span>{item}</span>
@@ -205,7 +205,7 @@ export default function HomePage() {
               </h2>
             </Reveal>
             <Link
-              to="/programmes"
+              to="/cpd-courses"
               className="inline-flex items-center gap-2 text-sm font-semibold text-navy-700 hover:text-clinical-600 transition-colors shrink-0"
             >
               View All Courses
@@ -322,7 +322,7 @@ export default function HomePage() {
                 ))}
               </div>
               <Link
-                to="/programmes"
+                to="/cpd-courses"
                 className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-navy-800 text-white font-semibold hover:bg-navy-700 transition-colors"
               >
                 Browse Courses
@@ -344,7 +344,7 @@ export default function HomePage() {
               Professional pathways
             </h2>
             <p className="mt-5 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-              A structured way to explore subject areas, learning resources and published programme information.
+              A structured way to explore subject areas, learning resources and published course information.
             </p>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-8">
@@ -487,7 +487,7 @@ export default function HomePage() {
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 <Link
-                  to="/programmes"
+                  to="/cpd-courses"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-navy-800 font-semibold hover:bg-surface-50 transition-colors"
                 >
                   Explore Courses
