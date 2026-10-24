@@ -14,8 +14,9 @@ import FAQAccordion from '@/components/FAQAccordion';
 import NewsletterForm from '@/components/NewsletterForm';
 import { departments } from '@/data/departments';
 import { getFeaturedProgrammes } from '@/data/programmes';
-import { cpdCourses, cpdFilters } from '@/data/cpdCourses';
-import { newsItems, generalFAQs } from '@/data/testimonials';
+import { publishedCPDCourses, cpdFilters } from '@/data/cpdCourses';
+import { generalFAQs } from '@/data/testimonials';
+import { publishedEducationalArticleCards } from '@/data/educationalArticles';
 import { useState } from 'react';
 
 const learningSteps = [
@@ -51,8 +52,8 @@ export default function HomePage() {
 
   const filteredCPD =
     cpdFilter === 'All'
-      ? cpdCourses.slice(0, 4)
-      : cpdCourses.filter((c) => c.department.toLowerCase().includes(cpdFilter.toLowerCase())).slice(0, 4);
+      ? publishedCPDCourses.slice(0, 4)
+      : publishedCPDCourses.filter((c) => c.department.toLowerCase().includes(cpdFilter.toLowerCase())).slice(0, 4);
 
   return (
     <>
@@ -150,7 +151,7 @@ export default function HomePage() {
                 <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-10 border-t border-navy-100 pt-10">
                   {[
                     { stat: 'Explore', label: 'Healthcare study areas' },
-                    { stat: String(newsItems.length), label: 'Learning articles' },
+                    { stat: String(publishedEducationalArticleCards.length), label: 'Learning articles' },
                     { stat: 'Compare', label: 'Programme information' },
                     { stat: 'Plan', label: 'Your next learning step' },
                   ].map((item) => (
@@ -443,7 +444,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
-            {newsItems.slice(0, 3).map((item, i) => (
+            {publishedEducationalArticleCards.slice(0, 3).map((item, i) => (
               <NewsCard key={item.id} item={item} index={i} />
             ))}
           </div>
