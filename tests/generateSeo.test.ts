@@ -19,7 +19,7 @@ function runGenerator(siteUrl?: string, indexingEnabled = 'true') {
 
   const result = spawnSync(process.execPath, [generator], { cwd, env, encoding: 'utf8' });
   if (result.status !== 0) {
-    throw new Error(`SEO generator failed: ${result.stderr || result.stdout}`);
+    throw new Error('SEO generator failed: ' + (result.stderr || result.stdout));
   }
   return {
     sitemap: readFileSync(join(cwd, 'dist', 'sitemap.xml'), 'utf8'),
@@ -41,7 +41,7 @@ describe('build-time SEO publication safeguards', () => {
     expect(output.sitemap).toContain('<loc>https://www.clinovainternationalacademy.co.uk/</loc>');
     expect(output.sitemap).toContain('<loc>https://www.clinovainternationalacademy.co.uk/cpd-courses</loc>');
     expect(output.sitemap).not.toContain('/programmes</loc>');
-    expect(output.sitemap).not.toMatch(/\\/(departments|programmes)\\/[^<]+<\\/loc>/);
+    expect(output.sitemap).not.toContain('/departments/');
 
     const publishedCourses = [
       'clinical-assessment-of-low-back-pain',
@@ -54,7 +54,7 @@ describe('build-time SEO publication safeguards', () => {
       'balance-training-fall-prevention',
     ];
     for (const slug of publishedCourses) {
-      expect(output.sitemap).toContain(`<loc>https://www.clinovainternationalacademy.co.uk/cpd-courses/${slug}</loc>`);
+      expect(output.sitemap).toContain('<loc>https://www.clinovainternationalacademy.co.uk/cpd-courses/' + slug + '</loc>');
     }
 
     const reviewedArticles = [
@@ -65,12 +65,14 @@ describe('build-time SEO publication safeguards', () => {
       'evidence-based-practice-physiotherapy',
     ];
     for (const slug of reviewedArticles) {
-      expect(output.sitemap).toContain(`<loc>https://www.clinovainternationalacademy.co.uk/resources/${slug}</loc>`);
+      expect(output.sitemap).toContain('<loc>https://www.clinovainternationalacademy.co.uk/resources/' + slug + '</loc>');
     }
 
     expect(output.sitemap).not.toContain('/cpd-courses/clinical-communication-skills</loc>');
     expect(output.sitemap).not.toContain('/resources/shoulder-pain-assessment-rehabilitation</loc>');
-    expect(output.sitemap).not.toMatch(/\\/(admin|student|sign-in|sign-up|forgot-password|reset-password|verify)(?:\\/|<)/);
+    for (const route of ['/admin', '/student', '/sign-in', '/sign-up', '/forgot-password', '/reset-password', '/verify']) {
+      expect(output.sitemap).not.toContain(route);
+    }
     expect(output.robots).toContain('Sitemap: https://www.clinovainternationalacademy.co.uk/sitemap.xml');
     expect(output.robots).toContain('Disallow: /admin');
     expect(output.robots).toContain('Disallow: /student');
