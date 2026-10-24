@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, Info } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import CurriculumDraftContent from '@/components/CurriculumDraftContent';
@@ -10,44 +10,31 @@ export default function CPDCourseDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const course = cpdCourses.find(item => item.slug === slug);
   const draft = slug ? getCPDCurriculum(slug) : undefined;
-  useSEO({ title: course?.title ?? 'Learning Guide Not Found', description: course?.description ?? 'The requested CPD course could not be found.', ogImage: course?.image });
-  if (!course) return <div className="min-h-screen flex items-center justify-center"><div className="text-center"><h1 className="font-heading text-2xl font-bold text-navy-900 mb-4">Learning Guide Not Found</h1><Link to="/cpd-courses" className="text-clinical-600">Browse learning guides</Link></div></div>;
+  useSEO({ title: course?.title ?? 'Learning Topic Not Found', description: course?.description ?? 'The requested learning topic could not be found.', ogImage: course?.image });
+
+  if (!course) return <section className="mx-auto flex min-h-[60vh] max-w-3xl items-center justify-center px-6 py-24 text-center"><div><h1 className="font-heading text-3xl font-bold text-navy-900">Learning topic not found</h1><p className="mt-3 text-sm text-navy-600">This address does not match a topic in the current catalogue.</p><Link to="/cpd-courses" className="mt-6 inline-flex items-center gap-2 font-semibold text-clinical-700"><ArrowLeft className="h-4 w-4" /> Browse professional development</Link></div></section>;
+
   const related = cpdCourses.filter(item => item.slug !== course.slug && item.department === course.department).slice(0, 3);
+
   return <>
-    <section className="bg-navy-900 pt-28 pb-14">
-      <div className="max-w-editorial mx-auto px-6 lg:px-10">
+    <header className="relative overflow-hidden bg-navy-900">
+      <div className="absolute inset-0"><img src={course.image} alt="" className="h-full w-full object-cover opacity-20" /><div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-900/95 to-navy-900/60" /></div>
+      <div className="relative mx-auto max-w-editorial px-6 pb-14 pt-28 lg:px-10 lg:pb-16 lg:pt-36">
         <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Professional Development', to: '/cpd-courses' }, { label: course.title }]} />
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mt-8 items-end">
-          <div className="lg:col-span-7">
-            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-300 mb-4">CPD topic · {course.department}</div>
-            <h1 className="font-heading text-3xl md:text-5xl font-bold text-white leading-tight">{course.title}</h1>
-            <p className="mt-5 text-lg text-navy-100/80 leading-relaxed">{course.description}</p>
-          </div>
-          <img src={course.image} alt="" className="lg:col-span-5 aspect-[4/3] object-cover" />
+        <div className="mt-8 grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-8"><p className="text-xs font-semibold uppercase tracking-[0.15em] text-teal-300">Learning topic · {course.department}</p><h1 className="mt-4 max-w-4xl font-heading text-3xl font-bold leading-tight text-white md:text-5xl">{course.title}</h1><p className="mt-5 max-w-3xl text-base leading-7 text-navy-100/80 md:text-lg">{course.description}</p><div className="mt-6 flex flex-wrap gap-3"><span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white"><BookOpen className="h-4 w-4 text-teal-300" /> Independent study guide</span><span className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white">{course.level} level</span></div></div>
+          <img src={course.image} alt="" className="hidden aspect-[5/4] w-full rounded-xl border border-white/15 object-cover shadow-xl lg:col-span-4 lg:block" />
         </div>
       </div>
-    </section>
-    <p className="max-w-4xl mx-auto px-6 mt-6 p-4 rounded-lg border border-amber-200 bg-amber-50 text-sm text-amber-950"><strong>Catalogue information.</strong> Availability, dates, fees, duration, CPD hours, delivery, assessment, instructors and certificates require academy confirmation. No checkout or enrolment is available. CPD is a catalogue category, not a claim of accredited or awarded hours.</p>
-    <section className="py-12 lg:py-16 bg-white">
-      <div className="max-w-editorial mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-8 space-y-10">
-            <div>
-              <h2 className="font-heading text-2xl font-bold text-navy-900 mb-4">Overview</h2>
-              <p className="text-sm text-navy-600 leading-relaxed">These educational materials support critical reflection and recognition of professional limits. They do not establish clinical competence, eligibility to practise, prescribing authority or a qualification. Confirm programme availability and terms before booking.</p>
-            </div>
-            {draft ? <CurriculumDraftContent draft={draft} /> : <p className="text-sm text-navy-700">Detailed learning content is not available for this topic.</p>}
-          </div>
-          <aside className="lg:col-span-4">
-            <div className="lg:sticky lg:top-24 border border-navy-200 p-6">
-              <h2 className="font-heading text-lg font-bold text-navy-900 mb-4">Catalogue status</h2>
-              <p className="text-sm text-navy-600 leading-relaxed">CPD hours, duration, fees, delivery, assessment and certification must be confirmed before booking. Reflection activities are not submitted, graded, saved or counted as completion.</p>
-              <Link to="/cpd-courses" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-clinical-700">Browse other topics <ArrowRight className="w-4 h-4" /></Link>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-    {related.length > 0 && <section className="py-10 bg-navy-50"><div className="max-w-editorial mx-auto px-6 lg:px-10"><h2 className="font-heading text-2xl font-bold text-navy-900">Related CPD topics</h2><ul className="mt-5 space-y-3">{related.map(item => <li key={item.slug}><Link className="text-sm font-semibold text-clinical-700 underline underline-offset-4" to={`/cpd-courses/${item.slug}`}>{item.title}</Link></li>)}</ul></div></section>}
+    </header>
+
+    <aside className="border-b border-amber-200 bg-amber-50"><div className="mx-auto flex max-w-editorial items-start gap-3 px-6 py-5 lg:px-10"><Info className="mt-0.5 h-5 w-5 shrink-0 text-amber-800" /><p className="text-sm leading-6 text-amber-950"><strong>Catalogue status:</strong> This page describes an educational topic. It does not confirm an active course, enrolment, dates, fees, accredited status, awarded CPD hours or certification. Confirm all course terms with the academy before making plans.</p></div></aside>
+
+    <main className="bg-white py-12 lg:py-16"><div className="mx-auto grid max-w-editorial grid-cols-1 gap-10 px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
+      <article className="min-w-0 space-y-10 lg:col-span-8"><section><p className="text-xs font-semibold uppercase tracking-[0.15em] text-clinical-700">About this topic</p><h2 className="mt-3 font-heading text-2xl font-bold text-navy-900 md:text-3xl">Overview</h2><p className="mt-4 text-base leading-7 text-navy-700">This topic is provided for independent professional reading and reflection. Use the material to identify areas for further study and consult current guidance relevant to your setting.</p><p className="mt-4 text-sm leading-6 text-navy-600">Reading this guide does not establish clinical competence, eligibility to practise or completion of an assessed course.</p></section>{draft ? <section><h2 className="mb-5 font-heading text-2xl font-bold text-navy-900">Study material</h2><CurriculumDraftContent draft={draft} /></section> : <section className="rounded-xl border border-navy-100 bg-surface-50 p-6"><h2 className="font-heading text-xl font-bold text-navy-900">Study material</h2><p className="mt-2 text-sm leading-6 text-navy-600">Detailed learning content is not currently available for this topic.</p></section>}</article>
+      <aside className="lg:col-span-4"><div className="rounded-xl border border-navy-100 p-6 shadow-sm lg:sticky lg:top-24"><p className="text-xs font-semibold uppercase tracking-[0.15em] text-clinical-700">At a glance</p><h2 className="mt-3 font-heading text-xl font-bold text-navy-900">Topic information</h2><dl className="mt-5 divide-y divide-navy-100"><div className="py-3"><dt className="text-xs text-navy-500">Subject area</dt><dd className="mt-1 text-sm font-semibold text-navy-800">{course.department}</dd></div><div className="py-3"><dt className="text-xs text-navy-500">Study level</dt><dd className="mt-1 text-sm font-semibold text-navy-800">{course.level}</dd></div><div className="py-3"><dt className="text-xs text-navy-500">Format</dt><dd className="mt-1 text-sm font-semibold text-navy-800">Independent reading</dd></div><div className="py-3"><dt className="text-xs text-navy-500">CPD hours / certificate</dt><dd className="mt-1 text-sm font-semibold text-navy-800">Not awarded by this guide</dd></div></dl><div className="mt-5 border-t border-navy-100 pt-5"><p className="text-sm leading-6 text-navy-600">Ask the academy about current course availability and confirmed terms.</p><Link to="/contact" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-navy-900 px-4 py-3 text-sm font-semibold text-white hover:bg-navy-800">Contact the Academy <ArrowRight className="h-4 w-4" /></Link><Link to="/cpd-courses" className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-md border border-navy-200 px-4 py-3 text-sm font-semibold text-navy-800 hover:bg-surface-50"><ArrowLeft className="h-4 w-4" /> Browse other topics</Link></div></div></aside>
+    </div></main>
+
+    {related.length > 0 && <section className="bg-surface-50 py-12"><div className="mx-auto max-w-editorial px-6 lg:px-10"><h2 className="font-heading text-2xl font-bold text-navy-900">Related learning topics</h2><ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{related.map(item => <li key={item.slug}><Link className="flex h-full items-center justify-between gap-3 rounded-lg border border-navy-100 bg-white p-4 text-sm font-semibold text-navy-800 hover:border-clinical-300 hover:text-clinical-700" to={`/cpd-courses/${item.slug}`}>{item.title}<ArrowRight className="h-4 w-4 shrink-0" /></Link></li>)}</ul></div></section>}
   </>;
 }
