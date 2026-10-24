@@ -70,7 +70,7 @@ export default function DepartmentDetailPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-900 mb-4">Subject-area overview</h2>
           <p className="text-base text-navy-600 leading-relaxed">{department.overview}</p>
-          <p className="mt-4 text-sm text-navy-500 leading-relaxed">Use this subject area to guide further reading and reflection. Review published programme information before making a learning commitment.</p>
+          <p className="mt-4 text-sm text-navy-500 leading-relaxed">Use this subject area to guide further reading and reflection. Browse the published self-study courses for structured lessons and evidence sources.</p>
         </div>
       </section>
 
@@ -173,8 +173,8 @@ export default function DepartmentDetailPage() {
         <section className="py-16 bg-navy-50">
           <div className="max-w-3xl mx-auto px-4 text-center">
             <p className="text-navy-500 mb-4">No related programme records are currently listed for this subject area. Explore the learning library for related educational reading.</p>
-            <Link to="/programmes" className="inline-flex items-center gap-2 px-6 py-3 bg-navy-900 text-white font-semibold rounded-lg hover:bg-navy-800 transition-colors">
-              View Programme Information <ArrowRight className="w-4 h-4" />
+            <Link to="/cpd-courses" className="inline-flex items-center gap-2 px-6 py-3 bg-navy-900 text-white font-semibold rounded-lg hover:bg-navy-800 transition-colors">
+              Browse Self-Study Courses <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </section>
@@ -191,7 +191,7 @@ export default function DepartmentDetailPage() {
       <CTASection
         title={`Continue exploring ${department.shortName}`}
         description="Explore the learning library and study tools. Confirm programme requirements and recognition before enrolling."
-        primaryCTA={{ label: 'View Programme Information', to: '/programmes' }}
+        primaryCTA={{ label: 'Browse Self-Study Courses', to: '/programmes' }}
         secondaryCTA={{ label: 'Contact Academy', to: '/contact' }}
       />
     </>
