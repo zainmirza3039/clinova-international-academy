@@ -147,6 +147,8 @@ export const cpdCourses: CPDCourse[] = [
   },
 ];
 
+export const publishedCPDCourses = cpdCourses.filter((course) => course.publicationStatus === 'published');
+
 export const cpdFilters = [
   'All',
   'Physical Therapy',
