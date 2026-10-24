@@ -9,7 +9,7 @@ const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Departments', to: '/departments', hasMegaMenu: true },
-  { label: 'Programmes', to: '/programmes', hasMegaMenu: true },
+  { label: 'Courses', to: '/cpd-courses', hasMegaMenu: true },
   { label: 'CPD Courses', to: '/cpd-courses' },
   { label: 'Admissions', to: '/admissions' },
   { label: 'Training Partners', to: '/training-partners' },
@@ -18,11 +18,14 @@ const navLinks = [
 ];
 
 const programmeMenuItems = [
-  { label: 'Certificate Courses', to: '/programmes?type=Certificate', desc: 'Short focused programmes' },
-  { label: 'Diploma Programmes', to: '/programmes?type=Diploma', desc: 'Comprehensive study programmes' },
-  { label: 'Professional Development', to: '/programmes?type=Professional Development', desc: 'Career-focused learning' },
-  { label: 'CPD Courses', to: '/cpd-courses', desc: 'Continuing professional development' },
-  { label: 'Featured Programmes', to: '/programmes?featured=true', desc: 'Explore our highlights' },
+  { label: 'MSK Assessment & Clinical Reasoning', to: '/cpd-courses/musculoskeletal-assessment-and-clinical-reasoning', desc: 'History, examination and clinical reasoning' },
+  { label: 'Low Back Pain Assessment', to: '/cpd-courses/clinical-assessment-of-low-back-pain', desc: 'Assessment, safety and evidence-informed management' },
+  { label: 'Knee Osteoarthritis Rehabilitation', to: '/cpd-courses/knee-osteoarthritis-rehabilitation', desc: 'Exercise, function and review' },
+  { label: 'Stroke Rehabilitation', to: '/cpd-courses/stroke-rehabilitation-functional-goals', desc: 'Functional goals and task-specific practice' },
+  { label: 'Sports Rehabilitation', to: '/cpd-courses/introduction-to-sports-rehabilitation', desc: 'Progressive loading and return to sport' },
+  { label: 'Pain Management', to: '/cpd-courses/pain-management-fundamentals', desc: 'Pain science and function-led care' },
+  { label: 'Balance & Falls Prevention', to: '/cpd-courses/balance-training-fall-prevention', desc: 'Falls assessment and progressive exercise' },
+  { label: 'View All Courses', to: '/cpd-courses', desc: 'Browse all open self-study courses' },
 ];
 
 const mobileSubmenuId = (label: string) => `mobile-submenu-${label.toLowerCase().replace(/\s+/g, '-')}`;
