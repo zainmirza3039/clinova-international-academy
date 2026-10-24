@@ -86,7 +86,6 @@
 /* Frontend release safeguards and accessible navigation. */
 body { padding-top: 4rem; }
 @media (min-width: 1024px) { body { padding-top: 5rem; } }
-.preview-notice { background: #eaf4f2; border-bottom: 1px solid #c4ded9; padding: .7rem 1.5rem; text-align: center; color: #164b46; font-size: .75rem; line-height: 1.6; }
 .skip-link { position: fixed; left: 1rem; top: -6rem; z-index: 100; background: white; color: #082b4c; padding: .8rem 1.2rem; border: 2px solid #1769aa; }
 .skip-link:focus { top: 1rem; }
 [id] { scroll-margin-top: 7rem; }
