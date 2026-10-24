@@ -25,6 +25,7 @@ function runGenerator(siteUrl?: string, indexingEnabled = 'true') {
     sitemap: readFileSync(join(cwd, 'dist', 'sitemap.xml'), 'utf8'),
     robots: readFileSync(join(cwd, 'dist', 'robots.txt'), 'utf8'),
     html: readFileSync(join(cwd, 'dist', 'index.html'), 'utf8'),
+    stdout: result.stdout,
   };
 }
 
@@ -35,16 +36,47 @@ afterEach(() => {
 });
 
 describe('build-time SEO publication safeguards', () => {
-  it('includes fixed public pages but excludes unverified dynamic catalogue routes', () => {
+  it('includes fixed public pages and only published courses and reviewed articles', () => {
     const output = runGenerator('https://www.clinovainternationalacademy.co.uk/');
     expect(output.sitemap).toContain('<loc>https://www.clinovainternationalacademy.co.uk/</loc>');
-    expect(output.sitemap).toContain('<loc>https://www.clinovainternationalacademy.co.uk/programmes</loc>');
     expect(output.sitemap).toContain('<loc>https://www.clinovainternationalacademy.co.uk/cpd-courses</loc>');
-    expect(output.sitemap).not.toMatch(/\/(departments|programmes|cpd-courses)\/[^<]+<\/loc>/);
+    expect(output.sitemap).not.toContain('/programmes</loc>');
+    expect(output.sitemap).not.toMatch(/\\/(departments|programmes)\\/[^<]+<\\/loc>/);
+
+    const publishedCourses = [
+      'clinical-assessment-of-low-back-pain',
+      'introduction-to-sports-rehabilitation',
+      'pain-management-fundamentals',
+      'motor-control-relearning-in-neurorehabilitation',
+      'musculoskeletal-assessment-and-clinical-reasoning',
+      'knee-osteoarthritis-rehabilitation',
+      'stroke-rehabilitation-functional-goals',
+      'balance-training-fall-prevention',
+    ];
+    for (const slug of publishedCourses) {
+      expect(output.sitemap).toContain(`<loc>https://www.clinovainternationalacademy.co.uk/cpd-courses/${slug}</loc>`);
+    }
+
+    const reviewedArticles = [
+      'low-back-pain-rehabilitation',
+      'knee-osteoarthritis-rehabilitation',
+      'stroke-rehabilitation-functional-goals',
+      'balance-training-fall-prevention',
+      'evidence-based-practice-physiotherapy',
+    ];
+    for (const slug of reviewedArticles) {
+      expect(output.sitemap).toContain(`<loc>https://www.clinovainternationalacademy.co.uk/resources/${slug}</loc>`);
+    }
+
+    expect(output.sitemap).not.toContain('/cpd-courses/clinical-communication-skills</loc>');
+    expect(output.sitemap).not.toContain('/resources/shoulder-pain-assessment-rehabilitation</loc>');
+    expect(output.sitemap).not.toMatch(/\\/(admin|student|sign-in|sign-up|forgot-password|reset-password|verify)(?:\\/|<)/);
     expect(output.robots).toContain('Sitemap: https://www.clinovainternationalacademy.co.uk/sitemap.xml');
     expect(output.robots).toContain('Disallow: /admin');
     expect(output.robots).toContain('Disallow: /student');
+    expect(output.robots).toContain('Disallow: /verify');
     expect(output.html).toContain('content="index, follow"');
+    expect(output.stdout).toContain('8 published courses, 5 reviewed articles');
   });
 
   it.each([
