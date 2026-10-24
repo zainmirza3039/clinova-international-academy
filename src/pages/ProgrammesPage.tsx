@@ -24,7 +24,7 @@ export default function ProgrammesPage() {
     () => [...new Set(programmes.map((programme) => programme.category))].sort(),
     [],
   );
-  const categoryFilter = requestedCategory === 'All' || categories.includes(requestedCategory)
+  const categoryFilter = requestedCategory === 'All' || categories.some(category => category === requestedCategory)
     ? requestedCategory
     : 'All';
 
