@@ -99,7 +99,7 @@ export default function Footer() {
             &copy; 2026 Clinova International Academy. All rights reserved.
           </p>
           <p className="text-xs text-navy-100/40 text-center sm:text-right">
-            Online Healthcare Education &bull; CPD &bull; Professional Development
+            Online Healthcare Education &bull; Self-Study Courses &bull; Professional Development
           </p>
         </div>
       </div>
