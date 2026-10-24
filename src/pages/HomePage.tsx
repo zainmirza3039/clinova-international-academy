@@ -56,68 +56,65 @@ export default function HomePage() {
 
   return (
     <>
-      {/* HERO — asymmetric split, editorial scale */}
-      <section className="relative bg-navy-800 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.pexels.com/photos/8376296/pexels-photo-8376296.jpeg?auto=compress&cs=tinysrgb&h=900&w=1400"
-            alt="Healthcare professional studying online"
-            className="w-full h-full object-cover opacity-25"
-            loading="eager"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy-800 via-navy-800/90 to-navy-800/40" />
-        </div>
-        <div className="relative max-w-editorial mx-auto px-6 lg:px-10 pt-20 pb-0 lg:pt-32 lg:pb-0">
-          <div
-            ref={heroRef}
-            className={`max-w-2xl pb-16 lg:pb-28 ${heroVisible ? 'animate-fade-up' : 'opacity-0'}`}
-          >
-            <div className="flex items-center gap-3 mb-8">
-              <div className="h-px w-8 bg-teal-400" />
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-400">
-                Online Healthcare Education
-              </span>
+      {/* HERO — editorial hierarchy with a purposeful learning panel */}
+      <section className="relative overflow-hidden bg-white">
+        <div aria-hidden="true" className="absolute -right-32 -top-24 h-[30rem] w-[30rem] rounded-full bg-teal-50 blur-3xl" />
+        <div className="relative max-w-editorial mx-auto px-6 lg:px-10 pt-14 pb-12 lg:pt-24 lg:pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div ref={heroRef} className="lg:col-span-7 max-w-3xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-teal-100 bg-teal-50 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-teal-800">
+                <span className="h-1.5 w-1.5 rounded-full bg-teal-600" />
+                Healthcare education
+              </div>
+              <h1 className="mt-7 max-w-3xl font-heading text-4xl md:text-5xl lg:text-[3.75rem] font-bold text-navy-900 leading-[1.06] tracking-tight text-balance">
+                Better learning for better healthcare practice.
+              </h1>
+              <p className="mt-6 max-w-2xl text-base md:text-lg text-navy-600 leading-[1.75]">
+                Explore healthcare disciplines, practical learning resources and professional development pathways designed to support informed, reflective practice.
+              </p>
+              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                <Link to="/cpd-courses" className="group inline-flex items-center justify-center gap-2 rounded-md bg-navy-800 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-navy-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-500">
+                  Explore CPD topics <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+                <Link to="/programmes" className="inline-flex items-center justify-center gap-2 rounded-md border border-navy-200 bg-white px-6 py-3.5 text-sm font-semibold text-navy-800 transition hover:border-navy-400 hover:bg-surface-50">
+                  Browse programmes
+                </Link>
+              </div>
+              <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 border-t border-navy-100 pt-5 text-sm text-navy-600">
+                {['Clinical subject areas', 'Learning resources', 'Clear programme information'].map((item) => (
+                  <div key={item} className="inline-flex items-center gap-2">
+                    <CheckCircle className="h-4 w-4 shrink-0 text-teal-700" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white leading-[1.08] text-balance">
-              Explore a thoughtful approach to healthcare learning
-            </h1>
-            <p className="mt-7 text-lg text-navy-100/65 leading-[1.6] max-w-xl">
-              Explore healthcare subject areas, educational reading and study tools. Check published programme information for current availability and requirements.
-            </p>
-            <div className="mt-9 flex flex-col sm:flex-row gap-3">
-              <Link
-                to="/programmes"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-clinical-500 text-white font-semibold hover:bg-clinical-600 transition-colors"
-              >
-                Explore Programmes
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                to="/cpd-courses"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-transparent text-white font-semibold border border-white/25 hover:bg-white/10 transition-colors"
-              >
-                Explore Learning Resources
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Trust indicators — thin bar at bottom of hero */}
-        <div className="relative border-t border-white/10 bg-navy-900/50">
-          <div className="max-w-editorial mx-auto px-6 lg:px-10 py-4">
-            <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-2">
-              {[
-                { label: 'Flexible Study' },
-                { label: 'Professional development' },
-                { label: 'Clear programme information' },
-                { label: 'Global Access' },
-                { label: 'Self-Paced' },
-              ].map((item) => (
-                <div key={item.label} className="flex items-center gap-2 text-navy-100/60">
-                  <CheckCircle className="w-3.5 h-3.5 text-teal-400" />
-                  <span className="text-xs font-medium tracking-wide">{item.label}</span>
+            <div className="lg:col-span-5">
+              <div className="relative overflow-hidden rounded-2xl border border-navy-100 bg-surface-50 shadow-[0_24px_70px_-36px_rgba(8,43,76,0.35)]">
+                <div className="relative h-56 sm:h-64 lg:h-72 overflow-hidden">
+                  <img src="https://images.pexels.com/photos/8376296/pexels-photo-8376296.jpeg?auto=compress&cs=tinysrgb&h=900&w=1400" alt="Healthcare professional reviewing learning material" className="h-full w-full object-cover" loading="eager" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-navy-900/10 to-transparent" />
+                  <div className="absolute bottom-5 left-5 right-5 text-white">
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal-200">Learn with purpose</p>
+                    <p className="mt-2 max-w-sm font-heading text-2xl font-bold leading-tight">Build knowledge. Reflect on practice. Keep progressing.</p>
+                  </div>
                 </div>
-              ))}
+                <div className="space-y-0 divide-y divide-navy-100 bg-white px-5 sm:px-6">
+                  <Link to="/departments" className="group flex items-center justify-between gap-4 py-4">
+                    <div><p className="text-sm font-semibold text-navy-900">Explore subject areas</p><p className="mt-1 text-xs text-navy-500">Browse healthcare disciplines</p></div>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-navy-500 transition-transform group-hover:translate-x-1 group-hover:text-teal-700" />
+                  </Link>
+                  <Link to="/resources" className="group flex items-center justify-between gap-4 py-4">
+                    <div><p className="text-sm font-semibold text-navy-900">Read learning resources</p><p className="mt-1 text-xs text-navy-500">Explore articles and study tools</p></div>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-navy-500 transition-transform group-hover:translate-x-1 group-hover:text-teal-700" />
+                  </Link>
+                  <Link to="/training-partners" className="group flex items-center justify-between gap-4 py-4">
+                    <div><p className="text-sm font-semibold text-navy-900">Discuss collaboration</p><p className="mt-1 text-xs text-navy-500">Enquire about potential partnerships</p></div>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-navy-500 transition-transform group-hover:translate-x-1 group-hover:text-teal-700" />
+                  </Link>
+                </div>
+              </div>
+              <p className="mt-3 text-xs leading-relaxed text-navy-500">Course availability, recognition and delivery are stated only where confirmed.</p>
             </div>
           </div>
         </div>
