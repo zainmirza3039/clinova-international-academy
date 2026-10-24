@@ -10,9 +10,9 @@ import FAQAccordion from '@/components/FAQAccordion';
 import CTASection from '@/components/CTASection';
 import { getDepartmentBySlug } from '@/data/departments';
 import { getProgrammesByDepartment } from '@/data/programmes';
-import { cpdCourses } from '@/data/cpdCourses';
+import { publishedCPDCourses } from '@/data/cpdCourses';
 import type { FAQ } from '@/data/types';
-import { newsItems } from '@/data/testimonials';
+import { publishedEducationalArticleCards } from '@/data/educationalArticles';
 
 export default function DepartmentDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -41,8 +41,8 @@ export default function DepartmentDetailPage() {
   const certificates = programmes.filter((p) => p.category === 'Certificate');
   const diplomas = programmes.filter((p) => p.category === 'Diploma');
   const articleSlugs = ['physiotherapy-assessment-structured-approach', 'musculoskeletal-pain-and-function', 'evidence-based-practice-physiotherapy', 'patient-safety-red-flags-referral'];
-  const relatedArticles = articleSlugs.map((articleSlug) => newsItems.find((article) => article.slug === articleSlug)).filter(Boolean);
-  const relatedCPD = cpdCourses.filter((c) => c.department === department.name).slice(0, 4);
+  const relatedArticles = articleSlugs.map((articleSlug) => publishedEducationalArticleCards.find((article) => article.slug === articleSlug)).filter(Boolean);
+  const relatedCPD = publishedCPDCourses.filter((c) => c.department === department.name).slice(0, 4);
 
   const deptFAQs: FAQ[] = [
     { id: 'df1', question: `What is this ${department.shortName} page?`, answer: `It organises educational reading and study topics for this healthcare discipline. It does not itself represent a clinical service or a live programme.` },
