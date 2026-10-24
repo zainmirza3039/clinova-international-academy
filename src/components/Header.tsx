@@ -10,7 +10,6 @@ const navLinks = [
   { label: 'About', to: '/about' },
   { label: 'Departments', to: '/departments', hasMegaMenu: true },
   { label: 'Courses', to: '/cpd-courses', hasMegaMenu: true },
-  { label: 'CPD Courses', to: '/cpd-courses' },
   { label: 'Admissions', to: '/admissions' },
   { label: 'Training Partners', to: '/training-partners' },
   { label: 'Resources', to: '/resources' },
@@ -144,13 +143,13 @@ export default function Header() {
                   </div>
                 )}
 
-                {/* Mega Menu - Programmes */}
-                {link.hasMegaMenu && megaMenu === link.label && link.label === 'Programmes' && (
+                {/* Mega Menu - Courses */}
+                {link.hasMegaMenu && megaMenu === link.label && link.label === 'Courses' && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[420px]">
                     <div className="bg-white shadow-2xl border border-navy-100">
                       <div className="p-5">
                         <div className="text-xs font-semibold uppercase tracking-[0.18em] text-clinical-500 mb-4 pb-3 border-b border-navy-100">
-                          Programmes
+                          Courses
                         </div>
                         <div className="space-y-1">
                           {programmeMenuItems.map((item) => (
@@ -238,8 +237,8 @@ export default function Header() {
                     ))}
                   </div>
                 )}
-                {/* Mobile submenu - Programmes */}
-                {link.hasMegaMenu && mobileMegaMenu === link.label && link.label === 'Programmes' && (
+                {/* Mobile submenu - Courses */}
+                {link.hasMegaMenu && mobileMegaMenu === link.label && link.label === 'Courses' && (
                   <div id={mobileSubmenuId(link.label)} className="pl-4 py-1 space-y-0.5">
                     {programmeMenuItems.map((item) => (
                       <Link
