@@ -4,8 +4,8 @@ import { academyPublicAddress } from '@/data/publicContact';
 const academyLinks = [
   { label: 'About', to: '/about' },
   { label: 'Departments', to: '/departments' },
-  { label: 'Programmes', to: '/programmes' },
-  { label: 'Professional Development', to: '/cpd-courses' },
+  { label: 'Self-Study Courses', to: '/cpd-courses' },
+  { label: 'Professional Development', to: '/cpd-courses' }
   { label: 'Online Learning', to: '/online-learning' },
 ];
 
