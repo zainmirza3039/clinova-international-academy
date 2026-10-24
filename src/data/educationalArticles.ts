@@ -1,6 +1,7 @@
 import assessmentAndPain from './articles/assessment-and-pain.json';
 import rehabilitation from './articles/rehabilitation.json';
 import clinicalPractice from './articles/clinical-practice.json';
+import { newsItems as articleCards } from './testimonials';
 
 export interface EducationalSection { heading: string; paragraphs: string[] }
 export interface EducationalReference { title: string; url: string }
@@ -29,4 +30,12 @@ export function getEducationalArticle(slug: string | undefined): EducationalArti
   return educationalArticles.find(article => article.slug === (legacyArticleSlugs[slug] ?? slug));
 }
 
-export { newsItems as educationalArticleCards } from './testimonials';
+export const publishedEducationalArticles = educationalArticles.filter(article => article.status === 'published');
+
+export function getPublishedEducationalArticle(slug: string | undefined): EducationalArticle | undefined {
+  const article = getEducationalArticle(slug);
+  return article?.status === 'published' ? article : undefined;
+}
+
+export const educationalArticleCards = articleCards;
+export const publishedEducationalArticleCards = articleCards.filter(card => getPublishedEducationalArticle(card.slug) !== undefined);
