@@ -42,7 +42,7 @@ export interface Programme {
   featured: boolean;
 }
 
-export type ProgrammeCategory = 'Certificate' | 'Diploma' | 'Professional Development' | 'CPD';
+export type ProgrammeCategory = 'Learning Guide' | 'Certificate' | 'Diploma' | 'Professional Development' | 'CPD';
 export type ProgrammeLevel = 'Foundation' | 'Intermediate' | 'Advanced';
 export type ProgrammeStatus = 'Draft' | 'Open' | 'Coming Soon';
 export type PublicationStatus = 'draft' | 'published';
