@@ -17,7 +17,7 @@ export interface CourseDraftModule {
 
 export interface CourseDraft {
   programmeSlug: string;
-  status: 'draft';
+  status: 'draft' | 'published';
   reviewNotice: string;
   outcomes: string[];
   intendedAudience: string[];
