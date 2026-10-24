@@ -331,14 +331,16 @@ export const programmes: Programme[] = [
   },
 ];
 
+export const publishedProgrammes = programmes.filter((programme) => programme.publicationStatus === 'published');
+
 export function getProgrammeBySlug(slug: string): Programme | undefined {
-  return programmes.find((p) => p.slug === slug);
+  return publishedProgrammes.find((programme) => programme.slug === slug);
 }
 
 export function getProgrammesByDepartment(departmentSlug: string): Programme[] {
-  return programmes.filter((p) => p.departmentSlug === departmentSlug);
+  return publishedProgrammes.filter((programme) => programme.departmentSlug === departmentSlug);
 }
 
 export function getFeaturedProgrammes(): Programme[] {
-  return programmes.filter((p) => p.featured);
+  return publishedProgrammes.filter((programme) => programme.featured);
 }
