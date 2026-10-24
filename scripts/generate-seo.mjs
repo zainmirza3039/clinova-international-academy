@@ -10,7 +10,7 @@ let origin;
 
 try {
   const u = new URL(env.VITE_SITE_URL);
-  const previewHost = /(^|\\.)(vercel\\.app|manus\\.computer|localhost|test|invalid)$/.test(u.hostname);
+  const previewHost = /(^|\.)(vercel\.app|manus\.computer|localhost|test|invalid)$/.test(u.hostname);
   if (
     env.VITE_INDEXING_ENABLED === 'true' &&
     u.protocol === 'https:' &&
@@ -34,17 +34,17 @@ const fixedPublicRoutes = [
 
 function readPublishedSlugs(file, statusField) {
   const source = readFileSync(join(sourceRoot, file), 'utf8');
-  const entries = source.split(/\\n(?=  \\{\\n)/).filter(entry => /^  \\{\\n/.test(entry));
+  const entries = source.split(/\n(?=  \{\n)/).filter(entry => /^  \{\n/.test(entry));
   return entries.flatMap(entry => {
     if (!new RegExp(statusField + ':\\s*[\'"]published[\'"]').test(entry)) return [];
-    const match = entry.match(/^\\s*slug:\\s*[\'"]([^\'"]+)[\'"]/m);
+    const match = entry.match(/^\s*slug:\s*[\'"]([^\'"]+)[\'"]/m);
     return match ? [match[1]] : [];
   });
 }
 
 function readReviewedArticleSlugs() {
   const source = readFileSync(join(sourceRoot, 'src/data/educationalArticles.ts'), 'utf8');
-  const match = source.match(/const sourceReviewedArticleSlugs = new Set\\(\\[([\\s\\S]*?)\\]\\)/);
+  const match = source.match(/const sourceReviewedArticleSlugs = new Set\(\[([\s\S]*?)\]\)/);
   if (!match) throw new Error('Could not locate the explicit educational article publication allowlist.');
   return [...match[1].matchAll(/[\'"]([a-z0-9]+(?:-[a-z0-9]+)*)[\'"]/g)].map(item => item[1]);
 }
@@ -58,10 +58,10 @@ const dynamicPublicRoutes = [
 const routes = [...new Set([...fixedPublicRoutes, ...dynamicPublicRoutes])];
 const escapeXml = value => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;');
 
-const sitemap = '<?xml version="1.0" encoding="UTF-8"?>\\n' +
-  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\\n' +
-  (origin ? routes.map(path => '  <url><loc>' + escapeXml(origin + path) + '</loc></url>').join('\\n') : '') +
-  '\\n</urlset>\\n';
+const sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+  (origin ? routes.map(path => '  <url><loc>' + escapeXml(origin + path) + '</loc></url>').join('\n') : '') +
+  '\n</urlset>\n';
 
 writeFileSync(resolve(outputRoot, 'dist/sitemap.xml'), sitemap);
 writeFileSync(
@@ -80,8 +80,8 @@ writeFileSync(
         'Disallow: /verify',
         'Sitemap: ' + origin + '/sitemap.xml',
         '',
-      ].join('\\n')
-    : 'User-agent: *\\nDisallow: /\\n',
+      ].join('\n')
+    : 'User-agent: *\nDisallow: /\n',
 );
 
 const htmlFile = resolve(outputRoot, 'dist/index.html');
