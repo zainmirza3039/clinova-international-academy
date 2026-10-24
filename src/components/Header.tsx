@@ -23,6 +23,7 @@ const programmeMenuItems = [
   { label: 'Stroke Rehabilitation', to: '/cpd-courses/stroke-rehabilitation-functional-goals', desc: 'Functional goals and task-specific practice' },
   { label: 'Sports Rehabilitation', to: '/cpd-courses/introduction-to-sports-rehabilitation', desc: 'Progressive loading and return to sport' },
   { label: 'Pain Management', to: '/cpd-courses/pain-management-fundamentals', desc: 'Pain science and function-led care' },
+  { label: 'Motor Control & Neurorehabilitation', to: '/cpd-courses/motor-control-relearning-in-neurorehabilitation', desc: 'Task-specific practice and motor learning' },
   { label: 'Balance & Falls Prevention', to: '/cpd-courses/balance-training-fall-prevention', desc: 'Falls assessment and progressive exercise' },
   { label: 'View All Courses', to: '/cpd-courses', desc: 'Browse all open self-study courses' },
 ];
