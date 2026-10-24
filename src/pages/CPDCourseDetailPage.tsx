@@ -3,18 +3,18 @@ import { ArrowLeft, ArrowRight, BookOpen, Info } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import CurriculumDraftContent from '@/components/CurriculumDraftContent';
-import { cpdCourses } from '@/data/cpdCourses';
+import { publishedCPDCourses } from '@/data/cpdCourses';
 import { getCPDCurriculum } from '@/data/cpdCurricula';
 
 export default function CPDCourseDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const course = cpdCourses.find(item => item.slug === slug);
+  const course = publishedCPDCourses.find(item => item.slug === slug);
   const draft = slug ? getCPDCurriculum(slug) : undefined;
   useSEO({ title: course?.title ?? 'Learning Topic Not Found', description: course?.description ?? 'The requested learning topic could not be found.', ogImage: course?.image });
 
   if (!course) return <section className="mx-auto flex min-h-[60vh] max-w-3xl items-center justify-center px-6 py-24 text-center"><div><h1 className="font-heading text-3xl font-bold text-navy-900">Learning topic not found</h1><p className="mt-3 text-sm text-navy-600">This address does not match a topic in the current catalogue.</p><Link to="/cpd-courses" className="mt-6 inline-flex items-center gap-2 font-semibold text-clinical-700"><ArrowLeft className="h-4 w-4" /> Browse professional development</Link></div></section>;
 
-  const related = cpdCourses.filter(item => item.slug !== course.slug && item.department === course.department).slice(0, 3);
+  const related = publishedCPDCourses.filter(item => item.slug !== course.slug && item.department === course.department).slice(0, 3);
 
   return <>
     <header className="relative overflow-hidden bg-navy-900">
