@@ -191,7 +191,7 @@ export default function DepartmentDetailPage() {
       <CTASection
         title={`Continue exploring ${department.shortName}`}
         description="Explore the learning library and study tools. Confirm programme requirements and recognition before enrolling."
-        primaryCTA={{ label: 'Browse Self-Study Courses', to: '/programmes' }}
+        primaryCTA={{ label: 'Browse Self-Study Courses', to: '/cpd-courses' }}
         secondaryCTA={{ label: 'Contact Academy', to: '/contact' }}
       />
     </>
