@@ -139,8 +139,8 @@ export default function ProgrammesPage() {
           ) : (
             <div className="border border-dashed border-navy-200 bg-surface-50 px-6 py-16 text-center">
               <BookOpen className="mx-auto h-8 w-8 text-navy-400" aria-hidden="true" />
-              <h3 className="mt-4 font-heading text-lg font-bold text-navy-900">No matching learning guides</h3>
-              <p className="mt-2 text-sm text-navy-600">Try a different keyword or remove one of your filters.</p>
+              <h3 className="mt-4 font-heading text-lg font-bold text-navy-900">No formal programmes currently published</h3>
+              <p className="mt-2 text-sm text-navy-600">Formal programme cohorts are not currently published. Browse the available open self-study courses for structured lessons and evidence sources.</p>
               <button type="button" onClick={resetFilters} className="mt-5 inline-flex items-center gap-2 rounded-md bg-navy-900 px-5 py-3 text-sm font-semibold text-white hover:bg-navy-800 focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:ring-offset-2">
                 <RotateCcw className="h-4 w-4" aria-hidden="true" /> Reset search
               </button>
