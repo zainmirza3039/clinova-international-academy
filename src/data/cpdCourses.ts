@@ -152,10 +152,6 @@ export const publishedCPDCourses = cpdCourses.filter((course) => course.publicat
 export const cpdFilters = [
   'All',
   'Physical Therapy',
-  'Nursing',
-  'Medicine',
-  'Pharmacy',
-  'Psychology',
   'Rehabilitation',
-  'Healthcare Management',
+  'Sports',
 ];
