@@ -7,13 +7,11 @@ import { useSEO } from '@/hooks/useSEO';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import Reveal from '@/components/Reveal';
 import DepartmentCard from '@/components/DepartmentCard';
-import ProgrammeCard from '@/components/ProgrammeCard';
 import CPDCard from '@/components/CPDCard';
 import NewsCard from '@/components/NewsCard';
 import FAQAccordion from '@/components/FAQAccordion';
 import NewsletterForm from '@/components/NewsletterForm';
 import { departments } from '@/data/departments';
-import { getFeaturedProgrammes } from '@/data/programmes';
 import { publishedCPDCourses, cpdFilters } from '@/data/cpdCourses';
 import { generalFAQs } from '@/data/testimonials';
 import { publishedEducationalArticleCards } from '@/data/educationalArticles';
@@ -46,7 +44,6 @@ export default function HomePage() {
     },
   });
 
-  const featuredProgrammes = getFeaturedProgrammes();
   const [cpdFilter, setCpdFilter] = useState('All');
   const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation<HTMLDivElement>();
 
@@ -75,10 +72,10 @@ export default function HomePage() {
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 <Link to="/cpd-courses" className="group inline-flex items-center justify-center gap-2 rounded-md bg-navy-800 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-navy-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-500">
-                  Explore CPD topics <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  Explore self-study courses <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
-                <Link to="/programmes" className="inline-flex items-center justify-center gap-2 rounded-md border border-navy-200 bg-white px-6 py-3.5 text-sm font-semibold text-navy-800 transition hover:border-navy-400 hover:bg-surface-50">
-                  Browse programmes
+                <Link to="/cpd-courses" className="inline-flex items-center justify-center gap-2 rounded-md border border-navy-200 bg-white px-6 py-3.5 text-sm font-semibold text-navy-800 transition hover:border-navy-400 hover:bg-surface-50">
+                  Browse courses
                 </Link>
               </div>
               <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 border-t border-navy-100 pt-5 text-sm text-navy-600">
@@ -201,23 +198,23 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 lg:mb-16">
             <Reveal className="max-w-2xl">
               <div className="text-xs font-semibold uppercase tracking-[0.18em] text-clinical-500 mb-4">
-                Programmes
+                Open courses
               </div>
               <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
-                Featured learning pathways
+                Featured self-study courses
               </h2>
             </Reveal>
             <Link
               to="/programmes"
               className="inline-flex items-center gap-2 text-sm font-semibold text-navy-700 hover:text-clinical-600 transition-colors shrink-0"
             >
-              View All Programmes
+              View All Courses
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
-            {featuredProgrammes.map((prog, i) => (
-              <ProgrammeCard key={prog.id} programme={prog} index={i} />
+            {publishedCPDCourses.slice(0, 3).map((course, i) => (
+              <CPDCard key={course.id} course={course} index={i} />
             ))}
           </div>
         </div>
@@ -314,10 +311,10 @@ export default function HomePage() {
                 Healthcare education without borders
               </h2>
               <p className="mt-5 text-base text-navy-600/80 leading-[1.65]">
-                Explore healthcare reading and subject themes from wherever you are. Published programme pages describe the specific services and arrangements available.
+                Explore structured self-study courses and source-linked healthcare learning material from wherever you are. These open courses do not award accredited CPD hours or certificates.
               </p>
               <div className="mt-8 space-y-3">
-                {['Explore educational material at your own pace', 'Use reflection prompts alongside local guidance', 'Review published programme information', 'Check requirements before making a learning commitment'].map((point) => (
+                {['Explore educational material at your own pace', 'Use reflection prompts alongside local guidance', 'Work through structured course lessons', 'Check requirements before making a learning commitment'].map((point) => (
                   <div key={point} className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 text-teal-500 shrink-0 mt-0.5" />
                     <span className="text-sm text-navy-700 leading-relaxed">{point}</span>
@@ -328,7 +325,7 @@ export default function HomePage() {
                 to="/programmes"
                 className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-navy-800 text-white font-semibold hover:bg-navy-700 transition-colors"
               >
-                Explore Learning Guides
+                Browse Courses
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </Reveal>
@@ -486,14 +483,14 @@ export default function HomePage() {
                 Ready to explore a learning question?
               </h2>
               <p className="mt-4 text-base text-white/70 leading-[1.65] max-w-lg">
-                Explore educational reading and study tools. Review each programme's published details for availability, assessment, recognition and outcomes.
+                Explore source-linked course lessons and study tools. Course pages describe the learning material; accredited CPD hours, certificates and learner progress are not provided.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 <Link
                   to="/programmes"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-navy-800 font-semibold hover:bg-surface-50 transition-colors"
                 >
-                  Explore Programmes
+                  Explore Courses
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
