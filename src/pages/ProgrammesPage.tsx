@@ -5,7 +5,6 @@ import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import CTASection from '@/components/CTASection';
-import SearchBar from '@/components/SearchBar';
 import { publishedProgrammes } from '@/data/programmes';
 import { departments } from '@/data/departments';
 
