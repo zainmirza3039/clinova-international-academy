@@ -55,7 +55,7 @@ export default function HomePage() {
         <div className="absolute inset-0">
           <img
             src="https://images.pexels.com/photos/8376296/pexels-photo-8376296.jpeg?auto=compress&cs=tinysrgb&h=900&w=1400"
-            alt="Healthcare professional studying online"
+            alt="Healthcare professional reviewing educational material"
             className="w-full h-full object-cover opacity-25"
             loading="eager"
           />

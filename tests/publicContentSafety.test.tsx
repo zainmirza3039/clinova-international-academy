@@ -47,6 +47,7 @@ describe('rendered public copy safeguards', () => {
     expect(copy).toMatch(/Course availability, delivery, recognition and enrolment are not yet confirmed/i);
     expect(copy).toMatch(/No programmes are currently approved for publication/i);
     expect(copy).toMatch(/No CPD courses are currently approved for publication/i);
+    expect(container.querySelector('img[alt="Healthcare professional studying online"]')).toBeNull();
     for (const claim of unsupportedPublicClaims) expect(copy).not.toMatch(claim);
 
     const certificateQuestion = screen.getByRole('button', { name: 'Will I receive a certificate?' });
