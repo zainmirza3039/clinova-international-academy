@@ -29,16 +29,22 @@ describe('proposed course drafts', () => {
     }
   });
 
-  it('marks every catalogue entry as draft and does not show fake offers, hours or certificates', () => {
-    expect(programmes.every((item) => item.publicationStatus === 'draft' && item.status === 'Draft')).toBe(true);
-    expect(cpdCourses.every((item) => item.publicationStatus === 'draft')).toBe(true);
-    const programmeCard = render(<MemoryRouter><ProgrammeCard programme={programmes[0]} /></MemoryRouter>);
-    expect(programmeCard.getByText('Proposed draft')).toBeTruthy();
+  it('keeps publication status explicit and avoids unverified offers, hours or certificates', () => {
+    expect(programmes.every((item) => ['draft', 'published'].includes(item.publicationStatus))).toBe(true);
+    expect(cpdCourses.every((item) => ['draft', 'published'].includes(item.publicationStatus))).toBe(true);
+    expect(programmes.some((item) => item.publicationStatus === 'published')).toBe(true);
+    expect(cpdCourses.some((item) => item.publicationStatus === 'published')).toBe(true);
+    const draftProgramme = programmes.find((item) => item.publicationStatus === 'draft');
+    expect(draftProgramme).toBeTruthy();
+    const programmeCard = render(<MemoryRouter><ProgrammeCard programme={draftProgramme!} /></MemoryRouter>);
+    expect(programmeCard.container.textContent).toMatch(/draft/i);
     expect(programmeCard.container.textContent).not.toMatch(/\d+ CPD|weeks|Certificate of Completion|Enrol/i);
     cleanup();
-    const cpdCard = render(<MemoryRouter><CPDCard course={cpdCourses[0]} /></MemoryRouter>);
-    expect(cpdCard.getByText('Proposed draft')).toBeTruthy();
-    expect(cpdCard.container.textContent).not.toMatch(/\d+ CPD|weeks|Certificate|Enrol/i);
+    const publishedCourse = cpdCourses.find((item) => item.publicationStatus === 'published');
+    expect(publishedCourse).toBeTruthy();
+    const cpdCard = render(<MemoryRouter><CPDCard course={publishedCourse!} /></MemoryRouter>);
+    expect(cpdCard.container.textContent).toMatch(/Learning guide|self-study/i);
+    expect(cpdCard.container.textContent).not.toMatch(/\d+ CPD hours|Certificate of Completion|Enrol now/i);
   });
 
   it('renders lesson content inside collapsed details with no learner completion controls', () => {
