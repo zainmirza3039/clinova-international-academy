@@ -5,7 +5,7 @@ import { enquiriesEnabled, enquiryUnavailable } from '@/lib/siteConfig';
 import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import { validateFormFields } from '@/lib/formValidation';
-import { academyPublicAddress } from '@/data/publicContact';
+import { academyPublicAddress, pakistanLocalAgentPhone } from '@/data/publicContact';
 
 const enquiryTypes = ['General Enquiry', 'Academic Enquiry', 'Partnership Enquiry', 'Technical Support'];
 
@@ -185,6 +185,11 @@ export default function ContactPage() {
                       <div className="text-xs text-navy-100/50 mb-1">Email</div>
                       <p className="text-sm">Awaiting academy confirmation</p>
                     </div>
+                  </div>
+                  <div className="border-t border-white/10 pt-5">
+                    <div className="text-xs text-navy-100/60 mb-1">Optional secondary contact for Pakistan enquiries</div>
+                    <a href="tel:03069633353" aria-label={`Call local agent in Pakistan at ${pakistanLocalAgentPhone}`} className="text-sm font-semibold text-white underline underline-offset-2">{pakistanLocalAgentPhone}</a>
+                    <p className="mt-2 text-xs text-navy-100/70">Use a confirmed website or email channel first when available; this local-agent phone is secondary.</p>
                   </div>
                   <div className="border-t border-white/10 pt-5">
                     <div className="text-xs text-navy-100/60 mb-1">Response times</div>

@@ -199,12 +199,13 @@ export const newsItems: NewsItem[] = [
 ];
 
 export const generalFAQs: FAQ[] = [
-  { id: 'f1', question: 'Are Clinova programmes accredited?', answer: 'Clinova programmes are CPD-focused educational courses. We do not currently claim formal accreditation from any regulatory body. Programme status and any future approvals will be communicated on the relevant course page.' },
-  { id: 'f2', question: 'How are programmes delivered?', answer: 'Programme pages describe the intended delivery format and learning structure. Contact the academy before enrolling if you need confirmation that a specific programme is currently available.' },
-  { id: 'f3', question: 'Can I study while working full-time?', answer: 'Many programmes are designed around flexible professional learning. Check the individual programme duration and contact the academy to discuss whether the expected workload fits your circumstances.' },
-  { id: 'f4', question: 'Will I receive a certificate?', answer: 'Where stated on a programme page, eligible learners may receive a Certificate of Completion after meeting the published completion requirements. A Certificate of Completion is not a professional licence or formal accreditation.' },
-  { id: 'f5', question: 'What are the entry requirements?', answer: 'Entry requirements vary by programme. Review the intended audience and prerequisites on the relevant detail page, and contact the academy if your background is not covered.' },
-  { id: 'f6', question: 'How long do I have access to course materials?', answer: 'Access arrangements depend on the programme and enrolment workflow. Confirm the applicable period with the academy before enrolment.' },
+  { id: 'f1', question: 'Are Clinova programmes accredited?', answer: 'No programme is currently approved for public listing. Accreditation for any proposed offering is unconfirmed; no accreditation is claimed.' },
+  { id: 'f2', question: 'How are programmes delivered?', answer: 'Delivery formats for any future offering are not confirmed. Do not assume online or in-person delivery; details will be stated only after an offering is approved.' },
+  { id: 'f3', question: 'Can I study while working full-time?', answer: 'No course duration, workload or study-flexibility arrangements are confirmed. Please discuss your needs with the academy if a specific programme is approved.' },
+  { id: 'f4', question: 'Will I receive a certificate?', answer: 'No Certificate of Completion, qualification or other award is currently confirmed. Published details will explain any approved award before enrolment.' },
+  { id: 'f5', question: 'What are the entry requirements?', answer: 'Entry requirements, target audiences and enrolment arrangements for proposed programmes are unconfirmed; no enrolment is currently open.' },
+  { id: 'f6', question: 'How long do I have access to course materials?', answer: 'Student accounts and course access are not currently available. Access periods for any future offering remain unconfirmed.' },
+  { id: 'f7', question: 'What are the fees?', answer: 'Fees and funding are not confirmed. If you have a fee question about a proposed offering, please discuss it with the academy; no amount or estimate is quoted here.' },
 ];
 
 export const newsCategories = ['Clinical Education', 'Professional Development', 'Rehabilitation'];
