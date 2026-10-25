@@ -46,16 +46,19 @@ describe('catalogue filter accessibility and URL navigation', () => {
     expect(screen.getAllByRole('button').every(button => button.getAttribute('type') === 'button')).toBe(true);
   });
 
-  it('labels all programme filters and follows same-page type query navigation', () => {
-    render(<MemoryRouter initialEntries={['/programmes?type=Certificate']}><Link to="/programmes?type=Diploma">Navigate diploma</Link><ProgrammesPage /></MemoryRouter>);
-    expect((screen.getByLabelText('Programme Type') as HTMLSelectElement).value).toBe('Certificate');
-    for (const label of ['Department', 'Duration', 'Delivery']) expect(screen.getByLabelText(label).tagName).toBe('SELECT');
-    fireEvent.click(screen.getByText('Navigate diploma'));
-    expect((screen.getByLabelText('Programme Type') as HTMLSelectElement).value).toBe('Diploma');
+  it('labels current learning-guide filters and follows same-page resource-type navigation', () => {
+    render(<MemoryRouter initialEntries={['/programmes?type=Learning%20Guide']}><Link to="/programmes?type=Learning%20Guide">Navigate learning guides</Link><ProgrammesPage /></MemoryRouter>);
+    expect((screen.getByLabelText('Resource type') as HTMLSelectElement).value).toBe('Learning Guide');
+    for (const label of ['Subject area', 'Study level']) expect(screen.getByLabelText(label).tagName).toBe('SELECT');
+    fireEvent.click(screen.getByText('Navigate learning guides'));
+    expect((screen.getByLabelText('Resource type') as HTMLSelectElement).value).toBe('Learning Guide');
   });
-  it('labels every CPD filter', () => {
+  it('labels CPD filters and keeps unawarded credit unavailable', () => {
     render(<MemoryRouter><CPDCoursesPage /></MemoryRouter>);
-    for (const label of ['Department', 'CPD Hours', 'Level']) expect(screen.getByLabelText(label).tagName).toBe('SELECT');
+    expect(screen.getByLabelText('Department').tagName).toBe('SELECT');
+    expect((screen.getByLabelText('CPD credit') as HTMLSelectElement).disabled).toBe(true);
+    expect(screen.getByLabelText('Level').tagName).toBe('SELECT');
+    expect(screen.getByText('This library does not award or record CPD hours.')).toBeTruthy();
   });
 });
 
