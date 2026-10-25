@@ -18,7 +18,8 @@ afterEach(() => { cleanup(); vi.clearAllMocks(); });
 describe('student dashboard data gate', () => {
   it('keeps learner queries disabled and displays honest empty states by default', () => {
     render(<StudentDashboardPage />);
-    expect(screen.getByRole('heading', { name: /welcome, student@example.test/i })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Welcome back' })).toBeTruthy();
+    expect(screen.getByText('student@example.test')).toBeTruthy();
     expect(screen.getByText('Profile details are not available yet.')).toBeTruthy();
     expect(screen.getByText('No enrolment information is available yet.')).toBeTruthy();
     expect(screen.getByText('Progress information will appear when an authorized record exists.')).toBeTruthy();
