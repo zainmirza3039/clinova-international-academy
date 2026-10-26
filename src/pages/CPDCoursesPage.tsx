@@ -9,7 +9,7 @@ import { ChevronDown } from 'lucide-react';
 
 export default function CPDCoursesPage() {
   useSEO({
-    title: 'Confirmed CPD Courses',
+    title: 'CPD Topic Availability',
     description:
       'Browse academy-approved CPD courses. Unconfirmed topic outlines are not listed as available courses.',
   });

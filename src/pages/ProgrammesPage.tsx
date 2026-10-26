@@ -15,7 +15,7 @@ const deliveries = ['All'];
 
 export default function ProgrammesPage() {
   useSEO({
-    title: 'Confirmed Programmes',
+    title: 'Programme Availability',
     description:
       'Browse academy-approved programmes. Proposed outlines remain unavailable until publication details are confirmed.',
   });
@@ -126,10 +126,10 @@ export default function ProgrammesPage() {
       </section>
 
       <CTASection
-        title="Can't Find What You're Looking For?"
-        description="Contact our team to discuss your professional development needs and find the right programme."
-        primaryCTA={{ label: 'Contact Academy', to: '/contact' }}
-        secondaryCTA={{ label: 'Browse CPD Courses', to: '/cpd-courses' }}
+        title="Looking for a specific topic?"
+        description="This catalogue contains proposed outlines only. Availability, fees, delivery and enrolment are not confirmed."
+        primaryCTA={{ label: 'Contact details', to: '/contact' }}
+        secondaryCTA={{ label: 'Review proposed CPD topics', to: '/cpd-courses' }}
       />
     </>
   );

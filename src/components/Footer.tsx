@@ -5,16 +5,16 @@ import { academyPublicAddress } from '@/data/publicContact';
 const academyLinks = [
   { label: 'About', to: '/about' },
   { label: 'Departments', to: '/departments' },
-  { label: 'Programmes', to: '/programmes' },
-  { label: 'CPD Courses', to: '/cpd-courses' },
-  { label: 'Online Learning', to: '/online-learning' },
+  { label: 'Proposed programme areas', to: '/programmes' },
+  { label: 'Proposed CPD topics', to: '/cpd-courses' },
+  { label: 'Student access status', to: '/online-learning' },
 ];
 
 const professionalLinks = [
   { label: 'Training Partners', to: '/training-partners' },
   { label: 'Resources', to: '/resources' },
   { label: 'Study Tools', to: '/learning-resources' },
-  { label: 'Certificate Verification', to: '/verify' },
+  { label: 'Certificate verification status', to: '/verify' },
   { label: 'FAQs', to: '/faqs' },
   { label: 'Events', to: '/events' },
   { label: 'Faculty', to: '/faculty' },
@@ -47,7 +47,7 @@ export default function Footer() {
             </p>
             <div className="space-y-2.5">
               <address className="not-italic text-sm text-navy-100/80">{academyPublicAddress}</address>
-              <p className="text-xs text-navy-100/80">Phone, email and visiting arrangements await confirmation.</p>
+              <p className="text-xs text-navy-100/80">Email and visiting arrangements await confirmation. An optional secondary local-agent call for Pakistan enquiries is listed on the Contact page.</p>
             </div>
           </div>
 
@@ -101,7 +101,7 @@ export default function Footer() {
             &copy; 2026 Clinova International Academy. All rights reserved.
           </p>
           <p className="text-xs text-navy-100/40 text-center sm:text-right">
-            Online Healthcare Education &bull; CPD &bull; Professional Development
+            Healthcare Education &bull; Proposed CPD Topics &bull; Professional Development
           </p>
         </div>
       </div>

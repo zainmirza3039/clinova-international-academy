@@ -112,7 +112,7 @@ export default function DepartmentDetailPage() {
         <section className="py-12 lg:py-16 bg-navy-50">
           <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="font-heading text-xl font-bold text-navy-900 mb-6 flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-teal-600" /> Certificate Courses
+              <BookOpen className="w-5 h-5 text-teal-600" /> Proposed certificate-level outlines
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {certificates.map((prog, i) => (
@@ -128,7 +128,7 @@ export default function DepartmentDetailPage() {
         <section className="py-12 lg:py-16 bg-white">
           <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="font-heading text-xl font-bold text-navy-900 mb-6 flex items-center gap-2">
-              <Award className="w-5 h-5 text-teal-600" /> Diploma Programmes
+              <Award className="w-5 h-5 text-teal-600" /> Proposed diploma-level outlines
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {diplomas.map((prog, i) => (
@@ -144,7 +144,7 @@ export default function DepartmentDetailPage() {
         <section className="py-12 lg:py-16 bg-navy-50">
           <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="font-heading text-xl font-bold text-navy-900 mb-6 flex items-center gap-2">
-              <Monitor className="w-5 h-5 text-teal-600" /> CPD Courses
+              <Monitor className="w-5 h-5 text-teal-600" /> Proposed CPD topic outlines
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedCPD.map((course, i) => (

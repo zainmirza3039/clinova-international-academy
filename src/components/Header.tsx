@@ -19,11 +19,8 @@ const navLinks = [
 ];
 
 const programmeMenuItems = [
-  { label: 'Certificate Courses', to: '/programmes?type=Certificate', desc: 'Short focused programmes' },
-  { label: 'Diploma Programmes', to: '/programmes?type=Diploma', desc: 'Comprehensive study programmes' },
-  { label: 'Professional Development', to: '/programmes?type=Professional Development', desc: 'Career-focused learning' },
-  { label: 'CPD Courses', to: '/cpd-courses', desc: 'Continuing professional development' },
-  { label: 'Featured Programmes', to: '/programmes?featured=true', desc: 'Explore our highlights' },
+  { label: 'Proposed programme areas', to: '/programmes', desc: 'No programme is approved or open for enrolment.' },
+  { label: 'Proposed CPD topics', to: '/cpd-courses', desc: 'Course availability and recognised hours are unconfirmed.' },
 ];
 
 const mobileSubmenuId = (label: string) => `mobile-submenu-${label.toLowerCase().replace(/\s+/g, '-')}`;
@@ -148,7 +145,7 @@ export default function Header() {
                     <div className="bg-white shadow-2xl border border-navy-100">
                       <div className="p-5">
                         <div className="text-xs font-semibold uppercase tracking-[0.18em] text-clinical-500 mb-4 pb-3 border-b border-navy-100">
-                          Programmes
+                          Proposed programme areas
                         </div>
                         <div className="space-y-1">
                           {programmeMenuItems.map((item) => (

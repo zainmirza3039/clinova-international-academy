@@ -79,6 +79,9 @@ describe('completion frontend pages', () => {
     expect(screen.queryByLabelText(/your name/i)).toBeNull();
     expect(screen.queryByLabelText(/^message \*/i)).toBeNull();
     expect(screen.queryByRole('button', { name: /send message/i })).toBeNull();
+    const localAgent = screen.getByRole('link', { name: /call local agent in pakistan at 0306-9633353/i });
+    expect(localAgent.getAttribute('href')).toBe('tel:03069633353');
+    expect(screen.getByText(/optional secondary contact for pakistan enquiries/i)).toBeTruthy();
   });
 
   it('does not collect partnership details while online submissions are disabled', () => {

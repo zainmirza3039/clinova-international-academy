@@ -55,7 +55,7 @@ export default function HomePage() {
         <div className="absolute inset-0">
           <img
             src="https://images.pexels.com/photos/8376296/pexels-photo-8376296.jpeg?auto=compress&cs=tinysrgb&h=900&w=1400"
-            alt="Healthcare professional studying online"
+            alt="Healthcare professional reviewing educational material"
             className="w-full h-full object-cover opacity-25"
             loading="eager"
           />
@@ -83,14 +83,14 @@ export default function HomePage() {
                 to="/programmes"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-clinical-500 text-white font-semibold hover:bg-clinical-600 transition-colors"
               >
-                Explore Programmes
+                View Proposed Programmes
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/cpd-courses"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-transparent text-white font-semibold border border-white/25 hover:bg-white/10 transition-colors"
               >
-                Browse CPD Courses
+                Review Proposed CPD Topics
               </Link>
             </div>
           </div>
@@ -101,11 +101,9 @@ export default function HomePage() {
           <div className="max-w-editorial mx-auto px-6 lg:px-10 py-4">
             <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-2">
               {[
-                { label: 'Flexible Study' },
-                { label: 'CPD-focused learning' },
-                { label: 'Proposed learning outlines' },
-                { label: 'Global Access' },
-                { label: 'Self-Paced' },
+                { label: 'Proposed subject areas' },
+                { label: 'Course details unconfirmed' },
+                { label: 'No enrolment available' },
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-2 text-navy-100/60">
                   <CheckCircle className="w-3.5 h-3.5 text-teal-400" />
@@ -181,23 +179,23 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FEATURED PROGRAMMES — split header, 3-col grid */}
+      {/* PROPOSED PROGRAMME AREAS — split header, 3-col grid */}
       <section className="py-20 lg:py-32 bg-white">
         <div className="max-w-editorial mx-auto px-6 lg:px-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 lg:mb-16">
             <Reveal className="max-w-2xl">
               <div className="text-xs font-semibold uppercase tracking-[0.18em] text-clinical-500 mb-4">
-                Programmes
+                Proposed programmes
               </div>
               <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
-                Featured programmes
+                Programme areas under consideration
               </h2>
             </Reveal>
             <Link
               to="/programmes"
               className="inline-flex items-center gap-2 text-sm font-semibold text-navy-700 hover:text-clinical-600 transition-colors shrink-0"
             >
-              View All Programmes
+              View Proposed Areas
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -217,17 +215,17 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <Reveal className="max-w-2xl">
               <div className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-400 mb-4">
-                CPD Courses
+                Proposed CPD topics
               </div>
               <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-white leading-[1.15] text-balance">
-                Continue your professional development
+                Subject areas under consideration
               </h2>
             </Reveal>
             <Link
               to="/cpd-courses"
               className="inline-flex items-center gap-2 text-sm font-semibold text-teal-400 hover:text-teal-300 transition-colors shrink-0"
             >
-              View All CPD Courses
+              View Proposed Topics
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -304,7 +302,7 @@ export default function HomePage() {
                 to="/programmes"
                 className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-navy-800 text-white font-semibold hover:bg-navy-700 transition-colors"
               >
-                Explore Online Programmes
+                Review proposed programme topics
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </Reveal>
@@ -484,27 +482,27 @@ export default function HomePage() {
             <div className="max-w-2xl">
               <div className="flex items-center gap-3 mb-6">
                 <ShieldCheck className="w-5 h-5 text-teal-400" />
-                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-400">Get Started</span>
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-400">Information</span>
               </div>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-white leading-[1.2] text-balance">
-                Ready to advance your healthcare career?
+                Explore proposed subject areas
               </h2>
               <p className="mt-4 text-base text-white/70 leading-[1.65] max-w-lg">
-                Explore our programmes and start your professional development journey today.
+                Review topics under consideration. Course availability, delivery and enrolment are not confirmed.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 <Link
                   to="/programmes"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-navy-800 font-semibold hover:bg-surface-50 transition-colors"
                 >
-                  Explore Programmes
+                  View Proposed Programmes
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   to="/cpd-courses"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-transparent text-white font-semibold border border-white/30 hover:bg-white/10 transition-colors"
                 >
-                  Browse CPD Courses
+                  Review Proposed CPD Topics
                 </Link>
               </div>
             </div>
