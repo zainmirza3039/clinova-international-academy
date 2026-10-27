@@ -19,13 +19,6 @@ export const draftDateLabel = 'Educational article · Source links provided for 
 export const educationalArticles: EducationalArticle[] = [
   ...assessmentAndPain, ...rehabilitation, ...clinicalPractice,
 ];
-const sourceReviewedArticleSlugs = new Set([
-  'low-back-pain-rehabilitation',
-  'knee-osteoarthritis-rehabilitation',
-  'stroke-rehabilitation-functional-goals',
-  'balance-training-fall-prevention',
-  'evidence-based-practice-physiotherapy',
-]);
 for (const article of educationalArticles) {
   article.status = 'published';
 }
