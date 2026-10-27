@@ -30,10 +30,10 @@ const oldProgrammeSlugs = new Set([
 const forbiddenRuntimeKeys = /^(delivery|duration|cpdhours|hours|instructor|instructors|fee|fees|price|certificate|certification)$/i;
 const dosagePattern = /\b\d+(?:\.\d+)?\s?(?:mg|g|mcg|micrograms?|μg|ml|mL|tablets?|capsules?)\b/i;
 
-function assertDraftShape(draft: CourseDraft | CPDCurriculumDraft | undefined, minimumLessonWords: number) {
+function assertCurriculumShape(draft: CourseDraft | CPDCurriculumDraft | undefined, minimumLessonWords: number) {
   expect(draft).toBeTruthy();
-  if (!draft) throw new Error('Expected curriculum draft to exist');
-  expect(draft.status).toBe('draft');
+  if (!draft) throw new Error('Expected published curriculum to exist');
+  expect(draft.status).toBe('published');
   expect(draft.reviewNotice.trim().length).toBeGreaterThan(30);
   expect(draft.outcomes.length).toBeGreaterThanOrEqual(4);
   expect(draft.intendedAudience.length).toBeGreaterThan(0);
@@ -84,23 +84,23 @@ function assertNoLearnerWorkflow(container: HTMLElement) {
 }
 
 describe('complete continuation catalogue and curriculum contracts', () => {
-  it('covers exactly every programme and CPD catalogue slug with one draft and no extras', () => {
+  it('covers exactly every published programme and CPD catalogue slug with one curriculum and no extras', () => {
     expect(Object.keys(courseDrafts).sort()).toEqual([...allProgrammeSlugs].sort());
     expect(Object.keys(cpdCurricula).sort()).toEqual([...allCpdSlugs].sort());
     for (const slug of allProgrammeSlugs) expect(getCourseDraft(slug)?.programmeSlug).toBe(slug);
     for (const slug of allCpdSlugs) expect(getCPDCurriculum(slug)?.courseSlug).toBe(slug);
   });
 
-  it('keeps all programme and CPD drafts substantive, scoped and reviewable', () => {
+  it('keeps all programme and CPD curricula substantive, scoped and reviewable', () => {
     for (const slug of allProgrammeSlugs) {
-      assertDraftShape(getCourseDraft(slug), oldProgrammeSlugs.has(slug) ? 100 : 130);
+      assertCurriculumShape(getCourseDraft(slug), oldProgrammeSlugs.has(slug) ? 100 : 130);
     }
-    for (const slug of allCpdSlugs) assertDraftShape(getCPDCurriculum(slug), 130);
+    for (const slug of allCpdSlugs) assertCurriculumShape(getCPDCurriculum(slug), 130);
   });
 
   it('links only existing educational articles and does not add runtime delivery claims', () => {
-    const drafts = [...Object.values(courseDrafts), ...Object.values(cpdCurricula)];
-    for (const draft of drafts) {
+    const curricula = [...Object.values(courseDrafts), ...Object.values(cpdCurricula)];
+    for (const draft of curricula) {
       const serializedKeys = Object.keys(draft).join('|');
       expect(serializedKeys).not.toMatch(/delivery|duration|hours?|instructor|fees?|certificate|certification/i);
       for (const article of draft.relatedArticles) {
@@ -142,7 +142,7 @@ describe('direct programme and CPD detail rendering', () => {
       </MemoryRouter>,
     );
     expect(screen.getByRole('heading', { level: 1, name: programme.title })).toBeTruthy();
-    expect(screen.getByText(/Proposed draft catalogue entry/i)).toBeTruthy();
+    expect(screen.getByText(/Independent educational guide/i)).toBeTruthy();
     expect(screen.getByRole('navigation', { name: 'Curriculum sections' })).toBeTruthy();
     expect(screen.getByRole('heading', { name: 'Sources and scope notes' })).toBeTruthy();
     const details = container.querySelectorAll('details');
@@ -210,12 +210,12 @@ describe('direct programme and CPD detail rendering', () => {
         <Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes>
       </MemoryRouter>,
     );
-    expect(screen.getByRole('heading', { name: 'Programme Not Found' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Learning guide not found' })).toBeTruthy();
     rerender(
       <MemoryRouter key="missing-cpd" initialEntries={['/cpd-courses/no-such-cpd']}>
         <Routes><Route path="/cpd-courses/:slug" element={<CPDCourseDetailPage />} /></Routes>
       </MemoryRouter>,
     );
-    expect(screen.getByRole('heading', { name: 'CPD Course Not Found' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Learning topic not found' })).toBeTruthy();
   });
 });
