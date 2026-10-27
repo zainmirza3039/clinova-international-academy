@@ -22,10 +22,10 @@ describe('resource publication dates', () => {
     expect(formatResourceDate('2026-10-22')).toBe('22 October 2026');
     expect(formatResourceDate('2026-10-22T23:30:00-05:00')).toBe('22 October 2026');
   });
-  it('renders draft text instead of Invalid Date on cards', () => {
+  it('omits unconfirmed publication dates on cards', () => {
     const { container } = render(<MemoryRouter><NewsCard item={newsItems[0]} /></MemoryRouter>);
-    expect(screen.getByText(newsItems[0].date)).toBeTruthy();
-    expect(container.textContent).not.toContain('Invalid Date');
+    expect(newsItems[0].date).toBe('');
+    expect(container.textContent).not.toMatch(/draft|Invalid Date/i);
     expect(container.querySelector('time')).toBeNull();
   });
   it('uses semantic time only for valid dates', () => {
@@ -33,10 +33,10 @@ describe('resource publication dates', () => {
     expect(container.querySelector('time')?.getAttribute('datetime')).toBe('2026-10-22');
     expect(screen.getByText('22 October 2026')).toBeTruthy();
   });
-  it('keeps draft date labels on article details', () => {
+  it('shows article metadata without inventing a publication date', () => {
     render(<MemoryRouter initialEntries={[`/resources/${newsItems[0].slug}`]}><Routes><Route path="/resources/:slug" element={<ResourceDetailPage />} /></Routes></MemoryRouter>);
-    expect(screen.getAllByText(newsItems[0].date).length).toBeGreaterThan(0);
-    expect(document.body.textContent).not.toContain('Invalid Date');
+    expect(screen.getByText('Educational article · Source links provided for further reading')).toBeTruthy();
+    expect(document.body.textContent).not.toMatch(/draft|Invalid Date/i);
   });
 });
 
