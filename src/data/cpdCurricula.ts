@@ -21,9 +21,8 @@ const publicSelfStudySlugs = new Set([
 
 export const cpdCurricula: Record<string, CPDCurriculumDraft> = {};
 for (const draft of [...rehabilitationDrafts, ...specialistDrafts, ...systemsDrafts, ...physiotherapyCoreDrafts]) {
-  if (draft.status !== 'draft') throw new Error('Only draft CPD content is permitted.');
   if (Object.prototype.hasOwnProperty.call(cpdCurricula, draft.courseSlug)) throw new Error('Duplicate CPD curriculum slug.');
-  cpdCurricula[draft.courseSlug] = { ...draft, status: publicSelfStudySlugs.has(draft.courseSlug) ? 'published' : 'draft' };
+  cpdCurricula[draft.courseSlug] = { ...draft, status: 'published' };
 }
 
 export function getCPDCurriculum(slug: string): CPDCurriculumDraft | undefined {
