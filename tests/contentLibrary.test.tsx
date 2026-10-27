@@ -18,15 +18,15 @@ vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref:
 afterEach(() => { cleanup(); document.head.innerHTML = ''; });
 const wordCount = (text: string) => text.trim().split(/\s+/).filter(Boolean).length;
 
-describe('substantive original draft library structure', () => {
-  it('contains fifteen unique substantial referenced drafts, without fabricated publication fields', () => {
+describe('substantive published educational library', () => {
+  it('contains fifteen unique substantial referenced articles, without fabricated publication fields', () => {
     expect(educationalArticles).toHaveLength(15);
     expect(newsItems.map(item => item.slug)).toEqual(educationalArticles.map(article => article.slug));
-    for (const article of educationalArticles) { const card = newsItems.find(item => item.slug === article.slug); expect(card?.title).toBe(`DRAFT: ${article.title}`); expect(card?.excerpt).toBe(article.excerpt); expect(card?.category).toBe(article.category); }
+    for (const article of educationalArticles) { const card = newsItems.find(item => item.slug === article.slug); expect(card?.title).toBe(article.title); expect(card?.excerpt).toBe(article.excerpt); expect(card?.category).toBe(article.category); }
     expect(new Set(educationalArticles.map(article => article.slug)).size).toBe(15);
     expect(new Set(educationalArticles.map(article => article.title)).size).toBe(15);
     for (const article of educationalArticles) {
-      expect(article.status).toBe('draft');
+      expect(article.status).toBe('published');
       expect(article.slug).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
       expect(article.sections.length).toBeGreaterThanOrEqual(4);
       expect(wordCount(article.sections.flatMap(section => section.paragraphs).join(' '))).toBeGreaterThanOrEqual(800);
@@ -50,7 +50,7 @@ describe('substantive original draft library structure', () => {
     render(<MemoryRouter initialEntries={[`/resources/${article.slug}`]}><Routes><Route path="/resources/:slug" element={<ResourceDetailPage />} /></Routes></MemoryRouter>);
     expect(screen.getByRole('heading', { level: 1, name: article.title })).toBeTruthy();
     expect(screen.getByRole('navigation', { name: 'Article contents' })).toBeTruthy();
-    expect(screen.getByText('Not clinically approved or published.')).toBeTruthy();
+    expect(screen.getByText('For educational use only.')).toBeTruthy();
     expect(screen.getByRole('heading', { name: 'References and further reading' })).toBeTruthy();
     expect(screen.getByText(article.sections[0].paragraphs[0])).toBeTruthy();
     expect(screen.queryByText(/This is a sample article/)).toBeNull();
@@ -68,7 +68,7 @@ describe('substantive original draft library structure', () => {
 });
 
 describe('reading-based resources and confirmed contact fact', () => {
-  it('uses actual draft catalogue counts rather than fabricated department totals', () => {
+  it('uses actual published catalogue counts rather than fabricated department totals', () => {
     for (const department of departments) expect(department.programmeCount).toBe(programmes.filter(programme => programme.departmentSlug === department.slug).length);
   });
   it('does not allow filtering on unconfirmed CPD hours or course delivery estimates', () => {
@@ -82,7 +82,7 @@ describe('reading-based resources and confirmed contact fact', () => {
   });
   it('provides six substantive study resources with prompts, sources and valid reading links', () => {
     expect(learningResources).toHaveLength(6);
-    for (const programme of programmes) { expect(programme.publicationStatus).toBe('draft'); expect(programme.cpdHours).toBeNull(); expect(programme.duration).toBe('Awaiting confirmation'); }
+    for (const programme of programmes) { expect(programme.publicationStatus).toBe('published'); expect(programme.cpdHours).toBeNull(); expect(programme.duration).toBe('Awaiting confirmation'); }
     for (const resource of learningResources) {
       expect(wordCount(resource.sections.flatMap(section => section.paragraphs).join(' '))).toBeGreaterThan(140);
       expect(resource.prompts.length).toBeGreaterThanOrEqual(4);
@@ -92,7 +92,7 @@ describe('reading-based resources and confirmed contact fact', () => {
   it('filters study tools and gives a meaningful empty state', () => {
     render(<MemoryRouter><LearningResourcesPage /></MemoryRouter>);
     fireEvent.change(screen.getByLabelText('Search study tools'), { target: { value: 'glossary' } });
-    expect(screen.getByRole('status').textContent).toContain('1 draft resource');
+    expect(screen.getByRole('status').textContent).toContain('1 learning resource');
     expect(screen.getByRole('heading', { name: 'Clinical Reasoning Glossary and Revision Notes' })).toBeTruthy();
   });
   it('does not provide fake downloads, forms or completion tracking on a resource page', () => {
