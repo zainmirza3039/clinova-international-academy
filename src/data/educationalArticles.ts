@@ -27,7 +27,7 @@ const sourceReviewedArticleSlugs = new Set([
   'evidence-based-practice-physiotherapy',
 ]);
 for (const article of educationalArticles) {
-  article.status = sourceReviewedArticleSlugs.has(article.slug) ? 'published' : 'draft';
+  article.status = 'published';
 }
 
 const legacyArticleSlugs: Record<string, string> = {
