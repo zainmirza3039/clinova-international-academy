@@ -46,7 +46,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Foundation',
     description: 'Essential communication techniques for effective clinical consultations.',
-    publicationStatus: 'draft',
+    publicationStatus: 'published',
     image: 'https://images.pexels.com/photos/7447058/pexels-photo-7447058.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -58,7 +58,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Foundation',
     description: 'Educational awareness of wound assessment information, professional scope and safe escalation; not a procedural guide.',
-    publicationStatus: 'draft',
+    publicationStatus: 'published',
     image: 'https://images.pexels.com/photos/5722160/pexels-photo-5722160.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -70,7 +70,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Advanced',
     description: 'An educational guide to finding and discussing medicines evidence within authorised professional roles; not a prescribing protocol.',
-    publicationStatus: 'draft',
+    publicationStatus: 'published',
     image: 'https://images.pexels.com/photos/8657359/pexels-photo-8657359.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -82,7 +82,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Intermediate',
     description: 'An educational introduction to anxiety-related CBT concepts, training limits and specialist referral; not therapist qualification.',
-    publicationStatus: 'draft',
+    publicationStatus: 'published',
     image: 'https://images.pexels.com/photos/8430297/pexels-photo-8430297.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -94,7 +94,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Intermediate',
     description: 'Educational review of nutrition risk, shared decisions and dietetic referral; not individualised dietary prescriptions.',
-    publicationStatus: 'draft',
+    publicationStatus: 'published',
     image: 'https://images.pexels.com/photos/15319038/pexels-photo-15319038.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -106,7 +106,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Foundation',
     description: 'Principles of patient safety, error prevention and quality improvement.',
-    publicationStatus: 'draft',
+    publicationStatus: 'published',
     image: 'https://images.pexels.com/photos/6129104/pexels-photo-6129104.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -130,7 +130,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Foundation',
     description: 'Evidence-based infection prevention practices for clinical settings.',
-    publicationStatus: 'draft',
+    publicationStatus: 'published',
     image: 'https://images.pexels.com/photos/8376296/pexels-photo-8376296.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -142,7 +142,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Intermediate',
     description: 'Methods and tools for leading quality improvement initiatives in healthcare.',
-    publicationStatus: 'draft',
+    publicationStatus: 'published',
     image: 'https://images.pexels.com/photos/6129142/pexels-photo-6129142.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
 
