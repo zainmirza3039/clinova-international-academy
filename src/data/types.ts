@@ -44,7 +44,7 @@ export interface Programme {
 
 export type ProgrammeCategory = 'Learning Guide' | 'Certificate' | 'Diploma' | 'Professional Development' | 'CPD';
 export type ProgrammeLevel = 'Foundation' | 'Intermediate' | 'Advanced';
-export type ProgrammeStatus = 'Draft' | 'Open' | 'Coming Soon';
+export type ProgrammeStatus = 'Draft' | 'Published' | 'Open' | 'Coming Soon';
 export type PublicationStatus = 'draft' | 'published';
 
 export interface CPDCourse {
