@@ -28,7 +28,7 @@ try {
 }
 
 const fixedPublicRoutes = [
-  '/', '/about', '/departments', '/cpd-courses', '/online-learning',
+  '/', '/about', '/departments', '/programmes', '/cpd-courses', '/online-learning',
   '/training-partners', '/resources', '/contact', '/admissions',
   '/events', '/faculty', '/faqs', '/privacy-policy',
   '/terms-and-conditions', '/cookie-policy', '/refund-policy',
@@ -44,16 +44,24 @@ function readPublishedSlugs(file, statusField) {
   });
 }
 
-function readReviewedArticleSlugs() {
-  const source = readFileSync(join(sourceRoot, 'src/data/educationalArticles.ts'), 'utf8');
-  const match = source.match(/const sourceReviewedArticleSlugs = new Set\(\[([\s\S]*?)\]\)/);
-  if (!match) throw new Error('Could not locate the explicit educational article publication allowlist.');
-  return [...match[1].matchAll(/[\'"]([a-z0-9]+(?:-[a-z0-9]+)*)[\'"]/g)].map(item => item[1]);
+function readPublishedJsonSlugs(files, slugField, statusField = 'status') {
+  return files.flatMap(file => {
+    const entries = JSON.parse(readFileSync(join(sourceRoot, file), 'utf8'));
+    return entries
+      .filter(entry => entry[statusField] === 'published')
+      .map(entry => entry[slugField]);
+  });
 }
 
 const courseSlugs = readPublishedSlugs('src/data/cpdCourses.ts', 'publicationStatus');
-const articleSlugs = readReviewedArticleSlugs();
+const programmeSlugs = readPublishedSlugs('src/data/programmes.ts', 'publicationStatus');
+const articleSlugs = readPublishedJsonSlugs([
+  'src/data/articles/assessment-and-pain.json',
+  'src/data/articles/rehabilitation.json',
+  'src/data/articles/clinical-practice.json',
+], 'slug');
 const dynamicPublicRoutes = [
+  ...programmeSlugs.map(slug => '/programmes/' + slug),
   ...courseSlugs.map(slug => '/cpd-courses/' + slug),
   ...articleSlugs.map(slug => '/resources/' + slug),
 ];
@@ -93,5 +101,5 @@ if (origin) {
 }
 
 console.log(origin
-  ? 'SEO assets generated for configured origin (' + courseSlugs.length + ' published courses, ' + articleSlugs.length + ' reviewed articles).'
+  ? 'SEO assets generated for configured origin (' + programmeSlugs.length + ' published programmes, ' + courseSlugs.length + ' published courses, ' + articleSlugs.length + ' published articles).'
   : 'Preview SEO safeguards generated: noindex, no public sitemap entries.');
