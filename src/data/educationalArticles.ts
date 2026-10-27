@@ -14,7 +14,7 @@ export interface EducationalArticle {
 }
 
 export const educationalDisclaimer = 'For general educational discussion only. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competency. Check current evidence, local guidance and scope of practice before applying information; seek urgent local medical help for new severe or rapidly worsening symptoms.';
-export const draftDateLabel = 'Educational article · Source links provided for further reading';
+export const articleMetaLabel = 'Educational article · Source links provided for further reading';
 
 export const educationalArticles: EducationalArticle[] = [
   ...assessmentAndPain, ...rehabilitation, ...clinicalPractice,
