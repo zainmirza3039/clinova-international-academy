@@ -1,7 +1,7 @@
 [
   {
     "courseSlug": "musculoskeletal-assessment-and-clinical-reasoning",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Open self-study course for professional learning and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or accredited CPD credit. Check current evidence, local guidance and professional scope.",
     "outcomes": [
       "Structure a person-centred musculoskeletal history and examination.",
@@ -113,7 +113,7 @@
   },
   {
     "courseSlug": "knee-osteoarthritis-rehabilitation",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Open self-study course for professional learning and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or accredited CPD credit. Check current evidence, local guidance and professional scope.",
     "outcomes": [
       "Explain the role of symptoms and function in osteoarthritis assessment.",
@@ -215,7 +215,7 @@
   },
   {
     "courseSlug": "stroke-rehabilitation-functional-goals",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Open self-study course for professional learning and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or accredited CPD credit. Check current evidence, local guidance and professional scope.",
     "outcomes": [
       "Describe a comprehensive, person-centred stroke rehabilitation assessment.",
@@ -311,7 +311,7 @@
   },
   {
     "courseSlug": "balance-training-fall-prevention",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Open self-study course for professional learning and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or accredited CPD credit. Check current evidence, local guidance and professional scope.",
     "outcomes": [
       "Describe multifactorial contributors to falls in older adults.",
