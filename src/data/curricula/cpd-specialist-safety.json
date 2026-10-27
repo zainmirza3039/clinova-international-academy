@@ -1,7 +1,7 @@
 [
   {
     "courseSlug": "wound-care-essentials",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Describe a person-centred wound history without treating a checklist as a diagnosis.",
@@ -121,7 +121,7 @@
   },
   {
     "courseSlug": "pharmacotherapy-updates-in-chronic-disease",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Explain medicines reconciliation, review and shared decision-making as distinct activities.",
@@ -241,7 +241,7 @@
   },
   {
     "courseSlug": "cbt-for-anxiety-disorders",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Describe anxiety experiences and a provisional formulation without premature diagnosis.",
@@ -361,7 +361,7 @@
   },
   {
     "courseSlug": "clinical-nutrition-for-chronic-disease",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Explain what nutrition screening can and cannot establish in chronic disease.",
