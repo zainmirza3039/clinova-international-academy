@@ -1,7 +1,7 @@
 [
   {
     "courseSlug": "clinical-communication-skills",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Use person-centred listening, accessible information and teach-back.",
@@ -115,7 +115,7 @@
   },
   {
     "courseSlug": "patient-safety-in-clinical-practice",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Describe safety as a systems and human-factors discipline.",
@@ -229,7 +229,7 @@
   },
   {
     "courseSlug": "infection-prevention-and-control",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Explain transmission-risk reasoning, standard precautions and local IPC policy.",
@@ -343,7 +343,7 @@
   },
   {
     "courseSlug": "quality-improvement-in-healthcare",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Write a person-centred improvement aim with equity and governance boundaries.",
