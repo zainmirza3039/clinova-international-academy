@@ -32,7 +32,7 @@ const reviewNotice = 'Educational curriculum information only. Content is for pr
 
 const initialCourseDrafts: Record<string, CourseDraft> = {
   'certificate-in-musculoskeletal-assessment': {
-    programmeSlug: 'certificate-in-musculoskeletal-assessment', status: 'draft', reviewNotice,
+    programmeSlug: 'certificate-in-musculoskeletal-assessment', status: 'published', reviewNotice,
     outcomes: ['Use a structured history and examination sequence while adapting to the person and context.', 'Recognise findings that warrant escalation, referral or a different diagnostic pathway.', 'Communicate uncertainty, shared decisions and safety-netting without overclaiming what an assessment can establish.', 'Document relevant findings and reasoning in a way that supports continuity and review.'],
     intendedAudience: ['Physiotherapists and other regulated health professionals developing musculoskeletal assessment reasoning.', 'Learners working under appropriate supervision who need a framework for further study.'],
     prerequisites: ['A relevant professional or academic foundation in health, rehabilitation or human movement.', 'This material does not establish competence to assess, diagnose or treat; learners must follow local scope, supervision and referral requirements.'],
@@ -65,7 +65,7 @@ const initialCourseDrafts: Record<string, CourseDraft> = {
     ]
   },
   'certificate-in-clinical-pain-management': {
-    programmeSlug: 'certificate-in-clinical-pain-management', status: 'draft', reviewNotice,
+    programmeSlug: 'certificate-in-clinical-pain-management', status: 'published', reviewNotice,
     outcomes: ['Describe pain as a multidimensional experience without equating pain intensity with tissue damage.', 'Use a person-centred pain history and identify factors that may affect risk, function and participation.', 'Discuss self-management and rehabilitation options with appropriate uncertainty and safety-netting.', 'Recognise when pain presentations require escalation, multidisciplinary input or review of the working formulation.'],
     intendedAudience: ['Regulated health professionals and supervised learners who encounter people living with pain.', 'Rehabilitation teams seeking a cautious introduction to biopsychosocial and evidence-informed conversations.'],
     prerequisites: ['Foundational knowledge of health, rehabilitation or a relevant clinical role.', 'An understanding that pain management decisions remain within professional scope, local policy and supervision.'],
@@ -102,9 +102,8 @@ const initialCourseDrafts: Record<string, CourseDraft> = {
 
 export const courseDrafts: Record<string, CourseDraft> = { ...initialCourseDrafts };
 for (const draft of [...rehabilitationDrafts, ...personCentredDrafts, ...psychologyLeadershipDrafts]) {
-  if (draft.status !== 'draft') throw new Error('Only draft programme content is permitted.');
   if (Object.prototype.hasOwnProperty.call(courseDrafts, draft.programmeSlug)) throw new Error('Duplicate programme curriculum slug.');
-  courseDrafts[draft.programmeSlug] = { ...draft, status: 'draft' };
+  courseDrafts[draft.programmeSlug] = { ...draft, status: 'published' };
 }
 
 export function getCourseDraft(slug: string): CourseDraft | undefined {
