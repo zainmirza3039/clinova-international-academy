@@ -8,17 +8,6 @@ export interface CPDCurriculumDraft extends Omit<CourseDraft, 'programmeSlug'> {
   courseSlug: string;
 }
 
-const publicSelfStudySlugs = new Set([
-  'clinical-assessment-of-low-back-pain',
-  'pain-management-fundamentals',
-  'introduction-to-sports-rehabilitation',
-  'motor-control-relearning-in-neurorehabilitation',
-  'musculoskeletal-assessment-and-clinical-reasoning',
-  'knee-osteoarthritis-rehabilitation',
-  'stroke-rehabilitation-functional-goals',
-  'balance-training-fall-prevention',
-]);
-
 export const cpdCurricula: Record<string, CPDCurriculumDraft> = {};
 for (const draft of [...rehabilitationDrafts, ...specialistDrafts, ...systemsDrafts, ...physiotherapyCoreDrafts]) {
   if (Object.prototype.hasOwnProperty.call(cpdCurricula, draft.courseSlug)) throw new Error('Duplicate CPD curriculum slug.');
