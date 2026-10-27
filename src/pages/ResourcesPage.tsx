@@ -5,7 +5,7 @@ import PageHero from '@/components/PageHero';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import NewsCard from '@/components/NewsCard';
 import { newsItems } from '@/data/testimonials';
-import { publishedEducationalArticleCards, educationalDisclaimer, draftDateLabel, getPublishedEducationalArticle } from '@/data/educationalArticles';
+import { publishedEducationalArticleCards, educationalDisclaimer, articleMetaLabel, getPublishedEducationalArticle } from '@/data/educationalArticles';
 import { publishedProgrammes } from '@/data/programmes';
 
 export function ResourcesPage() {
@@ -46,7 +46,7 @@ export function ResourceDetailPage() {
   const related = (explicitRelated.length ? explicitRelated : publishedEducationalArticleCards.filter(item => item.slug !== article.slug && item.category === article.category)).slice(0, 3);
   const relatedProgrammes = article.relatedProgrammeSlugs.map(programmeSlug => publishedProgrammes.find(item => item.slug === programmeSlug)).filter((item): item is typeof publishedProgrammes[number] => Boolean(item));
   return <>
-    <header className="bg-navy-900 pt-28 pb-12 lg:pt-36"><div className="max-w-4xl mx-auto px-6"><Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Resources', to: '/resources' }, { label: article.category }]} /><p className="mt-6 text-sm font-semibold text-teal-300">{article.category}</p><h1 className="mt-3 text-3xl md:text-4xl font-heading font-bold text-white leading-tight">{article.title}</h1><p className="mt-5 text-navy-200 leading-relaxed">{article.excerpt}</p><p className="mt-4 text-sm text-navy-300">{draftDateLabel}</p></div></header>
+    <header className="bg-navy-900 pt-28 pb-12 lg:pt-36"><div className="max-w-4xl mx-auto px-6"><Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Resources', to: '/resources' }, { label: article.category }]} /><p className="mt-6 text-sm font-semibold text-teal-300">{article.category}</p><h1 className="mt-3 text-3xl md:text-4xl font-heading font-bold text-white leading-tight">{article.title}</h1><p className="mt-5 text-navy-200 leading-relaxed">{article.excerpt}</p><p className="mt-4 text-sm text-navy-300">{articleMetaLabel}</p></div></header>
     <article className="max-w-4xl mx-auto px-6 py-12">
       <aside aria-label="Educational status" className="p-5 bg-amber-50 border border-amber-200 text-sm text-navy-700 leading-relaxed"><strong>For educational use only.</strong> {educationalDisclaimer}</aside>
       <nav aria-label="Article contents" className="my-8 border border-navy-100 p-5"><h2 className="font-semibold text-navy-900">In this article</h2><ol className="mt-3 list-decimal pl-5 space-y-2">{article.sections.map((section, index) => <li key={section.heading}><a className="text-clinical-600 underline underline-offset-2" href={`#article-section-${index + 1}`}>{section.heading}</a></li>)}</ol></nav>
