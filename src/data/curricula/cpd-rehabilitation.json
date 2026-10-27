@@ -1,7 +1,7 @@
 [
   {
     "courseSlug": "clinical-assessment-of-low-back-pain",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Structure a person-centred low-back-pain history and examination while keeping alternative diagnoses in view.",
@@ -125,7 +125,7 @@
   },
   {
     "courseSlug": "pain-management-fundamentals",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Describe pain as a multidimensional lived experience without equating intensity with tissue damage.",
@@ -249,7 +249,7 @@
   },
   {
     "courseSlug": "introduction-to-sports-rehabilitation",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Describe staged sports rehabilitation as a criteria-informed, person-centred process rather than a calendar.",
@@ -367,7 +367,7 @@
   },
   {
     "courseSlug": "motor-control-relearning-in-neurorehabilitation",
-    "status": "draft",
+    "status": "published",
     "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Explain motor-control relearning as goal-linked practice shaped by task, person and environment.",
