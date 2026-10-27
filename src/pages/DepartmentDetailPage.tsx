@@ -46,7 +46,7 @@ export default function DepartmentDetailPage() {
 
   const deptFAQs: FAQ[] = [
     { id: 'df1', question: `What is this ${department.shortName} page?`, answer: `It organises educational reading and study topics for this healthcare discipline. It does not itself represent a clinical service or a live programme.` },
-    { id: 'df2', question: 'Who might use these materials?', answer: 'Healthcare professionals, learners and organisations may use the drafts to frame questions. Readers should consider their training, role, local guidance and scope of practice.' },
+    { id: 'df2', question: 'Who might use these materials?', answer: 'Healthcare professionals, learners and organisations may use these published educational resources to frame questions. Readers should consider their training, role, local guidance and scope of practice.' },
     { id: 'df3', question: 'Are the listed programmes available?', answer: 'Catalogue entries are informational. Confirm availability, dates, fees, delivery, assessment and entry requirements for each offering before enrolling.' },
     { id: 'df4', question: 'Do these pages provide a qualification or clinical authority?', answer: 'No. These pages do not promise a certificate, accreditation, competence, employment, professional recognition or permission to practise.' },
   ];
@@ -154,7 +154,7 @@ export default function DepartmentDetailPage() {
 
       <section className="py-12 lg:py-16 bg-white">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader eyebrow="Learning library" title="Read, reflect and go further" description="Curated article drafts related to assessment, evidence-informed practice and patient safety. Each opens in the educational article library." />
+          <SectionHeader eyebrow="Learning library" title="Read, reflect and go further" description="Published educational articles related to assessment, evidence-informed practice and patient safety. Each opens in the educational article library." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {relatedArticles.map((article) => article && <Link key={article.slug} to={`/resources/${article.slug}`} className="group p-4 border border-navy-100 hover:border-clinical-300 transition-colors">
               <h3 className="font-heading font-semibold text-navy-800 text-sm leading-snug group-hover:text-clinical-600">{article.title}</h3>
@@ -166,7 +166,7 @@ export default function DepartmentDetailPage() {
       </section>
 
       <section className="py-8 bg-amber-50 border-y border-amber-200">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-sm text-navy-700 leading-relaxed"><strong>Educational disclaimer.</strong> These drafts are for professional discussion, not patient-specific medical advice, a clinical protocol or evidence of competency. Follow local guidance and scope of practice; seek qualified review before clinical use.</div>
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-sm text-navy-700 leading-relaxed"><strong>Educational disclaimer.</strong> These published educational resources are for professional discussion, not patient-specific medical advice, a clinical protocol or evidence of competency. Follow local guidance and scope of practice; seek qualified review before clinical use.</div>
       </section>
 
       {programmes.length === 0 && relatedCPD.length === 0 && (
