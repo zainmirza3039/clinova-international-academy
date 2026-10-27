@@ -8,11 +8,11 @@ const images = [
 ];
 const articles = sources.flatMap(source => JSON.parse(readFileSync(new URL(`../src/data/articles/${source}.json`, import.meta.url), 'utf8')));
 const cards = articles.map((article, index) => ({
-  id: article.id, slug: article.slug, title: `DRAFT: ${article.title}`,
+  id: article.id, slug: article.slug, title: article.title,
   excerpt: article.excerpt, category: article.category,
-  date: 'Draft — publication date awaiting academy confirmation',
+  date: '',
   image: images[index % images.length],
 }));
 const target = new URL('../src/data/articleIndex.json', import.meta.url);
 writeFileSync(target, `${JSON.stringify(cards, null, 2)}\n`);
-console.log(`Generated ${cards.length} draft article cards: ${fileURLToPath(target)}`);
+console.log(`Generated ${cards.length} published educational article cards: ${fileURLToPath(target)}`);
