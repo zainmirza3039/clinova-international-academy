@@ -3,6 +3,9 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { afterEach, describe, expect, it } from 'vitest';
+import { programmes } from '@/data/programmes';
+import { cpdCourses } from '@/data/cpdCourses';
+import { educationalArticles } from '@/data/educationalArticles';
 
 const repoRoot = process.cwd();
 const generator = resolve(repoRoot, 'scripts/generate-seo.mjs');
@@ -45,33 +48,24 @@ describe('build-time SEO publication safeguards', () => {
     expect(output.sitemap).toContain('<loc>https://www.clinovainternationalacademy.co.uk/programmes</loc>');
     expect(output.sitemap).not.toContain('/departments/');
 
-    const publishedCourses = [
-      'clinical-assessment-of-low-back-pain', 'introduction-to-sports-rehabilitation', 'pain-management-fundamentals',
-      'motor-control-relearning-in-neurorehabilitation', 'musculoskeletal-assessment-and-clinical-reasoning',
-      'knee-osteoarthritis-rehabilitation', 'stroke-rehabilitation-functional-goals', 'balance-training-fall-prevention',
-      'clinical-communication-skills', 'wound-care-essentials', 'pharmacotherapy-updates-in-chronic-disease',
-      'cbt-for-anxiety-disorders', 'clinical-nutrition-for-chronic-disease', 'rehabilitation-after-immobilisation',
-      'shoulder-rehabilitation-principles', 'clinical-reasoning-in-neurological-rehabilitation',
-    ];
-    for (const slug of publishedCourses) {
-      expect(output.sitemap).toContain('<loc>https://www.clinovainternationalacademy.co.uk/cpd-courses/' + slug + '</loc>');
+    for (const { slug, publicationStatus } of cpdCourses) {
+      if (publicationStatus === 'published') {
+        expect(output.sitemap).toContain('<loc>https://www.clinovainternationalacademy.co.uk/cpd-courses/' + slug + '</loc>');
+      } else {
+        expect(output.sitemap).not.toContain('/cpd-courses/' + slug + '</loc>');
+      }
     }
-
-    const reviewedArticles = [
-      'low-back-pain-rehabilitation', 'knee-osteoarthritis-rehabilitation', 'stroke-rehabilitation-functional-goals',
-      'balance-training-fall-prevention', 'evidence-based-practice-physiotherapy',
-      'shoulder-pain-assessment-rehabilitation', 'clinical-communication-in-healthcare', 'safe-mobility-after-stroke',
-      'patient-centred-rehabilitation-goals', 'clinical-reasoning-in-physiotherapy', 'exercise-prescription-basics',
-      'understanding-pain-science', 'falls-risk-assessment', 'neuroplasticity-and-rehabilitation', 'shared-decision-making',
-    ];
-    for (const slug of reviewedArticles) {
-      expect(output.sitemap).toContain('<loc>https://www.clinovainternationalacademy.co.uk/resources/' + slug + '</loc>');
+    for (const { slug, publicationStatus } of programmes) {
+      if (publicationStatus === 'published') {
+        expect(output.sitemap).toContain('<loc>https://www.clinovainternationalacademy.co.uk/programmes/' + slug + '</loc>');
+      }
     }
-
-    expect(output.sitemap).toContain('/cpd-courses/clinical-communication-skills</loc>');
-    expect(output.sitemap).toContain('/resources/shoulder-pain-assessment-rehabilitation</loc>');
-    for (const route of ['/admin', '/student', '/sign-in', '/sign-up', '/forgot-password', '/reset-password', '/verify']) {
-      expect(output.sitemap).not.toContain(route);
+    for (const { slug, status } of educationalArticles) {
+      if (status === 'published') {
+        expect(output.sitemap).toContain('<loc>https://www.clinovainternationalacademy.co.uk/resources/' + slug + '</loc>');
+      } else {
+        expect(output.sitemap).not.toContain('/resources/' + slug + '</loc>');
+      }
     }
     expect(output.robots).toContain('Sitemap: https://www.clinovainternationalacademy.co.uk/sitemap.xml');
     expect(output.robots).toContain('Disallow: /admin');
