@@ -8,6 +8,7 @@ import CPDCoursesPage from '@/pages/CPDCoursesPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import Header from '@/components/Header';
 import FilterBar from '@/components/FilterBar';
+import { programmes } from '@/data/programmes';
 const config = vi.hoisted(() => ({ siteOrigin: 'https://academy.example' as string | undefined }));
 vi.mock('@/lib/siteConfig', () => config);
 vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }), useScrollPosition: () => false }));
@@ -47,8 +48,10 @@ describe('catalogue filter accessibility and URL navigation', () => {
   });
 
   it('labels current learning-guide filters and follows same-page resource-type navigation', () => {
-    render(<MemoryRouter initialEntries={['/programmes?type=Learning%20Guide']}><Link to="/programmes?type=Learning%20Guide">Navigate learning guides</Link><ProgrammesPage /></MemoryRouter>);
-    expect((screen.getByLabelText('Resource type') as HTMLSelectElement).value).toBe('Learning Guide');
+    const category = programmes[0].category;
+    const destination = `/programmes?type=${encodeURIComponent(category)}`;
+    render(<MemoryRouter initialEntries={[destination]}><Link to={destination}>Navigate learning guides</Link><ProgrammesPage /></MemoryRouter>);
+    expect((screen.getByLabelText('Resource type') as HTMLSelectElement).value).toBe(category);
     for (const label of ['Subject area', 'Study level']) expect(screen.getByLabelText(label).tagName).toBe('SELECT');
     fireEvent.click(screen.getByText('Navigate learning guides'));
     expect((screen.getByLabelText('Resource type') as HTMLSelectElement).value).toBe('Learning Guide');
