@@ -25,5 +25,5 @@
       "dest": "/index.html"
     }
   ],
-  "buildCommand": "VITE_VERIFICATION_ENABLED=false VITE_AUTH_ENABLED=false VITE_LEARNER_DATA_ENABLED=false VITE_ENQUIRIES_ENABLED=false npm run build"
+  "buildCommand": "export VITE_VERIFICATION_ENABLED=false VITE_AUTH_ENABLED=false VITE_LEARNER_DATA_ENABLED=false VITE_ENQUIRIES_ENABLED=false VITE_INDEXING_ENABLED=false; npm run typecheck && npm run lint && npm test && npm run build"
 }
