@@ -109,6 +109,6 @@ describe('reading-based resources and confirmed contact fact', () => {
     expect(screen.queryByRole('button', { name: /send message/i })).toBeNull();
     expect(screen.queryByRole('form')).toBeNull();
     expect(screen.getByText(/Online contact and partnership submissions are not currently available/)).toBeTruthy();
-    expect(screen.getByText(/Visiting arrangements and opening hours have not been confirmed/)).toBeTruthy();
+    expect(screen.getByText(/Visiting arrangements and opening hours are not published/)).toBeTruthy();
   });
 });
