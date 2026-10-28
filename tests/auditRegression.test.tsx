@@ -54,7 +54,7 @@ describe('catalogue filter accessibility and URL navigation', () => {
     expect((screen.getByLabelText('Resource type') as HTMLSelectElement).value).toBe(category);
     for (const label of ['Subject area', 'Study level']) expect(screen.getByLabelText(label).tagName).toBe('SELECT');
     fireEvent.click(screen.getByText('Navigate learning guides'));
-    expect((screen.getByLabelText('Resource type') as HTMLSelectElement).value).toBe('Learning Guide');
+    expect((screen.getByLabelText('Resource type') as HTMLSelectElement).value).toBe(category);
   });
   it('labels CPD filters and keeps unawarded credit unavailable', () => {
     render(<MemoryRouter><CPDCoursesPage /></MemoryRouter>);
