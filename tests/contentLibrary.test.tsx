@@ -60,7 +60,7 @@ describe('substantive published educational library', () => {
     fireEvent.change(screen.getByLabelText('Search resources'), { target: { value: 'unfindable-phrase-123' } });
     expect(screen.getByRole('status').textContent).toContain('0 educational articles');
     fireEvent.click(screen.getByRole('button', { name: 'Clear filters' }));
-    expect(screen.getByRole('status').textContent).toContain('15 articles');
+    expect(screen.getByRole('status').textContent).toContain('15 educational articles');
     const phrase = educationalArticles[0].sections[0].paragraphs[0].split(/\s+/).slice(4, 12).join(' ');
     fireEvent.change(screen.getByLabelText('Search resources'), { target: { value: phrase } });
     expect(screen.getByRole('link', { name: new RegExp(educationalArticles[0].title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) })).toBeTruthy();
@@ -77,8 +77,8 @@ describe('reading-based resources and confirmed contact fact', () => {
     expect(cpd.container.querySelector('option[value="10"]')).toBeNull();
     cleanup();
     render(<MemoryRouter><ProgrammesPage /></MemoryRouter>);
-    expect((screen.getByLabelText('Duration') as HTMLSelectElement).disabled).toBe(true);
-    expect((screen.getByLabelText('Delivery') as HTMLSelectElement).disabled).toBe(true);
+    expect(screen.queryByLabelText('Duration')).toBeNull();
+    expect(screen.queryByLabelText('Delivery')).toBeNull();
   });
   it('provides six substantive study resources with prompts, sources and valid reading links', () => {
     expect(learningResources).toHaveLength(6);
