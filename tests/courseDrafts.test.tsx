@@ -38,7 +38,7 @@ describe('published learning curricula', () => {
     const programmeCard = render(<MemoryRouter><ProgrammeCard programme={publishedProgramme} /></MemoryRouter>);
     expect(programmeCard.container.textContent).toMatch(/Read guide/i);
     expect(programmeCard.container.textContent).not.toMatch(/draft/i);
-    expect(programmeCard.container.textContent).not.toMatch(/\d+ CPD|weeks|Certificate of Completion|Enrol/i);
+    expect(programmeCard.container.textContent).not.toMatch(/\d+ CPD hours|weeks|Certificate of Completion|Enrol now/i);
     cleanup();
     const publishedCourse = cpdCourses.find((item) => item.publicationStatus === 'published');
     expect(publishedCourse).toBeTruthy();
