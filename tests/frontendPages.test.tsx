@@ -15,11 +15,11 @@ afterEach(() => cleanup());
 describe('completion frontend pages', () => {
   it('explains that application submission and persistence are unavailable', () => {
     renderPage(<ApplicationPage />);
-    expect(screen.getByText(/Submission unavailable/i)).toBeTruthy();
-    expect((screen.getByRole('button', { name: /submission is not available/i }) as HTMLButtonElement).disabled).toBe(true);
-    fireEvent.change(screen.getByLabelText(/your name/i), { target: { value: 'Private Name' } });
-    expect(screen.queryByText(/application record will be created/i)).not.toBeNull();
-    expect(screen.queryByText(/thank you|submitted successfully/i)).toBeNull();
+    expect(screen.getByRole('heading', { name: 'Discuss your learning interests' })).toBeTruthy();
+    expect(screen.getByText(/Online applications and payment processing are not available through this website/i)).toBeTruthy();
+    expect(screen.queryByRole('form')).toBeNull();
+    expect(screen.queryByLabelText(/your name/i)).toBeNull();
+    expect(screen.queryByRole('button', { name: /submit|send application/i })).toBeNull();
   });
 
   it('keeps admin access blocked without presenting credentials or fake records', () => {
@@ -32,9 +32,9 @@ describe('completion frontend pages', () => {
 
   it('renders honest unconfirmed states for events and faculty', () => {
     renderPage(<EventsPage />);
-    expect(screen.getByRole('heading', { name: /no confirmed events yet/i })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: /no events currently listed/i })).toBeTruthy();
     renderPage(<FacultyPage />);
-    expect(screen.getByRole('heading', { name: /faculty profiles are not yet confirmed/i })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: /no faculty profiles currently listed/i })).toBeTruthy();
   });
 
   it('provides FAQ buttons with expanded state and no invented commercial claims', () => {
@@ -46,14 +46,14 @@ describe('completion frontend pages', () => {
     expect(screen.queryByText(/£|accredited by/i)).toBeNull();
     const contactQuestion = screen.getByRole('button', { name: /how do i contact clinova/i });
     fireEvent.click(contactQuestion);
-    expect(screen.getByText(/enquiry submission is disabled in this preview/i)).toBeTruthy();
+    expect(screen.getByText(/Online enquiry submissions are not available/i)).toBeTruthy();
     expect(screen.queryByText(/currently supported contact route and expected response guidance/i)).toBeNull();
   });
 
   it('renders admissions guidance and the application preview link', () => {
     renderPage(<AdmissionsPage />);
     expect(screen.getByRole('heading', { name: /clear next step/i })).toBeTruthy();
-    expect(screen.getByRole('link', { name: /open application preview/i }).getAttribute('href')).toBe('/application');
+    expect(screen.getByRole('link', { name: /application information/i }).getAttribute('href')).toBe('/application');
   });
 
   it('renders the community index without implying unverified details', () => {
