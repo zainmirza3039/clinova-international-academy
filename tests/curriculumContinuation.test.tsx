@@ -142,7 +142,7 @@ describe('direct programme and CPD detail rendering', () => {
       </MemoryRouter>,
     );
     expect(screen.getByRole('heading', { level: 1, name: programme.title })).toBeTruthy();
-    expect(screen.getAllByText(/Independent (?:educational|study|self-study) guide/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Independent (?:educational|study|self-study) guide|Self-paced lessons/i).length).toBeGreaterThan(0);
     expect(screen.getByRole('navigation', { name: 'Curriculum sections' })).toBeTruthy();
     expect(screen.getByRole('heading', { name: 'Sources and scope notes' })).toBeTruthy();
     const details = container.querySelectorAll('details');
