@@ -58,7 +58,7 @@ describe('substantive published educational library', () => {
   it('searches the article body and can clear an empty search', () => {
     render(<MemoryRouter><ResourcesPage /></MemoryRouter>);
     fireEvent.change(screen.getByLabelText('Search resources'), { target: { value: 'unfindable-phrase-123' } });
-    expect(screen.getByRole('status').textContent).toContain('0 articles');
+    expect(screen.getByRole('status').textContent).toContain('0 educational articles');
     fireEvent.click(screen.getByRole('button', { name: 'Clear filters' }));
     expect(screen.getByRole('status').textContent).toContain('15 articles');
     const phrase = educationalArticles[0].sections[0].paragraphs[0].split(/\s+/).slice(4, 12).join(' ');
@@ -73,7 +73,7 @@ describe('reading-based resources and confirmed contact fact', () => {
   });
   it('does not allow filtering on unconfirmed CPD hours or course delivery estimates', () => {
     const cpd = render(<MemoryRouter><CPDCoursesPage /></MemoryRouter>);
-    expect((cpd.getByLabelText('CPD Hours') as HTMLSelectElement).disabled).toBe(true);
+    expect((cpd.getByLabelText('CPD credit') as HTMLSelectElement).disabled).toBe(true);
     expect(cpd.container.querySelector('option[value="10"]')).toBeNull();
     cleanup();
     render(<MemoryRouter><ProgrammesPage /></MemoryRouter>);
@@ -106,7 +106,9 @@ describe('reading-based resources and confirmed contact fact', () => {
     render(<MemoryRouter><ContactPage /><Footer /></MemoryRouter>);
     expect(academyPublicAddress).toBe('1 Unity St, Bristol BS1 5HH, United Kingdom');
     expect(screen.getAllByText(academyPublicAddress)).toHaveLength(2);
-    expect((screen.getByRole('button', { name: 'Send Message' }) as HTMLButtonElement).disabled).toBe(true);
+    expect(screen.queryByRole('button', { name: /send message/i })).toBeNull();
+    expect(screen.queryByRole('form')).toBeNull();
+    expect(screen.getByText(/Online contact and partnership submissions are not currently available/)).toBeTruthy();
     expect(screen.getByText(/Visiting arrangements and opening hours have not been confirmed/)).toBeTruthy();
   });
 });
