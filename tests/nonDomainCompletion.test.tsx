@@ -49,16 +49,18 @@ describe('honest and accessible public states', () => {
     expect(category.getAttribute('aria-pressed')).toBe('true');
     expect(screen.getByRole('button', { name: 'All' }).getAttribute('aria-pressed')).toBe('false');
     fireEvent.change(screen.getByLabelText('Search resources'), { target: { value: 'no-such-article' } });
-    expect(screen.getByRole('status').textContent).toContain('0 articles');
+    expect(screen.getByRole('status').textContent).toContain('0 educational articles');
     expect(screen.getByText('No articles match your search.')).toBeTruthy();
   });
   it('does not present fictional learner totals or progress as real records', () => {
     const { container } = render(<MemoryRouter><OnlineLearningPage /></MemoryRouter>);
-    expect(screen.getByRole('heading', { name: 'An Illustrative Dashboard Concept' })).toBeTruthy();
-    expect(screen.getAllByText('Progress unavailable')).toHaveLength(3);
-    expect(screen.getAllByText('Illustrative only')).toHaveLength(3);
+    expect(screen.getByRole('heading', { name: 'A clear place to continue your healthcare learning' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Choose a resource that fits your next question' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Read educational articles' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Explore subject areas' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Use study guides' })).toBeTruthy();
     expect(container.textContent).not.toMatch(/75%|100%|30%|Completed|In Progress/);
     expect(screen.queryByText('45')).toBeNull();
-    expect(screen.getByRole('heading', { name: 'Proposed Video Lessons' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Use learning resources responsibly' })).toBeTruthy();
   });
 });
