@@ -13,6 +13,7 @@ const professionalLinks = [
   { label: 'Training Partners', to: '/training-partners' },
   { label: 'Resources', to: '/resources' },
   { label: 'Study Tools', to: '/learning-resources' },
+  { label: 'Certificate information', to: '/certification' },
   { label: 'Certificate Verification', to: '/verify' },
   { label: 'FAQs', to: '/faqs' },
   { label: 'Events', to: '/events' },
@@ -22,7 +23,6 @@ const professionalLinks = [
 const supportLinks = [
   { label: 'Contact', to: '/contact' },
   { label: 'Admissions', to: '/admissions' },
-  { label: 'Administration', to: '/admin' },
   { label: 'Privacy Policy', to: '/privacy-policy' },
   { label: 'Terms & Conditions', to: '/terms-and-conditions' },
   { label: 'Cookie Policy', to: '/cookie-policy' },
@@ -31,7 +31,7 @@ const supportLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-navy-800 text-navy-100">
+    <footer className="site-footer bg-navy-800 text-navy-100">
       <div className="max-w-editorial mx-auto px-6 lg:px-10">
         {/* Top — brand + link columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 py-14 lg:py-20">
@@ -99,7 +99,7 @@ export default function Footer() {
             &copy; 2026 Clinova International Academy. All rights reserved.
           </p>
           <p className="text-xs text-navy-100/40 text-center sm:text-right">
-            Online Healthcare Education &bull; Self-Study Courses &bull; Professional Development
+            Healthcare Learning Resources &bull; Self-Study Guides &bull; Professional Development
           </p>
         </div>
       </div>

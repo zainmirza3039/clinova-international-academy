@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { UnavailableAuth, safeReturnTarget, useAuth } from '@/auth/AuthProvider';
+import { UnavailableAuth } from '@/auth/AuthProvider';
+import { useAuth } from '@/auth/authContext';
+import { safeReturnTarget } from '@/auth/authUtils';
 import { useSEO } from '@/hooks/useSEO';
 
 type AuthMode = 'sign-in' | 'sign-up' | 'forgot-password' | 'reset-password';
@@ -30,7 +32,7 @@ export default function AuthPage({ mode: initialMode = 'sign-in' }: Props) {
   useEffect(() => {
     if (mode === 'reset-password') setLocalError(auth.status === 'ready' && (!auth.recovery || !auth.session) ? 'This password recovery link is no longer valid. Request a new one to continue.' : null);
     else if (auth.session && !auth.recovery) navigate(returnTo, { replace: true });
-  }, [auth.recovery, auth.session, auth.status, mode, navigate]);
+  }, [auth.recovery, auth.session, auth.status, mode, navigate, returnTo]);
 
   if (!auth.enabled || auth.status === 'error') return <UnavailableAuth message={auth.error ?? 'Authentication is not enabled for this site.'} />;
   if (auth.status === 'loading') return <section className="mx-auto max-w-3xl px-6 py-20 text-center" role="status" aria-live="polite"><h1 className="text-3xl font-bold text-navy-900">Checking your student session…</h1><p className="mt-4 text-navy-600">Please wait while we check authentication.</p></section>;

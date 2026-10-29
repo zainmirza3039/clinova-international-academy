@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { BookOpen, Award, Monitor, ArrowRight, CheckCircle, ExternalLink } from 'lucide-react';
+import { BookOpen, Award, Monitor, ArrowRight, CheckCircle } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import SectionHeader from '@/components/SectionHeader';
@@ -12,7 +12,6 @@ import { getDepartmentBySlug } from '@/data/departments';
 import { getProgrammesByDepartment } from '@/data/programmes';
 import { publishedCPDCourses } from '@/data/cpdCourses';
 import type { FAQ } from '@/data/types';
-import { publishedEducationalArticleCards } from '@/data/educationalArticles';
 
 export default function DepartmentDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -40,8 +39,6 @@ export default function DepartmentDetailPage() {
   const programmes = getProgrammesByDepartment(department.slug);
   const certificates = programmes.filter((p) => p.category === 'Certificate');
   const diplomas = programmes.filter((p) => p.category === 'Diploma');
-  const articleSlugs = ['physiotherapy-assessment-structured-approach', 'musculoskeletal-pain-and-function', 'evidence-based-practice-physiotherapy', 'patient-safety-red-flags-referral'];
-  const relatedArticles = articleSlugs.map((articleSlug) => publishedEducationalArticleCards.find((article) => article.slug === articleSlug)).filter(Boolean);
   const relatedCPD = publishedCPDCourses.filter((c) => c.department === department.name).slice(0, 4);
 
   const deptFAQs: FAQ[] = [
@@ -154,14 +151,11 @@ export default function DepartmentDetailPage() {
 
       <section className="py-12 lg:py-16 bg-white">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader eyebrow="Learning library" title="Read, reflect and go further" description="Published educational articles related to assessment, evidence-informed practice and patient safety. Each opens in the educational article library." />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {relatedArticles.map((article) => article && <Link key={article.slug} to={`/resources/${article.slug}`} className="group p-4 border border-navy-100 hover:border-clinical-300 transition-colors">
-              <h3 className="font-heading font-semibold text-navy-800 text-sm leading-snug group-hover:text-clinical-600">{article.title}</h3>
-              <span className="mt-3 inline-flex items-center gap-1 text-xs text-clinical-600">Read overview <ExternalLink className="w-3 h-3" /></span>
-            </Link>)}
+          <SectionHeader eyebrow="Learning library" title="Explore further reading" description="Browse the shared educational article library and independent study tools. These resources are not a department-specific curriculum." />
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <Link to="/resources" className="inline-flex items-center gap-2 text-sm font-semibold text-clinical-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600">Browse educational articles <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
+            <Link to="/learning-resources" className="inline-flex items-center gap-2 text-sm font-semibold text-clinical-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600">Explore study tools <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
           </div>
-          <Link to="/learning-resources" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-clinical-600">Open study tools <ArrowRight className="w-4 h-4" /></Link>
         </div>
       </section>
 

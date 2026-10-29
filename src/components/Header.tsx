@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useScrollPosition } from '@/hooks/useScrollAnimation';
 import { departments } from '@/data/departments';
+import { publishedCPDCourses } from '@/data/cpdCourses';
 
 const navLinks = [
   { label: 'Home', to: '/' },
@@ -16,15 +17,31 @@ const navLinks = [
   { label: 'Contact', to: '/contact' },
 ];
 
+const normalizeRoutePath = (path: string) => path.length > 1 ? path.replace(/\/+$/, '') : path;
+const getNavCurrentState = (pathname: string, to: string): 'page' | 'location' | undefined => {
+  const currentPath = normalizeRoutePath(pathname);
+  const targetPath = normalizeRoutePath(to);
+  if (currentPath === targetPath) return 'page';
+  if (targetPath !== '/' && currentPath.startsWith(`${targetPath}/`)) return 'location';
+  return undefined;
+};
+
+const featuredCourses = [
+  { slug: 'musculoskeletal-assessment-and-clinical-reasoning', desc: 'History, examination and clinical reasoning' },
+  { slug: 'clinical-assessment-of-low-back-pain', desc: 'Assessment, safety and evidence-informed management' },
+  { slug: 'knee-osteoarthritis-rehabilitation', desc: 'Exercise, function and review' },
+  { slug: 'stroke-rehabilitation-functional-goals', desc: 'Functional goals and task-specific practice' },
+  { slug: 'introduction-to-sports-rehabilitation', desc: 'Progressive loading and return to sport' },
+  { slug: 'pain-management-fundamentals', desc: 'Pain science and function-led care' },
+  { slug: 'motor-control-relearning-in-neurorehabilitation', desc: 'Task-specific practice and motor learning' },
+  { slug: 'balance-training-fall-prevention', desc: 'Falls assessment and progressive exercise' },
+];
+
 const programmeMenuItems = [
-  { label: 'MSK Assessment & Clinical Reasoning', to: '/cpd-courses/musculoskeletal-assessment-and-clinical-reasoning', desc: 'History, examination and clinical reasoning' },
-  { label: 'Low Back Pain Assessment', to: '/cpd-courses/clinical-assessment-of-low-back-pain', desc: 'Assessment, safety and evidence-informed management' },
-  { label: 'Knee Osteoarthritis Rehabilitation', to: '/cpd-courses/knee-osteoarthritis-rehabilitation', desc: 'Exercise, function and review' },
-  { label: 'Stroke Rehabilitation', to: '/cpd-courses/stroke-rehabilitation-functional-goals', desc: 'Functional goals and task-specific practice' },
-  { label: 'Sports Rehabilitation', to: '/cpd-courses/introduction-to-sports-rehabilitation', desc: 'Progressive loading and return to sport' },
-  { label: 'Pain Management', to: '/cpd-courses/pain-management-fundamentals', desc: 'Pain science and function-led care' },
-  { label: 'Motor Control & Neurorehabilitation', to: '/cpd-courses/motor-control-relearning-in-neurorehabilitation', desc: 'Task-specific practice and motor learning' },
-  { label: 'Balance & Falls Prevention', to: '/cpd-courses/balance-training-fall-prevention', desc: 'Falls assessment and progressive exercise' },
+  ...featuredCourses.flatMap(({ slug, desc }) => {
+    const course = publishedCPDCourses.find((item) => item.slug === slug);
+    return course ? [{ label: course.title, to: `/cpd-courses/${course.slug}`, desc }] : [];
+  }),
   { label: 'View All Courses', to: '/cpd-courses', desc: 'Browse all open self-study courses' },
 ];
 
@@ -77,7 +94,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`site-header fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-white shadow-sm border-b border-navy-100'
           : 'bg-white border-b border-navy-100'
@@ -107,7 +124,8 @@ export default function Header() {
               >
                 <Link
                   to={link.to}
-                  className={`flex items-center gap-1 rounded-md px-3 py-2 text-[13px] font-semibold transition-colors ${pathname === link.to || (link.to !== '/' && pathname.startsWith(link.to)) ? 'bg-surface-50 text-navy-900' : 'text-navy-600 hover:bg-surface-50 hover:text-navy-900'}`}
+                  className={`flex items-center gap-1 rounded-md px-3 py-2 text-[13px] font-semibold transition-colors ${getNavCurrentState(pathname, link.to) ? 'bg-surface-50 text-navy-900' : 'text-navy-600 hover:bg-surface-50 hover:text-navy-900'}`}
+                  aria-current={getNavCurrentState(pathname, link.to)}
                   aria-haspopup={link.hasMegaMenu ? 'true' : undefined}
                   aria-expanded={link.hasMegaMenu ? megaMenu === link.label : undefined}
                 >
@@ -129,6 +147,7 @@ export default function Header() {
                               key={dept.id}
                               to={`/departments/${dept.slug}`}
                               className="flex items-start gap-2.5 p-2.5 hover:bg-surface-50 transition-colors"
+                              aria-current={getNavCurrentState(pathname, `/departments/${dept.slug}`)}
                               onClick={() => setMegaMenu(null)}
                             >
                               <div className="w-0.5 h-full bg-teal-500 self-stretch shrink-0 min-h-[32px]" />
@@ -158,6 +177,7 @@ export default function Header() {
                               key={item.label}
                               to={item.to}
                               className="flex flex-col p-2.5 hover:bg-surface-50 transition-colors"
+                              aria-current={getNavCurrentState(pathname, item.to)}
                               onClick={() => setMegaMenu(null)}
                             >
                               <div className="text-sm font-semibold text-navy-800">{item.label}</div>
@@ -206,6 +226,7 @@ export default function Header() {
                   <Link
                     to={link.to}
                     className="flex-1 block py-3 text-base font-medium text-navy-800 hover:text-clinical-600 transition-colors"
+                    aria-current={getNavCurrentState(pathname, link.to)}
                     onClick={() => setMobileOpen(false)}
                   >
                     {link.label}
@@ -231,6 +252,7 @@ export default function Header() {
                         key={dept.id}
                         to={`/departments/${dept.slug}`}
                         className="block py-2.5 text-sm text-navy-600 hover:text-clinical-600 transition-colors"
+                        aria-current={getNavCurrentState(pathname, `/departments/${dept.slug}`)}
                         onClick={() => setMobileOpen(false)}
                       >
                         {dept.name}
@@ -246,6 +268,7 @@ export default function Header() {
                         key={item.label}
                         to={item.to}
                         className="block py-2.5 text-sm text-navy-600 hover:text-clinical-600 transition-colors"
+                        aria-current={getNavCurrentState(pathname, item.to)}
                         onClick={() => setMobileOpen(false)}
                       >
                         {item.label}

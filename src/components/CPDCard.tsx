@@ -9,7 +9,7 @@ export default function CPDCard({ course, index = 0 }: { course: CPDCourse; inde
     <Link
       to={`/cpd-courses/${course.slug}`}
       ref={ref as unknown as React.RefObject<HTMLAnchorElement>}
-      className={`group flex h-full flex-col overflow-hidden rounded-xl border border-navy-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal-200 hover:shadow-[0_18px_45px_-28px_rgba(8,43,76,0.45)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-600 animate-on-scroll ${isVisible ? 'is-visible' : ''}`}
+      className={`cpd-card group flex h-full flex-col overflow-hidden rounded-xl border border-navy-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal-200 hover:shadow-[0_18px_45px_-28px_rgba(8,43,76,0.45)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-600 animate-on-scroll ${isVisible ? 'is-visible' : ''}`}
       style={{ transitionDelay: `${(index % 4) * 60}ms` }}
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-surface-50">

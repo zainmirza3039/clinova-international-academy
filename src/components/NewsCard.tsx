@@ -11,7 +11,7 @@ export default function NewsCard({ item, index = 0 }: { item: NewsItem; index?: 
     <Link
       to={`/resources/${item.slug}`}
       ref={ref as unknown as React.RefObject<HTMLAnchorElement>}
-      className={`animate-on-scroll ${isVisible ? 'is-visible' : ''} group flex flex-col`}
+      className={`news-card animate-on-scroll ${isVisible ? 'is-visible' : ''} group flex flex-col`}
       style={{ transitionDelay: `${(index % 3) * 80}ms` }}
     >
       <div className="relative aspect-[16/9] overflow-hidden bg-navy-100">

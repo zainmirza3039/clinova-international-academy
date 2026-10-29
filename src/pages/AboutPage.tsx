@@ -9,13 +9,13 @@ import { generalFAQs } from '@/data/testimonials';
 const sections = [
   {
     icon: Target,
-    title: 'Our Mission',
+    title: 'Proposed mission',
     content:
       'Make healthcare learning easier to explore through clear subject guides, educational reading and practical reflection tools.',
   },
   {
     icon: Eye,
-    title: 'Our Vision',
+    title: 'Proposed vision',
     content:
       'Provide a transparent learning resource that distinguishes general education from clinical advice and describes programme arrangements accurately.',
   },
@@ -33,9 +33,9 @@ const sections = [
   },
   {
     icon: Monitor,
-    title: 'How We Teach',
+    title: 'What the site currently provides',
     content:
-      'The website provides educational reading and subject-area information. Teaching formats, assessment, learner support and programme delivery are described on individual programme pages where those details are available.',
+      'The site currently provides written educational resources and subject-area information. Live online teaching, enrolment, learner accounts, formal assessment, learner support and certificate services are not operational through this website.',
   },
   {
     icon: ShieldCheck,
@@ -49,7 +49,7 @@ export default function AboutPage() {
   useSEO({
     title: 'About Clinova International Academy',
     description:
-      'Learn about Clinova International Academy — our mission, vision, approach and commitment to accessible online healthcare professional education.',
+      'Explore Clinova’s healthcare subject areas, independent study resources and educational approach.',
   });
 
   return (
@@ -75,13 +75,13 @@ export default function AboutPage() {
             <div className="lg:col-span-8">
               <Reveal delay={100}>
                 <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
-                  Professional healthcare education, delivered online
+                  Healthcare learning resources for independent study
                 </h2>
                 <p className="mt-6 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-                  Clinova International Academy brings together healthcare subject areas, educational reading and study resources designed to support professional learning and reflection. Programme availability, fees, delivery and recognition depend on the details published for each offering.
+                  Clinova International Academy brings together healthcare subject areas, educational reading and study resources designed to support professional learning and reflection. At present, this site does not provide live online teaching, enrolment, assessment or learner accounts.
                 </p>
                 <p className="mt-4 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-                  Readers can use these resources to explore topics and reflect on practice. Programme-specific requirements and any certificate or recognition should be checked against the published terms for that offering.
+                  Programme and course-guide pages are informational. Availability, dates, fees, eligibility, delivery, assessment and recognition are unconfirmed unless explicitly stated for a specific offering; no qualification, CPD credit, certificate or professional recognition should be assumed.
                 </p>
               </Reveal>
             </div>

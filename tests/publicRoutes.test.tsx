@@ -5,17 +5,34 @@ import App from '@/App';
 import { programmes } from '@/data/programmes';
 import { departments } from '@/data/departments';
 import { cpdCourses } from '@/data/cpdCourses';
+import { educationalArticles } from '@/data/educationalArticles';
 import { newsItems } from '@/data/testimonials';
 vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }), useScrollPosition: () => false }));
 beforeEach(() => { vi.spyOn(window, 'scrollTo').mockImplementation(() => {}); });
 afterEach(() => { cleanup(); vi.restoreAllMocks(); });
 const routes = ['/learning-resources', ...learningResources.map(resource => `/learning-resources/${resource.slug}`), '/', '/about', '/departments', '/programmes', '/courses', '/cpd-courses', '/online-learning', '/training-partners', '/resources', '/blog', '/announcements', '/contact', '/admissions', '/apply', '/application', '/admin', '/admin/applications', '/events', '/faculty', '/community', '/faqs', '/privacy-policy', '/terms-and-conditions', '/cookie-policy', '/refund-policy', '/verify', '/missing-page', ...programmes.map(p => `/programmes/${p.slug}`), ...departments.map(p => `/departments/${p.slug}`), ...cpdCourses.map(p => `/cpd-courses/${p.slug}`), ...newsItems.map(p => `/resources/${p.slug}`)];
+routes.push('/certification');
+routes.push(...programmes.map(programme => `/courses/${programme.slug}`));
+routes.push(...newsItems.map(article => `/blog/${article.slug}`));
+const catalogueTitles = new Map<string, string>([
+  ...programmes.flatMap((record): [string, string][] => [
+    [`/programmes/${record.slug}`, record.title],
+    [`/courses/${record.slug}`, record.title],
+  ]),
+  ...cpdCourses.map((record): [string, string] => [`/cpd-courses/${record.slug}`, record.title]),
+  ...educationalArticles.flatMap((record): [string, string][] => [
+    [`/resources/${record.slug}`, record.title],
+    [`/blog/${record.slug}`, record.title],
+  ]),
+]);
 describe('public route rendering without live infrastructure', () => {
   it.each(routes)('%s renders an accessible heading and preview metadata', async (route) => {
     window.history.replaceState({}, '', route);
     const { container } = render(<App />);
     await waitFor(() => {
       expect(container.querySelector('h1')?.textContent?.trim().length).toBeGreaterThan(0);
+      const expectedTitle = catalogueTitles.get(route);
+      if (expectedTitle) expect(container.querySelector('h1')?.textContent?.trim()).toBe(expectedTitle);
       expect(document.title).toContain('Clinova');
       expect(document.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex, nofollow');
     });

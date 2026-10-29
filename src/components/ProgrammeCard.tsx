@@ -9,7 +9,7 @@ export default function ProgrammeCard({ programme, index = 0 }: { programme: Pro
     <Link
       to={`/programmes/${programme.slug}`}
       ref={ref as unknown as React.RefObject<HTMLAnchorElement>}
-      className={`animate-on-scroll group flex h-full flex-col overflow-hidden rounded-xl border border-navy-100 bg-white transition duration-300 hover:-translate-y-1 hover:border-navy-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:ring-offset-4 ${isVisible ? 'is-visible' : ''}`}
+      className={`programme-card animate-on-scroll group flex h-full flex-col overflow-hidden rounded-xl border border-navy-100 bg-white transition duration-300 hover:-translate-y-1 hover:border-navy-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:ring-offset-4 ${isVisible ? 'is-visible' : ''}`}
       style={{ transitionDelay: `${(index % 3) * 70}ms` }}
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-navy-100">

@@ -70,7 +70,7 @@ export default function ProgrammesPage() {
             </div>
             <div className="inline-flex shrink-0 items-center gap-2 text-sm text-navy-600">
               <BookOpen className="h-4 w-4 text-clinical-700" aria-hidden="true" />
-              <span>{filtered.length} {filtered.length === 1 ? 'topic' : 'topics'} found</span>
+              <span role="status" aria-live="polite" aria-atomic="true">{filtered.length} {filtered.length === 1 ? 'topic' : 'topics'} found</span>
             </div>
           </div>
 
@@ -126,7 +126,7 @@ export default function ProgrammesPage() {
           </div>
 
           <div className="mb-6 flex items-center justify-between gap-4">
-            <p className="text-sm text-navy-600" role="status" aria-live="polite" aria-atomic="true">
+            <p className="text-sm text-navy-600">
               Showing <span className="font-semibold text-navy-900">{filtered.length}</span> learning {filtered.length === 1 ? 'guide' : 'guides'}
             </p>
           </div>
@@ -138,8 +138,8 @@ export default function ProgrammesPage() {
           ) : (
             <div className="border border-dashed border-navy-200 bg-surface-50 px-6 py-16 text-center">
               <BookOpen className="mx-auto h-8 w-8 text-navy-400" aria-hidden="true" />
-              <h3 className="mt-4 font-heading text-lg font-bold text-navy-900">No formal programmes currently published</h3>
-              <p className="mt-2 text-sm text-navy-600">Formal programme cohorts are not currently published. Browse the available open self-study courses for structured lessons and evidence sources.</p>
+              <h3 className="mt-4 font-heading text-lg font-bold text-navy-900">{hasFilters ? 'No learning guides match your current filters.' : 'No learning guides are currently listed.'}</h3>
+              <p className="mt-2 text-sm text-navy-600">{hasFilters ? 'Try a broader search or clear one or more filters to see more of the learning library.' : 'There are no learning guides to show at this time.'}</p>
               <Link to="/cpd-courses" className="mt-5 inline-flex items-center gap-2 rounded-md bg-navy-900 px-5 py-3 text-sm font-semibold text-white hover:bg-navy-800 focus:outline-none focus:ring-2 focus:ring-clinical-500 focus:ring-offset-2">Browse Self-Study Courses <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
             </div>
           )}
