@@ -14,6 +14,9 @@ export const learnerDataEnabled = import.meta.env.VITE_LEARNER_DATA_ENABLED === 
 export const enquiriesEnabled = import.meta.env.VITE_ENQUIRIES_ENABLED === 'true'
   && import.meta.env.VITE_SUPABASE_URL === 'https://ssxpmcbqfdggfsoqbxac.supabase.co'
   && Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY);
+export const verificationEnabled = import.meta.env.VITE_VERIFICATION_ENABLED === 'true'
+  && import.meta.env.VITE_SUPABASE_URL === 'https://ssxpmcbqfdggfsoqbxac.supabase.co'
+  && Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY);
 export const enquiryUnavailable = 'Online submissions are currently unavailable. No information has been sent. Please use the published postal address for written correspondence.';
 export const siteSettings = {
   academyName: 'Clinova International Academy',
