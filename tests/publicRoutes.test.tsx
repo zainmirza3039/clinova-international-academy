@@ -5,7 +5,7 @@ import App from '@/App';
 import { programmes } from '@/data/programmes';
 import { departments } from '@/data/departments';
 import { cpdCourses } from '@/data/cpdCourses';
-import { newsItems } from '@/data/resourceDrafts';
+import { newsItems } from '@/data/testimonials';
 vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }), useScrollPosition: () => false }));
 beforeEach(() => { vi.spyOn(window, 'scrollTo').mockImplementation(() => {}); });
 afterEach(() => { cleanup(); vi.restoreAllMocks(); });

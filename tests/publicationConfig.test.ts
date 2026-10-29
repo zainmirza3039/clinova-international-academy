@@ -34,15 +34,13 @@ describe('explicit publication gate', () => {
       mkdirSync(join(dir, 'dist')); mkdirSync(join(dir, 'src/data'), { recursive: true });
       writeFileSync(join(dir, 'dist/index.html'), '<meta name="robots" content="noindex, nofollow">');
       for (const name of ['departments', 'programmes', 'cpdCourses']) writeFileSync(join(dir, `src/data/${name}.ts`), "export const data = [{slug: 'test-fixture'}];");
-      execFileSync(process.execPath, [resolve('scripts/generate-seo.mjs')], { cwd: dir, env: { ...process.env, VITE_SITE_URL: origin, VITE_INDEXING_ENABLED: indexing } });
+      execFileSync(process.execPath, [resolve('scripts/generate-seo.mjs')], { cwd: dir, env: { ...process.env, VERCEL_ENV: '', VITE_SITE_URL: origin, VITE_INDEXING_ENABLED: indexing } });
       const sitemap = readFileSync(join(dir, 'dist/sitemap.xml'), 'utf8');
       const robots = readFileSync(join(dir, 'dist/robots.txt'), 'utf8');
       expect(sitemap.includes('<loc>')).toBe(valid);
-      expect(sitemap).not.toMatch(/vercel\.app|\/student|\/sign-in|\/sign-up|\/reset-password|\/admin|\/privacy-policy|\/terms-and-conditions|\/cookie-policy|\/refund-policy/);
-      if (valid) {
-        expect(robots).toContain('Sitemap: https://academy.example/sitemap.xml');
-        expect(robots).not.toContain('Disallow: /student');
-      } else expect(robots).toBe('User-agent: *\nDisallow: /\n');
+      expect(sitemap).not.toMatch(/vercel\.app|\/student|\/sign-in|\/sign-up|\/reset-password|\/admin/);
+      if (valid) expect(robots).toContain('Disallow: /student');
+      else expect(robots).toBe('User-agent: *\nDisallow: /\n');
     } finally { rmSync(dir, { recursive: true, force: true }); }
   });
 });

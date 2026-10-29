@@ -86,8 +86,28 @@
 /* Frontend release safeguards and accessible navigation. */
 body { padding-top: 4rem; }
 @media (min-width: 1024px) { body { padding-top: 5rem; } }
-.preview-notice { background: #eaf4f2; border-bottom: 1px solid #c4ded9; padding: .7rem 1.5rem; text-align: center; color: #164b46; font-size: .75rem; line-height: 1.6; }
 .skip-link { position: fixed; left: 1rem; top: -6rem; z-index: 100; background: white; color: #082b4c; padding: .8rem 1.2rem; border: 2px solid #1769aa; }
 .skip-link:focus { top: 1rem; }
 [id] { scroll-margin-top: 7rem; }
 @media (max-width: 640px) { input, select, textarea { font-size: 16px !important; } }
+
+
+/* Clinova visual refinement: restrained surfaces, consistent interaction states and responsive media. */
+:root {
+  color-scheme: light;
+  --clinova-radius: 0.75rem;
+  --clinova-shadow: 0 16px 44px -28px rgba(8, 43, 76, 0.34);
+}
+html { text-rendering: optimizeLegibility; }
+body { color: #163b59; }
+::selection { background: #ccefe8; color: #082b4c; }
+a, button, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid rgba(11, 155, 138, 0.65);
+  outline-offset: 3px;
+}
+img { max-width: 100%; }
+@media (max-width: 640px) {
+  h1 { overflow-wrap: anywhere; }
+  section { scroll-margin-top: 5rem; }
+}

@@ -1,4 +1,3 @@
-import BrandLogo from '@/components/BrandLogo';
 import { Link } from 'react-router-dom';
 import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
@@ -10,8 +9,7 @@ const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Departments', to: '/departments', hasMegaMenu: true },
-  { label: 'Programmes', to: '/programmes', hasMegaMenu: true },
-  { label: 'CPD Courses', to: '/cpd-courses' },
+  { label: 'Courses', to: '/cpd-courses', hasMegaMenu: true },
   { label: 'Admissions', to: '/admissions' },
   { label: 'Training Partners', to: '/training-partners' },
   { label: 'Resources', to: '/resources' },
@@ -19,8 +17,15 @@ const navLinks = [
 ];
 
 const programmeMenuItems = [
-  { label: 'Proposed programme areas', to: '/programmes', desc: 'No programme is approved or open for enrolment.' },
-  { label: 'Proposed CPD topics', to: '/cpd-courses', desc: 'Course availability and recognised hours are unconfirmed.' },
+  { label: 'MSK Assessment & Clinical Reasoning', to: '/cpd-courses/musculoskeletal-assessment-and-clinical-reasoning', desc: 'History, examination and clinical reasoning' },
+  { label: 'Low Back Pain Assessment', to: '/cpd-courses/clinical-assessment-of-low-back-pain', desc: 'Assessment, safety and evidence-informed management' },
+  { label: 'Knee Osteoarthritis Rehabilitation', to: '/cpd-courses/knee-osteoarthritis-rehabilitation', desc: 'Exercise, function and review' },
+  { label: 'Stroke Rehabilitation', to: '/cpd-courses/stroke-rehabilitation-functional-goals', desc: 'Functional goals and task-specific practice' },
+  { label: 'Sports Rehabilitation', to: '/cpd-courses/introduction-to-sports-rehabilitation', desc: 'Progressive loading and return to sport' },
+  { label: 'Pain Management', to: '/cpd-courses/pain-management-fundamentals', desc: 'Pain science and function-led care' },
+  { label: 'Motor Control & Neurorehabilitation', to: '/cpd-courses/motor-control-relearning-in-neurorehabilitation', desc: 'Task-specific practice and motor learning' },
+  { label: 'Balance & Falls Prevention', to: '/cpd-courses/balance-training-fall-prevention', desc: 'Falls assessment and progressive exercise' },
+  { label: 'View All Courses', to: '/cpd-courses', desc: 'Browse all open self-study courses' },
 ];
 
 const mobileSubmenuId = (label: string) => `mobile-submenu-${label.toLowerCase().replace(/\s+/g, '-')}`;
@@ -82,7 +87,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center shrink-0" onClick={() => setMobileOpen(false)}>
-            <BrandLogo className="w-[180px] sm:w-[200px] lg:w-[220px]" />
+            <img src="/clinova-logo.svg" alt="Clinova International Academy" className="w-[160px] sm:w-[180px] lg:w-[200px] h-auto" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -102,7 +107,7 @@ export default function Header() {
               >
                 <Link
                   to={link.to}
-                  className="flex items-center gap-1 px-3 py-2 text-[13px] font-medium text-navy-700 hover:text-clinical-600 transition-colors"
+                  className={`flex items-center gap-1 rounded-md px-3 py-2 text-[13px] font-semibold transition-colors ${pathname === link.to || (link.to !== '/' && pathname.startsWith(link.to)) ? 'bg-surface-50 text-navy-900' : 'text-navy-600 hover:bg-surface-50 hover:text-navy-900'}`}
                   aria-haspopup={link.hasMegaMenu ? 'true' : undefined}
                   aria-expanded={link.hasMegaMenu ? megaMenu === link.label : undefined}
                 >
@@ -139,13 +144,13 @@ export default function Header() {
                   </div>
                 )}
 
-                {/* Mega Menu - Programmes */}
-                {link.hasMegaMenu && megaMenu === link.label && link.label === 'Programmes' && (
+                {/* Mega Menu - Courses */}
+                {link.hasMegaMenu && megaMenu === link.label && link.label === 'Courses' && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[420px]">
                     <div className="bg-white shadow-2xl border border-navy-100">
                       <div className="p-5">
                         <div className="text-xs font-semibold uppercase tracking-[0.18em] text-clinical-500 mb-4 pb-3 border-b border-navy-100">
-                          Proposed programme areas
+                          Courses
                         </div>
                         <div className="space-y-1">
                           {programmeMenuItems.map((item) => (
@@ -233,8 +238,8 @@ export default function Header() {
                     ))}
                   </div>
                 )}
-                {/* Mobile submenu - Programmes */}
-                {link.hasMegaMenu && mobileMegaMenu === link.label && link.label === 'Programmes' && (
+                {/* Mobile submenu - Courses */}
+                {link.hasMegaMenu && mobileMegaMenu === link.label && link.label === 'Courses' && (
                   <div id={mobileSubmenuId(link.label)} className="pl-4 py-1 space-y-0.5">
                     {programmeMenuItems.map((item) => (
                       <Link

@@ -8,17 +8,18 @@ export const siteOrigin = (() => {
     return url.protocol === 'https:' && url.pathname === '/' && !url.username && !url.password && !url.search && !url.hash && !previewHost ? url.origin : undefined;
   } catch { return undefined; }
 })();
+export const learnerDataEnabled = import.meta.env.VITE_LEARNER_DATA_ENABLED === 'true'
+  && import.meta.env.VITE_SUPABASE_URL === 'https://ssxpmcbqfdggfsoqbxac.supabase.co'
+  && Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY);
 export const enquiriesEnabled = import.meta.env.VITE_ENQUIRIES_ENABLED === 'true'
   && import.meta.env.VITE_SUPABASE_URL === 'https://ssxpmcbqfdggfsoqbxac.supabase.co'
   && Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY);
-export const enquiryUnavailable = 'Submissions are currently unavailable. Database access and the enquiry schema must be verified before this form can accept information. Nothing has been sent.';
+export const verificationEnabled = import.meta.env.VITE_VERIFICATION_ENABLED === 'true'
+  && import.meta.env.VITE_SUPABASE_URL === 'https://ssxpmcbqfdggfsoqbxac.supabase.co'
+  && Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY);
+export const enquiryUnavailable = 'Online submissions are currently unavailable. No information has been sent. Please use the published postal address for written correspondence.';
 export const siteSettings = {
   academyName: 'Clinova International Academy',
   contactEmail: '', // Awaiting academy confirmation; do not invent an address.
-  contentStatus: 'Programme catalogue and policies are proposed and unconfirmed. Applications, sign-in, student services and administration are not live.',
+  contentStatus: 'Explore healthcare learning resources and subject areas. Course availability, recognition and learner services are stated only where confirmed.',
 };
-
-// Independently approved public-only certificate lookup; never enabled by learner flags.
-export const verificationEnabled = import.meta.env.VITE_VERIFICATION_ENABLED === 'true'
-  && import.meta.env.VITE_SUPABASE_URL === 'https://ssxpmcbqfdggfsoqbxac.supabase.co'
-  && Boolean(import.meta.env.VITE_SUPABASE_ANON_KEY);

@@ -17,12 +17,9 @@ export interface Module {
   topics: string[];
 }
 
-export type PublicationStatus = 'draft' | 'review' | 'published' | 'archived';
-
 export interface Programme {
   id: string;
   slug: string;
-  publicationStatus: PublicationStatus;
   title: string;
   department: string;
   departmentSlug: string;
@@ -40,16 +37,18 @@ export interface Programme {
   assessment: string;
   whoFor: string[];
   status: ProgrammeStatus;
+  /** Publication state for catalogue safety; legacy status remains filter-compatible. */
+  publicationStatus?: PublicationStatus;
   featured: boolean;
 }
 
-export type ProgrammeCategory = 'Certificate' | 'Diploma' | 'Professional Development' | 'CPD';
+export type ProgrammeCategory = 'Learning Guide' | 'Certificate' | 'Diploma' | 'Professional Development' | 'CPD';
 export type ProgrammeLevel = 'Foundation' | 'Intermediate' | 'Advanced';
-export type ProgrammeStatus = 'Draft' | 'Open' | 'Coming Soon';
+export type ProgrammeStatus = 'Draft' | 'Published' | 'Open' | 'Coming Soon';
+export type PublicationStatus = 'draft' | 'published';
 
 export interface CPDCourse {
   id: string;
-  publicationStatus: PublicationStatus;
   slug: string;
   title: string;
   department: string;
@@ -57,33 +56,41 @@ export interface CPDCourse {
   duration: string;
   level: ProgrammeLevel;
   description: string;
-  learningOutcomes: string[];
-  modules: string[];
-  prerequisites: string;
-  assessment: string;
   image: string;
+  /** Publication state for catalogue safety. */
+  publicationStatus?: PublicationStatus;
+}
+
+export interface Testimonial {
+  id: string;
+  role: string;
+  country: string;
+  quote: string;
+  isDemo: boolean;
 }
 
 export interface NewsItem {
   id: string;
-  publicationStatus: PublicationStatus;
   slug: string;
   category: string;
   date: string;
   title: string;
   excerpt: string;
   image: string;
-  sections: ArticleSection[];
-  takeaways: string[];
-}
-
-export interface ArticleSection {
-  heading: string;
-  paragraphs: string[];
 }
 
 export interface FAQ {
   id: string;
   question: string;
   answer: string;
+}
+
+export interface Certificate {
+  id: string;
+  certificateId: string;
+  holder: string;
+  course: string;
+  issueDate: string;
+  cpdHours: number;
+  status: 'verified' | 'not-found';
 }

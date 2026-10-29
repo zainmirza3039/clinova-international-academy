@@ -1,13 +1,14 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { Link, MemoryRouter } from 'react-router-dom';
 import { useSEO } from '@/hooks/useSEO';
 import ProgrammesPage from '@/pages/ProgrammesPage';
 import CPDCoursesPage from '@/pages/CPDCoursesPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import Header from '@/components/Header';
 import FilterBar from '@/components/FilterBar';
+import { programmes } from '@/data/programmes';
 const config = vi.hoisted(() => ({ siteOrigin: 'https://academy.example' as string | undefined }));
 vi.mock('@/lib/siteConfig', () => config);
 vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }), useScrollPosition: () => false }));
@@ -46,14 +47,21 @@ describe('catalogue filter accessibility and URL navigation', () => {
     expect(screen.getAllByRole('button').every(button => button.getAttribute('type') === 'button')).toBe(true);
   });
 
-  it('hides catalogue filters until there are approved public records', () => {
-    render(<MemoryRouter><ProgrammesPage /></MemoryRouter>);
-    expect(screen.queryByLabelText('Programme Type')).toBeNull();
-    expect(screen.getByText(/No programmes are currently approved for publication/)).toBeTruthy();
-    cleanup();
+  it('labels current learning-guide filters and follows same-page resource-type navigation', () => {
+    const category = programmes[0].category;
+    const destination = `/programmes?type=${encodeURIComponent(category)}`;
+    render(<MemoryRouter initialEntries={[destination]}><Link to={destination}>Navigate learning guides</Link><ProgrammesPage /></MemoryRouter>);
+    expect((screen.getByLabelText('Resource type') as HTMLSelectElement).value).toBe(category);
+    for (const label of ['Subject area', 'Study level']) expect(screen.getByLabelText(label).tagName).toBe('SELECT');
+    fireEvent.click(screen.getByText('Navigate learning guides'));
+    expect((screen.getByLabelText('Resource type') as HTMLSelectElement).value).toBe(category);
+  });
+  it('labels CPD filters and keeps unawarded credit unavailable', () => {
     render(<MemoryRouter><CPDCoursesPage /></MemoryRouter>);
-    expect(screen.queryByLabelText('CPD Hours')).toBeNull();
-    expect(screen.getByText(/No CPD courses are currently approved for publication/)).toBeTruthy();
+    expect(screen.getByLabelText('Department').tagName).toBe('SELECT');
+    expect((screen.getByLabelText('CPD credit') as HTMLSelectElement).disabled).toBe(true);
+    expect(screen.getByLabelText('Level').tagName).toBe('SELECT');
+    expect(screen.getByText('This library does not award or record CPD hours.')).toBeTruthy();
   });
 });
 

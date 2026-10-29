@@ -153,6 +153,12 @@ describe('safe return targets and AuthPage validation', () => {
     expect(await screen.findByRole('button', { name: 'Sign in' })).toBeTruthy();
   });
 
+  it('allows a same-origin admin return target for the role-gated admin page', async () => {
+    const { safeReturnTarget } = await loadAuth();
+    expect(safeReturnTarget('/admin')).toBe('/admin');
+    expect(safeReturnTarget('/admin/certificates')).toBe('/admin/certificates');
+  });
+
   it.each(['https://evil.test', '//evil.test/student', '/student/../sign-in', '/student/%2e%2e/sign-in', '/student\\evil'])('rejects unsafe return target %s', async target => {
     const { safeReturnTarget } = await loadAuth();
     expect(safeReturnTarget(target)).toBe('/student');

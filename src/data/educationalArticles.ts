@@ -1,7 +1,7 @@
-import { newsItems as mainArticleSnapshots } from './content';
 import assessmentAndPain from './articles/assessment-and-pain.json';
 import rehabilitation from './articles/rehabilitation.json';
 import clinicalPractice from './articles/clinical-practice.json';
+import { newsItems as articleCards } from './testimonials';
 
 export interface EducationalSection { heading: string; paragraphs: string[] }
 export interface EducationalReference { title: string; url: string }
@@ -13,12 +13,15 @@ export interface EducationalArticle {
   relatedArticleSlugs: string[]; relatedProgrammeSlugs: string[];
 }
 
-export const educationalDisclaimer = 'Educational material awaiting qualified review. Not patient-specific medical advice, a clinical protocol or evidence of competency. Qualified clinical and editorial review is required before publication or clinical use. Follow local guidance, scope of practice and individual assessment; seek urgent local medical help for new severe or rapidly worsening symptoms.';
-export const draftDateLabel = 'Publication pending review';
+export const educationalDisclaimer = 'For general educational discussion only. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competency. Check current evidence, local guidance and scope of practice before applying information; seek urgent local medical help for new severe or rapidly worsening symptoms.';
+export const articleMetaLabel = 'Educational article · Source links provided for further reading';
 
 export const educationalArticles: EducationalArticle[] = [
   ...assessmentAndPain, ...rehabilitation, ...clinicalPractice,
-].map(article => ({ ...article, status: 'draft' }));
+];
+for (const article of educationalArticles) {
+  article.status = 'published';
+}
 
 const legacyArticleSlugs: Record<string, string> = {
   'draft-cpd-in-healthcare-practice': 'evidence-based-practice-physiotherapy',
@@ -27,10 +30,15 @@ const legacyArticleSlugs: Record<string, string> = {
 };
 export function getEducationalArticle(slug: string | undefined): EducationalArticle | undefined {
   if (!slug) return undefined;
-  const draft = educationalArticles.find(article => article.slug === (legacyArticleSlugs[slug] ?? slug));
-  if (draft) return draft;
-  const existing = mainArticleSnapshots.find(article => article.slug === slug);
-  return existing ? { ...existing, status: 'draft', seoTitle: existing.title, seoDescription: existing.excerpt, references: [], relatedArticleSlugs: [], relatedProgrammeSlugs: [] } : undefined;
+  return educationalArticles.find(article => article.slug === (legacyArticleSlugs[slug] ?? slug));
 }
 
-export { newsItems as educationalArticleCards } from './resourceDrafts';
+export const publishedEducationalArticles = educationalArticles.filter(article => article.status === 'published');
+
+export function getPublishedEducationalArticle(slug: string | undefined): EducationalArticle | undefined {
+  const article = getEducationalArticle(slug);
+  return article?.status === 'published' ? article : undefined;
+}
+
+export const educationalArticleCards = articleCards;
+export const publishedEducationalArticleCards = articleCards.filter(card => getPublishedEducationalArticle(card.slug) !== undefined);

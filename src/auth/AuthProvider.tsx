@@ -32,7 +32,6 @@ export type AuthStatus = 'loading' | 'ready' | 'disabled' | 'error';
 export type AuthActionResult = { error: Error | null };
 type AuthContextValue = {
   enabled: boolean; status: AuthStatus; session: Session | null; error: string | null; recovery: boolean;
-  client: SupabaseClient | null;
   signIn: (email: string, password: string) => Promise<AuthActionResult>;
   signUp: (email: string, password: string) => Promise<AuthActionResult>;
   sendPasswordReset: (email: string, redirectTo?: string) => Promise<AuthActionResult>;
@@ -47,7 +46,8 @@ export function safeReturnTarget(target: string | null | undefined) {
   try {
     const parsed = new URL(target, 'https://safe.invalid');
     const decodedPath = decodeURIComponent(parsed.pathname);
-    if (parsed.origin !== 'https://safe.invalid' || !/^\/student(?:\/|$)/.test(parsed.pathname) || decodedPath.includes('\\') || decodedPath.split('/').includes('..')) return '/student';
+    const allowedRoute = /^\/student(?:\/|$)/.test(parsed.pathname) || /^\/admin(?:\/|$)/.test(parsed.pathname);
+    if (parsed.origin !== 'https://safe.invalid' || !allowedRoute || decodedPath.includes('\\') || decodedPath.split('/').includes('..')) return '/student';
     return target;
   } catch { return '/student'; }
 }
@@ -90,25 +90,20 @@ export function AuthProvider({ children, client }: { children: ReactNode; client
     return () => { active = false; subscription?.unsubscribe(); };
   }, [configuredClient, enabled]);
 
-  const call = useCallback(async (operation: () => Promise<{ error: unknown; data?: unknown }>, adoptSession = false): Promise<AuthActionResult> => {
+  const call = useCallback(async (operation: () => Promise<{ error: unknown }>): Promise<AuthActionResult> => {
     if (!enabled || !configuredClient) return { error: new Error('Authentication is currently unavailable.') };
     setError(null);
     try {
       const result = await operation();
       if (result.error) { const next = new Error(errorMessage(result.error)); setError(next.message); return { error: next }; }
-      const returnedSession = adoptSession && result.data && typeof result.data === 'object' && 'session' in result.data
-        ? (result.data as { session?: Session | null }).session
-        : null;
-      if (returnedSession) { setSession(returnedSession); setRecovery(false); setStatus('ready'); }
       return { error: null };
     } catch (reason) { const next = new Error(errorMessage(reason)); setError(next.message); return { error: next }; }
   }, [configuredClient, enabled]);
 
   const value = useMemo<AuthContextValue>(() => ({
     enabled, status, session, error, recovery,
-    client: enabled && status === 'ready' && session && !recovery ? configuredClient : null,
-    signIn: (email, password) => call(() => configuredClient!.auth.signInWithPassword({ email, password }), true),
-    signUp: (email, password) => call(() => configuredClient!.auth.signUp({ email, password }), true),
+    signIn: (email, password) => call(() => configuredClient!.auth.signInWithPassword({ email, password })),
+    signUp: (email, password) => call(() => configuredClient!.auth.signUp({ email, password })),
     sendPasswordReset: (email) => call(() => configuredClient!.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/reset-password` })),
     updatePassword: (password) => {
       if (!recovery || !session) return Promise.resolve({ error: new Error('Password recovery must be started from a valid recovery link.') });

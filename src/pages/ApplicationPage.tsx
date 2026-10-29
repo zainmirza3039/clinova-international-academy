@@ -1,19 +1,63 @@
-import { useState } from 'react';
-import { AlertTriangle, LockKeyhole } from 'lucide-react';
+import { ArrowRight, ClipboardList, Mail, ShieldCheck } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import PageHero from '@/components/PageHero';
 import { useSEO } from '@/hooks/useSEO';
 
 export default function ApplicationPage() {
-  useSEO({ title: 'Application Planner', description: 'Review the Clinova application journey. Submission and persistence are not currently available.' });
-  const [values, setValues] = useState({ name: '', email: '', programme: '', note: '' });
-  const update = (field: keyof typeof values) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setValues((current) => ({ ...current, [field]: event.target.value }));
-  const inputClass = 'w-full border border-navy-200 bg-white px-4 py-3 text-sm text-navy-800 focus:border-clinical-500 focus:outline-none focus:ring-2 focus:ring-clinical-500';
-  return <>
-    <PageHero breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Admissions', to: '/admissions' }, { label: 'Application planner' }]} eyebrow="Application planner" title="Plan your application, locally" description="Use this local, in-browser planner to gather your thoughts. It is not a live application service." />
-    <section className="py-16 lg:py-24 bg-white"><div className="max-w-editorial mx-auto px-6 lg:px-10"><div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
-      <div className="lg:col-span-7"><div role="note" className="flex gap-3 border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950 mb-8"><AlertTriangle className="w-5 h-5 shrink-0 text-amber-700" aria-hidden="true" /><p><strong>Submission unavailable.</strong> This form does not submit, save or transmit your information. Inputs exist only in memory while this page is open and are cleared when you leave or refresh.</p></div>
-        <form onSubmit={(event) => event.preventDefault()} aria-describedby="application-status" className="space-y-5"><div><label htmlFor="application-name" className="block text-sm font-medium text-navy-700 mb-1.5">Your name</label><input id="application-name" value={values.name} onChange={update('name')} className={inputClass} autoComplete="name" /></div><div><label htmlFor="application-email" className="block text-sm font-medium text-navy-700 mb-1.5">Email address</label><input id="application-email" type="email" value={values.email} onChange={update('email')} className={inputClass} autoComplete="email" /></div><div><label htmlFor="application-programme" className="block text-sm font-medium text-navy-700 mb-1.5">Programme of interest</label><select id="application-programme" value={values.programme} onChange={update('programme')} className={inputClass}><option value="">Select a programme</option><option>Certificate course</option><option>Diploma programme</option><option>Professional development</option><option>CPD course</option></select></div><div><label htmlFor="application-note" className="block text-sm font-medium text-navy-700 mb-1.5">Notes for your own planning</label><textarea id="application-note" rows={5} value={values.note} onChange={update('note')} className={inputClass} /></div><button type="submit" className="w-full cursor-not-allowed bg-navy-200 px-6 py-3.5 text-sm font-semibold text-navy-500" disabled aria-describedby="application-status">Submission is not available</button><p id="application-status" role="status" className="text-sm text-navy-600">No application record will be created. To ask a question, visit the contact page for its current availability.</p></form>
-      </div><aside className="lg:col-span-5"><div className="bg-navy-800 p-7 text-white"><LockKeyhole className="w-6 h-6 text-teal-300 mb-5" aria-hidden="true" /><h2 className="font-heading text-xl font-bold">What happens next?</h2><p className="mt-3 text-sm leading-relaxed text-navy-100/75">A real application workflow requires a reviewed server contract, secure storage, privacy notices and an admissions process. Those capabilities are not connected here.</p><p className="mt-5 border-t border-white/15 pt-5 text-sm leading-relaxed text-navy-100/75">Contact channels and enquiry availability are awaiting academy confirmation. Application notes are not sent as contact enquiries.</p></div></aside>
-    </div></div></section>
-  </>;
+  useSEO({
+    title: 'Application Information',
+    description: 'Information about discussing a learning interest with Clinova International Academy.',
+  });
+
+  return (
+    <>
+      <PageHero
+        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Admissions', to: '/admissions' }, { label: 'Application Information' }]}
+        eyebrow="Admissions"
+        title="Discuss your learning interests"
+        description="Review the learning resources first, then contact Clinova in writing if you have a question about a specific subject or future learning opportunity."
+      />
+      <section className="py-16 lg:py-24 bg-white">
+        <div className="max-w-editorial mx-auto px-6 lg:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+            <div className="lg:col-span-7">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-600 mb-4">Before you enquire</p>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-800">Prepare a clear, focused enquiry</h2>
+              <p className="mt-5 text-base text-navy-600 leading-relaxed">
+                Include the subject or learning guide you are asking about, your main question and the best way to reply if you choose to provide it. Do not send patient details, medical records, identity documents, passwords or payment information.
+              </p>
+              <ul className="mt-8 space-y-4">
+                {[
+                  'Identify the topic or learning guide you are interested in.',
+                  'Ask for written details before making a payment or commitment.',
+                  'Check any entry requirements, delivery terms, fees and recognition claims in writing.',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-navy-700">
+                    <ShieldCheck className="w-5 h-5 shrink-0 text-teal-600 mt-0.5" aria-hidden="true" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link to="/contact" className="mt-9 inline-flex items-center gap-2 bg-clinical-600 px-6 py-3.5 text-sm font-semibold text-white hover:bg-clinical-700">
+                Contact information<ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
+            </div>
+            <aside className="lg:col-span-5">
+              <div className="bg-navy-800 p-7 text-white">
+                <ClipboardList className="w-6 h-6 text-teal-300 mb-5" aria-hidden="true" />
+                <h2 className="font-heading text-xl font-bold">Application status</h2>
+                <p className="mt-3 text-sm leading-relaxed text-navy-100/75">
+                  Online applications and payment processing are not available through this website. This page does not collect or submit application information.
+                </p>
+                <div className="mt-6 border-t border-white/15 pt-5 flex gap-3">
+                  <Mail className="w-5 h-5 shrink-0 text-teal-300" aria-hidden="true" />
+                  <p className="text-sm leading-relaxed text-navy-100/75">For written correspondence, use the public postal address on the Contact page.</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

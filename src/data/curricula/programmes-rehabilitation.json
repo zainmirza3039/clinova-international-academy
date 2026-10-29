@@ -1,8 +1,8 @@
 [
   {
     "programmeSlug": "professional-development-in-sports-rehabilitation",
-    "status": "draft",
-    "reviewNotice": "Proposed draft only. This outline is not an award, qualification, clinical protocol or medical advice. Qualified clinical and editorial review is required before any publication or delivery; hours, duration, fees, dates, instructors, accreditation, assessments, certificates and availability are unknown and unconfirmed.",
+    "status": "published",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Describe person-centred sports rehabilitation reasoning and distinguish participation goals from selection or clearance decisions.",
       "Map sport demands to observable function, context and uncertainty without treating a test or date as proof of readiness.",
@@ -18,7 +18,7 @@
     "prerequisites": [
       "Foundational knowledge of rehabilitation, human movement or a relevant regulated professional role.",
       "Access to appropriate supervision and local referral, safeguarding and information-governance pathways.",
-      "The ability to recognise that this draft does not authorise examination, treatment, prescribing, clearance or independent return-to-sport decisions."
+      "The ability to recognise that this educational material does not authorise examination, treatment, prescribing, clearance or independent return-to-sport decisions."
     ],
     "modules": [
       {
@@ -53,7 +53,7 @@
             "text": "Return-to-activity decisions are distributed decisions, not a single professional’s public promise. Establish who holds clinical responsibility, who controls training exposure, who decides selection, and what the participant is entitled to know or withhold. With consent and appropriate information governance, communicate a concise status: current functional priorities, relevant restrictions or uncertainties, agreed monitoring, escalation signs and the next review. Avoid sharing a diagnosis or personal detail merely because a team is curious. HCPC standards emphasise valid consent, effective communication, appropriate referral and practice within scope; these principles require local interpretation for each workforce and jurisdiction. A multidisciplinary meeting should invite disagreement, document reasoning and distinguish evidence from preference. Young athletes, people with disabilities and those facing selection pressure may need safeguarding or advocacy support. If neurological, cardiopulmonary, systemic or psychological concerns emerge, refer to the suitably qualified service rather than adapting a sports plan informally. The aim is safe participation and honest uncertainty, not a simple green-light label."
           }
         ],
-        "reflectiveActivity": "Write a fictional multidisciplinary case note that distinguishes observed change, interpretation, uncertainty, agreed responsibilities and the trigger for review. Include one example where selection and clinical risk decisions appropriately diverge."
+        "reflectiveActivity": "Write a fictional multidisciplinary case note that distinguishes observed change, interpretation, uncertainty, agreed responsibilities and the trigger. Include one example where selection and clinical risk decisions appropriately diverge."
       },
       {
         "title": "Sustainable and inclusive participation",
@@ -76,11 +76,11 @@
     "faqs": [
       {
         "question": "Is this programme available or open for enrolment?",
-        "answer": "No confirmation exists. This is a proposed draft outline only; availability, dates and delivery arrangements are unknown."
+        "answer": "No confirmation exists. This is a catalogue overview outline only; availability, dates and delivery arrangements are unknown."
       },
       {
         "question": "Does the title represent an award or accreditation?",
-        "answer": "No. The proposed title is not an award, qualification or accreditation. Hours, fees, instructors, assessments, certificates and recognition are all unconfirmed."
+        "answer": "No. The suggested title is not an award, qualification or accreditation. hours, fees, instructors, assessments, certificates and recognition are not included."
       },
       {
         "question": "Can it authorise return-to-play clearance?",
@@ -134,8 +134,8 @@
   },
   {
     "programmeSlug": "diploma-in-rehabilitation-practice",
-    "status": "draft",
-    "reviewNotice": "Proposed draft only. This outline is not an award, qualification, clinical protocol or medical advice. Qualified clinical and editorial review is required before any publication or delivery; hours, duration, fees, dates, instructors, accreditation, assessments, certificates and availability are unknown and unconfirmed. The word “Diploma” is a proposed title only and must not be read as a granted award.",
+    "status": "published",
+    "reviewNotice": "Independent educational guide for general study and reflection. This material is not patient-specific medical advice, a clinical protocol or evidence of professional competence. It does not confer a qualification, registration, authority to practise or CPD credit. Follow current evidence, local guidance and professional standards.",
     "outcomes": [
       "Explain rehabilitation as person-centred, participation-focused and coordinated across settings and professions.",
       "Formulate revisable goals and documentation that distinguish reported experience, observation, interpretation, uncertainty and review triggers.",
@@ -144,14 +144,14 @@
       "Describe safe transitions and multidisciplinary handovers without claiming independent prescribing, procedural competence or clinical clearance."
     ],
     "intendedAudience": [
-      "Regulated health and care professionals seeking a proposed foundation for rehabilitation team practice.",
+      "Regulated health and care professionals seeking a suggested foundation for rehabilitation team practice.",
       "Rehabilitation assistants, support workers and supervised learners whose roles include coordinating person-centred participation goals.",
       "Educators and service planners exploring a future curriculum, subject to specialist clinical and academic governance."
     ],
     "prerequisites": [
       "A relevant health, care, rehabilitation, psychology, human movement or allied academic/professional foundation.",
-      "Access to role-appropriate supervision, safeguarding, emergency and referral pathways; this draft cannot supply them.",
-      "Understanding that neurological and cardiopulmonary practice requires specialist training, supervision and referral, and that this proposed title is not an award."
+      "Access to role-appropriate supervision, safeguarding, emergency and referral pathways; this educational material cannot supply them.",
+      "Understanding that neurological and cardiopulmonary practice requires specialist training, supervision and referral, and that this suggested title is not an award."
     ],
     "modules": [
       {
@@ -161,15 +161,15 @@
           {
             "title": "Rehabilitation practice as coordinated care",
             "description": "Define rehabilitation broadly and locate the practitioner’s role within a person-centred team.",
-            "text": "Rehabilitation is not a single technique or profession. WHO describes it as an essential health service that can improve functioning and support participation in family, community and work life across the life course. A rehabilitation practitioner therefore starts by asking what the person needs to do, what matters to them and which barriers affect access, rather than assuming that impairment reduction is the only outcome. NICE recommends personalised, holistic assessment after traumatic injury, with physical, cognitive and psychological domains considered in partnership with the person and carers where appropriate. This draft uses those principles as educational prompts, not as a substitute for a regulated scope or a local pathway. Map the team’s responsibilities, supervision, referral routes and information-sharing rules before discussing interventions. A proposed diploma cannot confer competence, registration or independent practice. Document consent, communication needs, cultural context and uncertainty. When needs exceed training—especially acute illness, neurological change, cardiopulmonary symptoms, safeguarding concerns or complex medication questions—pause and refer to the appropriate qualified service."
+            "text": "Rehabilitation is not a single technique or profession. WHO describes it as an essential health service that can improve functioning and support participation in family, community and work life across the life course. A rehabilitation practitioner therefore starts by asking what the person needs to do, what matters to them and which barriers affect access, rather than assuming that impairment reduction is the only outcome. NICE recommends personalised, holistic assessment after traumatic injury, with physical, cognitive and psychological domains considered in partnership with the person and carers where appropriate. This educational material uses those principles as educational prompts, not as a substitute for a regulated scope or a local pathway. Map the team’s responsibilities, supervision, referral routes and information-sharing rules before discussing interventions. A suggested diploma cannot confer competence, registration or independent practice. Document consent, communication needs, cultural context and uncertainty. When needs exceed training—especially acute illness, neurological change, cardiopulmonary symptoms, safeguarding concerns or complex medication questions—pause and refer to the appropriate qualified service."
           },
           {
             "title": "Goals, outcomes and participation",
             "description": "Turn broad rehabilitation aims into revisable, meaningful outcomes without promising a timeline.",
-            "text": "A meaningful rehabilitation goal describes an activity or participation outcome in the person’s own context. “Improve mobility” may be a useful theme, but a person may prioritise preparing food, returning to study, managing fatigue on public transport or joining a family event. Explore previous ability, current barriers, confidence, environment, carer involvement and what the person considers acceptable progress. Use measures only when their purpose and limitations are understood; a score can support communication but cannot represent the whole person or prove tissue healing. Agree how progress will be reviewed and what would trigger a change of plan or referral. NICE emphasises realistic goals, participation and revisiting goals over time; this is different from promising a fixed recovery timeline. Include the person in decisions and offer accessible information, interpreters or communication support where needed. Distinguish an educational case discussion from patient-specific prescribing. A learner may practise articulating outcomes and uncertainty, but must not independently assess, diagnose, treat or clear a person on the basis of this draft."
+            "text": "A meaningful rehabilitation goal describes an activity or participation outcome in the person’s own context. “Improve mobility” may be a useful theme, but a person may prioritise preparing food, returning to study, managing fatigue on public transport or joining a family event. Explore previous ability, current barriers, confidence, environment, carer involvement and what the person considers acceptable progress. Use measures only when their purpose and limitations are understood; a score can support communication but cannot represent the whole person or prove tissue healing. Agree how progress will be reviewed and what would trigger a change of plan or referral. NICE emphasises realistic goals, participation and revisiting goals over time; this is different from promising a fixed recovery timeline. Include the person in decisions and offer accessible information, interpreters or communication support where needed. Distinguish an educational case discussion from patient-specific prescribing. A learner may practise articulating outcomes and uncertainty, but must not independently assess, diagnose, treat or clear a person on the basis of this educational material."
           }
         ],
-        "reflectiveActivity": "For a fictional person moving from hospital to community, draft a goal-setting conversation and a responsibility map. Mark what is known, uncertain, outside role scope and due for multidisciplinary review."
+        "reflectiveActivity": "For a fictional person moving from hospital to community, educational material a goal-setting conversation and a responsibility map. Mark what is known, uncertain, outside role scope and due for multidisciplinary review."
       },
       {
         "title": "Specialist boundaries and safety",
@@ -183,7 +183,7 @@
           {
             "title": "Cardiopulmonary safety and escalation",
             "description": "Keep cardiopulmonary scope explicit and treat concerning symptoms as a referral issue.",
-            "text": "Cardiopulmonary rehabilitation requires condition-specific knowledge, risk assessment, monitoring and emergency arrangements that cannot be supplied by a generic diploma outline. Before any activity discussion, clarify the responsible clinical team, diagnosed condition if known, current restrictions and local escalation process. New or unexplained chest discomfort, severe or unusual breathlessness, fainting, cyanosis, palpitations with instability, acute confusion or marked deterioration requires prompt medical assessment; do not explain it away as deconditioning or anxiety. Even apparently modest activity can carry different implications with cardiac disease, pulmonary disease, recent surgery, infection, oxygen use, medication changes or autonomic problems. A learner may observe how teams communicate goals, consent, monitoring responsibilities and stop criteria, but must not prescribe intensity, alter medication, interpret readings beyond competence or provide independent clearance. Refer to appropriately qualified cardiopulmonary and medical professionals, and follow emergency policy. Any future teaching would need specialist review, equipment governance, staff competence and local legal requirements. The proposed diploma cannot establish those safeguards."
+            "text": "Cardiopulmonary rehabilitation requires condition-specific knowledge, risk assessment, monitoring and emergency arrangements that cannot be supplied by a generic diploma outline. Before any activity discussion, clarify the responsible clinical team, diagnosed condition if known, current restrictions and local escalation process. New or unexplained chest discomfort, severe or unusual breathlessness, fainting, cyanosis, palpitations with instability, acute confusion or marked deterioration requires prompt medical assessment; do not explain it away as deconditioning or anxiety. Even apparently modest activity can carry different implications with cardiac disease, pulmonary disease, recent surgery, infection, oxygen use, medication changes or autonomic problems. A learner may observe how teams communicate goals, consent, monitoring responsibilities and stop criteria, but must not prescribe intensity, alter medication, interpret readings beyond competence or provide independent clearance. Refer to appropriately qualified cardiopulmonary and medical professionals, and follow emergency policy. Any future teaching would need specialist review, equipment governance, staff competence and local legal requirements. The suggested diploma cannot establish those safeguards."
           }
         ],
         "reflectiveActivity": "Using two fictional vignettes, write separate escalation notes: one neurological and one cardiopulmonary. Include observed concern, urgency uncertainty, responsible service, information-sharing consent and what you will not attempt."
@@ -195,12 +195,12 @@
           {
             "title": "Reasoning, evidence and documentation",
             "description": "Make rehabilitation decisions transparent, reviewable and proportionate to evidence.",
-            "text": "Evidence-informed practice combines relevant research, professional judgement and the person’s values and circumstances; it is not the mechanical application of a headline or guideline. Define the decision, population and outcome before searching, then ask whether a source actually applies to the setting and person. NICE recommendations have defined scopes, while WHO resources support service planning and curriculum development; neither replaces examination, local policy or specialist judgement. In documentation, separate reported experience, observed findings, interpretation, uncertainty, agreed action and review trigger. State what was not assessed and why, rather than implying normality. HCPC standards emphasise reasoned decisions, appropriate referral, communication, consent, supervision and safe practice for physiotherapists; comparable duties vary by profession and jurisdiction. Use accessible language and preserve confidentiality in educational examples. If evidence is limited or conflicting, say so and seek supervision. This draft does not specify interventions, doses, procedures, assessments or pass criteria. Its purpose is to rehearse reasoning and handover, not to create a clinical workflow or award competence."
+            "text": "Evidence-informed practice combines relevant research, professional judgement and the person’s values and circumstances; it is not the mechanical application of a headline or guideline. Define the decision, population and outcome before searching, then ask whether a source actually applies to the setting and person. NICE recommendations have defined scopes, while WHO resources support service planning and curriculum development; neither replaces examination, local policy or specialist judgement. In documentation, separate reported experience, observed findings, interpretation, uncertainty, agreed action and review trigger. State what was not assessed and why, rather than implying normality. HCPC standards emphasise reasoned decisions, appropriate referral, communication, consent, supervision and safe practice for physiotherapists; comparable duties vary by profession and jurisdiction. Use accessible language and preserve confidentiality in educational examples. If evidence is limited or conflicting, say so and seek supervision. This educational material does not specify interventions, doses, procedures, assessments or pass criteria. Its purpose is to rehearse reasoning and handover, not to create a clinical workflow or award competence."
           },
           {
             "title": "Transitions, teamwork and reflective practice",
             "description": "Plan safe handovers and professional development without claiming completion or certification.",
-            "text": "People move between acute care, community services, sport, work, education and home, and risk can change at each transition. A useful handover states the person’s priorities, current function, relevant precautions, unresolved questions, responsible service, agreed communication consent and the next review point. Confirm who will act; a document sent without ownership is not coordination. Include reasonable adjustments and consider transport, equipment, finances, language, fatigue and carer capacity. Team reflection should examine assumptions, power, inequity, missed information and whether the plan remains acceptable to the person. It should not disclose identifiable information or become a substitute for supervision, incident reporting or specialist review. HCPC standards call for ongoing learning and appropriate referrals, but this proposed diploma is not a registration route, certificate or evidence of competence. There is no pass, completion or assessment workflow confirmed. Any future programme would need governance, qualified instructors, specialist input for neurological and cardiopulmonary content, safeguarding processes and formal review. Until then, learners should treat the outline as a discussion aid only."
+            "text": "People move between acute care, community services, sport, work, education and home, and risk can change at each transition. A useful handover states the person’s priorities, current function, relevant precautions, unresolved questions, responsible service, agreed communication consent and the next review point. Confirm who will act; a document sent without ownership is not coordination. Include reasonable adjustments and consider transport, equipment, finances, language, fatigue and carer capacity. Team reflection should examine assumptions, power, inequity, missed information and whether the plan remains acceptable to the person. It should not disclose identifiable information or become a substitute for supervision, incident reporting or specialist review. HCPC standards call for ongoing learning and appropriate referrals, but this suggested diploma is not a registration route, certificate or evidence of competence. There is no pass, completion or assessment workflow confirmed. Any future programme would need governance, qualified instructors, specialist input for neurological and cardiopulmonary content, safeguarding processes and formal review. Until then, learners should treat the outline as a discussion aid only."
           }
         ],
         "reflectiveActivity": "Review a fictional handover that contains ambiguous ownership and excess personal detail. Rewrite it with minimum necessary information, explicit responsibility, review trigger, accessibility needs and a question for supervision."
@@ -209,11 +209,11 @@
     "faqs": [
       {
         "question": "Is Diploma in Rehabilitation Practice an existing diploma?",
-        "answer": "No. This is a proposed programme title only, not a confirmed award. Accreditation, recognition, delivery, hours, dates, fees, instructors, assessments and certificates are unknown."
+        "answer": "No. This is a suggested programme title only, not a confirmed award. Accreditation, recognition, delivery, hours, dates, fees, instructors, assessments and certificates are unknown."
       },
       {
-        "question": "What scope does the proposed diploma cover?",
-        "answer": "It is a broad educational draft spanning rehabilitation reasoning and team practice. It does not establish competence in neurological, cardiopulmonary or any other specialist practice."
+        "question": "What scope does the suggested diploma cover?",
+        "answer": "It is a broad educational material spanning rehabilitation reasoning and team practice. It does not establish competence in neurological, cardiopulmonary or any other specialist practice."
       },
       {
         "question": "Can a learner independently prescribe or treat?",

@@ -1,42 +1,105 @@
 import { readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { loadEnv } from 'vite';
 
-const env = { ...loadEnv('production', process.cwd(), 'VITE_'), ...process.env };
+const sourceRoot = dirname(dirname(fileURLToPath(import.meta.url)));
+const outputRoot = process.cwd();
+const env = { ...loadEnv('production', sourceRoot, 'VITE_'), ...process.env };
 let origin;
+
 try {
   const u = new URL(env.VITE_SITE_URL);
   const previewHost = /(^|\.)(vercel\.app|manus\.computer|localhost|test|invalid)$/.test(u.hostname);
-  if (env.VITE_INDEXING_ENABLED === 'true' && u.protocol === 'https:' && u.pathname === '/' && !u.username && !u.password && !u.search && !u.hash && !previewHost) origin = u.origin;
-} catch { /* Preview builds remain unindexed. */ }
-
-const fixed = ['/', '/about', '/departments', '/programmes', '/cpd-courses', '/online-learning', '/training-partners', '/resources', '/contact', '/admissions', '/events', '/faculty', '/faqs'];
-
-// Department pages are public category pages. Course detail URLs must be explicitly published.
-const departmentSource = readFileSync('src/data/departments.ts', 'utf8');
-for (const match of departmentSource.matchAll(/slug:\s*['"]([^'"]+)['"]/g)) {
-  fixed.push('/departments/' + match[1]);
+  if (
+    env.VITE_INDEXING_ENABLED === 'true' &&
+    env.VERCEL_ENV !== 'preview' &&
+    env.VERCEL_ENV !== 'development' &&
+    u.protocol === 'https:' &&
+    u.pathname === '/' &&
+    !u.username &&
+    !u.password &&
+    !u.search &&
+    !u.hash &&
+    !previewHost
+  ) origin = u.origin;
+} catch {
+  // Preview builds remain unindexed when no valid production origin is configured.
 }
 
-for (const [file, prefix] of [['programmes', 'programmes'], ['cpdCourses', 'cpd-courses']]) {
-  const source = readFileSync('src/data/' + file + '.ts', 'utf8');
-  const entries = source.split(/\n(?=  \{)/).filter(entry => /^  \{\n/.test(entry));
-  for (const entry of entries) {
-    if (!/publicationStatus:\s*['"]published['"]/.test(entry)) continue;
-    const match = entry.match(/^\s*slug:\s*['"]([^'"]+)['"]/m);
-    if (match) fixed.push('/' + prefix + '/' + match[1]);
-  }
+const fixedPublicRoutes = [
+  '/', '/about', '/departments', '/programmes', '/cpd-courses', '/online-learning',
+  '/training-partners', '/resources', '/contact', '/admissions',
+  '/events', '/faculty', '/faqs', '/privacy-policy',
+  '/terms-and-conditions', '/cookie-policy', '/refund-policy',
+];
+
+function readPublishedSlugs(file, statusField) {
+  const source = readFileSync(join(sourceRoot, file), 'utf8');
+  const entries = source.split(/\n(?=  \{\n)/).filter(entry => /^  \{\n/.test(entry));
+  return entries.flatMap(entry => {
+    if (!new RegExp(statusField + ':\\s*[\'"]published[\'"]').test(entry)) return [];
+    const match = entry.match(/^\s*slug:\s*[\'"]([^\'"]+)[\'"]/m);
+    return match ? [match[1]] : [];
+  });
 }
 
-const escape = s => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('"', '&quot;');
-const urls = origin ? [...new Set(fixed)].map(path => '  <url><loc>' + escape(origin + path) + '</loc></url>').join('\n') : '';
-writeFileSync('dist/sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + '\n</urlset>\n');
-writeFileSync('dist/robots.txt', origin ? 'User-agent: *\nSitemap: ' + origin + '/sitemap.xml\n' : 'User-agent: *\nDisallow: /\n');
-// Keep preview HTML noindexed while allowing indexing only in explicitly enabled production builds.
-const htmlFile = 'dist/index.html';
-const html = readFileSync(htmlFile, 'utf8');
-const robotsMeta = /<meta\s+name="robots"\s+content="[^"]*"\s*\/?\s*>/i;
-const replacement = origin
-  ? '<meta name="robots" content="index, follow" />'
-  : '<meta name="robots" content="noindex, nofollow" />';
-writeFileSync(htmlFile, robotsMeta.test(html) ? html.replace(robotsMeta, replacement) : html.replace('</head>', '    ' + replacement + '\n  </head>'));
-console.log(origin ? 'SEO assets generated for configured origin.' : 'Preview SEO safeguards generated: noindex, no public sitemap entries.');
+function readPublishedJsonSlugs(files, slugField, statusField = 'status') {
+  return files.flatMap(file => {
+    const entries = JSON.parse(readFileSync(join(sourceRoot, file), 'utf8'));
+    return entries
+      .filter(entry => entry[statusField] === 'published')
+      .map(entry => entry[slugField]);
+  });
+}
+
+const courseSlugs = readPublishedSlugs('src/data/cpdCourses.ts', 'publicationStatus');
+const programmeSlugs = readPublishedSlugs('src/data/programmes.ts', 'publicationStatus');
+const articleSlugs = readPublishedJsonSlugs([
+  'src/data/articles/assessment-and-pain.json',
+  'src/data/articles/rehabilitation.json',
+  'src/data/articles/clinical-practice.json',
+], 'slug');
+const dynamicPublicRoutes = [
+  ...programmeSlugs.map(slug => '/programmes/' + slug),
+  ...courseSlugs.map(slug => '/cpd-courses/' + slug),
+  ...articleSlugs.map(slug => '/resources/' + slug),
+];
+const routes = [...new Set([...fixedPublicRoutes, ...dynamicPublicRoutes])];
+const escapeXml = value => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;');
+
+const sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+  (origin ? routes.map(path => '  <url><loc>' + escapeXml(origin + path) + '</loc></url>').join('\n') : '') +
+  '\n</urlset>\n';
+
+writeFileSync(resolve(outputRoot, 'dist/sitemap.xml'), sitemap);
+writeFileSync(
+  resolve(outputRoot, 'dist/robots.txt'),
+  origin
+    ? [
+        'User-agent: *',
+        'Disallow: /admin',
+        'Disallow: /apply',
+        'Disallow: /application',
+        'Disallow: /sign-in',
+        'Disallow: /sign-up',
+        'Disallow: /forgot-password',
+        'Disallow: /reset-password',
+        'Disallow: /student',
+        'Disallow: /verify',
+        'Sitemap: ' + origin + '/sitemap.xml',
+        '',
+      ].join('\n')
+    : 'User-agent: *\nDisallow: /\n',
+);
+
+const htmlFile = resolve(outputRoot, 'dist/index.html');
+if (origin) {
+  const html = readFileSync(htmlFile, 'utf8');
+  writeFileSync(htmlFile, html.replace('content="noindex, nofollow"', 'content="index, follow"'));
+}
+
+console.log(origin
+  ? 'SEO assets generated for configured origin (' + programmeSlugs.length + ' published programmes, ' + courseSlugs.length + ' published courses, ' + articleSlugs.length + ' published articles).'
+  : 'Preview SEO safeguards generated: noindex, no public sitemap entries.');

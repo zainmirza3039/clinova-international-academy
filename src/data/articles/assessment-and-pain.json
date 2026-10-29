@@ -5,9 +5,9 @@
     "title": "A Structured Approach to Physiotherapy Assessment",
     "excerpt": "A function-led framework for a safe history, examination and shared plan.",
     "category": "Assessment",
-    "status": "draft",
+    "status": "published",
     "seoTitle": "Structured Physiotherapy Assessment | Clinova",
-    "seoDescription": "How a structured physiotherapy assessment links symptoms, function, context, safety screening and shared goals. Draft for review.",
+    "seoDescription": "How a structured physiotherapy assessment links symptoms, function, context, safety screening and shared goals. educational material.",
     "sections": [
       {
         "heading": "Why structure matters",
@@ -86,7 +86,7 @@
     "title": "Musculoskeletal Pain and Function: Looking Beyond a Pain Score",
     "excerpt": "How pain, capacity, context and participation interact in person-centred rehabilitation.",
     "category": "Musculoskeletal",
-    "status": "draft",
+    "status": "published",
     "seoTitle": "Musculoskeletal Pain and Function | Clinova",
     "seoDescription": "Why musculoskeletal pain and function can diverge, how context shapes symptoms and how education supports realistic rehabilitation.",
     "sections": [
@@ -169,9 +169,9 @@
     "title": "Therapeutic Exercise: Principles for Safe Progression",
     "excerpt": "A cautious guide to selecting, adapting and progressing therapeutic exercise while monitoring response.",
     "category": "Rehabilitation",
-    "status": "draft",
+    "status": "published",
     "seoTitle": "Therapeutic Exercise and Safe Progression | Clinova",
-    "seoDescription": "Principles for exercise selection, response monitoring, adaptation, pacing and referral. Educational draft, not a prescription.",
+    "seoDescription": "Principles for exercise selection, response monitoring, adaptation, pacing and referral. educational material, not a prescription.",
     "sections": [
       {
         "heading": "Purpose and choice",
@@ -252,7 +252,7 @@
     "title": "Knee Osteoarthritis: Exercise, Function and Rehabilitation",
     "excerpt": "How education, tailored exercise and functional goals fit into knee osteoarthritis care, with attention to flares and referral.",
     "category": "Rehabilitation",
-    "status": "draft",
+    "status": "published",
     "seoTitle": "Knee Osteoarthritis Exercise and Rehabilitation | Clinova",
     "seoDescription": "An evidence-informed overview of knee osteoarthritis rehabilitation, exercise selection, function, flares and referral.",
     "sections": [
@@ -294,7 +294,7 @@
         "heading": "Referral and uncertainty",
         "paragraphs": [
           "Refer when presentation is atypical, the knee is acutely inflamed, trauma is significant, neurological or vascular features appear or function deteriorates beyond expected fluctuation. Persistent disabling symptoms despite appropriately delivered non-surgical care may warrant further discussion through local pathways.",
-          "Do not claim exercise prevents surgery, repairs cartilage or guarantees relief. Evidence supports exercise as an important management component while benefit differs in size and timing. This framework is not a personalized programme and requires qualified clinical and editorial review before publication.",
+          "Do not claim exercise prevents surgery, repairs cartilage or guarantees relief. Evidence supports exercise as an important management component while benefit differs in size and timing. This framework is not a personalised programme; exercise selection and referral require individual clinical assessment and current local guidance.",
           "Review should also consider whether the person can maintain gains without frequent professional input. Teach problem-solving: how to choose an easier variation, distribute activity and ask for help. Independence is not doing everything alone; it can mean having a reliable plan and knowing when expert reassessment is needed."
         ]
       }
@@ -332,7 +332,7 @@
     "title": "Low Back Pain: Assessment, Education and Rehabilitation",
     "excerpt": "A safety-conscious overview of low back pain assessment, education, activity and rehabilitation, including escalation.",
     "category": "Rehabilitation",
-    "status": "draft",
+    "status": "published",
     "seoTitle": "Low Back Pain Assessment and Rehabilitation | Clinova",
     "seoDescription": "A cautious framework for assessing low back pain, explaining uncertainty, supporting activity and recognizing referral needs.",
     "sections": [
@@ -347,7 +347,7 @@
       {
         "heading": "Explain without overpromising",
         "paragraphs": [
-          "NICE describes physical and psychological approaches to help people manage low back pain and sciatica in daily life, with clinical judgement. Recovery is not always linear and persistent pain does not mean failure. Imaging is not automatically useful: findings can be common without symptoms, so it is considered when likely to change management or serious pathology is suspected.",
+          "NICE NG59 recommends tailored information and self-management advice, encouragement to continue normal activities, and consideration of an exercise programme suited to the person's needs and capabilities. Manual therapy may be considered only as part of a package that includes exercise. Imaging is not automatically useful: findings can be present without symptoms, so imaging in a non-specialist setting is not routinely offered and specialist imaging should be considered when it is likely to change management or serious pathology is suspected. The NICE NG59 page accessed for this article records an update on 29 July 2026; that update withdrew earlier recommendations on psychological therapy specifically for low back pain or sciatica, so older summaries should not be treated as current guidance.",
           "A helpful explanation connects symptoms with sensitivity, movement, sleep, stress, workload and confidence without claiming a single cause. Ask what the person thinks is happening and what they need to return to. Reassurance should be conditional: encourage safe activity while giving advice about weakness, systemic symptoms or escalating disability.",
           "Leg pain does not automatically mean that a person needs imaging or surgery. Clarify distribution, sensory change, weakness and how symptoms respond to movement, then interpret findings in context. Neurological examination and medical review may be appropriate when symptoms are persistent, progressive or functionally significant. Avoid using a label such as sciatica as a substitute for assessment.",
           "Work and daily activity advice should be practical. A temporary change in lifting position, task rotation, planned breaks or gradual return may be more useful than telling someone to protect the back completely. Employers and occupational-health professionals may help where consented. Advice must account for the actual job and should not imply that every person can modify work without support.",
@@ -374,7 +374,7 @@
         "heading": "Review and communicate uncertainty",
         "paragraphs": [
           "Review whether symptoms, function and participation change as expected. Reconsider the working classification if leg symptoms progress, strength or sensation changes, pain becomes systemic or essential activities cannot be managed. Persistent pain may benefit from coordinated medical, physical and psychological support; this is not a judgement about motivation.",
-          "Distinguish evidence from hypothesis, avoid guarantees and state limits. NICE NG59 was last updated in July 2026 on the accessed page; guidelines and local pathways change, so clinicians should check the current source. This draft does not diagnose, determine imaging or prescribe exercises and requires qualified review.",
+          "Distinguish evidence from hypothesis, avoid guarantees and state limits. NICE NG59 was last updated in July 2026 on the accessed page; guidelines and local pathways change, so clinicians should check the current source. This educational material does not diagnose, determine imaging or prescribe exercises; clinicians should consult the current source and local referral pathways.",
           "Finally, avoid implying that a particular posture, scan finding or exercise technique explains every episode. Low back pain can recur for many reasons, and recurrence is not necessarily evidence of failed rehabilitation. A plan that supports confidence, varied movement and early recognition of concerning change is more useful than a promise of permanent symptom elimination."
         ]
       }

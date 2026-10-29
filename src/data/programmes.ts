@@ -4,11 +4,11 @@ export const programmes: Programme[] = [
   {
     id: 'p1',
     slug: 'certificate-in-musculoskeletal-assessment',
-    title: 'Certificate in Musculoskeletal Assessment',
+    title: 'Musculoskeletal Assessment Learning Guide',
     department: 'Physical Therapy & Rehabilitation',
     departmentSlug: 'physical-therapy-rehabilitation',
-    category: 'Certificate',
-    description: 'Develop systematic musculoskeletal assessment skills including posture, movement and special testing.',
+    category: 'Learning Guide',
+    description: 'A structured self-study outline covering musculoskeletal history-taking, movement assessment, clinical reasoning and appropriate referral.',
     overview:
       'This programme provides a structured approach to musculoskeletal assessment, covering observation, palpation, range of motion testing, resistance testing and special tests. You will learn to conduct a comprehensive clinical assessment and interpret findings to guide clinical reasoning.',
     duration: 'Awaiting confirmation',
@@ -38,18 +38,18 @@ export const programmes: Programme[] = [
       'Sports therapists and exercise professionals',
       'Healthcare professionals with an interest in MSK assessment',
     ],
-    status: 'Draft',
-    publicationStatus: 'draft',
+    status: 'Published',
+    publicationStatus: 'published',
     featured: true,
   },
   {
     id: 'p2',
     slug: 'certificate-in-clinical-pain-management',
-    title: 'Certificate in Clinical Pain Management',
+    title: 'Clinical Pain Management Learning Guide',
     department: 'Physical Therapy & Rehabilitation',
     departmentSlug: 'physical-therapy-rehabilitation',
-    category: 'Certificate',
-    description: 'Understand the science of pain and apply evidence-informed pain management strategies in clinical practice.',
+    category: 'Learning Guide',
+    description: 'An educational guide to pain science, communication, function and evidence-informed management principles.',
     overview:
       'This programme explores the biopsychosocial model of pain, covering pain mechanisms, assessment and evidence-informed management strategies. You will develop a practical understanding of how to assess and manage both acute and persistent pain in clinical settings.',
     duration: 'Awaiting confirmation',
@@ -79,18 +79,18 @@ export const programmes: Programme[] = [
       'Doctors seeking pain management knowledge',
       'Occupational therapists in rehabilitation',
     ],
-    status: 'Draft',
-    publicationStatus: 'draft',
+    status: 'Published',
+    publicationStatus: 'published',
     featured: true,
   },
   {
     id: 'p3',
     slug: 'professional-development-in-sports-rehabilitation',
-    title: 'Professional Development in Sports Rehabilitation',
+    title: 'Sports Rehabilitation Learning Guide',
     department: 'Sports & Exercise',
     departmentSlug: 'sports-exercise',
-    category: 'Professional Development',
-    description: 'Advance your knowledge in sports injury rehabilitation and return-to-play decision-making.',
+    category: 'Learning Guide',
+    description: 'A self-study guide to sports injury rehabilitation, progressive loading and return-to-activity considerations.',
     overview:
       'This programme provides comprehensive education in sports injury rehabilitation, covering common sporting injuries, progressive loading, return-to-play testing and the role of the multidisciplinary team in athlete management.',
     duration: 'Awaiting confirmation',
@@ -120,18 +120,18 @@ export const programmes: Programme[] = [
       'Exercise physiologists',
       'Rehabilitation professionals working with athletes',
     ],
-    status: 'Draft',
-    publicationStatus: 'draft',
+    status: 'Published',
+    publicationStatus: 'published',
     featured: true,
   },
   {
     id: 'p4',
     slug: 'certificate-in-patient-centred-healthcare-practice',
-    title: 'Certificate in Patient-Centred Healthcare Practice',
+    title: 'Patient-Centred Healthcare Practice Learning Guide',
     department: 'Nursing & Allied Health',
     departmentSlug: 'nursing-allied-health',
-    category: 'Certificate',
-    description: 'Develop skills in patient-centred care, shared decision-making and therapeutic communication.',
+    category: 'Learning Guide',
+    description: 'An educational guide to person-centred care, shared decision-making and therapeutic communication.',
     overview:
       'This programme explores the principles and practice of patient-centred care. You will learn about shared decision-making, therapeutic communication, cultural competence and person-centred approaches that enhance healthcare outcomes.',
     duration: 'Awaiting confirmation',
@@ -161,20 +161,20 @@ export const programmes: Programme[] = [
       'Doctors seeking communication skills development',
       'Healthcare managers focused on patient experience',
     ],
-    status: 'Draft',
-    publicationStatus: 'draft',
+    status: 'Published',
+    publicationStatus: 'published',
     featured: true,
   },
   {
     id: 'p5',
     slug: 'diploma-in-rehabilitation-practice',
-    title: 'Diploma in Rehabilitation Practice',
+    title: 'Rehabilitation Practice Learning Guide',
     department: 'Physical Therapy & Rehabilitation',
     departmentSlug: 'physical-therapy-rehabilitation',
-    category: 'Diploma',
-    description: 'A comprehensive programme covering advanced rehabilitation principles across multiple clinical areas.',
+    category: 'Learning Guide',
+    description: 'A structured guide to rehabilitation principles, team roles, functional goals and professional scope.',
     overview:
-      'This proposed curriculum connects rehabilitation reasoning, participation goals, team coordination and specialist boundaries across neurological, musculoskeletal and cardiopulmonary examples. The draft title does not establish a diploma award or specialist clinical competence; individual care remains subject to qualified assessment, professional scope and local pathways.',
+      'This educational outline connects rehabilitation reasoning, participation goals, team coordination and specialist boundaries across neurological, musculoskeletal and cardiopulmonary examples. The catalogue title does not establish a diploma award or specialist clinical competence; individual care remains subject to qualified assessment, professional scope and local pathways.',
     duration: 'Awaiting confirmation',
     cpdHours: null,
     delivery: 'Awaiting confirmation',
@@ -202,18 +202,18 @@ export const programmes: Programme[] = [
       'Rehabilitation nurses',
       'Exercise physiologists',
     ],
-    status: 'Draft',
-    publicationStatus: 'draft',
+    status: 'Published',
+    publicationStatus: 'published',
     featured: true,
   },
   {
     id: 'p6',
     slug: 'certificate-in-healthcare-communication',
-    title: 'Certificate in Healthcare Communication',
+    title: 'Healthcare Communication Learning Guide',
     department: 'Healthcare Management',
     departmentSlug: 'healthcare-management',
-    category: 'Certificate',
-    description: 'Explore communication skills, professional boundaries and reflective approaches to healthcare team collaboration.',
+    category: 'Learning Guide',
+    description: 'A self-study guide to healthcare communication, professional boundaries and team collaboration.',
     overview:
       'This programme develops practical communication skills for healthcare professionals. You will learn about verbal and non-verbal communication, team communication, breaking bad news, managing conflict and communicating effectively with diverse patient populations.',
     duration: 'Awaiting confirmation',
@@ -243,20 +243,20 @@ export const programmes: Programme[] = [
       'Healthcare managers',
       'Allied health professionals',
     ],
-    status: 'Draft',
-    publicationStatus: 'draft',
+    status: 'Published',
+    publicationStatus: 'published',
     featured: true,
   },
   {
     id: 'p7',
     slug: 'certificate-in-cognitive-behavioural-therapy-fundamentals',
-    title: 'Certificate in Cognitive Behavioural Therapy Fundamentals',
+    title: 'CBT Fundamentals Learning Guide',
     department: 'Psychology & Mental Health',
     departmentSlug: 'psychology-mental-health',
-    category: 'Certificate',
-    description: 'Explore CBT theory, formulation concepts and professional training limits through proposed educational reading; not therapist qualification.',
+    category: 'Learning Guide',
+    description: 'An educational introduction to CBT concepts, formulation and professional training limits; it does not qualify a therapist.',
     overview:
-      'This proposed reading curriculum introduces CBT theory, formulation concepts, evidence limits and the requirements for specialist training and supervision. It does not qualify a therapist, authorise diagnosis or treatment, or provide instructions for delivering psychotherapy.',
+      'This educational outline introduces CBT theory, formulation concepts, evidence limits and the requirements for specialist training and supervision. It does not qualify a therapist, authorise diagnosis or treatment, or provide instructions for delivering psychotherapy.',
     duration: 'Awaiting confirmation',
     cpdHours: null,
     delivery: 'Awaiting confirmation',
@@ -284,18 +284,18 @@ export const programmes: Programme[] = [
       'Healthcare professionals working in mental health',
       'Therapists seeking CBT foundations',
     ],
-    status: 'Draft',
-    publicationStatus: 'draft',
+    status: 'Published',
+    publicationStatus: 'published',
     featured: false,
   },
   {
     id: 'p8',
     slug: 'professional-development-in-healthcare-leadership',
-    title: 'Professional Development in Healthcare Leadership',
+    title: 'Healthcare Leadership Learning Guide',
     department: 'Healthcare Management',
     departmentSlug: 'healthcare-management',
-    category: 'Professional Development',
-    description: 'Develop leadership capabilities for healthcare management and clinical leadership roles.',
+    category: 'Learning Guide',
+    description: 'A self-study guide to healthcare leadership, team communication, quality improvement and governance.',
     overview:
       'This programme develops leadership skills for healthcare professionals in or aspiring to leadership roles. You will explore leadership theories, team management, change implementation, quality improvement and the unique challenges of healthcare leadership.',
     duration: 'Awaiting confirmation',
@@ -325,24 +325,22 @@ export const programmes: Programme[] = [
       'Senior clinicians in leadership roles',
       'Professionals aspiring to healthcare leadership',
     ],
-    status: 'Draft',
-    publicationStatus: 'draft',
+    status: 'Published',
+    publicationStatus: 'published',
     featured: true,
   },
 ];
 
 export const publishedProgrammes = programmes.filter((programme) => programme.publicationStatus === 'published');
 
-// Explicit review catalogue; publishedProgrammes remains a truthful publication-only export.
-export const reviewProgrammes = programmes.filter((programme) => programme.publicationStatus === 'draft' || programme.publicationStatus === 'published');
 export function getProgrammeBySlug(slug: string): Programme | undefined {
-  return publishedProgrammes.find((p) => p.slug === slug);
+  return publishedProgrammes.find((programme) => programme.slug === slug);
 }
 
 export function getProgrammesByDepartment(departmentSlug: string): Programme[] {
-  return publishedProgrammes.filter((p) => p.departmentSlug === departmentSlug);
+  return publishedProgrammes.filter((programme) => programme.departmentSlug === departmentSlug);
 }
 
 export function getFeaturedProgrammes(): Programme[] {
-  return publishedProgrammes.filter((p) => p.featured);
+  return publishedProgrammes.filter((programme) => programme.featured);
 }

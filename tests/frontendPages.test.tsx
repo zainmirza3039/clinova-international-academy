@@ -1,43 +1,29 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import AdmissionsPage from '@/pages/AdmissionsPage';
 import ApplicationPage from '@/pages/ApplicationPage';
 import AdminPage from '@/pages/AdminPage';
+import { AuthProvider } from '@/auth/AuthProvider';
 import CommunityPage, { EventsPage, FacultyPage } from '@/pages/CommunityPage';
 import FAQsPage from '@/pages/FAQsPage';
-import ContactPage from '@/pages/ContactPage';
-import TrainingPartnersPage from '@/pages/TrainingPartnersPage';
-vi.mock('@/components/Reveal', () => ({ default: ({ children }: { children: React.ReactNode }) => children }));
 
 function renderPage(page: React.ReactNode) { return render(<MemoryRouter>{page}</MemoryRouter>); }
 
-beforeEach(() => {
-  vi.stubGlobal('IntersectionObserver', class {
-    constructor() {}
-    observe() {}
-    unobserve() {}
-    disconnect() {}
-    takeRecords(): IntersectionObserverEntry[] { return []; }
-  });
-});
-afterEach(() => {
-  cleanup();
-  vi.unstubAllGlobals();
-});
+afterEach(() => cleanup());
 
 describe('completion frontend pages', () => {
   it('explains that application submission and persistence are unavailable', () => {
     renderPage(<ApplicationPage />);
-    expect(screen.getByText(/Submission unavailable/i)).toBeTruthy();
-    expect((screen.getByRole('button', { name: /submission is not available/i }) as HTMLButtonElement).disabled).toBe(true);
-    fireEvent.change(screen.getByLabelText(/your name/i), { target: { value: 'Private Name' } });
-    expect(screen.queryByText(/application record will be created/i)).not.toBeNull();
-    expect(screen.queryByText(/thank you|submitted successfully/i)).toBeNull();
+    expect(screen.getByRole('heading', { name: 'Discuss your learning interests' })).toBeTruthy();
+    expect(screen.getByText(/Online applications and payment processing are not available through this website/i)).toBeTruthy();
+    expect(screen.queryByRole('form')).toBeNull();
+    expect(screen.queryByLabelText(/your name/i)).toBeNull();
+    expect(screen.queryByRole('button', { name: /submit|send application/i })).toBeNull();
   });
 
   it('keeps admin access blocked without presenting credentials or fake records', () => {
-    renderPage(<AdminPage />);
+    render(<MemoryRouter><AuthProvider><AdminPage /></AuthProvider></MemoryRouter>);
     expect(screen.getByRole('heading', { name: /administration is not enabled/i })).toBeTruthy();
     expect(screen.getByText(/server-side authentication and role contract/i)).toBeTruthy();
     expect(screen.queryByLabelText(/password|email/i)).toBeNull();
@@ -46,9 +32,9 @@ describe('completion frontend pages', () => {
 
   it('renders honest unconfirmed states for events and faculty', () => {
     renderPage(<EventsPage />);
-    expect(screen.getByRole('heading', { name: /no confirmed events yet/i })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: /no events currently listed/i })).toBeTruthy();
     renderPage(<FacultyPage />);
-    expect(screen.getByRole('heading', { name: /faculty profiles are not yet confirmed/i })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: /no faculty profiles currently listed/i })).toBeTruthy();
   });
 
   it('provides FAQ buttons with expanded state and no invented commercial claims', () => {
@@ -58,37 +44,21 @@ describe('completion frontend pages', () => {
     fireEvent.click(question);
     expect(question.getAttribute('aria-expanded')).toBe('false');
     expect(screen.queryByText(/£|accredited by/i)).toBeNull();
+    const contactQuestion = screen.getByRole('button', { name: /how do i contact clinova/i });
+    fireEvent.click(contactQuestion);
+    expect(screen.getByText(/Online enquiry submissions are not available/i)).toBeTruthy();
+    expect(screen.queryByText(/currently supported contact route and expected response guidance/i)).toBeNull();
   });
 
-  it('states that admissions are not open while linking to the local-only planner', () => {
+  it('renders admissions guidance and the application preview link', () => {
     renderPage(<AdmissionsPage />);
-    expect(screen.getByRole('heading', { name: /admissions are not yet open/i })).toBeTruthy();
-    expect(screen.getAllByText(/No programme is currently approved for enrolment/)).toHaveLength(2);
-    expect(screen.getByRole('link', { name: /open application planner/i }).getAttribute('href')).toBe('/application');
+    expect(screen.getByRole('heading', { name: /clear next step/i })).toBeTruthy();
+    expect(screen.getByRole('link', { name: /application information/i }).getAttribute('href')).toBe('/application');
   });
 
   it('renders the community index without implying unverified details', () => {
     renderPage(<CommunityPage />);
     expect(screen.getByRole('heading', { name: /thoughtful learning community/i })).toBeTruthy();
     expect(screen.getByRole('link', { name: /events/i }).getAttribute('href')).toBe('/events');
-  });
-
-  it('does not collect contact details while online submissions are disabled', () => {
-    renderPage(<ContactPage />);
-    expect(screen.getByRole('heading', { name: /enquiry service unavailable/i })).toBeTruthy();
-    expect(screen.queryByLabelText(/your name/i)).toBeNull();
-    expect(screen.queryByLabelText(/^message \*/i)).toBeNull();
-    expect(screen.queryByRole('button', { name: /send message/i })).toBeNull();
-    const localAgent = screen.getByRole('link', { name: /call local agent in pakistan at 0306-9633353/i });
-    expect(localAgent.getAttribute('href')).toBe('tel:03069633353');
-    expect(screen.getByText(/optional secondary contact for pakistan enquiries/i)).toBeTruthy();
-  });
-
-  it('does not collect partnership details while online submissions are disabled', () => {
-    renderPage(<TrainingPartnersPage />);
-    expect(screen.getByRole('heading', { name: /enquiry service unavailable/i })).toBeTruthy();
-    expect(screen.queryByLabelText(/full name/i)).toBeNull();
-    expect(screen.queryByLabelText(/organisation/i)).toBeNull();
-    expect(screen.queryByRole('button', { name: /submit partnership enquiry/i })).toBeNull();
   });
 });

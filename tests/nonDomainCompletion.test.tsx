@@ -1,11 +1,11 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { formatResourceDate, isValidIsoDate } from '@/lib/resourceDate';
 import NewsCard from '@/components/NewsCard';
 import { ResourcesPage, ResourceDetailPage } from '@/pages/ResourcesPage';
 import OnlineLearningPage from '@/pages/OnlineLearningPage';
-import { newsItems } from '@/data/resourceDrafts';
+import { newsItems, newsCategories } from '@/data/testimonials';
 
 vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }) }));
 afterEach(() => cleanup());
@@ -22,10 +22,10 @@ describe('resource publication dates', () => {
     expect(formatResourceDate('2026-10-22')).toBe('22 October 2026');
     expect(formatResourceDate('2026-10-22T23:30:00-05:00')).toBe('22 October 2026');
   });
-  it('renders draft text instead of Invalid Date on cards', () => {
+  it('omits unconfirmed publication dates on cards', () => {
     const { container } = render(<MemoryRouter><NewsCard item={newsItems[0]} /></MemoryRouter>);
-    expect(screen.getByText(newsItems[0].date)).toBeTruthy();
-    expect(container.textContent).not.toContain('Invalid Date');
+    expect(newsItems[0].date).toBe('');
+    expect(container.textContent).not.toMatch(/draft|Invalid Date/i);
     expect(container.querySelector('time')).toBeNull();
   });
   it('uses semantic time only for valid dates', () => {
@@ -33,27 +33,34 @@ describe('resource publication dates', () => {
     expect(container.querySelector('time')?.getAttribute('datetime')).toBe('2026-10-22');
     expect(screen.getByText('22 October 2026')).toBeTruthy();
   });
-  it('does not expose publication dates for unapproved article details', () => {
+  it('shows article metadata without inventing a publication date', () => {
     render(<MemoryRouter initialEntries={[`/resources/${newsItems[0].slug}`]}><Routes><Route path="/resources/:slug" element={<ResourceDetailPage />} /></Routes></MemoryRouter>);
-    expect(screen.getByRole('heading', { name: 'Article Not Found' })).toBeTruthy();
-    expect(document.body.textContent).not.toContain(newsItems[0].date);
-    expect(document.body.textContent).not.toContain('Invalid Date');
+    expect(screen.getByText('Educational article · Source links provided for further reading')).toBeTruthy();
+    expect(document.body.textContent).not.toMatch(/draft|Invalid Date/i);
   });
 });
 
 describe('honest and accessible public states', () => {
-  it('announces the empty public library without exposing draft filters', () => {
+  it('exposes selected categories and announces results', () => {
     render(<MemoryRouter><ResourcesPage /></MemoryRouter>);
-    expect(screen.getByRole('status').textContent).toContain('0 articles');
-    expect(screen.getByText('Articles are being prepared for publication.')).toBeTruthy();
-    expect(screen.queryByLabelText('Search resources')).toBeNull();
-    expect(screen.queryByRole('button', { name: /Assessment|Rehabilitation|Clinical Education/ })).toBeNull();
+    const category = screen.getByRole('button', { name: newsCategories[0] });
+    expect(category.getAttribute('aria-pressed')).toBe('false');
+    fireEvent.click(category);
+    expect(category.getAttribute('aria-pressed')).toBe('true');
+    expect(screen.getByRole('button', { name: 'All' }).getAttribute('aria-pressed')).toBe('false');
+    fireEvent.change(screen.getByLabelText('Search resources'), { target: { value: 'no-such-article' } });
+    expect(screen.getByRole('status').textContent).toContain('0 educational articles');
+    expect(screen.getByText('No articles match your search.')).toBeTruthy();
   });
-  it('shows only the real student-access availability state, not an illustrative dashboard', () => {
+  it('does not present fictional learner totals or progress as real records', () => {
     const { container } = render(<MemoryRouter><OnlineLearningPage /></MemoryRouter>);
-    expect(screen.getByRole('heading', { name: 'Student learning access is not yet available' })).toBeTruthy();
-    expect(screen.getByRole('heading', { name: 'Learner services are unavailable' })).toBeTruthy();
-    expect(screen.getByRole('link', { name: /Student sign-in status/ })).toBeTruthy();
-    expect(container.textContent).not.toMatch(/Illustrative Dashboard|Proposed Video Lessons|Progress unavailable|Example CPD total|45|75%|100%|30%/);
+    expect(screen.getByRole('heading', { name: 'A clear place to continue your healthcare learning' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Choose a resource that fits your next question' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Read educational articles' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Explore subject areas' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Use study guides' })).toBeTruthy();
+    expect(container.textContent).not.toMatch(/75%|100%|30%|Completed|In Progress/);
+    expect(screen.queryByText('45')).toBeNull();
+    expect(screen.getByRole('heading', { name: 'Use learning resources responsibly' })).toBeTruthy();
   });
 });

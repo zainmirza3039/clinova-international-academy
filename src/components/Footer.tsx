@@ -1,20 +1,19 @@
-import BrandLogo from '@/components/BrandLogo';
 import { Link } from 'react-router-dom';
 import { academyPublicAddress } from '@/data/publicContact';
 
 const academyLinks = [
   { label: 'About', to: '/about' },
   { label: 'Departments', to: '/departments' },
-  { label: 'Proposed programme areas', to: '/programmes' },
-  { label: 'Proposed CPD topics', to: '/cpd-courses' },
-  { label: 'Student access status', to: '/online-learning' },
+  { label: 'Self-Study Courses', to: '/cpd-courses' },
+  { label: 'Articles & Resources', to: '/resources' },
+  { label: 'Online Learning', to: '/online-learning' },
 ];
 
 const professionalLinks = [
   { label: 'Training Partners', to: '/training-partners' },
   { label: 'Resources', to: '/resources' },
   { label: 'Study Tools', to: '/learning-resources' },
-  { label: 'Certificate verification status', to: '/verify' },
+  { label: 'Certificate Verification', to: '/verify' },
   { label: 'FAQs', to: '/faqs' },
   { label: 'Events', to: '/events' },
   { label: 'Faculty', to: '/faculty' },
@@ -39,15 +38,14 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-5">
             <Link to="/" className="inline-block mb-6">
-              <BrandLogo variant="white" className="w-[240px] max-w-full" />
+              <img src="/clinova-logo-white.svg" alt="Clinova International Academy" className="w-[200px] h-auto" />
             </Link>
             <p className="text-sm text-navy-100/60 leading-[1.65] mb-6 max-w-md">
-              Explore proposed healthcare learning pathways and educational reading awaiting qualified review.
-              Courses and learning services await confirmation; no enrolment is available here.
+              Explore healthcare subject guides, educational articles and structured resources for independent professional learning.
             </p>
             <div className="space-y-2.5">
               <address className="not-italic text-sm text-navy-100/80">{academyPublicAddress}</address>
-              <p className="text-xs text-navy-100/80">Email and visiting arrangements await confirmation. An optional secondary local-agent call for Pakistan enquiries is listed on the Contact page.</p>
+              <p className="text-xs text-navy-100/80">For written correspondence, use the postal address above. Visiting arrangements are not provided.</p>
             </div>
           </div>
 
@@ -101,7 +99,7 @@ export default function Footer() {
             &copy; 2026 Clinova International Academy. All rights reserved.
           </p>
           <p className="text-xs text-navy-100/40 text-center sm:text-right">
-            Healthcare Education &bull; Proposed CPD Topics &bull; Professional Development
+            Online Healthcare Education &bull; Self-Study Courses &bull; Professional Development
           </p>
         </div>
       </div>

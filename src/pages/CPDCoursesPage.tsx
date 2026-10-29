@@ -9,9 +9,9 @@ import { ChevronDown } from 'lucide-react';
 
 export default function CPDCoursesPage() {
   useSEO({
-    title: 'CPD Topic Availability',
+    title: 'Physiotherapy and Healthcare Self-Study Courses',
     description:
-      'Browse academy-approved CPD courses. Unconfirmed topic outlines are not listed as available courses.',
+      'Explore structured self-study courses with learning outcomes, lessons and evidence sources. These open learning courses do not award accredited CPD hours or certificates.',
   });
 
   const [search, setSearch] = useState('');
@@ -37,19 +37,19 @@ export default function CPDCoursesPage() {
   return (
     <>
       <PageHero
-        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'CPD Courses' }]}
-        eyebrow="CPD Courses"
-        title="Continuing Professional Development"
-        description="Only academy-approved CPD offerings appear here. Recognised hours, accreditation, delivery and enrolment will be stated only when confirmed."
+        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Professional Development' }]}
+        eyebrow="Professional Development"
+        title="Physiotherapy & Healthcare Self-Study Courses"
+        description="Study structured lessons, reflective activities and evidence sources across physiotherapy and healthcare. These open self-study courses do not award accredited CPD hours or certificates."
         image="https://images.pexels.com/photos/5452222/pexels-photo-5452222.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-editorial mx-auto px-6 lg:px-10">
           {/* Search + Filters */}
-          {publishedCPDCourses.length > 0 && <div className="bg-surface-50 p-6 mb-12 border border-navy-100">
+          <div className="bg-surface-50 p-6 mb-12 border border-navy-100">
             <div className="mb-4">
-              <SearchBar value={search} onChange={setSearch} placeholder="Search CPD courses..." />
+              <SearchBar value={search} onChange={setSearch} placeholder="Search self-study courses..." />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
@@ -62,11 +62,11 @@ export default function CPDCoursesPage() {
                 </select>
               </div>
               <div>
-                <label htmlFor="cpd-hours" className="block text-xs font-medium text-navy-500 mb-1.5">CPD Hours</label>
+                <label htmlFor="cpd-hours" className="block text-xs font-medium text-navy-500 mb-1.5">CPD credit</label>
                 <select id="cpd-hours" disabled aria-describedby="cpd-hours-note" className={selectClass} value={cpdFilter} onChange={(e) => setCpdFilter(e.target.value)}>
-                  <option value="All">Hours awaiting confirmation</option>
+                  <option value="All">CPD credit not awarded</option>
                 </select>
-                <p id="cpd-hours-note" className="mt-2 text-xs text-navy-600">No verified CPD hours are available to filter.</p>
+                <p id="cpd-hours-note" className="mt-2 text-xs text-navy-600">This library does not award or record CPD hours.</p>
               </div>
               <div>
                 <label htmlFor="cpd-level" className="block text-xs font-medium text-navy-500 mb-1.5">Level</label>
@@ -78,7 +78,7 @@ export default function CPDCoursesPage() {
                 </select>
               </div>
             </div>
-          </div>}
+          </div>
 
           {/* Results */}
           <div className="mb-8" role="status" aria-live="polite" aria-atomic="true">
@@ -108,8 +108,8 @@ export default function CPDCoursesPage() {
             </>
           ) : (
             <div className="text-center py-16 bg-surface-50 border border-navy-100">
-              <p className="text-navy-800 mb-2 font-semibold">No CPD courses are currently approved for publication.</p>
-              <p className="text-sm text-navy-600">The academy will list courses here after confirming availability, recognised CPD hours, delivery and any accreditation. No enrolment is currently offered through this page.</p>
+              <p className="text-navy-500 mb-2">No self-study courses match your current filters.</p>
+              <p className="text-sm text-navy-400">Try adjusting your search or filter criteria.</p>
             </div>
           )}
         </div>

@@ -6,9 +6,9 @@ export const departments: Department[] = [
     slug: 'physical-therapy-rehabilitation',
     name: 'Physical Therapy & Rehabilitation',
     shortName: 'Physical Therapy',
-    description: 'Proposed educational subject area for reading, reflection and study planning.',
+    description: 'Healthcare subject area for reading, reflection and independent study.',
     overview:
-      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
+      'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/20860622/pexels-photo-20860622.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
     programmeCount: 3,
     learningAreas: [
@@ -27,9 +27,9 @@ export const departments: Department[] = [
     slug: 'nursing-allied-health',
     name: 'Nursing & Allied Health',
     shortName: 'Nursing',
-    description: 'Proposed educational subject area for reading, reflection and study planning.',
+    description: 'Healthcare subject area for reading, reflection and independent study.',
     overview:
-      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
+      'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/32115899/pexels-photo-32115899.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
     programmeCount: 1,
     learningAreas: [
@@ -48,9 +48,9 @@ export const departments: Department[] = [
     slug: 'medicine',
     name: 'Medicine',
     shortName: 'Medicine',
-    description: 'Proposed educational subject area for reading, reflection and study planning.',
+    description: 'Healthcare subject area for reading, reflection and independent study.',
     overview:
-      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
+      'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/6762866/pexels-photo-6762866.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
     programmeCount: 0,
     learningAreas: [
@@ -69,9 +69,9 @@ export const departments: Department[] = [
     slug: 'dentistry',
     name: 'Dentistry',
     shortName: 'Dentistry',
-    description: 'Proposed educational subject area for reading, reflection and study planning.',
+    description: 'Healthcare subject area for reading, reflection and independent study.',
     overview:
-      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
+      'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/8413334/pexels-photo-8413334.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
     programmeCount: 0,
     learningAreas: [
@@ -90,9 +90,9 @@ export const departments: Department[] = [
     slug: 'pharmacy',
     name: 'Pharmacy',
     shortName: 'Pharmacy',
-    description: 'Proposed educational subject area for reading, reflection and study planning.',
+    description: 'Healthcare subject area for reading, reflection and independent study.',
     overview:
-      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
+      'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/14797864/pexels-photo-14797864.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
     programmeCount: 0,
     learningAreas: [
@@ -111,9 +111,9 @@ export const departments: Department[] = [
     slug: 'psychology-mental-health',
     name: 'Psychology & Mental Health',
     shortName: 'Psychology',
-    description: 'Proposed educational subject area for reading, reflection and study planning.',
+    description: 'Healthcare subject area for reading, reflection and independent study.',
     overview:
-      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
+      'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
     programmeCount: 1,
     learningAreas: [
@@ -132,9 +132,9 @@ export const departments: Department[] = [
     slug: 'nutrition-dietetics',
     name: 'Nutrition & Dietetics',
     shortName: 'Nutrition',
-    description: 'Proposed educational subject area for reading, reflection and study planning.',
+    description: 'Healthcare subject area for reading, reflection and independent study.',
     overview:
-      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
+      'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/15319047/pexels-photo-15319047.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
     programmeCount: 0,
     learningAreas: [
@@ -153,9 +153,9 @@ export const departments: Department[] = [
     slug: 'sports-exercise',
     name: 'Sports & Exercise',
     shortName: 'Sports & Exercise',
-    description: 'Proposed educational subject area for reading, reflection and study planning.',
+    description: 'Healthcare subject area for reading, reflection and independent study.',
     overview:
-      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
+      'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/39219676/pexels-photo-39219676.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
     programmeCount: 1,
     learningAreas: [
@@ -174,9 +174,9 @@ export const departments: Department[] = [
     slug: 'occupational-therapy',
     name: 'Occupational Therapy',
     shortName: 'Occupational Therapy',
-    description: 'Proposed educational subject area for reading, reflection and study planning.',
+    description: 'Healthcare subject area for reading, reflection and independent study.',
     overview:
-      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
+      'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/4566528/pexels-photo-4566528.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
     programmeCount: 0,
     learningAreas: [
@@ -195,9 +195,9 @@ export const departments: Department[] = [
     slug: 'healthcare-management',
     name: 'Healthcare Management',
     shortName: 'Healthcare Management',
-    description: 'Proposed educational subject area for reading, reflection and study planning.',
+    description: 'Healthcare subject area for reading, reflection and independent study.',
     overview:
-      'This proposed subject area groups educational topics for professional discussion and study planning. It does not establish a department, live course, clinical service, qualification or employment pathway; confirm any academy offering directly.',
+      'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/5407235/pexels-photo-5407235.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
     programmeCount: 2,
     learningAreas: [

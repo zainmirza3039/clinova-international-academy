@@ -1,0 +1,42 @@
+name: Quality checks
+
+on:
+  push:
+    branches:
+      - feat/clinova-safe-auth-Sh2gdLt
+  pull_request:
+    branches:
+      - main
+      - feat/clinova-safe-auth-Sh2gdLt
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      VITE_VERIFICATION_ENABLED: "false"
+      VITE_AUTH_ENABLED: "false"
+      VITE_LEARNER_DATA_ENABLED: "false"
+      VITE_ENQUIRIES_ENABLED: "false"
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: TypeScript type check
+        run: npm run typecheck
+      - name: ESLint
+        run: npm run lint
+      - name: Unit tests
+        run: npm test
+      - name: Production build and SEO output
+        run: npm run build

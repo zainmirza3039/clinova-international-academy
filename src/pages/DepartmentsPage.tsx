@@ -6,18 +6,18 @@ import { departments } from '@/data/departments';
 
 export default function DepartmentsPage() {
   useSEO({
-    title: 'Proposed Subject Areas',
+    title: 'Healthcare Learning Areas',
     description:
-      'Explore proposed healthcare subject areas for reading and study planning. These labels are an educational organisation of topics, not evidence of established departments or services.',
+      'Explore healthcare subject areas and related educational resources for independent study.',
   });
 
   return (
     <>
       <PageHero
-        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Subject areas' }]}
-        eyebrow="Subject areas"
+        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Departments' }]}
+        eyebrow="Departments"
         title="Explore Healthcare Subject Areas"
-        description="These categories are for navigation and topic exploration only. They do not represent established departments, active courses or accredited programmes."
+        description="Browse organised healthcare subject areas and follow topics into related educational reading and self-study guides."
         image="https://images.pexels.com/photos/5452233/pexels-photo-5452233.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
 
@@ -32,10 +32,10 @@ export default function DepartmentsPage() {
       </section>
 
       <CTASection
-        title="Plan your next learning question"
-        description="Subject categories are provided for orientation only. No programme or CPD course is currently approved for enrolment, and student services are not live."
-        primaryCTA={{ label: 'Check Programme Availability', to: '/programmes' }}
-        secondaryCTA={{ label: 'Check CPD Availability', to: '/cpd-courses' }}
+        title="Continue your learning"
+        description="Explore educational articles and study tools to identify the questions you want to investigate next."
+        primaryCTA={{ label: 'View Learning Guides', to: '/programmes' }}
+        secondaryCTA={{ label: 'Browse Learning Library', to: '/cpd-courses' }}
       />
     </>
   );
