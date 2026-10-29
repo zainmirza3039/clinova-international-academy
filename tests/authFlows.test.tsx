@@ -34,13 +34,23 @@ function makeClient(options: { session?: unknown; getSession?: Promise<unknown> 
 
 async function loadAuth() {
   vi.resetModules();
-  return import('@/auth/AuthProvider');
+  return {
+    ...(await import('@/auth/AuthProvider')),
+    ...(await import('@/auth/authContext')),
+    ...(await import('@/auth/authUtils')),
+  };
 }
 async function loadBoth() {
   vi.resetModules();
-  return { ...(await import('@/auth/AuthProvider')), AuthPage: (await import('@/pages/AuthPage')).default, MemoryRouter: (await import('react-router-dom')).MemoryRouter };
+  return {
+    ...(await import('@/auth/AuthProvider')),
+    ...(await import('@/auth/authContext')),
+    ...(await import('@/auth/authUtils')),
+    AuthPage: (await import('@/pages/AuthPage')).default,
+    MemoryRouter: (await import('react-router-dom')).MemoryRouter,
+  };
 }
-function Probe({ useAuth }: { useAuth: typeof import('@/auth/AuthProvider').useAuth }) {
+function Probe({ useAuth }: { useAuth: typeof import('@/auth/authContext').useAuth }) {
   const auth = useAuth();
   return <><span data-testid="status">{auth.status}</span><span data-testid="session">{auth.session ? 'session' : 'none'}</span><span data-testid="recovery">{String(auth.recovery)}</span></>;
 }

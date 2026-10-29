@@ -10,7 +10,7 @@ export default function DepartmentCard({ department, index = 0 }: { department: 
     <Link
       to={`/departments/${department.slug}`}
       ref={ref as unknown as React.RefObject<HTMLAnchorElement>}
-      className={`animate-on-scroll ${isVisible ? 'is-visible' : ''} group block`}
+      className={`department-card animate-on-scroll ${isVisible ? 'is-visible' : ''} group block`}
       style={{ transitionDelay: `${(index % 4) * 70}ms` }}
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-navy-100">

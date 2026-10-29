@@ -47,7 +47,8 @@ describe('auth foundation', () => {
     vi.stubEnv('VITE_SUPABASE_URL', 'https://ssxpmcbqfdggfsoqbxac.supabase.co');
     vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'mock-key');
     vi.resetModules();
-    const { AuthProvider: Provider, useAuth } = await import('@/auth/AuthProvider');
+    const { AuthProvider: Provider } = await import('@/auth/AuthProvider');
+    const { useAuth } = await import('@/auth/authContext');
     const client = makeClient();
     function Probe() { const auth = useAuth(); return <><button onClick={() => void auth.updatePassword('new-password')}>update</button><button onClick={() => void auth.signOut()}>out</button><span>{auth.recovery ? 'recovery' : 'ordinary'}</span></>; }
     render(<Provider client={client}><Probe /></Provider>);

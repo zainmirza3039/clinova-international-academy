@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSEO } from '@/hooks/useSEO';
+import { CmsPublishedContentShelf } from '@/components/CmsPublishedContent';
 import PageHero from '@/components/PageHero';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import NewsCard from '@/components/NewsCard';
@@ -34,6 +35,7 @@ export function ResourcesPage() {
       <p className="mb-6 text-sm text-navy-600" role="status" aria-live="polite" aria-atomic="true">Showing {filtered.length} educational article{filtered.length !== 1 ? 's' : ''}</p>
       {filtered.length ? <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">{filtered.map((item, index) => <NewsCard key={item.id} item={item} index={index} />)}</div> : <div className="text-center py-12 bg-navy-50"><p className="font-semibold text-navy-800">No articles match your search.</p><p className="mt-2 text-sm text-navy-600">Try a broader term or another topic.</p><button type="button" onClick={() => { setSearch(''); setCategory('All'); }} className="mt-5 px-5 py-2 bg-navy-900 text-white">Clear filters</button></div>}
     </div></section>
+    <div className="mx-auto max-w-editorial px-6 lg:px-10"><CmsPublishedContentShelf /></div>
   </>;
 }
 

@@ -11,6 +11,8 @@ import ProgrammesPage from '@/pages/ProgrammesPage';
 import { ResourcesPage, ResourceDetailPage } from '@/pages/ResourcesPage';
 import LearningResourcesPage, { LearningResourceDetailPage } from '@/pages/LearningResourcesPage';
 import ContactPage from '@/pages/ContactPage';
+import DepartmentsPage from '@/pages/DepartmentsPage';
+import DepartmentDetailPage from '@/pages/DepartmentDetailPage';
 import Footer from '@/components/Footer';
 import { academyPublicAddress } from '@/data/publicContact';
 
@@ -70,6 +72,19 @@ describe('substantive published educational library', () => {
 describe('reading-based resources and confirmed contact fact', () => {
   it('uses actual published catalogue counts rather than fabricated department totals', () => {
     for (const department of departments) expect(department.programmeCount).toBe(programmes.filter(programme => programme.departmentSlug === department.slug).length);
+  });
+  it('routes department-page calls to action to the article and study-tool libraries', () => {
+    render(<MemoryRouter><DepartmentsPage /></MemoryRouter>);
+    expect(screen.getByRole('link', { name: 'Browse educational articles' }).getAttribute('href')).toBe('/resources');
+    expect(screen.getByRole('link', { name: 'Explore study tools' }).getAttribute('href')).toBe('/learning-resources');
+  });
+  it('does not present physiotherapy articles as related to every subject area', () => {
+    render(<MemoryRouter initialEntries={['/departments/medicine']}><Routes><Route path="/departments/:slug" element={<DepartmentDetailPage />} /></Routes></MemoryRouter>);
+    expect(screen.getByRole('heading', { name: 'Medicine' })).toBeTruthy();
+    expect(screen.getByText(/not a department-specific curriculum/i)).toBeTruthy();
+    expect(screen.queryByRole('link', { name: /read overview/i })).toBeNull();
+    expect(screen.getByRole('link', { name: 'Browse educational articles' }).getAttribute('href')).toBe('/resources');
+    expect(screen.getByRole('link', { name: 'Explore study tools' }).getAttribute('href')).toBe('/learning-resources');
   });
   it('does not allow filtering on unconfirmed CPD hours or course delivery estimates', () => {
     const cpd = render(<MemoryRouter><CPDCoursesPage /></MemoryRouter>);

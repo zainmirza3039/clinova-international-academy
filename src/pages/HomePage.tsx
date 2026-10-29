@@ -55,16 +55,15 @@ export default function HomePage() {
   return (
     <>
       {/* HERO — editorial hierarchy with a purposeful learning panel */}
-      <section className="relative overflow-hidden bg-white">
-        <div aria-hidden="true" className="absolute -right-32 -top-24 h-[30rem] w-[30rem] rounded-full bg-teal-50 blur-3xl" />
-        <div className="relative max-w-editorial mx-auto px-6 lg:px-10 pt-14 pb-12 lg:pt-24 lg:pb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            <div ref={heroRef} className={`lg:col-span-7 max-w-3xl ${heroVisible ? 'animate-fade-up' : 'opacity-0'}`}>
-              <div className="inline-flex items-center gap-2 rounded-full border border-teal-100 bg-teal-50 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-teal-800">
+      <section className="home-hero relative overflow-hidden bg-white">
+        <div className="home-hero__inner relative max-w-editorial mx-auto px-6 lg:px-10 pt-14 pb-12 lg:pt-24 lg:pb-20">
+          <div className="home-hero__layout grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div ref={heroRef} className={`home-hero__copy lg:col-span-7 max-w-3xl ${heroVisible ? 'animate-fade-up' : 'opacity-0'}`}>
+              <div className="home-hero__eyebrow inline-flex items-center gap-2 rounded-full border border-teal-100 bg-teal-50 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-teal-800">
                 <span className="h-1.5 w-1.5 rounded-full bg-teal-600" />
                 Healthcare education
               </div>
-              <h1 className="mt-7 max-w-3xl font-heading text-4xl md:text-5xl lg:text-[3.75rem] font-bold text-navy-900 leading-[1.06] tracking-tight text-balance">
+              <h1 className="home-hero__title mt-7 max-w-3xl font-heading text-4xl md:text-5xl lg:text-[3.75rem] font-bold text-navy-900 leading-[1.06] tracking-tight text-balance">
                 Better learning for better healthcare practice.
               </h1>
               <p className="mt-6 max-w-2xl text-base md:text-lg text-navy-600 leading-[1.75]">
@@ -87,9 +86,9 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            <div className="lg:col-span-5">
-              <div className="relative overflow-hidden rounded-2xl border border-navy-100 bg-surface-50 shadow-[0_24px_70px_-36px_rgba(8,43,76,0.35)]">
-                <div className="relative h-56 sm:h-64 lg:h-72 overflow-hidden">
+            <div className="home-hero__visual lg:col-span-5">
+              <div className="home-hero__frame relative overflow-hidden rounded-2xl border border-navy-100 bg-surface-50 shadow-[0_24px_70px_-36px_rgba(8,43,76,0.35)]">
+                <div className="home-hero__photo relative h-56 sm:h-64 lg:h-72 overflow-hidden">
                   <img src="https://images.pexels.com/photos/8376296/pexels-photo-8376296.jpeg?auto=compress&cs=tinysrgb&h=900&w=1400" alt="Healthcare professional reviewing learning material" className="h-full w-full object-cover" loading="eager" />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-navy-900/10 to-transparent" />
                   <div className="absolute bottom-5 left-5 right-5 text-white">
@@ -97,7 +96,7 @@ export default function HomePage() {
                     <p className="mt-2 max-w-sm font-heading text-2xl font-bold leading-tight">Build knowledge. Reflect on practice. Keep progressing.</p>
                   </div>
                 </div>
-                <div className="space-y-0 divide-y divide-navy-100 bg-white px-5 sm:px-6">
+                <div className="home-hero__links space-y-0 divide-y divide-navy-100 bg-white px-5 sm:px-6">
                   <Link to="/departments" className="group flex items-center justify-between gap-4 py-4">
                     <div><p className="text-sm font-semibold text-navy-900">Explore subject areas</p><p className="mt-1 text-xs text-navy-500">Browse healthcare disciplines</p></div>
                     <ArrowRight className="h-4 w-4 shrink-0 text-navy-500 transition-transform group-hover:translate-x-1 group-hover:text-teal-700" />
@@ -119,7 +118,7 @@ export default function HomePage() {
       </section>
 
       {/* INTRODUCTION — asymmetric, editorial prose with side meta */}
-      <section className="py-20 lg:py-32 bg-white">
+      <section className="home-intro py-20 lg:py-32 bg-white">
         <div className="max-w-editorial mx-auto px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
             <div className="lg:col-span-4">
@@ -145,7 +144,7 @@ export default function HomePage() {
                 <p className="mt-6 text-base md:text-lg text-navy-600/80 leading-[1.65]">
                   Clinova brings together healthcare subject areas, educational reading and study tools to support professional learning and reflection. Programme availability, delivery, admissions and outcomes depend on the published details for each offering.
                 </p>
-                <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-10 border-t border-navy-100 pt-10">
+                <div className="home-intro__metrics mt-10 grid grid-cols-1 sm:grid-cols-4 gap-8 lg:gap-10 border-t border-navy-100 pt-10">
                   {[
                     { stat: 'Explore', label: 'Healthcare study areas' },
                     { stat: String(publishedEducationalArticleCards.length), label: 'Learning articles' },
@@ -221,7 +220,7 @@ export default function HomePage() {
       </section>
 
       {/* CPD SECTION — dark band, left-aligned, filter tabs inline */}
-      <section className="py-20 lg:py-32 bg-navy-800">
+      <section className="home-course-section py-20 lg:py-32 bg-surface-50">
         <div className="max-w-editorial mx-auto px-6 lg:px-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <Reveal className="max-w-2xl">
@@ -240,10 +239,12 @@ export default function HomePage() {
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <div className="flex flex-wrap gap-1 mb-12">
+          <div className="flex flex-wrap gap-1 mb-12" role="group" aria-label="Filter self-study courses by subject">
             {cpdFilters.map((filter) => (
               <button
                 key={filter}
+                type="button"
+                aria-pressed={cpdFilter === filter}
                 onClick={() => setCpdFilter(filter)}
                 className={`px-4 py-2 text-sm font-medium transition-colors ${
                   cpdFilter === filter

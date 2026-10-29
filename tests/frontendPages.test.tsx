@@ -1,18 +1,30 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import AdmissionsPage from '@/pages/AdmissionsPage';
+import AboutPage from '@/pages/AboutPage';
 import ApplicationPage from '@/pages/ApplicationPage';
 import AdminPage from '@/pages/AdminPage';
 import { AuthProvider } from '@/auth/AuthProvider';
 import CommunityPage, { EventsPage, FacultyPage } from '@/pages/CommunityPage';
 import FAQsPage from '@/pages/FAQsPage';
 
+vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }) }));
+
 function renderPage(page: React.ReactNode) { return render(<MemoryRouter>{page}</MemoryRouter>); }
 
 afterEach(() => cleanup());
 
 describe('completion frontend pages', () => {
+  it('describes the current reading-only service scope without claiming online delivery', () => {
+    const { container } = renderPage(<AboutPage />);
+    expect(screen.getByRole('heading', { name: 'Healthcare learning resources for independent study' })).toBeTruthy();
+    expect(container.textContent).toMatch(/does not provide live online teaching, enrolment, assessment or learner accounts/i);
+    expect(screen.getByText('Proposed mission')).toBeTruthy();
+    expect(screen.getByText('Proposed vision')).toBeTruthy();
+    expect(container.textContent).not.toMatch(/delivered online/i);
+  });
+
   it('explains that application submission and persistence are unavailable', () => {
     renderPage(<ApplicationPage />);
     expect(screen.getByRole('heading', { name: 'Discuss your learning interests' })).toBeTruthy();

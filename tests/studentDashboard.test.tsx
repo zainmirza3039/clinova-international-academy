@@ -3,7 +3,7 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import StudentDashboardPage from '@/pages/StudentDashboardPage';
 
 const { from, signOut } = vi.hoisted(() => ({ from: vi.fn(), signOut: vi.fn().mockResolvedValue({ error: null }) }));
-vi.mock('@/auth/AuthProvider', () => ({
+vi.mock('@/auth/authContext', () => ({
   useAuth: () => ({
     session: { user: { id: 'student-test-id', email: 'student@example.test' } },
     signOut,

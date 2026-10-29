@@ -10,8 +10,6 @@ import DepartmentDetailPage from '@/pages/DepartmentDetailPage';
 import ProgrammesPage from '@/pages/ProgrammesPage';
 import CPDCoursesPage from '@/pages/CPDCoursesPage';
 import OnlineLearningPage from '@/pages/OnlineLearningPage';
-import TrainingPartnersPage from '@/pages/TrainingPartnersPage';
-import CertificateVerificationPage from '@/pages/CertificateVerificationPage';
 
 import ContactPage from '@/pages/ContactPage';
 import LegalPage from '@/pages/LegalPage';
@@ -19,7 +17,6 @@ import NotFoundPage from '@/pages/NotFoundPage';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import AdmissionsPage from '@/pages/AdmissionsPage';
 import ApplicationPage from '@/pages/ApplicationPage';
-import AdminPage from '@/pages/AdminPage';
 import CommunityPage, { EventsPage, FacultyPage } from '@/pages/CommunityPage';
 import FAQsPage from '@/pages/FAQsPage';
 import { privacyPolicy, termsAndConditions, cookiePolicy, refundPolicy } from '@/data/legalContent';
@@ -34,6 +31,11 @@ const ResourcesPage = lazy(() => import('@/pages/ResourcesPage').then(module => 
 const ResourceDetailPage = lazy(() => import('@/pages/ResourcesPage').then(module => ({ default: module.ResourceDetailPage })));
 const LearningResourcesPage = lazy(() => import('@/pages/LearningResourcesPage'));
 const LearningResourceDetailPage = lazy(() => import('@/pages/LearningResourcesPage').then(module => ({ default: module.LearningResourceDetailPage })));
+const TrainingPartnersPage = lazy(() => import('@/pages/TrainingPartnersPage'));
+const CertificateVerificationPage = lazy(() => import('@/pages/CertificateVerificationPage'));
+const CertificationPage = lazy(() => import('@/pages/CertificationPage'));
+const AdminPage = lazy(() => import('@/pages/AdminPage'));
+const CmsPublishedContentDetailPage = lazy(() => import('@/components/CmsPublishedContent').then(module => ({ default: module.CmsPublishedContentDetailPage })));
 
 export default function App() {
   return (
@@ -75,8 +77,10 @@ export default function App() {
             <Route path="/cpd-courses/:slug" element={<CPDCourseDetailPage />} />
             <Route path="/online-learning" element={<OnlineLearningPage />} />
             <Route path="/training-partners" element={<TrainingPartnersPage />} />
+            <Route path="/certification" element={<CertificationPage />} />
             <Route path="/verify" element={<CertificateVerificationPage />} />
             <Route path="/resources" element={<ResourcesPage />} />
+            <Route path="/cms/:kind/:slug" element={<CmsPublishedContentDetailPage />} />
             <Route path="/learning-resources" element={<LearningResourcesPage />} />
             <Route path="/learning-resources/:slug" element={<LearningResourceDetailPage />} />
             <Route path="/resources/:slug" element={<ResourceDetailPage />} />

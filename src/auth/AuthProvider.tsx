@@ -1,56 +1,12 @@
-import { createClient, type AuthChangeEvent, type Session, type SupabaseClient } from '@supabase/supabase-js';
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { type AuthChangeEvent, type Session, type SupabaseClient } from '@supabase/supabase-js';
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSEO } from '@/hooks/useSEO';
+import { authConfig, createAuthClient } from './authConfig';
+import { AuthContext, useAuth, type AuthActionResult, type AuthContextValue, type AuthStatus } from './authContext';
+import { safeReturnTarget } from './authUtils';
 
-export const REQUIRED_SUPABASE_HOSTNAME = 'ssxpmcbqfdggfsoqbxac.supabase.co';
-
-function getAuthConfig() {
-  const enabled = import.meta.env.VITE_AUTH_ENABLED === 'true';
-  const rawUrl = String(import.meta.env.VITE_SUPABASE_URL ?? '').trim();
-  const key = String(import.meta.env.VITE_SUPABASE_ANON_KEY ?? '').trim();
-  let validUrl = false;
-  try {
-    const parsed = new URL(rawUrl);
-    validUrl = parsed.protocol === 'https:' && parsed.hostname === REQUIRED_SUPABASE_HOSTNAME &&
-      parsed.port === '' && parsed.username === '' && parsed.password === '' &&
-      (parsed.pathname === '' || parsed.pathname === '/') && parsed.search === '' && parsed.hash === '';
-  } catch { validUrl = false; }
-  return { enabled: enabled && validUrl && Boolean(key), url: rawUrl, key };
-}
-
-export const authConfig = getAuthConfig();
-
-export function createAuthClient(): SupabaseClient | null {
-  if (!authConfig.enabled) return null;
-  try {
-    return createClient(authConfig.url, authConfig.key, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } });
-  } catch { return null; }
-}
-
-export type AuthStatus = 'loading' | 'ready' | 'disabled' | 'error';
-export type AuthActionResult = { error: Error | null };
-type AuthContextValue = {
-  enabled: boolean; status: AuthStatus; session: Session | null; error: string | null; recovery: boolean;
-  signIn: (email: string, password: string) => Promise<AuthActionResult>;
-  signUp: (email: string, password: string) => Promise<AuthActionResult>;
-  sendPasswordReset: (email: string, redirectTo?: string) => Promise<AuthActionResult>;
-  updatePassword: (password: string) => Promise<AuthActionResult>;
-  signOut: () => Promise<AuthActionResult>;
-};
-const AuthContext = createContext<AuthContextValue | null>(null);
 const errorMessage = (error: unknown) => error instanceof Error ? error.message : 'Something went wrong. Please try again.';
-
-export function safeReturnTarget(target: string | null | undefined) {
-  if (!target || target.includes('\\') || target.startsWith('//') || !target.startsWith('/')) return '/student';
-  try {
-    const parsed = new URL(target, 'https://safe.invalid');
-    const decodedPath = decodeURIComponent(parsed.pathname);
-    const allowedRoute = /^\/student(?:\/|$)/.test(parsed.pathname) || /^\/admin(?:\/|$)/.test(parsed.pathname);
-    if (parsed.origin !== 'https://safe.invalid' || !allowedRoute || decodedPath.includes('\\') || decodedPath.split('/').includes('..')) return '/student';
-    return target;
-  } catch { return '/student'; }
-}
 
 export function AuthProvider({ children, client }: { children: ReactNode; client?: SupabaseClient | null }) {
   const [configuredClient] = useState<SupabaseClient | null>(() => client === undefined ? createAuthClient() : client);
@@ -113,8 +69,6 @@ export function AuthProvider({ children, client }: { children: ReactNode; client
   }), [call, configuredClient, enabled, error, recovery, session, status]);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
-
-export function useAuth() { const context = useContext(AuthContext); if (!context) throw new Error('useAuth must be used inside AuthProvider'); return context; }
 
 export function ProtectedStudentRoute({ children }: { children?: ReactNode }) {
   const { enabled, status, session, error } = useAuth();

@@ -33,9 +33,9 @@ export default function DepartmentsPage() {
 
       <CTASection
         title="Continue your learning"
-        description="Explore educational articles and study tools to identify the questions you want to investigate next."
-        primaryCTA={{ label: 'View Learning Guides', to: '/programmes' }}
-        secondaryCTA={{ label: 'Browse Learning Library', to: '/cpd-courses' }}
+        description="Explore educational articles and reading-based study tools for independent learning."
+        primaryCTA={{ label: 'Browse educational articles', to: '/resources' }}
+        secondaryCTA={{ label: 'Explore study tools', to: '/learning-resources' }}
       />
     </>
   );

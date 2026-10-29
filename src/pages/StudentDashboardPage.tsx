@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useAuth } from '@/auth/AuthProvider';
+import { useAuth } from '@/auth/authContext';
 import { useSEO } from '@/hooks/useSEO';
 import { learnerDataEnabled } from '@/lib/siteConfig';
 
@@ -69,7 +69,7 @@ export default function StudentDashboardPage() {
       }
     })();
     return () => { active = false; };
-  }, [session?.user.id, learnerDataEnabled]);
+  }, [session?.user.id]);
 
   const handleSignOut = async () => {
     if (busyRef.current) return;
