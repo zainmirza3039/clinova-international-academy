@@ -139,7 +139,7 @@ export default function Header() {
       <div className="max-w-editorial mx-auto px-6 lg:px-10">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <Link to="/" className="flex items-center shrink-0" onClick={() => setMobileOpen(false)}>
-            <img src="/clinova-logo.svg" alt="Clinova International Academy" className="w-[160px] sm:w-[180px] lg:w-[200px] h-auto" />
+            <img src="/clinova-logo.png" alt="Clinova International Academy" className="w-[160px] sm:w-[180px] lg:w-[200px] h-auto" />
           </Link>
 
           <nav className="hidden xl:flex items-center gap-0.5" aria-label="Main navigation">
