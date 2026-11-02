@@ -68,7 +68,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-8 py-14 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 lg:py-20">
           <div className="lg:col-span-3">
             <Link to="/" className="mb-6 inline-block">
-              <img src="/clinova-logo-white.svg" alt="Clinova International Academy" className="w-[200px] h-auto" />
+              <img src="/clinova-logo-white.png" alt="Clinova International Academy" className="w-[200px] h-auto" />
             </Link>
             <p className="mb-6 max-w-md text-sm leading-[1.65] text-navy-100/70">
               Explore healthcare subject guides, educational articles and structured resources for independent professional learning.
