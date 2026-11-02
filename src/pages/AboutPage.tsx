@@ -1,130 +1,22 @@
-import { Target, Eye, Compass, Users, Monitor, ShieldCheck } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, BookOpenCheck, ShieldAlert, BadgeCheck, MapPin } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
-import FAQAccordion from '@/components/FAQAccordion';
-import CTASection from '@/components/CTASection';
-import { generalFAQs } from '@/data/testimonials';
+import { academyLegalIdentity } from '@/data/publicContact';
 
 const sections = [
-  {
-    icon: Target,
-    title: 'Proposed mission',
-    content:
-      'Make healthcare learning easier to explore through clear subject guides, educational reading and practical reflection tools.',
-  },
-  {
-    icon: Eye,
-    title: 'Proposed vision',
-    content:
-      'Provide a transparent learning resource that distinguishes general education from clinical advice and describes programme arrangements accurately.',
-  },
-  {
-    icon: Compass,
-    title: 'Our Approach',
-    content:
-      'Our approach prioritises plain language, evidence-aware reading, clear scope limits and practical reflection. Programme delivery and assessment details are published only when confirmed.',
-  },
-  {
-    icon: Users,
-    title: 'Who We Serve',
-    content:
-      'Our educational resources cover topics across physiotherapy, nursing, medicine, pharmacy, psychology, nutrition, occupational therapy, sport and healthcare management. Readers should work within their training and scope of practice.',
-  },
-  {
-    icon: Monitor,
-    title: 'What the site currently provides',
-    content:
-      'The site currently provides written educational resources and subject-area information. Live online teaching, enrolment, learner accounts, formal assessment, learner support and certificate services are not operational through this website.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Quality & Learning Standards',
-    content:
-      'We aim to distinguish educational information from clinical advice and formal qualifications. No accreditation, certificate, employment outcome or professional recognition should be assumed unless it is explicitly documented for a specific offering.',
-  },
+  { icon: BookOpenCheck, title: 'CPD education', content: 'A structured CPD course catalogue, learner access and course-level assessment are in development. No course is currently open for enrollment.' },
+  { icon: BadgeCheck, title: 'Professional certification', content: 'Professional competency certification is distinct from course participation. Clinova is developing a separate governance model; no scheme or application is currently open.' },
+  { icon: ShieldAlert, title: 'Assessment and quality', content: 'Assessment rules, independent certification decisions, impartiality safeguards, quality controls and credential policies require separate approval and evidence.' },
 ];
 
 export default function AboutPage() {
-  useSEO({
-    title: 'About Clinova International Academy',
-    description:
-      'Explore Clinova’s healthcare subject areas, independent study resources and educational approach.',
-  });
-
-  return (
-    <>
-      <PageHero
-        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'About' }]}
-        eyebrow="About Us"
-        title="About Clinova International Academy"
-        description="Explore Clinova's healthcare learning resources and subject areas."
-        image="https://images.pexels.com/photos/5452189/pexels-photo-5452189.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-      />
-
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="max-w-editorial mx-auto px-6 lg:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
-            <div className="lg:col-span-4">
-              <Reveal>
-                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-clinical-500 mb-4">
-                  Introduction
-                </div>
-              </Reveal>
-            </div>
-            <div className="lg:col-span-8">
-              <Reveal delay={100}>
-                <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance">
-                  Healthcare learning resources for independent study
-                </h2>
-                <p className="mt-6 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-                  Clinova International Academy brings together healthcare subject areas, educational reading and study resources designed to support professional learning and reflection. At present, this site does not provide live online teaching, enrolment, assessment or learner accounts.
-                </p>
-                <p className="mt-4 text-base md:text-lg text-navy-600/80 leading-[1.65]">
-                  Programme and course-guide pages are informational. Availability, dates, fees, eligibility, delivery, assessment and recognition are unconfirmed unless explicitly stated for a specific offering; no qualification, CPD credit, certificate or professional recognition should be assumed.
-                </p>
-              </Reveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 lg:py-32 bg-surface-50">
-        <div className="max-w-editorial mx-auto px-6 lg:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
-            {sections.map((section, i) => (
-              <Reveal key={section.title} delay={(i % 3) * 80} className="border-t border-navy-200 pt-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <section.icon className="w-5 h-5 text-teal-500" strokeWidth={1.5} />
-                  <h3 className="font-heading font-bold text-navy-800 text-lg">{section.title}</h3>
-                </div>
-                <p className="text-sm text-navy-600/80 leading-relaxed">{section.content}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="faqs" className="py-20 lg:py-32 bg-white">
-        <div className="max-w-3xl mx-auto px-6 lg:px-10">
-          <Reveal className="mb-12 lg:mb-16">
-            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-clinical-500 mb-4 text-center">
-              FAQs
-            </div>
-            <h2 className="font-heading text-2xl md:text-3xl lg:text-[2.5rem] font-bold text-navy-800 leading-[1.15] text-balance text-center">
-              Frequently asked questions
-            </h2>
-          </Reveal>
-          <FAQAccordion items={generalFAQs} />
-        </div>
-      </section>
-
-      <CTASection
-        title="Explore healthcare learning"
-        description="Explore educational reading and subject areas. Review published programme details before making a learning commitment."
-        primaryCTA={{ label: 'Explore Programmes', to: '/programmes' }}
-        secondaryCTA={{ label: 'Contact Academy', to: '/contact' }}
-      />
-    </>
-  );
+  useSEO({ title: 'About Clinova International Academy', description: 'Clinova public identity and the current status of healthcare education and professional certification development.' });
+  return <>
+    <PageHero breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'About' }]} eyebrow="About Us" title="About Clinova International Academy" description="Advancing Healthcare Through Professional Education." image="https://images.pexels.com/photos/5452189/pexels-photo-5452189.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" />
+    <section className="bg-white py-16 lg:py-24"><div className="mx-auto grid max-w-editorial gap-8 px-6 lg:grid-cols-12 lg:gap-16 lg:px-10"><Reveal className="lg:col-span-4"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-clinical-600">Our approach</p><h2 className="mt-3 font-heading text-2xl font-bold leading-tight text-navy-900 md:text-3xl">Clear scope, separate services</h2></Reveal><div className="space-y-5 lg:col-span-8"><p className="text-base leading-relaxed text-navy-700">Clinova International Academy is developing healthcare education and a distinct professional certification pathway. Education, course-level assessment and professional competence decisions are not interchangeable.</p><p className="text-base leading-relaxed text-navy-700">The public website currently provides organizational information, subject areas and published educational reading. It does not accept course enrollment or certification applications and does not operate assessments, credential issuance or live verification.</p><p className="text-sm leading-relaxed text-navy-600">Availability, fees, dates, eligibility, faculty, clinical approval, awarding-body status and accreditation are not implied unless supported by specific authoritative evidence and approved terms.</p></div></div></section>
+    <section className="bg-surface-50 py-16 lg:py-24" aria-labelledby="about-services-heading"><div className="mx-auto max-w-editorial px-6 lg:px-10"><h2 id="about-services-heading" className="font-heading text-2xl font-bold text-navy-900 md:text-3xl">Development areas and current status</h2><div className="mt-9 grid gap-7 md:grid-cols-3">{sections.map(({ icon: Icon, title, content }) => <Reveal key={title} className="border-t-2 border-teal-600 pt-5"><Icon className="h-6 w-6 text-clinical-700" aria-hidden="true" /><h3 className="mt-4 font-heading text-lg font-bold text-navy-900">{title}</h3><p className="mt-2 text-sm leading-relaxed text-navy-600">{content}</p></Reveal>)}</div><div className="mt-9 flex flex-wrap gap-5"><Link to="/cpd-courses" className="inline-flex min-h-11 items-center gap-2 font-semibold text-clinical-700 underline">CPD system status <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link><Link to="/certification" className="inline-flex min-h-11 items-center gap-2 font-semibold text-clinical-700 underline">Professional certification status <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link><Link to="/quality-assurance" className="inline-flex min-h-11 items-center gap-2 font-semibold text-clinical-700 underline">Quality assurance <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div></div></section>
+    <section className="bg-white py-16 lg:py-24" aria-labelledby="about-identity-heading"><div className="mx-auto grid max-w-editorial gap-8 px-6 lg:grid-cols-12 lg:gap-16 lg:px-10"><div className="lg:col-span-7"><p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-600">Legal identity</p><h2 id="about-identity-heading" className="mt-3 font-heading text-2xl font-bold text-navy-900 md:text-3xl">{academyLegalIdentity.legalName}</h2><dl className="mt-6 grid gap-x-8 gap-y-4 sm:grid-cols-2"><div><dt className="text-xs font-semibold uppercase tracking-wide text-navy-500">Acronym</dt><dd className="mt-1 text-sm font-semibold text-navy-800">{academyLegalIdentity.acronym}</dd></div><div><dt className="text-xs font-semibold uppercase tracking-wide text-navy-500">Company number</dt><dd className="mt-1 text-sm font-semibold text-navy-800">{academyLegalIdentity.companyNumber}</dd></div><div><dt className="text-xs font-semibold uppercase tracking-wide text-navy-500">Incorporated</dt><dd className="mt-1 text-sm font-semibold text-navy-800"><time dateTime={academyLegalIdentity.incorporationDate}>14 October 2025</time></dd></div></dl><Link to="/contact" className="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-clinical-700 underline">Contact information <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div><address className="not-italic border-t-2 border-navy-800 bg-surface-50 p-6 lg:col-span-5"><MapPin className="h-5 w-5 text-clinical-700" aria-hidden="true" /><p className="mt-4 text-xs font-semibold uppercase tracking-wide text-clinical-700">{academyLegalIdentity.registeredOfficeLabel}</p><p className="mt-2 font-semibold text-navy-900">{academyLegalIdentity.registeredOfficeAddress}</p><p className="mt-3 text-sm leading-relaxed text-navy-600">{academyLegalIdentity.registeredOfficeNotice}</p></address></div></section>
+  </>;
 }

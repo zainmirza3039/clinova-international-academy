@@ -10,7 +10,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Self-paced study',
     level: 'Intermediate',
     description: 'Evidence-informed self-study course covering low-back-pain history, red-flag reasoning, neurological screening, risk stratification, shared decisions and function-led management.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/20860616/pexels-photo-20860616.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -22,7 +22,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Self-paced study',
     level: 'Foundation',
     description: 'Self-study course covering sports-injury assessment, tissue loading, progressive rehabilitation, functional testing and return-to-sport decisions.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/7187811/pexels-photo-7187811.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -34,7 +34,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Self-paced study',
     level: 'Foundation',
     description: 'Self-study course on pain mechanisms, biopsychosocial assessment, communication, pacing, function-focused rehabilitation and evidence-informed review.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/5473223/pexels-photo-5473223.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -46,7 +46,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Foundation',
     description: 'Essential communication techniques for effective clinical consultations.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/7447058/pexels-photo-7447058.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -58,7 +58,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Foundation',
     description: 'Educational awareness of wound assessment information, professional scope and safe escalation; not a procedural guide.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/5722160/pexels-photo-5722160.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -70,7 +70,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Advanced',
     description: 'An educational guide to finding and discussing medicines evidence within authorised professional roles; not a prescribing protocol.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/8657359/pexels-photo-8657359.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -82,7 +82,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Intermediate',
     description: 'An educational introduction to anxiety-related CBT concepts, training limits and specialist referral; not therapist qualification.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/8430297/pexels-photo-8430297.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -94,7 +94,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Intermediate',
     description: 'Educational review of nutrition risk, shared decisions and dietetic referral; not individualised dietary prescriptions.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/15319038/pexels-photo-15319038.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -106,7 +106,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Foundation',
     description: 'Principles of patient safety, error prevention and quality improvement.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/6129104/pexels-photo-6129104.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -118,7 +118,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Self-paced study',
     level: 'Advanced',
     description: 'Self-study course on task-specific practice, motor learning, functional goal-setting, dose and progression in neurological rehabilitation.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/6111589/pexels-photo-6111589.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -130,7 +130,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Foundation',
     description: 'Evidence-based infection prevention practices for clinical settings.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/8376296/pexels-photo-8376296.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -142,7 +142,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Independent study',
     level: 'Intermediate',
     description: 'Methods and tools for leading quality improvement initiatives in healthcare.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/6129142/pexels-photo-6129142.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
 
@@ -155,7 +155,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Self-paced study',
     level: 'Intermediate',
     description: 'Structured learning on person-centred history-taking, differential reasoning, examination selection, documentation and safety-netting.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -167,7 +167,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Self-paced study',
     level: 'Intermediate',
     description: 'Guideline-linked learning on osteoarthritis assessment, education, therapeutic exercise, functional outcomes and referral.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/4506109/pexels-photo-4506109.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -179,7 +179,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Self-paced study',
     level: 'Intermediate',
     description: 'Evidence-informed learning on comprehensive assessment, functional goals, task-specific practice, team coordination and safety.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/7551665/pexels-photo-7551665.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
   {
@@ -191,7 +191,7 @@ export const cpdCourses: CPDCourse[] = [
     duration: 'Self-paced study',
     level: 'Intermediate',
     description: 'Structured learning on multifactorial falls assessment, progressive balance and strength exercise, environmental risk and referral.',
-    publicationStatus: 'published',
+    publicationStatus: 'draft',
     image: 'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
   },
 ];

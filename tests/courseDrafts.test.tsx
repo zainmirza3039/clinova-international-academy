@@ -2,57 +2,46 @@ import { cleanup, render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { courseDrafts } from '@/data/courseDrafts';
-import { programmes } from '@/data/programmes';
-import { cpdCourses } from '@/data/cpdCourses';
+import { programmes, publishedProgrammes } from '@/data/programmes';
+import { cpdCourses, publishedCPDCourses } from '@/data/cpdCourses';
+import { getCPDCurriculum } from '@/data/cpdCurricula';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import CPDCard from '@/components/CPDCard';
 import ProgrammeDetailPage from '@/pages/ProgrammeDetailPage';
-
+import CPDCourseDetailPage from '@/pages/CPDCourseDetailPage';
 vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }) }));
 afterEach(() => cleanup());
 
-describe('published learning curricula', () => {
-  it('contains two stable-slug curricula with three modules and two substantive lessons each', () => {
-    for (const slug of ['certificate-in-musculoskeletal-assessment', 'certificate-in-clinical-pain-management']) {
-      const draft = courseDrafts[slug];
-      expect(draft.status).toBe('published');
-      expect(draft.modules).toHaveLength(3);
-      expect(draft.modules.every((module) => module.lessons)).toBe(true);
-      expect(draft.modules.every((module) => module.lessons).valueOf()).toBe(true);
-      draft.modules.forEach((module) => {
-        expect(module.lessons).toHaveLength(2);
-        module.lessons.forEach((lesson) => expect(lesson.text.split(/\s+/).length).toBeGreaterThanOrEqual(100));
-        expect(module.reflectiveActivity.length).toBeGreaterThan(40);
-      });
-      expect(draft.relatedArticles.length).toBeGreaterThanOrEqual(3);
-      expect(draft.evidence.some((source) => /nice|who|hcpc/i.test(source.organisation))).toBe(true);
-    }
+describe('legacy catalogue and curriculum release gates', () => {
+  it('marks existing programme and CPD catalogue entries as draft-only', () => {
+    expect(programmes.length).toBeGreaterThan(0); expect(cpdCourses.length).toBeGreaterThan(0);
+    expect(programmes.every(item => item.publicationStatus === 'draft' && item.status === 'Draft')).toBe(true);
+    expect(cpdCourses.every(item => item.publicationStatus === 'draft')).toBe(true);
+    expect(publishedProgrammes).toHaveLength(0); expect(publishedCPDCourses).toHaveLength(0);
+    expect(Object.values(courseDrafts).every(draft => draft.status === 'draft')).toBe(true);
+    for (const course of cpdCourses) expect(getCPDCurriculum(course.slug)?.status).toBe('draft');
   });
 
-  it('keeps publication status explicit and avoids unverified offers, hours or certificates', () => {
-    expect(programmes.every((item) => item.publicationStatus === 'published')).toBe(true);
-    expect(cpdCourses.every((item) => item.publicationStatus === 'published')).toBe(true);
-    expect(programmes.length).toBeGreaterThan(0);
-    expect(cpdCourses.length).toBeGreaterThan(0);
-    const publishedProgramme = programmes[0];
-    const programmeCard = render(<MemoryRouter><ProgrammeCard programme={publishedProgramme} /></MemoryRouter>);
-    expect(programmeCard.container.textContent).toMatch(/Read guide/i);
-    expect(programmeCard.container.textContent).not.toMatch(/draft/i);
-    expect(programmeCard.container.textContent).not.toMatch(/\d+ CPD hours|weeks|Certificate of Completion|Enrol now/i);
+  it('does not render titles or links when a legacy catalogue card is given a draft record', () => {
+    const programme = render(<MemoryRouter><ProgrammeCard programme={programmes[0]} /></MemoryRouter>);
+    expect(screen.getByRole('heading', { name: 'Programme information is under review' })).toBeTruthy();
+    expect(programme.container.textContent).not.toContain(programmes[0].title);
+    expect(programme.container.querySelector('a')).toBeNull();
     cleanup();
-    const publishedCourse = cpdCourses.find((item) => item.publicationStatus === 'published');
-    expect(publishedCourse).toBeTruthy();
-    const cpdCard = render(<MemoryRouter><CPDCard course={publishedCourse!} /></MemoryRouter>);
-    expect(cpdCard.container.textContent).toMatch(/Learning guide|self-study/i);
-    expect(cpdCard.container.textContent).not.toMatch(/\d+ CPD hours|Certificate of Completion|Enrol now/i);
+    const course = render(<MemoryRouter><CPDCard course={cpdCourses[0]} /></MemoryRouter>);
+    expect(screen.getByRole('heading', { name: 'No current CPD course is available' })).toBeTruthy();
+    expect(course.container.textContent).not.toContain(cpdCourses[0].title);
+    expect(course.container.querySelector('a')).toBeNull();
   });
 
-  it('renders lesson content inside collapsed details with no learner completion controls', () => {
-    render(<MemoryRouter initialEntries={['/programmes/certificate-in-musculoskeletal-assessment']}><Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes></MemoryRouter>);
-    expect(screen.getByRole('heading', { name: 'Further study material' })).toBeTruthy();
-    expect(screen.getAllByText(/Reflective activity:/i)).toHaveLength(3);
-    expect(document.querySelectorAll('details[open]')).toHaveLength(0);
-    expect(screen.queryByRole('button', { name: /complete|save/i })).toBeNull();
-    expect(document.body.textContent).not.toMatch(/digital Certificate|you will receive|\b40 CPD hours\b/);
+  it('keeps direct legacy programme and CPD paths on an unavailable status page', () => {
+    const { container } = render(<MemoryRouter initialEntries={[`/programmes/${programmes[0].slug}`]}><Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes></MemoryRouter>);
+    expect(screen.getByRole('heading', { name: 'Programme details are under review' })).toBeTruthy();
+    expect(container.textContent).not.toContain(programmes[0].title);
+    cleanup();
+    const cpd = render(<MemoryRouter initialEntries={[`/cpd-courses/${cpdCourses[0].slug}`]}><Routes><Route path="/cpd-courses/:slug" element={<CPDCourseDetailPage />} /></Routes></MemoryRouter>);
+    expect(screen.getByRole('heading', { name: 'This course is not currently offered' })).toBeTruthy();
+    expect(cpd.container.textContent).not.toContain(cpdCourses[0].title);
+    expect(cpd.container.querySelector('form,input,select,textarea,button')).toBeNull();
   });
 });

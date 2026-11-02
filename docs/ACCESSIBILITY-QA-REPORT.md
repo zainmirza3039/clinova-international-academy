@@ -60,7 +60,7 @@ Follow-up **keyboard-only interaction smoke** passed on `/certification`, `/veri
 
 ## Known issues and severity
 
-- **High — clinical release gate:** Exact reviewed source hashes, reviewer identity/date, editorial review and release-owner approval remain unevidenced for the 39 published records. Obtain record-level evidence before a release decision; publication flags were not changed.
+- **High — clinical release gate:** Exact reviewed source hashes, reviewer identity/date, editorial review and release-owner approval remain unevidenced for the 39 records in that baseline snapshot. This feature branch marks all programme and CPD records draft-only; that visibility change is not clinical or release approval.
 - **High — certificate workflow:** No server-side issuance/eligibility function or public verification endpoint exists. The admin UI now exposes no certificate write action, but this does not prevent direct API/database writes allowed by any deployed policy; hosted privileges were not checked and no schema change was made. Course completion/award rules, opaque code generation, uniqueness/concurrency, audit history and endpoint protections remain unresolved. Keep issuance disabled and public verification unavailable until server-side controls and tests exist.
 - **High — collaboration submissions:** The local form does not persist. A secure, abuse-controlled endpoint, approved privacy/retention rules and authenticated staff review workflow are still required before submissions can be enabled.
 - **Medium — accessibility verification:** Human keyboard review and real screen-reader announcements remain outstanding.
@@ -68,11 +68,11 @@ Follow-up **keyboard-only interaction smoke** passed on `/certification`, `/veri
 
 ## Clinical-review and content integrity
 
-The academy owner reports that clinical review is complete, but the evidence available in this checkout does not link reviewer decisions to exact record hashes or identify reviewer/date, editorial sign-off or release approval. The source marks 8/8 programme records and 16/16 CPD records as `published`; the 15 article records are assigned `published` in source. Those flags are implementation metadata, not clinical, editorial, accreditation or release approval.
+The academy owner reports that clinical review is complete, but the evidence available in this checkout does not link reviewer decisions to exact record hashes or identify reviewer/date, editorial sign-off or release approval. At the historical baseline, the source marked 8/8 programme records and 16/16 CPD records as `published`; this feature branch marks those records draft-only. The 15 article records retain their existing `published` source status. None of these flags is clinical, editorial, accreditation or release approval.
 
 The supplied historical `CLINOVA-RELEASE-READINESS-REVIEW-1.md` is dated 2026-10-22 and explicitly **NOT APPROVED FOR RELEASE**. Its report date is not a per-record review date and it adds no hash-linked sign-off. All 39 inventory identity/hash rows match the current source, but every review-evidence row remains unmatched and is marked **Requires version-specific confirmation**.
 
-No programme, CPD or article source record, source hash or publication flag was changed. The [39-record clinical-review inventory](CLINOVA-CLINICAL-REVIEW-INVENTORY.md) and [evidence-gap report](CLINICAL-REVIEW-EVIDENCE-GAPS.md) remain the record-level tracking sources. Exact-hash clinical review, editorial review and separate release-owner approval are still required.
+In the historical QA snapshot, no programme, CPD or article source record, source hash or publication flag was changed. The current branch changes only programme/CPD publication status to draft-only and preserves the content payload; it does not grant approval. The [39-record clinical-review inventory](CLINOVA-CLINICAL-REVIEW-INVENTORY.md) and [evidence-gap report](CLINICAL-REVIEW-EVIDENCE-GAPS.md) remain the record-level tracking sources. Exact-hash clinical review, editorial review and separate release-owner approval are still required.
 
 A final metadata-only check of the 16 other Clinova worktrees found 14 clean and two with the same pre-existing dirty-path counts of 7 and 2. No other worktree was modified by this task.
 

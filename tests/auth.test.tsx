@@ -4,6 +4,9 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { AuthProvider, ProtectedStudentRoute } from '@/auth/AuthProvider';
 
+// These tests exercise provider mechanics with an isolated approved configuration; the release gate is tested separately.
+vi.mock('@/auth/authConfig', () => ({ authConfig: { enabled: true }, createAuthClient: vi.fn(() => null) }));
+
 const makeClient = () => {
   let listener: ((event: string, session: unknown) => void) | undefined;
   const session = { user: { id: 'user-1', email: 'student@example.test' }, access_token: 'test-token' };
@@ -22,7 +25,7 @@ const makeClient = () => {
 afterEach(() => { vi.unstubAllEnvs(); vi.restoreAllMocks(); });
 
 describe('auth foundation', () => {
-  it('is unavailable by default and never constructs a client', () => {
+  it('keeps the route unavailable when no auth client is injected', () => {
     const client = makeClient();
     render(<AuthProvider client={null}><MemoryRouter><ProtectedStudentRoute><p>private</p></ProtectedStudentRoute></MemoryRouter></AuthProvider>);
     expect(screen.getByText('Student access unavailable')).toBeTruthy();

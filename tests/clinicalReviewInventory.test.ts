@@ -70,6 +70,8 @@ function rowsFor(sectionHeading: string): string[][] {
 describe('Clinova clinical-review identity and evidence inventory', () => {
   it('matches each source record ID, title, route, file, snapshot hash, status, and missing sign-off fields', () => {
     expect(inventory).toContain('c60569d32e2e898577f4c5cadade40ea0f4cac52');
+    expect(inventory).toContain('d002743d11144b6b7a69e33ba71de720335bbd43');
+    expect(inventory).toContain('All 8 legacy programme records and 16 CPD course records are draft-only');
     expect(rowsFor('Programmes (8)')).toEqual(programmes.map((record) =>
       expectedRow(record, `/programmes/${record.slug}`, 'src/data/programmes.ts', record.publicationStatus),
     ));
@@ -90,6 +92,6 @@ describe('Clinova clinical-review identity and evidence inventory', () => {
     expect(inventory).toContain('does **not** establish that any exact version listed below was reviewed');
     expect(inventory).toContain('not review signatures, proof of clinical approval');
     expect(inventory).toContain('Requires version-specific confirmation');
-    expect(inventory).toContain('Do not change publication flags, indexing, or learner workflows on the basis of this identity register alone.');
+    expect(inventory).toContain('No Vercel indexing settings or hosted database records were changed.');
   });
 });

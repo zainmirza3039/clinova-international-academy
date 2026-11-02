@@ -1,12 +1,14 @@
 # Clinova content inventory
 
-This document summarizes the source at baseline `c60569d`. It is not evidence that the academy’s courses or services are operational.
+This document preserves a historical content snapshot at baseline `c60569d`; it is not evidence that the academy’s courses or services are operational.
+
+> **Current implementation status:** This feature branch supersedes baseline statements about course availability, login, CMS workflow and learner services. All 8 programme and 16 CPD records are draft-only; course catalogue/detail routes are status-only. Authentication, learner persistence, enquiries, CMS queries/actions, assessment, certification, credential issuance and public verification are disabled in source pending separate approvals. See the [master development specification](CLINOVA-MASTER-DEVELOPMENT-SPECIFICATION.md) and [current record inventory](CLINOVA-CLINICAL-REVIEW-INVENTORY.md).
 
 ## Review and publication status
 
 The academy owner reports that clinical review is complete, but the exact reviewed version, reviewer identity, review date, and record-level coverage are not verified in the available evidence. The source identity list is in [CLINOVA-CLINICAL-REVIEW-INVENTORY.md](CLINOVA-CLINICAL-REVIEW-INVENTORY.md); that generated register is not proof that every exact content version was reviewed.
 
-The source currently marks eight programme records and sixteen CPD records as `published`; fifteen article records receive `status: 'published'` in `src/data/educationalArticles.ts`. These are source publication flags, not evidence of clinical review, editorial approval, or final release approval. No publication flag was changed during this local review.
+At baseline `c60569d`, eight programme records and sixteen CPD records were marked `published`; this feature branch changed those course flags to draft-only and withholds their detail content. Fifteen article records still receive `status: 'published'` in `src/data/educationalArticles.ts`. No source publication flag is evidence of clinical review, editorial approval, or final release approval.
 
 ## What the site contains
 
@@ -14,17 +16,17 @@ The source currently marks eight programme records and sixteen CPD records as `p
 |---|---|---|
 | Home and About | `/`, `/about` | Proposed educational principles, learning-resource navigation, and a clear account of unavailable learner services. No invented history, faculty, accreditation, achievements, or outcomes. |
 | Subject areas | `/departments`, `/departments/:slug` | Ten proposed subject groupings, not established academic departments. Each page includes overview, topic list, scope caution, FAQs, and a general link to the shared learning library; resources are not represented as a department-specific curriculum. |
-| Programme catalogue | `/programmes`, `/programmes/:slug`; `/courses` aliases | Eight source records. All currently have `publicationStatus: 'published'` and `status: 'Published'`; this is not clinical sign-off. Enrolment, fees, duration, delivery, assessment, recognised CPD hours, and certificates are not promised; CPD hours are null. Unsupported duration/delivery filters are disabled. |
-| Programme detail content | `/programmes/:slug`; `/courses/:slug` aliases | Eight programme detail records with source-linked curriculum content. Availability and qualification terms are not confirmed. See the record-identity inventory for IDs, exact titles, routes, and source flags; exact reviewed-version coverage remains unverified. |
-| CPD course catalogue | `/cpd-courses`, `/cpd-courses/:slug` | Sixteen source records, all currently marked `publicationStatus: 'published'`. They are not evidence of available bookings or accredited CPD; hours are null and assessment, delivery, and recognition are not confirmed. CPD-hour filtering is disabled. |
+| Programme catalogue | `/programmes`, `/programmes/:slug`; legacy `/courses` aliases | At baseline there were eight source records with published flags. The current branch marks them draft-only; public pages show status only and do not reveal titles, curricula, enrollment or course detail. |
+| Programme detail content | `/programmes/:slug`; legacy `/courses/:slug` aliases | The baseline contained eight curriculum records. Current public detail routes provide a review-status message and no curriculum content. Qualification terms and exact reviewed-version coverage remain unverified. |
+| CPD course catalogue | `/cpd-courses`, `/cpd-courses/:slug` | At baseline there were sixteen source records with published flags. The current branch marks them draft-only; public pages show system status only. No booking, hours, assessment, delivery, recognition or course detail is offered. |
 | Article library | `/resources`, `/resources/:slug`; `/blog` aliases | Fifteen substantial educational articles in three JSON files. Source code assigns `status: 'published'`; this is not version-specific clinical or editorial approval. Pages include search, topic filtering, full sections, takeaways, references, and scope cautions. No fabricated bylines or publication dates. |
 | Study tools | `/learning-resources`, `/learning-resources/:slug` | Six reading-based resources with prompts, sources, and related reading. No fake downloads, patient-data collection, or saved completion. |
-| Online learning | `/online-learning` | Illustrative resource-navigation page. Live teaching, enrolment, assessment, progress, and certificates are not represented as operational services. |
+| Online learning | `/online-learning` | Legacy route redirects to CPD system status. No live teaching, enrolment, assessment, progress, or certificate service is represented as operational. |
 | Contact | `/contact` | Owner-confirmed public address: **1 Unity St, Bristol BS1 5HH, United Kingdom**. Phone, email, hours, and visiting arrangements remain unconfirmed; contact submission is disabled. |
 | Partners | `/training-partners` | Proposal and enquiry guidance without promises of an agreement, delivery, certificates, or commercial outcomes. Submission remains disabled in preview configuration. |
-| Admissions/application | `/admissions`, `/apply`, `/application` | Preview guidance only. No approved admissions contract, online application submission, or persistence. |
+| Admissions/application | `/admissions`, `/apply`, `/application` | Status and guidance only. No approved intake, online application submission, or persistence; no application data is collected. |
 | Verification | `/verify` | Honest unavailable state; no invented certificate records, identifiers, or verification results. |
-| Auth/student/admin | Auth routes, `/student/*`, `/admin/*` | Default-off auth and guarded routes. No trusted learner, enrolment, progress, assessment, certificate, or administrative data service exists. |
+| Auth/student/admin | Auth routes, `/student/*`, `/admin/*` | Auth is source-disabled; login routes show an unavailable status. Learner and admin record operations remain gated, and no new private learner, application, assessment or credential query is made. |
 | Community | `/events`, `/faculty`, `/community` | No-confirmed-record states rather than fabricated people, events, or attendance. |
 | FAQs/testimonials | `/faqs`, shared FAQ data | General proposed/unconfirmed guidance; testimonials remain empty. |
 | Legal | Privacy, terms, cookies, and refund routes | Draft policy documents, not reviewed legal commitments. Operator/controller, processing arrangements, and commercial terms require owner/legal confirmation. |
@@ -42,7 +44,7 @@ Programme titles containing “Certificate” or “Diploma” identify catalogu
 
 ## Existing backend and safety gates
 
-The existing enquiry migration defines contact, partnership, and newsletter insert-only tables. It is not a student schema or an operational administration/delivery service. Prior reported insert/read-denial testing is not reclassified as full production verification. A separate CMS-only migration was subsequently applied to Clinova production; the current local frontend work made no additional database change.
+The existing enquiry migration defines contact, partnership, and newsletter insert-only tables. It is not a student schema or an operational administration/delivery service. Prior reported insert/read-denial testing is not reclassified as full production verification. A separate CMS-only migration was previously reported as applied to Clinova production; this branch makes no database change and disables CMS queries/actions in source pending separate server-side authorization review.
 
 Before enabling any workflow, confirm academy/project ownership, abuse and rate controls, privacy/retention, API/browser persistence, staff access, operational delivery, and error/duplicate behaviour. Auth additionally needs reviewed redirect/recovery configuration and live callback/email tests. Student features require a separately reviewed backend contract and authorization—not guessed tables or frontend-only access checks. The separate review-only learner-schema proposal is not integrated or applied here. Learner deletion/retention policy remains an owner decision.
 
@@ -55,12 +57,12 @@ Before enabling any workflow, confirm academy/project ownership, abuse and rate 
 - Comprehensive assistive-technology, performance, and real-device QA beyond automated and local-browser checks.
 - Domain purchase/DNS/custom-domain aliases, canonical origin, `VITE_SITE_URL`, and domain-dependent SEO/publication remain deliberately untouched.
 
-No further production database write or migration, merge, production deployment, domain/DNS/Vercel change, paid service, or change to PainFix is part of this local work. Curriculum pages are loaded on demand; the homepage does not eagerly load the lesson corpus.
+The no-merge/no-deployment statement in the earlier baseline report described that review only; the release state of this feature branch is tracked separately. The baseline curriculum-loading note likewise describes the earlier implementation.
 
 ## CMS production schema and local integration status (30 October 2026)
 
 The owner-approved CMS migration was applied once to production project `ssxpmcbqfdggfsoqbxac`; its ledger entry is `20261029192938` / `clinova_content_management_20261030`. It created the five empty content, version, review-decision, source-provenance and audit tables, workflow functions/triggers, RLS, and the `published_content` view. Read-only schema inspection confirms **zero CMS rows**. No source records were imported, no content was published, and no learner, certificate, enquiry, Auth, storage or settings schema was changed by that CMS migration.
 
-The local frontend now has a `VITE_CMS_ENABLED=false`-by-default integration. When explicitly enabled for the known Clinova Supabase project, public pages read only `published_content`; the existing repository library remains visible as fallback and supplementary content can use a dedicated detail route. The Admin Content panel has local draft/review RPC wiring guarded by exact `app_metadata.clinova_roles` claims. The existing app role claim is not mapped to CMS roles, and application Auth remains disabled; therefore the CMS interface is denied/off unless those independent gates are satisfied. This code is **local only**: it has not been deployed, and a production database schema existing does not mean the live frontend is using it.
+The earlier CMS integration was designed as opt-in for the known Clinova Supabase project. This feature branch adds an unconditional source-level gate: no public CMS query, private workflow read, or CMS RPC action runs, even if `VITE_CMS_ENABLED` is true. The admin panel explains the inactive state. A production database schema existing does not mean the live frontend is using it or that its permissions have been validated.
 
 Live Supabase advisors reported 7 authenticated `SECURITY DEFINER` RPC warnings, 7 unindexed foreign keys, 5 unused indexes on the new empty tables, and 2 overlapping authenticated SELECT-policy warnings. The seven RPC bodies were inspected read-only and contain `auth.uid()` plus role-specific `has_clinova_role(...)` checks; this is a useful server-side control, not a reason to ignore least-privilege warnings. Index and policy findings are performance notices; their impact should be reassessed after approved non-production workload tests. No advisory was remediated in production. See [Supabase implementation status](SUPABASE-IMPLEMENTATION-STATUS.md) for the functions, advisory links, and remaining gates.

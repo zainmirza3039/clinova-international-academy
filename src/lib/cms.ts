@@ -46,6 +46,7 @@ interface CmsQueryResult {
 
 interface CmsSelectQuery extends PromiseLike<CmsQueryResult> {
   order(column: string, options: { ascending: boolean }): CmsSelectQuery;
+  in(column: string, values: readonly unknown[]): CmsSelectQuery;
   limit(count: number): CmsSelectQuery;
 }
 
@@ -67,10 +68,12 @@ const contentKinds: CmsContentKind[] = ['programme', 'cpd_course', 'article'];
 const workflowStatuses: CmsWorkflowStatus[] = ['draft', 'in_review', 'approved', 'published', 'archived', 'withdrawn', 'changes_requested', 'rejected', 'superseded'];
 const cmsRoleSet = new Set<string>(cmsRoles);
 const expectedSupabaseUrl = 'https://ssxpmcbqfdggfsoqbxac.supabase.co';
+const CMS_ACTIVATION_APPROVED_IN_SOURCE = false;
 
-/** CMS access is opt-in and tied to the known Supabase project; unset/invalid flags stay off. */
+/** CMS stays source-disabled until its server-side authorization contract is separately reviewed and approved. */
 export function cmsFeatureEnabled(): boolean {
-  return import.meta.env.VITE_CMS_ENABLED === 'true'
+  return CMS_ACTIVATION_APPROVED_IN_SOURCE
+    && import.meta.env.VITE_CMS_ENABLED === 'true'
     && import.meta.env.VITE_SUPABASE_URL === expectedSupabaseUrl
     && Boolean(import.meta.env.VITE_SUPABASE_ANON_KEY);
 }
@@ -151,10 +154,11 @@ export async function fetchPublishedCmsContent(client?: CmsClient): Promise<CmsP
   const { data, error } = await activeClient
     .from('published_content')
     .select('content_item_id, content_version_id, kind, version_number, snapshot, content_sha256, published_at')
+    .in('kind', ['article'])
     .order('published_at', { ascending: false })
     .limit(100);
   if (error) throw new Error('Published CMS content is unavailable.');
-  return (data ?? []).map(parsePublishedContent).filter((row): row is CmsPublishedContent => row !== null);
+  return (data ?? []).map(parsePublishedContent).filter((row): row is CmsPublishedContent => row !== null && row.kind === 'article');
 }
 
 /** Unpublished workflow records are queried only with the exact server-managed CMS role claim. */

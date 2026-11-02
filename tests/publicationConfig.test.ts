@@ -21,12 +21,12 @@ describe('explicit publication gate', () => {
     const { siteOrigin } = await import('@/lib/siteConfig');
     expect(Boolean(siteOrigin)).toBe(valid);
   });
-  it.each(['https://unrelated.supabase.co', '', 'https://ssxpmcbqfdggfsoqbxac.supabase.co'])('restricts enquiry configuration to the confirmed Clinova project: %s', async (url) => {
+  it('keeps enquiry persistence disabled even when runtime variables request it', async () => {
     vi.stubEnv('VITE_ENQUIRIES_ENABLED', 'true');
-    vi.stubEnv('VITE_SUPABASE_URL', url); vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'mock-key');
+    vi.stubEnv('VITE_SUPABASE_URL', 'https://ssxpmcbqfdggfsoqbxac.supabase.co'); vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'mock-key');
     vi.resetModules();
     const { enquiriesEnabled } = await import('@/lib/siteConfig');
-    expect(enquiriesEnabled).toBe(url === 'https://ssxpmcbqfdggfsoqbxac.supabase.co');
+    expect(enquiriesEnabled).toBe(false);
   });
   it.each([['https://branch.vercel.app', 'true', false], ['https://academy.example', 'false', false], ['https://academy.example', 'true', true]])('build SEO uses the same release safeguards: %s indexing=%s', (origin, indexing, valid) => {
     const dir = mkdtempSync(join(tmpdir(), 'clinova-seo-'));

@@ -33,7 +33,7 @@ export function useSEO({ title, description, canonical, ogImage, structuredData,
     ensureMeta('meta[property="og:description"]', 'property', 'og:description').content = description;
     ensureMeta('meta[property="og:type"]', 'property', 'og:type').content = 'website';
     const publicPath = canonical ?? location.pathname.replace(/^\/courses(?=\/|$)/, '/programmes').replace(/^\/(blog|announcements)(?=\/|$)/, '/resources');
-    const privateRoute = noindex || /^\/(admin|apply|application|sign-in|sign-up|forgot-password|reset-password|student)(\/|$)/.test(location.pathname);
+    const privateRoute = noindex || /^\/(admin|apply|apply-certification|application|sign-in|sign-up|forgot-password|reset-password|student|candidate-dashboard|assessor-dashboard|certification-panel|faculty-dashboard|verify|assessment|quality-assurance|certification\/policies|certification\/verify)(\/|$)/.test(location.pathname);
     document.head.querySelector('meta[property="og:url"]')?.remove();
     if (siteOrigin && !privateRoute) ensureMeta('meta[property="og:url"]', 'property', 'og:url').content = `${siteOrigin}${publicPath}`;
     ensureMeta('meta[name="robots"]', 'name', 'robots').content =

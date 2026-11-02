@@ -93,7 +93,7 @@ Should you encounter any issues or concerns with external links provided on our 
     expect(normalizedContent).toContain(expectedText.replace(/\s+/g, ' ').trim());
   });
 
-  it('does not claim that published privacy/account policies already govern sign-in', async () => {
+  it('keeps login unavailable even when environment flags request activation', async () => {
     vi.stubEnv('VITE_AUTH_ENABLED', 'true');
     vi.stubEnv('VITE_SUPABASE_URL', 'https://ssxpmcbqfdggfsoqbxac.supabase.co');
     vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'test-key');
@@ -117,8 +117,11 @@ Should you encounter any issues or concerns with external links provided on our 
       </AuthProvider>,
     );
 
-    expect(await screen.findByText(/approved privacy information is not available here/i)).toBeTruthy();
-    expect(screen.getByRole('link', { name: 'View policy status' }).getAttribute('href')).toBe('/privacy-policy');
+    expect(await screen.findByRole('heading', { name: 'Student access unavailable' })).toBeTruthy();
+    expect(screen.queryByRole('form')).toBeNull();
+    expect(screen.queryByLabelText(/email address|password/i)).toBeNull();
+    expect(client.auth.getSession).not.toHaveBeenCalled();
+    expect(screen.queryByText(/approved privacy information is not available here/i)).toBeNull();
     expect(screen.queryByText(/governed by clinova.s published privacy and account policies/i)).toBeNull();
   });
 });

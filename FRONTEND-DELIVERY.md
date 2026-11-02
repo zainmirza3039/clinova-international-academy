@@ -8,13 +8,17 @@ This is a frontend-only, preview-safe increment. It is not a completed productio
 
 Repository: `zainmirza3039/clinova-international-academy`. Baseline main: `033b8cdc41cb963bf5d9f8ad2e51534ad77db78f`. This branch is stacked on PR #1 (`759299c4fea622dcfe0ea9c687e1cd211ff0b587`) to preserve its validation, enquiry payloads, tests and SPA routing. No backend worktree, schema migration, production data or unrelated resource was modified.
 
+> **Superseded by the current feature branch:** This earlier PR #3 report described a previous opt-in enquiry implementation. In the current branch, public forms do not submit or persist, and source-level approval gates keep Auth, learner data, CMS and enquiry operations disabled regardless of environment flags. The old contract and setup instructions below are historical only; do not enable them by changing deployment variables. No hosted database or Vercel setting is changed here.
+
 ## What is available
 
 The existing React 18 / TypeScript / Vite / npm design and public catalogue are preserved. Added admissions, application-planning, FAQs, events, faculty and community screens. Course and blog URL aliases are available. Admin paths display a locked setup screen, not an unprotected dashboard. Global draft-content disclosure, safer error fallback, keyboard skip link, Escape-to-close navigation, corrected header offset and mobile form typography are included. Invented testimonials, example certificate records, headline statistics, department course counts and unconfirmed contact addresses are removed from rendered content.
 
-Programme titles, outlines, durations and CPD metadata are existing draft catalogue content, not verified academy offerings. Faculty, events, academy location, fees, accreditation, certificate arrangements, contact channels, policies and platform availability require client approval. Stock photographs are illustrative, not photographs of Clinova staff or facilities.
+At the time of that earlier increment, programme titles, outlines, durations and CPD metadata were draft catalogue content, not verified academy offerings. Faculty, events, academy location, fees, accreditation, certificate arrangements, contact channels, policies and platform availability require client approval. Stock photographs are illustrative, not photographs of Clinova staff or facilities.
 
-## Checked-in enquiry contract
+## Historical enquiry contract (not active in current source)
+
+The table names and payload fields below document a prior interface only. This feature branch does not query or write these tables, and the source-level release lock cannot be overridden by environment variables.
 
 Only these existing insert-only browser contracts are used:
 
@@ -22,11 +26,11 @@ Only these existing insert-only browser contracts are used:
 - `partnership_inquiries`: `full_name`, `organisation`, `role`, `email`, `phone`, `country`, `website`, `message`.
 - `newsletter_subscriptions`: `email`.
 
-No application, course-admin, publishing, settings or authentication endpoint is invented. The existing migration is preserved, but its deployed state is unverified. No database read/write test or migration was performed.
+No application, course-admin, publishing, settings or authentication endpoint was invented in that earlier increment. No database read/write test or migration was performed by this current feature branch; production data, grants and schema were not changed.
 
 ## Safe configuration
 
-Use `.env.example`; all `VITE_*` values are public. Never add a service-role key or database password. Without configuration the full public site still renders: the Supabase client is loaded only after an explicitly enabled enquiry submission. Keep `VITE_ENQUIRIES_ENABLED=false` until the backend owner verifies Clinova access, the deployed schema and policies, server-side validation, persistent rate limits/spam controls and actual persistence. A client-side flag is a release safeguard, not a security control.
+All `VITE_*` values are public. Never add a service-role key or database password. The old “default-off environment flag” model is superseded: `enquiriesEnabled` is source-disabled, the forms do not load a Supabase client, and setting `VITE_ENQUIRIES_ENABLED=true` cannot activate persistence. Any future activation requires a separately approved code change, backend/privacy/security review, and end-to-end negative tests.
 
 `VITE_SITE_URL` is intentionally blank in preview. Builds generate disallow-all robots, noindex metadata and an empty XML sitemap. Set a confirmed HTTPS academy origin only when publication is authorised; the post-build script generates canonical sitemap URLs. Admin and application routes remain noindex. This SPA uses runtime per-route metadata; server-rendered per-route social cards and genuine HTTP 404 status require a future prerender/server layer.
 

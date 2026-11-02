@@ -6,11 +6,10 @@ export const departments: Department[] = [
     slug: 'physical-therapy-rehabilitation',
     name: 'Physical Therapy & Rehabilitation',
     shortName: 'Physical Therapy',
-    description: 'Healthcare subject area for reading, reflection and independent study.',
+    description: 'Subject-area information only; no current course or qualification offer is implied.',
     overview:
       'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/20860622/pexels-photo-20860622.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 3,
     learningAreas: [
       'Musculoskeletal Physiotherapy',
       'Neurological Rehabilitation',
@@ -27,11 +26,10 @@ export const departments: Department[] = [
     slug: 'nursing-allied-health',
     name: 'Nursing & Allied Health',
     shortName: 'Nursing',
-    description: 'Healthcare subject area for reading, reflection and independent study.',
+    description: 'Subject-area information only; no current course or qualification offer is implied.',
     overview:
       'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/32115899/pexels-photo-32115899.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 1,
     learningAreas: [
       'Patient Assessment',
       'Wound Care Management',
@@ -48,11 +46,10 @@ export const departments: Department[] = [
     slug: 'medicine',
     name: 'Medicine',
     shortName: 'Medicine',
-    description: 'Healthcare subject area for reading, reflection and independent study.',
+    description: 'Subject-area information only; no current course or qualification offer is implied.',
     overview:
       'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/6762866/pexels-photo-6762866.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 0,
     learningAreas: [
       'Clinical Diagnostics',
       'Evidence-Based Medicine',
@@ -69,11 +66,10 @@ export const departments: Department[] = [
     slug: 'dentistry',
     name: 'Dentistry',
     shortName: 'Dentistry',
-    description: 'Healthcare subject area for reading, reflection and independent study.',
+    description: 'Subject-area information only; no current course or qualification offer is implied.',
     overview:
       'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/8413334/pexels-photo-8413334.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 0,
     learningAreas: [
       'Restorative Dentistry',
       'Patient Communication',
@@ -90,11 +86,10 @@ export const departments: Department[] = [
     slug: 'pharmacy',
     name: 'Pharmacy',
     shortName: 'Pharmacy',
-    description: 'Healthcare subject area for reading, reflection and independent study.',
+    description: 'Subject-area information only; no current course or qualification offer is implied.',
     overview:
       'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/14797864/pexels-photo-14797864.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 0,
     learningAreas: [
       'Pharmacotherapy Updates',
       'Patient Counselling',
@@ -111,11 +106,10 @@ export const departments: Department[] = [
     slug: 'psychology-mental-health',
     name: 'Psychology & Mental Health',
     shortName: 'Psychology',
-    description: 'Healthcare subject area for reading, reflection and independent study.',
+    description: 'Subject-area information only; no current course or qualification offer is implied.',
     overview:
       'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 1,
     learningAreas: [
       'Cognitive Behavioural Therapy',
       'Psychological Assessment',
@@ -132,11 +126,10 @@ export const departments: Department[] = [
     slug: 'nutrition-dietetics',
     name: 'Nutrition & Dietetics',
     shortName: 'Nutrition',
-    description: 'Healthcare subject area for reading, reflection and independent study.',
+    description: 'Subject-area information only; no current course or qualification offer is implied.',
     overview:
       'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/15319047/pexels-photo-15319047.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 0,
     learningAreas: [
       'Clinical Nutrition',
       'Dietary Assessment',
@@ -153,11 +146,10 @@ export const departments: Department[] = [
     slug: 'sports-exercise',
     name: 'Sports & Exercise',
     shortName: 'Sports & Exercise',
-    description: 'Healthcare subject area for reading, reflection and independent study.',
+    description: 'Subject-area information only; no current course or qualification offer is implied.',
     overview:
       'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/39219676/pexels-photo-39219676.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 1,
     learningAreas: [
       'Sports Injury Prevention',
       'Exercise Prescription',
@@ -174,11 +166,10 @@ export const departments: Department[] = [
     slug: 'occupational-therapy',
     name: 'Occupational Therapy',
     shortName: 'Occupational Therapy',
-    description: 'Healthcare subject area for reading, reflection and independent study.',
+    description: 'Subject-area information only; no current course or qualification offer is implied.',
     overview:
       'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/4566528/pexels-photo-4566528.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 0,
     learningAreas: [
       'Functional Assessment',
       'Adaptive Techniques',
@@ -195,11 +186,10 @@ export const departments: Department[] = [
     slug: 'healthcare-management',
     name: 'Healthcare Management',
     shortName: 'Healthcare Management',
-    description: 'Healthcare subject area for reading, reflection and independent study.',
+    description: 'Subject-area information only; no current course or qualification offer is implied.',
     overview:
       'This subject area groups healthcare topics for professional discussion, reading and study planning. Use the related educational resources to explore each topic further.',
     image: 'https://images.pexels.com/photos/5407235/pexels-photo-5407235.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    programmeCount: 2,
     learningAreas: [
       'Healthcare Leadership',
       'Quality Improvement',

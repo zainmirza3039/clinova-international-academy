@@ -4,18 +4,18 @@ import { fetchPublishedCmsContent, type CmsContentKind, type CmsPublishedContent
 
 const kindLabels: Record<CmsContentKind, string> = {
   programme: 'Learning guide',
-  cpd_course: 'Self-study course',
+  cpd_course: 'CPD course',
   article: 'Educational article',
 };
 
 function usePublishedCmsContent() {
   const [records, setRecords] = useState<CmsPublishedContent[]>([]);
-  const [loading, setLoading] = useState(() => import.meta.env.VITE_CMS_ENABLED === 'true');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     let active = true;
     void fetchPublishedCmsContent().then((next) => {
-      if (active) setRecords(next);
+      if (active) setRecords(next.filter((record) => record.kind !== 'cpd_course'));
     }).catch(() => {
       // Public CMS failure is intentionally non-fatal: repository content remains available.
       if (active) setRecords([]);

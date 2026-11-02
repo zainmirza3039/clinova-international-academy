@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import AdmissionsPage from '@/pages/AdmissionsPage';
@@ -9,77 +9,47 @@ import AdminPage from '@/pages/AdminPage';
 import { AuthProvider } from '@/auth/AuthProvider';
 import CommunityPage, { EventsPage, FacultyPage } from '@/pages/CommunityPage';
 import FAQsPage from '@/pages/FAQsPage';
-
 vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }) }));
+const renderPage = (page: React.ReactNode) => render(<MemoryRouter>{page}</MemoryRouter>);
+afterEach(() => { cleanup(); document.head.innerHTML = ''; });
 
-function renderPage(page: React.ReactNode) { return render(<MemoryRouter>{page}</MemoryRouter>); }
-
-afterEach(() => cleanup());
-
-describe('completion frontend pages', () => {
-  it('describes the current reading-only service scope without claiming online delivery', () => {
+describe('Clinova programme and certification system pages', () => {
+  it('preserves the confirmed legal identity and explains service boundaries', () => {
     const { container } = renderPage(<AboutPage />);
-    expect(screen.getByRole('heading', { name: 'Healthcare learning resources for independent study' })).toBeTruthy();
-    expect(container.textContent).toMatch(/does not provide live online teaching, enrolment, assessment or learner accounts/i);
-    expect(screen.getByText('Proposed mission')).toBeTruthy();
-    expect(screen.getByText('Proposed vision')).toBeTruthy();
-    expect(container.textContent).not.toMatch(/delivered online/i);
+    expect(screen.getByRole('heading', { name: 'About Clinova International Academy' })).toBeTruthy();
+    expect(container.textContent).toContain('Clinova International Academy Ltd'); expect(container.textContent).toContain('16048192');
+    expect(container.textContent).toContain('14 October 2025'); expect(container.textContent).toMatch(/does not accept course enrollment or certification applications/i);
+    expect(container.textContent).toMatch(/no scheme or application is currently open/i);
   });
-
-  it('explains that application submission and persistence are unavailable', () => {
-    renderPage(<ApplicationPage />);
-    expect(screen.getByRole('heading', { name: 'Discuss your learning interests' })).toBeTruthy();
-    expect(screen.getByText(/Online applications and payment processing are not available through this website/i)).toBeTruthy();
-    expect(screen.queryByRole('form')).toBeNull();
-    expect(screen.queryByLabelText(/your name/i)).toBeNull();
-    expect(screen.queryByRole('button', { name: /submit|send application/i })).toBeNull();
+  it('explains that ordinary application submission and persistence are unavailable', () => {
+    const { container } = renderPage(<ApplicationPage />);
+    expect(container.textContent).toMatch(/Online applications and payment processing are disabled/i);
+    expect(container.querySelector('form,input,textarea,button[type="submit"]')).toBeNull();
   });
-
-  it('distinguishes online reading resources from unavailable teaching and learner services', () => {
-    const { container } = renderPage(<OnlineLearningPage />);
-    expect(screen.getByRole('heading', { name: /self-guided resources only; live teaching and enrolment are unavailable/i })).toBeTruthy();
-    expect(container.textContent).toMatch(/learner accounts, enrolment, formal assessment, learner support and certificate services are not operational/i);
-    expect(screen.getByRole('link', { name: /browse self-study courses/i }).getAttribute('href')).toBe('/cpd-courses');
+  it('redirects the legacy online-learning path to current CPD system status', () => {
+    const { container } = renderPage(<OnlineLearningPage />); expect(container.textContent).toBe('');
   });
-
-  it('keeps admin access blocked without presenting credentials or fake records', () => {
+  it('keeps admin access blocked without a verified hosted role contract', () => {
     render(<MemoryRouter><AuthProvider><AdminPage /></AuthProvider></MemoryRouter>);
-    expect(screen.getByRole('heading', { name: /administration is not enabled/i })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Secure setup required' })).toBeTruthy();
     expect(screen.getByText(/server-side authentication and role contract/i)).toBeTruthy();
-    expect(screen.queryByLabelText(/password|email/i)).toBeNull();
-    expect(screen.getByText('Applications')).toBeTruthy();
+    expect(screen.queryByLabelText(/password|email/i)).toBeNull(); expect(screen.getByText('Applications')).toBeTruthy();
   });
-
-  it('renders honest unconfirmed states for events and faculty', () => {
-    renderPage(<EventsPage />);
-    expect(screen.getByRole('heading', { name: /no events currently listed/i })).toBeTruthy();
-    renderPage(<FacultyPage />);
-    expect(screen.getByRole('heading', { name: /no verified faculty profiles are currently published/i })).toBeTruthy();
+  it('renders unconfirmed event and faculty states honestly', () => {
+    renderPage(<EventsPage />); expect(screen.getByRole('heading', { name: 'No events currently listed' })).toBeTruthy();
+    cleanup(); renderPage(<FacultyPage />); expect(screen.getByRole('heading', { name: 'No verified faculty profiles are currently published' })).toBeTruthy();
   });
-
-  it('provides FAQ buttons with expanded state and no invented commercial claims', () => {
-    renderPage(<FAQsPage />);
-    const question = screen.getByRole('button', { name: /how do i choose a programme/i });
-    expect(question.getAttribute('aria-expanded')).toBe('true');
-    fireEvent.click(question);
-    expect(question.getAttribute('aria-expanded')).toBe('false');
-    expect(screen.queryByText(/£|accredited by/i)).toBeNull();
-    const contactQuestion = screen.getByRole('button', { name: /how do i contact clinova/i });
-    fireEvent.click(contactQuestion);
-    expect(screen.getByText(/Online enquiry submissions are not available/i)).toBeTruthy();
-    expect(screen.queryByText(/currently supported contact route and expected response guidance/i)).toBeNull();
+  it('provides keyboard-native FAQ interactions without inventing prices or accreditation claims', () => {
+    renderPage(<FAQsPage />); const question = screen.getByRole('button', { name: /how do i choose a programme/i });
+    expect(question.getAttribute('aria-expanded')).toBe('true'); expect(document.body.textContent).not.toMatch(/£|accredited by/i);
   });
-
-  it('renders admissions guidance and the application preview link', () => {
+  it('renders admissions status and a safe application-information link', () => {
     renderPage(<AdmissionsPage />);
-    expect(screen.getByRole('heading', { name: /explore your learning options/i })).toBeTruthy();
-    expect(screen.getByRole('heading', { name: /student access and online applications are unavailable/i })).toBeTruthy();
-    expect(screen.getByRole('link', { name: /application information/i }).getAttribute('href')).toBe('/application');
+    expect(screen.getByRole('heading', { name: 'Services are in development; applications are not open' })).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'Application information' }).getAttribute('href')).toBe('/application');
   });
-
-  it('renders the community index without implying unverified details', () => {
-    renderPage(<CommunityPage />);
-    expect(screen.getByRole('heading', { name: /thoughtful learning community/i })).toBeTruthy();
-    expect(screen.getByRole('link', { name: /events/i }).getAttribute('href')).toBe('/events');
+  it('renders community status without implying unverified event details', () => {
+    renderPage(<CommunityPage />); expect(screen.getByRole('heading', { name: 'A thoughtful learning community' })).toBeTruthy();
+    expect(screen.getByRole('link', { name: /^Events/ }).getAttribute('href')).toBe('/events');
   });
 });

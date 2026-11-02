@@ -6,6 +6,8 @@
 
 **Scope:** Local source, tests and documentation only. No hosted configuration or learner records were queried in this phase.
 
+> **Historical snapshot:** This audit describes the earlier detached baseline, not the current feature branch. The current implementation withholds all programme and CPD course detail, replaces certification/catalogue content with status-only pages, and hard-disables auth, learner persistence, CMS workflow, assessment, issuance and verification in source. Use the [master development specification](CLINOVA-MASTER-DEVELOPMENT-SPECIFICATION.md), [current clinical-review inventory](CLINOVA-CLINICAL-REVIEW-INVENTORY.md) and [current evidence-gap report](CLINICAL-REVIEW-EVIDENCE-GAPS.md) for the active state. Historical route descriptions below are not release status.
+
 ## Route-to-feature matrix
 
 | Route(s) | Current implementation | Data and security boundary | Status / remaining gap |
@@ -53,7 +55,7 @@ A fresh, isolated disposable PostgreSQL 16.15 cluster was used to apply `local-b
 - An authorized project operator must establish the missing `20261018200942` migration execution history from an approved audit trail and compare live schema/grants/policies to source in a separately authorized non-production Supabase environment. Do not fabricate a ledger entry or replay the create migration.
 - The academy's academic authority must approve the award meaning, exact completion/assessment/exception rules, trusted issuer/revoker roles, revocation/reissue/expiry policy, and allowed public verification fields. Until then, issuance, revocation and live verification stay unavailable.
 - The data controller/legal adviser must approve enquiry purpose/lawful basis, privacy wording, collection fields, staff access, retention/deletion and abuse controls before any submission or triage endpoint is enabled.
-- Qualified academy reviewers and the release owner must provide exact-hash clinical, editorial and release decisions before any CMS import or status change; the existing 39 source publication flags were not changed.
+- At the time of this baseline audit, course publication flags were not changed. This feature branch now marks programme and CPD records draft-only and withholds their public details, but qualified academy reviewers and the release owner must still provide exact-hash clinical, editorial and release decisions before any future CMS import or publication change.
 - Human keyboard, real screen-reader and physical-device accessibility checks remain owner/QA tasks; automated tests and simulated viewport checks are not substitutes.
 
 **Status:** local SQL prototype and synthetic tests validated on PostgreSQL 16.15; no non-production Supabase validation was performed in this follow-up; no production Supabase, Vercel, deployment, or remote setting was touched.
