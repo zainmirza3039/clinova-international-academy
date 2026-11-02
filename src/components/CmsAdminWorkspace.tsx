@@ -119,7 +119,7 @@ function VersionCard({ version, user, roles, onTransition, disabled }: {
 
   return <article className="rounded-xl border border-navy-100 bg-white p-5">
     <div className="flex flex-wrap items-start justify-between gap-3">
-      <div><p className="text-xs font-semibold uppercase tracking-wide text-teal-700">{version.kind.replace('_', ' ')} · v{version.version_number}</p><h4 className="mt-1 text-lg font-semibold text-navy-900">{title}</h4><p className="mt-1 text-xs text-navy-500">Version hash: <code>{version.content_sha256.slice(0, 12)}…</code></p></div>
+      <div><p className="text-xs font-semibold uppercase tracking-wide text-teal-700">{version.kind.replace('_', ' ')} · v{version.version_number}</p><h4 className="mt-1 text-lg font-semibold text-navy-900">{title}</h4><p className="mt-1 text-xs text-navy-500">Exact content SHA-256: <code className="break-all">{version.content_sha256}</code></p></div>
       <span className="rounded-full bg-navy-50 px-3 py-1 text-xs font-semibold text-navy-700">{version.workflow_status.replace('_', ' ')}</span>
     </div>
     {maySubmit && <button type="button" disabled={disabled} onClick={() => void onTransition({ name: 'submit_content_for_review', args: { p_version_id: version.id } })} className="mt-4 rounded-lg border border-teal-700 px-4 py-2 text-sm font-semibold text-teal-800 disabled:opacity-50">Submit draft for review</button>}

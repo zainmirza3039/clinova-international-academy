@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { ResourcesPage } from '@/pages/ResourcesPage';
+import CmsAdminWorkspace from '@/components/CmsAdminWorkspace';
 import { educationalArticles } from '@/data/educationalArticles';
 import {
   cmsFeatureEnabled,
@@ -136,5 +137,33 @@ describe('Clinova CMS integration gates', () => {
       name: 'publish_content_version', args: { p_version_id: 'version-cms-1' },
     }, client)).rejects.toThrow(/not authorized/i);
     expect(doubles.rpc).not.toHaveBeenCalled();
+  });
+
+  it('shows the complete content SHA-256 to a reviewer for the exact version under review', async () => {
+    enableCms();
+    const workflowRow = {
+      id: 'version-review-1',
+      content_item_id: 'item-review-1',
+      kind: 'article',
+      version_number: 2,
+      snapshot: { title: 'Review this exact snapshot', slug: 'review-this-exact-snapshot' },
+      content_sha256: digest,
+      workflow_status: 'in_review',
+      author_id: 'author-id',
+      created_at: '2026-10-29T18:00:00.000Z',
+    };
+    const limit = vi.fn().mockResolvedValue({ data: [workflowRow], error: null });
+    const order = vi.fn(() => ({ limit }));
+    const select = vi.fn(() => ({ order }));
+    doubles.from.mockImplementation((table: string) => {
+      expect(table).toBe('content_versions');
+      return { select };
+    });
+
+    render(<CmsAdminWorkspace user={{ id: 'clinical-reviewer', app_metadata: { clinova_roles: ['clinical_reviewer'] } }} />);
+
+    expect(await screen.findByText(digest, { exact: true })).toBeTruthy();
+    expect(screen.getByText('Exact content SHA-256:')).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Clinical review' })).toBeTruthy();
   });
 });

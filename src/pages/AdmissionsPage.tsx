@@ -1,25 +1,95 @@
-import { ArrowRight, CheckCircle2, ClipboardList, Compass, Users } from 'lucide-react';
+import { ArrowRight, BookOpen, Compass, Newspaper } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageHero from '@/components/PageHero';
 import { useSEO } from '@/hooks/useSEO';
 
-const steps = [
-  { icon: Compass, title: 'Explore your options', text: 'Review our programmes and departments to find a learning route that fits your goals.' },
-  { icon: ClipboardList, title: 'Prepare your details', text: 'Have your preferred programme, experience and contact details ready before you begin.' },
-  { icon: Users, title: 'Speak with our team', text: 'Review published information and send a written enquiry if you need clarification.' },
+const learningRoutes = [
+  {
+    icon: Compass,
+    title: 'Browse subject areas',
+    text: 'Explore the healthcare disciplines and topic areas currently represented in the directory.',
+    linkLabel: 'View subject areas',
+    to: '/departments',
+  },
+  {
+    icon: BookOpen,
+    title: 'Read self-study guides',
+    text: 'Search the published course catalogue and review each independent study outline.',
+    linkLabel: 'Browse self-study courses',
+    to: '/cpd-courses',
+  },
+  {
+    icon: Newspaper,
+    title: 'Explore educational reading',
+    text: 'Find source-linked articles and reading-based study tools for professional reflection.',
+    linkLabel: 'Open articles and resources',
+    to: '/resources',
+  },
 ];
 
 export default function AdmissionsPage() {
-  useSEO({ title: 'Admissions Information', description: 'Guidance for exploring healthcare learning resources and asking about specific opportunities.' });
-  return <>
-    <PageHero breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Admissions' }]} eyebrow="Admissions" title="A clear next step for your learning journey" description="Find the right route into Clinova, understand what to prepare and contact our team when you are ready to discuss your options." />
-    <section>
-      <section className="py-16 lg:py-24 bg-white"><div className="max-w-editorial mx-auto px-6 lg:px-10">
-        <div className="max-w-2xl"><p className="text-sm font-semibold uppercase tracking-[0.16em] text-teal-600 mb-4">Start with confidence</p><h2 className="font-heading text-3xl font-bold text-navy-800">Admissions guidance, without the guesswork</h2><p className="mt-5 text-navy-600 leading-relaxed">Admission requirements can vary by programme. Browse the course information first, then use our enquiry channel for advice about your circumstances. We do not publish a universal admissions rule because suitability is programme-specific.</p></div>
-        <div className="grid md:grid-cols-3 gap-8 mt-12">{steps.map(({ icon: Icon, title, text }, index) => <article key={title} className="border-t-2 border-teal-500 pt-6"><span className="text-xs font-semibold text-teal-600">0{index + 1}</span><Icon className="w-6 h-6 text-clinical-600 mt-5 mb-4" aria-hidden="true" /><h3 className="font-heading text-lg font-bold text-navy-800">{title}</h3><p className="mt-3 text-sm leading-relaxed text-navy-600">{text}</p></article>)}</div>
-      </div></section>
-      <section className="py-16 bg-surface-50"><div className="max-w-editorial mx-auto px-6 lg:px-10 flex flex-col md:flex-row md:items-center justify-between gap-8"><div><h2 className="font-heading text-2xl font-bold text-navy-800">Ready to share your interest?</h2><p className="mt-2 text-sm text-navy-600">Online applications and payment processing are not available through this website.</p></div><Link to="/application" className="inline-flex items-center justify-center gap-2 bg-clinical-500 px-6 py-3.5 text-sm font-semibold text-white hover:bg-clinical-600">Application information <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link></div></section>
-      <section className="py-14 bg-navy-800"><div className="max-w-editorial mx-auto px-6 lg:px-10 flex gap-4 items-start"><CheckCircle2 className="w-6 h-6 text-teal-400 shrink-0" aria-hidden="true" /><div><h2 className="font-heading text-xl font-bold text-white">Need advice first?</h2><p className="mt-2 text-sm text-navy-100/70">Check the contact page for current channel availability. Please do not send sensitive documents until our team requests them.</p><Link to="/contact" className="inline-block mt-4 text-sm font-semibold text-teal-300 hover:text-white">Contact Clinova <span aria-hidden="true">→</span></Link></div></div></section>
-    </section>
-  </>;
+  useSEO({
+    title: 'Learner and Admissions Information',
+    description: 'Explore Clinova’s published healthcare learning resources and check current admissions and learner-service availability.',
+  });
+
+  return (
+    <>
+      <PageHero
+        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Learner information' }]}
+        eyebrow="Learner information"
+        title="Explore your learning options"
+        description="Start with Clinova’s published subject areas, independent study guides and educational reading. Online applications, enrolment and payment processing are not available through this website."
+      />
+
+      <section className="bg-white px-6 py-12 lg:py-16" aria-labelledby="admissions-status-heading">
+        <div className="mx-auto max-w-4xl border border-amber-300 bg-amber-50 p-6 md:p-9">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-900">Current service status</p>
+          <h2 id="admissions-status-heading" className="mt-3 font-heading text-2xl font-bold text-navy-900 md:text-3xl">
+            Student access and online applications are unavailable
+          </h2>
+          <p className="mt-4 leading-relaxed text-navy-700">
+            This page provides information only; it does not accept applications, enrol learners or process payments. Course and programme pages are educational listings, not an offer of admission. Check each published page for its current scope and status.
+          </p>
+          <Link to="/application" className="mt-5 inline-flex min-h-11 items-center gap-2 font-semibold text-clinical-700 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-clinical-600">
+            Read application information <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+
+      <section className="bg-surface-50 px-6 py-16 lg:py-20" aria-labelledby="learning-routes-heading">
+        <div className="mx-auto max-w-editorial lg:px-10">
+          <div className="max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-600">Explore the current learning material</p>
+            <h2 id="learning-routes-heading" className="mt-3 font-heading text-2xl font-bold text-navy-900 md:text-3xl">Choose a place to begin</h2>
+            <p className="mt-4 leading-relaxed text-navy-600">Browse what is currently published; no live admissions or learner-support service is implied by these links.</p>
+          </div>
+          <div className="mt-9 grid gap-6 md:grid-cols-3">
+            {learningRoutes.map(({ icon: Icon, title, text, linkLabel, to }) => (
+              <article key={title} className="flex h-full flex-col border border-navy-200 bg-white p-6">
+                <Icon className="h-6 w-6 text-clinical-700" aria-hidden="true" />
+                <h3 className="mt-4 font-heading text-lg font-bold text-navy-900">{title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-navy-600">{text}</p>
+                <Link to={to} className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-clinical-700 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-clinical-600">
+                  {linkLabel} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-navy-800 px-6 py-14" aria-labelledby="admissions-contact-heading">
+        <div className="mx-auto flex max-w-editorial flex-col items-start gap-5 lg:flex-row lg:items-center lg:justify-between lg:px-10">
+          <div>
+            <h2 id="admissions-contact-heading" className="font-heading text-xl font-bold text-white">Need clarification about a published resource?</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-navy-100/75">Online enquiry submissions are unavailable. The Contact page lists the confirmed postal address and the optional secondary phone contact with its stated role.</p>
+          </div>
+          <Link to="/contact" className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-semibold text-navy-900 hover:bg-surface-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+            View contact details <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+    </>
+  );
 }

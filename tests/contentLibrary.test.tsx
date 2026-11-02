@@ -6,6 +6,8 @@ import { learningResources } from '@/data/learningResources';
 import { programmes } from '@/data/programmes';
 import { newsItems } from '@/data/testimonials';
 import { departments } from '@/data/departments';
+import { publishedCPDCourses } from '@/data/cpdCourses';
+import { getCPDCurriculum } from '@/data/cpdCurricula';
 import CPDCoursesPage from '@/pages/CPDCoursesPage';
 import ProgrammesPage from '@/pages/ProgrammesPage';
 import { ResourcesPage, ResourceDetailPage } from '@/pages/ResourcesPage';
@@ -14,7 +16,7 @@ import ContactPage from '@/pages/ContactPage';
 import DepartmentsPage from '@/pages/DepartmentsPage';
 import DepartmentDetailPage from '@/pages/DepartmentDetailPage';
 import Footer from '@/components/Footer';
-import { academyPublicAddress } from '@/data/publicContact';
+import { academyLegalIdentity, academyPakistanAgentPhone, academyPublicAddress } from '@/data/publicContact';
 
 vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }) }));
 afterEach(() => { cleanup(); document.head.innerHTML = ''; });
@@ -95,6 +97,53 @@ describe('reading-based resources and confirmed contact fact', () => {
     expect(screen.queryByLabelText('Duration')).toBeNull();
     expect(screen.queryByLabelText('Delivery')).toBeNull();
   });
+  it('filters only by exact published course subject, level and study-format values', () => {
+    render(<MemoryRouter><CPDCoursesPage /></MemoryRouter>);
+    const department = screen.getByLabelText('Department') as HTMLSelectElement;
+    const level = screen.getByLabelText('Level') as HTMLSelectElement;
+    const format = screen.getByLabelText('Study format') as HTMLSelectElement;
+
+    expect(Array.from(department.options).slice(1).map((option) => option.value)).toEqual([...new Set(publishedCPDCourses.map((course) => course.department))]);
+    expect(Array.from(level.options).slice(1).map((option) => option.value)).toEqual([...new Set(publishedCPDCourses.map((course) => course.level))]);
+    expect(Array.from(format.options).slice(1).map((option) => option.value)).toEqual([...new Set(publishedCPDCourses.map((course) => course.duration))]);
+
+    fireEvent.change(department, { target: { value: 'Physical Therapy & Rehabilitation' } });
+    fireEvent.change(level, { target: { value: 'Advanced' } });
+    fireEvent.change(format, { target: { value: 'Self-paced study' } });
+
+    expect(screen.getByRole('heading', { name: 'Motor Control & Relearning in Neurorehabilitation' })).toBeTruthy();
+    expect(screen.getByRole('status').textContent).toContain('1 of 1 matching self-study course');
+    expect(screen.getByRole('link', { name: /Motor Control & Relearning in Neurorehabilitation/ }).getAttribute('href')).toBe('/cpd-courses/motor-control-relearning-in-neurorehabilitation');
+  });
+  it('shows the recorded study format on course cards and links to course details', () => {
+    render(<MemoryRouter><CPDCoursesPage /></MemoryRouter>);
+    const course = publishedCPDCourses[0];
+    const card = document.querySelector<HTMLAnchorElement>(`a[href="/cpd-courses/${course.slug}"]`);
+    expect(card).toBeTruthy();
+    expect(card?.textContent).toContain(course.duration);
+    expect(card?.textContent).toContain('View course details');
+  });
+  it('searches existing curriculum audience text and can clear a no-result search', () => {
+    render(<MemoryRouter><CPDCoursesPage /></MemoryRouter>);
+    const course = publishedCPDCourses.find((item) => (getCPDCurriculum(item.slug)?.intendedAudience.length ?? 0) > 0)!;
+    const audienceText = getCPDCurriculum(course.slug)!.intendedAudience[0];
+    const search = screen.getByLabelText('Search titles, professions, topics or learning content...');
+
+    fireEvent.change(search, { target: { value: audienceText } });
+    expect(Array.from(document.querySelectorAll<HTMLAnchorElement>('a[href^="/cpd-courses/"]')).some((link) => link.getAttribute('href') === `/cpd-courses/${course.slug}`)).toBe(true);
+    fireEvent.change(search, { target: { value: 'no-existing-course-topic-2046' } });
+    expect(screen.getByRole('status').textContent).toContain('0 of 0 matching self-study courses');
+    fireEvent.click(screen.getAllByRole('button', { name: 'Clear search and filters' }).at(-1)!);
+    expect(screen.getByRole('status').textContent).toContain(`8 of ${publishedCPDCourses.length} matching self-study courses`);
+  });
+  it('does not invent instructor assignments or expose enrollment, payment or learner-state controls', () => {
+    const { container } = render(<MemoryRouter><CPDCoursesPage /></MemoryRouter>);
+    expect((screen.getByLabelText('Instructor') as HTMLSelectElement).disabled).toBe(true);
+    expect(screen.getByText('Instructor assignments are not included in these course records.')).toBeTruthy();
+    expect((screen.getByLabelText('CPD credit') as HTMLSelectElement).disabled).toBe(true);
+    expect(container.querySelector('form, input[type="password"], input[type="number"], button[type="submit"]')).toBeNull();
+    expect(container.querySelector('a[href^="/sign-up"], a[href^="/student"], a[href*="checkout"], a[href*="enrol"]')).toBeNull();
+  });
   it('provides six substantive study resources with prompts, sources and valid reading links', () => {
     expect(learningResources).toHaveLength(6);
     for (const programme of programmes) { expect(programme.publicationStatus).toBe('published'); expect(programme.cpdHours).toBeNull(); expect(programme.duration).toBe('Awaiting confirmation'); }
@@ -117,13 +166,32 @@ describe('reading-based resources and confirmed contact fact', () => {
     expect(container.querySelector('form,input,textarea,[download]')).toBeNull();
     expect(screen.getByText(/No patient-data collection/)).toBeTruthy();
   });
-  it('shows only the owner-confirmed address while contact submission remains disabled', () => {
-    render(<MemoryRouter><ContactPage /><Footer /></MemoryRouter>);
+  it('publishes the confirmed legal identity and labels the office virtual while keeping the phone optional and secondary', () => {
+    const { container } = render(<MemoryRouter><ContactPage /><Footer /></MemoryRouter>);
+    const expectedCopyrightNotice = [
+      'This website and its content are copyright of Clinova International Academy – © Clinova International Academy 2024. All rights reserved.',
+      'Any redistribution or reproduction of part or all of the contents in any form is prohibited other than the following:',
+      'You may print or download extracts to a local hard disk for your personal and non-commercial use only.',
+      'You may copy the content to individual third parties for their personal use, provided that you acknowledge clinova International Academy as the source of the material.',
+      'You may not, except with our express written permission, distribute or commercially exploit the content. Nor may you transmit it or store it in any other website or other form of electronic retrieval system.',
+    ].join(' ');
     expect(academyPublicAddress).toBe('1 Unity St, Bristol BS1 5HH, United Kingdom');
+    expect(academyLegalIdentity.legalName).toBe('Clinova International Academy Ltd');
+    expect(academyLegalIdentity.acronym).toBe('Clinova / CIA');
+    expect(academyLegalIdentity.companyNumber).toBe('16048192');
+    expect(academyLegalIdentity.incorporationDate).toBe('2025-10-14');
+    expect(academyPakistanAgentPhone).toBe('0306-9633353');
     expect(screen.getAllByText(academyPublicAddress)).toHaveLength(2);
+    expect(screen.getAllByText('Registered office (virtual address)')).toHaveLength(2);
+    expect(container.textContent).toContain('Not a campus, visiting location, or public-facing venue.');
+    expect(container.textContent?.replace(/\s+/g, ' ').trim()).toContain(expectedCopyrightNotice);
+    expect(container.textContent).toContain('14 October 2025');
     expect(screen.queryByRole('button', { name: /send message/i })).toBeNull();
     expect(screen.queryByRole('form')).toBeNull();
-    expect(screen.getByText(/Online contact and partnership submissions are not currently available/)).toBeTruthy();
-    expect(screen.getByText(/Visiting arrangements and opening hours are not published/)).toBeTruthy();
+    expect(screen.getByText(/No verified public email address or online enquiry submission is available/)).toBeTruthy();
+    expect(screen.getByText('Optional secondary phone · Pakistan local agent')).toBeTruthy();
+    expect(screen.getByText(academyPakistanAgentPhone)).toBeTruthy();
+    expect(container.querySelector('a[href^="tel:"]')?.getAttribute('href')).toBe('tel:03069633353');
+    expect(container.textContent!.indexOf('Registered office (virtual address)')).toBeLessThan(container.textContent!.indexOf('Optional secondary phone · Pakistan local agent'));
   });
 });

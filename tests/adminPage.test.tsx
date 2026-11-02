@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import AdminPage from '@/pages/AdminPage';
 import { isEnrollmentMarkedCompleted } from '@/lib/certificateEligibility';
@@ -8,7 +8,8 @@ const state = vi.hoisted(() => ({
   auth: {
     enabled: true,
     status: 'ready' as 'ready' | 'disabled' | 'loading' | 'error',
-    session: { user: { id: 'test-user-id', email: 'student@example.test', app_metadata: { role: 'student' } } },
+    session: { user: { id: 'test-user-id', email: 'student@example.test', email_confirmed_at: '2026-10-30T00:00:00Z' as string | null, app_metadata: { role: 'student' } } },
+    emailVerified: true,
     error: null as string | null,
     signOut: vi.fn().mockResolvedValue({ error: null }),
   },
@@ -27,6 +28,8 @@ afterEach(() => {
   cleanup();
   state.auth.enabled = true;
   state.auth.status = 'ready';
+  state.auth.emailVerified = true;
+  state.auth.session.user.email_confirmed_at = '2026-10-30T00:00:00Z';
   state.auth.session.user.app_metadata.role = 'student';
   state.learnerDataEnabled = false;
   vi.clearAllMocks();
@@ -47,7 +50,16 @@ describe('admin role and data gates', () => {
     expect(state.from).not.toHaveBeenCalled();
   });
 
-  it('renders the source-backed admin panel without querying private data while the data gate is disabled', () => {
+  it('requires a verified email before exposing admin tools or making queries', () => {
+    state.auth.session.user.app_metadata.role = 'admin';
+    state.auth.emailVerified = false;
+    state.auth.session.user.email_confirmed_at = null;
+    render(<MemoryRouter><AdminPage /></MemoryRouter>);
+    expect(screen.getByRole('heading', { name: 'Email verification required' })).toBeTruthy();
+    expect(state.from).not.toHaveBeenCalled();
+  });
+
+  it('renders the source-backed admin panel without querying private data', () => {
     state.auth.session.user.app_metadata.role = 'admin';
     render(<MemoryRouter><AdminPage /></MemoryRouter>);
     expect(screen.getByRole('heading', { name: 'Clinova admin panel' })).toBeTruthy();
@@ -55,7 +67,7 @@ describe('admin role and data gates', () => {
     expect(screen.getByText('Learning guides')).toBeTruthy();
     expect(screen.getByText('CPD courses')).toBeTruthy();
     expect(screen.getByText('Educational articles')).toBeTruthy();
-    expect(screen.getByRole('status').textContent).toContain('Private learner, progress and certificate records are not loaded');
+    expect(screen.getByRole('status').textContent).toContain('no separately authorized server-side path is connected');
     expect(state.from).not.toHaveBeenCalled();
 
     fireEvent.click(screen.getByRole('button', { name: 'Courses' }));
@@ -98,34 +110,18 @@ describe('admin role and data gates', () => {
     expect(state.from).not.toHaveBeenCalled();
   });
 
-  it('keeps certificates read-only when an authenticated admin opens the data gates', async () => {
+  it('never queries broad learner or certificate tables from the browser admin page', () => {
     state.auth.session.user.app_metadata.role = 'admin';
     state.learnerDataEnabled = true;
-    state.from.mockImplementation((table: string) => ({
-      select: () => ({
-        order: () => ({ limit: async () => ({
-          data: table === 'student_enrollments' ? [
-            { id: 'enrollment-completed-test', student_id: 'student-completed-test', programme_slug: 'example-completed', programme_title: 'Example completed guide', status: 'completed', enrolled_at: '2026-01-01T00:00:00Z' },
-            { id: 'enrollment-active-test', student_id: 'student-active-test', programme_slug: 'example-active', programme_title: 'Example active guide', status: 'active', enrolled_at: '2026-01-02T00:00:00Z' },
-          ] : [],
-          error: null,
-        }) }),
-      }),
-      insert: state.insert,
-      update: state.update,
-      upsert: state.upsert,
-    }));
-
     render(<MemoryRouter><AdminPage /></MemoryRouter>);
-
-    await waitFor(() => expect(state.from).toHaveBeenCalledTimes(3));
     fireEvent.click(screen.getByRole('button', { name: 'Certificates' }));
-    expect(screen.getByRole('heading', { name: 'Certificate issuance and revocation are disabled' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Certificate access and issuance are unavailable' })).toBeTruthy();
     expect(screen.queryByRole('button', { name: /issue|revoke/i })).toBeNull();
     expect(screen.queryByLabelText('Certificate number')).toBeNull();
     fireEvent.click(screen.getByRole('button', { name: 'Learners' }));
-    expect(screen.getByText('Example completed guide')).toBeTruthy();
-    expect(screen.getByText('Example active guide')).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Learner record access is unavailable' })).toBeTruthy();
+    expect(screen.queryByText(/Example completed guide|Example active guide/)).toBeNull();
+    expect(state.from).not.toHaveBeenCalled();
     expect(state.insert).not.toHaveBeenCalled();
     expect(state.update).not.toHaveBeenCalled();
     expect(state.upsert).not.toHaveBeenCalled();

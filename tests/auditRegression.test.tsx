@@ -15,7 +15,7 @@ import FilterBar from '@/components/FilterBar';
 import { programmes } from '@/data/programmes';
 import { departments } from '@/data/departments';
 import { cpdFilters, publishedCPDCourses } from '@/data/cpdCourses';
-const config = vi.hoisted(() => ({ siteOrigin: 'https://academy.example' as string | undefined }));
+const config = vi.hoisted(() => ({ siteOrigin: 'https://academy.example' as string | undefined, selfStudyLearningEnabled: false, learnerDataEnabled: false }));
 vi.mock('@/lib/siteConfig', () => config);
 vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }), useScrollPosition: () => false }));
 afterEach(() => { cleanup(); document.head.innerHTML = ''; });
@@ -255,7 +255,7 @@ describe('mobile menu keyboard handling', () => {
     fireEvent.click(toggle);
     expect(toggle.getAttribute('aria-expanded')).toBe('true');
     const nav = screen.getByRole('navigation', { name: 'Mobile navigation' });
-    const finalLink = within(nav).getByRole('link', { name: 'Student access' });
+    const finalLink = within(nav).getByRole('link', { name: 'Contact', exact: true });
     finalLink.focus(); fireEvent.keyDown(document, { key: 'Tab' });
     expect(document.activeElement).toBe(toggle);
     fireEvent.keyDown(document, { key: 'Escape' });

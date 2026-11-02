@@ -14,7 +14,7 @@ const validEnv = () => {
 
 function makeClient(options: { session?: unknown; getSession?: Promise<unknown> } = {}) {
   let listener: ((event: string, session: unknown) => void) | undefined;
-  const session = options.session ?? { user: { id: 'u1', email: 'student@example.test' }, access_token: 'token' };
+  const session = options.session ?? { user: { id: 'u1', email: 'student@example.test', email_confirmed_at: '2026-10-30T00:00:00Z' }, access_token: 'token' };
   const sessionResult = options.getSession ?? Promise.resolve({ data: { session: null }, error: null });
   const unsubscribe = vi.fn();
   const auth = {
@@ -26,6 +26,7 @@ function makeClient(options: { session?: unknown; getSession?: Promise<unknown> 
     signInWithPassword: vi.fn().mockResolvedValue({ data: { session }, error: null }),
     signUp: vi.fn().mockResolvedValue({ data: { session }, error: null }),
     resetPasswordForEmail: vi.fn().mockResolvedValue({ error: null }),
+    resend: vi.fn().mockResolvedValue({ data: { user: null }, error: null }),
     updateUser: vi.fn().mockResolvedValue({ data: { user: (session as { user?: unknown })?.user }, error: null }),
     signOut: vi.fn().mockResolvedValue({ error: null }),
   };
@@ -48,6 +49,8 @@ async function loadBoth() {
     ...(await import('@/auth/authUtils')),
     AuthPage: (await import('@/pages/AuthPage')).default,
     MemoryRouter: (await import('react-router-dom')).MemoryRouter,
+    Routes: (await import('react-router-dom')).Routes,
+    Route: (await import('react-router-dom')).Route,
   };
 }
 function Probe({ useAuth }: { useAuth: typeof import('@/auth/authContext').useAuth }) {
@@ -123,6 +126,17 @@ describe('AuthProvider safety and session lifecycle', () => {
     expect(client.auth.resetPasswordForEmail).toHaveBeenCalledWith('student@example.test', { redirectTo: `${window.location.origin}/reset-password` });
   });
 
+  it('rejects external or wrong-path auth callback redirects', async () => {
+    validEnv();
+    const client = makeClient();
+    const { AuthProvider, useAuth } = await loadAuth();
+    function RedirectControls() { const auth = useAuth(); return <><button onClick={() => void auth.sendPasswordReset('student@example.test', 'https://evil.test/steal')}>reset</button><button onClick={() => void auth.resendEmailVerification('student@example.test', `${window.location.origin}/student`)}>resend</button></>; }
+    render(<AuthProvider client={client as unknown as SupabaseClient}><RedirectControls /></AuthProvider>);
+    await act(async () => { fireEvent.click(screen.getByText('reset')); fireEvent.click(screen.getByText('resend')); });
+    expect(client.auth.resetPasswordForEmail).toHaveBeenCalledWith('student@example.test', { redirectTo: `${window.location.origin}/reset-password` });
+    expect(client.auth.resend).toHaveBeenCalledWith({ type: 'signup', email: 'student@example.test', options: { emailRedirectTo: `${window.location.origin}/sign-in` } });
+  });
+
   it('does not construct an SDK client for wrong project configuration', async () => {
     vi.stubEnv('VITE_AUTH_ENABLED', 'true');
     vi.stubEnv('VITE_SUPABASE_URL', 'https://other-project.supabase.co');
@@ -169,6 +183,21 @@ describe('safe return targets and AuthPage validation', () => {
     expect(safeReturnTarget('/admin/certificates')).toBe('/admin/certificates');
   });
 
+  it('allows a safe CPD course detail return after learner sign-in', async () => {
+    const { safeReturnTarget } = await loadAuth();
+    expect(safeReturnTarget('/cpd-courses/clinical-communication-skills')).toBe('/cpd-courses/clinical-communication-skills');
+  });
+
+  it('preserves the safe course return target when opening account creation', async () => {
+    validEnv();
+    const client = makeClient();
+    const { AuthProvider, AuthPage, MemoryRouter } = await loadBoth();
+    const target = '/cpd-courses/clinical-communication-skills';
+    render(<AuthProvider client={client as unknown as SupabaseClient}><MemoryRouter initialEntries={[`/sign-in?returnTo=${encodeURIComponent(target)}`]}><AuthPage mode="sign-in" /></MemoryRouter></AuthProvider>);
+    const createAccount = await screen.findByRole('link', { name: 'Create an account' });
+    expect(createAccount.getAttribute('href')).toBe(`/sign-up?returnTo=${encodeURIComponent(target)}`);
+  });
+
   it.each(['https://evil.test', '//evil.test/student', '/student/../sign-in', '/student/%2e%2e/sign-in', '/student\\evil'])('rejects unsafe return target %s', async target => {
     const { safeReturnTarget } = await loadAuth();
     expect(safeReturnTarget(target)).toBe('/student');
@@ -197,5 +226,83 @@ describe('safe return targets and AuthPage validation', () => {
     expect(client.auth.signInWithPassword).toHaveBeenCalledTimes(1);
     expect(screen.getByRole('button').textContent).toContain('Please wait');
     await act(async () => { resolveSignIn({ data: { session: client.session }, error: null }); });
+  });
+
+  it('shows an anti-enumerating verification prompt after signup and can resend the link', async () => {
+    validEnv();
+    const client = makeClient();
+    client.auth.signUp.mockResolvedValueOnce({ data: { session: null, user: { id: 'u1', email: 'student@example.test', email_confirmed_at: null } }, error: null });
+    const { AuthProvider, AuthPage, MemoryRouter } = await loadBoth();
+    const target = '/cpd-courses/clinical-communication-skills';
+    render(<AuthProvider client={client as unknown as SupabaseClient}><MemoryRouter initialEntries={[`/sign-up?returnTo=${encodeURIComponent(target)}`]}><AuthPage mode="sign-up" /></MemoryRouter></AuthProvider>);
+    fireEvent.change(await screen.findByLabelText('Email address'), { target: { value: 'student@example.test' } });
+    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'long-password' } });
+    await act(async () => { fireEvent.submit(document.querySelector('form')!); });
+    expect((await screen.findByRole('status')).textContent).toContain('check your inbox for a verification link');
+    expect(client.auth.signUp).toHaveBeenCalledWith({ email: 'student@example.test', password: 'long-password', options: { emailRedirectTo: `${window.location.origin}/sign-in?verified=1&returnTo=${encodeURIComponent(target)}` } });
+    fireEvent.click(screen.getByRole('button', { name: 'Resend verification email' }));
+    await waitFor(() => expect(client.auth.resend).toHaveBeenCalledWith({ type: 'signup', email: 'student@example.test', options: { emailRedirectTo: `${window.location.origin}/sign-in?verified=1&returnTo=${encodeURIComponent(target)}` } }));
+    expect((await screen.findByRole('status')).textContent).toContain('If this address needs verification');
+  });
+
+  it('maps an unconfirmed sign-in error to a resend path without revealing account existence', async () => {
+    validEnv();
+    const client = makeClient();
+    client.auth.signInWithPassword.mockResolvedValueOnce({ data: { session: null }, error: Object.assign(new Error('Email not confirmed'), { code: 'email_not_confirmed' }) });
+    const { AuthProvider, AuthPage, MemoryRouter } = await loadBoth();
+    render(<AuthProvider client={client as unknown as SupabaseClient}><MemoryRouter><AuthPage mode="sign-in" /></MemoryRouter></AuthProvider>);
+    fireEvent.change(await screen.findByLabelText('Email address'), { target: { value: 'student@example.test' } });
+    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'secret' } });
+    await act(async () => { fireEvent.submit(document.querySelector('form')!); });
+    expect((await screen.findByRole('alert')).textContent).toContain('Verify your email address before signing in');
+    expect(screen.getByRole('button', { name: 'Resend verification email' })).toBeTruthy();
+  });
+
+  it('blocks unverified sessions from student routes and shows only the verification checkpoint', async () => {
+    validEnv();
+    const unverifiedSession = { user: { id: 'u1', email: 'student@example.test', email_confirmed_at: null }, access_token: 'mock-token' };
+    const client = makeClient({ getSession: Promise.resolve({ data: { session: unverifiedSession }, error: null }) });
+    const { AuthProvider, ProtectedStudentRoute, AuthPage, MemoryRouter, Routes, Route, useAuth } = await loadBoth();
+    function PrivateContent() { const auth = useAuth(); return <><p>private learner records</p><button onClick={() => void auth.signOut()}>Sign out</button></>; }
+    render(<AuthProvider client={client as unknown as SupabaseClient}><MemoryRouter initialEntries={['/student']}><Routes><Route path="/student" element={<ProtectedStudentRoute><PrivateContent /></ProtectedStudentRoute>} /><Route path="/sign-in" element={<AuthPage mode="sign-in" />} /></Routes></MemoryRouter></AuthProvider>);
+    expect(await screen.findByRole('heading', { name: 'Confirm your email address' })).toBeTruthy();
+    expect(screen.queryByText('private learner records')).toBeNull();
+    expect(client.auth.resend).not.toHaveBeenCalled();
+  });
+
+  it('shows verified callback state only when Supabase has a confirmed session', async () => {
+    validEnv();
+    const confirmed = { user: { id: 'u1', email: 'student@example.test', email_confirmed_at: '2026-10-30T00:00:00Z' }, access_token: 'mock-token' };
+    const client = makeClient({ getSession: Promise.resolve({ data: { session: confirmed }, error: null }) });
+    const { AuthProvider, AuthPage, MemoryRouter } = await loadBoth();
+    render(<AuthProvider client={client as unknown as SupabaseClient}><MemoryRouter initialEntries={['/sign-in?verified=1&returnTo=%2Fstudent']}><AuthPage mode="sign-in" /></MemoryRouter></AuthProvider>);
+    expect(await screen.findByRole('heading', { name: 'Email verified' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Continue' })).toBeTruthy();
+  });
+
+  it('preserves a safe return target in the password recovery callback', async () => {
+    validEnv();
+    const client = makeClient();
+    const { AuthProvider, AuthPage, MemoryRouter } = await loadBoth();
+    const target = '/cpd-courses/clinical-communication-skills';
+    render(<AuthProvider client={client as unknown as SupabaseClient}><MemoryRouter initialEntries={[`/forgot-password?returnTo=${encodeURIComponent(target)}`]}><AuthPage mode="forgot-password" /></MemoryRouter></AuthProvider>);
+    fireEvent.change(await screen.findByLabelText('Email address'), { target: { value: 'student@example.test' } });
+    await act(async () => { fireEvent.submit(document.querySelector('form')!); });
+    await waitFor(() => expect(client.auth.resetPasswordForEmail).toHaveBeenCalledWith('student@example.test', { redirectTo: `${window.location.origin}/reset-password?returnTo=${encodeURIComponent(target)}` }));
+    expect((await screen.findByRole('status')).textContent).toContain('a recovery link has been sent');
+  });
+
+  it('clears the protected student view and routes to sign-in after logout', async () => {
+    validEnv();
+    const client = makeClient({ getSession: Promise.resolve({ data: { session: makeClient().session }, error: null }) });
+    client.auth.signOut.mockImplementationOnce(async () => { client.emit('SIGNED_OUT', null); return { error: null }; });
+    const { AuthProvider, ProtectedStudentRoute, AuthPage, MemoryRouter, Routes, Route, useAuth } = await loadBoth();
+    function PrivateContent() { const auth = useAuth(); return <><p>private learner records</p><button onClick={() => void auth.signOut()}>Sign out</button></>; }
+    render(<AuthProvider client={client as unknown as SupabaseClient}><MemoryRouter initialEntries={['/student']}><Routes><Route path="/student" element={<ProtectedStudentRoute><PrivateContent /></ProtectedStudentRoute>} /><Route path="/sign-in" element={<AuthPage mode="sign-in" />} /></Routes></MemoryRouter></AuthProvider>);
+    expect(await screen.findByText('private learner records')).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Sign out' }));
+    await waitFor(() => expect(screen.queryByText('private learner records')).toBeNull());
+    expect(await screen.findByRole('heading', { name: 'Sign in to your student account' })).toBeTruthy();
+    expect(client.auth.signOut).toHaveBeenCalledOnce();
   });
 });

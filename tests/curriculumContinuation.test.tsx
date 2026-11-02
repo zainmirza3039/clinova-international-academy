@@ -170,7 +170,11 @@ describe('direct programme and CPD detail rendering', () => {
       </MemoryRouter>,
     );
     expect(screen.getByRole('heading', { level: 1, name: course.title })).toBeTruthy();
-    expect(screen.getByText(/Self-paced lessons/i)).toBeTruthy();
+    expect(screen.getAllByText(course.duration).length).toBeGreaterThan(0);
+    expect(screen.getByText(course.level, { exact: true })).toBeTruthy();
+    expect(screen.getByText(course.department, { exact: true })).toBeTruthy();
+    expect(screen.getByText(course.cpdHours === null ? 'Not listed in the course record' : `${course.cpdHours} ${course.cpdHours === 1 ? 'hour' : 'hours'}`)).toBeTruthy();
+    expect(screen.getByText('Not listed in the published course record')).toBeTruthy();
     expect(screen.getByRole('navigation', { name: 'Curriculum sections' })).toBeTruthy();
     expect(screen.getByRole('heading', { name: 'Sources and scope notes' })).toBeTruthy();
     const details = container.querySelectorAll('details');

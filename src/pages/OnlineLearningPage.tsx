@@ -12,6 +12,13 @@ const learningOptions = [
     action: 'Browse the library',
   },
   {
+    icon: BookOpen,
+    title: 'Browse independent study courses',
+    description: 'Review published self-study outlines. Learner enrolment and saved reading progress are unavailable in this build.',
+    to: '/cpd-courses',
+    action: 'Browse self-study courses',
+  },
+  {
     icon: Compass,
     title: 'Explore subject areas',
     description: 'Navigate healthcare topics and identify related areas for further independent study.',
@@ -42,6 +49,13 @@ export default function OnlineLearningPage() {
         description="Explore educational articles, healthcare subject areas and structured study resources designed for independent professional learning."
         image="https://images.pexels.com/photos/4145190/pexels-photo-4145190.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
+      <section className="bg-amber-50 px-6 py-8" aria-labelledby="online-learning-status-heading">
+        <div className="mx-auto max-w-editorial border border-amber-300 bg-white p-6 md:p-8 lg:px-10">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-900">Current service status</p>
+          <h2 id="online-learning-status-heading" className="mt-3 font-heading text-xl font-bold text-navy-900 md:text-2xl">Self-guided resources only; live teaching and enrolment are unavailable</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-navy-700">This site provides written educational resources and subject-area information. Live online teaching, learner accounts, enrolment, formal assessment, learner support and certificate services are not operational through this website.</p>
+        </div>
+      </section>
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-editorial mx-auto px-6 lg:px-10">
           <div className="max-w-3xl mb-12">
