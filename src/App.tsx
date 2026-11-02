@@ -3,28 +3,29 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
-import HomePage from '@/pages/HomePage';
-import AboutPage from '@/pages/AboutPage';
-import DepartmentsPage from '@/pages/DepartmentsPage';
-import DepartmentDetailPage from '@/pages/DepartmentDetailPage';
-import ProgrammesPage from '@/pages/ProgrammesPage';
-import CPDCoursesPage from '@/pages/CPDCoursesPage';
-import OnlineLearningPage from '@/pages/OnlineLearningPage';
-
-import ContactPage from '@/pages/ContactPage';
-import LegalPage from '@/pages/LegalPage';
-import NotFoundPage from '@/pages/NotFoundPage';
 import ErrorBoundary from '@/components/ErrorBoundary';
-import AdmissionsPage from '@/pages/AdmissionsPage';
-import ApplicationPage from '@/pages/ApplicationPage';
-import CommunityPage, { EventsPage, FacultyPage } from '@/pages/CommunityPage';
-import FAQsPage from '@/pages/FAQsPage';
-import { privacyPolicy, termsAndConditions, cookiePolicy, refundPolicy } from '@/data/legalContent';
+import { privacyPolicy, termsAndConditions, cookiePolicy, refundPolicy, accessibilityStatement, externalLinkingPolicy } from '@/data/legalContent';
 
 import { AuthProvider, ProtectedStudentRoute } from '@/auth/AuthProvider';
-import AuthPage from '@/pages/AuthPage';
-import StudentDashboardPage from '@/pages/StudentDashboardPage';
 
+const HomePage = lazy(() => import('@/pages/HomePage'));
+const AboutPage = lazy(() => import('@/pages/AboutPage'));
+const DepartmentsPage = lazy(() => import('@/pages/DepartmentsPage'));
+const DepartmentDetailPage = lazy(() => import('@/pages/DepartmentDetailPage'));
+const ProgrammesPage = lazy(() => import('@/pages/ProgrammesPage'));
+const CPDCoursesPage = lazy(() => import('@/pages/CPDCoursesPage'));
+const OnlineLearningPage = lazy(() => import('@/pages/OnlineLearningPage'));
+const ContactPage = lazy(() => import('@/pages/ContactPage'));
+const LegalPage = lazy(() => import('@/pages/LegalPage'));
+const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
+const AdmissionsPage = lazy(() => import('@/pages/AdmissionsPage'));
+const ApplicationPage = lazy(() => import('@/pages/ApplicationPage'));
+const CommunityPage = lazy(() => import('@/pages/CommunityPage'));
+const EventsPage = lazy(() => import('@/pages/CommunityPage').then(module => ({ default: module.EventsPage })));
+const FacultyPage = lazy(() => import('@/pages/CommunityPage').then(module => ({ default: module.FacultyPage })));
+const FAQsPage = lazy(() => import('@/pages/FAQsPage'));
+const AuthPage = lazy(() => import('@/pages/AuthPage'));
+const StudentDashboardPage = lazy(() => import('@/pages/StudentDashboardPage'));
 const ProgrammeDetailPage = lazy(() => import('@/pages/ProgrammeDetailPage'));
 const CPDCourseDetailPage = lazy(() => import('@/pages/CPDCourseDetailPage'));
 const ResourcesPage = lazy(() => import('@/pages/ResourcesPage').then(module => ({ default: module.ResourcesPage })));
@@ -36,6 +37,10 @@ const CertificateVerificationPage = lazy(() => import('@/pages/CertificateVerifi
 const CertificationPage = lazy(() => import('@/pages/CertificationPage'));
 const AdminPage = lazy(() => import('@/pages/AdminPage'));
 const CmsPublishedContentDetailPage = lazy(() => import('@/components/CmsPublishedContent').then(module => ({ default: module.CmsPublishedContentDetailPage })));
+const ClinicalInternshipsPage = lazy(() => import('@/pages/ClinicalInternshipsPage'));
+const InstructorRecruitmentPage = lazy(() => import('@/pages/InstructorRecruitmentPage'));
+const UnavailableRoleWorkspacePage = lazy(() => import('@/pages/UnavailableRoleWorkspacePage'));
+const CertificationAndCpdPolicyPage = lazy(() => import('@/pages/CertificationAndCpdPolicyPage'));
 
 export default function App() {
   return (
@@ -61,6 +66,8 @@ export default function App() {
             <Route path="/application" element={<ApplicationPage />} />
             <Route path="/community" element={<CommunityPage />} />
             <Route path="/admin/*" element={<AdminPage />} />
+            <Route path="/instructor/*" element={<UnavailableRoleWorkspacePage role="Instructor" />} />
+            <Route path="/institution/*" element={<UnavailableRoleWorkspacePage role="Institution" />} />
             <Route path="/events" element={<EventsPage />} />
             <Route path="/faculty" element={<FacultyPage />} />
             <Route path="/faqs" element={<FAQsPage />} />
@@ -76,8 +83,11 @@ export default function App() {
             <Route path="/cpd-courses" element={<CPDCoursesPage />} />
             <Route path="/cpd-courses/:slug" element={<CPDCourseDetailPage />} />
             <Route path="/online-learning" element={<OnlineLearningPage />} />
+            <Route path="/clinical-internships" element={<ClinicalInternshipsPage />} />
+            <Route path="/become-an-instructor" element={<InstructorRecruitmentPage />} />
             <Route path="/training-partners" element={<TrainingPartnersPage />} />
             <Route path="/certification" element={<CertificationPage />} />
+            <Route path="/certification-and-cpd-policy" element={<CertificationAndCpdPolicyPage />} />
             <Route path="/verify" element={<CertificateVerificationPage />} />
             <Route path="/resources" element={<ResourcesPage />} />
             <Route path="/cms/:kind/:slug" element={<CmsPublishedContentDetailPage />} />
@@ -89,6 +99,8 @@ export default function App() {
             <Route path="/terms-and-conditions" element={<LegalPage {...termsAndConditions} />} />
             <Route path="/cookie-policy" element={<LegalPage {...cookiePolicy} />} />
             <Route path="/refund-policy" element={<LegalPage {...refundPolicy} />} />
+            <Route path="/accessibility-statement" element={<LegalPage {...accessibilityStatement} />} />
+            <Route path="/external-linking-policy" element={<LegalPage {...externalLinkingPolicy} />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
           </Suspense>

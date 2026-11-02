@@ -21,6 +21,24 @@ describe('unconfigured preview safety', () => {
     expect(from).not.toHaveBeenCalled();
   });
 
+  it('presents the registered virtual office and optional secondary phone without implying a public venue', () => {
+    const { container } = render(<MemoryRouter><ContactPage /></MemoryRouter>);
+    const content = container.textContent ?? '';
+
+    expect(content).toContain('1 Unity St, Bristol BS1 5HH, United Kingdom');
+    expect(content).toContain('Registered office (virtual address)');
+    expect(content).toContain('Not a campus, visiting location, or public-facing venue.');
+    expect(content).toContain('No verified public email address or online enquiry submission is available.');
+    expect(content).toContain('Optional secondary phone · Pakistan local agent');
+    expect(content).toContain('0306-9633353');
+    expect(content.indexOf('Registered office (virtual address)')).toBeLessThan(content.indexOf('Optional secondary phone · Pakistan local agent'));
+    expect(container.querySelector('a[href^="mailto:"]')).toBeNull();
+    expect(container.querySelector('a[href*="whatsapp"], a[href*="wa.me"]')).toBeNull();
+    expect(container.querySelector('a[href^="tel:"]')?.getAttribute('href')).toBe('tel:03069633353');
+    expect(container.querySelector('form')).toBeNull();
+    expect(from).not.toHaveBeenCalled();
+  });
+
   it('exposes only the named local partnership draft validator, not an online submission', () => {
     const { container } = render(<MemoryRouter><TrainingPartnersPage /></MemoryRouter>);
     expect(container.querySelector('form')?.getAttribute('aria-labelledby')).toBe('collaboration-draft-heading');

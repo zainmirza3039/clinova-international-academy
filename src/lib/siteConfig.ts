@@ -11,6 +11,9 @@ export const siteOrigin = (() => {
 export const learnerDataEnabled = import.meta.env.VITE_LEARNER_DATA_ENABLED === 'true'
   && import.meta.env.VITE_SUPABASE_URL === 'https://ssxpmcbqfdggfsoqbxac.supabase.co'
   && Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY);
+export const selfStudyLearningEnabled = import.meta.env.VITE_SELF_STUDY_LEARNING_ENABLED === 'true'
+  && import.meta.env.VITE_SUPABASE_URL === 'https://ssxpmcbqfdggfsoqbxac.supabase.co'
+  && Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY);
 export const enquiriesEnabled = import.meta.env.VITE_ENQUIRIES_ENABLED === 'true'
   && import.meta.env.VITE_SUPABASE_URL === 'https://ssxpmcbqfdggfsoqbxac.supabase.co'
   && Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY);

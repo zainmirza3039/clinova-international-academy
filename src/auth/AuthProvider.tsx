@@ -7,6 +7,19 @@ import { AuthContext, useAuth, type AuthActionResult, type AuthContextValue, typ
 import { safeReturnTarget } from './authUtils';
 
 const errorMessage = (error: unknown) => error instanceof Error ? error.message : 'Something went wrong. Please try again.';
+function requiresEmailVerification(error: unknown) {
+  if (!error || typeof error !== 'object') return false;
+  const candidate = error as { code?: unknown; message?: unknown };
+  return candidate.code === 'email_not_confirmed' || (typeof candidate.message === 'string' && /\bemail (?:is )?not confirmed\b/i.test(candidate.message));
+}
+function safeAuthRedirect(redirectTo: string | undefined, path: '/sign-in' | '/reset-password') {
+  const fallback = `${window.location.origin}${path}`;
+  if (!redirectTo) return fallback;
+  try {
+    const parsed = new URL(redirectTo, window.location.origin);
+    return parsed.origin === window.location.origin && parsed.pathname === path ? parsed.toString() : fallback;
+  } catch { return fallback; }
+}
 
 export function AuthProvider({ children, client }: { children: ReactNode; client?: SupabaseClient | null }) {
   const [configuredClient] = useState<SupabaseClient | null>(() => client === undefined ? createAuthClient() : client);
@@ -15,6 +28,7 @@ export function AuthProvider({ children, client }: { children: ReactNode; client
   const [session, setSession] = useState<Session | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [recovery, setRecovery] = useState(false);
+  const emailVerified = Boolean(session && (!session.user.email || session.user.email_confirmed_at));
 
   useEffect(() => {
     if (!enabled || !configuredClient) return;
@@ -51,33 +65,53 @@ export function AuthProvider({ children, client }: { children: ReactNode; client
     setError(null);
     try {
       const result = await operation();
-      if (result.error) { const next = new Error(errorMessage(result.error)); setError(next.message); return { error: next }; }
+      if (result.error) {
+        const emailVerificationPending = requiresEmailVerification(result.error);
+        const next = new Error(emailVerificationPending ? 'Verify your email address before signing in.' : errorMessage(result.error));
+        setError(next.message);
+        return { error: next, ...(emailVerificationPending ? { emailVerificationPending: true } : {}) };
+      }
       return { error: null };
-    } catch (reason) { const next = new Error(errorMessage(reason)); setError(next.message); return { error: next }; }
+    } catch (reason) {
+      const emailVerificationPending = requiresEmailVerification(reason);
+      const next = new Error(emailVerificationPending ? 'Verify your email address before signing in.' : errorMessage(reason));
+      setError(next.message);
+      return { error: next, ...(emailVerificationPending ? { emailVerificationPending: true } : {}) };
+    }
   }, [configuredClient, enabled]);
 
   const value = useMemo<AuthContextValue>(() => ({
-    enabled, status, session, error, recovery,
+    enabled, status, session, emailVerified, error, recovery,
     signIn: (email, password) => call(() => configuredClient!.auth.signInWithPassword({ email, password })),
-    signUp: (email, password) => call(() => configuredClient!.auth.signUp({ email, password })),
-    sendPasswordReset: (email) => call(() => configuredClient!.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/reset-password` })),
+    signUp: async (email, password, redirectTo) => {
+      let emailVerificationPending = false;
+      const result = await call(async () => {
+        const response = await configuredClient!.auth.signUp({ email, password, options: { emailRedirectTo: safeAuthRedirect(redirectTo ?? `${window.location.origin}/sign-in?verified=1`, '/sign-in') } });
+        emailVerificationPending = !response.error && !response.data.session;
+        return response;
+      });
+      return result.error ? result : { ...result, emailVerificationPending };
+    },
+    sendPasswordReset: (email, redirectTo) => call(() => configuredClient!.auth.resetPasswordForEmail(email, { redirectTo: safeAuthRedirect(redirectTo, '/reset-password') })),
+    resendEmailVerification: (email, redirectTo) => call(() => configuredClient!.auth.resend({ type: 'signup', email, options: { emailRedirectTo: safeAuthRedirect(redirectTo ?? `${window.location.origin}/sign-in?verified=1`, '/sign-in') } })),
     updatePassword: (password) => {
       if (!recovery || !session) return Promise.resolve({ error: new Error('Password recovery must be started from a valid recovery link.') });
       return call(() => configuredClient!.auth.updateUser({ password })).then(result => { if (!result.error) setRecovery(false); return result; });
     },
     signOut: () => call(() => configuredClient!.auth.signOut()),
-  }), [call, configuredClient, enabled, error, recovery, session, status]);
+  }), [call, configuredClient, emailVerified, enabled, error, recovery, session, status]);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export function ProtectedStudentRoute({ children }: { children?: ReactNode }) {
-  const { enabled, status, session, error } = useAuth();
+  const { enabled, status, session, emailVerified, error } = useAuth();
   const location = useLocation();
   useSEO({ title: 'Student area', description: 'Clinova student area.', noindex: true });
   if (!enabled) return <UnavailableAuth message="Student access is currently unavailable." />;
   if (status === 'loading') return <UnavailableAuth message="Checking your student session…" />;
   if (status === 'error') return <UnavailableAuth message={error ?? 'Unable to check your session.'} />;
   if (!session) return <Navigate to={`/sign-in?returnTo=${encodeURIComponent(safeReturnTarget(`${location.pathname}${location.search}`))}`} replace state={{ from: location }} />;
+  if (!emailVerified) return <Navigate to={`/sign-in?returnTo=${encodeURIComponent(safeReturnTarget(`${location.pathname}${location.search}`))}&verification=required`} replace state={{ from: location }} />;
   return <>{children}</>;
 }
 

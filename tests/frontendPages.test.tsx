@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import AdmissionsPage from '@/pages/AdmissionsPage';
 import AboutPage from '@/pages/AboutPage';
 import ApplicationPage from '@/pages/ApplicationPage';
+import OnlineLearningPage from '@/pages/OnlineLearningPage';
 import AdminPage from '@/pages/AdminPage';
 import { AuthProvider } from '@/auth/AuthProvider';
 import CommunityPage, { EventsPage, FacultyPage } from '@/pages/CommunityPage';
@@ -34,6 +35,13 @@ describe('completion frontend pages', () => {
     expect(screen.queryByRole('button', { name: /submit|send application/i })).toBeNull();
   });
 
+  it('distinguishes online reading resources from unavailable teaching and learner services', () => {
+    const { container } = renderPage(<OnlineLearningPage />);
+    expect(screen.getByRole('heading', { name: /self-guided resources only; live teaching and enrolment are unavailable/i })).toBeTruthy();
+    expect(container.textContent).toMatch(/learner accounts, enrolment, formal assessment, learner support and certificate services are not operational/i);
+    expect(screen.getByRole('link', { name: /browse self-study courses/i }).getAttribute('href')).toBe('/cpd-courses');
+  });
+
   it('keeps admin access blocked without presenting credentials or fake records', () => {
     render(<MemoryRouter><AuthProvider><AdminPage /></AuthProvider></MemoryRouter>);
     expect(screen.getByRole('heading', { name: /administration is not enabled/i })).toBeTruthy();
@@ -46,7 +54,7 @@ describe('completion frontend pages', () => {
     renderPage(<EventsPage />);
     expect(screen.getByRole('heading', { name: /no events currently listed/i })).toBeTruthy();
     renderPage(<FacultyPage />);
-    expect(screen.getByRole('heading', { name: /no faculty profiles currently listed/i })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: /no verified faculty profiles are currently published/i })).toBeTruthy();
   });
 
   it('provides FAQ buttons with expanded state and no invented commercial claims', () => {
@@ -64,7 +72,8 @@ describe('completion frontend pages', () => {
 
   it('renders admissions guidance and the application preview link', () => {
     renderPage(<AdmissionsPage />);
-    expect(screen.getByRole('heading', { name: /clear next step/i })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: /explore your learning options/i })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: /student access and online applications are unavailable/i })).toBeTruthy();
     expect(screen.getByRole('link', { name: /application information/i }).getAttribute('href')).toBe('/application');
   });
 

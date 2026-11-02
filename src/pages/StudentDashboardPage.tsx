@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '@/auth/authContext';
+import { useMySelfStudyEnrollments } from '@/hooks/useSelfStudyLearning';
 import { useSEO } from '@/hooks/useSEO';
 import { learnerDataEnabled } from '@/lib/siteConfig';
 
@@ -17,7 +19,7 @@ function formatDate(value: string) {
 }
 
 export default function StudentDashboardPage() {
-  const { session, signOut } = useAuth();
+  const { enabled: authEnabled, status: authStatus, session, emailVerified, signOut } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [recordsLoading, setRecordsLoading] = useState(learnerDataEnabled);
@@ -25,20 +27,23 @@ export default function StudentDashboardPage() {
   const [enrollments, setEnrollments] = useState<Enrollment[]>([]);
   const [progress, setProgress] = useState<Progress[]>([]);
   const [certificates, setCertificates] = useState<Certificate[]>([]);
+  const selfStudy = useMySelfStudyEnrollments();
   const busyRef = useRef(false);
   useSEO({ title: 'Student dashboard', description: 'Clinova student dashboard.', noindex: true });
+  const learnerUserId = authEnabled && authStatus === 'ready' && emailVerified ? session?.user.id : null;
 
   useEffect(() => {
-    const userId = session?.user.id;
-    if (!learnerDataEnabled || !userId) {
+    if (!learnerDataEnabled || !learnerUserId) {
       setProfileName(null);
       setEnrollments([]);
       setProgress([]);
       setCertificates([]);
       setRecordsLoading(false);
+      setError(null);
       return;
     }
 
+    const userId = learnerUserId;
     let active = true;
     setProfileName(null);
     setEnrollments([]);
@@ -69,7 +74,7 @@ export default function StudentDashboardPage() {
       }
     })();
     return () => { active = false; };
-  }, [session?.user.id]);
+  }, [authEnabled, authStatus, emailVerified, learnerUserId]);
 
   const handleSignOut = async () => {
     if (busyRef.current) return;
@@ -114,6 +119,23 @@ export default function StudentDashboardPage() {
         </div>
         <div className="mt-5 grid gap-5 md:grid-cols-2">
           <EmptySection title="Profile">{recordsLoading ? 'Loading profile…' : profileName ?? 'Profile details are not available yet.'}</EmptySection>
+          <EmptySection title="Self-study courses">
+            <p className="mb-3">Reading markers are self-reported; they are not graded or verified course completion, CPD credit or certification.</p>
+            {selfStudy.status === 'disabled' ? 'Self-study enrollment and reading progress are not available in this build.'
+              : selfStudy.status === 'auth-loading' ? <span role="status">Checking your learner session…</span>
+                : selfStudy.status === 'signed-out' ? 'A verified learner session is required to view self-study courses.'
+                  : selfStudy.status === 'loading' ? <span role="status">Loading your self-study courses…</span>
+                    : selfStudy.status === 'error' ? <span role="alert">{selfStudy.error ?? 'Your self-study courses could not be loaded.'}</span>
+                      : selfStudy.enrollments.length ? <ul className="space-y-4">{selfStudy.enrollments.map(item => {
+                        const progressPercent = item.totalLessons > 0 ? Math.round((item.completedLessons / item.totalLessons) * 100) : null;
+                        return <li key={item.courseSlug} className="border-b border-navy-100 pb-4 last:border-0 last:pb-0">
+                          <Link className="font-semibold text-clinical-700 underline underline-offset-4" to={`/cpd-courses/${encodeURIComponent(item.courseSlug)}`}>{item.courseTitle}</Link>
+                          <p className="mt-1 text-sm text-navy-600">{item.completedLessons} of {item.totalLessons} lessons marked as read</p>
+                          {progressPercent !== null && <><div role="progressbar" aria-label={`${item.courseTitle} reading progress`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={progressPercent} className="mt-3 h-2 overflow-hidden rounded-full bg-navy-100"><div className="h-full rounded-full bg-teal-600" style={{ width: `${progressPercent}%` }} /></div><p className="mt-1 text-xs text-navy-500">{progressPercent}% of listed lessons marked as read</p></>}
+                          <p className="mt-1 text-xs text-navy-400">Enrolled {formatDate(item.enrolledAt)}</p>
+                        </li>;
+                      })}</ul> : <>No self-study enrollments are available for this account yet. <Link className="font-semibold text-clinical-700 underline underline-offset-4" to="/cpd-courses">Browse self-study courses</Link>.</>}
+          </EmptySection>
           <EmptySection title="Enrolments">{recordsLoading ? 'Loading enrolments…' : enrollments.length ? <ul className="space-y-3">{enrollments.map(item => <li key={item.id} className="border-b border-navy-100 pb-3 last:border-0 last:pb-0"><p className="font-semibold text-navy-800">{item.programme_title}</p><p className="mt-1 text-sm capitalize text-navy-500">Status: {item.status.replace(/_/g, ' ')}</p><p className="mt-1 text-xs text-navy-400">Added {formatDate(item.enrolled_at)}</p></li>)}</ul> : 'No enrolment information is available yet.'}</EmptySection>
           <EmptySection title="Progress">{recordsLoading ? 'Loading progress…' : progress.length ? <ul className="space-y-4">{progress.map(item => <li key={item.id} className="border-b border-navy-100 pb-4 last:border-0 last:pb-0"><div className="flex justify-between gap-3"><span className="text-sm font-medium text-navy-700">{enrollments.find(enrolment => enrolment.id === item.enrollment_id)?.programme_title ?? 'Programme progress'}</span><span className="text-sm font-bold tabular-nums text-navy-900">{item.progress_percent}%</span></div><div className="mt-3 h-2 overflow-hidden rounded-full bg-navy-100"><div className="h-full rounded-full bg-teal-600 transition-all" style={{ width: String(Math.max(0, Math.min(100, item.progress_percent))) + '%' }} /></div><p className="mt-2 text-xs text-navy-500">{item.completed_lessons} of {item.total_lessons} lessons recorded</p></li>)}</ul> : 'Progress information will appear when an authorized record exists.'}</EmptySection>
           <EmptySection title="Certificates">{recordsLoading ? 'Loading certificates…' : certificates.length ? <ul className="space-y-3">{certificates.map(item => <li key={item.id} className="rounded-lg border border-navy-100 bg-surface-50 p-4"><p className="font-semibold text-navy-800">{item.programme_title}</p><p className="mt-1 break-all text-sm text-navy-600">Certificate number: {item.certificate_number}</p><p className="mt-1 text-xs text-navy-500">Issued {formatDate(item.issued_at)}</p></li>)}</ul> : 'No issued certificate records are available.'}</EmptySection>

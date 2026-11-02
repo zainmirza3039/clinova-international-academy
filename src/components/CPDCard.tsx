@@ -28,13 +28,14 @@ export default function CPDCard({ course, index = 0 }: { course: CPDCourse; inde
         <div className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-800">{course.department}</div>
         <h3 className="mt-2 font-heading text-lg font-bold leading-snug text-navy-900 transition-colors group-hover:text-teal-800">{course.title}</h3>
         <p className="mt-3 flex-1 text-sm leading-relaxed text-navy-600 line-clamp-3">{course.description}</p>
-        <div className="mt-5 flex items-center justify-between gap-3 border-t border-navy-100 pt-4">
+        <div className="mt-5 flex flex-wrap gap-2 border-t border-navy-100 pt-4">
           <span className="rounded-full bg-surface-50 px-3 py-1.5 text-xs font-medium text-navy-600">{course.level}</span>
-          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy-800 transition-colors group-hover:text-teal-800">
-            View guide <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </span>
+          <span className="rounded-full bg-surface-50 px-3 py-1.5 text-xs font-medium text-navy-600">{course.duration}</span>
         </div>
-        <p className="mt-3 text-[11px] leading-relaxed text-navy-500">Open self-study course. No accredited CPD hours or certificate are awarded.</p>
+        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-800 transition-colors group-hover:text-teal-800">
+          View course details <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </span>
+        <p className="mt-3 text-[11px] leading-relaxed text-navy-500">No approved CPD-hour value or certificate is listed for this guide.</p>
       </div>
     </Link>
   );
