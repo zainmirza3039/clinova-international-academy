@@ -134,6 +134,25 @@ function CreateDraftForm({ user, onCreated, disabled }: { user: CmsUser; onCreat
   </form>;
 }
 
+function EditDraftForm({ version, onSave, disabled }: { version: CmsWorkflowVersion; onSave: (action: CmsAction) => Promise<void>; disabled: boolean }) {
+  const [title, setTitle] = useState(typeof version.snapshot.title === 'string' ? version.snapshot.title : '');
+  const [slug, setSlug] = useState(typeof version.snapshot.slug === 'string' ? version.snapshot.slug : '');
+  const [description, setDescription] = useState(typeof version.snapshot.description === 'string' ? version.snapshot.description : '');
+  const [content, setContent] = useState(typeof version.snapshot.contentMarkdown === 'string' ? version.snapshot.contentMarkdown : '');
+  function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (disabled || !title.trim() || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return;
+    void onSave({ name: 'create_content_version', args: { p_item_id: version.content_item_id, p_snapshot: { ...version.snapshot, title: title.trim(), slug, description: description.trim(), contentMarkdown: content } } });
+  }
+  return <form onSubmit={submit} className="mt-4 grid gap-3 border-t border-navy-100 pt-4">
+    <label className="text-sm font-medium text-navy-700">Title<input required maxLength={200} value={title} onChange={e => setTitle(e.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2" /></label>
+    <label className="text-sm font-medium text-navy-700">Slug<input required maxLength={160} pattern="[a-z0-9]+(-[a-z0-9]+)*" value={slug} onChange={e => setSlug(e.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2" /></label>
+    <label className="text-sm font-medium text-navy-700">Description<textarea rows={2} maxLength={4000} value={description} onChange={e => setDescription(e.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2" /></label>
+    <label className="text-sm font-medium text-navy-700">Content / teaching notes<textarea rows={5} maxLength={50000} value={content} onChange={e => setContent(e.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2" /></label>
+    <button type="submit" disabled={disabled || !title.trim() || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)} className="w-fit rounded-lg bg-teal-700 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50">Save new version</button>
+  </form>;
+}
+
 function VersionCard({ version, user, roles, onTransition, disabled }: {
   version: CmsWorkflowVersion;
   user: CmsUser;
@@ -142,10 +161,13 @@ function VersionCard({ version, user, roles, onTransition, disabled }: {
   disabled: boolean;
 }) {
   const [reason, setReason] = useState('');
+  const [editing, setEditing] = useState(false);
   const title = typeof version.snapshot.title === 'string' ? version.snapshot.title : 'Untitled content';
   const canAuthor = hasAnyCmsRole(user, createRoles);
-  const articleWorkflow = version.kind === 'article';
+  const articleWorkflow = true;
   const maySubmit = articleWorkflow && version.workflow_status === 'draft' && canAuthor
+    && (version.author_id === user.id || roles.includes('content_admin'));
+  const mayEdit = version.workflow_status === 'draft' && canAuthor
     && (version.author_id === user.id || roles.includes('content_admin'));
   const canPublish = articleWorkflow && roles.includes('content_publisher');
   const canArchive = articleWorkflow && version.workflow_status === 'published' && canPublish;
@@ -157,6 +179,8 @@ function VersionCard({ version, user, roles, onTransition, disabled }: {
       <div><p className="text-xs font-semibold uppercase tracking-wide text-teal-700">{version.kind.replace('_', ' ')} · v{version.version_number}</p><h4 className="mt-1 text-lg font-semibold text-navy-900">{title}</h4><p className="mt-1 text-xs text-navy-500">Exact content SHA-256: <code className="break-all">{version.content_sha256}</code></p></div>
       <span className="rounded-full bg-navy-50 px-3 py-1 text-xs font-semibold text-navy-700">{version.workflow_status.replace('_', ' ')}</span>
     </div>
+    {mayEdit && <button type="button" disabled={disabled} onClick={() => setEditing(v => !v)} className="mt-4 rounded-lg border border-navy-300 px-4 py-2 text-sm font-semibold text-navy-800">{editing ? 'Close editor' : 'Edit draft'}</button>}
+    {editing && <EditDraftForm version={version} onSave={onTransition} disabled={disabled} />}
     {maySubmit && <button type="button" disabled={disabled} onClick={() => void onTransition({ name: 'submit_content_for_review', args: { p_version_id: version.id } })} className="mt-4 rounded-lg border border-teal-700 px-4 py-2 text-sm font-semibold text-teal-800 disabled:opacity-50">Submit draft for review</button>}
     {version.workflow_status === 'in_review' && roles.includes('clinical_reviewer') && <CmsReviewForm version={version} reviewType="clinical" onSubmit={onTransition} disabled={disabled} />}
     {version.workflow_status === 'in_review' && roles.includes('editorial_reviewer') && <CmsReviewForm version={version} reviewType="editorial" onSubmit={onTransition} disabled={disabled} />}
