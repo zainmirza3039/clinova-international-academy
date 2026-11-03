@@ -66,15 +66,29 @@ function CreateDraftForm({ user, onCreated, disabled }: { user: CmsUser; onCreat
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
   const [description, setDescription] = useState('');
+  const [durationHours, setDurationHours] = useState('');
+  const [deliveryMode, setDeliveryMode] = useState('');
+  const [targetAudience, setTargetAudience] = useState('');
+  const [assessmentMethod, setAssessmentMethod] = useState('');
+  const [learningOutcomes, setLearningOutcomes] = useState('');
+  const [contentMarkdown, setContentMarkdown] = useState('');
   if (!hasAnyCmsRole(user, createRoles)) return null;
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!title.trim() || kind !== 'article' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || disabled) return;
-    void onCreated({ name: 'create_content_item', args: { p_kind: kind, p_snapshot: { title: title.trim(), slug, description: description.trim() } } });
+    if (!title.trim() || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || disabled) return;
+    const snapshot: Record<string, unknown> = { title: title.trim(), slug, description: description.trim() };
+    if (durationHours.trim()) snapshot.durationHours = Number(durationHours);
+    if (deliveryMode.trim()) snapshot.deliveryMode = deliveryMode.trim();
+    if (targetAudience.trim()) snapshot.targetAudience = targetAudience.trim();
+    if (assessmentMethod.trim()) snapshot.assessmentMethod = assessmentMethod.trim();
+    if (learningOutcomes.trim()) snapshot.learningOutcomes = learningOutcomes.split('\\n').map(item => item.trim()).filter(Boolean);
+    if (contentMarkdown.trim()) snapshot.contentMarkdown = contentMarkdown.trim();
+    void onCreated({ name: 'create_content_item', args: { p_kind: kind, p_snapshot: snapshot } });
     setTitle('');
     setSlug('');
     setDescription('');
+    setDurationHours(''); setDeliveryMode(''); setTargetAudience(''); setAssessmentMethod(''); setLearningOutcomes(''); setContentMarkdown('');
   }
 
   return <form onSubmit={submit} className="mt-5 rounded-xl border border-navy-100 bg-white p-5">
@@ -83,7 +97,7 @@ function CreateDraftForm({ user, onCreated, disabled }: { user: CmsUser; onCreat
     <div className="mt-4 grid gap-4 sm:grid-cols-2">
       <label className="text-sm font-medium text-navy-700">Content type
         <select value={kind} onChange={event => setKind(event.target.value as CmsContentKind)} className="mt-1 w-full rounded-lg border border-navy-200 bg-white px-3 py-2.5">
-          <option value="article">Educational article</option><option value="programme" disabled>Programme record (not enabled)</option><option value="cpd_course" disabled>CPD course record (not enabled)</option>
+          <option value="article">Educational article</option><option value="programme">Academic programme</option><option value="cpd_course">CPD course</option>
         </select>
       </label>
       <label className="text-sm font-medium text-navy-700">Title
@@ -95,8 +109,28 @@ function CreateDraftForm({ user, onCreated, disabled }: { user: CmsUser; onCreat
       <label className="text-sm font-medium text-navy-700 sm:col-span-2">Short description
         <textarea maxLength={4000} rows={3} value={description} onChange={event => setDescription(event.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2.5" />
       </label>
+      {kind !== 'article' && <>
+        <label className="text-sm font-medium text-navy-700">Duration (hours; optional)
+          <input type="number" min="0.25" max="1000" step="0.25" value={durationHours} onChange={event => setDurationHours(event.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2.5" />
+        </label>
+        <label className="text-sm font-medium text-navy-700">Delivery mode
+          <input maxLength={120} value={deliveryMode} onChange={event => setDeliveryMode(event.target.value)} placeholder="e.g. Live online" className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2.5" />
+        </label>
+        <label className="text-sm font-medium text-navy-700">Target audience
+          <input maxLength={500} value={targetAudience} onChange={event => setTargetAudience(event.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2.5" />
+        </label>
+        <label className="text-sm font-medium text-navy-700">Assessment method
+          <input maxLength={500} value={assessmentMethod} onChange={event => setAssessmentMethod(event.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2.5" />
+        </label>
+        <label className="text-sm font-medium text-navy-700 sm:col-span-2">Learning outcomes (one per line)
+          <textarea rows={3} maxLength={4000} value={learningOutcomes} onChange={event => setLearningOutcomes(event.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2.5" />
+        </label>
+      </>}
+      <label className="text-sm font-medium text-navy-700 sm:col-span-2">Content / teaching notes (optional)
+        <textarea rows={5} maxLength={50000} value={contentMarkdown} onChange={event => setContentMarkdown(event.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2.5" placeholder="Add approved source material. Do not invent clinical claims or CPD credit." />
+      </label>
     </div>
-    <button type="submit" disabled={disabled || kind !== 'article' || !title.trim() || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)} className="mt-4 rounded-lg bg-teal-700 px-4 py-2.5 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50">Save draft</button>
+    <button type="submit" disabled={disabled || !title.trim() || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)} className="mt-4 rounded-lg bg-teal-700 px-4 py-2.5 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50">Save draft</button>
   </form>;
 }
 
