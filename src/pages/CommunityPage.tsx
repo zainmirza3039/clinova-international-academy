@@ -1,4 +1,6 @@
 import { CalendarDays, GraduationCap, Users } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { supabase } from '@/lib/supabase';
 import { Link } from 'react-router-dom';
 import PageHero from '@/components/PageHero';
 import { useSEO } from '@/hooks/useSEO';
@@ -33,7 +35,21 @@ export function EventsPage() {
   );
 }
 
+type VerifiedInstructor = { user_id: string; public_name: string; professional_title: string; biography: string | null };
+
 export function FacultyPage() {
+  const [faculty, setFaculty] = useState<VerifiedInstructor[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    let active = true;
+    void supabase.from('verified_instructors').select('user_id,public_name,professional_title,biography').order('public_name').then(({data,error: queryError}) => {
+      if (!active) return;
+      if (queryError) setError(true); else setFaculty((data ?? []) as VerifiedInstructor[]);
+      setLoading(false);
+    });
+    return () => { active = false; };
+  }, []);
   useSEO({
     title: 'Healthcare faculty',
     description: 'See verified faculty information for Clinova International Academy and how educator information is handled.',
@@ -49,11 +65,7 @@ export function FacultyPage() {
       />
       <section className="bg-surface-50 px-6 py-16 lg:py-24">
         <div className="mx-auto max-w-editorial lg:px-10">
-          <EmptyState
-            icon={GraduationCap}
-            title="No verified faculty profiles are currently published"
-            text="There are no approved profiles to display here. Course and learning-guide pages do not, by themselves, verify an instructor or contributor."
-          />
+          {loading ? <p className="border border-navy-200 bg-white p-8 text-center text-sm text-navy-600" role="status">Loading verified faculty profiles…</p> : error ? <p className="border border-amber-200 bg-amber-50 p-6 text-sm text-navy-700" role="alert">Faculty profiles are temporarily unavailable.</p> : faculty.length === 0 ? <EmptyState icon={GraduationCap} title="No verified faculty profiles are currently published" text="There are no approved profiles to display here. Profiles will appear after an administrator verifies professional details and teaching scope." /> : <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{faculty.map(person => <article key={person.user_id} className="border border-navy-200 bg-white p-6"><span className="text-xs font-semibold uppercase tracking-[0.14em] text-clinical-700">Verified faculty</span><h2 className="mt-3 font-heading text-xl font-bold text-navy-900">{person.public_name}</h2><p className="mt-1 text-sm font-semibold text-navy-700">{person.professional_title}</p>{person.biography && <p className="mt-4 text-sm leading-relaxed text-navy-600">{person.biography}</p>}</article>)}</div>}
           <div className="mt-8 border border-navy-200 bg-white p-6 sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-700">Profile publishing standard</p>
             <h2 className="mt-3 font-heading text-xl font-bold text-navy-800">Professional details need to be checked before publication</h2>
