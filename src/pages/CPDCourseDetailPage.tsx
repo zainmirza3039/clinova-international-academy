@@ -17,7 +17,7 @@ export default function CPDCourseDetailPage() {
     }).catch(() => { if (active) setPublishedCourse(false); });
     return () => { active = false; };
   }, [slug]);
-  if (publishedCourse && slug) return <Navigate to={\`/cms/cpd_course/\${slug}\`} replace />;
+  if (publishedCourse && slug) return <Navigate to={`/cms/cpd_course/${slug}`} replace />;
 
   useSEO({
     title: topic ? `${topic.title} | Proposed CPD topic` : 'CPD topic information',
