@@ -9,7 +9,7 @@ import { publishedEducationalArticleCards } from '@/data/educationalArticles';
 import { academyLegalIdentity } from '@/data/publicContact';
 
 const pillars = [
-  { icon: BookOpenCheck, title: 'CPD education', text: 'A structured CPD learning and learner-access system is being developed. No course is currently open for enrollment.', to: '/cpd-courses', action: 'CPD system status' },
+  { icon: BookOpenCheck, title: 'CPD education', text: 'Browse proposed topic titles while the structured learning and learner-access system is developed. No course is currently open for enrollment.', to: '/cpd-courses', action: 'Browse proposed topics' },
   { icon: BadgeCheck, title: 'Professional certification', text: 'A separate competence-based pathway is being designed. No scheme is currently accepting applications.', to: '/certification', action: 'Certification status' },
   { icon: ShieldAlert, title: 'Assessment and governance', text: 'Course assessments and professional certification decisions require separate approved rules, impartiality controls and evidence.', to: '/assessment', action: 'Assessment development' },
 ];
@@ -18,12 +18,6 @@ export default function HomePage() {
   useSEO({
     title: 'Clinova International Academy | Healthcare Education and Professional Certification',
     description: 'Clinova International Academy public information for healthcare education, CPD system development and separate professional certification proposals.',
-    structuredData: {
-      '@context': 'https://schema.org',
-      '@type': 'EducationalOrganization',
-      name: 'Clinova International Academy',
-      description: 'Healthcare education and professional certification system development.',
-    },
   });
 
   return (
@@ -35,7 +29,7 @@ export default function HomePage() {
             <h1 id="home-hero-heading" className="mt-7 max-w-3xl font-heading text-4xl font-bold leading-[1.06] tracking-tight text-navy-900 text-balance md:text-5xl lg:text-[3.75rem]">Healthcare education and professional certification, clearly separated</h1>
             <p className="mt-6 max-w-2xl text-base leading-[1.75] text-navy-600 md:text-lg">Advancing Healthcare Through Professional Education. Clinova is developing a structured CPD learning system alongside a separate, independently governed professional certification pathway.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link to="/cpd-courses" className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-navy-800 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-navy-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600">CPD course status <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" /></Link>
+              <Link to="/cpd-courses" className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-navy-800 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-navy-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600">Browse proposed CPD topics <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" /></Link>
               <Link to="/certification" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-navy-300 bg-white px-6 py-3.5 text-sm font-semibold text-navy-800 transition hover:bg-surface-50">Professional certification</Link>
             </div>
             <p className="mt-5 max-w-2xl text-sm leading-relaxed text-navy-600">No CPD course enrollment, certification application, examination, credential issuance or live verification is currently available through this website.</p>

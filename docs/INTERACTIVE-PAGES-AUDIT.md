@@ -6,7 +6,7 @@
 
 **Scope:** Local source, tests and documentation only. No hosted configuration or learner records were queried in this phase.
 
-> **Historical snapshot:** This audit describes the earlier detached baseline, not the current feature branch. The current implementation withholds all programme and CPD course detail, replaces certification/catalogue content with status-only pages, and hard-disables auth, learner persistence, CMS workflow, assessment, issuance and verification in source. Use the [master development specification](CLINOVA-MASTER-DEVELOPMENT-SPECIFICATION.md), [current clinical-review inventory](CLINOVA-CLINICAL-REVIEW-INVENTORY.md) and [current evidence-gap report](CLINICAL-REVIEW-EVIDENCE-GAPS.md) for the active state. Historical route descriptions below are not release status.
+> **Historical snapshot:** This audit describes the earlier detached baseline, not the current feature branch. The current programme catalogue is status-only; the CPD directory exposes twelve owner-listed title labels as proposal-only topics, with no course detail or enrollment. Exact-version review coverage remains unverified. Certification pages remain status-only, and auth, learner persistence, CMS workflow, assessment, issuance and verification are hard-disabled in source. Use the [master development specification](CLINOVA-MASTER-DEVELOPMENT-SPECIFICATION.md), [current clinical-review inventory](CLINOVA-CLINICAL-REVIEW-INVENTORY.md) and [current evidence-gap report](CLINICAL-REVIEW-EVIDENCE-GAPS.md) for the active state. Historical route descriptions below are not release status.
 
 ## Route-to-feature matrix
 

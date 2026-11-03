@@ -11,7 +11,8 @@ type FooterLink = { label: string; to: string };
 const exploreLinks: FooterLink[] = [
   { label: 'About Clinova', to: '/about' },
   { label: 'Healthcare subject areas', to: '/departments' },
-  { label: 'CPD Courses — status', to: '/cpd-courses' },
+  { label: 'Proposed CPD topics', to: '/cpd-courses' },
+  { label: 'Programme catalogue status', to: '/programmes' },
   { label: 'Professional certification', to: '/certification' },
   { label: 'Assessment development', to: '/assessment' },
   { label: 'Articles and resources', to: '/resources' },

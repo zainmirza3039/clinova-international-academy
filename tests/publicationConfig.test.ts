@@ -8,13 +8,16 @@ afterEach(() => { vi.unstubAllEnvs(); vi.resetModules(); });
 describe('explicit publication gate', () => {
   it.each([
     ['', 'true', false],
-    ['https://academy.example', 'false', false],
-    ['https://academy.example', 'true', true],
+    ['https://www.clinovainternationalacademy.co.uk', 'false', false],
+    ['https://www.clinovainternationalacademy.co.uk', 'true', true],
+    ['https://www.clinovainternationalacademy.co.uk/', 'true', true],
+    ['https://clinovainternationalacademy.co.uk', 'true', false],
+    ['https://academy.example', 'true', false],
     ['https://branch.vercel.app', 'true', false],
     ['https://branch.manus.computer', 'true', false],
-    ['https://user:password@academy.example', 'true', false],
-    ['https://academy.example?preview=1', 'true', false],
-    ['https://academy.example/path', 'true', false],
+    ['https://user:password@www.clinovainternationalacademy.co.uk', 'true', false],
+    ['https://www.clinovainternationalacademy.co.uk/?preview=1', 'true', false],
+    ['https://www.clinovainternationalacademy.co.uk/path', 'true', false],
   ])('validates origin %s with indexing=%s', async (origin, indexing, valid) => {
     vi.stubEnv('VITE_SITE_URL', origin); vi.stubEnv('VITE_INDEXING_ENABLED', indexing);
     vi.resetModules();
@@ -28,7 +31,7 @@ describe('explicit publication gate', () => {
     const { enquiriesEnabled } = await import('@/lib/siteConfig');
     expect(enquiriesEnabled).toBe(false);
   });
-  it.each([['https://branch.vercel.app', 'true', false], ['https://academy.example', 'false', false], ['https://academy.example', 'true', true]])('build SEO uses the same release safeguards: %s indexing=%s', (origin, indexing, valid) => {
+  it.each([['https://branch.vercel.app', 'true', false], ['https://www.clinovainternationalacademy.co.uk', 'false', false], ['https://www.clinovainternationalacademy.co.uk', 'true', true], ['https://clinovainternationalacademy.co.uk', 'true', false]])('build SEO uses the same release safeguards: %s indexing=%s', (origin, indexing, valid) => {
     const dir = mkdtempSync(join(tmpdir(), 'clinova-seo-'));
     try {
       mkdirSync(join(dir, 'dist')); mkdirSync(join(dir, 'src/data'), { recursive: true });

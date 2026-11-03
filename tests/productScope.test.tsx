@@ -25,10 +25,13 @@ describe('Clinova platform scope and truthful availability', () => {
     expect(container.textContent).not.toMatch(/self-study course|browse self-study|self-paced course/i);
     expect(container.querySelector('form,input[type="email"]')).toBeNull();
   });
-  it('keeps CPD catalogue and admissions as status-only pages', () => {
+  it('shows proposed CPD topic titles without opening a course or admissions workflow', () => {
     const cpd = renderPage(<CPDCoursesPage />);
+    expect(screen.getByRole('heading', { name: 'Browse proposed CPD topics' })).toBeTruthy();
     expect(screen.getByRole('heading', { name: 'No CPD course enrollment is available' })).toBeTruthy();
-    expect(cpd.container.querySelector('a[href^="/cpd-courses/"]')).toBeNull(); expect(cpd.container.querySelector('form,input,select,button[type="submit"]')).toBeNull(); cleanup();
+    expect(cpd.container.querySelectorAll('a[href^="/cpd-courses/"]')).toHaveLength(12);
+    expect(cpd.container.querySelector('form,input[type="email"],input[type="password"],input[type="file"],textarea,button[type="submit"]')).toBeNull();
+    expect(cpd.container.textContent).not.toMatch(/self-study course|self-paced study|independent study/i); cleanup();
     const admissions = renderPage(<AdmissionsPage />);
     expect(screen.getByRole('heading', { name: 'Online applications and payments are unavailable' })).toBeTruthy();
     expect(admissions.container.querySelector('form,input,button[type="submit"]')).toBeNull();

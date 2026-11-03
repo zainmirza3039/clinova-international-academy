@@ -30,6 +30,7 @@ describe('honest and accessible public states', () => {
     const { container } = render(<MemoryRouter initialEntries={['/online-learning']}><Routes><Route path="/online-learning" element={<OnlineLearningPage />} /><Route path="/cpd-courses" element={<CPDCoursesPage />} /></Routes></MemoryRouter>);
     expect(screen.getByRole('heading', { name: 'No CPD course enrollment is available' })).toBeTruthy();
     expect(container.textContent).not.toMatch(/75%|100%|30%|Completed|In Progress|self-study/i);
-    expect(container.querySelector('form,input,select,button[type="submit"]')).toBeNull();
+    expect(screen.getByLabelText('Search proposed topics')).toBeTruthy();
+    expect(container.querySelector('form,input[type="email"],input[type="password"],input[type="file"],textarea,button[type="submit"]')).toBeNull();
   });
 });

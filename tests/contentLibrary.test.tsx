@@ -61,26 +61,32 @@ describe('draft-only programme data and non-course reading resources', () => {
     expect(publishedProgrammes).toHaveLength(0); expect(publishedCPDCourses).toHaveLength(0);
     for (const department of departments) expect(department).not.toHaveProperty('programmeCount');
   });
-  it('shows no CPD catalogue records or unapproved course filters', () => {
+  it('shows only owner-listed CPD topic titles and no unapproved course details', () => {
     const { container } = render(<MemoryRouter><CPDCoursesPage /></MemoryRouter>);
     expect(container.textContent).toMatch(/no cpd course enrollment is available/i);
-    expect(container.querySelector('a[href^="/cpd-courses/"]')).toBeNull();
-    expect(container.querySelector('select,input,button[type="submit"]')).toBeNull();
+    expect(container.querySelectorAll('a[href^="/cpd-courses/"]')).toHaveLength(12);
+    expect(container.querySelector('select')).not.toBeNull();
+    expect(container.querySelector('input[type="search"]')).not.toBeNull();
+    expect(container.textContent).toContain('Clinical Assessment of Low Back Pain');
+    expect(container.textContent).not.toContain(cpdCourses.find((item) => item.id === 'c13')!.title);
+    expect(container.querySelector('form,input[type="email"],input[type="password"],button[type="submit"]')).toBeNull();
   });
   it('shows no current programme offers or unapproved delivery estimates', () => {
     const { container } = render(<MemoryRouter><ProgrammesPage /></MemoryRouter>);
-    expect(container.textContent).toMatch(/no approved enrollment offer is available/i);
+    expect(container.textContent).toMatch(/no programme offer is available/i);
+    for (const programme of programmes) expect(container.textContent).not.toContain(programme.title);
     expect(container.querySelector('a[href^="/programmes/"]')).toBeNull();
     expect(container.textContent).not.toMatch(/\b\d+\s+(?:weeks|months|CPD hours)\b/i);
   });
   it('keeps subject-area pages informational and removes legacy course titles', () => {
     render(<MemoryRouter><DepartmentsPage /></MemoryRouter>);
-    expect(screen.getByRole('heading', { name: 'Healthcare subject-area information' })).toBeTruthy();
-    expect(screen.getByText(/no course is open for enrollment/i)).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Proposed healthcare subject areas' })).toBeTruthy();
+    expect(screen.getByText(/do not establish an academic department/i)).toBeTruthy();
     cleanup();
     const { container } = render(<MemoryRouter initialEntries={['/departments/medicine']}><Routes><Route path="/departments/:slug" element={<DepartmentDetailPage />} /></Routes></MemoryRouter>);
     expect(screen.getByRole('heading', { name: 'Medicine' })).toBeTruthy();
-    expect(container.textContent).toMatch(/no subject-area course is open/i);
+    expect(screen.getByRole('heading', { name: 'Proposed learning areas' })).toBeTruthy();
+    expect(container.textContent).toMatch(/information only/i);
     expect(container.querySelector('a[href^="/programmes/"]')).toBeNull();
   });
   it('preserves educational tools without turning them into an enrollment or completion service', () => {

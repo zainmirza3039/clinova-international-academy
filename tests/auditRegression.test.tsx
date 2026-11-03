@@ -43,14 +43,18 @@ describe('closed catalogue and navigation regressions', () => {
     render(<form><FilterBar filters={['All', 'Certificate']} active="All" onChange={() => undefined} /></form>);
     expect(screen.getAllByRole('button').every(button => button.getAttribute('type') === 'button')).toBe(true);
   });
-  it('does not expose programme or course filters, offers or detail links', () => {
+  it('withholds programme titles and presents only proposal-level CPD topic discovery', () => {
     const programme = render(<MemoryRouter><ProgrammesPage /></MemoryRouter>);
-    expect(programme.container.textContent).toMatch(/no approved enrollment offer is available/i);
+    expect(programme.container.textContent).toMatch(/no programme offer is available/i);
     expect(programme.container.querySelector('select,input,a[href^="/programmes/"]')).toBeNull();
     cleanup();
     const cpd = render(<MemoryRouter><CPDCoursesPage /></MemoryRouter>);
     expect(cpd.container.textContent).toMatch(/no cpd course enrollment is available/i);
-    expect(cpd.container.querySelector('select,input,a[href^="/cpd-courses/"]')).toBeNull();
+    expect(cpd.container.querySelector('input[type="search"]')).not.toBeNull();
+    expect(cpd.container.querySelector('select')).not.toBeNull();
+    expect(cpd.container.querySelectorAll('a[href^="/cpd-courses/"]')).toHaveLength(12);
+    expect(cpd.container.textContent).toMatch(/proposed topic titles/i);
+    expect(cpd.container.textContent).not.toMatch(/self-study course|self-paced study|independent study/i);
   });
   it('does not render legacy course slugs in navigation or expose admin in the footer', () => {
     render(<MemoryRouter><Header /><Footer /></MemoryRouter>);

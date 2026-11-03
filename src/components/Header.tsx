@@ -19,7 +19,9 @@ const navLinks: NavigationLink[] = [
     ],
   },
   { label: 'CPD Courses', to: '/cpd-courses', menuTitle: 'CPD education', items: [
-    { label: 'Course catalogue status', to: '/cpd-courses', description: 'No CPD course is currently open for enrollment.' },
+    { label: 'Proposed CPD topic directory', to: '/cpd-courses', description: 'Browse owner-listed topic titles only; no course or enrollment offer is open.' },
+    { label: 'Browse subject areas', to: '/departments', description: 'Explore proposed subject groupings and learning topics.' },
+    { label: 'Programme catalogue status', to: '/programmes', description: 'The programme title list is being reconciled; admissions are not open.' },
     { label: 'Admissions information', to: '/admissions', description: 'Current education, application and learner-service status.' },
     { label: 'Candidate and learner portal', to: '/candidate-dashboard', description: 'Separate CPD and certification areas; services are not connected.' },
   ] },

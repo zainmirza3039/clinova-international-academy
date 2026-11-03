@@ -1,13 +1,19 @@
 // Public build-time configuration only. Never put private credentials in VITE_* values.
+import { canonicalOrigin } from '@/lib/seoPolicy';
+
 const configuredOrigin = import.meta.env.VITE_SITE_URL?.trim();
 export const siteOrigin = (() => {
   if (!configuredOrigin || import.meta.env.VITE_INDEXING_ENABLED !== 'true') return undefined;
   try {
     const url = new URL(configuredOrigin);
-    const previewHost = /(^|\.)(vercel\.app|manus\.computer|localhost|test|invalid)$/.test(url.hostname);
-    return url.protocol === 'https:' && url.pathname === '/' && !url.username && !url.password && !url.search && !url.hash && !previewHost ? url.origin : undefined;
-  } catch { return undefined; }
+    const isCanonicalOrigin = url.origin === canonicalOrigin;
+    const isCleanHttpsOrigin = url.protocol === 'https:' && url.pathname === '/' && !url.username && !url.password && !url.search && !url.hash;
+    return isCanonicalOrigin && isCleanHttpsOrigin ? canonicalOrigin : undefined;
+  } catch {
+    return undefined;
+  }
 })();
+
 // Persistence stays unavailable until a separately approved backend contract and hosted validation exist.
 export const learnerDataEnabled = false;
 // Legacy self-study enrollment is intentionally disabled regardless of hosted environment variables.
