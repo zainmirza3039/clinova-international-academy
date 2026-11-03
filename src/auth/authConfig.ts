@@ -2,7 +2,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 export const REQUIRED_SUPABASE_HOSTNAME = 'ssxpmcbqfdggfsoqbxac.supabase.co';
 
-// Authentication stays unavailable until prerequisites receive a separate approved code release.
+// Authentication is enabled only when the configured Supabase URL matches the academy project and a publishable key is present.
 const AUTH_ACTIVATION_APPROVED_IN_SOURCE = true;
 
 function getAuthConfig() {
