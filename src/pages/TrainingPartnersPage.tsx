@@ -110,7 +110,7 @@ export default function TrainingPartnersPage() {
 
   useSEO({
     title: 'Training Partnerships',
-    description: 'Information and a local-only draft checker for organisations exploring educational collaboration with Clinova International Academy.',
+    description: 'Submit an institutional expression of interest for healthcare education, instructor collaboration and clinical learning partnerships with Clinova International Academy.',
   });
 
   useEffect(() => {
@@ -163,6 +163,7 @@ export default function TrainingPartnersPage() {
         country: draft.countryLocation.trim(),
         website: null,
         message: [
+          `Organisation type: ${draft.organisationType}`,
           `Collaboration type: ${draft.collaborationType}`,
           `Proposal: ${draft.proposal}`,
           `Expected audience: ${draft.expectedAudience}`,
@@ -276,10 +277,10 @@ export default function TrainingPartnersPage() {
         </div>
       </section>
 
-      <section id="collaboration-draft" aria-labelledby="collaboration-draft-heading" className="bg-surface-50 px-6 py-16 lg:py-20">
+      <section id="collaboration-enquiry" aria-labelledby="collaboration-enquiry-heading" className="bg-surface-50 px-6 py-16 lg:py-20">
         <div className="mx-auto max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-600">Institutional enquiry</p>
-          <h2 id="collaboration-draft-heading" className="mt-3 font-heading text-2xl font-bold text-navy-800 md:text-3xl">Discuss a collaboration</h2>
+          <h2 id="collaboration-enquiry-heading" className="mt-3 font-heading text-2xl font-bold text-navy-800 md:text-3xl">Discuss a collaboration</h2>
           <p className="mt-4 leading-relaxed text-navy-600">
             Use this form to send an institutional expression of interest. Submissions are stored for authorized academy staff to review. Do not enter patient, learner, or other sensitive personal information.
           </p>
