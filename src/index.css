@@ -560,3 +560,69 @@ input:focus, select:focus, textarea:focus { border-color: #66877d; }
 
 .clinova-home-contact__legal{margin-top:18px;color:#d5e0da;font-size:12px;font-weight:700}
 .clinova-home-contact__availability{max-width:760px;margin-top:7px;color:#b7c5c7;font-size:10px;line-height:1.65}
+
+
+/* Learning portal interaction and record components. */
+.portal-shell{padding-top:0}
+.portal-heading-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.portal-refresh{display:inline-flex;min-height:38px;align-items:center;gap:8px;padding:0 12px;border:1px solid var(--clinova-line);background:#fff;color:var(--clinova-ink);font-size:11px;font-weight:650}
+.portal-refresh:disabled{opacity:.55;cursor:wait}
+.portal-loading{padding:34px;border:1px solid var(--clinova-line);background:#fff;color:var(--clinova-muted);font-size:12px;text-align:center}
+.portal-notice{margin-bottom:18px;padding:12px 15px;border:1px solid #bfd9ce;background:#f2f8f4;color:#315d4b;font-size:12px}
+.portal-course-list{display:grid;gap:13px}
+.portal-course-card{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px;border:1px solid var(--clinova-line);background:#fff}
+.portal-course-card h3{margin-top:9px;color:var(--clinova-ink);font-size:16px;font-weight:650}
+.portal-course-card p{margin-top:6px;color:var(--clinova-muted);font-size:11px;line-height:1.6}
+.portal-status{display:inline-flex;align-items:center;padding:4px 8px;background:#edf2ed;color:#526d5e;font-size:9px;font-weight:750;letter-spacing:.06em;text-transform:uppercase}
+.portal-status--valid{background:#edf5ef;color:#246044}
+.portal-status--revoked{background:#fbefed;color:#8d3c32}
+.portal-link-button{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;color:var(--clinova-green-dark);font-size:11px;font-weight:700}
+.portal-list-row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--clinova-line)}
+.portal-list-row:last-child{border-bottom:0}
+.portal-list-row strong{display:block;color:var(--clinova-ink);font-size:12px;font-weight:650}
+.portal-list-row small{display:block;margin-top:4px;color:var(--clinova-muted);font-size:10px}
+.portal-list-row a,.portal-list-row button{color:var(--clinova-green-dark);font-size:10px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.portal-profile-form,.portal-form{display:grid;gap:15px}
+.portal-profile-form{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:22px}
+.portal-profile-form label,.portal-form label{display:grid;gap:7px;color:#4f6067;font-size:11px;font-weight:650}
+.portal-profile-form input,.portal-form input,.portal-form select,.portal-form textarea,.portal-revocation textarea{width:100%;min-height:42px;padding:10px 12px;border:1px solid var(--clinova-line);border-radius:2px;background:#fff;color:var(--clinova-ink);font-size:12px}
+.portal-form{margin-bottom:17px}
+.portal-form h2,.portal-form h3{color:var(--clinova-ink);font-size:17px;font-weight:650}
+.portal-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.portal-upload{padding:13px;border:1px dashed #b9c9bf;background:#f8faf7}
+.portal-upload input{border:0;padding:5px 0}
+.portal-lesson-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:13px;border:1px solid var(--clinova-line);background:#fff}
+.portal-lesson-row label{display:flex;align-items:flex-start;gap:11px;min-width:0;cursor:pointer}
+.portal-lesson-row input{margin-top:3px}
+.portal-lesson-row strong{display:block;color:var(--clinova-ink);font-size:12px}
+.portal-lesson-row small{display:block;margin-top:4px;color:var(--clinova-muted);font-size:10px}
+.portal-resource-link{flex-shrink:0;color:var(--clinova-green-dark);font-size:10px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.portal-table-wrap{overflow-x:auto}
+.portal-table{width:100%;border-collapse:collapse;text-align:left}
+.portal-table th{padding:12px 14px;background:#f4f6f3;color:#68777c;font-size:9px;font-weight:750;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.portal-table td{padding:13px 14px;border-top:1px solid var(--clinova-line);color:#455961;font-size:11px;vertical-align:top}
+.portal-table code{font-size:9px;overflow-wrap:anywhere}
+.admin-learning-panel{margin-top:25px}
+.admin-learning-heading{display:flex;justify-content:space-between;align-items:end;gap:18px;margin:20px 0}
+.admin-learning-heading h2{margin-top:7px;color:var(--clinova-ink);font-size:21px;font-weight:650;letter-spacing:-.035em}
+.admin-learning-heading p:not(.portal-kicker){margin-top:5px;color:var(--clinova-muted);font-size:11px;line-height:1.6}
+.portal-admin-records{display:grid;gap:11px;margin-top:18px}
+.portal-admin-record{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;padding:17px;border:1px solid var(--clinova-line);background:#fff}
+.portal-admin-record h3{margin-top:8px;color:var(--clinova-ink);font-size:14px;font-weight:650}
+.portal-admin-record p{margin-top:5px;color:#62737a;font-size:11px;line-height:1.5}
+.portal-admin-record small{display:block;margin-top:7px;color:#849095;font-size:9px;overflow-wrap:anywhere}
+.portal-record-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:7px}
+.portal-record-actions button{display:inline-flex;min-height:34px;align-items:center;gap:6px;padding:0 10px;border:1px solid var(--clinova-line);background:#fff;color:var(--clinova-green-dark);font-size:10px;font-weight:700}
+.portal-record-actions button:disabled{opacity:.5}
+.portal-revocation{grid-column:1/-1;display:grid;gap:7px;color:#62737a;font-size:10px;font-weight:650}
+.portal-revocation textarea{max-width:600px}
+@media(max-width:640px){
+ .portal-course-card{display:block}
+ .portal-course-card .portal-link-button{margin-top:14px}
+ .portal-profile-form,.portal-form-grid{grid-template-columns:1fr}
+ .portal-admin-record{grid-template-columns:1fr}
+ .portal-record-actions{justify-content:flex-start}
+ .portal-lesson-row{align-items:flex-start;flex-direction:column}
+ .portal-resource-link{margin-left:27px}
+ .admin-learning-heading{align-items:flex-start}
+}
