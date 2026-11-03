@@ -5,6 +5,7 @@ import DepartmentCard from '@/components/DepartmentCard';
 import NewsCard from '@/components/NewsCard';
 import { departments } from '@/data/departments';
 import { publishedEducationalArticleCards } from '@/data/educationalArticles';
+import { academyLegalIdentity } from '@/data/publicContact';
 
 const pathways = [
   { icon: BookOpen, title: 'Continuing professional development', text: 'Structured, instructor-led learning for doctors, nurses and allied healthcare professionals.', to: '/cpd-courses', action: 'Explore CPD programmes' },
@@ -112,7 +113,7 @@ export default function HomePage() {
       </section>}
 
       <section className="clinova-home-contact" aria-labelledby="contact-heading">
-        <div className="clinova-container clinova-home-contact__inner"><div><p className="clinova-overline">Start a conversation</p><h2 id="contact-heading">Let’s move healthcare education forward.</h2><p>For programme information, teaching opportunities and institutional collaboration, contact the Clinova team.</p></div><Link className="clinova-button clinova-button--light" to="/contact">Contact Clinova <ArrowRight size={17} aria-hidden="true" /></Link></div>
+        <div className="clinova-container clinova-home-contact__inner"><div><p className="clinova-overline">Start a conversation</p><h2 id="contact-heading">Let’s move healthcare education forward.</h2><p>For programme information, teaching opportunities and institutional collaboration, contact the Clinova team.</p><p className="clinova-home-contact__legal">{academyLegalIdentity.legalName}</p><p className="clinova-home-contact__availability">No CPD course enrollment, certification application, examination, credential issuance or live verification is currently available through this website.</p></div><Link className="clinova-button clinova-button--light" to="/contact">Contact Clinova <ArrowRight size={17} aria-hidden="true" /></Link></div>
       </section>
     </>
   );
