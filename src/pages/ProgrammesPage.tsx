@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldAlert } from 'lucide-react';
 import PageHero from '@/components/PageHero';
+import { CmsPublishedContentShelf } from '@/components/CmsPublishedContent';
 import { useSEO } from '@/hooks/useSEO';
 
 export default function ProgrammesPage() {
@@ -34,6 +35,7 @@ export default function ProgrammesPage() {
             <div className="bg-white p-5"><dt className="text-xs font-semibold uppercase tracking-[0.12em] text-navy-500">Review and release</dt><dd className="mt-2 text-sm font-semibold text-navy-900">Exact-version approval not evidenced</dd></div>
             <div className="bg-white p-5"><dt className="text-xs font-semibold uppercase tracking-[0.12em] text-navy-500">Admissions</dt><dd className="mt-2 text-sm font-semibold text-navy-900">Not open</dd></div>
           </dl>
+          <div className="mt-12"><CmsPublishedContentShelf kinds={['programme']} /></div>
           <div className="mt-8 flex flex-wrap gap-5">
             <Link to="/departments" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-clinical-700 underline underline-offset-4">Browse proposed subject areas <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
             <Link to="/cpd-courses" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-clinical-700 underline underline-offset-4">Browse proposed CPD topics <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
