@@ -177,12 +177,31 @@ export async function attachCourseResource(lessonId: string, resourcePath: strin
   ensureNoError(error, 'The uploaded resource could not be attached to the lesson.');
 }
 
+export async function createSignedCourseResourceUrl(path: string): Promise<string> {
+  const { data, error } = await supabase.storage.from('course-resources').createSignedUrl(path, 300);
+  ensureNoError(error, 'This course resource is not available to your account.');
+  if (!data?.signedUrl) throw new Error('A secure resource link could not be created.');
+  return data.signedUrl;
+}
+
 export async function uploadCourseResource(userId: string, courseItemId: string, file: File): Promise<string> {
   const safeName = file.name.normalize('NFKC').replace(/[^a-zA-Z0-9._-]+/g, '-').slice(-120);
   const path = `${courseItemId}/${crypto.randomUUID()}-${safeName}`;
   const { error } = await supabase.storage.from('course-resources').upload(path, file, { upsert: false });
   ensureNoError(error, 'The resource could not be uploaded. Check file type, size and instructor assignment.');
   return path;
+}
+
+export async function fetchAdminLessonDrafts(): Promise<(LearningLesson & { is_published: boolean; course: LearningCourse | null })[]> {
+  const { data, error } = await supabase.from('course_lessons').select('id,course_item_id,title,summary,content_markdown,resource_path,sequence_number,is_published').order('created_at', { ascending: false }).limit(200);
+  ensureNoError(error, 'Course lesson records are unavailable.');
+  const courses = await getCourses([...new Set((data ?? []).map((row: any) => row.course_item_id))]);
+  return (data ?? []).map((row: any) => ({ ...row, course: courses.get(row.course_item_id) ?? null }));
+}
+
+export async function setCourseLessonPublished(lessonId: string, published: boolean): Promise<void> {
+  const { error } = await supabase.from('course_lessons').update({ is_published: published, updated_at: new Date().toISOString() }).eq('id', lessonId);
+  ensureNoError(error, 'Lesson publication status could not be changed.');
 }
 
 export async function createAdminCourseAssignment(courseItemId: string, instructorId: string, adminId: string): Promise<void> {
