@@ -23,7 +23,8 @@ const navLinks: NavigationLink[] = [
     { label: 'Browse subject areas', to: '/departments', description: 'Explore proposed subject groupings and learning topics.' },
     { label: 'Programme catalogue status', to: '/programmes', description: 'The programme title list is being reconciled; admissions are not open.' },
     { label: 'Admissions information', to: '/admissions', description: 'Current education, application and learner-service status.' },
-    { label: 'Candidate and learner portal', to: '/candidate-dashboard', description: 'Separate CPD and certification areas; services are not connected.' },
+    { label: 'Student portal', to: '/student', description: 'Access your learner workspace after secure sign-in.' },
+    { label: 'Instructor portal', to: '/instructor', description: 'Access teaching tools after an administrator assigns your role.' },
   ] },
   {
     label: 'Professional Certification',
