@@ -22,7 +22,7 @@ export type LearningSession = {
 };
 export type LearningProgress = { lesson_id: string; progress_status: string; completed_at: string | null };
 export type LearningCertificate = {
-  id: string; course_item_id: string; certificate_number: string; verification_code: string;
+  id: string; enrollment_id: string; course_item_id: string; certificate_number: string; verification_code: string;
   issued_at: string; revoked_at: string | null; course: LearningCourse | null;
 };
 export type StudentWorkspace = {
@@ -77,7 +77,7 @@ export async function fetchStudentWorkspace(userId: string): Promise<StudentWork
   const [profileResult, enrollmentResult, certificateResult] = await Promise.all([
     supabase.from('profiles').select('user_id,full_name,professional_title,institution,country').eq('user_id', userId).maybeSingle(),
     supabase.from('course_enrollments').select('id,course_item_id,enrollment_status,applied_at,completed_at').eq('student_id', userId).order('applied_at', { ascending: false }),
-    supabase.from('course_certificates').select('id,course_item_id,certificate_number,verification_code,issued_at,revoked_at').eq('student_id', userId).order('issued_at', { ascending: false }),
+    supabase.from('course_certificates').select('id,enrollment_id,course_item_id,certificate_number,verification_code,issued_at,revoked_at').eq('student_id', userId).order('issued_at', { ascending: false }),
   ]);
   ensureNoError(profileResult.error, 'Your profile could not be loaded.');
   ensureNoError(enrollmentResult.error, 'Your enrolments could not be loaded.');
@@ -216,7 +216,7 @@ export async function fetchAdminLearningWorkspace(): Promise<AdminLearningWorksp
     supabase.from('instructor_profiles').select('user_id,public_name,professional_title,verification_status,is_public').order('created_at', { ascending: false }).limit(100),
     supabase.from('course_enrollments').select('id,course_item_id,student_id,enrollment_status,applied_at').order('applied_at', { ascending: false }).limit(200),
     supabase.from('content_items').select('id,kind').eq('kind', 'cpd_course').limit(200),
-    supabase.from('course_certificates').select('id,course_item_id,certificate_number,verification_code,issued_at,revoked_at,student_id').order('issued_at', { ascending: false }).limit(200),
+    supabase.from('course_certificates').select('id,enrollment_id,course_item_id,certificate_number,verification_code,issued_at,revoked_at,student_id').order('issued_at', { ascending: false }).limit(200),
   ]);
   ensureNoError(profiles.error, 'Learner profiles are unavailable.');
   ensureNoError(instructors.error, 'Instructor profiles are unavailable.');
@@ -254,6 +254,11 @@ export async function revokeCpdCertificate(certificateId: string, reason: string
   ensureNoError(error, 'Certificate revocation could not be saved.');
 }
 
+export async function manageClinovaRole(userId: string, role: string, enabled: boolean): Promise<void> {
+  const { error } = await supabase.functions.invoke('manage-clinova-role', { body: { user_id: userId, role, enabled } });
+  ensureNoError(error, 'The role change was rejected by the secure administrator service.');
+}
+
 export async function reviewInstructorProfile(userId: string, adminId: string, approved: boolean): Promise<void> {
   const { error } = await supabase.from('instructor_profiles').update({
     verification_status: approved ? 'verified' : 'rejected',
@@ -262,4 +267,5 @@ export async function reviewInstructorProfile(userId: string, adminId: string, a
     reviewed_at: new Date().toISOString(),
   }).eq('user_id', userId);
   ensureNoError(error, 'Instructor profile review could not be saved.');
+  await manageClinovaRole(userId, 'instructor', approved);
 }
