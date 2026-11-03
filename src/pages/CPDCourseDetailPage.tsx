@@ -1,4 +1,6 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { fetchPublishedCmsContent } from '@/lib/cms';
 import { ArrowLeft, ArrowRight, ShieldAlert } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import { useSEO } from '@/hooks/useSEO';
@@ -7,6 +9,15 @@ import { getOwnerListedCPDTopicBySlug } from '@/data/catalogueBrowse';
 export default function CPDCourseDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const topic = slug ? getOwnerListedCPDTopicBySlug(slug) : undefined;
+  const [publishedCourse, setPublishedCourse] = useState(false);
+  useEffect(() => {
+    let active = true;
+    void fetchPublishedCmsContent().then(records => {
+      if (active) setPublishedCourse(records.some(record => record.kind === 'cpd_course' && record.snapshot.slug === slug));
+    }).catch(() => { if (active) setPublishedCourse(false); });
+    return () => { active = false; };
+  }, [slug]);
+  if (publishedCourse && slug) return <Navigate to={\`/cms/cpd_course/\${slug}\`} replace />;
 
   useSEO({
     title: topic ? `${topic.title} | Proposed CPD topic` : 'CPD topic information',
