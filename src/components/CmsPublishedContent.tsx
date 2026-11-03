@@ -15,7 +15,7 @@ function usePublishedCmsContent() {
   useEffect(() => {
     let active = true;
     void fetchPublishedCmsContent().then((next) => {
-      if (active) setRecords(next.filter((record) => record.kind !== 'cpd_course'));
+      if (active) setRecords(next);
     }).catch(() => {
       // Public CMS failure is intentionally non-fatal: repository content remains available.
       if (active) setRecords([]);
@@ -50,15 +50,16 @@ function readSections(snapshot: Record<string, unknown>) {
   });
 }
 
-export function CmsPublishedContentShelf() {
+export function CmsPublishedContentShelf({ kinds }: { kinds?: CmsContentKind[] }) {
   const { records, loading } = usePublishedCmsContent();
+  const visibleRecords = kinds ? records.filter(record => kinds.includes(record.kind)) : records;
   if (loading) return <p className="sr-only" role="status">Checking newly published content…</p>;
-  if (records.length === 0) return null;
+  if (visibleRecords.length === 0) return null;
 
   return <section aria-labelledby="cms-published-content-title" className="mt-12 border-t border-navy-100 pt-10">
     <div className="mb-6"><p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-700">Approved CMS releases</p><h2 id="cms-published-content-title" className="mt-2 text-2xl font-heading font-bold text-navy-900">More published learning content</h2><p className="mt-2 text-sm text-navy-600">These additional records are served from the public, published-content view. Existing repository content remains available as well.</p></div>
     <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {records.map(record => {
+      {visibleRecords.map(record => {
         const title = readText(record.snapshot, 'title') ?? 'Untitled content';
         const summary = readText(record.snapshot, 'excerpt') ?? readText(record.snapshot, 'description') ?? readText(record.snapshot, 'overview');
         const slug = record.snapshot.slug as string;
