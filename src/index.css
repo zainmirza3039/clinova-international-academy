@@ -365,3 +365,106 @@ input:focus, select:focus, textarea:focus { border-color: #66877d; }
 .page-hero nav[aria-label='Breadcrumb'] span { color: rgba(255, 255, 255, 0.82) !important; }
 .page-hero nav[aria-label='Breadcrumb'] [aria-current='page'] { color: #fff !important; }
 .page-hero nav[aria-label='Breadcrumb'] svg { color: #a9c0b4 !important; }
+
+
+/* Clinova redesign system — editorial, restrained and built for an education provider. */
+:root {
+  --clinova-ink: #152b3b;
+  --clinova-muted: #60717b;
+  --clinova-green: #54796b;
+  --clinova-green-dark: #365b4d;
+  --clinova-paper: #f5f5f0;
+  --clinova-line: #dce2dc;
+  --clinova-white: #fff;
+}
+.clinova-container { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+.clinova-home-hero { padding: 142px 0 88px; background: #fff; }
+.clinova-home-hero__grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .75fr); gap: clamp(40px, 7vw, 100px); align-items: center; }
+.clinova-eyebrow, .clinova-overline { color: var(--clinova-green-dark); font-size: 11px; font-weight: 700; letter-spacing: .15em; line-height: 1.4; text-transform: uppercase; }
+.clinova-eyebrow { display: flex; align-items: center; gap: 10px; }
+.clinova-eyebrow span { width: 22px; height: 2px; background: var(--clinova-green); }
+.clinova-home-hero h1 { max-width: 760px; margin-top: 25px; color: var(--clinova-ink); font-size: clamp(42px, 5.2vw, 68px); font-weight: 600; letter-spacing: -.055em; line-height: 1.04; }
+.clinova-home-hero__lead { max-width: 680px; margin-top: 25px; color: var(--clinova-muted); font-size: 17px; line-height: 1.8; }
+.clinova-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.clinova-button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 11px; padding: 0 20px; font-size: 13px; font-weight: 700; transition: background .18s ease, color .18s ease, border-color .18s ease; }
+.clinova-button--primary { border: 1px solid var(--clinova-green-dark); background: var(--clinova-green-dark); color: #fff; }
+.clinova-button--primary:hover { border-color: #274638; background: #274638; }
+.clinova-button--secondary { border: 1px solid #cbd4ce; color: var(--clinova-ink); }
+.clinova-button--secondary:hover { background: var(--clinova-paper); }
+.clinova-home-hero__note { margin-top: 23px; color: #75838a; font-size: 12px; line-height: 1.6; }
+.clinova-home-hero__aside { padding: 28px 30px 26px; border: 1px solid var(--clinova-line); background: var(--clinova-paper); }
+.clinova-home-hero__aside-top { display: flex; justify-content: space-between; align-items: center; color: var(--clinova-green-dark); }
+.clinova-overline { display: block; }
+.clinova-home-hero__statement { max-width: 340px; margin-top: 28px; color: var(--clinova-ink); font-size: 25px; font-weight: 600; letter-spacing: -.035em; line-height: 1.28; }
+.clinova-check-list { display: grid; gap: 13px; margin-top: 27px; padding-top: 23px; border-top: 1px solid #d7ded7; color: #52656c; font-size: 13px; }
+.clinova-check-list li { display: flex; gap: 11px; align-items: baseline; }
+.clinova-check-list li::before { content: ''; width: 6px; height: 6px; flex: 0 0 6px; border-radius: 50%; background: var(--clinova-green); }
+.clinova-text-link { display: inline-flex; align-items: center; gap: 9px; color: var(--clinova-green-dark); font-size: 13px; font-weight: 700; text-decoration: none; }
+.clinova-text-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.clinova-home-hero__aside .clinova-text-link { margin-top: 27px; }
+.clinova-audience { border-block: 1px solid var(--clinova-line); background: #fff; }
+.clinova-audience__inner { display: flex; flex-wrap: wrap; gap: 22px 38px; align-items: center; padding-block: 23px; }
+.clinova-audience__inner > p { color: var(--clinova-ink); font-size: 12px; font-weight: 700; }
+.clinova-audience__inner ul { display: flex; flex-wrap: wrap; gap: 9px 25px; color: var(--clinova-muted); font-size: 12px; }
+.clinova-section { padding: 88px 0; background: #fff; }
+.clinova-section--paper { background: var(--clinova-paper); }
+.clinova-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 38px; }
+.clinova-section-heading h2, .clinova-teaching h2, .clinova-partners h2, .clinova-home-contact h2 { max-width: 700px; margin-top: 13px; color: var(--clinova-ink); font-size: clamp(30px, 3.6vw, 43px); font-weight: 600; letter-spacing: -.045em; line-height: 1.12; }
+.clinova-section-heading > p { max-width: 390px; color: var(--clinova-muted); font-size: 14px; line-height: 1.75; }
+.clinova-pathway-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--clinova-line); background: #fff; }
+.clinova-pathway-card { min-height: 290px; padding: 28px; border-right: 1px solid var(--clinova-line); }
+.clinova-pathway-card:last-child { border-right: 0; }
+.clinova-pathway-card__number { display: block; margin-bottom: 30px; color: #91a39a; font-size: 11px; font-weight: 700; letter-spacing: .1em; }
+.clinova-pathway-card > svg { color: var(--clinova-green); }
+.clinova-pathway-card h3 { margin-top: 19px; color: var(--clinova-ink); font-size: 19px; font-weight: 650; letter-spacing: -.025em; }
+.clinova-pathway-card p { min-height: 75px; margin-top: 11px; color: var(--clinova-muted); font-size: 13px; line-height: 1.7; }
+.clinova-pathway-card a { display: inline-flex; align-items: center; gap: 8px; margin-top: 17px; color: var(--clinova-green-dark); font-size: 12px; font-weight: 700; }
+.clinova-department-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; }
+.clinova-disclaimer { margin-top: 25px; color: #78858a; font-size: 11px; line-height: 1.65; }
+.clinova-teaching { display: grid; grid-template-columns: 1.1fr .9fr; gap: 80px; align-items: center; }
+.clinova-teaching__intro > p:not(.clinova-overline) { max-width: 610px; margin-top: 20px; color: var(--clinova-muted); font-size: 14px; line-height: 1.8; }
+.clinova-teaching__intro .clinova-text-link { margin-top: 25px; }
+.clinova-teaching__list { border-top: 1px solid var(--clinova-line); }
+.clinova-teaching__list > div { display: flex; gap: 17px; align-items: flex-start; padding: 23px 0; border-bottom: 1px solid var(--clinova-line); color: var(--clinova-green-dark); }
+.clinova-teaching__list span { display: grid; gap: 5px; }
+.clinova-teaching__list strong { color: var(--clinova-ink); font-size: 14px; }
+.clinova-teaching__list small { color: var(--clinova-muted); font-size: 12px; line-height: 1.6; }
+.clinova-partners { display: grid; grid-template-columns: 1fr 380px; gap: 80px; align-items: center; }
+.clinova-partners > div:first-child > p:not(.clinova-overline) { max-width: 650px; margin: 20px 0 26px; color: var(--clinova-muted); font-size: 14px; line-height: 1.8; }
+.clinova-partners__panel { padding: 29px; border: 1px solid var(--clinova-line); background: #fff; color: var(--clinova-green-dark); }
+.clinova-partners__panel h3 { margin-top: 19px; color: var(--clinova-ink); font-size: 20px; font-weight: 650; }
+.clinova-partners__panel p { margin: 10px 0 22px; color: var(--clinova-muted); font-size: 13px; line-height: 1.7; }
+.clinova-resource-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 25px; }
+.clinova-home-contact { padding: 65px 0; background: var(--clinova-ink); }
+.clinova-home-contact__inner { display: flex; justify-content: space-between; align-items: center; gap: 40px; }
+.clinova-home-contact .clinova-overline { color: #a9c2b4; }
+.clinova-home-contact h2 { max-width: 650px; color: #fff; }
+.clinova-home-contact__inner > div > p:last-child { margin-top: 15px; color: #c1ccd0; font-size: 14px; line-height: 1.7; }
+.clinova-button--light { flex: 0 0 auto; border: 1px solid #d7e1dc; color: #fff; }
+.clinova-button--light:hover { background: #fff; color: var(--clinova-ink); }
+@media (max-width: 900px) {
+  .clinova-home-hero__grid, .clinova-teaching, .clinova-partners { grid-template-columns: 1fr; gap: 42px; }
+  .clinova-department-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .clinova-partners { gap: 30px; }
+}
+@media (max-width: 640px) {
+  .clinova-container { width: min(100% - 36px, 1180px); }
+  .clinova-home-hero { padding: 112px 0 58px; }
+  .clinova-home-hero h1 { font-size: clamp(39px, 11vw, 54px); }
+  .clinova-home-hero__lead { font-size: 15px; }
+  .clinova-home-hero__aside { padding: 23px; }
+  .clinova-audience__inner { display: block; padding-block: 20px; }
+  .clinova-audience__inner ul { gap: 10px 16px; margin-top: 13px; }
+  .clinova-section { padding: 62px 0; }
+  .clinova-section-heading { display: block; }
+  .clinova-section-heading > p, .clinova-section-heading > .clinova-text-link { display: inline-flex; margin-top: 18px; }
+  .clinova-pathway-grid { grid-template-columns: 1fr; }
+  .clinova-pathway-card { min-height: 0; padding: 24px; border-right: 0; border-bottom: 1px solid var(--clinova-line); }
+  .clinova-pathway-card:last-child { border-bottom: 0; }
+  .clinova-pathway-card__number { margin-bottom: 18px; }
+  .clinova-pathway-card p { min-height: 0; }
+  .clinova-department-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .clinova-resource-grid { grid-template-columns: 1fr; }
+  .clinova-home-contact__inner { display: block; }
+  .clinova-home-contact__inner > .clinova-button { margin-top: 25px; }
+}
