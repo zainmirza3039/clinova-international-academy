@@ -1,56 +1,59 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpenCheck, BadgeCheck, ShieldAlert } from 'lucide-react';
+import { ArrowRight, Award, BookOpen, CalendarDays, CircleUserRound, Clock3, GraduationCap, LogOut } from 'lucide-react';
 import { useAuth } from '@/auth/authContext';
 import { useSEO } from '@/hooks/useSEO';
 
-const portalAreas = [
-  { title: 'CPD enrollment and learning', detail: 'Course enrollment, learning progress, quizzes and CPD history are not connected.', to: '/cpd-courses', action: 'CPD system status', icon: BookOpenCheck },
-  { title: 'CPD completion credentials', detail: 'No CPD completion record or certificate is available in this build.', to: '/verify', action: 'Verification status', icon: BadgeCheck },
-  { title: 'Professional certification', detail: 'Candidate applications, eligibility, competence assessments and independent decisions are unavailable.', to: '/certification', action: 'Certification status', icon: BadgeCheck },
-  { title: 'Examination and OSCE', detail: 'No exam schedule, assessment evidence, result or feedback record is queried.', to: '/assessment', action: 'Assessment status', icon: ShieldAlert },
-];
+type StudentTab = 'Overview' | 'My programmes' | 'Schedule' | 'Certificates' | 'Profile';
+
+const tabs: StudentTab[] = ['Overview', 'My programmes', 'Schedule', 'Certificates', 'Profile'];
+
+function EmptyPanel({ icon: Icon, title, detail, action, to }: { icon: typeof BookOpen; title: string; detail: string; action?: string; to?: string }) {
+  return <div className="portal-empty">
+    <span className="portal-empty__icon"><Icon size={23} strokeWidth={1.7} aria-hidden="true" /></span>
+    <h3>{title}</h3><p>{detail}</p>
+    {action && to && <Link to={to} className="portal-link">{action} <ArrowRight size={15} aria-hidden="true" /></Link>}
+  </div>;
+}
 
 export default function StudentDashboardPage() {
   const auth = useAuth();
+  const [activeTab, setActiveTab] = useState<StudentTab>('Overview');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  useSEO({ title: 'Candidate and learner dashboard', description: 'Clinova learner and candidate portal availability.', noindex: true });
+  useSEO({ title: 'Student dashboard | Clinova International Academy', description: 'Your Clinova learner dashboard.', noindex: true });
+
   const signOut = async () => {
     if (busy) return;
-    setBusy(true);
-    setError(null);
-    try {
-      const result = await auth.signOut();
-      if (result.error) setError(result.error.message);
-    } finally {
-      setBusy(false);
-    }
+    setBusy(true); setError(null);
+    try { const result = await auth.signOut(); if (result.error) setError(result.error.message); }
+    finally { setBusy(false); }
   };
 
-  return <section className="min-h-[70vh] bg-surface-50/70 pb-16" aria-labelledby="dashboard-title">
-    <div className="bg-navy-900 text-white">
-      <div className="mx-auto max-w-6xl px-6 py-10 lg:py-14">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-300">Candidate and learner portal</p><h1 id="dashboard-title" className="mt-3 font-heading text-3xl font-bold leading-tight sm:text-4xl">Account services are not connected</h1><p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/75">CPD learning and professional certification are distinct. No learner or candidate records were requested for this page.</p>{auth.session?.user.email && <p className="mt-2 text-xs text-white/55">Signed in as {auth.session.user.email}</p>}</div>
-          {auth.session && <button type="button" onClick={() => void signOut()} disabled={busy} className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-md border border-white/25 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 disabled:opacity-60">{busy ? 'Signing out…' : 'Sign out'}</button>}
-        </div>
+  return <div className="portal-shell" aria-labelledby="student-dashboard-title">
+    <aside className="portal-sidebar">
+      <div className="portal-sidebar__brand"><span className="portal-sidebar__mark">C</span><span>CLINOVA<small>LEARNER PORTAL</small></span></div>
+      <p className="portal-sidebar__label">WORKSPACE</p>
+      <nav aria-label="Student dashboard navigation">{tabs.map(tab => <button key={tab} type="button" className={activeTab === tab ? 'portal-nav-item is-active' : 'portal-nav-item'} aria-current={activeTab === tab ? 'page' : undefined} onClick={() => setActiveTab(tab)}>{tab === 'Overview' ? <GraduationCap size={17} /> : tab === 'My programmes' ? <BookOpen size={17} /> : tab === 'Schedule' ? <CalendarDays size={17} /> : tab === 'Certificates' ? <Award size={17} /> : <CircleUserRound size={17} />}{tab}</button>)}</nav>
+      <div className="portal-sidebar__bottom"><Link to="/" className="portal-nav-item"><ArrowRight size={16} />Public website</Link><button type="button" onClick={() => void signOut()} disabled={busy} className="portal-nav-item"><LogOut size={16} />{busy ? 'Signing out…' : 'Sign out'}</button></div>
+    </aside>
+    <main className="portal-main">
+      <header className="portal-topbar"><div><span className="portal-kicker">STUDENT WORKSPACE</span><p>{auth.session?.user.email ?? 'Learner account'}</p></div><span className="portal-avatar" aria-hidden="true">{(auth.session?.user.email?.[0] ?? 'S').toUpperCase()}</span></header>
+      <div className="portal-content">
+        <div className="portal-page-heading"><div><p className="portal-kicker">YOUR LEARNING</p><h1 id="student-dashboard-title">{activeTab === 'Overview' ? 'Welcome to your learning space' : activeTab}</h1><p>Manage your learning journey and keep your professional development organised.</p></div><Link to="/cpd-courses" className="clinova-button clinova-button--primary">Browse programmes <ArrowRight size={16} /></Link></div>
+        {error && <p role="alert" className="portal-alert">{error}</p>}
+        {activeTab === 'Overview' && <>
+          <div className="portal-metrics"><article><span>Enrolled programmes</span><strong>—</strong><small>No enrolment records connected</small></article><article><span>Learning progress</span><strong>—</strong><small>Progress tracking not yet active</small></article><article><span>Upcoming sessions</span><strong>—</strong><small>No teaching schedule available</small></article><article><span>Certificates</span><strong>—</strong><small>No credentials issued through this portal</small></article></div>
+          <div className="portal-section-heading"><div><h2>Continue learning</h2><p>Your active programmes will appear here after enrolment is enabled.</p></div></div>
+          <EmptyPanel icon={BookOpen} title="Your programme list is empty" detail="When you enrol in an approved Clinova programme, its teaching materials, schedule and progress will be organised here." action="Explore CPD programmes" to="/cpd-courses" />
+          <div className="portal-two-column"><section className="portal-card"><h2>Learning calendar</h2><EmptyPanel icon={CalendarDays} title="No sessions scheduled" detail="Confirmed live teaching sessions will appear in your calendar." /></section><section className="portal-card"><h2>Certificates and records</h2><EmptyPanel icon={Award} title="No certificates available" detail="Completion records will appear here when an approved programme and issuance workflow are active." action="Verification information" to="/verify" /></section></div>
+        </>}
+        {activeTab === 'My programmes' && <EmptyPanel icon={BookOpen} title="No programmes to display" detail="Your enrolled programmes and learning materials will appear here when learner enrolment is activated." action="Browse CPD programmes" to="/cpd-courses" />}
+        {activeTab === 'Schedule' && <EmptyPanel icon={Clock3} title="Your calendar is clear" detail="Teaching dates, online sessions and programme deadlines will be shown here once a confirmed timetable is available." />}
+        {activeTab === 'Certificates' && <EmptyPanel icon={Award} title="No certificates have been issued" detail="This area will display verified completion records and downloadable certificates when the certificate lifecycle is operational." action="Read about certification" to="/certification" />}
+        {activeTab === 'Profile' && <section className="portal-card"><h2>Account information</h2><dl className="portal-profile-list"><div><dt>Email address</dt><dd>{auth.session?.user.email ?? 'Not available'}</dd></div><div><dt>Account status</dt><dd>{auth.emailVerified ? 'Email verified' : 'Verification required'}</dd></div><div><dt>Professional details</dt><dd>Not yet provided</dd></div></dl><p className="portal-muted">Profile editing and professional registration fields will be enabled after the account data model and privacy controls are completed.</p></section>}
+        <p className="portal-footnote">Portal preview: learner records, enrolment, attendance, assessment, progress and certificate issuance are not connected yet. No sample learner activity is being presented as real data.</p>
       </div>
-    </div>
-    <div className="mx-auto max-w-6xl px-6">
-      {error && <p className="mt-6 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800" role="alert">{error}</p>}
-      <div className="-mt-5 grid gap-5 sm:grid-cols-2">
-        {portalAreas.map((area) => {
-          const Icon = area.icon;
-          return <article key={area.title} className="rounded-xl border border-navy-100 bg-white p-6 shadow-sm">
-            <Icon className="h-6 w-6 text-clinical-700" aria-hidden="true" />
-            <h2 className="mt-4 font-heading text-xl font-bold text-navy-900">{area.title}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-navy-600">{area.detail}</p>
-            <Link to={area.to} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-clinical-700 underline underline-offset-4">{area.action}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
-          </article>;
-        })}
-      </div>
-      <p className="mt-7 rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm leading-relaxed text-navy-700" role="status">Authentication, candidate data, course enrollment, examination, credential downloads and renewal reminders are disabled. Public sign-up does not grant candidate, assessor, decision-maker or administrator permissions.</p>
-    </div>
-  </section>;
+    </main>
+  </div>;
 }
