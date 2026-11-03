@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - 'feat/clinova-safe-auth-*'
+      - 'feat/clinova-platform-redesign'
   pull_request:
     branches:
       - main
