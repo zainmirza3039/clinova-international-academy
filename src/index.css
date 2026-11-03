@@ -517,3 +517,22 @@ input:focus, select:focus, textarea:focus { border-color: #66877d; }
 .portal-alert{margin-bottom:18px;padding:12px 15px;border:1px solid #e4c8c4;background:#fff7f5;color:#8b3428;font-size:12px}
 @media(max-width:900px){.portal-shell{grid-template-columns:1fr;padding-top:64px}.portal-sidebar{position:static;height:auto;padding:14px 16px;border-right:0;border-bottom:1px solid var(--clinova-line)}.portal-sidebar__brand{padding-bottom:12px}.portal-sidebar__label,.portal-sidebar__bottom{display:none}.portal-sidebar nav{display:flex;gap:5px;overflow-x:auto}.portal-nav-item{width:auto;min-width:max-content;min-height:38px;padding-inline:10px}.portal-topbar{min-height:58px}}
 @media(max-width:640px){.portal-content{padding-top:25px}.portal-page-heading{display:block}.portal-page-heading>.clinova-button{margin-top:17px}.portal-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.portal-two-column{grid-template-columns:1fr}.portal-profile-list>div{grid-template-columns:1fr;gap:5px}}
+
+
+/* Admin workspace presentation. */
+.clinova-admin-shell { max-width: 1440px; padding-top: 38px; padding-bottom: 70px; }
+.clinova-admin-shell > header { align-items: center; padding: 0 0 24px; border-bottom: 1px solid var(--clinova-line); }
+.clinova-admin-shell > header h1 { color: var(--clinova-ink); font-size: clamp(28px,3vw,38px); font-weight: 650; letter-spacing: -.045em; }
+.clinova-admin-shell > header p { color: var(--clinova-muted); }
+.clinova-admin-shell > nav { display: flex; gap: 5px; margin-top: 22px; padding: 0 0 10px; border-bottom: 1px solid var(--clinova-line); }
+.clinova-admin-shell > nav button { border-radius: 0 !important; border: 0 !important; border-bottom: 2px solid transparent !important; background: transparent !important; color: #617078 !important; padding: 11px 14px !important; font-size: 12px !important; }
+.clinova-admin-shell > nav button[aria-pressed="true"] { border-bottom-color: var(--clinova-green-dark) !important; background: #edf2ed !important; color: var(--clinova-green-dark) !important; }
+.clinova-admin-shell > p[role="status"] { margin-top: 18px; border: 1px solid var(--clinova-line); border-radius: 0; background: #f7f8f5; color: #586b70; font-size: 11px; line-height: 1.65; }
+.clinova-admin-shell article.rounded-xl { border-radius: 0 !important; border-color: var(--clinova-line) !important; box-shadow: none !important; }
+.clinova-admin-shell h2 { color: var(--clinova-ink); letter-spacing: -.035em; }
+.clinova-admin-shell h3 { color: var(--clinova-ink); }
+.clinova-admin-shell .bg-teal-700 { background: var(--clinova-green-dark) !important; }
+.clinova-admin-shell .text-teal-700,.clinova-admin-shell .text-teal-800 { color: var(--clinova-green-dark) !important; }
+.clinova-admin-shell .border-teal-700 { border-color: var(--clinova-green-dark) !important; }
+.clinova-admin-shell button { border-radius: 2px !important; }
+@media(max-width:640px){.clinova-admin-shell{padding-top:24px}.clinova-admin-shell>header{align-items:flex-start}.clinova-admin-shell>nav{margin-inline:-16px;padding-inline:16px;overflow-x:auto}.clinova-admin-shell>nav button{white-space:nowrap}}
