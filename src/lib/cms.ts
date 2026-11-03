@@ -79,8 +79,9 @@ export function cmsFeatureEnabled(): boolean {
 
 export function getCmsRoles(user: CmsUser | null | undefined): CmsRole[] {
   const claim = user?.app_metadata?.clinova_roles;
-  if (!Array.isArray(claim)) return user?.app_metadata?.role === 'admin' ? ['content_admin'] : [];
-  return claim.filter((role): role is CmsRole => typeof role === 'string' && cmsRoleSet.has(role));
+  const roles = Array.isArray(claim) ? claim.filter((role): role is CmsRole => typeof role === 'string' && cmsRoleSet.has(role)) : [];
+  if (user?.app_metadata?.role === 'admin' && !roles.includes('content_admin')) roles.push('content_admin');
+  return roles;
 }
 
 export function hasAnyCmsRole(user: CmsUser | null | undefined, required: readonly CmsRole[] = cmsRoles): boolean {
