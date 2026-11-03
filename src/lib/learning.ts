@@ -22,7 +22,7 @@ export type LearningSession = {
 };
 export type LearningProgress = { lesson_id: string; progress_status: string; completed_at: string | null };
 export type LearningCertificate = {
-  id: string; enrollment_id: string; course_item_id: string; certificate_number: string; verification_code: string;
+  id: string; enrollment_id: string; course_item_id: string; certificate_number: string; verification_code: string; student_id?: string;
   issued_at: string; revoked_at: string | null; course: LearningCourse | null;
 };
 export type StudentWorkspace = {
@@ -31,7 +31,7 @@ export type StudentWorkspace = {
   lessons: LearningLesson[];
   sessions: LearningSession[];
   progress: LearningProgress[];
-  certificates: LearningCertificate[];
+  certificates: (LearningCertificate & { learner: LearningProfile | null })[];
 };
 export type InstructorWorkspace = {
   assignments: LearningCourse[];
@@ -244,7 +244,7 @@ export async function fetchAdminLearningWorkspace(): Promise<AdminLearningWorksp
   ensureNoError(certificates.error, 'Certificate records are unavailable.');
   const courseIds = [...new Set([...(items.data ?? []).map((item: any) => item.id), ...(certificates.data ?? []).map((row: any) => row.course_item_id)])];
   const courses = await getCourses(courseIds);
-  const learnerIds = [...new Set((enrollments.data ?? []).map((row: any) => row.student_id))];
+  const learnerIds = [...new Set([...(enrollments.data ?? []).map((row: any) => row.student_id), ...(certificates.data ?? []).map((row: any) => row.student_id)])];
   const learnerProfiles = learnerIds.length
     ? await supabase.from('profiles').select('user_id,full_name,professional_title,institution,country').in('user_id', learnerIds)
     : { data: [], error: null };
@@ -254,7 +254,7 @@ export async function fetchAdminLearningWorkspace(): Promise<AdminLearningWorksp
     profiles: (profiles.data ?? []) as LearningProfile[],
     instructors: (instructors.data ?? []) as AdminLearningWorkspace['instructors'],
     courses: [...courses.values()],
-    certificates: (certificates.data ?? []).map((row: any) => ({ ...row, course: courses.get(row.course_item_id) ?? null })),
+    certificates: (certificates.data ?? []).map((row: any) => ({ ...row, course: courses.get(row.course_item_id) ?? null, learner: profileMap.get(row.student_id) ?? null })),
     enrollments: (enrollments.data ?? []).map((row: any) => ({
       ...row,
       course: courses.get(row.course_item_id) ?? null,
