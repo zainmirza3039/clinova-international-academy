@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpenCheck, ShieldAlert } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import CPDCard from '@/components/CPDCard';
+import { CmsPublishedContentShelf } from '@/components/CmsPublishedContent';
 import { useSEO } from '@/hooks/useSEO';
 import { credentialTypes } from '@/data/credentialTypes';
 import { ownerListedCPDTopics } from '@/data/catalogueBrowse';
@@ -102,6 +103,7 @@ export default function CPDCoursesPage() {
             )}
           </section>
 
+          <div className="mt-12"><CmsPublishedContentShelf kinds={['cpd_course']} /></div>
           <section className="mt-14 border-t border-navy-100 pt-10" aria-labelledby="cpd-system-status-title">
             <div className="flex items-start gap-4">
               <BookOpenCheck className="mt-1 h-6 w-6 shrink-0 text-clinical-700" aria-hidden="true" />
