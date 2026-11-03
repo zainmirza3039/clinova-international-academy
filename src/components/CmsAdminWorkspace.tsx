@@ -72,6 +72,7 @@ function CreateDraftForm({ user, onCreated, disabled }: { user: CmsUser; onCreat
   const [assessmentMethod, setAssessmentMethod] = useState('');
   const [learningOutcomes, setLearningOutcomes] = useState('');
   const [contentMarkdown, setContentMarkdown] = useState('');
+  const [enrollmentOpen, setEnrollmentOpen] = useState(false);
   if (!hasAnyCmsRole(user, createRoles)) return null;
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -84,11 +85,12 @@ function CreateDraftForm({ user, onCreated, disabled }: { user: CmsUser; onCreat
     if (assessmentMethod.trim()) snapshot.assessmentMethod = assessmentMethod.trim();
     if (learningOutcomes.trim()) snapshot.learningOutcomes = learningOutcomes.split('\\n').map(item => item.trim()).filter(Boolean);
     if (contentMarkdown.trim()) snapshot.contentMarkdown = contentMarkdown.trim();
+    if (kind === 'cpd_course') snapshot.enrollmentOpen = enrollmentOpen;
     void onCreated({ name: 'create_content_item', args: { p_kind: kind, p_snapshot: snapshot } });
     setTitle('');
     setSlug('');
     setDescription('');
-    setDurationHours(''); setDeliveryMode(''); setTargetAudience(''); setAssessmentMethod(''); setLearningOutcomes(''); setContentMarkdown('');
+    setDurationHours(''); setDeliveryMode(''); setTargetAudience(''); setAssessmentMethod(''); setLearningOutcomes(''); setContentMarkdown(''); setEnrollmentOpen(false);
   }
 
   return <form onSubmit={submit} className="mt-5 rounded-xl border border-navy-100 bg-white p-5">
@@ -109,6 +111,7 @@ function CreateDraftForm({ user, onCreated, disabled }: { user: CmsUser; onCreat
       <label className="text-sm font-medium text-navy-700 sm:col-span-2">Short description
         <textarea maxLength={4000} rows={3} value={description} onChange={event => setDescription(event.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2.5" />
       </label>
+      {kind === 'cpd_course' && <label className="flex items-center gap-3 text-sm font-medium text-navy-700 sm:col-span-2"><input type="checkbox" checked={enrollmentOpen} onChange={event => setEnrollmentOpen(event.target.checked)} className="h-4 w-4 accent-teal-700" />Open learner applications after this course is approved and published</label>}
       {kind !== 'article' && <>
         <label className="text-sm font-medium text-navy-700">Duration (hours; optional)
           <input type="number" min="0.25" max="1000" step="0.25" value={durationHours} onChange={event => setDurationHours(event.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2.5" />
