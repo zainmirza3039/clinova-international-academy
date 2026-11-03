@@ -7,6 +7,8 @@ import { departments } from '@/data/departments';
 import { cpdCourses } from '@/data/cpdCourses';
 import { educationalArticles } from '@/data/educationalArticles';
 import { newsItems } from '@/data/testimonials';
+import { siteOrigin } from '@/lib/siteConfig';
+import { getIndexableSeoRoute } from '@/lib/seoPolicy';
 vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }), useScrollPosition: () => false }));
 beforeEach(() => { vi.spyOn(window, 'scrollTo').mockImplementation(() => {}); });
 afterEach(() => { cleanup(); vi.restoreAllMocks(); });
@@ -35,7 +37,8 @@ const articleTitles = new Map<string, string>(educationalArticles.flatMap(record
 ]));
 
 describe('public route rendering without live infrastructure', () => {
-  it.each(routes)('%s renders an accessible heading and preview metadata', async (route) => {
+  it.each(routes)('%s renders an accessible heading and obeys the SEO allowlist', async (route) => {
+    const indexableRoute = siteOrigin ? getIndexableSeoRoute(route) : undefined;
     window.history.replaceState({}, '', route);
     const { container } = render(<App />);
     await waitFor(() => {
@@ -43,11 +46,18 @@ describe('public route rendering without live infrastructure', () => {
       const expectedTitle = articleTitles.get(route);
       if (expectedTitle) expect(container.querySelector('h1')?.textContent?.trim()).toBe(expectedTitle);
       expect(document.title).toContain('Clinova');
-      expect(document.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex, nofollow');
+      expect(document.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe(
+        indexableRoute ? 'index, follow' : 'noindex, nofollow',
+      );
     });
     expect(container.querySelector('#main-content')).not.toBeNull();
     expect(container.querySelectorAll('main')).toHaveLength(1);
-    expect(document.querySelector('link[rel="canonical"]')).toBeNull();
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (indexableRoute && siteOrigin) {
+      expect(canonical?.getAttribute('href')).toBe(`${siteOrigin}${indexableRoute.path}`);
+    } else {
+      expect(canonical).toBeNull();
+    }
     expect(container.textContent).not.toContain('This page could not be loaded');
   });
 });
