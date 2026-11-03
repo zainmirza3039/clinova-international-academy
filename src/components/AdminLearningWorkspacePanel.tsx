@@ -52,12 +52,15 @@ export default function AdminLearningWorkspacePanel({ section, adminId }: { sect
   }
 
   async function issueCertificate(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    await run(async () => {
+    event.preventDefault(); if (busy) return;
+    setBusy(true); setError(null); setNotice(null);
+    try {
       const code = await issueCpdCertificate(certificateDraft.enrollmentId, certificateDraft.number);
       setNotice(`Certificate issued. Verification UUID: ${code}`);
       setCertificateDraft({ enrollmentId: '', number: '' });
-    }, 'Certificate issued.');
+      await refresh();
+    } catch (reason) { setError(reason instanceof Error ? reason.message : 'Certificate could not be issued.'); }
+    finally { setBusy(false); }
   }
 
   if (loading) return <div className="portal-loading" role="status">Loading academy records…</div>;
@@ -83,7 +86,7 @@ export default function AdminLearningWorkspacePanel({ section, adminId }: { sect
 
     {section === 'Certificates' && <>
       <form className="portal-form portal-card" onSubmit={issueCertificate}><h3>Issue CPD completion certificate</h3><p className="portal-muted">Only completed enrolments can receive a certificate. Use the approved certificate number from the academy register.</p><label>Completed learner enrolment<select required value={certificateDraft.enrollmentId} onChange={e => setCertificateDraft(v => ({...v,enrollmentId:e.target.value}))}><option value="">Select completed enrolment</option>{data.enrollments.filter(e => e.enrollment_status === 'completed' && !data.certificates.some(c => c.enrollment_id === e.id)).map(e => <option key={e.id} value={e.id}>{e.learner?.full_name ?? 'Learner'} · {e.course?.title ?? 'CPD programme'}</option>)}</select></label><label>Certificate number<input required maxLength={80} value={certificateDraft.number} onChange={e => setCertificateDraft(v => ({...v,number:e.target.value}))} /></label><button type="submit" className="clinova-button clinova-button--primary" disabled={busy}>Issue certificate</button></form>
-      <div className="portal-admin-records">{data.certificates.map(certificate => <article key={certificate.id} className="portal-admin-record"><div><span className={certificate.revoked_at ? 'portal-status portal-status--revoked' : 'portal-status portal-status--valid'}>{certificate.revoked_at ? 'revoked' : 'valid'}</span><h3>{certificate.course?.title ?? 'CPD programme'}</h3><p>{certificate.certificate_number}</p><small>Verification UUID: {certificate.verification_code}</small></div><div className="portal-record-actions">{!certificate.revoked_at && <button type="button" disabled={busy || (revocationReason[certificate.id] ?? '').trim().length < 10} onClick={() => void run(() => revokeCpdCertificate(certificate.id,revocationReason[certificate.id] ?? ''),'Certificate revoked.')}>Revoke</button>}</div>{!certificate.revoked_at && <label className="portal-revocation">Revocation reason<textarea minLength={10} maxLength={2000} rows={2} value={revocationReason[certificate.id] ?? ''} onChange={e => setRevocationReason(v => ({...v,[certificate.id]:e.target.value}))} /></label>}</article>)}</div>
+      <div className="portal-admin-records">{data.certificates.map(certificate => <article key={certificate.id} className="portal-admin-record"><div><span className={certificate.revoked_at ? 'portal-status portal-status--revoked' : 'portal-status portal-status--valid'}>{certificate.revoked_at ? 'revoked' : 'valid'}</span><h3>{certificate.learner?.full_name ?? 'Learner'} · {certificate.course?.title ?? 'CPD programme'}</h3><p>{certificate.certificate_number}</p><small>Verification UUID: {certificate.verification_code}</small></div><div className="portal-record-actions">{!certificate.revoked_at && <button type="button" disabled={busy || (revocationReason[certificate.id] ?? '').trim().length < 10} onClick={() => void run(() => revokeCpdCertificate(certificate.id,revocationReason[certificate.id] ?? ''),'Certificate revoked.')}>Revoke</button>}</div>{!certificate.revoked_at && <label className="portal-revocation">Revocation reason<textarea minLength={10} maxLength={2000} rows={2} value={revocationReason[certificate.id] ?? ''} onChange={e => setRevocationReason(v => ({...v,[certificate.id]:e.target.value}))} /></label>}</article>)}</div>
     </>}
     <p className="portal-footnote">Administrative actions are enforced by Supabase RLS and restricted RPCs. This panel does not expose authentication passwords or service-role credentials.</p>
   </section>;
