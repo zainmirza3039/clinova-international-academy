@@ -6,6 +6,7 @@ import { programmes, publishedProgrammes } from '@/data/programmes';
 import { cpdCourses, publishedCPDCourses } from '@/data/cpdCourses';
 import { getCPDCurriculum } from '@/data/cpdCurricula';
 import { ownerListedCPDTopics } from '@/data/catalogueBrowse';
+import { ownerListedProgrammes } from '@/data/programmeCatalogueBrowse';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import CPDCard from '@/components/CPDCard';
 import ProgrammeDetailPage from '@/pages/ProgrammeDetailPage';
@@ -43,10 +44,15 @@ describe('draft catalogue and curriculum release gates', () => {
     expect(cpd.container.querySelectorAll('a[href^="/cpd-courses/"]')).toHaveLength(1);
   });
 
-  it('keeps programme detail routes generic and not available for enrollment', () => {
-    const { container } = render(<MemoryRouter initialEntries={[`/programmes/${programmes[0].slug}`]}><Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes></MemoryRouter>);
-    expect(screen.getByRole('heading', { name: 'Programme details are under review' })).toBeTruthy();
-    expect(container.textContent).not.toContain(programmes[0].title);
+  it('shows only an owner-listed title and proposed/not-open status on programme detail routes', () => {
+    const proposed = ownerListedProgrammes[0];
+    const source = programmes.find((item) => item.id === proposed.id)!;
+    const { container } = render(<MemoryRouter initialEntries={[`/programmes/${proposed.slug}`]}><Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes></MemoryRouter>);
+    expect(screen.getByRole('heading', { level: 1, name: proposed.title })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Proposed — not open for enrolment' })).toBeTruthy();
+    expect(container.textContent).not.toContain(source.description);
+    expect(container.textContent).not.toContain(source.overview);
+    expect(container.textContent).not.toContain(source.modules[0].title);
     expect(container.querySelector('form,input,textarea,select,button[type="submit"]')).toBeNull();
   });
 

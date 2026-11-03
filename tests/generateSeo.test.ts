@@ -148,6 +148,15 @@ describe('build-time SEO publication safeguards', () => {
     expect(document.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex, nofollow');
     expect(document.querySelector('link[rel="canonical"]')).toBeNull();
 
+    for (const programme of programmes) {
+      for (const routePrefix of ['/programmes', '/courses']) {
+        document.head.innerHTML = rootMetadata;
+        runInNewContext(output.guardScript, { window: { location: { pathname: `${routePrefix}/${programme.slug}` } }, document });
+        expect(document.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex, nofollow');
+        expect(document.querySelector('link[rel="canonical"]')).toBeNull();
+      }
+    }
+
     document.head.innerHTML = rootMetadata;
     document.title = 'Homepage';
     runInNewContext(output.guardScript, { window: { location: { pathname: '/contact/' } }, document });

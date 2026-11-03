@@ -6,6 +6,7 @@ import { cpdCurricula, getCPDCurriculum } from '@/data/cpdCurricula';
 import { programmes } from '@/data/programmes';
 import { cpdCourses } from '@/data/cpdCourses';
 import { ownerListedCPDTopics } from '@/data/catalogueBrowse';
+import { ownerListedProgrammes } from '@/data/programmeCatalogueBrowse';
 import ProgrammeDetailPage from '@/pages/ProgrammeDetailPage';
 import CPDCourseDetailPage from '@/pages/CPDCourseDetailPage';
 
@@ -24,10 +25,15 @@ describe('withheld curriculum data and proposal-only public routes', () => {
     expect(getCPDCurriculum('__proto__')).toBeUndefined(); expect(getCPDCurriculum('toString')).toBeUndefined();
   });
 
-  it('does not reveal programme titles, lesson text, enrollment or assessment controls', () => {
-    const { container } = render(<MemoryRouter initialEntries={[`/programmes/${programmeSlugs[0]}`]}><Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes></MemoryRouter>);
-    expect(screen.getByRole('heading', { name: 'Programme details are under review' })).toBeTruthy();
-    expect(container.textContent).not.toContain(programmes[0].title);
+  it('reveals an owner-listed programme title only, not lesson text, enrollment or assessment controls', () => {
+    const proposed = ownerListedProgrammes[0];
+    const source = programmes.find((item) => item.id === proposed.id)!;
+    const { container } = render(<MemoryRouter initialEntries={[`/programmes/${proposed.slug}`]}><Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes></MemoryRouter>);
+    expect(screen.getByRole('heading', { level: 1, name: proposed.title })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Proposed — not open for enrolment' })).toBeTruthy();
+    expect(container.textContent).not.toContain(source.title);
+    expect(container.textContent).not.toContain(source.overview);
+    expect(container.textContent).not.toContain(source.modules[0].title);
     expect(container.querySelector('form,input,textarea,select,[download],button[type="submit"]')).toBeNull();
   });
 
