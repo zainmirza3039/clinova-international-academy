@@ -6,6 +6,7 @@ import {
   isPrivateSeoPath,
   normalizeSeoPath,
 } from '@/lib/seoPolicy';
+import { ownerListedProgrammes } from '@/data/programmeCatalogueBrowse';
 
 describe('Clinova SEO publication policy', () => {
   it('allows only the approved exact public routes', () => {
@@ -16,6 +17,10 @@ describe('Clinova SEO publication policy', () => {
     expect(getIndexableSeoRoute('/about')).toBeUndefined();
     expect(getIndexableSeoRoute('/events')).toBeUndefined();
     expect(getIndexableSeoRoute('/programmes')).toBeUndefined();
+    for (const programme of ownerListedProgrammes) {
+      expect(getIndexableSeoRoute(`/programmes/${programme.slug}`)).toBeUndefined();
+      expect(getIndexableSeoRoute(`/courses/${programme.slug}`)).toBeUndefined();
+    }
     expect(getIndexableSeoRoute('/cpd-courses/example')).toBeUndefined();
     expect(getIndexableSeoRoute('/resources/rehabilitation')).toBeUndefined();
     expect(getIndexableSeoRoute('/certification/verify')).toBeUndefined();

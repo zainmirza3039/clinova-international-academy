@@ -43,10 +43,14 @@ describe('closed catalogue and navigation regressions', () => {
     render(<form><FilterBar filters={['All', 'Certificate']} active="All" onChange={() => undefined} /></form>);
     expect(screen.getAllByRole('button').every(button => button.getAttribute('type') === 'button')).toBe(true);
   });
-  it('withholds programme titles and presents only proposal-level CPD topic discovery', () => {
+  it('shows proposed programme titles while preserving proposal-level CPD topic discovery', () => {
     const programme = render(<MemoryRouter><ProgrammesPage /></MemoryRouter>);
-    expect(programme.container.textContent).toMatch(/no programme offer is available/i);
-    expect(programme.container.querySelector('select,input,a[href^="/programmes/"]')).toBeNull();
+    expect(programme.container.textContent).toMatch(/programme enrolment is not open/i);
+    expect(programme.container.textContent).toMatch(/showing 8 of 8 proposed programme titles/i);
+    expect(programme.container.querySelector('input[type="search"]')).not.toBeNull();
+    expect(programme.container.querySelector('select')).toBeNull();
+    expect(programme.container.querySelectorAll('a[href^="/programmes/"]')).toHaveLength(8);
+    expect(programme.container.textContent).toMatch(/proposed — not open for enrolment/i);
     cleanup();
     const cpd = render(<MemoryRouter><CPDCoursesPage /></MemoryRouter>);
     expect(cpd.container.textContent).toMatch(/no cpd course enrollment is available/i);

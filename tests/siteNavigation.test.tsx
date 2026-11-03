@@ -9,14 +9,14 @@ afterEach(() => cleanup());
 function renderSiteNavigation() { return render(<MemoryRouter initialEntries={['/']}><Header /><Footer /></MemoryRouter>); }
 
 describe('site-wide catalogue and service navigation', () => {
-  it('groups proposed subject areas, CPD topics, programme status and gated services', () => {
+  it('groups proposed subject areas, CPD topics, programmes and gated services', () => {
     renderSiteNavigation();
     const mainNav = within(screen.getByRole('navigation', { name: 'Main navigation' }));
     const cpd = mainNav.getByRole('link', { name: 'CPD Courses' });
     fireEvent.focus(cpd);
     expect(mainNav.getByRole('link', { name: /Proposed CPD topic directory/ }).getAttribute('href')).toBe('/cpd-courses');
     expect(mainNav.getByRole('link', { name: /Browse subject areas/ }).getAttribute('href')).toBe('/departments');
-    expect(mainNav.getByRole('link', { name: /Programme catalogue status/ }).getAttribute('href')).toBe('/programmes');
+    expect(mainNav.getByRole('link', { name: /Proposed programme catalogue/ }).getAttribute('href')).toBe('/programmes');
     expect(mainNav.getByRole('link', { name: /Admissions information/ }).getAttribute('href')).toBe('/admissions');
     expect(mainNav.queryByRole('link', { name: /self-study|published courses/i })).toBeNull();
 
@@ -42,7 +42,7 @@ describe('site-wide catalogue and service navigation', () => {
     fireEvent.click(cpdToggle);
     expect(cpdToggle.getAttribute('aria-expanded')).toBe('true');
     expect(mobileNav.getByRole('link', { name: /Proposed CPD topic directory/i }).getAttribute('href')).toBe('/cpd-courses');
-    expect(mobileNav.getByRole('link', { name: /Programme catalogue status/i }).getAttribute('href')).toBe('/programmes');
+    expect(mobileNav.getByRole('link', { name: /Proposed programme catalogue/i }).getAttribute('href')).toBe('/programmes');
     expect(mobileNav.getByText(/no course or enrollment offer is open/i)).toBeTruthy();
     fireEvent.keyDown(document, { key: 'Escape' });
     expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Open menu' }));
@@ -54,7 +54,7 @@ describe('site-wide catalogue and service navigation', () => {
     const explore = footer.getByRole('navigation', { name: 'Explore links' }).textContent ?? '';
     expect(explore).toContain('About Clinova');
     expect(explore).toContain('Proposed CPD topics');
-    expect(explore).toContain('Programme catalogue status');
+    expect(explore).toContain('Proposed programme catalogue');
     expect(footer.getByRole('navigation', { name: 'Learner links' }).textContent).toContain('Candidate and learner portal');
     expect(footer.getByRole('link', { name: /credential verification/i }).getAttribute('href')).toBe('/verify');
     expect(footer.getByRole('link', { name: 'Privacy Policy' }).getAttribute('href')).toBe('/privacy-policy');

@@ -128,7 +128,7 @@ export default function CPDCoursesPage() {
 
           <div className="mt-8 flex flex-wrap gap-4">
             <Link to="/departments" className="inline-flex min-h-11 items-center gap-2 rounded-md border border-navy-300 px-5 py-3 text-sm font-semibold text-navy-800 hover:bg-surface-50">Browse subject areas <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
-            <Link to="/programmes" className="inline-flex min-h-11 items-center gap-2 rounded-md border border-navy-300 px-5 py-3 text-sm font-semibold text-navy-800 hover:bg-surface-50">Programme catalogue status</Link>
+            <Link to="/programmes" className="inline-flex min-h-11 items-center gap-2 rounded-md border border-navy-300 px-5 py-3 text-sm font-semibold text-navy-800 hover:bg-surface-50">Proposed programme catalogue</Link>
             <Link to="/certification" className="inline-flex min-h-11 items-center gap-2 rounded-md border border-navy-300 px-5 py-3 text-sm font-semibold text-navy-800 hover:bg-surface-50">Professional certification</Link>
             <Link to="/verify" className="inline-flex min-h-11 items-center gap-2 rounded-md border border-navy-300 px-5 py-3 text-sm font-semibold text-navy-800 hover:bg-surface-50">Credential verification status</Link>
           </div>

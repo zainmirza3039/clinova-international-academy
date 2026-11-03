@@ -15,6 +15,7 @@ import DepartmentsPage from '@/pages/DepartmentsPage';
 import DepartmentDetailPage from '@/pages/DepartmentDetailPage';
 import CPDCoursesPage from '@/pages/CPDCoursesPage';
 import ProgrammesPage from '@/pages/ProgrammesPage';
+import { ownerListedProgrammes } from '@/data/programmeCatalogueBrowse';
 import Footer from '@/components/Footer';
 import { academyLegalIdentity, academyPakistanAgentPhone, academyPublicAddress } from '@/data/publicContact';
 vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }) }));
@@ -71,11 +72,19 @@ describe('draft-only programme data and non-course reading resources', () => {
     expect(container.textContent).not.toContain(cpdCourses.find((item) => item.id === 'c13')!.title);
     expect(container.querySelector('form,input[type="email"],input[type="password"],button[type="submit"]')).toBeNull();
   });
-  it('shows no current programme offers or unapproved delivery estimates', () => {
+  it('shows proposed title-only programme entries without offers or unapproved delivery estimates', () => {
     const { container } = render(<MemoryRouter><ProgrammesPage /></MemoryRouter>);
-    expect(container.textContent).toMatch(/no programme offer is available/i);
-    for (const programme of programmes) expect(container.textContent).not.toContain(programme.title);
-    expect(container.querySelector('a[href^="/programmes/"]')).toBeNull();
+    expect(container.textContent).toMatch(/programme enrolment is not open/i);
+    for (const programme of ownerListedProgrammes) expect(container.textContent).toContain(programme.title);
+    for (const source of programmes) {
+      expect(container.textContent).not.toContain(source.title);
+      expect(container.textContent).not.toContain(source.description);
+      expect(container.textContent).not.toContain(source.overview);
+      expect(container.textContent).not.toContain(source.duration);
+      expect(container.textContent).not.toContain(source.delivery);
+    }
+    expect(container.querySelectorAll('a[href^="/programmes/"]')).toHaveLength(8);
+    expect(container.querySelector('input[type="search"]')).not.toBeNull();
     expect(container.textContent).not.toMatch(/\b\d+\s+(?:weeks|months|CPD hours)\b/i);
   });
   it('keeps subject-area pages informational and removes legacy course titles', () => {

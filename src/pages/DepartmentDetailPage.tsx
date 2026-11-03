@@ -81,7 +81,7 @@ export default function DepartmentDetailPage() {
           <div className="mt-10 flex flex-wrap gap-5 border-t border-navy-100 pt-7">
             <Link to="/cpd-courses" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-clinical-700 underline underline-offset-4">Browse all proposed CPD topics <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
             <Link to="/departments" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-clinical-700 underline underline-offset-4">All subject areas</Link>
-            <Link to="/programmes" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-clinical-700 underline underline-offset-4">Programme catalogue status</Link>
+            <Link to="/programmes" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-clinical-700 underline underline-offset-4">Proposed programme catalogue</Link>
           </div>
         </div>
       </section>
