@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { fetchPublishedCmsContent, type CmsContentKind, type CmsPublishedContent } from '@/lib/cms';
 
 const kindLabels: Record<CmsContentKind, string> = {
-  programme: 'Learning guide',
+  programme: 'Academic programme',
   cpd_course: 'CPD course',
   article: 'Educational article',
 };
@@ -14,6 +14,7 @@ function usePublishedCmsContent() {
 
   useEffect(() => {
     let active = true;
+    setLoading(true);
     void fetchPublishedCmsContent().then((next) => {
       if (active) setRecords(next);
     }).catch(() => {
@@ -57,7 +58,7 @@ export function CmsPublishedContentShelf({ kinds }: { kinds?: CmsContentKind[] }
   if (visibleRecords.length === 0) return null;
 
   return <section aria-labelledby="cms-published-content-title" className="mt-12 border-t border-navy-100 pt-10">
-    <div className="mb-6"><p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-700">Approved CMS releases</p><h2 id="cms-published-content-title" className="mt-2 text-2xl font-heading font-bold text-navy-900">More published learning content</h2><p className="mt-2 text-sm text-navy-600">These additional records are served from the public, published-content view. Existing repository content remains available as well.</p></div>
+    <div className="mb-6"><p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-700">Approved CMS releases</p><h2 id="cms-published-content-title" className="mt-2 text-2xl font-heading font-bold text-navy-900">Published content</h2><p className="mt-2 text-sm text-navy-600">These additional records are served from the public, published-content view. Existing repository content remains available as well.</p></div>
     <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {visibleRecords.map(record => {
         const title = readText(record.snapshot, 'title') ?? 'Untitled content';
