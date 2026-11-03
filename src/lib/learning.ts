@@ -44,6 +44,7 @@ export type AdminLearningWorkspace = {
   instructors: { user_id: string; public_name: string; professional_title: string; verification_status: string; is_public: boolean }[];
   enrollments: { id: string; course_item_id: string; student_id: string; enrollment_status: string; applied_at: string; course: LearningCourse | null; learner: LearningProfile | null }[];
   courses: LearningCourse[];
+  certificates: LearningCertificate[];
 };
 
 function ensureNoError(error: { message?: string } | null, message: string): void {
@@ -210,17 +211,19 @@ export async function issueCpdCertificate(enrollmentId: string, certificateNumbe
 }
 
 export async function fetchAdminLearningWorkspace(): Promise<AdminLearningWorkspace> {
-  const [profiles, instructors, enrollments, items] = await Promise.all([
+  const [profiles, instructors, enrollments, items, certificates] = await Promise.all([
     supabase.from('profiles').select('user_id,full_name,professional_title,institution,country').order('created_at', { ascending: false }).limit(200),
     supabase.from('instructor_profiles').select('user_id,public_name,professional_title,verification_status,is_public').order('created_at', { ascending: false }).limit(100),
     supabase.from('course_enrollments').select('id,course_item_id,student_id,enrollment_status,applied_at').order('applied_at', { ascending: false }).limit(200),
     supabase.from('content_items').select('id,kind').eq('kind', 'cpd_course').limit(200),
+    supabase.from('course_certificates').select('id,course_item_id,certificate_number,verification_code,issued_at,revoked_at,student_id').order('issued_at', { ascending: false }).limit(200),
   ]);
   ensureNoError(profiles.error, 'Learner profiles are unavailable.');
   ensureNoError(instructors.error, 'Instructor profiles are unavailable.');
   ensureNoError(enrollments.error, 'Enrolment records are unavailable.');
   ensureNoError(items.error, 'Course records are unavailable.');
-  const courseIds = (items.data ?? []).map((item: any) => item.id);
+  ensureNoError(certificates.error, 'Certificate records are unavailable.');
+  const courseIds = [...new Set([...(items.data ?? []).map((item: any) => item.id), ...(certificates.data ?? []).map((row: any) => row.course_item_id)])];
   const courses = await getCourses(courseIds);
   const learnerIds = [...new Set((enrollments.data ?? []).map((row: any) => row.student_id))];
   const learnerProfiles = learnerIds.length
@@ -232,12 +235,23 @@ export async function fetchAdminLearningWorkspace(): Promise<AdminLearningWorksp
     profiles: (profiles.data ?? []) as LearningProfile[],
     instructors: (instructors.data ?? []) as AdminLearningWorkspace['instructors'],
     courses: [...courses.values()],
+    certificates: (certificates.data ?? []).map((row: any) => ({ ...row, course: courses.get(row.course_item_id) ?? null })),
     enrollments: (enrollments.data ?? []).map((row: any) => ({
       ...row,
       course: courses.get(row.course_item_id) ?? null,
       learner: profileMap.get(row.student_id) ?? null,
     })),
   };
+}
+
+export async function createInstructorProfile(userId: string, publicName: string, professionalTitle: string): Promise<void> {
+  const { error } = await supabase.from('instructor_profiles').upsert({ user_id: userId, public_name: publicName.trim(), professional_title: professionalTitle.trim(), verification_status: 'pending', is_public: false }, { onConflict: 'user_id' });
+  ensureNoError(error, 'Instructor profile could not be created. Confirm the user ID belongs to an existing account.');
+}
+
+export async function revokeCpdCertificate(certificateId: string, reason: string): Promise<void> {
+  const { error } = await supabase.from('course_certificates').update({ revoked_at: new Date().toISOString(), revocation_reason: reason.trim() }).eq('id', certificateId);
+  ensureNoError(error, 'Certificate revocation could not be saved.');
 }
 
 export async function reviewInstructorProfile(userId: string, adminId: string, approved: boolean): Promise<void> {
