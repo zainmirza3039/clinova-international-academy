@@ -44,7 +44,7 @@ function StatusPanel({ title, message, linkTo, linkLabel }: { title: string; mes
 export default function AdminPage() {
   const auth = useAuth();
   const isEmailVerified = auth.emailVerified && Boolean(auth.session?.user.email && auth.session.user.email_confirmed_at);
-  const isAdmin = auth.session?.user.app_metadata?.role === 'admin';
+  const isAdmin = auth.session?.user.app_metadata?.role === 'admin' || (Array.isArray(auth.session?.user.app_metadata?.clinova_roles) && auth.session.user.app_metadata.clinova_roles.includes('content_admin'));
   const [activeSection, setActiveSection] = useState<AdminSection>('Overview');
   const [contentSearch, setContentSearch] = useState('');
   useSEO({ title: 'Admin access', description: 'Restricted Clinova administration.', noindex: true });
