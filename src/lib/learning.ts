@@ -164,9 +164,16 @@ export async function createTeachingSession(userId: string, input: { course_item
   ensureNoError(error, 'The teaching session could not be created.');
 }
 
-export async function createCourseLesson(userId: string, input: { course_item_id: string; title: string; summary?: string; content_markdown?: string; sequence_number: number }): Promise<void> {
-  const { error } = await supabase.from('course_lessons').insert({ ...input, created_by: userId, is_published: false });
+export async function createCourseLesson(userId: string, input: { course_item_id: string; title: string; summary?: string; content_markdown?: string; sequence_number: number }): Promise<string> {
+  const { data, error } = await supabase.from('course_lessons').insert({ ...input, created_by: userId, is_published: false }).select('id').single();
   ensureNoError(error, 'The lesson could not be created.');
+  if (!data?.id) throw new Error('The lesson was not returned after creation.');
+  return data.id as string;
+}
+
+export async function attachCourseResource(lessonId: string, resourcePath: string): Promise<void> {
+  const { error } = await supabase.from('course_lessons').update({ resource_path: resourcePath }).eq('id', lessonId);
+  ensureNoError(error, 'The uploaded resource could not be attached to the lesson.');
 }
 
 export async function uploadCourseResource(userId: string, courseItemId: string, file: File): Promise<string> {
