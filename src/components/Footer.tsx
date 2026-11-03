@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { academyLegalIdentity } from '@/data/publicContact';
 
-const copyrightNotice = `This website and its content are copyright of Clinova International Academy – © Clinova International Academy 2024. All rights reserved.
+const copyrightNotice = `This website and its content are copyright of Clinova International Academy Ltd. © 2026. All rights reserved.
 Any redistribution or reproduction of part or all of the contents in any form is prohibited other than the following:
 You may print or download extracts to a local hard disk for your personal and non-commercial use only.
 You may copy the content to individual third parties for their personal use, provided that you acknowledge clinova International Academy as the source of the material.
@@ -25,7 +25,7 @@ const learnerLinks: FooterLink[] = [
 ];
 const facultyInstitutionLinks: FooterLink[] = [
   { label: 'Faculty directory', to: '/faculty' },
-  { label: 'Faculty information — applications not open', to: '/become-an-instructor' },
+  { label: 'Instructor information', to: '/become-an-instructor' },
   { label: 'Institutional collaboration', to: '/for-institutions' },
   { label: 'Clinical placement status', to: '/clinical-internships' },
 ];
