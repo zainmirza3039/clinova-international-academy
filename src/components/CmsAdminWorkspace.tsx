@@ -142,16 +142,18 @@ function EditDraftForm({ version, onSave, disabled }: { version: CmsWorkflowVers
   const [slug, setSlug] = useState(typeof version.snapshot.slug === 'string' ? version.snapshot.slug : '');
   const [description, setDescription] = useState(typeof version.snapshot.description === 'string' ? version.snapshot.description : '');
   const [content, setContent] = useState(typeof version.snapshot.contentMarkdown === 'string' ? version.snapshot.contentMarkdown : '');
+  const [enrollmentOpen, setEnrollmentOpen] = useState(version.snapshot.enrollmentOpen === true);
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (disabled || !title.trim() || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return;
-    void onSave({ name: 'create_content_version', args: { p_item_id: version.content_item_id, p_snapshot: { ...version.snapshot, title: title.trim(), slug, description: description.trim(), contentMarkdown: content } } });
+    void onSave({ name: 'create_content_version', args: { p_item_id: version.content_item_id, p_snapshot: { ...version.snapshot, title: title.trim(), slug, description: description.trim(), contentMarkdown: content, ...(version.kind === 'cpd_course' ? { enrollmentOpen } : {}) } } });
   }
   return <form onSubmit={submit} className="mt-4 grid gap-3 border-t border-navy-100 pt-4">
     <label className="text-sm font-medium text-navy-700">Title<input required maxLength={200} value={title} onChange={e => setTitle(e.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2" /></label>
     <label className="text-sm font-medium text-navy-700">Slug<input required maxLength={160} pattern="[a-z0-9]+(-[a-z0-9]+)*" value={slug} onChange={e => setSlug(e.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2" /></label>
     <label className="text-sm font-medium text-navy-700">Description<textarea rows={2} maxLength={4000} value={description} onChange={e => setDescription(e.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2" /></label>
     <label className="text-sm font-medium text-navy-700">Content / teaching notes<textarea rows={5} maxLength={50000} value={content} onChange={e => setContent(e.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2" /></label>
+    {version.kind === 'cpd_course' && <label className="flex items-center gap-3 text-sm font-medium text-navy-700"><input type="checkbox" checked={enrollmentOpen} onChange={e => setEnrollmentOpen(e.target.checked)} className="h-4 w-4 accent-teal-700" />Open applications when this version is approved and published</label>}
     <button type="submit" disabled={disabled || !title.trim() || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)} className="w-fit rounded-lg bg-teal-700 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50">Save new version</button>
   </form>;
 }
