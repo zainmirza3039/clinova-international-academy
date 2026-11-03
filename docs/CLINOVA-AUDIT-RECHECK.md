@@ -80,8 +80,7 @@ All `VITE_*` values are public build-time inputs. Never add service-role keys, d
 
 - `VITE_SUPABASE_URL`: the confirmed Clinova project HTTPS origin only.
 - `VITE_SUPABASE_ANON_KEY`: only that project's public anon/publishable key.
-- `VITE_AUTH_ENABLED=false`: retain until backend owner authorizes Auth configuration, sign-up policy, email delivery, password/security policy and exact callback origin allowlist.
-- `VITE_ENQUIRIES_ENABLED=false`: retain until migration state, effective grants, RLS and server validation/abuse controls are verified. Do not duplicate the migration the backend owner reports applying.
+- `VITE_AUTH_ENABLED=false` and `VITE_ENQUIRIES_ENABLED=false`: keep these historical build values false. The current feature branch additionally hard-disables both services in source, so environment-only changes cannot activate sign-in or submission. Any future activation requires a separately authorized code change, backend/policy/security review and negative end-to-end tests. Do not duplicate or apply migrations.
 - `VITE_SITE_URL`: blank until intended domain ownership/resolution and publication are confirmed. Never use a preview URL as canonical.
 - `VITE_INDEXING_ENABLED=false`: separately approve catalogue, identity, accreditation/contact claims, policies and domain before enabling.
 

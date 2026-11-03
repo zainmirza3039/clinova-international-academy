@@ -2,76 +2,53 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useScrollPosition } from '@/hooks/useScrollAnimation';
-import { departments } from '@/data/departments';
-import { publishedCPDCourses } from '@/data/cpdCourses';
 
 type NavigationItem = { label: string; to: string; description: string };
 type NavigationLink = { label: string; to: string; menuTitle?: string; items?: NavigationItem[] };
 
-const featuredCourseSlugs = [
-  'musculoskeletal-assessment-and-clinical-reasoning',
-  'clinical-assessment-of-low-back-pain',
-  'knee-osteoarthritis-rehabilitation',
-  'stroke-rehabilitation-functional-goals',
-  'introduction-to-sports-rehabilitation',
-  'pain-management-fundamentals',
-  'motor-control-relearning-in-neurorehabilitation',
-  'balance-training-fall-prevention',
-];
-
-const departmentItems: NavigationItem[] = departments.map((department) => ({
-  label: department.name,
-  to: `/departments/${department.slug}`,
-  description: department.description,
-}));
-
-const courseItems: NavigationItem[] = [
-  { label: 'All self-study courses', to: '/cpd-courses', description: 'Search the current independent-study catalogue.' },
-  { label: 'Programme learning guides', to: '/programmes', description: 'Browse informational learning guides; no award or enrolment is implied.' },
-  { label: 'Articles and resources', to: '/resources', description: 'Explore educational reading and source-linked articles.' },
-  { label: 'Study tools', to: '/learning-resources', description: 'Read reflection prompts, checklists and other study tools.' },
-  ...featuredCourseSlugs.flatMap((slug) => {
-    const course = publishedCPDCourses.find((item) => item.slug === slug);
-    return course ? [{ label: course.title, to: `/cpd-courses/${course.slug}`, description: course.description }] : [];
-  }),
-];
-
 const navLinks: NavigationLink[] = [
   { label: 'Home', to: '/' },
-  { label: 'About', to: '/about' },
-  { label: 'Departments', to: '/departments', menuTitle: 'Healthcare subject areas', items: departmentItems },
-  { label: 'Courses', to: '/cpd-courses', menuTitle: 'Courses and learning resources', items: courseItems },
   {
-    label: 'Learners',
-    to: '/admissions',
-    menuTitle: 'Learner information',
+    label: 'About Us',
+    to: '/about',
+    menuTitle: 'About Clinova',
     items: [
-      { label: 'Admissions information', to: '/admissions', description: 'Review current learning routes and admissions status.' },
-      { label: 'Online learning resources', to: '/online-learning', description: 'Self-guided reading only; live teaching and learner enrolment are unavailable.' },
-      { label: 'Application information', to: '/application', description: 'Online applications and payment processing are unavailable.' },
-      { label: 'Student access — currently unavailable', to: '/student', description: 'Learner sign-in and protected student services are not available in this build.' },
+      { label: 'Academy information', to: '/about', description: 'Read the approved public identity and organizational information.' },
+      { label: 'Healthcare subject areas', to: '/departments', description: 'Browse subject-area information; no course offer is implied.' },
+      { label: 'Quality assurance', to: '/quality-assurance', description: 'Review the public policy publication status.' },
+    ],
+  },
+  { label: 'CPD Courses', to: '/cpd-courses', menuTitle: 'CPD education', items: [
+    { label: 'Proposed CPD topic directory', to: '/cpd-courses', description: 'Browse owner-listed topic titles only; no course or enrollment offer is open.' },
+    { label: 'Browse subject areas', to: '/departments', description: 'Explore proposed subject groupings and learning topics.' },
+    { label: 'Programme catalogue status', to: '/programmes', description: 'The programme title list is being reconciled; admissions are not open.' },
+    { label: 'Admissions information', to: '/admissions', description: 'Current education, application and learner-service status.' },
+    { label: 'Candidate and learner portal', to: '/candidate-dashboard', description: 'Separate CPD and certification areas; services are not connected.' },
+  ] },
+  {
+    label: 'Professional Certification',
+    to: '/certification',
+    menuTitle: 'Professional certification',
+    items: [
+      { label: 'Certification overview', to: '/certification', description: 'No certification scheme is currently open.' },
+      { label: 'Application status', to: '/apply-certification', description: 'No candidate applications are being accepted.' },
+      { label: 'Assessment development', to: '/assessment', description: 'No exam, OSCE or practical assessment is operational.' },
+      { label: 'Policy development', to: '/certification/policies', description: 'Policy work areas are drafts, not candidate rules.' },
     ],
   },
   {
-    label: 'Faculty',
-    to: '/faculty',
-    menuTitle: 'Faculty and educator information',
-    items: [
-      { label: 'Faculty directory', to: '/faculty', description: 'No verified faculty profiles are currently published.' },
-      { label: 'Instructor information', to: '/become-an-instructor', description: 'Instructor applications and credential submissions are not open.' },
-    ],
-  },
-  {
-    label: 'Institutions',
-    to: '/training-partners',
+    label: 'For Institutions',
+    to: '/for-institutions',
     menuTitle: 'Institutional information',
     items: [
-      { label: 'Partnership information', to: '/training-partners', description: 'Discussion areas only; proposals and application submissions are not available.' },
-      { label: 'Clinical internship status', to: '/clinical-internships', description: 'No verified placements or application workflow are currently listed.' },
+      { label: 'Institutional collaboration', to: '/for-institutions', description: 'Information only; no agreement or partner status is implied.' },
+      { label: 'Clinical placement status', to: '/clinical-internships', description: 'No verified placement or application workflow is listed.' },
     ],
   },
   { label: 'Resources', to: '/resources' },
+  { label: 'Verify Certificate', to: '/verify' },
   { label: 'Contact', to: '/contact' },
+  { label: 'Login / Register', to: '/sign-in' },
 ];
 
 const normalizeRoutePath = (path: string) => path.length > 1 ? path.replace(/\/+$/, '') : path;

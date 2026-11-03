@@ -2,8 +2,11 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 export const REQUIRED_SUPABASE_HOSTNAME = 'ssxpmcbqfdggfsoqbxac.supabase.co';
 
+// Authentication stays unavailable until prerequisites receive a separate approved code release.
+const AUTH_ACTIVATION_APPROVED_IN_SOURCE = false;
+
 function getAuthConfig() {
-  const enabled = import.meta.env.VITE_AUTH_ENABLED === 'true';
+  const enabled = AUTH_ACTIVATION_APPROVED_IN_SOURCE && import.meta.env.VITE_AUTH_ENABLED === 'true';
   const rawUrl = String(import.meta.env.VITE_SUPABASE_URL ?? '').trim();
   const key = String(import.meta.env.VITE_SUPABASE_ANON_KEY ?? '').trim();
   let validUrl = false;

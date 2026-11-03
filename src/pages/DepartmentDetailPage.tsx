@@ -1,193 +1,90 @@
-import { useParams, Link } from 'react-router-dom';
-import { BookOpen, Award, Monitor, ArrowRight, CheckCircle } from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
+import { ArrowRight, BookOpenCheck, ShieldAlert } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
-import SectionHeader from '@/components/SectionHeader';
-import Reveal from '@/components/Reveal';
-import ProgrammeCard from '@/components/ProgrammeCard';
 import CPDCard from '@/components/CPDCard';
-import FAQAccordion from '@/components/FAQAccordion';
-import CTASection from '@/components/CTASection';
 import { getDepartmentBySlug } from '@/data/departments';
-import { getProgrammesByDepartment } from '@/data/programmes';
-import { publishedCPDCourses } from '@/data/cpdCourses';
-import type { FAQ } from '@/data/types';
+import { getOwnerListedCPDTopicsBySubjectArea } from '@/data/catalogueBrowse';
 
 export default function DepartmentDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const department = slug ? getDepartmentBySlug(slug) : undefined;
+  const relatedTopics = department ? getOwnerListedCPDTopicsBySubjectArea(department.name) : [];
 
   useSEO({
-    title: department ? `${department.name}` : 'Department Not Found',
-    description: department?.description ?? 'Department not found.',
+    title: department ? `${department.name} | Proposed subject area` : 'Subject area not found',
+    description: department ? `${department.name} proposed subject-area information and topic titles; no course is open for enrollment.` : 'Subject area not found.',
+    noindex: true,
   });
 
   if (!department) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white pt-20">
-        <div className="text-center px-4">
-          <h1 className="font-heading text-2xl font-bold text-navy-900 mb-4">Department Not Found</h1>
-          <p className="text-navy-500 mb-6">The department you're looking for may have moved or no longer exists.</p>
-          <Link to="/departments" className="inline-flex items-center gap-2 px-6 py-3 bg-navy-900 text-white font-semibold rounded-lg hover:bg-navy-800 transition-colors">
-            View All Departments
-          </Link>
+      <section className="mx-auto flex min-h-[60vh] max-w-3xl items-center justify-center px-6 py-24 text-center">
+        <div>
+          <h1 className="font-heading text-2xl font-bold text-navy-900">Subject area not found</h1>
+          <p className="mt-3 text-navy-600">This address does not match a current subject-area page.</p>
+          <Link to="/departments" className="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-clinical-700 underline"><ArrowRight className="h-4 w-4" aria-hidden="true" />View subject areas</Link>
         </div>
-      </div>
+      </section>
     );
   }
-
-  const programmes = getProgrammesByDepartment(department.slug);
-  const certificates = programmes.filter((p) => p.category === 'Certificate');
-  const diplomas = programmes.filter((p) => p.category === 'Diploma');
-  const relatedCPD = publishedCPDCourses.filter((c) => c.department === department.name).slice(0, 4);
-
-  const deptFAQs: FAQ[] = [
-    { id: 'df1', question: `What is this ${department.shortName} page?`, answer: `It organises educational reading and study topics for this healthcare discipline. It does not itself represent a clinical service or a live programme.` },
-    { id: 'df2', question: 'Who might use these materials?', answer: 'Healthcare professionals, learners and organisations may use these published educational resources to frame questions. Readers should consider their training, role, local guidance and scope of practice.' },
-    { id: 'df3', question: 'Are the listed programmes available?', answer: 'Catalogue entries are informational. Confirm availability, dates, fees, delivery, assessment and entry requirements for each offering before enrolling.' },
-    { id: 'df4', question: 'Do these pages provide a qualification or clinical authority?', answer: 'No. These pages do not promise a certificate, accreditation, competence, employment, professional recognition or permission to practise.' },
-  ];
 
   return (
     <>
       <PageHero
-        breadcrumbs={[
-          { label: 'Home', to: '/' },
-          { label: 'Departments', to: '/departments' },
-          { label: department.shortName },
-        ]}
-        eyebrow="Healthcare learning"
+        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Subject areas', to: '/departments' }, { label: department.shortName }]}
+        eyebrow="Proposed subject area"
         title={department.name}
-        description={department.description}
+        description="This is an informational subject grouping. It does not represent an established academic department, approved curriculum or current training offer."
         image={department.image}
       />
-
-      {/* Overview */}
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy-900 mb-4">Subject-area overview</h2>
-          <p className="text-base text-navy-600 leading-relaxed">{department.overview}</p>
-          <p className="mt-4 text-sm text-navy-500 leading-relaxed">Use this subject area to guide further reading and reflection. Browse the published self-study courses for structured lessons and evidence sources.</p>
-        </div>
-      </section>
-
-      {/* Learning Areas */}
-      <section className="py-12 lg:py-16 bg-navy-50">
-        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-bold text-navy-900 mb-3 text-center">Topic coverage</h2>
-          <p className="text-center text-sm text-navy-600 mb-8">Subject categories for educational exploration, not an established department curriculum.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {department.learningAreas.map((area, i) => (
-              <Reveal key={area} delay={(i % 4) * 60} className="flex items-center gap-3 p-4 bg-white rounded-lg border border-navy-100">
-                <CheckCircle className="w-5 h-5 text-teal-600 shrink-0" />
-                <span className="text-sm font-medium text-navy-700">{area}</span>
-              </Reveal>
-            ))}
+      <section className="bg-white px-6 py-12 lg:py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="border border-amber-300 bg-amber-50 p-6" role="status">
+            <ShieldAlert className="h-6 w-6 text-amber-700" aria-hidden="true" />
+            <h2 className="mt-3 font-heading text-xl font-bold text-navy-900">Information only · no enrollment is open</h2>
+            <p className="mt-2 text-sm leading-relaxed text-navy-700">The topic names on this page are proposed learning areas. Related CPD titles use provisional subject groupings and are not course offers. No syllabus, hours, faculty, schedule, fee, assessment or credential terms are published here.</p>
           </div>
-        </div>
-      </section>
 
-      {/* Featured Programmes */}
-      {programmes.length > 0 && (
-        <section className="py-16 lg:py-24 bg-white">
-          <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-            <SectionHeader eyebrow="Programme information" title="Related learning pathways" description={`Explore learning topics related to ${department.name}. Availability and terms are stated in each published offering.`} />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {programmes.map((prog, i) => (
-                <ProgrammeCard key={prog.id} programme={prog} index={i} />
-              ))}
+          <section className="mt-10" aria-labelledby="learning-areas-title">
+            <div className="flex items-start gap-3">
+              <BookOpenCheck className="mt-1 h-6 w-6 shrink-0 text-clinical-700" aria-hidden="true" />
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-clinical-700">Subject-area topics</p>
+                <h2 id="learning-areas-title" className="mt-1 font-heading text-2xl font-bold text-navy-900">Proposed learning areas</h2>
+                <p className="mt-2 max-w-3xl text-sm leading-relaxed text-navy-600">These topic labels are provided for discovery only. They are not course curricula, competency standards or professional instructions.</p>
+              </div>
             </div>
-          </div>
-        </section>
-      )}
-
-      {/* Related proposed certificate outlines */}
-      {certificates.length > 0 && (
-        <section className="py-12 lg:py-16 bg-navy-50">
-          <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="font-heading text-xl font-bold text-navy-900 mb-6 flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-teal-600" /> Certificate Courses
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {certificates.map((prog, i) => (
-                <ProgrammeCard key={prog.id} programme={prog} index={i} />
+            <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {department.learningAreas.map((area) => (
+                <li key={area} className="border border-navy-200 bg-surface-50 p-4">
+                  <span className="text-xs font-semibold uppercase tracking-[0.12em] text-clinical-700">Proposed topic</span>
+                  <p className="mt-2 text-sm font-semibold leading-relaxed text-navy-900">{area}</p>
+                </li>
               ))}
-            </div>
-          </div>
-        </section>
-      )}
+            </ul>
+          </section>
 
-      {/* Related proposed diploma outlines */}
-      {diplomas.length > 0 && (
-        <section className="py-12 lg:py-16 bg-white">
-          <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="font-heading text-xl font-bold text-navy-900 mb-6 flex items-center gap-2">
-              <Award className="w-5 h-5 text-teal-600" /> Diploma Programmes
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {diplomas.map((prog, i) => (
-                <ProgrammeCard key={prog.id} programme={prog} index={i} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+          <section className="mt-12 border-t border-navy-100 pt-10" aria-labelledby="related-topic-proposals-title">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-clinical-700">CPD topic directory</p>
+            <h2 id="related-topic-proposals-title" className="mt-1 font-heading text-2xl font-bold text-navy-900">Related proposed CPD topics</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-navy-600">The subject-area labels below are provisional source groupings for browsing; they do not mean a topic is approved or currently available.</p>
+            {relatedTopics.length > 0 ? (
+              <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {relatedTopics.map((topic) => <CPDCard key={topic.id} course={topic} />)}
+              </div>
+            ) : (
+              <p className="mt-5 border border-navy-200 bg-surface-50 p-5 text-sm text-navy-700" role="status">No owner-listed CPD topic is currently grouped under this subject area.</p>
+            )}
+          </section>
 
-      {/* Related proposed professional-development outlines */}
-      {relatedCPD.length > 0 && (
-        <section className="py-12 lg:py-16 bg-navy-50">
-          <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="font-heading text-xl font-bold text-navy-900 mb-6 flex items-center gap-2">
-              <Monitor className="w-5 h-5 text-teal-600" /> CPD Courses
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {relatedCPD.map((course, i) => (
-                <CPDCard key={course.id} course={course} index={i} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      <section className="py-12 lg:py-16 bg-white">
-        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader eyebrow="Learning library" title="Explore further reading" description="Browse the shared educational article library and independent study tools. These resources are not a department-specific curriculum." />
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Link to="/resources" className="inline-flex items-center gap-2 text-sm font-semibold text-clinical-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600">Browse educational articles <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
-            <Link to="/learning-resources" className="inline-flex items-center gap-2 text-sm font-semibold text-clinical-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600">Explore study tools <ArrowRight className="w-4 h-4" aria-hidden="true" /></Link>
+          <div className="mt-10 flex flex-wrap gap-5 border-t border-navy-100 pt-7">
+            <Link to="/cpd-courses" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-clinical-700 underline underline-offset-4">Browse all proposed CPD topics <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+            <Link to="/departments" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-clinical-700 underline underline-offset-4">All subject areas</Link>
+            <Link to="/programmes" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-clinical-700 underline underline-offset-4">Programme catalogue status</Link>
           </div>
         </div>
       </section>
-
-      <section className="py-8 bg-amber-50 border-y border-amber-200">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-sm text-navy-700 leading-relaxed"><strong>Educational disclaimer.</strong> These published educational resources are for professional discussion, not patient-specific medical advice, a clinical protocol or evidence of competency. Follow local guidance and scope of practice; seek qualified review before clinical use.</div>
-      </section>
-
-      {programmes.length === 0 && relatedCPD.length === 0 && (
-        <section className="py-16 bg-navy-50">
-          <div className="max-w-3xl mx-auto px-4 text-center">
-            <p className="text-navy-500 mb-4">No related programme records are currently listed for this subject area. Explore the learning library for related educational reading.</p>
-            <Link to="/cpd-courses" className="inline-flex items-center gap-2 px-6 py-3 bg-navy-900 text-white font-semibold rounded-lg hover:bg-navy-800 transition-colors">
-              Browse Self-Study Courses <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </section>
-      )}
-
-      {/* FAQs */}
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader eyebrow="FAQs" title="Frequently Asked Questions" />
-          <FAQAccordion items={deptFAQs} />
-        </div>
-      </section>
-
-      <CTASection
-        title={`Continue exploring ${department.shortName}`}
-        description="Explore the learning library and study tools. Confirm programme requirements and recognition before enrolling."
-        primaryCTA={{ label: 'Browse Self-Study Courses', to: '/cpd-courses' }}
-        secondaryCTA={{ label: 'Contact Academy', to: '/contact' }}
-      />
     </>
   );
 }

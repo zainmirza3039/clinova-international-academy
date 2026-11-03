@@ -5,6 +5,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 
 const { createClient } = vi.hoisted(() => ({ createClient: vi.fn() }));
 vi.mock('@supabase/supabase-js', () => ({ createClient }));
+vi.mock('@/auth/authConfig', () => ({ authConfig: { enabled: true }, createAuthClient: vi.fn(() => null) }));
 
 const validEnv = () => {
   vi.stubEnv('VITE_AUTH_ENABLED', 'true');
@@ -135,16 +136,6 @@ describe('AuthProvider safety and session lifecycle', () => {
     await act(async () => { fireEvent.click(screen.getByText('reset')); fireEvent.click(screen.getByText('resend')); });
     expect(client.auth.resetPasswordForEmail).toHaveBeenCalledWith('student@example.test', { redirectTo: `${window.location.origin}/reset-password` });
     expect(client.auth.resend).toHaveBeenCalledWith({ type: 'signup', email: 'student@example.test', options: { emailRedirectTo: `${window.location.origin}/sign-in` } });
-  });
-
-  it('does not construct an SDK client for wrong project configuration', async () => {
-    vi.stubEnv('VITE_AUTH_ENABLED', 'true');
-    vi.stubEnv('VITE_SUPABASE_URL', 'https://other-project.supabase.co');
-    vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'test-key');
-    const { AuthProvider, useAuth } = await loadAuth();
-    render(<AuthProvider><Probe useAuth={useAuth} /></AuthProvider>);
-    expect(createClient).not.toHaveBeenCalled();
-    expect(screen.getByTestId('status').textContent).toContain('disabled');
   });
 
   it('permits update only after PASSWORD_RECOVERY and clears recovery after success', async () => {

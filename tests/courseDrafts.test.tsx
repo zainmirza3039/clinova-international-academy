@@ -1,58 +1,62 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { courseDrafts } from '@/data/courseDrafts';
-import { programmes } from '@/data/programmes';
-import { cpdCourses } from '@/data/cpdCourses';
+import { programmes, publishedProgrammes } from '@/data/programmes';
+import { cpdCourses, publishedCPDCourses } from '@/data/cpdCourses';
+import { getCPDCurriculum } from '@/data/cpdCurricula';
+import { ownerListedCPDTopics } from '@/data/catalogueBrowse';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import CPDCard from '@/components/CPDCard';
 import ProgrammeDetailPage from '@/pages/ProgrammeDetailPage';
+import CPDCourseDetailPage from '@/pages/CPDCourseDetailPage';
 
-vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }) }));
-afterEach(() => cleanup());
+afterEach(() => { cleanup(); document.head.innerHTML = ''; });
 
-describe('published learning curricula', () => {
-  it('contains two stable-slug curricula with three modules and two substantive lessons each', () => {
-    for (const slug of ['certificate-in-musculoskeletal-assessment', 'certificate-in-clinical-pain-management']) {
-      const draft = courseDrafts[slug];
-      expect(draft.status).toBe('published');
-      expect(draft.modules).toHaveLength(3);
-      expect(draft.modules.every((module) => module.lessons)).toBe(true);
-      expect(draft.modules.every((module) => module.lessons).valueOf()).toBe(true);
-      draft.modules.forEach((module) => {
-        expect(module.lessons).toHaveLength(2);
-        module.lessons.forEach((lesson) => expect(lesson.text.split(/\s+/).length).toBeGreaterThanOrEqual(100));
-        expect(module.reflectiveActivity.length).toBeGreaterThan(40);
-      });
-      expect(draft.relatedArticles.length).toBeGreaterThanOrEqual(3);
-      expect(draft.evidence.some((source) => /nice|who|hcpc/i.test(source.organisation))).toBe(true);
-    }
-  });
-
-  it('keeps publication status explicit and avoids unverified offers, hours or certificates', () => {
-    expect(programmes.every((item) => item.publicationStatus === 'published')).toBe(true);
-    expect(cpdCourses.every((item) => item.publicationStatus === 'published')).toBe(true);
+describe('draft catalogue and curriculum release gates', () => {
+  it('keeps every programme and CPD source record draft-only with no public-published selectors', () => {
     expect(programmes.length).toBeGreaterThan(0);
-    expect(cpdCourses.length).toBeGreaterThan(0);
-    const publishedProgramme = programmes[0];
-    const programmeCard = render(<MemoryRouter><ProgrammeCard programme={publishedProgramme} /></MemoryRouter>);
-    expect(programmeCard.container.textContent).toMatch(/Read guide/i);
-    expect(programmeCard.container.textContent).not.toMatch(/draft/i);
-    expect(programmeCard.container.textContent).not.toMatch(/\d+ CPD hours|weeks|Certificate of Completion|Enrol now/i);
-    cleanup();
-    const publishedCourse = cpdCourses.find((item) => item.publicationStatus === 'published');
-    expect(publishedCourse).toBeTruthy();
-    const cpdCard = render(<MemoryRouter><CPDCard course={publishedCourse!} /></MemoryRouter>);
-    expect(cpdCard.container.textContent).toMatch(/Learning guide|self-study/i);
-    expect(cpdCard.container.textContent).not.toMatch(/\d+ CPD hours|Certificate of Completion|Enrol now/i);
+    expect(cpdCourses.length).toBe(16);
+    expect(programmes.every((item) => item.publicationStatus === 'draft' && item.status === 'Draft')).toBe(true);
+    expect(cpdCourses.every((item) => item.publicationStatus === 'draft')).toBe(true);
+    expect(publishedProgrammes).toHaveLength(0);
+    expect(publishedCPDCourses).toHaveLength(0);
+    expect(ownerListedCPDTopics).toHaveLength(12);
+    expect(Object.values(courseDrafts).every((draft) => draft.status === 'draft')).toBe(true);
+    for (const course of cpdCourses) expect(getCPDCurriculum(course.slug)?.status).toBe('draft');
   });
 
-  it('renders lesson content inside collapsed details with no learner completion controls', () => {
-    render(<MemoryRouter initialEntries={['/programmes/certificate-in-musculoskeletal-assessment']}><Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes></MemoryRouter>);
-    expect(screen.getByRole('heading', { name: 'Further study material' })).toBeTruthy();
-    expect(screen.getAllByText(/Reflective activity:/i)).toHaveLength(3);
-    expect(document.querySelectorAll('details[open]')).toHaveLength(0);
-    expect(screen.queryByRole('button', { name: /complete|save/i })).toBeNull();
-    expect(document.body.textContent).not.toMatch(/digital Certificate|you will receive|\b40 CPD hours\b/);
+  it('keeps programme cards inert and uses CPD cards only for owner-listed topic titles', () => {
+    const programme = render(<MemoryRouter><ProgrammeCard programme={programmes[0]} /></MemoryRouter>);
+    expect(screen.getByRole('heading', { name: 'Programme information is under review' })).toBeTruthy();
+    expect(programme.container.textContent).not.toContain(programmes[0].title);
+    expect(programme.container.querySelector('a')).toBeNull();
+    cleanup();
+
+    const topic = ownerListedCPDTopics[0];
+    const sourceTopic = cpdCourses.find((item) => item.id === topic.id)!;
+    const cpd = render(<MemoryRouter><CPDCard course={topic} /></MemoryRouter>);
+    expect(screen.getByRole('heading', { name: topic.title })).toBeTruthy();
+    expect(cpd.container.textContent).toContain('Proposed CPD topic');
+    expect(cpd.container.textContent).toContain('not an open course or enrollment offer');
+    expect(cpd.container.textContent).not.toContain(sourceTopic.description);
+    expect(cpd.container.querySelectorAll('a[href^="/cpd-courses/"]')).toHaveLength(1);
+  });
+
+  it('keeps programme detail routes generic and not available for enrollment', () => {
+    const { container } = render(<MemoryRouter initialEntries={[`/programmes/${programmes[0].slug}`]}><Routes><Route path="/programmes/:slug" element={<ProgrammeDetailPage />} /></Routes></MemoryRouter>);
+    expect(screen.getByRole('heading', { name: 'Programme details are under review' })).toBeTruthy();
+    expect(container.textContent).not.toContain(programmes[0].title);
+    expect(container.querySelector('form,input,textarea,select,button[type="submit"]')).toBeNull();
+  });
+
+  it('keeps owner-listed CPD topic details title-only, with no course content or learner controls', () => {
+    const topic = ownerListedCPDTopics[0];
+    const sourceTopic = cpdCourses.find((item) => item.id === topic.id)!;
+    const { container } = render(<MemoryRouter initialEntries={[`/cpd-courses/${topic.slug}`]}><Routes><Route path="/cpd-courses/:slug" element={<CPDCourseDetailPage />} /></Routes></MemoryRouter>);
+    expect(screen.getByRole('heading', { level: 1, name: topic.title })).toBeTruthy();
+    expect(container.textContent).not.toContain(sourceTopic.description);
+    expect(container.textContent).not.toContain(sourceTopic.duration);
+    expect(container.querySelector('form,input,textarea,select,button[type="submit"]')).toBeNull();
   });
 });

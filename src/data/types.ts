@@ -6,7 +6,6 @@ export interface Department {
   description: string;
   overview: string;
   image: string;
-  programmeCount: number;
   learningAreas: string[];
 }
 

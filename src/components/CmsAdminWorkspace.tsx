@@ -70,7 +70,7 @@ function CreateDraftForm({ user, onCreated, disabled }: { user: CmsUser; onCreat
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!title.trim() || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || disabled) return;
+    if (!title.trim() || kind !== 'article' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || disabled) return;
     void onCreated({ name: 'create_content_item', args: { p_kind: kind, p_snapshot: { title: title.trim(), slug, description: description.trim() } } });
     setTitle('');
     setSlug('');
@@ -83,7 +83,7 @@ function CreateDraftForm({ user, onCreated, disabled }: { user: CmsUser; onCreat
     <div className="mt-4 grid gap-4 sm:grid-cols-2">
       <label className="text-sm font-medium text-navy-700">Content type
         <select value={kind} onChange={event => setKind(event.target.value as CmsContentKind)} className="mt-1 w-full rounded-lg border border-navy-200 bg-white px-3 py-2.5">
-          <option value="article">Educational article</option><option value="programme">Learning guide</option><option value="cpd_course">Self-study course</option>
+          <option value="article">Educational article</option><option value="programme" disabled>Programme record (not enabled)</option><option value="cpd_course" disabled>CPD course record (not enabled)</option>
         </select>
       </label>
       <label className="text-sm font-medium text-navy-700">Title
@@ -96,7 +96,7 @@ function CreateDraftForm({ user, onCreated, disabled }: { user: CmsUser; onCreat
         <textarea maxLength={4000} rows={3} value={description} onChange={event => setDescription(event.target.value)} className="mt-1 w-full rounded-lg border border-navy-200 px-3 py-2.5" />
       </label>
     </div>
-    <button type="submit" disabled={disabled || !title.trim() || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)} className="mt-4 rounded-lg bg-teal-700 px-4 py-2.5 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50">Save draft</button>
+    <button type="submit" disabled={disabled || kind !== 'article' || !title.trim() || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)} className="mt-4 rounded-lg bg-teal-700 px-4 py-2.5 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50">Save draft</button>
   </form>;
 }
 
@@ -110,11 +110,12 @@ function VersionCard({ version, user, roles, onTransition, disabled }: {
   const [reason, setReason] = useState('');
   const title = typeof version.snapshot.title === 'string' ? version.snapshot.title : 'Untitled content';
   const canAuthor = hasAnyCmsRole(user, createRoles);
-  const maySubmit = version.workflow_status === 'draft' && canAuthor
+  const articleWorkflow = version.kind === 'article';
+  const maySubmit = articleWorkflow && version.workflow_status === 'draft' && canAuthor
     && (version.author_id === user.id || roles.includes('content_admin'));
-  const canPublish = roles.includes('content_publisher');
-  const canArchive = version.workflow_status === 'published' && canPublish;
-  const canWithdraw = !['archived', 'withdrawn', 'rejected', 'changes_requested', 'superseded'].includes(version.workflow_status)
+  const canPublish = articleWorkflow && roles.includes('content_publisher');
+  const canArchive = articleWorkflow && version.workflow_status === 'published' && canPublish;
+  const canWithdraw = articleWorkflow && !['archived', 'withdrawn', 'rejected', 'changes_requested', 'superseded'].includes(version.workflow_status)
     && hasAnyCmsRole(user, ['content_publisher', 'content_admin']);
 
   return <article className="rounded-xl border border-navy-100 bg-white p-5">
@@ -185,7 +186,7 @@ export default function CmsAdminWorkspace({ user }: { user: CmsUser }) {
 
   if (!enabled) return <section aria-labelledby="cms-workspace-title" className="mt-8 rounded-xl border border-navy-200 bg-surface-50 p-5">
     <h3 id="cms-workspace-title" className="text-lg font-semibold text-navy-900">CMS workflow</h3>
-    <p className="mt-2 text-sm leading-relaxed text-navy-700" role="status">CMS access is off by default. The published-view frontend and admin RPC integrations are present locally, but remain inactive while <code>VITE_CMS_ENABLED</code> is not explicitly enabled for the approved project.</p>
+    <p className="mt-2 text-sm leading-relaxed text-navy-700" role="status">CMS queries and workflow actions are disabled in source until the backend authorization, publication-view and operational prerequisites are separately reviewed and approved. No workflow records were requested and no action is available here.</p>
   </section>;
 
   if (!authorized) return <section aria-labelledby="cms-workspace-title" className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-5">
@@ -202,7 +203,7 @@ export default function CmsAdminWorkspace({ user }: { user: CmsUser }) {
     {notice && <p className="mt-4 rounded-lg border border-teal-200 bg-teal-50 p-3 text-sm text-teal-900" role="status">{notice}</p>}
     {loading && <p className="mt-4 text-sm text-navy-600" role="status">Loading authorized content workflow records…</p>}
     <CreateDraftForm user={user} onCreated={transition} disabled={busy || loading} />
-    {!loading && versions.length === 0 && <p className="mt-5 rounded-lg border border-dashed border-navy-200 p-5 text-sm text-navy-600" role="status">No CMS versions are available. The production CMS currently contains no content rows; no source records are imported automatically.</p>}
+    {!loading && versions.length === 0 && <p className="mt-5 rounded-lg border border-dashed border-navy-200 p-5 text-sm text-navy-600" role="status">No CMS versions are available to this account. No repository records are imported automatically.</p>}
     <div className="mt-5 space-y-4">{versions.map(version => <VersionCard key={version.id} version={version} user={user} roles={roles} onTransition={transition} disabled={busy || loading} />)}</div>
     <p className="mt-5 text-xs leading-relaxed text-navy-500">The database remains authoritative for role checks, evidence validation, independent review, allowed transitions and publication prerequisites. No certificate operation is exposed here.</p>
   </section>;

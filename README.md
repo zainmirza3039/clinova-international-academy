@@ -1,6 +1,6 @@
 # Clinova International Academy
 
-Public healthcare education enquiry website built with React, TypeScript and Vite. This repository is not a student portal or LMS.
+Clinova public information site with programme and certification-development status pages. Learner, admin, certificate, verification and enquiry workflows are not operational in this release.
 
 ## Local checks
 
@@ -14,12 +14,12 @@ npm run typecheck
 npm run build
 ```
 
-Tests use a mocked Supabase client and synthetic form values. They do not contact a database or require environment variables. The routing test checks the Vercel fallback configuration; hosted deep-link behavior still needs verification after deployment.
+The Vitest suite uses mocked clients and synthetic form values; it does not contact a database or require hosted credentials. The optional `npm run test:db:local` script creates and destroys a disposable local PostgreSQL cluster to exercise synthetic row-security and certificate-lifecycle cases. Hosted deep-link and production behavior are not exercised by those checks.
 
-## Separate Clinova deployment
+## Deployment and data boundaries
 
 `vercel.json` serves existing static files first and falls back to `index.html` for React Router URLs. It contains no project IDs, domains or environment values.
 
-Before enabling real submissions, the owner must approve a separate Clinova Supabase project, organisation, region and plan/cost. Apply the existing migration only to that approved project, then configure `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in the separate Clinova deployment. These steps are not performed by this code change. Never use a service-role key in frontend code or reuse another project's credentials.
+Public enquiry forms do not submit or persist data in this release. The `enquiriesEnabled` control is source-disabled regardless of `VITE_ENQUIRIES_ENABLED`; adding Supabase URL/anon-key variables or setting the flag does not activate submissions. Auth, learner data, CMS operations, certification, issuance and live verification are also source-disabled. Current public pages do not need Supabase credentials.
 
-The existing client throws when Supabase configuration is missing, so a preview without those values is not a functioning enquiry site even if its build succeeds. A successful insert stores an enquiry; this repository does not implement email delivery or newsletter sending. Confirm existing domain, email and content claims with the owner before launch.
+Any future workflow activation requires a separate code change after owner, backend, privacy and security approval, confirmation of the target environment and database policy, and end-to-end negative testing. Do not apply or replay migrations as part of this branch. Never use a service-role key in frontend code. Confirm legal identity, domain, email and public-content claims with the owner before any launch decision.

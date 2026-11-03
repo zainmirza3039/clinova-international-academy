@@ -50,6 +50,8 @@ The source migration and dashboard are a development foundation, not proof of a 
 
 ## Update: CMS schema and local frontend integration (30 October 2026)
 
+> **Current feature-branch gate (3 November 2026):** The implementation described below is historical. The current branch hard-disables CMS reads and workflow RPCs in source, even when `VITE_CMS_ENABLED` is set, and also hard-disables Auth, learner-data persistence and enquiry submissions. No hosted schema, data, roles, permissions, Auth configuration or Vercel setting was changed. The existing production CMS schema described here has not been re-queried or newly validated.
+
 ### Production schema: applied, empty, read-only verified
 
 The owner-approved CMS-only SQL was applied once to production project `ssxpmcbqfdggfsoqbxac`. The production migration ledger confirms version `20261029192938`, name `clinova_content_management_20261030`. Read-only metadata inspection confirmed the five CMS tables (`content_items`, `content_versions`, `content_review_decisions`, `content_source_provenance`, `content_audit_events`), their columns/RLS, the seven CMS transition RPCs, the `published_content` view, and **zero rows** in each CMS table. The public view exposes only item/version IDs, kind, version number, snapshot, hash and publication time, filtered to published versions whose publication time has arrived. No content rows were read or written; no source content was imported and nothing was published.

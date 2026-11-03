@@ -7,7 +7,6 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import NewsCard from '@/components/NewsCard';
 import { newsItems } from '@/data/testimonials';
 import { publishedEducationalArticleCards, educationalDisclaimer, articleMetaLabel, getPublishedEducationalArticle } from '@/data/educationalArticles';
-import { publishedProgrammes } from '@/data/programmes';
 
 export function ResourcesPage() {
   useSEO({ title: 'Healthcare Learning Library', description: 'Educational articles on assessment, rehabilitation, evidence-informed practice and patient safety.' });
@@ -26,7 +25,7 @@ export function ResourcesPage() {
     <PageHero breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Resources' }]} eyebrow="Learning resources" title="Explore the Learning Library" description="Explore educational reading on healthcare assessment, rehabilitation, evidence-informed practice and patient safety." />
     <section className="py-12 lg:py-16 bg-white"><div className="max-w-editorial mx-auto px-6 lg:px-10">
       <aside className="bg-amber-50 border border-amber-200 p-5 mb-8 text-sm text-navy-700 leading-relaxed"><strong>Educational information notice.</strong> {educationalDisclaimer}</aside>
-      <div className="flex flex-wrap gap-4 mb-8 text-sm font-semibold"><Link to="/learning-resources" className="text-clinical-600 underline underline-offset-4">Study guides, checklists and reflection tools</Link><Link to="/cpd-courses" className="text-clinical-600 underline underline-offset-4">Self-study courses</Link></div>
+      <div className="flex flex-wrap gap-4 mb-8 text-sm font-semibold"><Link to="/learning-resources" className="text-clinical-600 underline underline-offset-4">Study guides, checklists and reflection tools</Link><Link to="/cpd-courses" className="text-clinical-600 underline underline-offset-4">CPD system status — no courses open</Link></div>
       <div className="bg-navy-50 border border-navy-100 p-5 mb-8">
         <label htmlFor="resource-search" className="block text-sm font-semibold text-navy-800 mb-2">Search resources</label>
         <input id="resource-search" type="search" value={search} onChange={event => setSearch(event.target.value)} placeholder="Search titles, topics or article text" className="w-full px-4 py-3 mb-4 text-sm bg-white border border-navy-200 focus:outline-none focus:ring-2 focus:ring-clinical-500 text-navy-800" />
@@ -46,7 +45,6 @@ export function ResourceDetailPage() {
   if (!article) return <section className="max-w-3xl mx-auto px-6 py-24 text-center"><h1 className="text-3xl font-bold text-navy-900">Article Not Found</h1><p className="mt-4 text-navy-600">This address does not match an article in the library.</p><Link className="inline-block mt-6 text-clinical-600 underline" to="/resources">View All Resources</Link></section>;
   const explicitRelated = article.relatedArticleSlugs.map(relatedSlug => publishedEducationalArticleCards.find(item => item.slug === relatedSlug)).filter((item): item is typeof newsItems[number] => Boolean(item));
   const related = (explicitRelated.length ? explicitRelated : publishedEducationalArticleCards.filter(item => item.slug !== article.slug && item.category === article.category)).slice(0, 3);
-  const relatedProgrammes = article.relatedProgrammeSlugs.map(programmeSlug => publishedProgrammes.find(item => item.slug === programmeSlug)).filter((item): item is typeof publishedProgrammes[number] => Boolean(item));
   return <>
     <header className="bg-navy-900 pt-28 pb-12 lg:pt-36"><div className="max-w-4xl mx-auto px-6"><Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Resources', to: '/resources' }, { label: article.category }]} /><p className="mt-6 text-sm font-semibold text-teal-300">{article.category}</p><h1 className="mt-3 text-3xl md:text-4xl font-heading font-bold text-white leading-tight">{article.title}</h1><p className="mt-5 text-navy-200 leading-relaxed">{article.excerpt}</p><p className="mt-4 text-sm text-navy-300">{articleMetaLabel}</p></div></header>
     <article className="max-w-4xl mx-auto px-6 py-12">
@@ -55,7 +53,6 @@ export function ResourceDetailPage() {
       {article.sections.map((section, index) => <section key={section.heading} id={`article-section-${index + 1}`} className="mt-9 scroll-mt-28"><h2 className="text-2xl font-heading font-bold text-navy-900">{section.heading}</h2>{section.paragraphs.map((paragraph, paragraphIndex) => <p key={paragraphIndex} className="mt-4 text-base text-navy-700 leading-relaxed">{paragraph}</p>)}</section>)}
       <section className="mt-10 p-6 bg-surface-50"><h2 className="text-xl font-bold text-navy-900">Practical educational takeaways</h2><ul className="mt-4 list-disc pl-5 space-y-3 text-navy-700">{article.takeaways.map(takeaway => <li key={takeaway}>{takeaway}</li>)}</ul></section>
       <section className="mt-10"><h2 className="text-xl font-bold text-navy-900">References and further reading</h2><p className="mt-3 text-sm text-navy-600">Check the current source, local guidance and population before applying recommendations. References are provided for further reading and do not imply endorsement of this website.</p><ul className="mt-4 list-disc pl-5 space-y-3">{article.references.map(reference => <li key={reference.url}><a href={reference.url} target="_blank" rel="noopener noreferrer" className="text-clinical-600 underline break-words">{reference.title}<span className="sr-only"> (opens in a new tab)</span></a></li>)}</ul></section>
-      {relatedProgrammes.length > 0 && <section className="mt-10"><h2 className="text-xl font-bold text-navy-900">Related learning topics</h2><p className="mt-3 text-sm text-navy-600">These catalogue pages provide programme information; availability and terms must be confirmed for each published offering.</p><ul className="mt-4 space-y-3">{relatedProgrammes.map(programme => <li key={programme.slug}><Link to={`/programmes/${programme.slug}`} className="text-clinical-600 underline">{programme.title} — overview</Link></li>)}</ul></section>}
       <p className="mt-8 text-sm"><Link to="/learning-resources" className="text-clinical-600 underline">Explore learning and reflection resources</Link></p>
     </article>
     {related.length > 0 && <section className="bg-surface-50 py-12"><div className="max-w-editorial mx-auto px-6 lg:px-10"><h2 className="text-2xl font-bold text-navy-900 mb-8">Related articles</h2><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">{related.map((item, index) => <NewsCard key={item.id} item={item} index={index} />)}</div></div></section>}

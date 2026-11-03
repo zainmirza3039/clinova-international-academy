@@ -1,42 +1,25 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen } from 'lucide-react';
-import type { CPDCourse } from '@/data/types';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { ArrowRight } from 'lucide-react';
+import type { OwnerListedCPDTopic } from '@/data/catalogueBrowse';
 
-export default function CPDCard({ course, index = 0 }: { course: CPDCourse; index?: number }) {
-  const { ref, isVisible } = useScrollAnimation();
+export default function CPDCard({ course }: { course: OwnerListedCPDTopic; index?: number }) {
   return (
-    <Link
-      to={`/cpd-courses/${course.slug}`}
-      ref={ref as unknown as React.RefObject<HTMLAnchorElement>}
-      className={`cpd-card group flex h-full flex-col overflow-hidden rounded-xl border border-navy-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal-200 hover:shadow-[0_18px_45px_-28px_rgba(8,43,76,0.45)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-600 animate-on-scroll ${isVisible ? 'is-visible' : ''}`}
-      style={{ transitionDelay: `${(index % 4) * 60}ms` }}
-    >
-      <div className="relative aspect-[16/10] overflow-hidden bg-surface-50">
-        <img
-          src={course.image}
-          alt=""
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-        />
-        <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/70 bg-white/95 px-3 py-1.5 text-[11px] font-semibold text-navy-800 shadow-sm">
-          <BookOpen className="h-3.5 w-3.5 text-teal-700" />
-          Learning guide
-        </div>
-      </div>
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <div className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-800">{course.department}</div>
-        <h3 className="mt-2 font-heading text-lg font-bold leading-snug text-navy-900 transition-colors group-hover:text-teal-800">{course.title}</h3>
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-navy-600 line-clamp-3">{course.description}</p>
-        <div className="mt-5 flex flex-wrap gap-2 border-t border-navy-100 pt-4">
-          <span className="rounded-full bg-surface-50 px-3 py-1.5 text-xs font-medium text-navy-600">{course.level}</span>
-          <span className="rounded-full bg-surface-50 px-3 py-1.5 text-xs font-medium text-navy-600">{course.duration}</span>
-        </div>
-        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-800 transition-colors group-hover:text-teal-800">
-          View course details <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-        </span>
-        <p className="mt-3 text-[11px] leading-relaxed text-navy-500">No approved CPD-hour value or certificate is listed for this guide.</p>
-      </div>
-    </Link>
+    <article className="flex h-full flex-col border border-navy-200 bg-white p-5 shadow-sm">
+      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-clinical-700">Proposed CPD topic</p>
+      <h3 className="mt-3 font-heading text-lg font-bold leading-snug text-navy-900">{course.title}</h3>
+      <p className="mt-3 text-sm leading-relaxed text-navy-700">
+        Suggested subject grouping (provisional): <span className="font-medium">{course.subjectArea}</span>.
+      </p>
+      <p className="mt-3 flex-1 text-xs leading-relaxed text-navy-600">
+        Topic title only. This is not an open course or enrollment offer.
+      </p>
+      <Link
+        to={`/cpd-courses/${course.slug}`}
+        aria-label={`View status for proposed topic: ${course.title}`}
+        className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-clinical-700 underline underline-offset-4"
+      >
+        View topic status <ArrowRight className="h-4 w-4" aria-hidden="true" />
+      </Link>
+    </article>
   );
 }

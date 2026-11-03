@@ -57,7 +57,7 @@ export default function ClinicalInternshipsPage() {
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Clinical Internships' }]}
         eyebrow="Institutional collaboration"
         title="Clinical internships & partner-delivered practical training"
-        description="Clinical placements are distinct from online self-study. Practical training would be delivered and supervised by an approved partner institution under an agreed scope; Clinova would not independently deliver a partner’s clinical training."
+        description="Clinical placements are separate from CPD education and professional certification. Practical training would be delivered and supervised by an approved partner institution under an agreed scope; Clinova would not independently deliver a partner’s clinical training."
       />
 
       <section className="bg-white px-6 py-14 lg:py-20" aria-labelledby="placement-status-heading">
@@ -77,7 +77,7 @@ export default function ClinicalInternshipsPage() {
               Partnership information <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link to="/cpd-courses" className="inline-flex items-center justify-center gap-2 rounded-md border border-navy-300 px-5 py-3 text-sm font-semibold text-navy-800 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600">
-              Browse online self-study resources <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              Review CPD education status <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
         </div>

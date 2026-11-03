@@ -11,7 +11,7 @@ export interface CPDCurriculumDraft extends Omit<CourseDraft, 'programmeSlug'> {
 export const cpdCurricula: Record<string, CPDCurriculumDraft> = {};
 for (const draft of [...rehabilitationDrafts, ...specialistDrafts, ...systemsDrafts, ...physiotherapyCoreDrafts]) {
   if (Object.prototype.hasOwnProperty.call(cpdCurricula, draft.courseSlug)) throw new Error('Duplicate CPD curriculum slug.');
-  cpdCurricula[draft.courseSlug] = { ...draft, status: 'published' };
+  cpdCurricula[draft.courseSlug] = { ...draft, status: 'draft' };
 }
 
 export function getCPDCurriculum(slug: string): CPDCurriculumDraft | undefined {
