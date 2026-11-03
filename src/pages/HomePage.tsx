@@ -89,7 +89,7 @@ export default function HomePage() {
 
       <section className="clinova-section" aria-labelledby="teaching-heading">
         <div className="clinova-container clinova-teaching">
-          <div className="clinova-teaching__intro"><p className="clinova-overline">Teaching and learning</p><h2 id="teaching-heading">Learn with guidance from healthcare educators.</h2><p>Our CPD model is designed around scheduled teaching, relevant learning materials and clear programme information. Instructor profiles and programme details will be added as appointments and course specifications are confirmed.</p><Link to="/become-an-instructor" className="clinova-text-link">Information for instructors <ArrowRight size={16} aria-hidden="true" /></Link></div>
+          <div className="clinova-teaching__intro"><p className="clinova-overline">Teaching and learning</p><h2 id="teaching-heading">Learn with guidance from healthcare educators.</h2><p>Our CPD model is designed around scheduled teaching, relevant learning materials and clear programme information. Verified instructor profiles and approved programme details are displayed as appointments and course specifications are confirmed.</p><Link to="/become-an-instructor" className="clinova-text-link">Information for instructors <ArrowRight size={16} aria-hidden="true" /></Link></div>
           <div className="clinova-teaching__list">
             <div><CalendarDays size={22} aria-hidden="true" /><span><strong>Planned teaching</strong><small>Structured sessions and programme schedules</small></span></div>
             <div><Users size={22} aria-hidden="true" /><span><strong>Professional community</strong><small>Learning for multidisciplinary healthcare teams</small></span></div>
@@ -113,7 +113,7 @@ export default function HomePage() {
       </section>}
 
       <section className="clinova-home-contact" aria-labelledby="contact-heading">
-        <div className="clinova-container clinova-home-contact__inner"><div><p className="clinova-overline">Start a conversation</p><h2 id="contact-heading">Let’s move healthcare education forward.</h2><p>For programme information, teaching opportunities and institutional collaboration, contact the Clinova team.</p><p className="clinova-home-contact__legal">{academyLegalIdentity.legalName}</p><p className="clinova-home-contact__availability">No CPD course enrollment, certification application, examination, credential issuance or live verification is currently available through this website.</p></div><Link className="clinova-button clinova-button--light" to="/contact">Contact Clinova <ArrowRight size={17} aria-hidden="true" /></Link></div>
+        <div className="clinova-container clinova-home-contact__inner"><div><p className="clinova-overline">Start a conversation</p><h2 id="contact-heading">Let’s move healthcare education forward.</h2><p>For programme information, teaching opportunities and institutional collaboration, contact the Clinova team.</p><p className="clinova-home-contact__legal">{academyLegalIdentity.legalName}</p><p className="clinova-home-contact__availability">Current programme, application and certificate availability is shown on the relevant programme and verification pages.</p></div><Link className="clinova-button clinova-button--light" to="/contact">Contact Clinova <ArrowRight size={17} aria-hidden="true" /></Link></div>
       </section>
     </>
   );
