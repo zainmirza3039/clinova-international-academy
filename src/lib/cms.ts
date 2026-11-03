@@ -158,7 +158,7 @@ export async function fetchPublishedCmsContent(client?: CmsClient): Promise<CmsP
     .order('published_at', { ascending: false })
     .limit(100);
   if (error) throw new Error('Published CMS content is unavailable.');
-  return (data ?? []).map(parsePublishedContent).filter((row): row is CmsPublishedContent => row !== null && row.kind === 'article');
+  return (data ?? []).map(parsePublishedContent).filter((row): row is CmsPublishedContent => row !== null);
 }
 
 /** Unpublished workflow records are queried only with the exact server-managed CMS role claim. */
