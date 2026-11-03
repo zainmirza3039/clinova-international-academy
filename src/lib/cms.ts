@@ -70,7 +70,7 @@ const cmsRoleSet = new Set<string>(cmsRoles);
 const expectedSupabaseUrl = 'https://ssxpmcbqfdggfsoqbxac.supabase.co';
 const CMS_ACTIVATION_APPROVED_IN_SOURCE = true;
 
-/** CMS stays source-disabled until its server-side authorization contract is separately reviewed and approved. */
+/** CMS is enabled only for the configured Clinova Supabase project; role checks remain server-enforced. */
 export function cmsFeatureEnabled(): boolean {
   return CMS_ACTIVATION_APPROVED_IN_SOURCE
     && import.meta.env.VITE_SUPABASE_URL === expectedSupabaseUrl
