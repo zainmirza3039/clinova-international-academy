@@ -536,3 +536,23 @@ input:focus, select:focus, textarea:focus { border-color: #66877d; }
 .clinova-admin-shell .border-teal-700 { border-color: var(--clinova-green-dark) !important; }
 .clinova-admin-shell button { border-radius: 2px !important; }
 @media(max-width:640px){.clinova-admin-shell{padding-top:24px}.clinova-admin-shell>header{align-items:flex-start}.clinova-admin-shell>nav{margin-inline:-16px;padding-inline:16px;overflow-x:auto}.clinova-admin-shell>nav button{white-space:nowrap}}
+
+
+/* Public inner pages share the same editorial visual language as the homepage. */
+.site-header { background:#fff !important; border-bottom:1px solid var(--clinova-line) !important; box-shadow:none !important; }
+.site-header nav[aria-label="Main navigation"] a { color:#52636b; font-size:12px; font-weight:650; }
+.site-header nav[aria-label="Main navigation"] a[aria-current="page"],.site-header nav[aria-label="Main navigation"] a:hover { color:var(--clinova-green-dark); background:#f3f5f1; }
+.page-hero { overflow:hidden; background:var(--clinova-paper) !important; }
+.page-hero > .absolute.inset-0 { display:none !important; }
+.page-hero__inner { max-width:1180px; padding-top:136px !important; padding-bottom:68px !important; }
+.page-hero__eyebrow { margin-bottom:13px !important; color:var(--clinova-green-dark) !important; }
+.page-hero__title { max-width:850px !important; color:var(--clinova-ink) !important; font-size:clamp(36px,4.4vw,56px) !important; font-weight:600 !important; letter-spacing:-.05em !important; line-height:1.08 !important; }
+.page-hero__inner p.mt-5 { max-width:700px !important; color:var(--clinova-muted) !important; font-size:15px !important; line-height:1.8 !important; }
+.page-hero nav[aria-label="Breadcrumb"] a,.page-hero nav[aria-label="Breadcrumb"] span { color:#738087 !important; }
+.page-hero nav[aria-label="Breadcrumb"] [aria-current="page"] { color:var(--clinova-ink) !important; }
+.page-hero nav[aria-label="Breadcrumb"] svg { color:#82958a !important; }
+.site-footer { background:#142d3b !important; border-top:3px solid #6c8a7a; }
+.site-footer h2 { color:#fff; }
+.site-footer a { color:rgba(255,255,255,.74); }
+.site-footer a:hover { color:#c6d9ce !important; }
+@media(max-width:640px){.page-hero__inner{padding-top:112px !important;padding-bottom:48px !important}.page-hero__title{font-size:clamp(34px,10vw,46px) !important}}
