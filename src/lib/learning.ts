@@ -31,7 +31,7 @@ export type StudentWorkspace = {
   lessons: LearningLesson[];
   sessions: LearningSession[];
   progress: LearningProgress[];
-  certificates: (LearningCertificate & { learner: LearningProfile | null })[];
+  certificates: LearningCertificate[];
 };
 export type InstructorWorkspace = {
   assignments: LearningCourse[];
@@ -44,7 +44,7 @@ export type AdminLearningWorkspace = {
   instructors: { user_id: string; public_name: string; professional_title: string; verification_status: string; is_public: boolean }[];
   enrollments: { id: string; course_item_id: string; student_id: string; enrollment_status: string; applied_at: string; course: LearningCourse | null; learner: LearningProfile | null }[];
   courses: LearningCourse[];
-  certificates: LearningCertificate[];
+  certificates: (LearningCertificate & { learner: LearningProfile | null })[];
 };
 
 function ensureNoError(error: { message?: string } | null, message: string): void {
