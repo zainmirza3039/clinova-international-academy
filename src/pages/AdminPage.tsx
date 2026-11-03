@@ -6,6 +6,7 @@ import PageHero from '@/components/PageHero';
 import CmsAdminWorkspace from '@/components/CmsAdminWorkspace';
 import AdminLearningWorkspacePanel from '@/components/AdminLearningWorkspacePanel';
 import AdminLessonReviewPanel from '@/components/AdminLessonReviewPanel';
+import AdminInquiryPanel from '@/components/AdminInquiryPanel';
 import AccreditationPreparationPanel from '@/components/AccreditationPreparationPanel';
 import { useSEO } from '@/hooks/useSEO';
 import { publishedEducationalArticles } from '@/data/educationalArticles';
@@ -69,11 +70,8 @@ export default function AdminPage() {
 
     {activeSection === 'Applications' && <AdminLearningWorkspacePanel section="Applications" adminId={auth.session.user.id} />}
 
-    {activeSection === 'Inquiries' && <section className="mt-8" aria-labelledby="inquiries-title"><h2 id="inquiries-title" className="mb-4 text-2xl font-bold text-navy-900">Inquiries</h2><StatusPanel title="Inquiry management is unavailable" message="Contact and partnership forms do not save or send submissions. No inquiry records are available to list, assign or respond to from this panel." linkTo="/for-institutions" linkLabel="View institutional information" /></section>}
+    {activeSection === 'Inquiries' && <AdminInquiryPanel />}
 
-    {activeSection === 'Content' && <section className="mt-8" aria-labelledby="content-title"><div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"><div><h2 id="content-title" className="text-2xl font-bold text-navy-900">Educational content</h2><p className="mt-1 text-sm text-navy-600">Read-only article records from repository source.</p></div><label className="w-full sm:max-w-sm"><span className="text-sm font-medium text-navy-700">Search articles</span><input className={inputClass} type="search" value={contentSearch} onChange={event => setContentSearch(event.target.value)} placeholder="Title or category" /></label></div><p className="mt-4 text-sm text-navy-600" role="status" aria-live="polite" aria-atomic="true">{filteredArticles.length} of {articleRows.length} articles shown</p><div className="mt-3"><SourceRecordsTable rows={filteredArticles} label="Repository educational articles" /></div><p className="mt-3 text-xs leading-relaxed text-navy-500">This panel does not edit or approve clinical or educational content. The CMS integration remains subject to its existing server authorization.</p><CmsAdminWorkspace user={auth.session.user} /></section>}
-
-    {activeSection === 'Events' && <section className="mt-8" aria-labelledby="events-title"><h2 id="events-title" className="mb-4 text-2xl font-bold text-navy-900">Events</h2><StatusPanel title="No confirmed events are available" message="The current public events page contains no event records. Event creation, registration and attendee management are not connected." linkTo="/events" linkLabel="View the public events page" /></section>}
     {activeSection === 'Faculty' && <AdminLearningWorkspacePanel section="Faculty" adminId={auth.session.user.id} />}
 
     {activeSection === 'Learners' && <AdminLearningWorkspacePanel section="Learners" adminId={auth.session.user.id} />}
