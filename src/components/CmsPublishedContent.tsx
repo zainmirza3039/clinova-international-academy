@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { fetchPublishedCmsContent, type CmsContentKind, type CmsPublishedContent } from '@/lib/cms';
+import { useOptionalAuth } from '@/auth/authContext';
+import { applyToCourse } from '@/lib/learning';
 
 const kindLabels: Record<CmsContentKind, string> = {
   programme: 'Academic programme',
@@ -77,6 +79,10 @@ export function CmsPublishedContentShelf({ kinds }: { kinds?: CmsContentKind[] }
 
 export function CmsPublishedContentDetailPage() {
   const { kind, slug } = useParams<{ kind: string; slug: string }>();
+  const auth = useOptionalAuth();
+  const [applying, setApplying] = useState(false);
+  const [applicationMessage, setApplicationMessage] = useState<string | null>(null);
+  const [applicationError, setApplicationError] = useState<string | null>(null);
   const { records, loading } = usePublishedCmsContent();
   const record = records.find(item => item.kind === kind && item.snapshot.slug === slug);
 
@@ -90,6 +96,14 @@ export function CmsPublishedContentDetailPage() {
   const sections = readSections(snapshot);
   const takeaways = readStringArray(snapshot, 'takeaways');
   const learningOutcomes = readStringArray(snapshot, 'learningOutcomes');
+  const enrollmentOpen = record.kind === 'cpd_course' && snapshot.enrollmentOpen === true;
+  async function submitApplication() {
+    if (!auth?.session?.user.id || !auth.emailVerified || applying) return;
+    setApplying(true); setApplicationError(null); setApplicationMessage(null);
+    try { await applyToCourse(auth.session.user.id, record.content_item_id); setApplicationMessage('Your application has been submitted. You can follow its status in your student portal.'); }
+    catch (reason) { setApplicationError(reason instanceof Error ? reason.message : 'Your application could not be submitted.'); }
+    finally { setApplying(false); }
+  }
   const contentMarkdown = readText(snapshot, 'contentMarkdown');
   const metadata = [
     ['Duration', typeof snapshot.durationHours === 'number' ? \`\${snapshot.durationHours} hours\` : null],
@@ -105,6 +119,7 @@ export function CmsPublishedContentDetailPage() {
     {summary && <p className="mt-5 text-lg leading-relaxed text-navy-700">{summary}</p>}
     {metadata.length > 0 && <dl className="mt-7 grid gap-px border border-navy-200 bg-navy-200 sm:grid-cols-2">{metadata.map(([label,value]) => <div key={label} className="bg-white p-4"><dt className="text-xs font-semibold uppercase tracking-wide text-navy-500">{label}</dt><dd className="mt-1 text-sm text-navy-800">{value}</dd></div>)}</dl>}
     {contentMarkdown && <section className="mt-9 whitespace-pre-wrap leading-relaxed text-navy-700">{contentMarkdown}</section>}
+    {record.kind === 'cpd_course' && <section className="mt-10 border border-navy-200 bg-surface-50 p-6"><h2 className="font-heading text-xl font-bold text-navy-900">Programme enrolment</h2>{enrollmentOpen ? auth?.session && auth.emailVerified ? <><p className="mt-2 text-sm text-navy-600">Applications are open for this published programme. Your application will be reviewed by the academy before enrolment is activated.</p><button type="button" disabled={applying} onClick={() => void submitApplication()} className="mt-5 clinova-button clinova-button--primary">{applying ? 'Submitting…' : 'Apply for this programme'}</button></> : <><p className="mt-2 text-sm text-navy-600">Sign in with a verified learner account to submit an application.</p><Link to={`/sign-in?returnTo=${encodeURIComponent(`/cms/cpd_course/${slug}`)}`} className="mt-5 inline-flex clinova-button clinova-button--primary">Sign in to apply</Link></> : <p className="mt-2 text-sm text-navy-600">Applications are not currently open for this programme.</p>}{applicationMessage && <p className="mt-4 text-sm text-teal-800" role="status">{applicationMessage}</p>}{applicationError && <p className="mt-4 text-sm text-red-800" role="alert">{applicationError}</p>}</section>}
     {sections.map((section, index) => <section key={`${section.heading}-${index}`} className="mt-9"><h2 className="text-2xl font-heading font-bold text-navy-900">{section.heading}</h2>{section.paragraphs.map((paragraph, paragraphIndex) => <p key={paragraphIndex} className="mt-4 leading-relaxed text-navy-700">{paragraph}</p>)}</section>)}
     {learningOutcomes.length > 0 && <section className="mt-9"><h2 className="text-xl font-bold text-navy-900">Learning outcomes</h2><ul className="mt-4 list-disc space-y-2 pl-5 text-navy-700">{learningOutcomes.map((item, index) => <li key={`${item}-${index}`}>{item}</li>)}</ul></section>}
     {takeaways.length > 0 && <section className="mt-9"><h2 className="text-xl font-bold text-navy-900">Key takeaways</h2><ul className="mt-4 list-disc space-y-2 pl-5 text-navy-700">{takeaways.map((item, index) => <li key={`${item}-${index}`}>{item}</li>)}</ul></section>}
