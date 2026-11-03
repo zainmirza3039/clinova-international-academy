@@ -89,12 +89,21 @@ export function CmsPublishedContentDetailPage() {
   const sections = readSections(snapshot);
   const takeaways = readStringArray(snapshot, 'takeaways');
   const learningOutcomes = readStringArray(snapshot, 'learningOutcomes');
+  const contentMarkdown = readText(snapshot, 'contentMarkdown');
+  const metadata = [
+    ['Duration', typeof snapshot.durationHours === 'number' ? \`\${snapshot.durationHours} hours\` : null],
+    ['Delivery', readText(snapshot, 'deliveryMode')],
+    ['Audience', readText(snapshot, 'targetAudience')],
+    ['Assessment', readText(snapshot, 'assessmentMethod')],
+  ].filter((item): item is [string, string] => Boolean(item[1]));
 
   return <article className="mx-auto max-w-4xl px-6 py-16 lg:px-10">
     <nav aria-label="Breadcrumb" className="mb-8 text-sm"><Link className="text-clinical-700 underline" to="/resources">Learning library</Link><span className="px-2 text-navy-400">/</span><span className="text-navy-600">{kindLabels[record.kind]}</span></nav>
     <p className="text-sm font-semibold uppercase tracking-wide text-teal-700">{kindLabels[record.kind]}{category ? ` · ${category}` : ''}</p>
     <h1 className="mt-3 text-3xl font-heading font-bold leading-tight text-navy-900 md:text-4xl">{title}</h1>
     {summary && <p className="mt-5 text-lg leading-relaxed text-navy-700">{summary}</p>}
+    {metadata.length > 0 && <dl className="mt-7 grid gap-px border border-navy-200 bg-navy-200 sm:grid-cols-2">{metadata.map(([label,value]) => <div key={label} className="bg-white p-4"><dt className="text-xs font-semibold uppercase tracking-wide text-navy-500">{label}</dt><dd className="mt-1 text-sm text-navy-800">{value}</dd></div>)}</dl>}
+    {contentMarkdown && <section className="mt-9 whitespace-pre-wrap leading-relaxed text-navy-700">{contentMarkdown}</section>}
     {sections.map((section, index) => <section key={`${section.heading}-${index}`} className="mt-9"><h2 className="text-2xl font-heading font-bold text-navy-900">{section.heading}</h2>{section.paragraphs.map((paragraph, paragraphIndex) => <p key={paragraphIndex} className="mt-4 leading-relaxed text-navy-700">{paragraph}</p>)}</section>)}
     {learningOutcomes.length > 0 && <section className="mt-9"><h2 className="text-xl font-bold text-navy-900">Learning outcomes</h2><ul className="mt-4 list-disc space-y-2 pl-5 text-navy-700">{learningOutcomes.map((item, index) => <li key={`${item}-${index}`}>{item}</li>)}</ul></section>}
     {takeaways.length > 0 && <section className="mt-9"><h2 className="text-xl font-bold text-navy-900">Key takeaways</h2><ul className="mt-4 list-disc space-y-2 pl-5 text-navy-700">{takeaways.map((item, index) => <li key={`${item}-${index}`}>{item}</li>)}</ul></section>}
