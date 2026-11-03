@@ -14,7 +14,8 @@ export default function ContactPage() {
   async function submitEnquiry(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (submitting) return;
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
     if (website.trim()) { setFormSuccess(true); return; }
     setSubmitting(true); setFormError(''); setFormSuccess(false);
     try {
@@ -27,7 +28,7 @@ export default function ContactPage() {
         message: String(form.get('message') ?? '').trim(),
       });
       if (error) throw error;
-      setFormSuccess(true); event.currentTarget.reset();
+      setFormSuccess(true); formElement.reset();
     } catch { setFormError('Your message could not be submitted. Please try again later or use the contact number shown on this page.'); }
     finally { setSubmitting(false); }
   }
