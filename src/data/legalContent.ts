@@ -48,17 +48,17 @@ export const refundPolicy: LegalContent = {
 
 export const accessibilityStatement: LegalContent = {
   title: 'Accessibility Statement',
-  description: 'Accessibility information for MyUniHub, including current capabilities, known gaps, and contact details.',
+  description: 'Accessibility information for Clinova International Academy, including the website’s accessibility approach and how to report an issue.',
   breadcrumb: [...home, { label: 'Accessibility Statement' }],
   publicationStatus: approved,
   sections: [
     {
       heading: 'Accessibility features and compatibility',
-      content: 'This statement relates to MyUniHub. The website can be zoomed to 400% without text overflow. It supports keyboard navigation and speech recognition and is compatible with JAWS, NVDA and VoiceOver.',
+      content: 'Clinova International Academy aims to make its website usable by people with different access needs. The website is designed to support keyboard navigation, text resizing and assistive technologies. This statement does not claim independent certification or a completed WCAG conformance audit.',
     },
     {
       heading: 'Compliance and testing',
-      content: 'MyUniHub is partially compliant with WCAG 2.2 AA. We carry out regular accessibility testing and reviews and make improvements.',
+      content: 'The website is reviewed as part of ongoing maintenance. A formal independent WCAG 2.2 AA conformance assessment has not been published.',
     },
     {
       heading: 'Known gaps',
@@ -66,7 +66,7 @@ export const accessibilityStatement: LegalContent = {
     },
     {
       heading: 'Contact and response',
-      content: 'For accessibility issues, contact MyUniHub at info@clinovainternationalacademy.co.uk or call (+44) 7412 890634. Issues are typically addressed within three working days.',
+      content: 'To report an accessibility issue, use the contact details published on the Clinova contact page. Please describe the page, the assistive technology or device used, and the barrier encountered. A response timeframe is not guaranteed.',
     },
   ],
 };
