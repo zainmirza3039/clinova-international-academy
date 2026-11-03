@@ -11,16 +11,16 @@ type FooterLink = { label: string; to: string };
 const exploreLinks: FooterLink[] = [
   { label: 'About Clinova', to: '/about' },
   { label: 'Healthcare subject areas', to: '/departments' },
-  { label: 'Proposed CPD topics', to: '/cpd-courses' },
-  { label: 'Programme catalogue status', to: '/programmes' },
+  { label: 'CPD programmes', to: '/cpd-courses' },
+  { label: 'Programmes', to: '/programmes' },
   { label: 'Professional certification', to: '/certification' },
   { label: 'Assessment development', to: '/assessment' },
   { label: 'Articles and resources', to: '/resources' },
 ];
 const learnerLinks: FooterLink[] = [
   { label: 'Admissions information', to: '/admissions' },
-  { label: 'Candidate and learner portal — unavailable', to: '/candidate-dashboard' },
-  { label: 'Assessor workspace — unavailable', to: '/assessor-dashboard' },
+  { label: 'Student portal', to: '/student' },
+  { label: 'Instructor portal', to: '/instructor' },
   { label: 'Login / Register', to: '/sign-in' },
 ];
 const facultyInstitutionLinks: FooterLink[] = [
@@ -33,7 +33,7 @@ const supportLinks: FooterLink[] = [
   { label: 'Contact details', to: '/contact' },
   { label: 'FAQs', to: '/faqs' },
   { label: 'Quality assurance and governance', to: '/quality-assurance' },
-  { label: 'Credential verification — unavailable', to: '/verify' },
+  { label: 'Certificate verification information', to: '/verify' },
   { label: 'Accessibility Statement', to: '/accessibility-statement' },
   { label: 'External Linking Policy', to: '/external-linking-policy' },
   { label: 'Privacy Policy', to: '/privacy-policy' },
@@ -58,7 +58,7 @@ export default function Footer() {
         <nav className="lg:col-span-2" aria-label="Explore links"><h2 className="mb-5 font-heading text-xs font-bold uppercase tracking-[0.18em] text-white">Explore</h2><FooterLinkList links={exploreLinks} /></nav>
         <nav className="lg:col-span-2" aria-label="Learner links"><h2 className="mb-5 font-heading text-xs font-bold uppercase tracking-[0.18em] text-white">Learners</h2><FooterLinkList links={learnerLinks} /></nav>
         <nav className="lg:col-span-2" aria-label="Faculty and institution links"><h2 className="mb-5 font-heading text-xs font-bold uppercase tracking-[0.18em] text-white">Faculty &amp; institutions</h2><FooterLinkList links={facultyInstitutionLinks} /></nav>
-        <nav className="lg:col-span-3" aria-label="Contact, verification and legal links"><h2 className="mb-5 font-heading text-xs font-bold uppercase tracking-[0.18em] text-white">Contact &amp; information</h2><FooterLinkList links={supportLinks} /><p className="mt-5 text-xs leading-relaxed text-navy-100/60">Privacy, Terms and Conditions, Cookie, and Refund Policy pages are placeholders pending approval. CPD and professional credentials are distinct; neither issuance nor live verification is available.</p></nav>
+        <nav className="lg:col-span-3" aria-label="Contact, verification and legal links"><h2 className="mb-5 font-heading text-xs font-bold uppercase tracking-[0.18em] text-white">Contact &amp; information</h2><FooterLinkList links={supportLinks} /><p className="mt-5 text-xs leading-relaxed text-navy-100/60">CPD completion records and professional certification are distinct services. Live credential issuance and verification are not yet available.</p></nav>
       </div>
       <div className="border-t border-white/10 py-6"><p className="max-w-5xl whitespace-pre-line text-xs leading-relaxed text-navy-100/70">{copyrightNotice}</p><p className="mt-4 text-xs text-navy-100/45">Healthcare education &bull; CPD learning &bull; Professional certification development</p></div>
     </div>
