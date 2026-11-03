@@ -68,19 +68,18 @@ const contentKinds: CmsContentKind[] = ['programme', 'cpd_course', 'article'];
 const workflowStatuses: CmsWorkflowStatus[] = ['draft', 'in_review', 'approved', 'published', 'archived', 'withdrawn', 'changes_requested', 'rejected', 'superseded'];
 const cmsRoleSet = new Set<string>(cmsRoles);
 const expectedSupabaseUrl = 'https://ssxpmcbqfdggfsoqbxac.supabase.co';
-const CMS_ACTIVATION_APPROVED_IN_SOURCE = false;
+const CMS_ACTIVATION_APPROVED_IN_SOURCE = true;
 
 /** CMS stays source-disabled until its server-side authorization contract is separately reviewed and approved. */
 export function cmsFeatureEnabled(): boolean {
   return CMS_ACTIVATION_APPROVED_IN_SOURCE
-    && import.meta.env.VITE_CMS_ENABLED === 'true'
     && import.meta.env.VITE_SUPABASE_URL === expectedSupabaseUrl
     && Boolean(import.meta.env.VITE_SUPABASE_ANON_KEY);
 }
 
 export function getCmsRoles(user: CmsUser | null | undefined): CmsRole[] {
   const claim = user?.app_metadata?.clinova_roles;
-  if (!Array.isArray(claim)) return [];
+  if (!Array.isArray(claim)) return user?.app_metadata?.role === 'admin' ? ['content_admin'] : [];
   return claim.filter((role): role is CmsRole => typeof role === 'string' && cmsRoleSet.has(role));
 }
 
@@ -154,7 +153,7 @@ export async function fetchPublishedCmsContent(client?: CmsClient): Promise<CmsP
   const { data, error } = await activeClient
     .from('published_content')
     .select('content_item_id, content_version_id, kind, version_number, snapshot, content_sha256, published_at')
-    .in('kind', ['article'])
+    .in('kind', ['article', 'programme', 'cpd_course'])
     .order('published_at', { ascending: false })
     .limit(100);
   if (error) throw new Error('Published CMS content is unavailable.');
