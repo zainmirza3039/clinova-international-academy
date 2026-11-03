@@ -24,6 +24,7 @@ const FacultyPage = lazy(() => import('@/pages/CommunityPage').then(module => ({
 const FAQsPage = lazy(() => import('@/pages/FAQsPage'));
 const AuthPage = lazy(() => import('@/pages/AuthPage'));
 const StudentDashboardPage = lazy(() => import('@/pages/StudentDashboardPage'));
+const InstructorDashboardPage = lazy(() => import('@/pages/InstructorDashboardPage'));
 const ProgrammeDetailPage = lazy(() => import('@/pages/ProgrammeDetailPage'));
 const CPDCourseDetailPage = lazy(() => import('@/pages/CPDCourseDetailPage'));
 const ResourcesPage = lazy(() => import('@/pages/ResourcesPage').then(module => ({ default: module.ResourcesPage })));
@@ -73,7 +74,7 @@ export default function App() {
                 <Route path="/apply-certification" element={<CertificationApplicationPage />} />
                 <Route path="/community" element={<CommunityPage />} />
                 <Route path="/admin/*" element={<AdminPage />} />
-                <Route path="/instructor/*" element={<UnavailableRoleWorkspacePage role="Instructor" />} />
+                <Route path="/instructor/*" element={<InstructorDashboardPage />} />
                 <Route path="/institution/*" element={<UnavailableRoleWorkspacePage role="Institution" />} />
                 <Route path="/events" element={<EventsPage />} />
                 <Route path="/faculty" element={<FacultyPage />} />
