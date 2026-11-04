@@ -72,6 +72,12 @@ export default function StudentDashboardPage() {
     finally { setBusy(false); }
   }
 
+  async function signOut() {
+    if (busy) return;
+    setBusy(true); const result = await auth.signOut(); setBusy(false);
+    if (result.error) setError(result.error.message);
+  }
+
   if (!learnerDataEnabled) {
     return <section className="mx-auto max-w-3xl px-6 py-24" aria-labelledby="student-dashboard-title">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-700">Learner services</p>
@@ -79,12 +85,6 @@ export default function StudentDashboardPage() {
       <p className="mt-4 leading-relaxed text-navy-700">This release does not load learner records, lesson content, profile data or progress. No learner data request has been made.</p>
       <Link to="/cpd-courses" className="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-clinical-700 underline underline-offset-4">Browse CPD programmes <ArrowRight size={16} /></Link>
     </section>;
-  }
-
-  async function signOut() {
-    if (busy) return;
-    setBusy(true); const result = await auth.signOut(); setBusy(false);
-    if (result.error) setError(result.error.message);
   }
 
   return <div className="portal-shell" aria-labelledby="student-dashboard-title">
