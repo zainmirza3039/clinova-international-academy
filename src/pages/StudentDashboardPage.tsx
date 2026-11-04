@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Award, BookOpen, CalendarDays, CircleUserRound, GraduationCap, LogOut, RefreshCw, UserRound } from 'lucide-react';
 import { useAuth } from '@/auth/authContext';
 import { useSEO } from '@/hooks/useSEO';
+import { learnerDataEnabled } from '@/lib/siteConfig';
 import { createSignedCourseResourceUrl, fetchStudentWorkspace, markLessonProgress, updateStudentProfile, type StudentWorkspace } from '@/lib/learning';
 
 type StudentTab = 'Overview' | 'My programmes' | 'Schedule' | 'Certificates' | 'Profile';
@@ -26,7 +27,7 @@ export default function StudentDashboardPage() {
   useSEO({ title: 'Student dashboard | Clinova International Academy', description: 'Your Clinova learner dashboard.', noindex: true });
 
   const refresh = useCallback(async () => {
-    if (!userId) return;
+    if (!userId || !learnerDataEnabled) { setWorkspace(emptyWorkspace); setLoading(false); return; }
     setLoading(true); setError(null);
     try {
       const data = await fetchStudentWorkspace(userId);
@@ -57,17 +58,27 @@ export default function StudentDashboardPage() {
   }
 
   async function openResource(path: string) {
+    if (!learnerDataEnabled) return;
     setError(null);
     try { const url = await createSignedCourseResourceUrl(path); window.open(url, '_blank', 'noopener,noreferrer'); }
     catch (reason) { setError(reason instanceof Error ? reason.message : 'Resource could not be opened.'); }
   }
 
   async function toggleLesson(enrollmentId: string, lessonId: string, completed: boolean) {
-    if (!userId || busy) return;
+    if (!learnerDataEnabled || !userId || busy) return;
     setBusy(true); setError(null); setNotice(null);
     try { await markLessonProgress(userId, enrollmentId, lessonId, completed); await refresh(); }
     catch (reason) { setError(reason instanceof Error ? reason.message : 'Progress could not be updated.'); }
     finally { setBusy(false); }
+  }
+
+  if (!learnerDataEnabled) {
+    return <section className="mx-auto max-w-3xl px-6 py-24" aria-labelledby="student-dashboard-title">
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-700">Learner services</p>
+      <h1 id="student-dashboard-title" className="mt-3 font-heading text-3xl font-bold text-navy-900">Learner services are not enabled</h1>
+      <p className="mt-4 leading-relaxed text-navy-700">This release does not load learner records, lesson content, profile data or progress. No learner data request has been made.</p>
+      <Link to="/cpd-courses" className="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-clinical-700 underline underline-offset-4">Browse CPD programmes <ArrowRight size={16} /></Link>
+    </section>;
   }
 
   async function signOut() {
