@@ -30,7 +30,7 @@ export default function DepartmentsPage() {
           </div>
           <div className="mt-12 flex flex-wrap gap-5 border-t border-navy-100 pt-7">
             <Link to="/cpd-courses" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-clinical-700 underline underline-offset-4">Browse proposed CPD topics <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
-            <Link to="/programmes" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-clinical-700 underline underline-offset-4">Programme catalogue status <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+            <Link to="/programmes" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-clinical-700 underline underline-offset-4">Proposed programme catalogue <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
           </div>
         </div>
       </section>
