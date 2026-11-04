@@ -93,10 +93,15 @@ Deno.serve(async (request: Request) => {
     role_name: role,
     action: body.enabled ? "granted" : "revoked",
   });
-  return json({
-    success: true,
-    user_id: userId,
-    roles: nextRoles,
-    audit_recorded: !auditError,
-  }, 200, headers);
+  if (auditError) {
+    const { error: rollbackError } = await adminClient.auth.admin.updateUserById(userId, {
+      app_metadata: { ...target.app_metadata, clinova_roles: existing },
+    });
+    return json({
+      error: rollbackError
+        ? "Role metadata changed but audit logging failed. Administrator intervention is required."
+        : "Role change was rolled back because its audit record could not be saved.",
+    }, 503, headers);
+  }
+  return json({ success: true, user_id: userId, roles: nextRoles, audit_recorded: true }, 200, headers);
 });
