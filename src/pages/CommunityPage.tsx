@@ -1,6 +1,7 @@
 import { CalendarDays, GraduationCap, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { isSupabaseConfigured, supabase } from '@/lib/supabase';
+import { learnerDataEnabled } from '@/lib/siteConfig';
 import { Link } from 'react-router-dom';
 import PageHero from '@/components/PageHero';
 import { useSEO } from '@/hooks/useSEO';
@@ -42,6 +43,7 @@ export function FacultyPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   useEffect(() => {
+    if (!isSupabaseConfigured || !learnerDataEnabled) { setLoading(false); return; }
     let active = true;
     void supabase.from('verified_instructors').select('user_id,public_name,professional_title,biography,credentials').order('public_name').then(({data,error: queryError}) => {
       if (!active) return;
