@@ -10,7 +10,10 @@ import { newsItems } from '@/data/testimonials';
 import { siteOrigin } from '@/lib/siteConfig';
 import { getIndexableSeoRoute } from '@/lib/seoPolicy';
 vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }), useScrollPosition: () => false }));
-vi.mock('@/auth/AuthProvider',()=>({AuthProvider:({children}:{children:React.ReactNode})=>children}));
+vi.mock('@/auth/AuthProvider', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@/auth/AuthProvider')>();
+  return { ...actual, AuthProvider: ({ children }: { children: React.ReactNode }) => children };
+});
 vi.mock('@/auth/authContext',()=>({useAuth:()=>({enabled:false,status:'disabled',session:null,emailVerified:false,error:null,signOut:vi.fn()})}));
 vi.mock('@/lib/cms',()=>({fetchPublishedCmsContent:vi.fn().mockResolvedValue([])}));
 type SupabaseQueryMock = { select: () => SupabaseQueryMock; order: () => Promise<{ data: unknown[]; error: null }> };
