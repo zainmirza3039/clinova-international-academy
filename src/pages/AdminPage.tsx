@@ -10,34 +10,17 @@ import AdminInquiryPanel from '@/components/AdminInquiryPanel';
 import AdminAuditPanel from '@/components/AdminAuditPanel';
 import AccreditationPreparationPanel from '@/components/AccreditationPreparationPanel';
 import { useSEO } from '@/hooks/useSEO';
-import { publishedEducationalArticles } from '@/data/educationalArticles';
 
 type AdminSection = 'Overview' | 'Courses' | 'Applications' | 'Inquiries' | 'Content' | 'Events' | 'Faculty' | 'Learners' | 'Certificates' | 'Professional Certification' | 'Assessments' | 'Accreditation' | 'Quality Assurance' | 'Finance & Operations' | 'Reports & Audit' | 'Settings';
-type CatalogueRow = { id: string; title: string; kind: string; category: string; href: string };
 
 const adminSections: AdminSection[] = ['Overview', 'Courses', 'Applications', 'Inquiries', 'Content', 'Events', 'Faculty', 'Learners', 'Certificates', 'Professional Certification', 'Assessments', 'Accreditation', 'Quality Assurance', 'Finance & Operations', 'Reports & Audit', 'Settings'];
 const protectedAreas = adminSections.filter((section) => section !== 'Overview');
-const inputClass = 'mt-1 w-full rounded-lg border border-navy-200 px-3 py-2.5 text-sm text-navy-800';
-
-const articleRows: CatalogueRow[] = publishedEducationalArticles.map(article => ({
-  id: `article-${article.id}`,
-  title: article.title,
-  kind: 'Educational article',
-  category: article.category,
-  href: `/resources/${article.slug}`,
-}));
-
 function DisabledAdmin() {
   return <><PageHero breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Admin access' }]} eyebrow="Restricted area" title="Administration is not enabled" description="This screen deliberately contains no login, credentials, registration flow or private records." /><section className="bg-surface-50 py-16 lg:py-24"><div className="mx-auto max-w-editorial px-6 lg:px-10"><div className="mx-auto max-w-3xl border border-navy-200 bg-white p-7 md:p-10"><div className="flex items-start gap-4"><ShieldAlert className="h-7 w-7 shrink-0 text-amber-600" aria-hidden="true" /><div><h2 className="font-heading text-2xl font-bold text-navy-800">Secure setup required</h2><p className="mt-3 text-sm leading-relaxed text-navy-600">Admin access is blocked until the application has a server-side authentication and role contract. Any live implementation must verify identity, enforce least privilege on the server and audit access to private records.</p></div></div><div className="mt-8 border-t border-navy-100 pt-7"><h3 className="font-heading text-base font-bold text-navy-800">Protected areas</h3><div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">{protectedAreas.map(area => <div key={area} className="flex items-center gap-2 border border-navy-100 bg-surface-50 px-3 py-3 text-sm text-navy-500"><LockKeyhole className="h-4 w-4 shrink-0" aria-hidden="true" />{area}</div>)}</div></div><p role="status" className="mt-8 bg-navy-50 px-4 py-3 text-sm text-navy-700">No sign-in is offered and no private data has been requested or displayed.</p></div></div></section></>;
 }
 
 function MetricCard({ label, value, detail }: { label: string; value: string | number; detail: string }) {
   return <article className="rounded-xl border border-navy-100 bg-white p-5 shadow-sm"><p className="text-sm font-medium text-navy-600">{label}</p><p className="mt-2 text-3xl font-bold text-navy-900">{value}</p><p className="mt-2 text-xs leading-relaxed text-navy-500">{detail}</p></article>;
-}
-
-function SourceRecordsTable({ rows, label }: { rows: CatalogueRow[]; label: string }) {
-  if (rows.length === 0) return <p className="rounded-lg border border-dashed border-navy-200 bg-white p-6 text-sm text-navy-600">No source records match this search.</p>;
-  return <div className="overflow-x-auto rounded-xl border border-navy-100 bg-white"><table aria-label={label} className="min-w-full divide-y divide-navy-100 text-left text-sm"><thead className="bg-surface-50 text-xs uppercase tracking-wide text-navy-600"><tr><th scope="col" className="px-4 py-3">Title</th><th scope="col" className="px-4 py-3">Type</th><th scope="col" className="px-4 py-3">Subject area</th><th scope="col" className="px-4 py-3">Source status</th></tr></thead><tbody className="divide-y divide-navy-100">{rows.map(row => <tr key={row.id} className="align-top"><td className="px-4 py-3 font-medium text-navy-800"><Link className="underline decoration-teal-500 underline-offset-4 hover:text-teal-700" to={row.href}>{row.title}</Link></td><td className="px-4 py-3 text-navy-600">{row.kind}</td><td className="px-4 py-3 text-navy-600">{row.category}</td><td className="px-4 py-3"><span className="rounded-full bg-teal-50 px-2.5 py-1 text-xs font-semibold text-teal-800">Repository source</span></td></tr>)}</tbody></table></div>;
 }
 
 function StatusPanel({ title, message, linkTo, linkLabel }: { title: string; message: string; linkTo?: string; linkLabel?: string }) {
@@ -49,7 +32,6 @@ export default function AdminPage() {
   const isEmailVerified = auth.emailVerified && Boolean(auth.session?.user.email && auth.session.user.email_confirmed_at);
   const isAdmin = auth.session?.user.app_metadata?.role === 'admin' || (Array.isArray(auth.session?.user.app_metadata?.clinova_roles) && auth.session.user.app_metadata.clinova_roles.includes('content_admin'));
   const [activeSection, setActiveSection] = useState<AdminSection>('Overview');
-  const [contentSearch, setContentSearch] = useState('');
   useSEO({ title: 'Admin access', description: 'Restricted Clinova administration.', noindex: true });
 
   if (!auth.enabled) return <DisabledAdmin />;
