@@ -12,64 +12,87 @@ import ClinicalInternshipsPage from '@/pages/ClinicalInternshipsPage';
 import AssessmentPage from '@/pages/AssessmentPage';
 import QualityAssurancePage from '@/pages/QualityAssurancePage';
 import { FacultyPage } from '@/pages/CommunityPage';
-vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }), useScrollPosition: () => false }));
-afterEach(() => { cleanup(); document.head.innerHTML = ''; });
-function renderPage(page: React.ReactNode) { return render(<MemoryRouter>{page}</MemoryRouter>); }
 
-describe('Clinova platform scope and truthful availability', () => {
-  it('presents Clinova education and certification without promoting legacy self-study offers', () => {
-    const { container } = renderPage(<HomePage />);
+vi.mock('@/hooks/useScrollAnimation',()=>({useScrollAnimation:()=>({ref:{current:null},isVisible:true}),useScrollPosition:()=>false}));
+vi.mock('@/hooks/useSEO',()=>({useSEO:vi.fn()}));
+vi.mock('@/lib/cms',()=>({fetchPublishedCmsContent:vi.fn().mockResolvedValue([])}));
+afterEach(()=>{cleanup();document.head.innerHTML='';});
+function renderPage(page:React.ReactNode){return render(<MemoryRouter>{page}</MemoryRouter>);}
+
+describe('Clinova platform scope and truthful service availability',()=>{
+  it('presents the academy and its instructor-led CPD model without legacy self-study offers',()=>{
+    const {container}=renderPage(<HomePage/>);
     expect(container.textContent).toContain('Clinova International Academy Ltd');
     expect(container.textContent).toMatch(/professional certification/i);
-    expect(container.textContent).toMatch(/No CPD course enrollment, certification application, examination, credential issuance or live verification is currently available/i);
+    expect(container.textContent).toMatch(/instructor-led learning/i);
     expect(container.textContent).not.toMatch(/self-study course|browse self-study|self-paced course/i);
     expect(container.querySelector('form,input[type="email"]')).toBeNull();
   });
-  it('shows proposed CPD topic titles without opening a course or admissions workflow', () => {
-    const cpd = renderPage(<CPDCoursesPage />);
-    expect(screen.getByRole('heading', { name: 'Browse proposed CPD topics' })).toBeTruthy();
-    expect(screen.getByRole('heading', { name: 'No CPD course enrollment is available' })).toBeTruthy();
-    expect(cpd.container.querySelectorAll('a[href^="/cpd-courses/"]')).toHaveLength(12);
-    expect(cpd.container.querySelector('form,input[type="email"],input[type="password"],input[type="file"],textarea,button[type="submit"]')).toBeNull();
-    expect(cpd.container.textContent).not.toMatch(/self-study course|self-paced study|independent study/i); cleanup();
-    const admissions = renderPage(<AdmissionsPage />);
-    expect(screen.getByRole('heading', { name: 'Online applications and payments are unavailable' })).toBeTruthy();
+
+  it('shows published CPD CMS catalogue status without inventing course offers',async()=>{
+    const cpd=renderPage(<CPDCoursesPage/>);
+    expect(screen.getByRole('heading',{name:'Published CPD programmes'})).toBeTruthy();
+    expect(await screen.findByRole('heading',{name:'New programmes will appear here when approved for publication.'})).toBeTruthy();
+    expect(cpd.container.textContent).toMatch(/Only programmes approved for publication appear in this catalogue/i);
+    expect(cpd.container.querySelector('form,input[type="password"],input[type="file"],button[type="submit"]')).toBeNull();
+    cleanup();
+    const admissions=renderPage(<AdmissionsPage/>);
+    expect(screen.getByRole('heading',{name:'Review programme availability before applying'})).toBeTruthy();
+    expect(admissions.container.textContent).toMatch(/A learner can apply only to a published CPD programme/i);
     expect(admissions.container.querySelector('form,input,button[type="submit"]')).toBeNull();
   });
-  it('does not collect applications or run assessment decisions', () => {
-    const application = renderPage(<ApplicationPage />);
-    expect(screen.getByRole('heading', { name: 'Applications and enrollment are not open' })).toBeTruthy();
-    expect(application.container.textContent).toMatch(/online applications and payment processing are disabled/i);
-    expect(application.container.querySelector('form,input,textarea,button[type="submit"]')).toBeNull(); cleanup();
-    const assessment = renderPage(<AssessmentPage />);
-    expect(screen.getByRole('heading', { name: 'No examination or OSCE is open' })).toBeTruthy();
-    expect(assessment.container.querySelector('form,input,textarea,button[type="submit"]')).toBeNull();
+
+  it('explains the CPD application route without collecting a general application',()=>{
+    const application=renderPage(<ApplicationPage/>);
+    expect(screen.getByRole('heading',{name:'How CPD programme applications work'})).toBeTruthy();
+    expect(application.container.textContent).toMatch(/Sign in with a verified learner account/i);
+    expect(application.container.querySelector('form,input,textarea,button[type="submit"]')).toBeNull();
   });
-  it('separates professional certification, policy development and quality assurance from accreditation claims', () => {
-    const certification = renderPage(<CertificationPage />); expect(screen.getByRole('heading', { name: 'No certification scheme is open' })).toBeTruthy();
-    expect(certification.container.textContent).toMatch(/no claim of UKAS accreditation/i); cleanup();
-    const quality = renderPage(<QualityAssurancePage />);
+
+  it('keeps professional certification separate from CPD completion certificates',()=>{
+    const certification=renderPage(<CertificationPage/>);
+    expect(screen.getByRole('heading',{name:'No certification scheme is open'})).toBeTruthy();
+    expect(certification.container.textContent).toMatch(/CPD completion certificates are not professional licences or statutory registration/i);
+    expect(certification.container.textContent).toMatch(/Neither a CPD credential nor a professional competency credential implies statutory registration/i);
+    expect(certification.container.querySelector('form,input,textarea,button[type="submit"]')).toBeNull();
+  });
+
+  it('provides a real CPD certificate verification form without claiming a result before lookup',()=>{
+    const {container}=renderPage(<CertificateVerificationPage/>);
+    expect(screen.getByRole('heading',{name:'Verify a CPD completion certificate'})).toBeTruthy();
+    expect(screen.getByRole('form',{name:'Official CPD certificate lookup'})).toBeTruthy();
+    expect(screen.getByLabelText('Certificate verification UUID')).toBeTruthy();
+    expect(container.textContent).toMatch(/lookup returns only the certificate number/i);
+  });
+
+  it('keeps assessment and professional certification application services closed',()=>{
+    const assessment=renderPage(<AssessmentPage/>);
+    expect(screen.getByRole('heading',{name:'No examination or OSCE is open'})).toBeTruthy();
+    expect(assessment.container.querySelector('form,input,textarea,button[type="submit"]')).toBeNull();
+    cleanup();
+    const certification=renderPage(<CertificationPage/>);
+    expect(certification.container.textContent).toMatch(/No professional certification scheme, candidate application, examination/i);
+  });
+
+  it('keeps clinical placements unlisted until partner and supervisor details are confirmed',()=>{
+    const placement=renderPage(<ClinicalInternshipsPage/>);
+    expect(placement.container.textContent).toMatch(/No verified clinical placements are currently listed/i);
+    expect(placement.container.querySelector('form,input,[type="file"]')).toBeNull();
+  });
+
+  it('keeps quality assurance separate from an accreditation award',()=>{
+    const quality=renderPage(<QualityAssurancePage/>);
     expect(quality.container.textContent).toMatch(/not published as an operative policy/i);
     expect(quality.container.textContent).not.toMatch(/Clinova is accredited/i);
   });
-  it('keeps certificate verification a local format check with no lookup claim', () => {
-    const { container } = renderPage(<CertificateVerificationPage />);
-    expect(screen.getByRole('heading', { name: 'Live verification is not available' })).toBeTruthy();
-    expect(container.textContent).toMatch(/not sent to a server or stored/i);
-    expect(container.querySelector('form')).toBeTruthy();
-  });
-  it('keeps placements unavailable and preserves the confirmed company identity', () => {
-    const placement = renderPage(<ClinicalInternshipsPage />);
-    expect(placement.container.textContent).toMatch(/no verified clinical placements are currently listed/i);
-    expect(placement.container.querySelector('form,input,[type="file"]')).toBeNull(); cleanup();
-    const contact = renderPage(<ContactPage />);
-    expect(contact.container.textContent).toContain('Clinova International Academy Ltd'); expect(contact.container.textContent).toContain('Clinova / CIA');
-    expect(contact.container.textContent).toContain('16048192'); expect(contact.container.textContent).toContain('14 October 2025');
-    expect(contact.container.textContent).toContain('Not a campus, visiting location, or public-facing venue.'); expect(contact.container.querySelector('form')).toBeNull();
-  });
-  it('keeps public faculty listing empty until profiles are verified', () => {
-    const { container } = renderPage(<FacultyPage />);
-    expect(screen.getByRole('heading', { name: 'No verified faculty profiles are currently published' })).toBeTruthy();
-    expect(container.querySelector('form,input')).toBeNull();
+
+  it('shows the public contact form and does not invent faculty profiles',()=>{
+    const contact=renderPage(<ContactPage/>);
+    expect(screen.getByRole('heading',{name:'How can the academy help?'})).toBeTruthy();
+    expect(contact.container.querySelector('form')).toBeTruthy();
+    cleanup();
+    const faculty=renderPage(<FacultyPage/>);
+    expect(screen.getByRole('heading',{name:'No verified faculty profiles are currently published'})).toBeTruthy();
+    expect(faculty.container.querySelector('form,input')).toBeNull();
   });
 });
