@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useSEO } from '@/hooks/useSEO';
 import PageHero from '@/components/PageHero';
 import { validateFormFields, type FormFieldRules } from '@/lib/formValidation';
-import { supabase } from '@/lib/supabase';
 
 const discussionAreas = [
   {
@@ -49,9 +48,9 @@ const fieldRules: FormFieldRules = {
   businessEmail: { required: true, maxLength: 320, kind: 'email' },
   phoneNumber: { maxLength: 80 },
   collaborationType: { required: true, maxLength: 80 },
-  proposal: { required: true, maxLength: 3000 },
+  proposal: { required: true, maxLength: 5000 },
   expectedAudience: { required: true, maxLength: 500 },
-  additionalDetails: { maxLength: 1000 },
+  additionalDetails: { maxLength: 2000 },
 };
 
 const fieldLabels: Record<DraftField, string> = {
@@ -94,7 +93,7 @@ function validateDraft(values: DraftValues): DraftErrors {
     errors.phoneNumber = 'Use 5–80 characters with digits and common phone punctuation.';
   }
   if (!values.acknowledgement) {
-    errors.acknowledgement = 'Confirm that you are authorized to contact the academy and have not included sensitive personal information.';
+    errors.acknowledgement = 'Confirm that this draft is not submitted or saved and contains no patient or learner information.';
   }
   return errors;
 }
@@ -103,14 +102,12 @@ export default function TrainingPartnersPage() {
   const [draft, setDraft] = useState<DraftValues>(createEmptyDraft);
   const [errors, setErrors] = useState<DraftErrors>({});
   const [status, setStatus] = useState('');
-  const [submitting, setSubmitting] = useState(false);
-  const [honeypot, setHoneypot] = useState('');
   const errorSummaryRef = useRef<HTMLDivElement>(null);
   const focusErrorSummaryOnUpdate = useRef(false);
 
   useSEO({
     title: 'Training Partnerships',
-    description: 'Submit an institutional expression of interest for healthcare education, instructor collaboration and clinical learning partnerships with Clinova International Academy.',
+    description: 'Information and a local-only draft checker for organisations exploring educational collaboration with Clinova International Academy.',
   });
 
   useEffect(() => {
@@ -142,7 +139,7 @@ export default function TrainingPartnersPage() {
     setStatus('');
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus('');
     const nextErrors = validateDraft(draft);
@@ -151,32 +148,7 @@ export default function TrainingPartnersPage() {
       focusErrorSummaryOnUpdate.current = true;
       return;
     }
-    if (honeypot.trim()) { setStatus('Your enquiry has been received.'); return; }
-    setSubmitting(true);
-    try {
-      const { error } = await supabase.from('partnership_inquiries').insert({
-        full_name: draft.contactName.trim(),
-        organisation: draft.organisationName.trim(),
-        role: draft.roleTitle.trim(),
-        email: draft.businessEmail.trim(),
-        phone: draft.phoneNumber.trim() || null,
-        country: draft.countryLocation.trim(),
-        website: null,
-        message: [
-          `Organisation type: ${draft.organisationType}`,
-          `Collaboration type: ${draft.collaborationType}`,
-          `Proposal: ${draft.proposal}`,
-          `Expected audience: ${draft.expectedAudience}`,
-          draft.additionalDetails.trim() ? `Additional details: ${draft.additionalDetails}` : '',
-        ].filter(Boolean).join('\n\n'),
-      });
-      if (error) throw error;
-      setStatus('Your partnership enquiry has been received. This is an expression of interest only; no partnership or placement is confirmed until a written agreement is completed.');
-      setDraft(createEmptyDraft());
-      setErrors({});
-    } catch {
-      setStatus('The enquiry could not be submitted. Please try again later or use the Contact page.');
-    } finally { setSubmitting(false); }
+    setStatus('Your draft passed local field checks, but no enquiry was submitted. Nothing was sent or saved. Use the Contact page postal details if you wish to send a written expression of interest.');
   };
 
   const clearDraft = () => {
@@ -250,7 +222,7 @@ export default function TrainingPartnersPage() {
         breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Training Partnerships' }]}
         eyebrow="Training Partnerships"
         title="Start a considered conversation about learning"
-        description="Explore possible educational collaboration and submit an expression of interest to the Clinova team."
+        description="Explore possible educational collaboration and check a proposal draft in this page. Online submissions are not available."
         image="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
       />
       <section className="bg-white px-6 py-16 lg:py-24">
@@ -277,21 +249,21 @@ export default function TrainingPartnersPage() {
         </div>
       </section>
 
-      <section id="collaboration-enquiry" aria-labelledby="collaboration-enquiry-heading" className="bg-surface-50 px-6 py-16 lg:py-20">
+      <section id="collaboration-draft" aria-labelledby="collaboration-draft-heading" className="bg-surface-50 px-6 py-16 lg:py-20">
         <div className="mx-auto max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-600">Institutional enquiry</p>
-          <h2 id="collaboration-enquiry-heading" className="mt-3 font-heading text-2xl font-bold text-navy-800 md:text-3xl">Discuss a collaboration</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-600">Local draft checker only</p>
+          <h2 id="collaboration-draft-heading" className="mt-3 font-heading text-2xl font-bold text-navy-800 md:text-3xl">Outline a collaboration idea</h2>
           <p className="mt-4 leading-relaxed text-navy-600">
-            Use this form to send an institutional expression of interest. Submissions are stored for authorized academy staff to review. Do not enter patient, learner, or other sensitive personal information.
+            This form checks fields in your current page only. It does not contact a server, send an enquiry, or save your details. Values remain temporarily in this page until you clear them, leave, or reload. Do not enter patient, learner, or other sensitive personal information.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-navy-600">
-            Submitting an enquiry does not create a partnership, guarantee a placement or authorize the use of either organisation’s name or logo.
+            The acknowledgement below only confirms that you understand this local-only behavior; it is not a privacy-policy consent or a submission.
           </p>
           <p className="mt-3 text-sm font-semibold text-navy-800">
-            For general enquiries, use the <Link to="/contact" className="text-clinical-700 underline">Contact page</Link>.
+            No written submission has been received. Use the <Link to="/contact" className="text-clinical-700 underline">published postal contact details</Link> if you wish to send correspondence.
           </p>
 
-          <form aria-labelledby="collaboration-enquiry-heading" className="mt-8 space-y-6" onSubmit={handleSubmit} noValidate>
+          <form aria-labelledby="collaboration-draft-heading" className="mt-8 space-y-6" onSubmit={handleSubmit} noValidate>
             {Object.keys(errors).length > 0 && (
               <div ref={errorSummaryRef} role="alert" aria-labelledby="partner-error-summary-heading" tabIndex={-1} className="border-l-4 border-red-700 bg-red-50 p-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">
                 <h3 id="partner-error-summary-heading" className="font-semibold text-red-900">Review these fields</h3>
@@ -382,22 +354,21 @@ export default function TrainingPartnersPage() {
                   className="mt-1 h-4 w-4 accent-teal-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600"
                 />
                 <label htmlFor="partner-acknowledgement" className="text-sm leading-relaxed text-navy-800">
-                  I confirm I am authorised to contact Clinova on behalf of this organisation and have not included sensitive personal or patient information. (required)
+                  I understand this draft is not sent or saved, and I have not included patient or learner information. (required)
                 </label>
               </div>
-              <p id="partner-acknowledgement-help" className="ml-7 mt-1 text-xs text-navy-600">Your enquiry will be sent to Clinova for review. It is not a partnership agreement or placement confirmation.</p>
+              <p id="partner-acknowledgement-help" className="ml-7 mt-1 text-xs text-navy-600">This acknowledgement is for local draft checking only.</p>
               {errors.acknowledgement && <p id="partner-acknowledgement-error" className="ml-7 mt-1 text-sm font-medium text-red-800">{errors.acknowledgement}</p>}
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <button type="submit" disabled={submitting} className="min-h-11 rounded-md bg-navy-800 px-5 py-3 text-sm font-semibold text-white hover:bg-navy-700 disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600">
-                {submitting ? 'Sending…' : 'Submit partnership enquiry'}
+              <button type="submit" className="min-h-11 rounded-md bg-navy-800 px-5 py-3 text-sm font-semibold text-white hover:bg-navy-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600">
+                Validate draft only
               </button>
               <button type="button" onClick={clearDraft} className="min-h-11 rounded-md border border-navy-300 px-5 py-3 text-sm font-semibold text-navy-800 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600">
-                Clear form
+                Clear draft
               </button>
             </div>
-            <label aria-hidden="true" className="absolute -left-[10000px] h-px w-px overflow-hidden">Website<input tabIndex={-1} autoComplete="off" value={honeypot} onChange={event => setHoneypot(event.target.value)} /></label>
             {status && <p role="status" aria-live="polite" className="border-l-4 border-amber-600 bg-white p-4 text-sm leading-relaxed text-navy-800">{status}</p>}
           </form>
         </div>
