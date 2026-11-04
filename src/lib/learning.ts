@@ -184,7 +184,16 @@ export async function fetchInstructorWorkspace(userId: string): Promise<Instruct
 }
 
 export async function createTeachingSession(userId: string, input: { course_item_id: string; title: string; starts_at: string; ends_at: string; meeting_url?: string }): Promise<void> {
-  const { error } = await supabase.from('course_live_sessions').insert({ ...input, created_by: userId, session_status: 'scheduled' });
+  const start = Date.parse(input.starts_at);
+  const end = Date.parse(input.ends_at);
+  if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) throw new Error('Choose a valid session start and an end time after the start.');
+  if (!input.title.trim() || input.title.trim().length > 200) throw new Error('Enter a session title of 1–200 characters.');
+  if (input.meeting_url) {
+    let url: URL;
+    try { url = new URL(input.meeting_url); } catch { throw new Error('Enter a valid HTTPS meeting link.'); }
+    if (url.protocol !== 'https:') throw new Error('Meeting links must use HTTPS.');
+  }
+  const { error } = await supabase.from('course_live_sessions').insert({ ...input, title: input.title.trim(), created_by: userId, session_status: 'scheduled' });
   ensureNoError(error, 'The teaching session could not be created.');
 }
 
@@ -208,6 +217,9 @@ export async function createSignedCourseResourceUrl(path: string): Promise<strin
 }
 
 export async function uploadCourseResource(userId: string, courseItemId: string, file: File): Promise<string> {
+  const allowedTypes = new Set(['application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/vnd.ms-powerpoint','application/vnd.openxmlformats-officedocument.presentationml.presentation','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','image/jpeg','image/png','image/webp','video/mp4']);
+  if (!allowedTypes.has(file.type)) throw new Error('This file type is not supported. Upload a PDF, Office document, JPG, PNG, WebP or MP4.');
+  if (file.size <= 0 || file.size > 100 * 1024 * 1024) throw new Error('Course resources must be smaller than 100 MB.');
   const safeName = file.name.normalize('NFKC').replace(/[^a-zA-Z0-9._-]+/g, '-').slice(-120);
   const path = `${courseItemId}/${crypto.randomUUID()}-${safeName}`;
   const { error } = await supabase.storage.from('course-resources').upload(path, file, { upsert: false });
