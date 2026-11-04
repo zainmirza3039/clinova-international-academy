@@ -83,7 +83,7 @@ function CreateDraftForm({ user, onCreated, disabled }: { user: CmsUser; onCreat
     if (deliveryMode.trim()) snapshot.deliveryMode = deliveryMode.trim();
     if (targetAudience.trim()) snapshot.targetAudience = targetAudience.trim();
     if (assessmentMethod.trim()) snapshot.assessmentMethod = assessmentMethod.trim();
-    if (learningOutcomes.trim()) snapshot.learningOutcomes = learningOutcomes.split('\\n').map(item => item.trim()).filter(Boolean);
+    if (learningOutcomes.trim()) snapshot.learningOutcomes = learningOutcomes.split('\n').map(item => item.trim()).filter(Boolean);
     if (contentMarkdown.trim()) snapshot.contentMarkdown = contentMarkdown.trim();
     if (kind === 'cpd_course') snapshot.enrollmentOpen = enrollmentOpen;
     void onCreated({ name: 'create_content_item', args: { p_kind: kind, p_snapshot: snapshot } });
