@@ -48,9 +48,9 @@ describe('published educational article library', () => {
   it('searches article text and supports clearing filters', () => {
     render(<MemoryRouter><ResourcesPage /></MemoryRouter>);
     fireEvent.change(screen.getByLabelText('Search resources'), { target: { value: 'unfindable-phrase-123' } });
-    expect(screen.getByRole('status').textContent).toContain('0 educational articles');
+    expect(screen.getByText(/Showing 0 educational articles/)).toBeTruthy();
     fireEvent.click(screen.getByRole('button', { name: 'Clear filters' }));
-    expect(screen.getByRole('status').textContent).toContain('15 educational articles');
+    expect(screen.getByText(/Showing 15 educational articles/)).toBeTruthy();
   });
 });
 
@@ -114,7 +114,7 @@ describe('draft-only programme data and non-course reading resources', () => {
   it('preserves the confirmed Clinova legal identity, office notice and copyright language', () => {
     const { container } = render(<MemoryRouter><ContactPage /><Footer /></MemoryRouter>);
     const expectedCopyrightNotice = [
-      'This website and its content are copyright of Clinova International Academy – © Clinova International Academy 2024. All rights reserved.',
+      'This website and its content are copyright of Clinova International Academy Ltd. © 2026. All rights reserved.',
       'Any redistribution or reproduction of part or all of the contents in any form is prohibited other than the following:',
       'You may print or download extracts to a local hard disk for your personal and non-commercial use only.',
       'You may copy the content to individual third parties for their personal use, provided that you acknowledge clinova International Academy as the source of the material.',
