@@ -273,7 +273,7 @@ export async function issueCpdCertificate(enrollmentId: string, certificateNumbe
 export async function fetchAdminLearningWorkspace(): Promise<AdminLearningWorkspace> {
   const [profiles, instructors, enrollments, items, certificates] = await Promise.all([
     supabase.from('profiles').select('user_id,full_name,professional_title,institution,country').order('created_at', { ascending: false }).limit(200),
-    supabase.from('instructor_profiles').select('user_id,public_name,professional_title,biography,credentials,verification_evidence,verification_rationale,verification_status,is_public').order('created_at', { ascending: false }).limit(100),
+    supabase.rpc('get_admin_instructor_profiles'),
     supabase.from('course_enrollments').select('id,course_item_id,student_id,enrollment_status,applied_at').order('applied_at', { ascending: false }).limit(200),
     supabase.from('content_items').select('id,kind').eq('kind', 'cpd_course').limit(200),
     supabase.from('course_certificates').select('id,enrollment_id,course_item_id,certificate_number,verification_code,issued_at,revoked_at,student_id').order('issued_at', { ascending: false }).limit(200),
