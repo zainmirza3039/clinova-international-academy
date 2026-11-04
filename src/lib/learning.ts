@@ -41,7 +41,7 @@ export type InstructorWorkspace = {
 };
 export type AdminLearningWorkspace = {
   profiles: LearningProfile[];
-  instructors: { user_id: string; public_name: string; professional_title: string; biography: string | null; credentials: string[]; verification_status: string; is_public: boolean }[];
+  instructors: { user_id: string; public_name: string; professional_title: string; biography: string | null; credentials: string[]; verification_evidence: unknown[]; verification_rationale: string | null; verification_status: string; is_public: boolean }[];
   enrollments: { id: string; course_item_id: string; student_id: string; enrollment_status: string; applied_at: string; course: LearningCourse | null; learner: LearningProfile | null }[];
   courses: LearningCourse[];
   certificates: (LearningCertificate & { learner: LearningProfile | null })[];
@@ -267,7 +267,7 @@ export async function issueCpdCertificate(enrollmentId: string, certificateNumbe
 export async function fetchAdminLearningWorkspace(): Promise<AdminLearningWorkspace> {
   const [profiles, instructors, enrollments, items, certificates] = await Promise.all([
     supabase.from('profiles').select('user_id,full_name,professional_title,institution,country').order('created_at', { ascending: false }).limit(200),
-    supabase.from('instructor_profiles').select('user_id,public_name,professional_title,biography,credentials,verification_status,is_public').order('created_at', { ascending: false }).limit(100),
+    supabase.from('instructor_profiles').select('user_id,public_name,professional_title,biography,credentials,verification_evidence,verification_rationale,verification_status,is_public').order('created_at', { ascending: false }).limit(100),
     supabase.from('course_enrollments').select('id,course_item_id,student_id,enrollment_status,applied_at').order('applied_at', { ascending: false }).limit(200),
     supabase.from('content_items').select('id,kind').eq('kind', 'cpd_course').limit(200),
     supabase.from('course_certificates').select('id,enrollment_id,course_item_id,certificate_number,verification_code,issued_at,revoked_at,student_id').order('issued_at', { ascending: false }).limit(200),
@@ -287,7 +287,7 @@ export async function fetchAdminLearningWorkspace(): Promise<AdminLearningWorksp
   const profileMap = new Map(((learnerProfiles.data ?? []) as LearningProfile[]).map(profile => [profile.user_id, profile]));
   return {
     profiles: (profiles.data ?? []) as LearningProfile[],
-    instructors: (instructors.data ?? []).map((row: any) => ({ ...row, credentials: Array.isArray(row.credentials) ? row.credentials.filter((item: unknown): item is string => typeof item === 'string') : [] })) as AdminLearningWorkspace['instructors'],
+    instructors: (instructors.data ?? []).map((row: any) => ({ ...row, credentials: Array.isArray(row.credentials) ? row.credentials.filter((item: unknown): item is string => typeof item === 'string') : [], verification_evidence: Array.isArray(row.verification_evidence) ? row.verification_evidence : [] })) as AdminLearningWorkspace['instructors'],
     courses: [...publishedCourses.values()],
     certificates: (certificates.data ?? []).map((row: any) => ({ ...row, course: courses.get(row.course_item_id) ?? null, learner: profileMap.get(row.student_id) ?? null })),
     enrollments: (enrollments.data ?? []).map((row: any) => ({
@@ -314,12 +314,18 @@ export async function manageClinovaRole(userId: string, role: string, enabled: b
   ensureNoError(error, 'The role change was rejected by the secure administrator service.');
 }
 
-export async function reviewInstructorProfile(userId: string, adminId: string, approved: boolean): Promise<void> {
+export async function reviewInstructorProfile(userId: string, adminId: string, approved: boolean, evidenceReferences: string[], rationale: string): Promise<void> {
+  const evidence = evidenceReferences.map(value => value.trim()).filter(Boolean).slice(0, 30);
+  const reason = rationale.trim();
+  if (reason.length < 10 || reason.length > 2000) throw new Error('A reviewer rationale of 10–2,000 characters is required.');
+  if (approved && evidence.length === 0) throw new Error('At least one qualification evidence reference is required before verification.');
   // Change the trusted role first. A failed role/audit operation must never leave an unassigned public instructor profile.
   await manageClinovaRole(userId, 'instructor', approved);
   const { error } = await supabase.from('instructor_profiles').update({
     verification_status: approved ? 'verified' : 'rejected',
     is_public: approved,
+    verification_evidence: evidence,
+    verification_rationale: reason,
     reviewed_by: adminId,
     reviewed_at: new Date().toISOString(),
   }).eq('user_id', userId);
