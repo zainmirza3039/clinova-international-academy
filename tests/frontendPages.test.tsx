@@ -23,7 +23,7 @@ describe('Clinova programme and certification system pages', () => {
   });
   it('explains the programme-specific CPD application pathway', () => {
     const { container } = renderPage(<ApplicationPage />);
-    expect(container.textContent).toMatch(/CPD applications are submitted from an individual programme page when that programme is published and marked open/i);
+    expect(container.textContent).toMatch(/CPD applications are submitted on individual CPD programme pages/i);
     expect(container.querySelector('form,input,textarea,button[type="submit"]')).toBeNull();
   });
   it('redirects the legacy online-learning path to current CPD system status', () => {
