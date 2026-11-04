@@ -6,7 +6,7 @@ import { useSEO } from '@/hooks/useSEO';
 const faqs = [
   ['How do I choose a programme?', 'Start with the programme and department pages, then contact the academy if you need help understanding which route fits your goals. Requirements and suitability can vary by programme.'],
   ['How can I ask about admissions?', 'Use the Contact page for an admissions enquiry. Please do not send sensitive documents until the academy confirms what is needed and how it should be shared.'],
-  ['Can I submit an application online?', 'CPD applications are submitted from individual published programme pages when applications are open. Sign in with a verified learner account and follow the programme's application instructions. Professional certification applications are not currently open.'],
+  ['Can I submit an application online?', 'CPD applications are submitted from individual published programme pages when applications are open. Sign in with a verified learner account and follow the programme’s application instructions. Professional certification applications are not currently open.'],
   ['Where can I find course details?', 'Browse the Programmes and CPD Courses sections for the information currently published on this site. If something is unclear, ask the team directly.'],
   ['What fees or funding are available?', 'Fees and funding are programme-specific and are not stated here without confirmed information. Please contact the academy for current details rather than relying on estimates.'],
   ['How do I contact Clinova?', 'Use the Contact page enquiry form or the published contact details. Do not include patient records, passwords or identity documents in a general enquiry.'],
