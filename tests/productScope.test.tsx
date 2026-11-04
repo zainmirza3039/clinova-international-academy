@@ -15,6 +15,7 @@ import { FacultyPage } from '@/pages/CommunityPage';
 
 vi.mock('@/hooks/useScrollAnimation',()=>({useScrollAnimation:()=>({ref:{current:null},isVisible:true}),useScrollPosition:()=>false}));
 vi.mock('@/hooks/useSEO',()=>({useSEO:vi.fn()}));
+vi.mock('@/lib/supabase',()=>({supabase:{from:vi.fn(()=>{const query:any={select:()=>query,order:()=>Promise.resolve({data:[],error:null})};return query;})}}));
 vi.mock('@/lib/cms',()=>({fetchPublishedCmsContent:vi.fn().mockResolvedValue([])}));
 afterEach(()=>{cleanup();document.head.innerHTML='';});
 function renderPage(page:React.ReactNode){return render(<MemoryRouter>{page}</MemoryRouter>);}
