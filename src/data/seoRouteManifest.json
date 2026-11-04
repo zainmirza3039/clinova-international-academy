@@ -9,7 +9,7 @@
     {
       "path": "/",
       "title": "Clinova International Academy | Official Information",
-      "description": "Official information for Clinova International Academy Ltd. No CPD course, application, examination, credential, or live verification service is currently open.",
+      "description": "Official information for Clinova International Academy Ltd, including published academic and instructor-led CPD programmes, learner services and professional education.",
       "structuredDataType": "WebSite"
     },
     {
@@ -21,13 +21,25 @@
     {
       "path": "/accessibility-statement",
       "title": "Accessibility Statement | Clinova International Academy",
-      "description": "Accessibility information for MyUniHub, including current capabilities, known gaps, and contact details.",
+      "description": "Accessibility information for Clinova International Academy, including its accessibility approach, known gaps and how to report an issue.",
       "structuredDataType": "WebPage"
     },
     {
       "path": "/external-linking-policy",
       "title": "External Linking Policy | Clinova International Academy",
       "description": "Clinova International Academy's owner-approved policy for external links.",
+      "structuredDataType": "WebPage"
+    },
+    {
+      "path": "/programmes",
+      "title": "Academic programmes | Clinova International Academy",
+      "description": "Explore published academic and professional education programmes from Clinova International Academy.",
+      "structuredDataType": "WebPage"
+    },
+    {
+      "path": "/cpd-courses",
+      "title": "CPD programmes | Clinova International Academy",
+      "description": "Explore published instructor-led continuing professional development programmes from Clinova International Academy.",
       "structuredDataType": "WebPage"
     }
   ],
@@ -69,8 +81,6 @@
     "/blog",
     "/announcements",
     "/departments",
-    "/programmes",
-    "/cpd-courses",
     "/online-learning",
     "/clinical-internships",
     "/become-an-instructor",
