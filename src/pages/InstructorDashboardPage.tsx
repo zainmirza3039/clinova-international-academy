@@ -3,7 +3,7 @@ import { Link, Navigate, useLocation } from 'react-router-dom';
 import { ArrowRight, BookOpen, CalendarDays, ClipboardList, CircleUserRound, GraduationCap, LogOut, RefreshCw, Users, Upload } from 'lucide-react';
 import { useAuth } from '@/auth/authContext';
 import { useSEO } from '@/hooks/useSEO';
-import { attachCourseResource, createCourseLesson, createTeachingSession, fetchInstructorWorkspace, uploadCourseResource, type InstructorWorkspace } from '@/lib/learning';
+import { createCourseLesson, createTeachingSession, deleteCourseResource, fetchInstructorWorkspace, uploadCourseResource, type InstructorWorkspace } from '@/lib/learning';
 
 type InstructorTab = 'Overview' | 'My programmes' | 'Teaching schedule' | 'Learners' | 'Resources' | 'Profile';
 const tabs: InstructorTab[] = ['Overview', 'My programmes', 'Teaching schedule', 'Learners', 'Resources', 'Profile'];
@@ -61,13 +61,16 @@ export default function InstructorDashboardPage() {
     event.preventDefault(); if (!userId || busy) return;
     setBusy(true); setError(null); setNotice(null);
     try {
-      const lessonId = await createCourseLesson(userId, { ...lessonDraft, sequence_number: Number(lessonDraft.sequence_number) });
       const file = resourceFiles[lessonDraft.course_item_id];
-      if (file) {
-        const path = await uploadCourseResource(userId, lessonDraft.course_item_id, file);
-        await attachCourseResource(lessonId, path);
+      let resourcePath: string | null = null;
+      if (file) resourcePath = await uploadCourseResource(userId, lessonDraft.course_item_id, file);
+      try {
+        await createCourseLesson(userId, { ...lessonDraft, sequence_number: Number(lessonDraft.sequence_number), resource_path: resourcePath });
+      } catch (reason) {
+        if (resourcePath) await deleteCourseResource(resourcePath).catch(() => undefined);
+        throw reason;
       }
-      setNotice('Lesson saved as an unpublished draft. An administrator must review and publish it before learners can access it.');
+      setNotice(file ? 'Lesson and private resource saved as an unpublished draft.' : 'Lesson saved as an unpublished draft. An administrator must review and publish it before learners can access it.');
       setLessonDraft(v => ({ ...v, title: '', summary: '', content_markdown: '', sequence_number: String(Number(v.sequence_number) + 1) }));
       setResourceFiles(v => ({ ...v, [lessonDraft.course_item_id]: null }));
       await refresh();
