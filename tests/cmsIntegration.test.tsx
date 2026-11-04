@@ -1,9 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { ResourcesPage } from '@/pages/ResourcesPage';
 import CmsAdminWorkspace from '@/components/CmsAdminWorkspace';
-import { educationalArticles } from '@/data/educationalArticles';
 import {
   cmsFeatureEnabled,
   fetchCmsWorkflowVersions,
@@ -14,75 +12,66 @@ import {
   type CmsClient,
 } from '@/lib/cms';
 
-const doubles = vi.hoisted(() => ({ from: vi.fn(), rpc: vi.fn() }));
-vi.mock('@/lib/supabase', () => ({ supabase: { from: doubles.from, rpc: doubles.rpc } }));
-vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }) }));
+const doubles=vi.hoisted(()=>({from:vi.fn(),rpc:vi.fn()}));
+vi.mock('@/lib/supabase',()=>({supabase:{from:doubles.from,rpc:doubles.rpc}}));
+vi.mock('@/hooks/useScrollAnimation',()=>({useScrollAnimation:()=>({ref:{current:null},isVisible:true})}));
 
-const expectedProject = 'https://ssxpmcbqfdggfsoqbxac.supabase.co';
-const client: CmsClient = {
-  from: doubles.from as unknown as CmsClient['from'],
-  rpc: doubles.rpc as unknown as CmsClient['rpc'],
+const expectedProject='https://ssxpmcbqfdggfsoqbxac.supabase.co';
+const client:CmsClient={
+  from:doubles.from as unknown as CmsClient['from'],
+  rpc:doubles.rpc as unknown as CmsClient['rpc'],
 };
-
-function requestCmsActivation() {
-  vi.stubEnv('VITE_CMS_ENABLED', 'true');
-  vi.stubEnv('VITE_SUPABASE_URL', expectedProject);
-  vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'test-publishable-key');
+function configureCms() {
+  vi.stubEnv('VITE_CMS_ENABLED','true');
+  vi.stubEnv('VITE_SUPABASE_URL',expectedProject);
+  vi.stubEnv('VITE_SUPABASE_ANON_KEY','test-publishable-key');
 }
+function queryBuilder(data:unknown[]=[]) {
+  const query:any={order:vi.fn(()=>query),in:vi.fn(()=>query),limit:vi.fn(()=>Promise.resolve({data,error:null}))};
+  return query;
+}
+function configureQueries() {
+  doubles.from.mockImplementation(()=>({select:vi.fn(()=>queryBuilder())}));
+  doubles.rpc.mockResolvedValue({data:[],error:null});
+}
+afterEach(()=>{cleanup();vi.clearAllMocks();vi.unstubAllEnvs();document.head.innerHTML='';});
 
-afterEach(() => {
-  cleanup();
-  vi.clearAllMocks();
-  vi.unstubAllEnvs();
-  document.head.innerHTML = '';
-});
-
-describe('Clinova CMS release gates', () => {
-  it('keeps repository-backed public content available without querying CMS', async () => {
-    vi.stubEnv('VITE_CMS_ENABLED', 'false');
-    vi.stubEnv('VITE_SUPABASE_URL', expectedProject);
-    vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'test-publishable-key');
-
-    expect(cmsFeatureEnabled()).toBe(false);
+describe('Clinova CMS workflow',()=>{
+  it('enables CMS only for the configured academy Supabase project',async()=>{
+    configureCms();configureQueries();
+    expect(cmsFeatureEnabled()).toBe(true);
     expect(await fetchPublishedCmsContent(client)).toEqual([]);
-    render(<MemoryRouter><ResourcesPage /></MemoryRouter>);
-    expect(await screen.findByText(/Showing 15 educational articles/)).toBeTruthy();
-    expect(screen.getByRole('link', { name: new RegExp(educationalArticles[0].title) })).toBeTruthy();
-    expect(doubles.from).not.toHaveBeenCalled();
-    expect(doubles.rpc).not.toHaveBeenCalled();
+    expect(doubles.from).toHaveBeenCalledWith('published_content');
   });
 
-  it('ignores true deployment flags and performs no public query or private workflow action', async () => {
-    requestCmsActivation();
-    const user = { id: 'synthetic-admin', app_metadata: { clinova_roles: ['content_admin'] } };
-
-    expect(cmsFeatureEnabled()).toBe(false);
-    expect(await fetchPublishedCmsContent(client)).toEqual([]);
-    await expect(fetchCmsWorkflowVersions(user, client)).rejects.toThrow(/disabled/i);
-    await expect(invokeCmsAction(user, {
-      name: 'create_content_item',
-      args: { p_kind: 'article', p_snapshot: { title: 'Synthetic draft', slug: 'synthetic-draft' } },
-    }, client)).rejects.toThrow(/disabled/i);
-    expect(doubles.from).not.toHaveBeenCalled();
-    expect(doubles.rpc).not.toHaveBeenCalled();
+  it('requires trusted CMS roles before reading workflow records or invoking actions',async()=>{
+    configureCms();configureQueries();
+    const author={id:'author-1',app_metadata:{clinova_roles:['content_author']}};
+    expect(await fetchCmsWorkflowVersions(author,client)).toEqual([]);
+    await invokeCmsAction(author,{name:'create_content_item',args:{p_kind:'article',p_snapshot:{title:'A reviewed article',slug:'reviewed-article'}}},client);
+    expect(doubles.from).toHaveBeenCalledWith('content_versions');
+    expect(doubles.rpc).toHaveBeenCalledWith('create_content_item',expect.objectContaining({p_kind:'article'}));
+    await expect(fetchCmsWorkflowVersions({id:'untrusted',user_metadata:{clinova_roles:['content_admin']}},client)).rejects.toThrow(/trusted Clinova CMS role/i);
   });
 
-  it('shows the CMS panel as inactive even to a trusted CMS role', () => {
-    requestCmsActivation();
-    const user = { id: 'synthetic-reviewer', app_metadata: { clinova_roles: ['clinical_reviewer'] } };
-    render(<CmsAdminWorkspace user={user} />);
-
-    expect(screen.getByRole('heading', { name: 'CMS workflow' })).toBeTruthy();
-    expect(screen.getByText(/queries and workflow actions are disabled in source/i)).toBeTruthy();
-    expect(screen.queryByRole('button', { name: /refresh cms|save draft|publish|withdraw/i })).toBeNull();
-    expect(doubles.from).not.toHaveBeenCalled();
-    expect(doubles.rpc).not.toHaveBeenCalled();
+  it('recognizes server-managed roles and legacy administrator access without trusting user metadata',()=>{
+    expect(getCmsRoles({id:'legacy-admin',app_metadata:{role:'admin'}})).toContain('content_admin');
+    expect(getCmsRoles({id:'user-claim',user_metadata:{clinova_roles:['content_admin']}})).toEqual([]);
+    expect(getCmsRoles({id:'trusted',app_metadata:{clinova_roles:['content_author']}})).toEqual(['content_author']);
+    expect(hasAnyCmsRole({id:'trusted',app_metadata:{clinova_roles:['content_author']}},['content_author'])).toBe(true);
   });
 
-  it('accepts only trusted server-managed CMS role claims as data, without enabling workflow access', () => {
-    expect(getCmsRoles({ id: 'legacy', app_metadata: { role: 'admin' } })).toEqual([]);
-    expect(getCmsRoles({ id: 'user-claim', user_metadata: { clinova_roles: ['content_admin'] } })).toEqual([]);
-    expect(getCmsRoles({ id: 'trusted', app_metadata: { clinova_roles: ['content_author'] } })).toEqual(['content_author']);
-    expect(hasAnyCmsRole({ id: 'trusted', app_metadata: { clinova_roles: ['content_author'] } }, ['content_author'])).toBe(true);
+  it('loads the admin CMS workspace for a trusted role and keeps it unavailable to untrusted accounts',async()=>{
+    configureCms();configureQueries();
+    const trusted={id:'cms-admin',app_metadata:{clinova_roles:['content_admin']}};
+    render(<MemoryRouter><CmsAdminWorkspace user={trusted}/></MemoryRouter>);
+    expect(screen.getByRole('heading',{name:'CMS workflow'})).toBeTruthy();
+    await waitFor(()=>expect(doubles.from).toHaveBeenCalledWith('content_versions'));
+    expect(screen.getByText(/No CMS versions are available to this account/i)).toBeTruthy();
+    cleanup();vi.clearAllMocks();configureQueries();
+    render(<MemoryRouter><CmsAdminWorkspace user={{id:'ordinary',app_metadata:{}}}/></MemoryRouter>);
+    expect(screen.getByRole('heading',{name:'CMS workflow access denied'})).toBeTruthy();
+    expect(doubles.from).not.toHaveBeenCalled();
+    expect(doubles.rpc).not.toHaveBeenCalled();
   });
 });
