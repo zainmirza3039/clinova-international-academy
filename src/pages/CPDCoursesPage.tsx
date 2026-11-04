@@ -1,99 +1,140 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, CalendarDays, GraduationCap } from 'lucide-react';
+import { ArrowRight, BookOpenCheck, ShieldAlert } from 'lucide-react';
 import PageHero from '@/components/PageHero';
-import { fetchPublishedCmsContent, type CmsPublishedContent } from '@/lib/cms';
+import CPDCard from '@/components/CPDCard';
 import { useSEO } from '@/hooks/useSEO';
+import { credentialTypes } from '@/data/credentialTypes';
+import { ownerListedCPDTopics } from '@/data/catalogueBrowse';
 
-function readText(snapshot: Record<string, unknown>, key: string): string | null {
-  const value = snapshot[key];
-  return typeof value === 'string' && value.trim() ? value.trim() : null;
-}
+const cpdSystemAreas = [
+  { title: 'Course catalogue', detail: 'Course descriptions, learning objectives, syllabus and delivery details require separate review and approval.' },
+  { title: 'Enrollment and learner access', detail: 'No application, enrollment, payment or learner-record service is connected.' },
+  { title: 'Learning and course assessment', detail: 'Course materials, assessments and completion rules are not published as operational services.' },
+  { title: 'CPD records and completion certificate', detail: 'No CPD completion record or certificate is currently issued or verified.' },
+];
+
+const suggestedSubjectAreas = [...new Set(ownerListedCPDTopics.map((topic) => topic.subjectArea))].sort();
 
 export default function CPDCoursesPage() {
-  const [records, setRecords] = useState<CmsPublishedContent[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState(false);
   const [query, setQuery] = useState('');
-  const [subject, setSubject] = useState('');
+  const [subjectArea, setSubjectArea] = useState('');
+
   useSEO({
-    title: 'Continuing Professional Development programmes',
-    description: 'Explore published, instructor-led continuing professional development programmes from Clinova International Academy.',
+    title: 'Proposed CPD topics',
+    description: 'Browse owner-listed Clinova CPD topic titles. They are proposals only; no course or enrollment is currently available.',
+    noindex: true,
   });
 
-  useEffect(() => {
-    let active = true;
-    void fetchPublishedCmsContent().then(items => {
-      if (!active) return;
-      setRecords(items.filter(item => item.kind === 'cpd_course'));
-      setLoadError(false);
-    }).catch(() => {
-      if (active) setLoadError(true);
-    }).finally(() => {
-      if (active) setLoading(false);
+  const filteredTopics = useMemo(() => {
+    const normalizedQuery = query.trim().toLocaleLowerCase();
+    return ownerListedCPDTopics.filter((topic) => {
+      const matchesQuery = !normalizedQuery || topic.title.toLocaleLowerCase().includes(normalizedQuery);
+      const matchesArea = !subjectArea || topic.subjectArea === subjectArea;
+      return matchesQuery && matchesArea;
     });
-    return () => { active = false; };
-  }, []);
+  }, [query, subjectArea]);
 
-  const subjects = useMemo(() => [...new Set(records.map(record => readText(record.snapshot, 'category') ?? readText(record.snapshot, 'department')).filter((value): value is string => Boolean(value)))].sort(), [records]);
-  const visible = useMemo(() => {
-    const normalized = query.trim().toLocaleLowerCase();
-    return records.filter(record => {
-      const title = readText(record.snapshot, 'title') ?? '';
-      const description = readText(record.snapshot, 'description') ?? readText(record.snapshot, 'excerpt') ?? '';
-      const category = readText(record.snapshot, 'category') ?? readText(record.snapshot, 'department') ?? '';
-      return (!normalized || `${title} ${description} ${category}`.toLocaleLowerCase().includes(normalized)) && (!subject || category === subject);
-    });
-  }, [records, query, subject]);
+  return (
+    <>
+      <PageHero
+        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'CPD Courses' }]}
+        eyebrow="CPD education"
+        title="Browse proposed CPD topics"
+        description="Explore Clinova-listed topic titles by name or suggested subject area. These topic labels are not current course offers."
+      />
+      <section className="bg-white px-6 py-14 lg:py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="border border-amber-300 bg-amber-50 p-6" role="status">
+            <div className="flex items-start gap-4">
+              <ShieldAlert className="mt-1 h-7 w-7 shrink-0 text-amber-700" aria-hidden="true" />
+              <div>
+                <h2 className="font-heading text-xl font-bold text-navy-900">No CPD course enrollment is available</h2>
+                <p className="mt-2 text-sm leading-relaxed text-navy-700">
+                  The titles below are shown as proposed topic labels only. They do not represent open courses. Syllabi, outcomes, CPD hours, faculty, schedules, fees, assessments and completion rules are not presented as approved. This page does not collect learner information or submit an application.
+                </p>
+              </div>
+            </div>
+          </div>
 
-  return <>
-    <PageHero
-      breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'CPD programmes' }]}
-      eyebrow="Continuing professional development"
-      title="Professional learning, led by healthcare educators."
-      description="Explore structured CPD programmes for doctors, physiotherapists, nurses and allied healthcare professionals. Each published programme includes its own learning information and application status."
-    />
-    <section className="bg-white px-6 py-14 lg:py-20">
-      <div className="mx-auto max-w-6xl">
-        <div className="grid gap-5 border-y border-navy-100 py-6 sm:grid-cols-3">
-          <div className="flex items-start gap-3"><BookOpen className="mt-1 h-5 w-5 shrink-0 text-clinical-700"/><div><h2 className="text-sm font-semibold text-navy-900">Structured programmes</h2><p className="mt-1 text-sm leading-relaxed text-navy-600">Course content and learning outcomes are shown on each published programme.</p></div></div>
-          <div className="flex items-start gap-3"><GraduationCap className="mt-1 h-5 w-5 shrink-0 text-clinical-700"/><div><h2 className="text-sm font-semibold text-navy-900">Instructor-led delivery</h2><p className="mt-1 text-sm leading-relaxed text-navy-600">Teaching is assigned to educators whose profiles have passed academy review.</p></div></div>
-          <div className="flex items-start gap-3"><CalendarDays className="mt-1 h-5 w-5 shrink-0 text-clinical-700"/><div><h2 className="text-sm font-semibold text-navy-900">Clear enrolment status</h2><p className="mt-1 text-sm leading-relaxed text-navy-600">Applications are accepted only when a programme is explicitly open.</p></div></div>
+          <section className="mt-10" aria-labelledby="topic-directory-title">
+            <div className="max-w-3xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-700">Topic directory</p>
+              <h2 id="topic-directory-title" className="mt-2 font-heading text-2xl font-bold text-navy-900">Find a proposed topic</h2>
+              <p className="mt-2 text-sm leading-relaxed text-navy-600">
+                Suggested subject groupings are provisional. Use them for browsing only; they do not establish an academic department or an approved curriculum.
+              </p>
+            </div>
+            <div className="mt-6 grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(16rem,0.7fr)]">
+              <div>
+                <label htmlFor="cpd-topic-search" className="mb-2 block text-sm font-semibold text-navy-800">Search proposed topics</label>
+                <input
+                  id="cpd-topic-search"
+                  type="search"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Search by topic title"
+                  className="min-h-12 w-full rounded-md border border-navy-300 bg-white px-4 text-sm text-navy-900 placeholder:text-navy-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600"
+                />
+              </div>
+              <div>
+                <label htmlFor="cpd-topic-subject-area" className="mb-2 block text-sm font-semibold text-navy-800">Suggested subject area (provisional)</label>
+                <select
+                  id="cpd-topic-subject-area"
+                  value={subjectArea}
+                  onChange={(event) => setSubjectArea(event.target.value)}
+                  className="min-h-12 w-full rounded-md border border-navy-300 bg-white px-4 text-sm text-navy-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600"
+                >
+                  <option value="">All proposed topics</option>
+                  {suggestedSubjectAreas.map((area) => <option key={area} value={area}>{area}</option>)}
+                </select>
+              </div>
+            </div>
+            <p className="mt-4 text-sm text-navy-600" role="status" aria-live="polite">
+              Showing {filteredTopics.length} of {ownerListedCPDTopics.length} proposed topic titles.
+            </p>
+            {filteredTopics.length > 0 ? (
+              <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {filteredTopics.map((topic) => <CPDCard key={topic.id} course={topic} />)}
+              </div>
+            ) : (
+              <p className="mt-5 border border-navy-200 bg-surface-50 p-5 text-sm text-navy-700" role="status">No proposed topic titles match those filters.</p>
+            )}
+          </section>
+
+          <section className="mt-14 border-t border-navy-100 pt-10" aria-labelledby="cpd-system-status-title">
+            <div className="flex items-start gap-4">
+              <BookOpenCheck className="mt-1 h-6 w-6 shrink-0 text-clinical-700" aria-hidden="true" />
+              <div>
+                <h2 id="cpd-system-status-title" className="font-heading text-xl font-bold text-navy-900">CPD system status</h2>
+                <p className="mt-2 max-w-3xl text-sm leading-relaxed text-navy-600">A topic title does not establish a live course, CPD credit, a completion certificate or professional competence. Related services remain disconnected.</p>
+              </div>
+            </div>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {cpdSystemAreas.map((area) => (
+                <article key={area.title} className="border border-navy-100 bg-surface-50 p-5">
+                  <h3 className="font-heading text-lg font-bold text-navy-900">{area.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-navy-600">{area.detail}</p>
+                  <p className="mt-3 text-xs font-semibold text-amber-800">Development only · not connected</p>
+                </article>
+              ))}
+            </div>
+            <section className="mt-8 border border-navy-100 p-6" aria-labelledby="cpd-credential-title">
+              <h3 id="cpd-credential-title" className="font-heading text-lg font-bold text-navy-900">CPD completion certificate</h3>
+              <p className="mt-3 text-sm leading-relaxed text-navy-600">A future CPD certificate would be separate from professional competency certification and would require an approved course-specific completion policy. It does not establish statutory registration or a licence to practise.</p>
+              <p className="mt-3 text-xs font-semibold text-amber-800">No CPD certificate is currently issued or verified here.</p>
+            </section>
+          </section>
+
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link to="/departments" className="inline-flex min-h-11 items-center gap-2 rounded-md border border-navy-300 px-5 py-3 text-sm font-semibold text-navy-800 hover:bg-surface-50">Browse subject areas <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+            <Link to="/programmes" className="inline-flex min-h-11 items-center gap-2 rounded-md border border-navy-300 px-5 py-3 text-sm font-semibold text-navy-800 hover:bg-surface-50">Proposed programme catalogue</Link>
+            <Link to="/certification" className="inline-flex min-h-11 items-center gap-2 rounded-md border border-navy-300 px-5 py-3 text-sm font-semibold text-navy-800 hover:bg-surface-50">Professional certification</Link>
+            <Link to="/verify" className="inline-flex min-h-11 items-center gap-2 rounded-md border border-navy-300 px-5 py-3 text-sm font-semibold text-navy-800 hover:bg-surface-50">Credential verification status</Link>
+          </div>
+          <p className="sr-only">Credential types remain distinct: {credentialTypes.map((item) => item.title).join('; ')}.</p>
         </div>
-
-        <div className="mt-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div><p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-700">Programme catalogue</p><h2 className="mt-2 font-heading text-2xl font-bold text-navy-900">Published CPD programmes</h2><p className="mt-2 max-w-2xl text-sm leading-relaxed text-navy-600">Only programmes approved for publication appear in this catalogue. Unpublished drafts and proposed topics are not displayed.</p></div>
-          <p className="text-sm text-navy-600" aria-live="polite">{loading ? 'Loading programmes…' : `${visible.length} programme${visible.length === 1 ? '' : 's'}`}</p>
-        </div>
-
-        {!loading && records.length > 0 && <div className="mt-6 grid gap-4 md:grid-cols-[minmax(0,1fr)_16rem]">
-          <label className="grid gap-2 text-sm font-semibold text-navy-800">Search programmes<input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Search by title, subject or description" className="min-h-11 border border-navy-300 bg-white px-4 font-normal"/></label>
-          <label className="grid gap-2 text-sm font-semibold text-navy-800">Subject area<select value={subject} onChange={event => setSubject(event.target.value)} className="min-h-11 border border-navy-300 bg-white px-4 font-normal"><option value="">All subject areas</option>{subjects.map(item => <option key={item} value={item}>{item}</option>)}</select></label>
-        </div>}
-
-        {loading && <p className="mt-8 border border-navy-100 bg-surface-50 p-8 text-center text-sm text-navy-600" role="status">Loading published CPD programmes…</p>}
-        {loadError && <div className="mt-8 border border-amber-200 bg-amber-50 p-6" role="alert"><h3 className="font-semibold text-navy-900">The programme catalogue is temporarily unavailable</h3><p className="mt-2 text-sm text-navy-700">Please try again later or contact the academy for current programme information.</p></div>}
-        {!loading && !loadError && records.length === 0 && <div className="mt-8 border border-navy-200 bg-surface-50 p-8 md:p-10"><p className="text-xs font-semibold uppercase tracking-[0.15em] text-clinical-700">Programme information</p><h3 className="mt-3 font-heading text-2xl font-bold text-navy-900">New programmes will appear here when approved for publication.</h3><p className="mt-3 max-w-2xl text-sm leading-relaxed text-navy-600">The academy is preparing its instructor-led programme catalogue. This page displays published programme information only; it does not advertise unconfirmed courses, dates, fees or CPD hours.</p><Link to="/contact" className="mt-6 inline-flex min-h-11 items-center gap-2 border border-navy-300 bg-white px-5 py-3 text-sm font-semibold text-navy-800">Ask about upcoming programmes <ArrowRight size={16}/></Link></div>}
-        {!loading && !loadError && records.length > 0 && visible.length === 0 && <p className="mt-8 border border-navy-200 bg-surface-50 p-6 text-sm text-navy-700" role="status">No published programmes match those filters.</p>}
-        {!loading && !loadError && visible.length > 0 && <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{visible.map(record => {
-          const snapshot = record.snapshot;
-          const title = readText(snapshot, 'title') ?? 'CPD programme';
-          const description = readText(snapshot, 'excerpt') ?? readText(snapshot, 'description') ?? readText(snapshot, 'overview');
-          const category = readText(snapshot, 'category') ?? readText(snapshot, 'department');
-          const duration = typeof snapshot.durationHours === 'number' ? `${snapshot.durationHours} learning hours` : null;
-          const delivery = readText(snapshot, 'deliveryMode');
-          const open = snapshot.enrollmentOpen === true;
-          return <article key={record.content_version_id} className="flex min-h-full flex-col border border-navy-200 bg-white p-6 transition-colors hover:border-clinical-600">
-            <div className="flex items-center justify-between gap-3"><span className="text-xs font-semibold uppercase tracking-[0.13em] text-clinical-700">{category ?? 'CPD programme'}</span><span className={open ? 'portal-status portal-status--valid' : 'portal-status'}>{open ? 'Applications open' : 'Published'}</span></div>
-            <h3 className="mt-4 font-heading text-xl font-bold leading-snug text-navy-900">{title}</h3>
-            {description && <p className="mt-3 flex-1 text-sm leading-relaxed text-navy-600">{description}</p>}
-            <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 border-t border-navy-100 pt-4 text-xs text-navy-600">{duration && <span>{duration}</span>}{delivery && <span>{delivery}</span>}</div>
-            <Link to={`/cms/cpd_course/${String(snapshot.slug)}`} className="mt-5 inline-flex min-h-10 items-center gap-2 font-semibold text-clinical-700 underline underline-offset-4">View programme details <ArrowRight size={15}/></Link>
-          </article>;
-        })}</div>}
-
-        <div className="mt-14 border-t border-navy-100 pt-8"><h2 className="font-heading text-xl font-bold text-navy-900">For educators and healthcare organisations</h2><p className="mt-2 max-w-2xl text-sm leading-relaxed text-navy-600">Clinova works with healthcare educators and institutions to develop structured learning opportunities and programme delivery.</p><div className="mt-5 flex flex-wrap gap-4"><Link to="/become-an-instructor" className="text-sm font-semibold text-clinical-700 underline underline-offset-4">Instructor information</Link><Link to="/training-partners" className="text-sm font-semibold text-clinical-700 underline underline-offset-4">Institutional partnerships</Link></div></div>
-      </div>
-    </section>
-  </>;
+      </section>
+    </>
+  );
 }
