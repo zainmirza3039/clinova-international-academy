@@ -1,50 +1,82 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import StudentDashboardPage from '@/pages/StudentDashboardPage';
 
 const state = vi.hoisted(() => ({
-  auth: { enabled: false, status: 'ready', emailVerified: false, session: null as null | { user: { id: string; email?: string } } },
-  signOut: vi.fn().mockResolvedValue({ error: null }),
-  from: vi.fn(),
-  rpc: vi.fn(),
+  auth: {
+    enabled: true,
+    status: 'ready',
+    emailVerified: true,
+    session: { user: { id: 'learner-1', email: 'learner@example.test' } },
+    signOut: vi.fn().mockResolvedValue({ error: null }),
+  },
+  fetchStudentWorkspace: vi.fn(),
+  markLessonProgress: vi.fn().mockResolvedValue(undefined),
+  updateStudentProfile: vi.fn().mockResolvedValue(undefined),
+  createSignedCourseResourceUrl: vi.fn().mockResolvedValue('https://example.test/signed-resource'),
 }));
-vi.mock('@/auth/authContext', () => ({ useAuth: () => ({ ...state.auth, signOut: state.signOut }) }));
-vi.mock('@/lib/supabase', () => ({ supabase: { from: state.from, rpc: state.rpc } }));
+vi.mock('@/auth/authContext', () => ({ useAuth: () => state.auth }));
 vi.mock('@/hooks/useSEO', () => ({ useSEO: vi.fn() }));
+vi.mock('@/lib/learning', () => ({
+  fetchStudentWorkspace: state.fetchStudentWorkspace,
+  markLessonProgress: state.markLessonProgress,
+  updateStudentProfile: state.updateStudentProfile,
+  createSignedCourseResourceUrl: state.createSignedCourseResourceUrl,
+}));
+
+const pendingWorkspace = {
+  profile: { full_name: 'Alex Learner', professional_title: 'DPT', institution: 'Teaching Hospital', country: 'Pakistan' },
+  enrollments: [{ id: 'enrol-1', course_item_id: 'course-1', student_id: 'learner-1', enrollment_status: 'applied', applied_at: '2026-11-01T10:00:00Z', course: { id: 'course-1', title: 'Clinical Assessment of Low Back Pain', description: 'Instructor-led CPD programme.' } }],
+  lessons: [],
+  sessions: [],
+  progress: [],
+  certificates: [],
+};
+const activeWorkspace = {
+  ...pendingWorkspace,
+  enrollments: [{ ...pendingWorkspace.enrollments[0], enrollment_status: 'active' }],
+  lessons: [{ id: 'lesson-1', course_item_id: 'course-1', title: 'Initial clinical assessment', summary: 'History and examination.', content_markdown: 'Review the clinical history and examination.', resource_path: null, sequence_number: 1 }],
+};
 
 function renderDashboard() { return render(<MemoryRouter><StudentDashboardPage /></MemoryRouter>); }
-afterEach(() => { cleanup(); vi.clearAllMocks(); state.signOut.mockResolvedValue({ error: null }); state.auth = { enabled: false, status: 'ready', emailVerified: false, session: null }; });
 
-describe('candidate and learner portal gate', () => {
-  it('shows distinct CPD and certification service states without displaying candidate records', () => {
-    state.auth = { enabled: false, status: 'ready', emailVerified: false, session: { user: { id: 'user-1', email: 'learner@example.test' } } };
-    const { container } = renderDashboard();
-    expect(screen.getByRole('heading', { name: 'Account services are not connected' })).toBeTruthy();
-    expect(screen.getByText('Signed in as learner@example.test')).toBeTruthy();
-    expect(screen.getByRole('link', { name: 'CPD system status' }).getAttribute('href')).toBe('/cpd-courses');
-    expect(screen.getByRole('link', { name: 'Certification status' }).getAttribute('href')).toBe('/certification');
-    expect(screen.getByText(/authentication, candidate data, course enrollment, examination, credential downloads and renewal reminders are disabled/i)).toBeTruthy();
-    expect(container.querySelector('form,input,select,textarea,[download]')).toBeNull();
-    expect(state.from).not.toHaveBeenCalled();
-    expect(state.rpc).not.toHaveBeenCalled();
-  });
+beforeEach(() => {
+  state.fetchStudentWorkspace.mockReset().mockResolvedValue(pendingWorkspace);
+  state.markLessonProgress.mockReset().mockResolvedValue(undefined);
+  state.updateStudentProfile.mockReset().mockResolvedValue(undefined);
+  state.createSignedCourseResourceUrl.mockReset().mockResolvedValue('https://example.test/signed-resource');
+  state.auth.signOut.mockReset().mockResolvedValue({ error: null });
+});
+afterEach(() => { cleanup(); vi.clearAllMocks(); });
 
-  it('supports sign-out without enabling learner data access', () => {
-    state.auth = { enabled: false, status: 'ready', emailVerified: false, session: { user: { id: 'user-1', email: 'learner@example.test' } } };
+describe('authenticated learner workspace', () => {
+  it('shows pending CPD applications instead of hiding them from My programmes', async () => {
     renderDashboard();
-    fireEvent.click(screen.getByRole('button', { name: 'Sign out' }));
-    expect(state.signOut).toHaveBeenCalledOnce();
-    expect(state.from).not.toHaveBeenCalled();
-    expect(state.rpc).not.toHaveBeenCalled();
+    expect(await screen.findByRole('heading', { name: 'Welcome to your learning space' })).toBeTruthy();
+    expect(screen.getByText('Applications pending')).toBeTruthy();
+    expect(screen.getByText('1')).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'My programmes' }));
+    expect(screen.getByRole('heading', { name: 'Clinical Assessment of Low Back Pain' })).toBeTruthy();
+    expect(screen.getByText('Your application is awaiting administrator review.')).toBeTruthy();
+    expect(state.fetchStudentWorkspace).toHaveBeenCalledWith('learner-1');
   });
 
-  it('does not show private identity when no session exists', () => {
-    const { container } = renderDashboard();
-    expect(screen.getByRole('heading', { name: 'Account services are not connected' })).toBeTruthy();
-    expect(container.textContent).not.toContain('learner@example.test');
-    expect(screen.queryByRole('button', { name: 'Sign out' })).toBeNull();
-    expect(state.from).not.toHaveBeenCalled();
-    expect(state.rpc).not.toHaveBeenCalled();
+  it('loads lesson content and sends learner progress changes to the learning service', async () => {
+    state.fetchStudentWorkspace.mockResolvedValue(activeWorkspace);
+    renderDashboard();
+    fireEvent.click(await screen.findByRole('button', { name: 'My programmes' }));
+    expect(screen.getByText('Initial clinical assessment')).toBeTruthy();
+    fireEvent.click(screen.getByText('Read lesson content'));
+    expect(screen.getByText('Review the clinical history and examination.')).toBeTruthy();
+    fireEvent.click(screen.getByRole('checkbox'));
+    await waitFor(() => expect(state.markLessonProgress).toHaveBeenCalledWith('learner-1', 'enrol-1', 'lesson-1', true));
+  });
+
+  it('signs out through the authenticated session provider', async () => {
+    renderDashboard();
+    await screen.findByRole('heading', { name: 'Welcome to your learning space' });
+    fireEvent.click(screen.getByRole('button', { name: 'Sign out' }));
+    await waitFor(() => expect(state.auth.signOut).toHaveBeenCalledOnce());
   });
 });
