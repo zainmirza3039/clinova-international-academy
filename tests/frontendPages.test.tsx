@@ -21,9 +21,9 @@ describe('Clinova programme and certification system pages', () => {
     expect(container.textContent).toContain('14 October 2025'); expect(container.textContent).toMatch(/does not accept course enrollment or certification applications/i);
     expect(container.textContent).toMatch(/no scheme or application is currently open/i);
   });
-  it('explains that ordinary application submission and persistence are unavailable', () => {
+  it('explains the programme-specific CPD application pathway', () => {
     const { container } = renderPage(<ApplicationPage />);
-    expect(container.textContent).toMatch(/Online applications and payment processing are disabled/i);
+    expect(container.textContent).toMatch(/CPD applications are submitted from individual published programme pages/i);
     expect(container.querySelector('form,input,textarea,button[type="submit"]')).toBeNull();
   });
   it('redirects the legacy online-learning path to current CPD system status', () => {
@@ -45,7 +45,7 @@ describe('Clinova programme and certification system pages', () => {
   });
   it('renders admissions status and a safe application-information link', () => {
     renderPage(<AdmissionsPage />);
-    expect(screen.getByRole('heading', { name: 'Services are in development; applications are not open' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Review programme availability before applying' })).toBeTruthy();
     expect(screen.getByRole('link', { name: 'Application information' }).getAttribute('href')).toBe('/application');
   });
   it('renders community status without implying unverified event details', () => {
