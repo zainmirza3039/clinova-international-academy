@@ -66,7 +66,7 @@ export default function ContactPage() {
                   Do not include patient information, medical records, identity documents, passwords or payment card details in general correspondence.
                 </p>
               </div>
-              <form onSubmit={submitEnquiry} className="mt-10 border border-navy-200 bg-surface-50 p-6 sm:p-8" aria-labelledby="contact-enquiry-heading">
+              <form onSubmit={submitEnquiry} onChange={() => { setFormSuccess(false); setFormError(''); }} className="mt-10 border border-navy-200 bg-surface-50 p-6 sm:p-8" aria-labelledby="contact-enquiry-heading">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clinical-700">Send an enquiry</p>
                 <h3 id="contact-enquiry-heading" className="mt-2 font-heading text-xl font-bold text-navy-900">How can the academy help?</h3>
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
