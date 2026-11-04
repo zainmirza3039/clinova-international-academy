@@ -13,7 +13,13 @@ vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref:
 vi.mock('@/auth/AuthProvider',()=>({AuthProvider:({children}:{children:React.ReactNode})=>children}));
 vi.mock('@/auth/authContext',()=>({useAuth:()=>({enabled:false,status:'disabled',session:null,emailVerified:false,error:null,signOut:vi.fn()})}));
 vi.mock('@/lib/cms',()=>({fetchPublishedCmsContent:vi.fn().mockResolvedValue([])}));
-vi.mock('@/lib/supabase',()=>({supabase:{from:vi.fn(()=>{const query:any={select:()=>query,order:()=>Promise.resolve({data:[],error:null})};return query;})}}));
+type SupabaseQueryMock = { select: () => SupabaseQueryMock; order: () => Promise<{ data: unknown[]; error: null }> };
+function createSupabaseQueryMock(): SupabaseQueryMock {
+  let query: SupabaseQueryMock;
+  query = { select: () => query, order: () => Promise.resolve({ data: [], error: null }) };
+  return query;
+}
+vi.mock('@/lib/supabase',()=>({supabase:{from:vi.fn(()=>createSupabaseQueryMock())}}));
 beforeEach(() => { vi.spyOn(window, 'scrollTo').mockImplementation(() => {}); });
 afterEach(() => { cleanup(); vi.restoreAllMocks(); });
 const routes = [
