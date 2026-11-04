@@ -73,6 +73,29 @@ async function getCourses(ids: string[]): Promise<Map<string, LearningCourse>> {
   return map;
 }
 
+async function getCurrentlyPublishedCourses(ids: string[]): Promise<Map<string, LearningCourse>> {
+  if (!ids.length) return new Map();
+  const { data, error } = await supabase.from('content_versions')
+    .select('content_item_id,snapshot')
+    .eq('kind', 'cpd_course')
+    .eq('workflow_status', 'published')
+    .not('published_at', 'is', null)
+    .lte('published_at', new Date().toISOString())
+    .in('content_item_id', ids);
+  ensureNoError(error, 'Published CPD programmes are unavailable.');
+  const map = new Map<string, LearningCourse>();
+  for (const version of (data ?? []) as any[]) {
+    const snapshot = version.snapshot as Record<string, unknown>;
+    if (typeof snapshot.title !== 'string' || map.has(version.content_item_id)) continue;
+    map.set(version.content_item_id, {
+      id: version.content_item_id,
+      title: snapshot.title,
+      description: typeof snapshot.description === 'string' ? snapshot.description : null,
+    });
+  }
+  return map;
+}
+
 export async function fetchStudentWorkspace(userId: string): Promise<StudentWorkspace> {
   const [profileResult, enrollmentResult, certificateResult] = await Promise.all([
     supabase.from('profiles').select('user_id,full_name,professional_title,institution,country').eq('user_id', userId).maybeSingle(),
@@ -243,7 +266,7 @@ export async function fetchAdminLearningWorkspace(): Promise<AdminLearningWorksp
   ensureNoError(items.error, 'Course records are unavailable.');
   ensureNoError(certificates.error, 'Certificate records are unavailable.');
   const courseIds = [...new Set([...(items.data ?? []).map((item: any) => item.id), ...(certificates.data ?? []).map((row: any) => row.course_item_id)])];
-  const courses = await getCourses(courseIds);
+  const [courses, publishedCourses] = await Promise.all([getCourses(courseIds), getCurrentlyPublishedCourses((items.data ?? []).map((item: any) => item.id))]);
   const learnerIds = [...new Set([...(enrollments.data ?? []).map((row: any) => row.student_id), ...(certificates.data ?? []).map((row: any) => row.student_id)])];
   const learnerProfiles = learnerIds.length
     ? await supabase.from('profiles').select('user_id,full_name,professional_title,institution,country').in('user_id', learnerIds)
@@ -253,7 +276,7 @@ export async function fetchAdminLearningWorkspace(): Promise<AdminLearningWorksp
   return {
     profiles: (profiles.data ?? []) as LearningProfile[],
     instructors: (instructors.data ?? []) as AdminLearningWorkspace['instructors'],
-    courses: [...courses.values()],
+    courses: [...publishedCourses.values()],
     certificates: (certificates.data ?? []).map((row: any) => ({ ...row, course: courses.get(row.course_item_id) ?? null, learner: profileMap.get(row.student_id) ?? null })),
     enrollments: (enrollments.data ?? []).map((row: any) => ({
       ...row,
