@@ -314,12 +314,13 @@ export async function manageClinovaRole(userId: string, role: string, enabled: b
 }
 
 export async function reviewInstructorProfile(userId: string, adminId: string, approved: boolean): Promise<void> {
+  // Change the trusted role first. A failed role/audit operation must never leave an unassigned public instructor profile.
+  await manageClinovaRole(userId, 'instructor', approved);
   const { error } = await supabase.from('instructor_profiles').update({
     verification_status: approved ? 'verified' : 'rejected',
     is_public: approved,
     reviewed_by: adminId,
     reviewed_at: new Date().toISOString(),
   }).eq('user_id', userId);
-  ensureNoError(error, 'Instructor profile review could not be saved.');
-  await manageClinovaRole(userId, 'instructor', approved);
+  ensureNoError(error, 'The instructor role was updated, but the profile review could not be saved. Refresh and reconcile the profile before assigning teaching.');
 }
