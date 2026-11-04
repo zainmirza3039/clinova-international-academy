@@ -39,7 +39,7 @@ describe('legal policy availability', () => {
     expect(screen.getByRole('heading', { name: 'No approved policy text is available' })).toBeTruthy();
     expect(screen.getByRole('status', { name: 'Policy approval status' }).textContent).toMatch(/approval required/i);
     expect(container.textContent).toMatch(/this page is a placeholder, not an operative policy/i);
-    expect(container.textContent).toMatch(/privacy, terms and conditions, cookie, and refund policy pages are placeholders pending approval/i);
+    expect(container.textContent).toMatch(/No approved (?:privacy-policy|terms|refund-policy|cookie-policy) text is available here; approval is required before publication\./i);
   });
 
   it.each(approvedLegalRoutes)('%s renders owner-approved legal information', async (route, title) => {
@@ -59,20 +59,16 @@ describe('legal policy availability', () => {
     const content = container.textContent ?? '';
 
     for (const detail of [
-      'MyUniHub',
-      'info@clinovainternationalacademy.co.uk',
-      '(+44) 7412 890634',
-      '400% without text overflow',
+      'Clinova International Academy',
       'keyboard navigation',
-      'speech recognition',
-      'JAWS, NVDA and VoiceOver',
-      'partially compliant with WCAG 2.2 AA',
-      'regular accessibility testing and reviews and make improvements',
+      'text resizing',
+      'assistive technologies',
+      'formal independent WCAG 2.2 AA conformance assessment has not been published',
       'older PDF and Office documents',
       'videos without captions',
-      'some forms and services with keyboard-navigation or screen-reader barriers',
+      'keyboard-navigation or screen-reader barriers',
       'older mobile and tablet content',
-      'Issues are typically addressed within three working days',
+      'A response timeframe is not guaranteed',
     ]) {
       expect(content).toContain(detail);
     }
