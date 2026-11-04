@@ -21,7 +21,7 @@ function createSupabaseQueryMock(): SupabaseQueryMock {
   const query: SupabaseQueryMock = { select: () => query, order: () => Promise.resolve({ data: [], error: null }) };
   return query;
 }
-vi.mock('@/lib/supabase',()=>({supabase:{from:vi.fn(()=>createSupabaseQueryMock())}}));
+vi.mock('@/lib/supabase',()=>({isSupabaseConfigured:false,supabase:{from:vi.fn(()=>createSupabaseQueryMock())}}));
 beforeEach(() => { vi.spyOn(window, 'scrollTo').mockImplementation(() => {}); });
 afterEach(() => { cleanup(); vi.restoreAllMocks(); });
 const routes = [
