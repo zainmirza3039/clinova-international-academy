@@ -19,12 +19,11 @@ const navLinks: NavigationLink[] = [
     ],
   },
   { label: 'CPD Courses', to: '/cpd-courses', menuTitle: 'CPD education', items: [
-    { label: 'CPD programme catalogue', to: '/cpd-courses', description: 'Browse published CPD programmes and their current enrolment status.' },
+    { label: 'Proposed CPD topic directory', to: '/cpd-courses', description: 'Browse owner-listed topic titles only; no course or enrollment offer is open.' },
     { label: 'Browse subject areas', to: '/departments', description: 'Explore proposed subject groupings and learning topics.' },
-    { label: 'Programme catalogue status', to: '/programmes', description: 'View the academic programme catalogue and published programme details.' },
+    { label: 'Proposed programme catalogue', to: '/programmes', description: 'Browse eight proposed title-only programmes; none is open for enrolment.' },
     { label: 'Admissions information', to: '/admissions', description: 'Current education, application and learner-service status.' },
-    { label: 'Student portal', to: '/student', description: 'Access your learner workspace after secure sign-in.' },
-    { label: 'Instructor portal', to: '/instructor', description: 'Access teaching tools after an administrator assigns your role.' },
+    { label: 'Candidate and learner portal', to: '/candidate-dashboard', description: 'Separate CPD and certification areas; services are not connected.' },
   ] },
   {
     label: 'Professional Certification',
@@ -32,8 +31,8 @@ const navLinks: NavigationLink[] = [
     menuTitle: 'Professional certification',
     items: [
       { label: 'Certification overview', to: '/certification', description: 'No certification scheme is currently open.' },
-      { label: 'Application status', to: '/apply-certification', description: 'Review the current certification application status.' },
-      { label: 'Assessment development', to: '/assessment', description: 'Review assessment pathway information.' },
+      { label: 'Application status', to: '/apply-certification', description: 'No candidate applications are being accepted.' },
+      { label: 'Assessment development', to: '/assessment', description: 'No exam, OSCE or practical assessment is operational.' },
       { label: 'Policy development', to: '/certification/policies', description: 'Policy work areas are drafts, not candidate rules.' },
     ],
   },
@@ -43,7 +42,7 @@ const navLinks: NavigationLink[] = [
     menuTitle: 'Institutional information',
     items: [
       { label: 'Institutional collaboration', to: '/for-institutions', description: 'Information only; no agreement or partner status is implied.' },
-      { label: 'Clinical placement status', to: '/clinical-internships', description: 'Review clinical placement and partner-delivery information.' },
+      { label: 'Clinical placement status', to: '/clinical-internships', description: 'No verified placement or application workflow is listed.' },
     ],
   },
   { label: 'Resources', to: '/resources' },
