@@ -45,7 +45,7 @@ export function FacultyPage() {
     let active = true;
     void supabase.from('verified_instructors').select('user_id,public_name,professional_title,biography,credentials').order('public_name').then(({data,error: queryError}) => {
       if (!active) return;
-      if (queryError) setError(true); else setFaculty((data ?? []).map((person: any) => ({ ...person, credentials: Array.isArray(person.credentials) ? person.credentials.filter((item: unknown): item is string => typeof item === 'string') : [] })) as VerifiedInstructor[]);
+      if (queryError) setError(true); else setFaculty(((data ?? []) as { user_id: string; public_name: string; professional_title: string; biography: string | null; credentials: unknown }[]).map(person => ({ ...person, credentials: Array.isArray(person.credentials) ? person.credentials.filter((item: unknown): item is string => typeof item === 'string') : [] })) as VerifiedInstructor[]);
       setLoading(false);
     });
     return () => { active = false; };
