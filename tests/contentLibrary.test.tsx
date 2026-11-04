@@ -103,7 +103,7 @@ describe('draft-only programme data and non-course reading resources', () => {
     for (const resource of learningResources) expect(wordCount(resource.sections.flatMap(section => section.paragraphs).join(' '))).toBeGreaterThan(140);
     render(<MemoryRouter><LearningResourcesPage /></MemoryRouter>);
     fireEvent.change(screen.getByLabelText('Search study tools'), { target: { value: 'glossary' } });
-    expect(screen.getByRole('status').textContent).toContain('1 learning resource');
+    expect(screen.getByText(/Showing 1 learning resource/)).toBeTruthy();
     cleanup();
     const resource = learningResources[0];
     const { container } = render(<MemoryRouter initialEntries={[`/learning-resources/${resource.slug}`]}><Routes><Route path="/learning-resources/:slug" element={<LearningResourceDetailPage />} /></Routes></MemoryRouter>);
