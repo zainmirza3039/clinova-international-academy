@@ -24,7 +24,7 @@ describe('honest and accessible public states', () => {
     render(<MemoryRouter><ResourcesPage /></MemoryRouter>); const category = screen.getByRole('button', { name: newsCategories[0] });
     expect(category.getAttribute('aria-pressed')).toBe('false'); fireEvent.click(category); expect(category.getAttribute('aria-pressed')).toBe('true');
     expect(screen.getByRole('button', { name: 'All' }).getAttribute('aria-pressed')).toBe('false'); fireEvent.change(screen.getByLabelText('Search resources'), { target: { value: 'no-such-article' } });
-    expect(screen.getByRole('status').textContent).toContain('0 educational articles'); expect(screen.getByText('No articles match your search.')).toBeTruthy();
+    expect(screen.getByText(/Showing 0 educational articles/)).toBeTruthy(); expect(screen.getByText('No articles match your search.')).toBeTruthy();
   });
   it('redirects the old online-learning route without showing fictional progress or course details', () => {
     const { container } = render(<MemoryRouter initialEntries={['/online-learning']}><Routes><Route path="/online-learning" element={<OnlineLearningPage />} /><Route path="/cpd-courses" element={<CPDCoursesPage />} /></Routes></MemoryRouter>);
