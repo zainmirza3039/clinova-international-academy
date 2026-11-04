@@ -15,7 +15,7 @@ export default function AdminLearningWorkspacePanel({ section, adminId }: { sect
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
-  const [instructorDraft, setInstructorDraft] = useState({ userId: '', publicName: '', title: '' });
+  const [instructorDraft, setInstructorDraft] = useState({ userId: '', publicName: '', title: '', biography: '', credentials: '' });
   const [assignmentDraft, setAssignmentDraft] = useState({ instructorId: '', courseId: '' });
   const [certificateDraft, setCertificateDraft] = useState({ enrollmentId: '', number: '' });
   const [roleDraft, setRoleDraft] = useState({ userId: '', role: 'instructor' });
@@ -29,18 +29,18 @@ export default function AdminLearningWorkspacePanel({ section, adminId }: { sect
   }, []);
   useEffect(() => { void refresh(); }, [refresh]);
 
-  async function run(action: () => Promise<unknown>, success: string) {
-    if (busy) return;
+  async function run(action: () => Promise<unknown>, success: string): Promise<boolean> {
+    if (busy) return false;
     setBusy(true); setError(null); setNotice(null);
-    try { await action(); setNotice(success); await refresh(); }
-    catch (reason) { setError(reason instanceof Error ? reason.message : 'The requested operation could not be completed.'); }
+    try { await action(); setNotice(success); await refresh(); return true; }
+    catch (reason) { setError(reason instanceof Error ? reason.message : 'The requested operation could not be completed.'); return false; }
     finally { setBusy(false); }
   }
 
   async function createInstructor(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    await run(() => createInstructorProfile(instructorDraft.userId.trim(), instructorDraft.publicName, instructorDraft.title), 'Instructor profile created in pending review.');
-    setInstructorDraft({ userId: '', publicName: '', title: '' });
+    const saved = await run(() => createInstructorProfile(instructorDraft.userId.trim(), instructorDraft.publicName, instructorDraft.title, instructorDraft.biography, instructorDraft.credentials.split('\n')), 'Instructor profile saved as pending verification.');
+    if (saved) setInstructorDraft({ userId: '', publicName: '', title: '', biography: '', credentials: '' });
   }
   async function assignInstructor(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -76,7 +76,7 @@ export default function AdminLearningWorkspacePanel({ section, adminId }: { sect
     </>}
 
     {section === 'Faculty' && <>
-      <form className="portal-form portal-card" onSubmit={createInstructor}><h3>Create instructor profile</h3><p className="portal-muted">Use the UUID of an existing Supabase Auth user. Public registration cannot create teaching permissions.</p><label>Existing Auth user UUID<input required pattern="[0-9a-fA-F-]{36}" value={instructorDraft.userId} onChange={e => setInstructorDraft(v => ({...v,userId:e.target.value}))} /></label><label>Public display name<input required maxLength={160} value={instructorDraft.publicName} onChange={e => setInstructorDraft(v => ({...v,publicName:e.target.value}))} /></label><label>Professional title<input required maxLength={160} value={instructorDraft.title} onChange={e => setInstructorDraft(v => ({...v,title:e.target.value}))} /></label><button type="submit" className="clinova-button clinova-button--primary" disabled={busy}>Create pending profile</button></form>
+      <form className="portal-form portal-card" onSubmit={createInstructor}><h3>Create instructor profile</h3><p className="portal-muted">Use the UUID of an existing Supabase Auth user. Public registration cannot create teaching permissions.</p><label>Existing Auth user UUID<input required pattern="[0-9a-fA-F-]{36}" value={instructorDraft.userId} onChange={e => setInstructorDraft(v => ({...v,userId:e.target.value}))} /></label><label>Public display name<input required maxLength={160} value={instructorDraft.publicName} onChange={e => setInstructorDraft(v => ({...v,publicName:e.target.value}))} /></label><label>Professional title<input required maxLength={160} value={instructorDraft.title} onChange={e => setInstructorDraft(v => ({...v,title:e.target.value}))} /></label><label>Professional biography<textarea rows={4} maxLength={5000} value={instructorDraft.biography} onChange={e => setInstructorDraft(v => ({...v,biography:e.target.value}))} placeholder="Relevant clinical and teaching experience" /></label><label>Qualifications and credentials (one per line)<textarea rows={4} maxLength={4000} value={instructorDraft.credentials} onChange={e => setInstructorDraft(v => ({...v,credentials:e.target.value}))} placeholder="Enter credentials exactly as evidenced; each line is reviewed before publication." /></label><p className="portal-muted">Profiles remain private and pending until qualifications, credentials and teaching scope have been checked. Do not upload identity documents in this form.</p><button type="submit" className="clinova-button clinova-button--primary" disabled={busy}>Save pending profile</button></form>
       <form className="portal-form portal-card" onSubmit={event => void updateRole(event, true)}><h3>Assign an academy role</h3><p className="portal-muted">Grant or revoke roles for an existing Auth user. Role changes are checked by the Supabase Edge Function and recorded in the audit table.</p><label>Existing Auth user UUID<input required pattern="[0-9a-fA-F-]{36}" value={roleDraft.userId} onChange={e => setRoleDraft(v => ({...v,userId:e.target.value}))} /></label><label>Role<select value={roleDraft.role} onChange={e => setRoleDraft(v => ({...v,role:e.target.value}))}><option value="instructor">Instructor</option><option value="faculty">Faculty</option><option value="content_author">Content author</option><option value="clinical_reviewer">Clinical reviewer</option><option value="editorial_reviewer">Editorial reviewer</option><option value="content_publisher">Content publisher</option><option value="content_admin">Content administrator</option></select></label><div className="flex flex-wrap gap-3"><button type="submit" className="clinova-button clinova-button--primary" disabled={busy}>Grant role</button><button type="button" className="clinova-button clinova-button--secondary" disabled={busy || !roleDraft.userId} onClick={event => { event.preventDefault(); void run(() => manageClinovaRole(roleDraft.userId.trim(),roleDraft.role,false),'Role revoked.'); }}>Revoke role</button></div></form>
       <div className="portal-admin-records">{data.instructors.map(instructor => <article key={instructor.user_id} className="portal-admin-record"><div><span className="portal-status">{instructor.verification_status}</span><h3>{instructor.public_name}</h3><p>{instructor.professional_title}</p><small>{instructor.user_id}</small></div><div className="portal-record-actions">{instructor.verification_status !== 'verified' && <button type="button" disabled={busy} onClick={() => void run(() => reviewInstructorProfile(instructor.user_id,adminId,true),'Instructor profile verified and made public.') }><ShieldCheck size={14}/>Verify</button>}{instructor.verification_status !== 'rejected' && <button type="button" disabled={busy} onClick={() => void run(() => reviewInstructorProfile(instructor.user_id,adminId,false),'Instructor profile rejected.') }><X size={14}/>Reject</button>}</div></article>)}</div>
       <form className="portal-form portal-card" onSubmit={assignInstructor}><h3>Assign an instructor to a CPD programme</h3><label>Verified instructor<select required value={assignmentDraft.instructorId} onChange={e => setAssignmentDraft(v => ({...v,instructorId:e.target.value}))}><option value="">Select instructor</option>{data.instructors.filter(i => i.verification_status === 'verified').map(i => <option key={i.user_id} value={i.user_id}>{i.public_name} · {i.professional_title}</option>)}</select></label><label>Published CPD programme<select required value={assignmentDraft.courseId} onChange={e => setAssignmentDraft(v => ({...v,courseId:e.target.value}))}><option value="">Select programme</option>{data.courses.map(c => <option key={c.id} value={c.id}>{c.title}</option>)}</select></label><button type="submit" className="clinova-button clinova-button--primary" disabled={busy || !data.courses.length || !data.instructors.some(i => i.verification_status === 'verified')}>Assign instructor</button></form>
