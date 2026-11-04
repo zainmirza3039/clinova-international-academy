@@ -15,7 +15,8 @@ describe('Clinova SEO publication policy', () => {
     expect(getIndexableSeoRoute('/external-linking-policy')).toBeDefined();
     expect(getIndexableSeoRoute('/about')).toBeUndefined();
     expect(getIndexableSeoRoute('/events')).toBeUndefined();
-    expect(getIndexableSeoRoute('/programmes')).toBeUndefined();
+    expect(getIndexableSeoRoute('/programmes')).toBeDefined();
+    expect(getIndexableSeoRoute('/cpd-courses')).toBeDefined();
     expect(getIndexableSeoRoute('/cpd-courses/example')).toBeUndefined();
     expect(getIndexableSeoRoute('/resources/rehabilitation')).toBeUndefined();
     expect(getIndexableSeoRoute('/certification/verify')).toBeUndefined();
