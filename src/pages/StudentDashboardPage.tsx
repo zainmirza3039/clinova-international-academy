@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Award, BookOpen, CalendarDays, CircleUserRound, Clock3, GraduationCap, LogOut, RefreshCw, UserRound } from 'lucide-react';
+import { ArrowRight, Award, BookOpen, CalendarDays, CircleUserRound, GraduationCap, LogOut, RefreshCw, UserRound } from 'lucide-react';
 import { useAuth } from '@/auth/authContext';
 import { useSEO } from '@/hooks/useSEO';
 import { createSignedCourseResourceUrl, fetchStudentWorkspace, markLessonProgress, updateStudentProfile, type StudentWorkspace } from '@/lib/learning';
