@@ -291,7 +291,7 @@ export default function TrainingPartnersPage() {
             For general enquiries, use the <Link to="/contact" className="text-clinical-700 underline">Contact page</Link>.
           </p>
 
-          <form aria-labelledby="collaboration-draft-heading" className="mt-8 space-y-6" onSubmit={handleSubmit} noValidate>
+          <form aria-labelledby="collaboration-enquiry-heading" className="mt-8 space-y-6" onSubmit={handleSubmit} noValidate>
             {Object.keys(errors).length > 0 && (
               <div ref={errorSummaryRef} role="alert" aria-labelledby="partner-error-summary-heading" tabIndex={-1} className="border-l-4 border-red-700 bg-red-50 p-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800">
                 <h3 id="partner-error-summary-heading" className="font-semibold text-red-900">Review these fields</h3>
@@ -382,19 +382,19 @@ export default function TrainingPartnersPage() {
                   className="mt-1 h-4 w-4 accent-teal-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600"
                 />
                 <label htmlFor="partner-acknowledgement" className="text-sm leading-relaxed text-navy-800">
-                  I understand this draft is not sent or saved, and I have not included patient or learner information. (required)
+                  I confirm I am authorised to contact Clinova on behalf of this organisation and have not included sensitive personal or patient information. (required)
                 </label>
               </div>
-              <p id="partner-acknowledgement-help" className="ml-7 mt-1 text-xs text-navy-600">This acknowledgement is for local draft checking only.</p>
+              <p id="partner-acknowledgement-help" className="ml-7 mt-1 text-xs text-navy-600">Your enquiry will be sent to Clinova for review. It is not a partnership agreement or placement confirmation.</p>
               {errors.acknowledgement && <p id="partner-acknowledgement-error" className="ml-7 mt-1 text-sm font-medium text-red-800">{errors.acknowledgement}</p>}
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <button type="submit" className="min-h-11 rounded-md bg-navy-800 px-5 py-3 text-sm font-semibold text-white hover:bg-navy-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600">
-                Validate draft only
+              <button type="submit" disabled={submitting} className="min-h-11 rounded-md bg-navy-800 px-5 py-3 text-sm font-semibold text-white hover:bg-navy-700 disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600">
+                {submitting ? 'Sending…' : 'Submit partnership enquiry'}
               </button>
               <button type="button" onClick={clearDraft} className="min-h-11 rounded-md border border-navy-300 px-5 py-3 text-sm font-semibold text-navy-800 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600">
-                Clear draft
+                Clear form
               </button>
             </div>
             <label aria-hidden="true" className="absolute -left-[10000px] h-px w-px overflow-hidden">Website<input tabIndex={-1} autoComplete="off" value={honeypot} onChange={event => setHoneypot(event.target.value)} /></label>
