@@ -14,9 +14,9 @@ describe('site-wide catalogue and service navigation', () => {
     const mainNav = within(screen.getByRole('navigation', { name: 'Main navigation' }));
     const cpd = mainNav.getByRole('link', { name: 'CPD Courses' });
     fireEvent.focus(cpd);
-    expect(mainNav.getByRole('link', { name: /Proposed CPD topic directory/ }).getAttribute('href')).toBe('/cpd-courses');
+    expect(mainNav.getByRole('link', { name: /CPD programme catalogue/ }).getAttribute('href')).toBe('/cpd-courses');
     expect(mainNav.getByRole('link', { name: /Browse subject areas/ }).getAttribute('href')).toBe('/departments');
-    expect(mainNav.getByRole('link', { name: /Programme catalogue status/ }).getAttribute('href')).toBe('/programmes');
+    expect(mainNav.getByRole('link', { name: /Programmes/ }).getAttribute('href')).toBe('/programmes');
     expect(mainNav.getByRole('link', { name: /Admissions information/ }).getAttribute('href')).toBe('/admissions');
     expect(mainNav.queryByRole('link', { name: /self-study|published courses/i })).toBeNull();
 
@@ -43,7 +43,7 @@ describe('site-wide catalogue and service navigation', () => {
     expect(cpdToggle.getAttribute('aria-expanded')).toBe('true');
     expect(mobileNav.getByRole('link', { name: /Proposed CPD topic directory/i }).getAttribute('href')).toBe('/cpd-courses');
     expect(mobileNav.getByRole('link', { name: /Programme catalogue status/i }).getAttribute('href')).toBe('/programmes');
-    expect(mobileNav.getByText(/no course or enrollment offer is open/i)).toBeTruthy();
+    expect(mobileNav.getByText(/published CPD programmes/i)).toBeTruthy();
     fireEvent.keyDown(document, { key: 'Escape' });
     expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Open menu' }));
   });
@@ -53,12 +53,12 @@ describe('site-wide catalogue and service navigation', () => {
     const footer = within(screen.getByRole('contentinfo'));
     const explore = footer.getByRole('navigation', { name: 'Explore links' }).textContent ?? '';
     expect(explore).toContain('About Clinova');
-    expect(explore).toContain('Proposed CPD topics');
+    expect(explore).toContain('CPD programmes');
     expect(explore).toContain('Programme catalogue status');
     expect(footer.getByRole('navigation', { name: 'Learner links' }).textContent).toContain('Candidate and learner portal');
     expect(footer.getByRole('link', { name: /credential verification/i }).getAttribute('href')).toBe('/verify');
     expect(footer.getByRole('link', { name: 'Privacy Policy' }).getAttribute('href')).toBe('/privacy-policy');
-    expect(footer.getByText(/pages are placeholders pending approval/i)).toBeTruthy();
+    expect(footer.getByText(/CPD completion certificates may be issued after an administrator confirms eligible course completion/i)).toBeTruthy();
     expect(footer.queryByRole('link', { name: /administration/i })).toBeNull();
   });
 });
