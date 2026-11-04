@@ -197,7 +197,7 @@ export async function createTeachingSession(userId: string, input: { course_item
   ensureNoError(error, 'The teaching session could not be created.');
 }
 
-export async function createCourseLesson(userId: string, input: { course_item_id: string; title: string; summary?: string; content_markdown?: string; sequence_number: number }): Promise<string> {
+export async function createCourseLesson(userId: string, input: { course_item_id: string; title: string; summary?: string; content_markdown?: string; resource_path?: string | null; sequence_number: number }): Promise<string> {
   const { data, error } = await supabase.from('course_lessons').insert({ ...input, created_by: userId, is_published: false }).select('id').single();
   ensureNoError(error, 'The lesson could not be created.');
   if (!data?.id) throw new Error('The lesson was not returned after creation.');
@@ -225,6 +225,12 @@ export async function uploadCourseResource(userId: string, courseItemId: string,
   const { error } = await supabase.storage.from('course-resources').upload(path, file, { upsert: false });
   ensureNoError(error, 'The resource could not be uploaded. Check file type, size and instructor assignment.');
   return path;
+}
+
+export async function deleteCourseResource(path: string): Promise<void> {
+  if (!path || path.startsWith('/') || path.split('/').length < 2) throw new Error('Invalid course resource path.');
+  const { error } = await supabase.storage.from('course-resources').remove([path]);
+  ensureNoError(error, 'The unused uploaded resource could not be removed.');
 }
 
 export async function fetchAdminLessonDrafts(): Promise<(LearningLesson & { is_published: boolean; course: LearningCourse | null })[]> {
