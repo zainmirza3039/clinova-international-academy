@@ -48,17 +48,16 @@ describe('site-wide catalogue and service navigation', () => {
     expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Open menu' }));
   });
 
-  it('groups legal, verification and proposed-catalogue links in the footer without exposing admin routes', () => {
+  it('groups legal, verification and catalogue links in the footer without exposing admin routes', () => {
     renderSiteNavigation();
     const footer = within(screen.getByRole('contentinfo'));
     const explore = footer.getByRole('navigation', { name: 'Explore links' }).textContent ?? '';
     expect(explore).toContain('About Clinova');
-    expect(explore).toContain('Proposed CPD topics');
-    expect(explore).toContain('Proposed programme catalogue');
-    expect(footer.getByRole('navigation', { name: 'Learner links' }).textContent).toContain('Candidate and learner portal');
-    expect(footer.getByRole('link', { name: /credential verification/i }).getAttribute('href')).toBe('/verify');
+    expect(explore).toContain('CPD programmes');
+    expect(explore).toContain('Programmes');
+    expect(footer.getByRole('navigation', { name: 'Learner links' }).textContent).toContain('Student portal');
+    expect(footer.getByRole('link', { name: 'Certificate verification information' }).getAttribute('href')).toBe('/verify');
     expect(footer.getByRole('link', { name: 'Privacy Policy' }).getAttribute('href')).toBe('/privacy-policy');
-    expect(footer.getByText(/pages are placeholders pending approval/i)).toBeTruthy();
     expect(footer.queryByRole('link', { name: /administration/i })).toBeNull();
   });
 });
