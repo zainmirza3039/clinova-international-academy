@@ -90,6 +90,7 @@ export function CmsPublishedContentDetailPage() {
   if (!record) return <section className="mx-auto max-w-3xl px-6 py-24 text-center"><h1 className="text-3xl font-bold text-navy-900">Published content not found</h1><p className="mt-4 text-navy-600">This item is not available from the public published-content view.</p><Link className="mt-6 inline-block text-clinical-600 underline" to="/resources">Return to the learning library</Link></section>;
 
   const snapshot = record.snapshot;
+  const contentItemId = record.content_item_id;
   const title = readText(snapshot, 'title') ?? 'Published content';
   const summary = readText(snapshot, 'excerpt') ?? readText(snapshot, 'description') ?? readText(snapshot, 'overview');
   const category = readText(snapshot, 'category') ?? readText(snapshot, 'department');
@@ -100,7 +101,7 @@ export function CmsPublishedContentDetailPage() {
   async function submitApplication() {
     if (!auth?.session?.user.id || !auth.emailVerified || applying) return;
     setApplying(true); setApplicationError(null); setApplicationMessage(null);
-    try { await applyToCourse(auth.session.user.id, record.content_item_id); setApplicationMessage('Your application has been submitted. You can follow its status in your student portal.'); }
+    try { await applyToCourse(auth.session.user.id, contentItemId); setApplicationMessage('Your application has been submitted. You can follow its status in your student portal.'); }
     catch (reason) { setApplicationError(reason instanceof Error ? reason.message : 'Your application could not be submitted.'); }
     finally { setApplying(false); }
   }
