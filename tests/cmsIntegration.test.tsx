@@ -26,8 +26,10 @@ function configureCms() {
   vi.stubEnv('VITE_SUPABASE_URL',expectedProject);
   vi.stubEnv('VITE_SUPABASE_ANON_KEY','test-publishable-key');
 }
-function queryBuilder(data:unknown[]=[]) {
-  const query:any={order:vi.fn(()=>query),in:vi.fn(()=>query),limit:vi.fn(()=>Promise.resolve({data,error:null}))};
+type QueryBuilder = { order: () => QueryBuilder; in: () => QueryBuilder; limit: () => Promise<{ data: unknown[]; error: null }> };
+function queryBuilder(data:unknown[]=[]): QueryBuilder {
+  let query: QueryBuilder;
+  query = { order: () => query, in: () => query, limit: () => Promise.resolve({data,error:null}) };
   return query;
 }
 function configureQueries() {
