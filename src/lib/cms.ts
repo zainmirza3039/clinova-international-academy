@@ -68,7 +68,7 @@ const contentKinds: CmsContentKind[] = ['programme', 'cpd_course', 'article'];
 const workflowStatuses: CmsWorkflowStatus[] = ['draft', 'in_review', 'approved', 'published', 'archived', 'withdrawn', 'changes_requested', 'rejected', 'superseded'];
 const cmsRoleSet = new Set<string>(cmsRoles);
 const expectedSupabaseUrl = 'https://ssxpmcbqfdggfsoqbxac.supabase.co';
-const CMS_ACTIVATION_APPROVED_IN_SOURCE = true;
+const CMS_ACTIVATION_APPROVED_IN_SOURCE = false;
 
 /** CMS is enabled only for the configured Clinova Supabase project; role checks remain server-enforced. */
 export function cmsFeatureEnabled(): boolean {
