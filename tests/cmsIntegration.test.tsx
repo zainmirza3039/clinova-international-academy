@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import CmsAdminWorkspace from '@/components/CmsAdminWorkspace';
 import {
@@ -26,52 +26,44 @@ function configureCms() {
   vi.stubEnv('VITE_SUPABASE_URL',expectedProject);
   vi.stubEnv('VITE_SUPABASE_ANON_KEY','test-publishable-key');
 }
-type QueryBuilder = { order: () => QueryBuilder; in: () => QueryBuilder; limit: () => Promise<{ data: unknown[]; error: null }> };
-function queryBuilder(data:unknown[]=[]): QueryBuilder {
-  const query: QueryBuilder = { order: () => query, in: () => query, limit: () => Promise.resolve({data,error:null}) };
-  return query;
-}
-function configureQueries() {
-  doubles.from.mockImplementation(()=>({select:vi.fn(()=>queryBuilder())}));
-  doubles.rpc.mockResolvedValue({data:[],error:null});
-}
 afterEach(()=>{cleanup();vi.clearAllMocks();vi.unstubAllEnvs();document.head.innerHTML='';});
 
-describe('Clinova CMS workflow',()=>{
-  it('enables CMS only for the configured academy Supabase project',async()=>{
-    configureCms();configureQueries();
-    expect(cmsFeatureEnabled()).toBe(true);
+describe('Clinova CMS release gate',()=>{
+  it('keeps CMS disabled in source even when valid project credentials and environment flags are supplied',async()=>{
+    configureCms();
+    expect(cmsFeatureEnabled()).toBe(false);
     expect(await fetchPublishedCmsContent(client)).toEqual([]);
-    expect(doubles.from).toHaveBeenCalledWith('published_content');
+    expect(doubles.from).not.toHaveBeenCalled();
+    expect(doubles.rpc).not.toHaveBeenCalled();
   });
 
-  it('requires trusted CMS roles before reading workflow records or invoking actions',async()=>{
-    configureCms();configureQueries();
+  it('rejects workflow reads and writes before any database request while CMS is disabled',async()=>{
+    configureCms();
     const author={id:'author-1',app_metadata:{clinova_roles:['content_author']}};
-    expect(await fetchCmsWorkflowVersions(author,client)).toEqual([]);
-    await invokeCmsAction(author,{name:'create_content_item',args:{p_kind:'article',p_snapshot:{title:'A reviewed article',slug:'reviewed-article'}}},client);
-    expect(doubles.from).toHaveBeenCalledWith('content_versions');
-    expect(doubles.rpc).toHaveBeenCalledWith('create_content_item',expect.objectContaining({p_kind:'article'}));
-    await expect(fetchCmsWorkflowVersions({id:'untrusted',user_metadata:{clinova_roles:['content_admin']}},client)).rejects.toThrow(/trusted Clinova CMS role/i);
+    await expect(fetchCmsWorkflowVersions(author,client)).rejects.toThrow(/disabled/i);
+    await expect(invokeCmsAction(author,{name:'create_content_item',args:{p_kind:'article',p_snapshot:{title:'A reviewed article',slug:'reviewed-article'}}},client)).rejects.toThrow(/disabled/i);
+    expect(doubles.from).not.toHaveBeenCalled();
+    expect(doubles.rpc).not.toHaveBeenCalled();
   });
 
-  it('recognizes server-managed roles and legacy administrator access without trusting user metadata',()=>{
+  it('recognizes server-managed roles without trusting user metadata',()=>{
     expect(getCmsRoles({id:'legacy-admin',app_metadata:{role:'admin'}})).toContain('content_admin');
     expect(getCmsRoles({id:'user-claim',user_metadata:{clinova_roles:['content_admin']}})).toEqual([]);
     expect(getCmsRoles({id:'trusted',app_metadata:{clinova_roles:['content_author']}})).toEqual(['content_author']);
     expect(hasAnyCmsRole({id:'trusted',app_metadata:{clinova_roles:['content_author']}},['content_author'])).toBe(true);
   });
 
-  it('loads the admin CMS workspace for a trusted role and keeps it unavailable to untrusted accounts',async()=>{
-    configureCms();configureQueries();
-    const trusted={id:'cms-admin',app_metadata:{clinova_roles:['content_admin']}};
-    render(<MemoryRouter><CmsAdminWorkspace user={trusted}/></MemoryRouter>);
+  it('shows the disabled CMS notice to administrators and denies untrusted accounts without querying',()=>{
+    configureCms();
+    render(<MemoryRouter><CmsAdminWorkspace user={{id:'cms-admin',app_metadata:{clinova_roles:['content_admin']}}}/></MemoryRouter>);
     expect(screen.getByRole('heading',{name:'CMS workflow'})).toBeTruthy();
-    await waitFor(()=>expect(doubles.from).toHaveBeenCalledWith('content_versions'));
-    expect(screen.getByText(/No CMS versions are available to this account/i)).toBeTruthy();
-    cleanup();vi.clearAllMocks();configureQueries();
+    expect(screen.getByRole('status').textContent).toMatch(/CMS queries and workflow actions are disabled in source/i);
+    expect(doubles.from).not.toHaveBeenCalled();
+    expect(doubles.rpc).not.toHaveBeenCalled();
+    cleanup();
     render(<MemoryRouter><CmsAdminWorkspace user={{id:'ordinary',app_metadata:{}}}/></MemoryRouter>);
-    expect(screen.getByRole('heading',{name:'CMS workflow access denied'})).toBeTruthy();
+    expect(screen.getByRole('heading',{name:'CMS workflow'})).toBeTruthy();
+    expect(screen.getByRole('status').textContent).toMatch(/CMS queries and workflow actions are disabled in source/i);
     expect(doubles.from).not.toHaveBeenCalled();
     expect(doubles.rpc).not.toHaveBeenCalled();
   });
