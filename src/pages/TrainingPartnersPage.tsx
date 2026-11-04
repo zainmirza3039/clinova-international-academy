@@ -49,9 +49,9 @@ const fieldRules: FormFieldRules = {
   businessEmail: { required: true, maxLength: 320, kind: 'email' },
   phoneNumber: { maxLength: 80 },
   collaborationType: { required: true, maxLength: 80 },
-  proposal: { required: true, maxLength: 5000 },
+  proposal: { required: true, maxLength: 3000 },
   expectedAudience: { required: true, maxLength: 500 },
-  additionalDetails: { maxLength: 2000 },
+  additionalDetails: { maxLength: 1000 },
 };
 
 const fieldLabels: Record<DraftField, string> = {
