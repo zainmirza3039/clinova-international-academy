@@ -15,8 +15,7 @@ vi.mock('@/auth/authContext',()=>({useAuth:()=>({enabled:false,status:'disabled'
 vi.mock('@/lib/cms',()=>({fetchPublishedCmsContent:vi.fn().mockResolvedValue([])}));
 type SupabaseQueryMock = { select: () => SupabaseQueryMock; order: () => Promise<{ data: unknown[]; error: null }> };
 function createSupabaseQueryMock(): SupabaseQueryMock {
-  let query: SupabaseQueryMock;
-  query = { select: () => query, order: () => Promise.resolve({ data: [], error: null }) };
+  const query: SupabaseQueryMock = { select: () => query, order: () => Promise.resolve({ data: [], error: null }) };
   return query;
 }
 vi.mock('@/lib/supabase',()=>({supabase:{from:vi.fn(()=>createSupabaseQueryMock())}}));
