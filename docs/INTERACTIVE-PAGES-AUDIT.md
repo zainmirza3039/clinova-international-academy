@@ -59,3 +59,17 @@ A fresh, isolated disposable PostgreSQL 16.15 cluster was used to apply `local-b
 - Human keyboard, real screen-reader and physical-device accessibility checks remain owner/QA tasks; automated tests and simulated viewport checks are not substitutes.
 
 **Status:** local SQL prototype and synthetic tests validated on PostgreSQL 16.15; no non-production Supabase validation was performed in this follow-up; no production Supabase, Vercel, deployment, or remote setting was touched.
+
+
+## Release-gate verification update — 4 November 2026
+
+The current preview release remains deliberately non-operational for account and learner workflows:
+
+- Authentication and CMS activation remain disabled in source until a separately reviewed release decision. Environment variables alone cannot enable either service.
+- Learner records, lesson progress and instructor-facing learning data remain disabled. The student workspace exits before requesting learner data.
+- Public contact and partnership submissions remain unavailable. The partnership page only validates a local draft; it does not send or persist it.
+- The public faculty query is skipped unless both Supabase configuration and the learner-data release gate are enabled.
+- Importing the Supabase module without credentials is safe for CI and local builds; attempted database access fails closed with an explicit configuration error.
+- The preview build must pass TypeScript, ESLint, the complete Vitest suite and the Vite production build before review.
+
+These controls do not certify hosted database RLS, migration state, or a future live workflow. Those require a separately authorized non-production integration review.
