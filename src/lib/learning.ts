@@ -59,9 +59,9 @@ async function getCourses(ids: string[]): Promise<Map<string, LearningCourse>> {
   ]);
   ensureNoError(items.error, 'Programme records are unavailable.');
   ensureNoError(versions.error, 'Published programme details are unavailable.');
-  const itemIds = new Set((items.data ?? []).filter((item: any) => item.kind === 'cpd_course').map((item: any) => item.id));
+  const itemIds = new Set(((items.data ?? []) as { id: string; kind: string }[]).filter(item => item.kind === 'cpd_course').map(item => item.id));
   const map = new Map<string, LearningCourse>();
-  for (const version of (versions.data ?? []) as any[]) {
+  for (const version of (versions.data ?? []) as { content_item_id: string; snapshot: unknown }[]) {
     if (!itemIds.has(version.content_item_id) || map.has(version.content_item_id)) continue;
     const snapshot = version.snapshot as Record<string, unknown>;
     map.set(version.content_item_id, {
@@ -84,7 +84,7 @@ async function getCurrentlyPublishedCourses(ids: string[]): Promise<Map<string, 
     .in('content_item_id', ids);
   ensureNoError(error, 'Published CPD programmes are unavailable.');
   const map = new Map<string, LearningCourse>();
-  for (const version of (data ?? []) as any[]) {
+  for (const version of (data ?? []) as { content_item_id: string; snapshot: unknown }[]) {
     const snapshot = version.snapshot as Record<string, unknown>;
     if (typeof snapshot.title !== 'string' || map.has(version.content_item_id)) continue;
     map.set(version.content_item_id, {
@@ -105,8 +105,8 @@ export async function fetchStudentWorkspace(userId: string): Promise<StudentWork
   ensureNoError(profileResult.error, 'Your profile could not be loaded.');
   ensureNoError(enrollmentResult.error, 'Your enrolments could not be loaded.');
   ensureNoError(certificateResult.error, 'Your certificates could not be loaded.');
-  const enrollmentsRaw = (enrollmentResult.data ?? []) as any[];
-  const certificatesRaw = (certificateResult.data ?? []) as any[];
+  const enrollmentsRaw = (enrollmentResult.data ?? []) as { id: string; course_item_id: string; enrollment_status: string; applied_at: string; completed_at: string | null }[];
+  const certificatesRaw = (certificateResult.data ?? []) as { id: string; enrollment_id: string; course_item_id: string; certificate_number: string; verification_code: string; issued_at: string; revoked_at: string | null }[];
   const ids = [...new Set([...enrollmentsRaw.map(x => x.course_item_id), ...certificatesRaw.map(x => x.course_item_id)])];
   const courses = await getCourses(ids);
   const [lessonResult, sessionResult, progressResult] = await Promise.all([
@@ -154,7 +154,7 @@ export async function fetchInstructorWorkspace(userId: string): Promise<Instruct
   const { data: assignmentData, error: assignmentError } = await supabase.from('course_instructor_assignments')
     .select('course_item_id').eq('instructor_id', userId).eq('assignment_status', 'active');
   ensureNoError(assignmentError, 'Your teaching assignments could not be loaded.');
-  const courseIds = [...new Set((assignmentData ?? []).map((row: any) => row.course_item_id))];
+  const courseIds = [...new Set((assignmentData ?? []).map(row => row.course_item_id))];
   if (!courseIds.length) return { assignments: [], sessions: [], learners: [], lessons: [] };
   const [courses, sessions, enrollments, lessons] = await Promise.all([
     getCourses(courseIds),
@@ -165,7 +165,7 @@ export async function fetchInstructorWorkspace(userId: string): Promise<Instruct
   ensureNoError(sessions.error, 'Teaching sessions could not be loaded.');
   ensureNoError(enrollments.error, 'Assigned learners could not be loaded.');
   ensureNoError(lessons.error, 'Teaching resources could not be loaded.');
-  const studentIds = [...new Set((enrollments.data ?? []).map((row: any) => row.student_id))];
+  const studentIds = [...new Set(((enrollments.data ?? []) as { student_id: string }[]).map(row => row.student_id))];
   const profiles = studentIds.length
     ? await supabase.from('profiles').select('user_id,full_name,professional_title,institution,country').in('user_id', studentIds)
     : { data: [], error: null };
@@ -175,7 +175,7 @@ export async function fetchInstructorWorkspace(userId: string): Promise<Instruct
     assignments: courseIds.map(id => courses.get(id)).filter((course): course is LearningCourse => Boolean(course)),
     sessions: (sessions.data ?? []) as LearningSession[],
     lessons: (lessons.data ?? []) as LearningLesson[],
-    learners: (enrollments.data ?? []).map((row: any) => ({
+    learners: ((enrollments.data ?? []) as { id: string; course_item_id: string; student_id: string; enrollment_status: string; applied_at: string }[]).map(row => ({
       ...row,
       profile: profileMap.get(row.student_id) ?? null,
       course: courses.get(row.course_item_id) ?? null,
@@ -236,8 +236,8 @@ export async function deleteCourseResource(path: string): Promise<void> {
 export async function fetchAdminLessonDrafts(): Promise<(LearningLesson & { is_published: boolean; course: LearningCourse | null })[]> {
   const { data, error } = await supabase.from('course_lessons').select('id,course_item_id,title,summary,content_markdown,resource_path,sequence_number,is_published').order('created_at', { ascending: false }).limit(200);
   ensureNoError(error, 'Course lesson records are unavailable.');
-  const courses = await getCourses([...new Set((data ?? []).map((row: any) => row.course_item_id))]);
-  return (data ?? []).map((row: any) => ({ ...row, course: courses.get(row.course_item_id) ?? null }));
+  const courses = await getCourses([...new Set(((data ?? []) as { course_item_id: string }[]).map(row => row.course_item_id))]);
+  return ((data ?? []) as (LearningLesson & { is_published: boolean })[]).map(row => ({ ...row, course: courses.get(row.course_item_id) ?? null }));
 }
 
 export async function setCourseLessonPublished(lessonId: string, published: boolean): Promise<void> {
@@ -283,9 +283,9 @@ export async function fetchAdminLearningWorkspace(): Promise<AdminLearningWorksp
   ensureNoError(enrollments.error, 'Enrolment records are unavailable.');
   ensureNoError(items.error, 'Course records are unavailable.');
   ensureNoError(certificates.error, 'Certificate records are unavailable.');
-  const courseIds = [...new Set([...(items.data ?? []).map((item: any) => item.id), ...(certificates.data ?? []).map((row: any) => row.course_item_id)])];
-  const [courses, publishedCourses] = await Promise.all([getCourses(courseIds), getCurrentlyPublishedCourses((items.data ?? []).map((item: any) => item.id))]);
-  const learnerIds = [...new Set([...(enrollments.data ?? []).map((row: any) => row.student_id), ...(certificates.data ?? []).map((row: any) => row.student_id)])];
+  const courseIds = [...new Set([...((items.data ?? []) as { id: string }[]).map(item => item.id), ...((certificates.data ?? []) as { course_item_id: string }[]).map(row => row.course_item_id)])];
+  const [courses, publishedCourses] = await Promise.all([getCourses(courseIds), getCurrentlyPublishedCourses(((items.data ?? []) as { id: string }[]).map(item => item.id))]);
+  const learnerIds = [...new Set([...((enrollments.data ?? []) as { student_id: string }[]).map(row => row.student_id), ...((certificates.data ?? []) as { student_id: string }[]).map(row => row.student_id)])];
   const learnerProfiles = learnerIds.length
     ? await supabase.from('profiles').select('user_id,full_name,professional_title,institution,country').in('user_id', learnerIds)
     : { data: [], error: null };
@@ -293,10 +293,10 @@ export async function fetchAdminLearningWorkspace(): Promise<AdminLearningWorksp
   const profileMap = new Map(((learnerProfiles.data ?? []) as LearningProfile[]).map(profile => [profile.user_id, profile]));
   return {
     profiles: (profiles.data ?? []) as LearningProfile[],
-    instructors: (instructors.data ?? []).map((row: any) => ({ ...row, credentials: Array.isArray(row.credentials) ? row.credentials.filter((item: unknown): item is string => typeof item === 'string') : [], verification_evidence: Array.isArray(row.verification_evidence) ? row.verification_evidence : [] })) as AdminLearningWorkspace['instructors'],
+    instructors: ((instructors.data ?? []) as { user_id: string; public_name: string; professional_title: string; biography: string | null; credentials: unknown; verification_evidence: unknown; verification_rationale: string | null; verification_status: string; is_public: boolean }[]).map(row => ({ ...row, credentials: Array.isArray(row.credentials) ? row.credentials.filter((item: unknown): item is string => typeof item === 'string') : [], verification_evidence: Array.isArray(row.verification_evidence) ? row.verification_evidence : [] })) as AdminLearningWorkspace['instructors'],
     courses: [...publishedCourses.values()],
-    certificates: (certificates.data ?? []).map((row: any) => ({ ...row, course: courses.get(row.course_item_id) ?? null, learner: profileMap.get(row.student_id) ?? null })),
-    enrollments: (enrollments.data ?? []).map((row: any) => ({
+    certificates: ((certificates.data ?? []) as { id: string; enrollment_id: string; course_item_id: string; certificate_number: string; verification_code: string; issued_at: string; revoked_at: string | null; student_id: string }[]).map(row => ({ ...row, course: courses.get(row.course_item_id) ?? null, learner: profileMap.get(row.student_id) ?? null })),
+    enrollments: ((enrollments.data ?? []) as { id: string; course_item_id: string; student_id: string; enrollment_status: string; applied_at: string }[]).map(row => ({
       ...row,
       course: courses.get(row.course_item_id) ?? null,
       learner: profileMap.get(row.student_id) ?? null,
