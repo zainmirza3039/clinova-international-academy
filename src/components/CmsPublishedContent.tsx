@@ -106,7 +106,7 @@ export function CmsPublishedContentDetailPage() {
   }
   const contentMarkdown = readText(snapshot, 'contentMarkdown');
   const metadata = [
-    ['Duration', typeof snapshot.durationHours === 'number' ? \`\${snapshot.durationHours} hours\` : null],
+    ['Duration', typeof snapshot.durationHours === 'number' ? String(snapshot.durationHours) + ' hours' : null],
     ['Delivery', readText(snapshot, 'deliveryMode')],
     ['Audience', readText(snapshot, 'targetAudience')],
     ['Assessment', readText(snapshot, 'assessmentMethod')],
