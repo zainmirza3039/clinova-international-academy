@@ -14,7 +14,7 @@ export type LearningEnrollment = {
 };
 export type LearningLesson = {
   id: string; course_item_id: string; title: string; summary: string | null;
-  content_markdown: string | null; resource_path: string | null; sequence_number: number;
+  content_markdown: string | null; resource_path: string | null; sequence_number: number; is_published?: boolean;
 };
 export type LearningSession = {
   id: string; course_item_id: string; title: string; starts_at: string; ends_at: string;
@@ -160,7 +160,7 @@ export async function fetchInstructorWorkspace(userId: string): Promise<Instruct
     getCourses(courseIds),
     supabase.from('course_live_sessions').select('id,course_item_id,title,starts_at,ends_at,meeting_url,session_status').in('course_item_id', courseIds).order('starts_at'),
     supabase.from('course_enrollments').select('id,course_item_id,student_id,enrollment_status,applied_at').in('course_item_id', courseIds).order('applied_at', { ascending: false }),
-    supabase.from('course_lessons').select('id,course_item_id,title,summary,content_markdown,resource_path,sequence_number').in('course_item_id', courseIds).order('sequence_number'),
+    supabase.from('course_lessons').select('id,course_item_id,title,summary,content_markdown,resource_path,sequence_number,is_published').in('course_item_id', courseIds).order('sequence_number'),
   ]);
   ensureNoError(sessions.error, 'Teaching sessions could not be loaded.');
   ensureNoError(enrollments.error, 'Assigned learners could not be loaded.');
