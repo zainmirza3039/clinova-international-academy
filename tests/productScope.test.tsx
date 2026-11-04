@@ -17,8 +17,7 @@ vi.mock('@/hooks/useScrollAnimation',()=>({useScrollAnimation:()=>({ref:{current
 vi.mock('@/hooks/useSEO',()=>({useSEO:vi.fn()}));
 type SupabaseQueryMock = { select: () => SupabaseQueryMock; order: () => Promise<{ data: unknown[]; error: null }> };
 function createSupabaseQueryMock(): SupabaseQueryMock {
-  let query: SupabaseQueryMock;
-  query = { select: () => query, order: () => Promise.resolve({ data: [], error: null }) };
+  const query: SupabaseQueryMock = { select: () => query, order: () => Promise.resolve({ data: [], error: null }) };
   return query;
 }
 vi.mock('@/lib/supabase',()=>({supabase:{from:vi.fn(()=>createSupabaseQueryMock())}}));
