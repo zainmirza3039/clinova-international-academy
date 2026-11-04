@@ -168,7 +168,7 @@ export default function TrainingPartnersPage() {
           `Proposal: ${draft.proposal}`,
           `Expected audience: ${draft.expectedAudience}`,
           draft.additionalDetails.trim() ? `Additional details: ${draft.additionalDetails}` : '',
-        ].filter(Boolean).join('\\n\\n'),
+        ].filter(Boolean).join('\n\n'),
       });
       if (error) throw error;
       setStatus('Your partnership enquiry has been received. This is an expression of interest only; no partnership or placement is confirmed until a written agreement is completed.');
