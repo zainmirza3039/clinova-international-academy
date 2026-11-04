@@ -1,5 +1,6 @@
--- Restrict the public verification endpoint to the minimum result fields and safe execution context.
-create or replace function public.verify_cpd_certificate(p_verification_code uuid)
+-- Keep the public verification RPC as a security-invoker wrapper.
+-- The narrowly scoped security-definer lookup lives in the non-exposed schema.
+create or replace function clinova_private.verify_cpd_certificate(p_verification_code uuid)
 returns table (
   certificate_number text,
   learner_name text,
@@ -9,7 +10,7 @@ returns table (
 )
 language sql
 stable
-security invoker
+security definer
 set search_path = pg_catalog
 as $$
   select c.certificate_number,
@@ -32,12 +33,24 @@ as $$
     and c.verification_code = p_verification_code
   limit 1;
 $$;
+revoke all on function clinova_private.verify_cpd_certificate(uuid) from public;
+grant usage on schema clinova_private to anon, authenticated;
+grant execute on function clinova_private.verify_cpd_certificate(uuid) to anon, authenticated;
 
-revoke all on function public.verify_cpd_certificate(uuid) from public, anon, authenticated;
+create or replace function public.verify_cpd_certificate(p_verification_code uuid)
+returns table (
+  certificate_number text,
+  learner_name text,
+  course_title text,
+  issued_at timestamptz,
+  certificate_status text
+)
+language sql
+stable
+security invoker
+set search_path = pg_catalog
+as $$
+  select * from clinova_private.verify_cpd_certificate(p_verification_code);
+$$;
+revoke all on function public.verify_cpd_certificate(uuid) from public;
 grant execute on function public.verify_cpd_certificate(uuid) to anon, authenticated;
-
--- The public RPC exposes only the limited result above; backing records stay private.
-drop policy if exists course_certificates_public_verify on public.course_certificates;
-drop policy if exists profiles_public_certificate_name on public.profiles;
-drop policy if exists content_items_public_course_verify on public.content_items;
-drop policy if exists content_versions_public_course_verify on public.content_versions;
