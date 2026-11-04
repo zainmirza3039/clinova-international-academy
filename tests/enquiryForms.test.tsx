@@ -41,7 +41,7 @@ describe('public enquiry workflows', () => {
     fireEvent.change(screen.getByLabelText('Subject'),{target:{value:'CPD programme information'}});
     fireEvent.change(screen.getByLabelText('Message'),{target:{value:'Please share details about upcoming CPD programmes.'}});
     fireEvent.submit(screen.getByRole('form',{name:'How can the academy help?'}));
-    expect(await screen.findByRole('status')).toHaveTextContent(/Your enquiry has been received/i);
+    expect((await screen.findByRole('status')).textContent).toMatch(/Your enquiry has been received/i);
     expect(from).toHaveBeenCalledWith('contact_submissions');
     expect(insert).toHaveBeenCalledWith(expect.objectContaining({
       name:'Alex Example',email:'alex@example.org',subject:'CPD programme information',
@@ -56,8 +56,8 @@ describe('public enquiry workflows', () => {
     fillValidPartnershipEnquiry();
     const form=screen.getByRole('form',{name:'Discuss a collaboration'});
     fireEvent.submit(form);
-    expect(await screen.findByRole('status')).toHaveTextContent(/Your partnership enquiry has been received/i);
-    expect(screen.getByRole('status')).toHaveTextContent(/no partnership or placement is confirmed/i);
+    expect((await screen.findByRole('status')).textContent).toMatch(/Your partnership enquiry has been received/i);
+    expect(screen.getByRole('status').textContent).toMatch(/no partnership or placement is confirmed/i);
     expect(from).toHaveBeenCalledWith('partnership_inquiries');
     expect(insert).toHaveBeenCalledWith(expect.objectContaining({
       full_name:'Alex Example',
