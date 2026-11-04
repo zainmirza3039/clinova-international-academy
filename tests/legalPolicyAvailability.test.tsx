@@ -39,7 +39,7 @@ describe('legal policy availability', () => {
     expect(screen.getByRole('heading', { name: 'No approved policy text is available' })).toBeTruthy();
     expect(screen.getByRole('status', { name: 'Policy approval status' }).textContent).toMatch(/approval required/i);
     expect(container.textContent).toMatch(/this page is a placeholder, not an operative policy/i);
-    expect(container.textContent).toMatch(/No approved (?:privacy-policy|terms(?: text)?|refund-policy|cookie-policy) (?:text )?is available here; approval is required before publication\./i);
+    expect(container.textContent).toMatch(/No approved (?:privacy-policy text|terms|refund-policy text|cookie-policy text) (?:is|are) available here; approval is required before publication\./i);
   });
 
   it.each(approvedLegalRoutes)('%s renders owner-approved legal information', async (route, title) => {
