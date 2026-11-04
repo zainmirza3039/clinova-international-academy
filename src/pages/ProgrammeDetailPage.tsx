@@ -1,23 +1,49 @@
-import { Link, Navigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { fetchPublishedCmsContent } from '@/lib/cms';
+import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ShieldAlert } from 'lucide-react';
+import PageHero from '@/components/PageHero';
+import { getOwnerListedProgrammeBySlug } from '@/data/programmeCatalogueBrowse';
 import { useSEO } from '@/hooks/useSEO';
 
 export default function ProgrammeDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const [publishedProgramme, setPublishedProgramme] = useState(false);
-  useSEO({ title: 'Programme details under review', description: 'Programme records are not published as current enrollment offers while Clinova completes content approval.' });
-  useEffect(() => {
-    let active = true;
-    void fetchPublishedCmsContent().then(records => {
-      if (active) setPublishedProgramme(records.some(record => record.kind === 'programme' && record.snapshot.slug === slug));
-    }).catch(() => { if (active) setPublishedProgramme(false); });
-    return () => { active = false; };
-  }, [slug]);
-  if (publishedProgramme && slug) return <Navigate to={`/cms/programme/${slug}`} replace />;
-  return <section className="mx-auto max-w-3xl px-6 py-24" aria-labelledby="programme-detail-title">
-    <div className="border border-amber-300 bg-amber-50 p-7"><ShieldAlert className="h-7 w-7 text-amber-700" aria-hidden="true" /><p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] text-amber-900">Programme information</p><h1 id="programme-detail-title" className="mt-2 font-heading text-2xl font-bold text-navy-900">Programme details are under review</h1><p className="mt-3 text-sm leading-relaxed text-navy-700">This route does not represent an open enrollment offer. No unreviewed syllabus, outcome, fee, assessment rule, CPD value, faculty profile, intake date or credential claim is displayed.</p><p className="mt-3 text-sm leading-relaxed text-navy-700">CPD course completion and professional competency certification are separate credential pathways and require separate approved rules.</p></div>
-    <Link to="/programmes" className="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-clinical-700 underline underline-offset-4"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Programme information</Link>
-  </section>;
+  const programme = slug ? getOwnerListedProgrammeBySlug(slug) : undefined;
+
+  useSEO({
+    title: programme ? `${programme.title} | Proposed programme` : 'Proposed programme title not found',
+    description: 'Proposed programme title only. Not open for enrolment.',
+    noindex: true,
+  });
+
+  if (!programme) {
+    return (
+      <section className="mx-auto max-w-3xl px-6 py-24" aria-labelledby="programme-not-found-title">
+        <div className="border border-navy-200 bg-surface-50 p-7">
+          <h1 id="programme-not-found-title" className="font-heading text-2xl font-bold text-navy-900">Proposed programme title not found</h1>
+          <p className="mt-3 text-sm leading-relaxed text-navy-700">This address does not match a title in the proposed programme directory.</p>
+        </div>
+        <Link to="/programmes" className="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-clinical-700 underline underline-offset-4"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Browse proposed programmes</Link>
+      </section>
+    );
+  }
+
+  return (
+    <>
+      <PageHero
+        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Proposed programmes', to: '/programmes' }, { label: programme.title }]}
+        eyebrow="Proposed programme"
+        title={programme.title}
+        description="Proposed title only — not open for enrolment."
+      />
+      <section className="bg-white px-6 py-12 lg:py-16">
+        <div className="mx-auto max-w-4xl">
+          <div className="border border-amber-300 bg-amber-50 p-6" role="status">
+            <ShieldAlert className="h-6 w-6 text-amber-700" aria-hidden="true" />
+            <h2 className="mt-3 font-heading text-xl font-bold text-navy-900">Proposed — not open for enrolment</h2>
+            <p className="mt-2 text-sm leading-relaxed text-navy-700">This page contains the proposed title only. No application or enrolment is currently available.</p>
+          </div>
+          <Link to="/programmes" className="mt-7 inline-flex min-h-11 items-center gap-2 font-semibold text-clinical-700 underline underline-offset-4"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Browse proposed programmes</Link>
+        </div>
+      </section>
+    </>
+  );
 }
