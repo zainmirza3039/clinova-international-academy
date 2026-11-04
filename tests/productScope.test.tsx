@@ -35,11 +35,11 @@ describe('Clinova platform scope and truthful service availability',()=>{
     expect(container.querySelector('form,input[type="email"]')).toBeNull();
   });
 
-  it('shows published CPD CMS catalogue status without inventing course offers',async()=>{
+  it('shows only proposed CPD topic titles without presenting them as open courses',()=>{
     const cpd=renderPage(<CPDCoursesPage/>);
-    expect(screen.getByRole('heading',{name:'Published CPD programmes'})).toBeTruthy();
-    expect(await screen.findByRole('heading',{name:'New programmes will appear here when approved for publication.'})).toBeTruthy();
-    expect(cpd.container.textContent).toMatch(/Only programmes approved for publication appear in this catalogue/i);
+    expect(screen.getByRole('heading',{name:'Browse proposed CPD topics'})).toBeTruthy();
+    expect(cpd.container.textContent).toMatch(/No CPD course enrollment is available/i);
+    expect(cpd.container.textContent).toMatch(/titles below are shown as proposed topic labels only/i);
     expect(cpd.container.querySelector('form,input[type="password"],input[type="file"],button[type="submit"]')).toBeNull();
     cleanup();
     const admissions=renderPage(<AdmissionsPage/>);
@@ -92,10 +92,10 @@ describe('Clinova platform scope and truthful service availability',()=>{
     expect(quality.container.textContent).not.toMatch(/Clinova is accredited/i);
   });
 
-  it('shows the public contact form and does not invent faculty profiles',()=>{
+  it('keeps online contact submission disabled and does not invent faculty profiles',()=>{
     const contact=renderPage(<ContactPage/>);
-    expect(screen.getByRole('heading',{name:'How can the academy help?'})).toBeTruthy();
-    expect(contact.container.querySelector('form')).toBeTruthy();
+    expect(contact.container.textContent).toMatch(/No verified public email address or online enquiry submission is available/i);
+    expect(contact.container.querySelector('form')).toBeNull();
     cleanup();
     const faculty=renderPage(<FacultyPage/>);
     expect(screen.getByRole('heading',{name:'No verified faculty profiles are currently published'})).toBeTruthy();
