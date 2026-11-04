@@ -10,6 +10,8 @@ import { newsItems } from '@/data/testimonials';
 import { siteOrigin } from '@/lib/siteConfig';
 import { getIndexableSeoRoute } from '@/lib/seoPolicy';
 vi.mock('@/hooks/useScrollAnimation', () => ({ useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }), useScrollPosition: () => false }));
+vi.mock('@/auth/AuthProvider',()=>({AuthProvider:({children}:{children:React.ReactNode})=>children}));
+vi.mock('@/auth/authContext',()=>({useAuth:()=>({enabled:false,status:'disabled',session:null,emailVerified:false,error:null,signOut:vi.fn()})}));
 vi.mock('@/lib/cms',()=>({fetchPublishedCmsContent:vi.fn().mockResolvedValue([])}));
 vi.mock('@/lib/supabase',()=>({supabase:{from:vi.fn(()=>{const query:any={select:()=>query,order:()=>Promise.resolve({data:[],error:null})};return query;})}}));
 beforeEach(() => { vi.spyOn(window, 'scrollTo').mockImplementation(() => {}); });
