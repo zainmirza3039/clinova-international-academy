@@ -8,6 +8,9 @@ export default defineConfig({
   },
   test: {
     environment: 'jsdom',
+    environmentOptions: {
+      jsdom: { url: 'http://localhost' },
+    },
     include: ['tests/**/*.test.{ts,tsx}'],
     clearMocks: true,
   },
