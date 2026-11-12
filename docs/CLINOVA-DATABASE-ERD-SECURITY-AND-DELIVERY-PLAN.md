@@ -369,3 +369,38 @@ The CPD verification function currently returns certificate number, learner name
 The companion draft SQL is at docs/security/PROPOSED-LEAST-PRIVILEGE-GRANTS.sql. It revokes existing blanket privileges from anon and authenticated; restores only policy-backed operations; retains SELECT on the two security-invoker public views and the underlying base relations required for those views; corrects table, sequence and function default privileges for current object-owner roles; retains the current private-schema USAGE requirement for the verifier wrapper; and does not change service_role grants.
 
 This is a review draft, not a runnable production release. Validate against the exact migration history and a disposable database before application. Confirm that all current app operations use intended RPCs and that no frontend depends on direct writes not represented in RLS policies.
+
+
+## 11. Feature-branch schema implementation update (2026-11-12)
+
+Two source-only migrations have now been added after the existing learner records migration:
+
+- `20261112010000_create_database_role_authorization.sql`
+  - normalized role and permission catalogue;
+  - time-bounded scoped assignments;
+  - role change requests with two-person approval;
+  - append-only assignment/bootstrap events;
+  - database permission predicate and narrow authenticated RPC wrappers;
+  - concurrency serialization for grant/revoke decisions.
+- `20261112020000_create_admissions_institutions_finance.sql`
+  - versioned academic programmes and intakes;
+  - applications, private documents, reviews, decisions and status history;
+  - institutions, agreements, memberships, cohorts and partner reviews;
+  - fee schedules, invoices, payment transactions, allocations and refunds;
+  - immutable webhook receipt/processing events and finance audit events.
+
+Local tests have been added:
+- `tests/database/role-authorization.local.sql`
+- `tests/database/admissions-institutions-finance.local.sql`
+
+The disposable PostgreSQL runner now applies both migrations and runs the corresponding test suites. Runtime execution is still pending because PostgreSQL server binaries are unavailable in the current execution environment. No migration has been applied to the hosted project.
+
+### Remaining implementation gates
+
+1. Execute the disposable local PostgreSQL harness and correct any runtime SQL/test failures.
+2. Add the legacy CMS RLS/RPC transition without breaking current invoker wrappers and private trigger functions.
+3. Add admissions, partner and finance command functions; direct API table access remains denied.
+4. Add a dedicated private `application-documents` Storage bucket and scoped object policies only after a separate reviewed Storage change.
+5. Implement and test aggregate financial invariants (invoice line totals, payment allocation caps, refund caps, currency matching, webhook signature/replay protection).
+6. Complete assessments/examinations, separate professional competency certification, quality management and operational reporting.
+7. Integrate the existing Vite frontend only after backend command/read contracts stabilize; the repository is not yet a Next.js application.
