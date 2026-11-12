@@ -64,6 +64,33 @@ begin
 end $$;
 commit;
 
+-- Audit records cannot be modified or deleted after insertion.
+insert into clinova_private.role_assignment_events(
+ actor_user_id,target_user_id,role_key,scope_type,scope_id,event_type,reason
+) values (
+ '00000000-0000-0000-0000-0000000000a2',
+ '00000000-0000-0000-0000-0000000000a1',
+ 'instructor','course','40000000-0000-0000-0000-000000000000',
+ 'granted','Synthetic immutable audit event'
+);
+
+do $
+begin
+ begin
+   update clinova_private.role_assignment_events
+   set reason='tampered'
+   where reason='Synthetic immutable audit event';
+   raise exception 'audit event update unexpectedly succeeded';
+ exception when sqlstate '55000' then null;
+ end;
+ begin
+   delete from clinova_private.role_assignment_events
+   where reason='Synthetic immutable audit event';
+   raise exception 'audit event delete unexpectedly succeeded';
+ exception when sqlstate '55000' then null;
+ end;
+end $;
+
 -- Anonymous callers cannot execute the authenticated-only wrapper.
 do $$
 begin
