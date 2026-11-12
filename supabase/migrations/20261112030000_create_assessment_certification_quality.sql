@@ -199,7 +199,6 @@ create table if not exists clinova_private.certification_evidence (
   storage_object_key text not null unique,
   evidence_description text not null,
   uploaded_by uuid not null references auth.users(id) on delete restrict,
-  uploaded_at timestamptz not null default now(),
   uploaded_at timestamptz not null default now()
 );
 
