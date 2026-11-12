@@ -461,6 +461,7 @@ revoke all on table
   clinova_private.controlled_document_versions,
   clinova_private.internal_audits,
   clinova_private.audit_findings,
+  clinova_private.quality_events,
   clinova_private.corrective_actions,
   clinova_private.complaints_and_appeals,
   clinova_private.complaint_case_events,
@@ -498,6 +499,7 @@ alter table clinova_private.controlled_documents enable row level security;
 alter table clinova_private.controlled_document_versions enable row level security;
 alter table clinova_private.internal_audits enable row level security;
 alter table clinova_private.audit_findings enable row level security;
+alter table clinova_private.quality_events enable row level security;
 alter table clinova_private.corrective_actions enable row level security;
 alter table clinova_private.complaints_and_appeals enable row level security;
 alter table clinova_private.complaint_case_events enable row level security;
