@@ -33,7 +33,8 @@ grant select on table public.content_versions to anon, authenticated;
 
 -- Learner/faculty operations: only the operations represented by existing policies.
 grant select, insert, update on table public.profiles to authenticated;
-grant select, insert, update on table public.instructor_profiles to authenticated;
+grant select on table public.instructor_profiles to anon, authenticated;
+grant insert, update on table public.instructor_profiles to authenticated;
 grant select, insert, update on table public.course_enrollments to authenticated;
 grant select, insert, update on table public.course_instructor_assignments to authenticated;
 grant select, insert, update, delete on table public.course_lessons to authenticated;
@@ -93,6 +94,14 @@ grant execute on function public.publish_content_version(uuid) to authenticated;
 grant execute on function public.record_content_review(uuid, text, text, jsonb, text) to authenticated;
 grant execute on function public.submit_content_for_review(uuid) to authenticated;
 grant execute on function public.withdraw_content_version(uuid, text) to authenticated;
+
+-- Prevent future private implementation functions from inheriting PostgreSQL's
+-- default PUBLIC EXECUTE privilege. Re-grant only the approved verifier and
+-- wrapper targets above for the current functions.
+alter default privileges for role postgres in schema clinova_private
+  revoke execute on functions from public, anon, authenticated;
+alter default privileges for role supabase_admin in schema clinova_private
+  revoke execute on functions from public, anon, authenticated;
 
 -- 4) Keep API roles' schema USAGE, but no CREATE privilege.
 -- Do not revoke clinova_private USAGE yet: public.verify_cpd_certificate is an
