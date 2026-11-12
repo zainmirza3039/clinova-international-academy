@@ -119,9 +119,10 @@ from clinova_private.invoices where invoice_number='LOCAL-INV-0001';
 
 -- Cross-institution agreement linkage must be rejected.
 do $body$
-declare other_institution uuid;
-declare other_agreement uuid;
-declare intake uuid;
+declare
+ other_institution uuid;
+ other_agreement uuid;
+ intake uuid;
 begin
  insert into clinova_private.institutions(institution_code,legal_name,display_name,country_code)
  values ('LOCAL-INST-2','Synthetic Other Ltd','Synthetic Other','GB')
@@ -139,8 +140,9 @@ end $body$;
 
 -- Amount arithmetic must be internally consistent.
 do $body$
-declare invoice_id uuid;
-declare fee_id uuid;
+declare
+ invoice_id uuid;
+ fee_id uuid;
 begin
  select id into invoice_id from clinova_private.invoices where invoice_number='LOCAL-INV-0001';
  select id into fee_id from clinova_private.fee_schedule_items where item_code='LOCAL-COURSE';
