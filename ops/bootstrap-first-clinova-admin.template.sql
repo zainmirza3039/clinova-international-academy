@@ -25,6 +25,7 @@ select (
   and exists (select 1 from auth.users where id=:'target_user_id'::uuid)
   and exists (select 1 from auth.users where id=:'operator_user_id'::uuid)
   and exists (select 1 from auth.users where id=:'approver_user_id'::uuid)
+  and exists (select 1 from clinova_private.roles where role_key='super_admin' and is_assignable)
   and not exists (select 1 from clinova_private.admin_bootstrap_events)
   and not exists (
     select 1
