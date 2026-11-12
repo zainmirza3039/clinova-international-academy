@@ -54,8 +54,11 @@ create table if not exists clinova_private.user_role_assignments (
   check ((revoked_at is null and revoked_by is null) or (revoked_at is not null and revoked_by is not null))
 );
 
-create unique index if not exists user_role_assignments_active_unique
-  on clinova_private.user_role_assignments(user_id, role_id, scope_type, coalesce(scope_id, '00000000-0000-0000-0000-000000000000'::uuid))
+-- Do not use a time-dependent partial unique index: PostgreSQL requires
+-- immutable predicates, and expired assignments must be re-grantable.
+drop index if exists clinova_private.user_role_assignments_active_unique;
+create index if not exists user_role_assignments_scope_lookup_idx
+  on clinova_private.user_role_assignments(user_id, role_id, scope_type, scope_id)
   where revoked_at is null;
 
 create index if not exists user_role_assignments_user_active_idx
@@ -433,6 +436,12 @@ begin
   elsif not clinova_private.has_permission('access.roles.approve','global',null) then
     raise exception 'Role approval permission required' using errcode='42501';
   end if;
+
+  -- Serialize grant/revoke decisions for the same target-role-scope tuple.
+  perform pg_advisory_xact_lock(hashtextextended(
+    v_request.target_user_id::text || ':' || v_request.role_id::text || ':' ||
+    v_request.scope_type || ':' || coalesce(v_request.scope_id::text,'global'), 0
+  ));
 
   if v_request.request_action='grant' then
     if exists (
