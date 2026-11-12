@@ -179,6 +179,7 @@ on conflict (role_key) do update set
 insert into clinova_private.permissions(permission_key,domain,action,description) values
 ('platform.settings.manage','platform','settings_manage','Manage platform-level settings.'),
 ('access.roles.request','access','roles_request','Request a scoped role change.'),
+('access.roles.approve','access','roles_approve','Approve ordinary scoped role changes.'),
 ('access.roles.approve_privileged','access','roles_approve_privileged','Approve controlled privileged role changes.'),
 ('access.roles.revoke','access','roles_revoke','Revoke authorized scoped assignments.'),
 ('admissions.application.read','admissions','application_read','Read assigned applications.'),
@@ -234,8 +235,11 @@ on conflict (permission_key) do update set domain=excluded.domain, action=exclud
 -- Minimum permission bundles. High-risk privileges remain separately controlled.
 with mapping(role_key, permission_key) as (values
 ('super_admin','platform.settings.manage'),
+('super_admin','access.roles.request'),
 ('super_admin','access.roles.approve_privileged'),
 ('super_admin','access.roles.revoke'),
+('academy_admin','access.roles.request'),
+('academy_admin','access.roles.approve'),
 ('academy_admin','admissions.application.read'),
 ('academy_admin','institutions.read'),
 ('academy_admin','learning.catalogue.read'),
@@ -323,6 +327,185 @@ $$;
 
 alter function clinova_private.reject_governance_event_mutation() owner to postgres;
 alter function clinova_private.has_permission(text,text,uuid) owner to postgres;
+
+-- Role changes are request/approval operations. API callers never write the
+-- assignment, request, or event tables directly.
+create or replace function clinova_private.request_role_change(
+  p_target_user_id uuid,
+  p_role_key text,
+  p_scope_type text,
+  p_scope_id uuid,
+  p_request_action text,
+  p_reason text,
+  p_idempotency_key text
+) returns uuid
+language plpgsql security definer
+set search_path = pg_catalog
+as $
+declare
+  v_actor uuid := auth.uid();
+  v_role_id uuid;
+  v_request_id uuid;
+begin
+  if v_actor is null then raise exception 'Authentication required' using errcode='28000'; end if;
+  if not clinova_private.has_permission('access.roles.request','global',null) then
+    raise exception 'Not authorized to request role changes' using errcode='42501';
+  end if;
+  if p_target_user_id is null or p_target_user_id = v_actor then
+    raise exception 'Self-assignment requests are not permitted' using errcode='42501';
+  end if;
+  if p_request_action not in ('grant','revoke') then
+    raise exception 'Invalid role change action' using errcode='22023';
+  end if;
+  if p_scope_type not in ('global','institution','programme','cohort','course','scheme','case')
+     or ((p_scope_type='global') <> (p_scope_id is null)) then
+    raise exception 'Invalid scope' using errcode='22023';
+  end if;
+  if p_reason is null or length(btrim(p_reason)) not between 10 and 2000
+     or p_idempotency_key is null or length(btrim(p_idempotency_key)) not between 8 and 200 then
+    raise exception 'Reason and idempotency key are required' using errcode='22023';
+  end if;
+  if not exists (select 1 from auth.users u where u.id=p_target_user_id) then
+    raise exception 'Target user does not exist' using errcode='23503';
+  end if;
+  select r.id into v_role_id
+  from clinova_private.roles r
+  where r.role_key=p_role_key and r.is_assignable;
+  if v_role_id is null then raise exception 'Role is missing or not assignable' using errcode='22023'; end if;
+
+  select q.id into v_request_id
+  from clinova_private.role_change_requests q
+  where q.idempotency_key=p_idempotency_key;
+  if v_request_id is not null then
+    if not exists (
+      select 1 from clinova_private.role_change_requests q
+      where q.id=v_request_id and q.requested_by=v_actor
+        and q.target_user_id=p_target_user_id and q.role_id=v_role_id
+        and q.scope_type=p_scope_type and q.scope_id is not distinct from p_scope_id
+        and q.request_action=p_request_action and q.reason=p_reason
+    ) then raise exception 'Idempotency key already used for a different request' using errcode='23505'; end if;
+    return v_request_id;
+  end if;
+
+  insert into clinova_private.role_change_requests(
+    target_user_id,role_id,scope_type,scope_id,request_action,requested_by,reason,idempotency_key
+  ) values (
+    p_target_user_id,v_role_id,p_scope_type,p_scope_id,p_request_action,v_actor,p_reason,p_idempotency_key
+  ) returning id into v_request_id;
+
+  insert into clinova_private.role_assignment_events(
+    request_id,actor_user_id,target_user_id,role_key,scope_type,scope_id,event_type,reason
+  ) values (
+    v_request_id,v_actor,p_target_user_id,p_role_key,p_scope_type,p_scope_id,'requested',p_reason
+  );
+  return v_request_id;
+end;
+$;
+
+create or replace function clinova_private.approve_role_change(p_request_id uuid)
+returns uuid
+language plpgsql security definer
+set search_path = pg_catalog
+as $
+declare
+  v_actor uuid := auth.uid();
+  v_request clinova_private.role_change_requests%rowtype;
+  v_role clinova_private.roles%rowtype;
+  v_assignment_id uuid;
+begin
+  if v_actor is null then raise exception 'Authentication required' using errcode='28000'; end if;
+  select q.* into v_request
+  from clinova_private.role_change_requests q
+  where q.id=p_request_id
+  for update;
+  if not found then raise exception 'Role change request not found' using errcode='P0002'; end if;
+  if v_request.status <> 'pending' or v_request.expires_at <= statement_timestamp() then
+    raise exception 'Request is no longer pending' using errcode='55000';
+  end if;
+  if v_request.requested_by=v_actor or v_request.target_user_id=v_actor then
+    raise exception 'Requester or target cannot approve this request' using errcode='42501';
+  end if;
+  select r.* into v_role from clinova_private.roles r where r.id=v_request.role_id;
+  if v_role.is_privileged then
+    if not clinova_private.has_permission('access.roles.approve_privileged','global',null) then
+      raise exception 'Privileged role approval permission required' using errcode='42501';
+    end if;
+  elsif not clinova_private.has_permission('access.roles.approve','global',null) then
+    raise exception 'Role approval permission required' using errcode='42501';
+  end if;
+
+  if v_request.request_action='grant' then
+    if exists (
+      select 1 from clinova_private.user_role_assignments a
+      where a.user_id=v_request.target_user_id and a.role_id=v_request.role_id
+        and a.scope_type=v_request.scope_type and a.scope_id is not distinct from v_request.scope_id
+        and a.revoked_at is null and (a.valid_until is null or a.valid_until > statement_timestamp())
+    ) then raise exception 'An active matching assignment already exists' using errcode='23505'; end if;
+
+    insert into clinova_private.user_role_assignments(
+      user_id,role_id,scope_type,scope_id,valid_from,grant_reason,created_by
+    ) values (
+      v_request.target_user_id,v_request.role_id,v_request.scope_type,v_request.scope_id,
+      statement_timestamp(),v_request.reason,v_actor
+    ) returning id into v_assignment_id;
+  else
+    update clinova_private.user_role_assignments a
+    set revoked_at=statement_timestamp(),revoked_by=v_actor
+    where a.user_id=v_request.target_user_id and a.role_id=v_request.role_id
+      and a.scope_type=v_request.scope_type and a.scope_id is not distinct from v_request.scope_id
+      and a.revoked_at is null and (a.valid_until is null or a.valid_until > statement_timestamp())
+    returning a.id into v_assignment_id;
+    if v_assignment_id is null then raise exception 'No active matching assignment to revoke' using errcode='P0002'; end if;
+  end if;
+
+  update clinova_private.role_change_requests
+  set status='approved',approved_by=v_actor,approved_at=statement_timestamp(),
+      applied_assignment_id=v_assignment_id
+  where id=p_request_id;
+
+  insert into clinova_private.role_assignment_events(
+    request_id,assignment_id,actor_user_id,target_user_id,role_key,scope_type,scope_id,event_type,reason
+  ) values (
+    p_request_id,v_assignment_id,v_actor,v_request.target_user_id,v_role.role_key,
+    v_request.scope_type,v_request.scope_id,
+    case when v_request.request_action='grant' then 'granted' else 'revoked' end,
+    v_request.reason
+  );
+  return v_assignment_id;
+end;
+$;
+
+alter function clinova_private.request_role_change(uuid,text,text,uuid,text,text,text) owner to postgres;
+alter function clinova_private.approve_role_change(uuid) owner to postgres;
+revoke all on function clinova_private.request_role_change(uuid,text,text,uuid,text,text,text) from public, anon, authenticated;
+revoke all on function clinova_private.approve_role_change(uuid) from public, anon, authenticated;
+
+create or replace function public.request_clinova_role_change(
+  p_target_user_id uuid,p_role_key text,p_scope_type text,p_scope_id uuid,
+  p_request_action text,p_reason text,p_idempotency_key text
+) returns uuid
+language sql security definer
+set search_path = pg_catalog
+as $
+  select clinova_private.request_role_change(
+    p_target_user_id,p_role_key,p_scope_type,p_scope_id,p_request_action,p_reason,p_idempotency_key
+  );
+$;
+
+create or replace function public.approve_clinova_role_change(p_request_id uuid)
+returns uuid
+language sql security definer
+set search_path = pg_catalog
+as $
+  select clinova_private.approve_role_change(p_request_id);
+$;
+
+alter function public.request_clinova_role_change(uuid,text,text,uuid,text,text,text) owner to postgres;
+alter function public.approve_clinova_role_change(uuid) owner to postgres;
+revoke all on function public.request_clinova_role_change(uuid,text,text,uuid,text,text,text) from public, anon, authenticated;
+revoke all on function public.approve_clinova_role_change(uuid) from public, anon, authenticated;
+grant execute on function public.request_clinova_role_change(uuid,text,text,uuid,text,text,text) to authenticated;
+grant execute on function public.approve_clinova_role_change(uuid) to authenticated;
 
 -- Exposed boolean-only boundary. SECURITY DEFINER is required because API
 -- roles must not receive USAGE on the private schema. Function owner is postgres.
