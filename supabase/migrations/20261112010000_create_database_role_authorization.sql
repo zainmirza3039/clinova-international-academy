@@ -357,10 +357,10 @@ begin
   if p_target_user_id is null or p_target_user_id = v_actor then
     raise exception 'Self-assignment requests are not permitted' using errcode='42501';
   end if;
-  if p_request_action not in ('grant','revoke') then
+  if p_request_action is null or p_request_action not in ('grant','revoke') then
     raise exception 'Invalid role change action' using errcode='22023';
   end if;
-  if p_scope_type not in ('global','institution','programme','cohort','course','scheme','case')
+  if p_scope_type is null or p_scope_type not in ('global','institution','programme','cohort','course','scheme','case')
      or ((p_scope_type='global') <> (p_scope_id is null)) then
     raise exception 'Invalid scope' using errcode='22023';
   end if;
