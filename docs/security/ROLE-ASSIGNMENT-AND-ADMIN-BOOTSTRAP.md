@@ -193,3 +193,22 @@ No production schema, grants, policies, role assignments, Auth invitations, secr
 - Supabase security advisors are clean;
 - rollback and backup procedures are documented;
 - the user explicitly approves the specific production change.
+
+
+## 11. Feature-branch implementation status (2026-11-12)
+
+The source-only migration `supabase/migrations/20261112010000_create_database_role_authorization.sql` now implements the first authorization foundation:
+- normalized roles, permissions and role-permission mappings;
+- scoped, time-bounded user assignments;
+- role-change request and append-only event relations;
+- two-person request/approval functions exposed through narrow authenticated RPC wrappers;
+- privileged-role approval checks requiring the super-admin permission;
+- transaction advisory locking for concurrent grant/revoke requests;
+- append-only triggers for role assignment and bootstrap audit events;
+- a boolean-only permission-check wrapper that does not expose assignment rows.
+
+The first-administrator operator template is `ops/bootstrap-first-clinova-admin.template.sql`. It requires separately verified target, operator and approver Auth identities and a one-time precondition. It is intentionally not invoked by the application.
+
+Local test coverage is in `tests/database/role-authorization.local.sql` and is wired into `scripts/test-disposable-postgres.sh`. It covers exact-scope permission checks, expiry, metadata spoof denial, role request/approval, privileged approval separation, and immutable audit events.
+
+**Important:** this is implementation source, not production-ready authorization cutover. Existing policies still use the legacy JWT helper. The migration deliberately preserves existing private-schema access and old RPCs to avoid breaking current content workflow triggers and invoker wrappers. Local runtime tests have not yet been executed because PostgreSQL server binaries are unavailable in the current execution environment. Do not apply this migration to the hosted project until the disposable test harness passes and the legacy-policy transition is separately reviewed.
