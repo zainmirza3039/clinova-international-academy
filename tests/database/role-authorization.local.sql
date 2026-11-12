@@ -3,6 +3,16 @@
 
 -- Synthetic users A and B are seeded by secure-learner-records.local.sql.
 
+insert into auth.users(id) values ('00000000-0000-0000-0000-0000000000c3');
+
+insert into clinova_private.user_role_assignments(
+ user_id,role_id,scope_type,scope_id,grant_reason,created_by
+)
+select u.id,r.id,'global',null,'Synthetic local role approver',u.id
+from auth.users u cross join clinova_private.roles r
+where u.id in ('00000000-0000-0000-0000-0000000000a2','00000000-0000-0000-0000-0000000000c3')
+  and r.role_key='academy_admin';
+
 insert into clinova_private.user_role_assignments(
  user_id,role_id,scope_type,scope_id,valid_from,valid_until,grant_reason,created_by
 )
@@ -60,6 +70,61 @@ begin
    raise exception 'unassigned user inherited another user permission';
  end if;
 end $$;
+commit;
+
+-- Exercise the two-person role request/approval workflow.
+begin;
+set local role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000a2',true);
+select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000a2","app_metadata":{}}',true);
+select public.request_clinova_role_change(
+ '00000000-0000-0000-0000-0000000000a1',
+ 'learner','global',null,'grant',
+ 'Synthetic role request for local authorization test',
+ 'local-role-request-learner-a'
+) as created_request_id \gset
+commit;
+
+select id as approval_request_id
+from clinova_private.role_change_requests
+where idempotency_key='local-role-request-learner-a' \gset
+
+-- The requester cannot approve their own request.
+begin;
+set local role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000a2',true);
+select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000a2","app_metadata":{}}',true);
+do $
+declare v_id uuid;
+begin
+ select id into v_id from clinova_private.role_change_requests
+ where idempotency_key='local-role-request-learner-a';
+ begin
+   perform public.approve_clinova_role_change(v_id);
+   raise exception 'requester approved own role request';
+ exception when insufficient_privilege then null;
+ end;
+end $;
+commit;
+
+-- A distinct academy administrator approves the non-privileged learner role.
+begin;
+set local role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000c3',true);
+select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000c3","app_metadata":{}}',true);
+select public.approve_clinova_role_change(:'approval_request_id');
+commit;
+
+begin;
+set local role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000a1',true);
+select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000a1","app_metadata":{}}',true);
+do $
+begin
+ if not public.has_clinova_permission('learning.catalogue.read','global',null) then
+   raise exception 'approved learner role did not become effective';
+ end if;
+end $;
 commit;
 
 -- Audit records cannot be modified or deleted after insertion.
