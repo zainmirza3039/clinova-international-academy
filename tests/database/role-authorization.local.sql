@@ -39,7 +39,7 @@ begin;
 set local role authenticated;
 select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000a1',true);
 select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000a1","user_metadata":{"role":"super_admin"},"app_metadata":{}}',true);
-do $body$$
+do $body$
 begin
  if not public.has_clinova_permission('learning.courses.manage','course','40000000-0000-0000-0000-000000000000') then
    raise exception 'active scoped permission was not granted';
@@ -56,7 +56,7 @@ begin
  if public.has_clinova_permission('unknown.permission','course','40000000-0000-0000-0000-000000000000') then
    raise exception 'unknown permission did not fail closed';
  end if;
-end $$;
+end $body$;
 commit;
 
 -- Learner B has no assignment and must not inherit A's scoped instructor rights.
@@ -64,12 +64,12 @@ begin;
 set local role authenticated;
 select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000a2',true);
 select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000a2","app_metadata":{"clinova_roles":["super_admin"]}}',true);
-do $body$$
+do $body$
 begin
  if public.has_clinova_permission('learning.courses.manage','course','40000000-0000-0000-0000-000000000000') then
    raise exception 'unassigned user inherited another user permission';
  end if;
-end $$;
+end $body$;
 commit;
 
 -- Exercise the two-person role request/approval workflow.
@@ -94,7 +94,7 @@ begin;
 set local role authenticated;
 select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000a2',true);
 select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000a2","app_metadata":{}}',true);
-do $body$$
+do $body$
 begin
  begin
    perform public.request_clinova_role_change(
@@ -106,7 +106,7 @@ begin
    raise exception 'self-grant request unexpectedly succeeded';
  exception when insufficient_privilege then null;
  end;
-end $$;
+end $body$;
 commit;
 
 -- A distinct academy administrator approves the non-privileged learner role.
@@ -210,7 +210,7 @@ begin
 end $body$;
 
 -- Anonymous callers cannot execute the authenticated-only wrapper.
-do $body$$
+do $body$
 begin
  if has_function_privilege('anon','public.has_clinova_permission(text,text,uuid)','EXECUTE') then
    raise exception 'anon unexpectedly has permission-helper EXECUTE';
@@ -221,6 +221,6 @@ begin
  if has_table_privilege('anon','clinova_private.roles','SELECT') then
    raise exception 'anon unexpectedly has direct roles-table SELECT';
  end if;
-end $$;
+end $body$;
 
 \echo 'PASS: role permissions, exact scope, expiry, identity binding, metadata spoof denial and private table ACLs'
