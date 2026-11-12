@@ -332,3 +332,40 @@ The repository is still a Vite + React SPA using React Router and `@supabase/sup
 | G8 | Release readiness | Passing lint/typecheck/unit/E2E/security/performance tests, backup/rollback, explicit owner release approval |
 
 No gate authorizes production migration or deployment by itself. Production changes require a separate approval after review of the exact migration diff, tested rollback, backup status and operational window.
+
+
+## 8. Follow-up grant and public-surface inspection (2026-11-12)
+
+A second read-only pass inspected exact per-table grants, default ACLs, function grants and view definitions. This refines the initial finding:
+
+### Exact privilege pattern
+
+- anon and authenticated currently have all table privileges (including TRUNCATE, REFERENCES, TRIGGER and DML) on the majority of learner, profile, certificate and instructor relations.
+- anon currently has only INSERT on the three intake tables, but has broad privileges on course_certificates, course_enrollments, course_instructor_assignments, course_lesson_progress, course_lessons, course_live_sessions, profiles and the verified_instructors view.
+- authenticated has broad DML/DDL-adjacent relation privileges on the same academic tables, despite RLS policies restricting row-level operations.
+- anon and authenticated also have SELECT on some internal CMS audit relations. RLS restricts rows, but grants should be narrowed to policy-backed staff use cases.
+- postgres and supabase_admin default ACLs in public grant broad table privileges to anon, authenticated and service_role. This is the recurrence mechanism: future tables can inherit excessive API grants.
+- No custom default ACLs were found for clinova_private; new functions in that schema need explicit default-function hardening because PostgreSQL normally grants function EXECUTE to PUBLIC by default.
+
+### Function allow-list and wrappers
+
+Public RPCs intentionally required by current workflows:
+- has_clinova_role(text) — anon/authenticated role predicate helper.
+- verify_cpd_certificate(uuid) — public verification.
+- CMS RPCs — authenticated only: archive, create item/version, issue CPD certificate, publish, record review, submit for review and withdraw.
+
+Private implementation functions called by those wrappers need matching explicit EXECUTE grants. Public wrapper functions are invoker functions; the private verifier is SECURITY DEFINER with search_path=pg_catalog. Keep clinova_private USAGE for now because the current public verifier wrapper is invoker and calls the private function. Do not revoke private-schema USAGE until the wrapper architecture is deliberately changed and tested.
+
+### Public views and privacy
+
+Both public views are confirmed security_invoker=true:
+- published_content exposes content_item_id, content_version_id, kind, version, full JSON snapshot, content hash and publication timestamp. The full snapshot is a potential over-disclosure surface. Before production public publishing, define a public JSON schema/allow-list and expose a narrow projection rather than every snapshot field.
+- verified_instructors exposes user_id (the internal Auth UUID), public name, professional title, biography and credentials. Remove the internal UUID from the public projection unless a specific verified public use case requires it. The underlying table SELECT must remain RLS-filtered to verified public profiles.
+
+The CPD verification function currently returns certificate number, learner name, course title, issue timestamp and valid/revoked status. It substitutes “Name withheld” only when profiles.full_name is empty; it does not currently implement a learner consent check. Add a privacy decision/consent field and use a neutral display policy when consent is absent. Do not expose email, phone, Auth UUID, evidence or internal decision notes.
+
+### Updated proposed grants file
+
+The companion draft SQL is at docs/security/PROPOSED-LEAST-PRIVILEGE-GRANTS.sql. It revokes existing blanket privileges from anon and authenticated; restores only policy-backed operations; retains SELECT on the two security-invoker public views and the underlying base relations required for those views; corrects table, sequence and function default privileges for current object-owner roles; retains the current private-schema USAGE requirement for the verifier wrapper; and does not change service_role grants.
+
+This is a review draft, not a runnable production release. Validate against the exact migration history and a disposable database before application. Confirm that all current app operations use intended RPCs and that no frontend depends on direct writes not represented in RLS policies.
