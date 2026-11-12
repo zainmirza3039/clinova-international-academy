@@ -106,6 +106,13 @@ insert into clinova_private.payment_webhook_events(
  provider,provider_event_id,event_type,signature_verified,idempotency_key
 ) values ('local-test','LOCAL-EVENT-1','payment.captured',true,'LOCAL-IDEMPOTENCY-1');
 
+insert into clinova_private.payment_webhook_processing_events(
+ webhook_event_id,processing_status,result_reference,reason
+)
+select id,'processed','LOCAL-PAY-0001','Synthetic verified local webhook processing'
+from clinova_private.payment_webhook_events
+where provider_event_id='LOCAL-EVENT-1';
+
 insert into clinova_private.finance_events(invoice_id,event_type,reason)
 select id,'payment_allocated','Synthetic local finance event'
 from clinova_private.invoices where invoice_number='LOCAL-INV-0001';
@@ -158,6 +165,12 @@ begin
  begin
    delete from clinova_private.finance_events where event_type='payment_allocated';
    raise exception 'finance event delete unexpectedly succeeded';
+ exception when sqlstate '55000' then null;
+ end;
+ begin
+   update clinova_private.payment_webhook_processing_events
+   set reason='tampered';
+   raise exception 'webhook processing event update unexpectedly succeeded';
  exception when sqlstate '55000' then null;
  end;
 end $body$;
