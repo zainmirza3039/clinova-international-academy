@@ -212,3 +212,8 @@ The first-administrator operator template is `ops/bootstrap-first-clinova-admin.
 Local test coverage is in `tests/database/role-authorization.local.sql` and is wired into `scripts/test-disposable-postgres.sh`. It covers exact-scope permission checks, expiry, metadata spoof denial, role request/approval, privileged approval separation, and immutable audit events.
 
 **Important:** this is implementation source, not production-ready authorization cutover. Existing policies still use the legacy JWT helper. The migration deliberately preserves existing private-schema access and old RPCs to avoid breaking current content workflow triggers and invoker wrappers. Local runtime tests have not yet been executed because PostgreSQL server binaries are unavailable in the current execution environment. Do not apply this migration to the hosted project until the disposable test harness passes and the legacy-policy transition is separately reviewed.
+
+
+### Initial dual-administrator bootstrap clarification
+
+The operator template now provisions **two distinct initial super-administrator accounts in one transaction**, with a separate operator and independent approver. This avoids a governance deadlock in which a single initial super-admin cannot obtain a second super-admin approval for later privileged grants. Both initial accounts must be verified, invited through Auth and enrolled in MFA before the operator procedure is run. The template is not a public RPC and is not run by the application.
