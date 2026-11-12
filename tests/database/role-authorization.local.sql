@@ -39,7 +39,7 @@ begin;
 set local role authenticated;
 select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000a1',true);
 select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000a1","user_metadata":{"role":"super_admin"},"app_metadata":{}}',true);
-do $$
+do $body$$
 begin
  if not public.has_clinova_permission('learning.courses.manage','course','40000000-0000-0000-0000-000000000000') then
    raise exception 'active scoped permission was not granted';
@@ -64,7 +64,7 @@ begin;
 set local role authenticated;
 select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000a2',true);
 select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000a2","app_metadata":{"clinova_roles":["super_admin"]}}',true);
-do $$
+do $body$$
 begin
  if public.has_clinova_permission('learning.courses.manage','course','40000000-0000-0000-0000-000000000000') then
    raise exception 'unassigned user inherited another user permission';
@@ -94,7 +94,7 @@ begin;
 set local role authenticated;
 select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000a2',true);
 select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000a2","app_metadata":{}}',true);
-do $$
+do $body$$
 begin
  begin
    perform public.request_clinova_role_change(
@@ -121,12 +121,12 @@ begin;
 set local role authenticated;
 select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000a1',true);
 select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000a1","app_metadata":{}}',true);
-do $
+do $body$
 begin
  if not public.has_clinova_permission('learning.catalogue.read','global',null) then
    raise exception 'approved learner role did not become effective';
  end if;
-end $;
+end $body$;
 commit;
 
 -- Privileged role grants require a super-admin approver, not an academy admin.
@@ -142,21 +142,24 @@ select public.request_clinova_role_change(
 );
 commit;
 
+select id as privileged_request_id
+from clinova_private.role_change_requests
+where idempotency_key='local-role-request-superadmin-a' \gset
+
 begin;
 set local role authenticated;
 select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000c3',true);
 select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000c3","app_metadata":{}}',true);
-do $
-declare v_id uuid;
+select set_config('test.request_id', :'privileged_request_id', true);
+do $body$
+declare v_id uuid := current_setting('test.request_id')::uuid;
 begin
- select id into v_id from clinova_private.role_change_requests
- where idempotency_key='local-role-request-superadmin-a';
  begin
    perform public.approve_clinova_role_change(v_id);
    raise exception 'academy admin approved privileged role assignment';
  exception when insufficient_privilege then null;
  end;
-end $;
+end $body$;
 commit;
 
 -- Provision synthetic super-admin C as the bootstrap fixture, then approve.
@@ -189,7 +192,7 @@ insert into clinova_private.role_assignment_events(
  'granted','Synthetic immutable audit event'
 );
 
-do $
+do $body$
 begin
  begin
    update clinova_private.role_assignment_events
@@ -204,10 +207,10 @@ begin
    raise exception 'audit event delete unexpectedly succeeded';
  exception when sqlstate '55000' then null;
  end;
-end $;
+end $body$;
 
 -- Anonymous callers cannot execute the authenticated-only wrapper.
-do $$
+do $body$$
 begin
  if has_function_privilege('anon','public.has_clinova_permission(text,text,uuid)','EXECUTE') then
    raise exception 'anon unexpectedly has permission-helper EXECUTE';
