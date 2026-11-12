@@ -200,7 +200,7 @@ create table if not exists clinova_private.certification_evidence (
   evidence_description text not null,
   uploaded_by uuid not null references auth.users(id) on delete restrict,
   uploaded_at timestamptz not null default now(),
-  verification_status text not null default 'pending' check (verification_status in ('pending','accepted','rejected','superseded'))
+  uploaded_at timestamptz not null default now()
 );
 
 create table if not exists clinova_private.eligibility_reviews (
@@ -345,7 +345,6 @@ create table if not exists clinova_private.audit_findings (
   finding text not null,
   evidence_refs jsonb not null default '[]'::jsonb check (jsonb_typeof(evidence_refs)='array'),
   owner_user_id uuid references auth.users(id) on delete restrict,
-  finding_status text not null default 'open' check (finding_status in ('open','action_planned','verified','closed','accepted_risk')),
   raised_at timestamptz not null default now()
 );
 
@@ -394,6 +393,17 @@ create table if not exists clinova_private.quality_risks (
   mitigation_plan text,
   risk_status text not null default 'open' check (risk_status in ('open','mitigating','accepted','closed')),
   reviewed_at timestamptz not null default now()
+);
+
+create table if not exists clinova_private.quality_events (
+  id uuid primary key default gen_random_uuid(),
+  entity_type text not null check (entity_type in ('controlled_document','internal_audit','audit_finding','corrective_action','complaint_case','risk','staff_competency')),
+  entity_id uuid not null,
+  actor_user_id uuid references auth.users(id) on delete restrict,
+  event_type text not null,
+  rationale text,
+  event_details jsonb not null default '{}'::jsonb check (jsonb_typeof(event_details)='object'),
+  occurred_at timestamptz not null default now()
 );
 
 create table if not exists clinova_private.staff_competencies (
@@ -497,6 +507,26 @@ alter table clinova_private.staff_competencies enable row level security;
 alter table clinova_private.operational_report_snapshots enable row level security;
 
 -- Immutable assessment/certification decisions and audit evidence.
+create trigger assessment_responses_append_only
+before update or delete on clinova_private.assessment_responses
+for each row execute function clinova_private.reject_governance_event_mutation();
+
+create trigger assessment_marks_append_only
+before update or delete on clinova_private.assessment_marks
+for each row execute function clinova_private.reject_governance_event_mutation();
+
+create trigger competency_observations_append_only
+before update or delete on clinova_private.competency_observations
+for each row execute function clinova_private.reject_governance_event_mutation();
+
+create trigger certification_evidence_append_only
+before update or delete on clinova_private.certification_evidence
+for each row execute function clinova_private.reject_governance_event_mutation();
+
+create trigger quality_events_append_only
+before update or delete on clinova_private.quality_events
+for each row execute function clinova_private.reject_governance_event_mutation();
+
 create trigger assessment_moderation_append_only
 before update or delete on clinova_private.assessment_moderation
 for each row execute function clinova_private.reject_governance_event_mutation();
