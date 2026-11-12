@@ -68,7 +68,8 @@ create table if not exists clinova_private.applications (
   status text not null default 'draft' check (status in ('draft','submitted','under_review','awaiting_information','offered','conditionally_offered','rejected','withdrawn','enrolled')),
   submitted_at timestamptz,
   created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now()
+  updated_at timestamptz not null default now(),
+  check (status='draft' or submitted_at is not null)
 );
 
 create index if not exists applications_applicant_user_idx
@@ -91,7 +92,8 @@ create table if not exists clinova_private.application_documents (
   review_status text not null default 'pending' check (review_status in ('pending','accepted','rejected','replacement_requested')),
   reviewed_by uuid references auth.users(id) on delete restrict,
   reviewed_at timestamptz,
-  review_rationale text
+  review_rationale text,
+  check (review_status='pending' or (reviewed_by is not null and reviewed_at is not null))
 );
 
 create table if not exists clinova_private.application_reviews (
@@ -211,7 +213,8 @@ create table if not exists clinova_private.partner_cohort_learners (
   joined_at timestamptz not null default now(),
   ended_at timestamptz,
   unique (cohort_id,user_id),
-  check (ended_at is null or ended_at >= joined_at)
+  check (ended_at is null or ended_at >= joined_at),
+  check (membership_status='active' or ended_at is not null)
 );
 
 create table if not exists clinova_private.partnership_reviews (
@@ -298,7 +301,7 @@ create table if not exists clinova_private.payment_transactions (
   verified_at timestamptz,
   created_at timestamptz not null default now(),
   unique (provider,provider_transaction_reference),
-  check (transaction_status not in ('captured','refunded','partially_refunded') or verified_at is not null)
+  check (transaction_status not in ('authorized','captured','refunded','partially_refunded') or verified_at is not null)
 );
 
 create table if not exists clinova_private.payment_allocations (
@@ -324,7 +327,8 @@ create table if not exists clinova_private.refunds (
   approved_at timestamptz,
   completed_at timestamptz,
   check (approved_by is null or approved_by <> requested_by),
-  check (refund_status not in ('approved','processing','completed') or (approved_by is not null and approved_at is not null))
+  check (refund_status not in ('approved','processing','completed') or (approved_by is not null and approved_at is not null)),
+  check (refund_status <> 'completed' or completed_at is not null)
 );
 
 create table if not exists clinova_private.payment_webhook_events (
@@ -337,7 +341,8 @@ create table if not exists clinova_private.payment_webhook_events (
   received_at timestamptz not null default now(),
   processed_at timestamptz,
   processing_status text not null default 'received' check (processing_status in ('received','processed','ignored','failed')),
-  unique (provider,provider_event_id)
+  unique (provider,provider_event_id),
+  check (processing_status <> 'processed' or (signature_verified and processed_at is not null))
 );
 
 create table if not exists clinova_private.finance_events (
