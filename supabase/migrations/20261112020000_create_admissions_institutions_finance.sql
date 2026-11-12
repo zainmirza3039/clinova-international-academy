@@ -124,7 +124,8 @@ create table if not exists clinova_private.application_status_events (
   from_status text,
   to_status text not null,
   reason text,
-  occurred_at timestamptz not null default now()
+  occurred_at timestamptz not null default now(),
+  check (invoice_id is not null or transaction_id is not null or refund_id is not null)
 );
 
 -- Institutions and partner management.
@@ -169,6 +170,7 @@ create table if not exists clinova_private.partner_agreements (
   created_by uuid references auth.users(id) on delete restrict,
   created_at timestamptz not null default now(),
   unique (institution_id,version_number),
+  unique (id,institution_id),
   check (effective_until is null or effective_from is null or effective_until >= effective_from),
   check (agreement_status not in ('approved','active') or (approved_by is not null and approved_at is not null))
 );
@@ -188,7 +190,7 @@ create table if not exists clinova_private.institution_memberships (
 create table if not exists clinova_private.partner_cohorts (
   id uuid primary key default gen_random_uuid(),
   institution_id uuid not null references clinova_private.institutions(id) on delete restrict,
-  agreement_id uuid not null references clinova_private.partner_agreements(id) on delete restrict,
+  agreement_id uuid not null,
   intake_id uuid not null references clinova_private.programme_intakes(id) on delete restrict,
   cohort_code text not null unique,
   capacity integer check (capacity is null or capacity > 0),
@@ -196,7 +198,9 @@ create table if not exists clinova_private.partner_cohorts (
   ends_at timestamptz,
   cohort_status text not null default 'planned' check (cohort_status in ('planned','active','completed','cancelled')),
   created_at timestamptz not null default now(),
-  check (ends_at is null or starts_at is null or ends_at > starts_at)
+  check (ends_at is null or starts_at is null or ends_at > starts_at),
+  foreign key (agreement_id,institution_id)
+    references clinova_private.partner_agreements(id,institution_id) on delete restrict
 );
 
 create table if not exists clinova_private.partner_cohort_learners (
@@ -264,6 +268,7 @@ create table if not exists clinova_private.invoices (
   due_at timestamptz,
   created_by uuid references auth.users(id) on delete restrict,
   created_at timestamptz not null default now(),
+  check (payer_user_id is not null or institution_id is not null),
   check (total_amount = subtotal + tax_total),
   check (invoice_status='draft' or issued_at is not null)
 );
@@ -277,7 +282,9 @@ create table if not exists clinova_private.invoice_lines (
   unit_amount numeric(12,2) not null check (unit_amount >= 0),
   tax_rate numeric(6,4) not null default 0 check (tax_rate between 0 and 1),
   line_subtotal numeric(12,2) not null check (line_subtotal >= 0),
-  line_tax numeric(12,2) not null check (line_tax >= 0)
+  line_tax numeric(12,2) not null check (line_tax >= 0),
+  check (line_subtotal = round(quantity * unit_amount, 2)),
+  check (line_tax = round(line_subtotal * tax_rate, 2))
 );
 
 create table if not exists clinova_private.payment_transactions (
