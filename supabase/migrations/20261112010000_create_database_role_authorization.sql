@@ -239,6 +239,7 @@ on conflict (permission_key) do update set domain=excluded.domain, action=exclud
 with mapping(role_key, permission_key) as (values
 ('super_admin','platform.settings.manage'),
 ('super_admin','access.roles.request'),
+('super_admin','access.roles.approve'),
 ('super_admin','access.roles.approve_privileged'),
 ('super_admin','access.roles.revoke'),
 ('academy_admin','access.roles.request'),
