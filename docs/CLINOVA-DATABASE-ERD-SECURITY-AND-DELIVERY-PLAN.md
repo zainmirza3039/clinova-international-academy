@@ -404,3 +404,17 @@ The disposable PostgreSQL runner now applies both migrations and runs the corres
 5. Implement and test aggregate financial invariants (invoice line totals, payment allocation caps, refund caps, currency matching, webhook signature/replay protection).
 6. Complete assessments/examinations, separate professional competency certification, quality management and operational reporting.
 7. Integrate the existing Vite frontend only after backend command/read contracts stabilize; the repository is not yet a Next.js application.
+
+
+### Assessment, professional certification and quality implementation update
+
+A third source-only migration, `20261112030000_create_assessment_certification_quality.sql`, now adds:
+- CPD assessment definitions, versioned items/options, attempts, responses, marks, results, moderation, completion decisions and events;
+- a separate professional competency certification domain with schemes/versions, units/criteria, candidate applications, private evidence, eligibility reviews, assessor assignments, competency observations, impartiality reviews, independent decisions, credentials, appeals and events;
+- quality controlled documents/versions, internal audits, findings, corrective actions, complaints/appeals, risk records, staff competency and operational report snapshots.
+
+Professional competency credentials are not CPD completion certificates. Assessment answer keys and candidate evidence remain in the private schema. Append-only evidence triggers protect assessment responses/marks, competency observations, decisions, review evidence and audit snapshots.
+
+Local test coverage is in `tests/database/assessment-certification-quality.local.sql`, and the disposable PostgreSQL runner now includes all three new domain migrations and test suites.
+
+**Not yet complete:** command functions and RLS scope rules for these domains, cross-record ownership constraints, marker/assessor/decision-maker separation tests, score calculation/moderation/release workflow, credential revocation/appeal state machine, quality workflow event commands, and operational report authorization. No production changes have been applied.
