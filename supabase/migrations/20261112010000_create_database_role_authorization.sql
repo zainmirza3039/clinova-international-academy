@@ -160,7 +160,7 @@ for each row execute function clinova_private.reject_governance_event_mutation()
 -- Fixed role catalogue.
 insert into clinova_private.roles(role_key, display_name, description, is_privileged) values
 ('super_admin','Super administrator','Platform security and controlled role governance.',true),
-('academy_admin','Academy administrator','Operational academy administration.',false),
+('academy_admin','Academy administrator','Operational academy administration.',true),
 ('admissions_officer','Admissions officer','Scoped applicant and admissions workflow.'),
 ('finance_officer','Finance officer','Scoped finance and reconciliation workflow.'),
 ('applicant','Applicant','Own admissions records.'),
