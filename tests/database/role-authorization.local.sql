@@ -1,9 +1,7 @@
 -- Local-only authorization checks. Executed only by test-disposable-postgres.sh.
 \set ON_ERROR_STOP on
 
-insert into auth.users(id) values
- ('00000000-0000-0000-0000-0000000000a1'),
- ('00000000-0000-0000-0000-0000000000a2');
+-- Synthetic users A and B are seeded by secure-learner-records.local.sql.
 
 insert into clinova_private.user_role_assignments(
  user_id,role_id,scope_type,scope_id,valid_from,valid_until,grant_reason,created_by
