@@ -50,3 +50,5 @@ PSQL=("$PG_BIN/psql" -X -v ON_ERROR_STOP=1 -h "$SOCKET" -p "$PORT" -U postgres)
 "${PSQL[@]}" -d clinova_local_test -f "$ROOT/tests/database/role-authorization.local.sql"
 "${PSQL[@]}" -d clinova_local_test -f "$ROOT/supabase/migrations/20261112020000_create_admissions_institutions_finance.sql" >/dev/null
 "${PSQL[@]}" -d clinova_local_test -f "$ROOT/tests/database/admissions-institutions-finance.local.sql"
+"${PSQL[@]}" -d clinova_local_test -f "$ROOT/supabase/migrations/20261112030000_create_assessment_certification_quality.sql" >/dev/null
+"${PSQL[@]}" -d clinova_local_test -f "$ROOT/tests/database/assessment-certification-quality.local.sql"
