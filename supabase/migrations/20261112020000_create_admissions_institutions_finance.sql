@@ -339,10 +339,16 @@ create table if not exists clinova_private.payment_webhook_events (
   signature_verified boolean not null,
   idempotency_key text not null unique,
   received_at timestamptz not null default now(),
-  processed_at timestamptz,
-  processing_status text not null default 'received' check (processing_status in ('received','processed','ignored','failed')),
-  unique (provider,provider_event_id),
-  check (processing_status <> 'processed' or (signature_verified and processed_at is not null))
+  unique (provider,provider_event_id)
+);
+
+create table if not exists clinova_private.payment_webhook_processing_events (
+  id uuid primary key default gen_random_uuid(),
+  webhook_event_id uuid not null references clinova_private.payment_webhook_events(id) on delete restrict,
+  processing_status text not null check (processing_status in ('processed','ignored','failed')),
+  result_reference text,
+  reason text,
+  processed_at timestamptz not null default now()
 );
 
 create table if not exists clinova_private.finance_events (
@@ -382,6 +388,7 @@ revoke all on table
   clinova_private.payment_allocations,
   clinova_private.refunds,
   clinova_private.payment_webhook_events,
+  clinova_private.payment_webhook_processing_events,
   clinova_private.finance_events
 from public, anon, authenticated;
 
@@ -408,6 +415,7 @@ alter table clinova_private.payment_transactions enable row level security;
 alter table clinova_private.payment_allocations enable row level security;
 alter table clinova_private.refunds enable row level security;
 alter table clinova_private.payment_webhook_events enable row level security;
+alter table clinova_private.payment_webhook_processing_events enable row level security;
 alter table clinova_private.finance_events enable row level security;
 
 -- Append-only decisions, reviews, status history, webhook receipts and finance events.
@@ -429,6 +437,10 @@ for each row execute function clinova_private.reject_governance_event_mutation()
 
 create trigger payment_webhook_events_append_only
 before update or delete on clinova_private.payment_webhook_events
+for each row execute function clinova_private.reject_governance_event_mutation();
+
+create trigger payment_webhook_processing_events_append_only
+before update or delete on clinova_private.payment_webhook_processing_events
 for each row execute function clinova_private.reject_governance_event_mutation();
 
 create trigger finance_events_append_only
