@@ -18,3 +18,15 @@ $$;
 
 GRANT USAGE ON SCHEMA auth TO anon, authenticated;
 GRANT EXECUTE ON FUNCTION auth.uid(), auth.jwt() TO anon, authenticated;
+
+-- Minimal local-only stubs for existing production relations referenced by
+-- the new assessment migration. The hosted project already owns these tables.
+CREATE TABLE public.content_items (
+  id uuid PRIMARY KEY,
+  kind text NOT NULL
+);
+
+CREATE TABLE public.course_enrollments (
+  id uuid PRIMARY KEY,
+  student_id uuid NOT NULL REFERENCES auth.users(id)
+);
