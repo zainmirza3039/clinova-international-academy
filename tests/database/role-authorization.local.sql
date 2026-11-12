@@ -89,22 +89,24 @@ select id as approval_request_id
 from clinova_private.role_change_requests
 where idempotency_key='local-role-request-learner-a' \gset
 
--- The requester cannot approve their own request.
+-- Requesters cannot target themselves for role assignment.
 begin;
 set local role authenticated;
 select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000a2',true);
 select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000a2","app_metadata":{}}',true);
-do $
-declare v_id uuid;
+do $$
 begin
- select id into v_id from clinova_private.role_change_requests
- where idempotency_key='local-role-request-learner-a';
  begin
-   perform public.approve_clinova_role_change(v_id);
-   raise exception 'requester approved own role request';
+   perform public.request_clinova_role_change(
+     '00000000-0000-0000-0000-0000000000a2',
+     'learner','global',null,'grant',
+     'Synthetic self-grant denial test',
+     'local-role-request-self-denied'
+   );
+   raise exception 'self-grant request unexpectedly succeeded';
  exception when insufficient_privilege then null;
  end;
-end $;
+end $$;
 commit;
 
 -- A distinct academy administrator approves the non-privileged learner role.
