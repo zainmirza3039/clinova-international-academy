@@ -129,6 +129,56 @@ begin
 end $;
 commit;
 
+-- Privileged role grants require a super-admin approver, not an academy admin.
+begin;
+set local role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000a2',true);
+select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000a2","app_metadata":{}}',true);
+select public.request_clinova_role_change(
+ '00000000-0000-0000-0000-0000000000a1',
+ 'super_admin','global',null,'grant',
+ 'Synthetic privileged role request for approval boundary test',
+ 'local-role-request-superadmin-a'
+);
+commit;
+
+begin;
+set local role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000c3',true);
+select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000c3","app_metadata":{}}',true);
+do $
+declare v_id uuid;
+begin
+ select id into v_id from clinova_private.role_change_requests
+ where idempotency_key='local-role-request-superadmin-a';
+ begin
+   perform public.approve_clinova_role_change(v_id);
+   raise exception 'academy admin approved privileged role assignment';
+ exception when insufficient_privilege then null;
+ end;
+end $;
+commit;
+
+-- Provision synthetic super-admin C as the bootstrap fixture, then approve.
+insert into clinova_private.user_role_assignments(
+ user_id,role_id,scope_type,scope_id,grant_reason,created_by
+)
+select '00000000-0000-0000-0000-0000000000c3',r.id,'global',null,
+ 'Synthetic super-admin fixture for privileged approval test',
+ '00000000-0000-0000-0000-0000000000c3'
+from clinova_private.roles r where r.role_key='super_admin';
+
+select id as privileged_request_id
+from clinova_private.role_change_requests
+where idempotency_key='local-role-request-superadmin-a' \gset
+
+begin;
+set local role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-0000000000c3',true);
+select set_config('request.jwt.claims','{"sub":"00000000-0000-0000-0000-0000000000c3","app_metadata":{}}',true);
+select public.approve_clinova_role_change(:'privileged_request_id');
+commit;
+
 -- Audit records cannot be modified or deleted after insertion.
 insert into clinova_private.role_assignment_events(
  actor_user_id,target_user_id,role_key,scope_type,scope_id,event_type,reason
