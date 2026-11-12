@@ -45,4 +45,6 @@ PSQL=("$PG_BIN/psql" -X -v ON_ERROR_STOP=1 -h "$SOCKET" -p "$PORT" -U postgres)
 "${PSQL[@]}" -d postgres -c 'CREATE DATABASE clinova_local_test;' >/dev/null
 "${PSQL[@]}" -d clinova_local_test -f "$ROOT/tests/database/bootstrap.local.sql" >/dev/null
 "${PSQL[@]}" -d clinova_local_test -f "$MIGRATION" >/dev/null
+"${PSQL[@]}" -d clinova_local_test -f "$ROOT/supabase/migrations/20261112010000_create_database_role_authorization.sql" >/dev/null
 "${PSQL[@]}" -d clinova_local_test -f "$ROOT/tests/database/secure-learner-records.local.sql"
+"${PSQL[@]}" -d clinova_local_test -f "$ROOT/tests/database/role-authorization.local.sql"
