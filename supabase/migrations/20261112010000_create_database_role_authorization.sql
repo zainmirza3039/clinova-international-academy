@@ -321,6 +321,9 @@ as $$
     );
 $$;
 
+alter function clinova_private.reject_governance_event_mutation() owner to postgres;
+alter function clinova_private.has_permission(text,text,uuid) owner to postgres;
+
 -- Exposed boolean-only boundary. SECURITY DEFINER is required because API
 -- roles must not receive USAGE on the private schema. Function owner is postgres.
 create or replace function public.has_clinova_permission(
@@ -334,6 +337,7 @@ as $$
   select clinova_private.has_permission(p_permission_key, p_scope_type, p_scope_id);
 $$;
 
+alter function public.has_clinova_permission(text,text,uuid) owner to postgres;
 revoke all on function public.has_clinova_permission(text,text,uuid) from public, anon, authenticated;
 grant execute on function public.has_clinova_permission(text,text,uuid) to authenticated;
 revoke all on function clinova_private.has_permission(text,text,uuid) from public, anon, authenticated;
