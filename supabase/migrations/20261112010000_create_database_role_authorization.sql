@@ -111,9 +111,15 @@ create table if not exists clinova_private.admin_bootstrap_events (
 );
 
 -- No API role receives table privileges. Keep implementation relations private.
-revoke all on all tables in schema clinova_private from public, anon, authenticated;
-revoke all on all sequences in schema clinova_private from public, anon, authenticated;
-revoke all on all functions in schema clinova_private from public, anon, authenticated;
+revoke all on table
+  clinova_private.roles,
+  clinova_private.permissions,
+  clinova_private.role_permissions,
+  clinova_private.user_role_assignments,
+  clinova_private.role_change_requests,
+  clinova_private.role_assignment_events,
+  clinova_private.admin_bootstrap_events
+from public, anon, authenticated;
 
 alter table clinova_private.roles enable row level security;
 alter table clinova_private.permissions enable row level security;
