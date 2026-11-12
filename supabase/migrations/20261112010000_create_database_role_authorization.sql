@@ -129,6 +129,31 @@ alter table clinova_private.role_change_requests enable row level security;
 alter table clinova_private.role_assignment_events enable row level security;
 alter table clinova_private.admin_bootstrap_events enable row level security;
 
+-- Append-only governance evidence. Mutation is rejected even for privileged
+-- application paths; maintenance requires a separately reviewed owner procedure.
+create or replace function clinova_private.reject_governance_event_mutation()
+returns trigger
+language plpgsql
+set search_path = pg_catalog
+as $
+begin
+  raise exception 'Governance evidence is append-only'
+    using errcode = '55000';
+end;
+$;
+
+revoke all on function clinova_private.reject_governance_event_mutation() from public, anon, authenticated;
+
+drop trigger if exists role_assignment_events_append_only on clinova_private.role_assignment_events;
+create trigger role_assignment_events_append_only
+before update or delete on clinova_private.role_assignment_events
+for each row execute function clinova_private.reject_governance_event_mutation();
+
+drop trigger if exists admin_bootstrap_events_append_only on clinova_private.admin_bootstrap_events;
+create trigger admin_bootstrap_events_append_only
+before update or delete on clinova_private.admin_bootstrap_events
+for each row execute function clinova_private.reject_governance_event_mutation();
+
 -- Fixed role catalogue.
 insert into clinova_private.roles(role_key, display_name, description, is_privileged) values
 ('super_admin','Super administrator','Platform security and controlled role governance.',true),
