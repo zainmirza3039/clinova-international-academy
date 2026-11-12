@@ -80,7 +80,7 @@ create table if not exists clinova_private.application_documents (
   id uuid primary key default gen_random_uuid(),
   application_id uuid not null references clinova_private.applications(id) on delete restrict,
   document_type text not null,
-  storage_bucket text not null default 'course-resources',
+  storage_bucket text not null default 'application-documents',
   storage_object_key text not null unique,
   original_filename text not null,
   mime_type text not null,
