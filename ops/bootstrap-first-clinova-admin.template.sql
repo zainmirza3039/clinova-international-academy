@@ -1,28 +1,33 @@
 -- OPERATOR-ONLY TEMPLATE — DO NOT RUN WITH PLACEHOLDER VALUES.
--- Execute only after the role-authorisation migration has passed local tests
--- and the academy has approved the named target, operator and independent approver.
--- Use a trusted direct administrative PostgreSQL session, never a browser RPC.
--- This file is not wired to the application and is not a public endpoint.
+-- Bootstrap TWO distinct initial super-admins so dual-control can operate from day one.
+-- Execute only after local security tests pass and both target identities are verified.
+-- Requires an independent operator and approver. Never expose as an application RPC.
 \set ON_ERROR_STOP on
 
--- Replace each value with verified Auth UUIDs and auditable references.
-\set target_user_id 'REPLACE_WITH_VERIFIED_TARGET_AUTH_UUID'
+-- Replace values with verified Auth UUIDs and auditable references.
+\set first_admin_user_id 'REPLACE_WITH_FIRST_ADMIN_AUTH_UUID'
+\set second_admin_user_id 'REPLACE_WITH_SECOND_ADMIN_AUTH_UUID'
 \set operator_user_id 'REPLACE_WITH_OPERATOR_AUTH_UUID'
 \set approver_user_id 'REPLACE_WITH_INDEPENDENT_APPROVER_AUTH_UUID'
 \set operator_reference 'REPLACE_WITH_CHANGE_TICKET_OR_OPERATOR_REFERENCE'
 \set approval_reference 'REPLACE_WITH_APPROVAL_RECORD_REFERENCE'
-\set bootstrap_reason 'Approved initial Clinova super administrator provisioning'
+\set bootstrap_reason 'Approved initial Clinova dual-administrator provisioning'
 
 begin;
 
 select (
-  :'target_user_id' <> 'REPLACE_WITH_VERIFIED_TARGET_AUTH_UUID'
+  :'first_admin_user_id' <> 'REPLACE_WITH_FIRST_ADMIN_AUTH_UUID'
+  and :'second_admin_user_id' <> 'REPLACE_WITH_SECOND_ADMIN_AUTH_UUID'
   and :'operator_user_id' <> 'REPLACE_WITH_OPERATOR_AUTH_UUID'
   and :'approver_user_id' <> 'REPLACE_WITH_INDEPENDENT_APPROVER_AUTH_UUID'
-  and :'target_user_id' <> :'operator_user_id'
-  and :'target_user_id' <> :'approver_user_id'
+  and :'first_admin_user_id' <> :'second_admin_user_id'
+  and :'first_admin_user_id' <> :'operator_user_id'
+  and :'first_admin_user_id' <> :'approver_user_id'
+  and :'second_admin_user_id' <> :'operator_user_id'
+  and :'second_admin_user_id' <> :'approver_user_id'
   and :'operator_user_id' <> :'approver_user_id'
-  and exists (select 1 from auth.users where id=:'target_user_id'::uuid)
+  and exists (select 1 from auth.users where id=:'first_admin_user_id'::uuid)
+  and exists (select 1 from auth.users where id=:'second_admin_user_id'::uuid)
   and exists (select 1 from auth.users where id=:'operator_user_id'::uuid)
   and exists (select 1 from auth.users where id=:'approver_user_id'::uuid)
   and exists (select 1 from clinova_private.roles where role_key='super_admin' and is_assignable)
@@ -42,29 +47,31 @@ select (
   insert into clinova_private.user_role_assignments(
     user_id,role_id,scope_type,scope_id,valid_from,grant_reason,created_by
   )
-  select
-    :'target_user_id'::uuid,r.id,'global',null,statement_timestamp(),
+  select target.id,r.id,'global',null,statement_timestamp(),
     :'bootstrap_reason',:'operator_user_id'::uuid
-  from clinova_private.roles r
-  where r.role_key='super_admin' and r.is_assignable;
+  from auth.users target
+  cross join clinova_private.roles r
+  where target.id in (:'first_admin_user_id'::uuid,:'second_admin_user_id'::uuid)
+    and r.role_key='super_admin' and r.is_assignable;
 
   insert into clinova_private.admin_bootstrap_events(
     target_user_id,role_key,operator_reference,approval_reference,reason
-  ) values (
-    :'target_user_id'::uuid,'super_admin',
-    :'operator_reference',:'approval_reference',:'bootstrap_reason'
-  );
+  ) values
+  (:'first_admin_user_id'::uuid,'super_admin',:'operator_reference' || '-first',
+   :'approval_reference',:'bootstrap_reason'),
+  (:'second_admin_user_id'::uuid,'super_admin',:'operator_reference' || '-second',
+   :'approval_reference',:'bootstrap_reason');
 
   insert into clinova_private.role_assignment_events(
     actor_user_id,target_user_id,role_key,scope_type,scope_id,event_type,reason
-  ) values (
-    :'operator_user_id'::uuid,:'target_user_id'::uuid,'super_admin',
-    'global',null,'granted',
-    :'bootstrap_reason' || ' | independent approval: ' || :'approver_user_id'
-  );
+  ) values
+  (:'operator_user_id'::uuid,:'first_admin_user_id'::uuid,'super_admin',
+   'global',null,'granted',:'bootstrap_reason' || ' | independent approver: ' || :'approver_user_id'),
+  (:'operator_user_id'::uuid,:'second_admin_user_id'::uuid,'super_admin',
+   'global',null,'granted',:'bootstrap_reason' || ' | independent approver: ' || :'approver_user_id');
 
   commit;
-  \echo 'Initial administrator bootstrap committed. Verify MFA and privileged access independently.'
+  \echo 'Two initial super-admin assignments committed. Verify MFA and access independently for both accounts.'
 \else
   rollback;
   \echo 'BOOTSTRAP ABORTED: placeholder values, identity verification, dual-control or one-time preconditions failed.'
