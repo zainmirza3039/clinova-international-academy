@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LockKeyhole, ShieldAlert } from 'lucide-react';
 import { useAuth } from '@/auth/authContext';
+import { hasClinovaAdminRole } from '@/auth/roleUtils';
 import PageHero from '@/components/PageHero';
 import CmsAdminWorkspace from '@/components/CmsAdminWorkspace';
 import AccreditationPreparationPanel from '@/components/AccreditationPreparationPanel';
