@@ -86,7 +86,7 @@ export function AuthProvider({ children, client }: { children: ReactNode; client
     signUp: async (email, password, redirectTo) => {
       let emailVerificationPending = false;
       const result = await call(async () => {
-        const response = await configuredClient!.auth.signUp({ email, password, options: { emailRedirectTo: safeAuthRedirect(redirectTo ?? `${window.location.origin}/sign-in?verified=1`, '/sign-in') } });
+        const response = await configuredClient!.auth.signUp({ email: email.trim(), password, options: { emailRedirectTo: safeAuthRedirect(redirectTo ?? `${window.location.origin}/sign-in?verified=1`, '/sign-in') } });
         emailVerificationPending = !response.error && !response.data.session;
         return response;
       });
