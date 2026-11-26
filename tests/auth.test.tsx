@@ -64,4 +64,18 @@ describe('auth foundation', () => {
     screen.getByText('out').click();
     await waitFor(() => expect(client.auth.signOut).toHaveBeenCalled());
   });
+  it('trims surrounding whitespace from learner email inputs before auth requests', async () => {
+    vi.stubEnv('VITE_AUTH_ENABLED', 'true');
+    vi.stubEnv('VITE_SUPABASE_URL', 'https://ssxpmcbqfdggfsoqbxac.supabase.co');
+    vi.stubEnv('VITE_SUPABASE_ANON_KEY', 'mock-key');
+    vi.resetModules();
+    const { AuthProvider: Provider } = await import('@/auth/AuthProvider');
+    const { useAuth } = await import('@/auth/authContext');
+    const client = makeClient();
+    function Probe() { const auth = useAuth(); return <button onClick={() => void auth.signIn('  learner@example.test  ', 'password')}>sign in</button>; }
+    render(<Provider client={client}><Probe /></Provider>);
+    screen.getByText('sign in').click();
+    await waitFor(() => expect(client.auth.signInWithPassword).toHaveBeenCalledWith({ email: 'learner@example.test', password: 'password' }));
+  });
+
 });
