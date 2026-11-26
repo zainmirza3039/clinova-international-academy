@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LockKeyhole, ShieldAlert } from 'lucide-react';
 import { useAuth } from '@/auth/authContext';
+import { hasClinovaAdminRole } from '@/auth/roleUtils';
 import PageHero from '@/components/PageHero';
 import CmsAdminWorkspace from '@/components/CmsAdminWorkspace';
 import AccreditationPreparationPanel from '@/components/AccreditationPreparationPanel';
@@ -44,7 +45,7 @@ function StatusPanel({ title, message, linkTo, linkLabel }: { title: string; mes
 export default function AdminPage() {
   const auth = useAuth();
   const isEmailVerified = auth.emailVerified && Boolean(auth.session?.user.email && auth.session.user.email_confirmed_at);
-  const isAdmin = auth.session?.user.app_metadata?.role === 'admin';
+  const isAdmin = hasClinovaAdminRole(auth.session?.user.app_metadata);
   const [activeSection, setActiveSection] = useState<AdminSection>('Overview');
   const [contentSearch, setContentSearch] = useState('');
   useSEO({ title: 'Admin access', description: 'Restricted Clinova administration.', noindex: true });
