@@ -82,7 +82,7 @@ export function AuthProvider({ children, client }: { children: ReactNode; client
 
   const value = useMemo<AuthContextValue>(() => ({
     enabled, status, session, emailVerified, error, recovery,
-    signIn: (email, password) => call(() => configuredClient!.auth.signInWithPassword({ email, password })),
+    signIn: (email, password) => call(() => configuredClient!.auth.signInWithPassword({ email: email.trim(), password })),
     signUp: async (email, password, redirectTo) => {
       let emailVerificationPending = false;
       const result = await call(async () => {
