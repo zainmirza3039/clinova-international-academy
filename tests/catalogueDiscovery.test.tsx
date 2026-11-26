@@ -167,4 +167,11 @@ describe('Clinova catalogue discovery structure', () => {
     expect(from).not.toHaveBeenCalled();
     expect(rpc).not.toHaveBeenCalled();
   });
+  it('matches programme slugs as well as display titles', () => {
+    render(<MemoryRouter><ProgrammesPage /></MemoryRouter>);
+    fireEvent.change(screen.getByLabelText('Search proposed programme titles'), { target: { value: 'clinical-pain-management' } });
+    expect(screen.getByRole('heading', { name: 'Certificate in Clinical Pain Management' })).toBeTruthy();
+    expect(screen.getByText('Showing 1 of 8 proposed programme titles.')).toBeTruthy();
+  });
+
 });
