@@ -18,7 +18,7 @@ export default function ProgrammesPage() {
   const filteredProgrammes = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase();
     return ownerListedProgrammes.filter((programme) =>
-      !normalizedQuery || programme.title.toLocaleLowerCase().includes(normalizedQuery),
+      !normalizedQuery || `${programme.title} ${programme.slug}`.toLocaleLowerCase().includes(normalizedQuery),
     );
   }, [query]);
 
