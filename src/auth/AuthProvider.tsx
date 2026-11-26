@@ -93,7 +93,7 @@ export function AuthProvider({ children, client }: { children: ReactNode; client
       return result.error ? result : { ...result, emailVerificationPending };
     },
     sendPasswordReset: (email, redirectTo) => call(() => configuredClient!.auth.resetPasswordForEmail(email.trim(), { redirectTo: safeAuthRedirect(redirectTo, '/reset-password') })),
-    resendEmailVerification: (email, redirectTo) => call(() => configuredClient!.auth.resend({ type: 'signup', email, options: { emailRedirectTo: safeAuthRedirect(redirectTo ?? `${window.location.origin}/sign-in?verified=1`, '/sign-in') } })),
+    resendEmailVerification: (email, redirectTo) => call(() => configuredClient!.auth.resend({ type: 'signup', email: email.trim(), options: { emailRedirectTo: safeAuthRedirect(redirectTo ?? `${window.location.origin}/sign-in?verified=1`, '/sign-in') } })),
     updatePassword: (password) => {
       if (!recovery || !session) return Promise.resolve({ error: new Error('Password recovery must be started from a valid recovery link.') });
       return call(() => configuredClient!.auth.updateUser({ password })).then(result => { if (!result.error) setRecovery(false); return result; });
